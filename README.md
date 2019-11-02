@@ -1,0 +1,1 @@
+"# MissisipiCapital_DayTradyingPlatform" 
