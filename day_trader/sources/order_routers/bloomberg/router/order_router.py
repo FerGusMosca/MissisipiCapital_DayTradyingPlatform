@@ -5,8 +5,10 @@ from sources.framework.common.abstract.base_communication_module import BaseComm
 from sources.framework.common.interfaces.icommunication_module import ICommunicationModule
 from sources.framework.common.wrappers.execution_report_list_wrapper import *
 from sources.framework.common.wrappers.generic_execution_report_wrapper import *
-from sources.framework.common.enums.OrdType import *
-from sources.framework.common.enums.Side import *
+from sources.framework.business_entities.market_data.candle_bar import *
+from sources.framework.common.wrappers.market_data_wrapper import *
+from sources.order_routers.bloomberg.common.wrappers.candle_bar_data_wrapper import *
+from sources.order_routers.bloomberg.common.converter.market_data_request_converter import *
 from sources.order_routers.bloomberg.common.configuration.configuration import Configuration
 from sources.order_routers.bloomberg.common.wrappers.rejected_execution_report_wrapper import *
 from sources.order_routers.bloomberg.common.wrappers.execution_report_wrapper import *
@@ -15,12 +17,19 @@ from sources.framework.common.logger.message_type import MessageType
 from sources.framework.common.dto.cm_state import *
 from sources.order_routers.bloomberg.common.converter.order_converter import *
 from sources.framework.common.wrappers.empty_order_list_wrapper import *
+from sources.framework.common.enums.TimeUnit import *
+from sources.order_routers.bloomberg.common.util.log_helper import *
 import threading
 import time
 from datetime import datetime
 
 ORDER_FIELDS      = blpapi.Name("OrderFields")
 ORDER_ROUTE_FIELDS      = blpapi.Name("OrderRouteFields")
+MARKET_DATA_EVENTS      = blpapi.Name("MarketDataEvents")
+MARKET_BAR_START      = blpapi.Name("MarketBarStart")
+MARKET_BAR_UPDATE      = blpapi.Name("MarketBarUpdate")
+MARKET_BAR_INTERVAL_END      = blpapi.Name("MarketBarIntervalEnd")
+MARKET_BAR_END      = blpapi.Name("MarketBarEnd")
 SESSION_STARTED         = blpapi.Name("SessionStarted")
 SESSION_TERMINATED      = blpapi.Name("SessionTerminated")
 SESSION_STARTUP_FAILURE = blpapi.Name("SessionStartupFailure")
@@ -46,7 +55,6 @@ _HALTING_TIME_IN_SECONDS=300
 
 _CANCEL_CORRELATION_ID = 90
 
-
 class OrderRouter( BaseCommunicationModule, ICommunicationModule):
 
     # region Constructors
@@ -57,10 +65,16 @@ class OrderRouter( BaseCommunicationModule, ICommunicationModule):
         self.Connected = False
         self.Session=None
         self.id = None
+        self.MarketDataSubscriptionLock=threading.Lock()
+        self.CandleBarSubscriptionLock = threading.Lock()
         self.ActiveOrdersLock = threading.Lock()
 
         self.ClOrdIdsTranslators = {}
         self.PendingNewOrders = {}
+
+        self.MarketDataSubscriptions = {}
+        self.CandleBarSubscriptions = {}
+
         self.PendingCancels = {}
         self.ActiveOrders = {}
 
@@ -72,12 +86,21 @@ class OrderRouter( BaseCommunicationModule, ICommunicationModule):
 
         self.InitialPaintOrder = False
         self.InitialPaintExecutionReports=False
+
+        self.OnMarketData=None
+        self.OnExecutionReport=None
+        self.Initialized=False
         # endregion
 
     # endregion
 
     # region Private Methods
 
+    def UpdateAndSendCandlebar(self,msg,candlebar):
+        SubscriptionHelper.UpdateCandleBar(self, msg, candlebar)
+        LogHelper.LogPublishCandleBarOnSecurity(self, candlebar.Security.Symbol, candlebar)
+        cbWrapper = CandleBarDataWrapper(self, candlebar)
+        self.OnMarketData.ProcessIncoming(cbWrapper)
 
     def ValidateMaxOrdersPerSecondLimit(self):
         now = datetime.now()  # current date and time
@@ -207,16 +230,17 @@ class OrderRouter( BaseCommunicationModule, ICommunicationModule):
         for msg in event:
 
             if msg.messageType() == SERVICE_OPENED:
-                self.DoLog("Service {} opened...".format(self.Configuration.EMSX_Environment),MessageType.INFO)
-                self.DoLog("Subscribing to order and route events", MessageType.INFO)
-                SubscriptionHelper.CreateOrderSubscription(self,self.Configuration.EMSX_Environment,self.Session)
-                SubscriptionHelper.CreateRouteSubscription(self,self.Configuration.EMSX_Environment,self.Session)
+                svc = BloombergTranslationHelper.GetSafeString(self,msg,"serviceName",self.Configuration.EMSX_Environment)
+                self.DoLog("Service {} opened...".format(svc),MessageType.INFO)
 
             elif msg.messageType() == SERVICE_OPEN_FAILURE:
-                self.DoLog("Error: Service {} failed to open".format(self.Configuration.EMSX_Environment),MessageType.ERROR)
+                svc = BloombergTranslationHelper.GetSafeString(self, msg, "serviceName", self.Configuration.EMSX_Environment)
+                self.DoLog("Error: Service {} failed to open".format(svc),MessageType.ERROR)
                 self.Connected=False
 
     def ProcessSubscriptionStatusEvent(self, event, session):
+
+        self.DoLog("@{0}:Processing {1}".format("Bloomberg Orde Router",event.eventType()),MessageType.DEBUG)
 
         for msg in event:
 
@@ -237,15 +261,14 @@ class OrderRouter( BaseCommunicationModule, ICommunicationModule):
                 self.DoLog("Error Subscribing to Bloomberg Events:{}-{} (Symbol {})".format(errorcode,description,symbol),MessageType.ERROR)
 
             elif msg.messageType() == SUBSCRIPTION_TERMINATED:
-
                 self.DoLog("Subscription terminated connected to Bloomberg Events:{}".format(msg),MessageType.ERROR)
 
     def ProcessMiscEvents(self, event):
 
-        self.DoLog("Processing " + event.eventType() + " event",MessageType.INFO)
+        self.DoLog("Processing " + event.eventType() + " event",MessageType.DEBUG)
 
         for msg in event:
-            self.DoLog("MESSAGE: %s" % (msg.tostring()),MessageType.INFO)
+            self.DoLog("MESSAGE: %s" % (msg.tostring()),MessageType.DEBUG)
 
     def ProcessResponseEvent(self, event):
 
@@ -300,48 +323,89 @@ class OrderRouter( BaseCommunicationModule, ICommunicationModule):
             else:
                 self.DoLog("Received response for unknown CorrelationId {}".format(msg.correlationIds()[0].value()),MessageType.DEBUG)
 
+    def ProcessInitialPaint(self,msg):
+        if msg.correlationIds()[0].value() == orderSubscriptionID.value():
+            self.ProcessOrderInitialPaint(msg)
+        elif msg.correlationIds()[0].value() == routeSubscriptionID.value():
+            self.ProcessExecutionReportsInitialPaint(msg)
+        else:
+            self.DoLog("Received INIT_PAINT for unknown correlation id: {}".format(msg.correlationIds()[0].value()),MessageType)
+
+    def ProcessInitialPaintEnd(self,msg):
+        if msg.correlationIds()[0].value() == routeSubscriptionID.value():
+            self.InitialPaintExecutionReports = True
+        elif msg.correlationIds()[0].value() == orderSubscriptionID.value():
+            self.InitialPaintOrder = True
+        else:
+            self.DoLog("Received Initial Paint End for unknown correlation id. ".format(msg.correlationIds()[0].value()),MessageType.ERROR)
+
+    def ProcessExecutionReports(self,msg):
+        eventStatus = msg.getElementAsInteger("EVENT_STATUS")
+        if msg.correlationIds()[0].value() == routeSubscriptionID.value():  # we only want execution reports to be updated
+
+            activeOrder = self.FetchActiveOrder(msg)
+
+            if activeOrder is not None:
+
+                if (eventStatus == _EVENT_STATUS_NEW_ORDER or eventStatus == _EVENT_STATUS_UPD_ORDER or eventStatus == _EVENT_STATUS_DELETE_ORDER):
+                    self.DoLog("Received execution report for order {}. EMSX_SEQUENCE= {}".format(activeOrder.ClOrdId,activeOrder.OrderId),MessageType.DEBUG)
+                    self.DoSendExecutionReport(activeOrder, msg)
+            else:
+                self.DoLog("Received response for unknown order:{}.".format(msg), MessageType.DEBUG)
+        elif msg.correlationIds()[0].value() == orderSubscriptionID.value():
+            self.DoLog("Received order subscription event. ", MessageType.DEBUG)
+        elif msg.correlationIds()[0].value() == _CANCEL_CORRELATION_ID:
+            self.DoLog("Received Cancel Subscription Event for unknown correlationId= {}".format(msg.correlationIds()[0].value()), MessageType.DEBUG)
+        else:
+            self.DoLog( "Received Subscription Event for unknown correlationId= {}".format(msg.correlationIds()[0].value()),MessageType.DEBUG)
+
+    def ProcessMarketData(self,msg):
+        if msg.correlationIds()[0].value() in self.MarketDataSubscriptions:
+            symbol = msg.correlationIds()[0].value()
+            sec = self.MarketDataSubscriptions[msg.correlationIds()[0].value()]
+            SubscriptionHelper.UpdateMarketData(self, msg, sec)
+            LogHelper.LogPublishMarketDataOnSecurity(self, symbol, sec)
+            mdWrapper = MarketDataWrapper(sec.MarketData)
+            self.OnMarketData.ProcessIncoming(mdWrapper)
+        else:
+            self.DoLog( "Received market data for unknown subscription. Symbol= {}".format(msg.correlationIds()[0].value()),MessageType.ERROR)
+
+    def ProcessCandlebarStart(self,msg):
+        symbol = msg.correlationIds()[0].value()
+        if symbol in self.CandleBarSubscriptions:
+            cb = self.CandleBarSubscriptions[symbol]
+            cb = CandleBar(cb.Security)
+            self.UpdateAndSendCandlebar(msg, cb)
+        else:
+            self.DoLog( "Received candlebar for unknown subscription. Symbol= {}".format(msg.correlationIds()[0].value()), MessageType.ERROR)
+
+    def ProcessCandlebarUpdate(self,msg):
+        symbol = msg.correlationIds()[0].value()
+        if symbol in self.CandleBarSubscriptions:
+            cb = self.CandleBarSubscriptions[symbol]
+            self.UpdateAndSendCandlebar(msg, cb)
+        else:
+            self.DoLog("Received candlebar for unknown subscription. Symbol= {}".format(msg.correlationIds()[0].value()),MessageType.ERROR)
+
     def ProcessSubscriptionDataEvent(self, event):
         for msg in event:
 
             if msg.messageType() == ORDER_ROUTE_FIELDS:
                 eventStatus = msg.getElementAsInteger("EVENT_STATUS")
-
                 if eventStatus ==_EVENT_STATUS_INIT_PAINT:
-                    if msg.correlationIds()[0].value() == orderSubscriptionID.value():
-                        self.ProcessOrderInitialPaint(msg)
-                    elif msg.correlationIds()[0].value() == routeSubscriptionID.value():
-                        self.ProcessExecutionReportsInitialPaint(msg)
-                    else:
-                        self.DoLog("Received INIT_PAINT for unknown correlation id: {}".format( msg.correlationIds()[0].value()),MessageType)
-
+                    self.ProcessInitialPaint(msg)
                 elif eventStatus == _EVENT_STATUS_INIT_PAINT_END:
-                    if msg.correlationIds()[0].value() == routeSubscriptionID.value():
-                        self.InitialPaintExecutionReports=True
-                    elif  msg.correlationIds()[0].value() == orderSubscriptionID.value():
-                        self.InitialPaintOrder=True
-                    else:
-                        self.DoLog("Received Initial Paint End for unknown correlation id. ".format( msg.correlationIds()[0].value()), MessageType.DEBUG)
+                    self.ProcessInitialPaintEnd(msg)
                 else:
-                    if msg.correlationIds()[0].value() == routeSubscriptionID.value():#we only want execution reports to be updated
-
-                        activeOrder=self.FetchActiveOrder(msg)
-
-                        if activeOrder is not None:
-
-                            if (   eventStatus==_EVENT_STATUS_NEW_ORDER
-                                or eventStatus==_EVENT_STATUS_UPD_ORDER
-                                or eventStatus==_EVENT_STATUS_DELETE_ORDER):
-                                self.DoLog("Received execution report for order {}. EMSX_SEQUENCE= {}".format(activeOrder.ClOrdId,activeOrder.OrderId), MessageType.DEBUG)
-                                self.DoSendExecutionReport(activeOrder,msg)
-                        else:
-                            self.DoLog("Received response for unknown order:{}.".format(msg),MessageType.DEBUG)
-                    elif msg.correlationIds()[0].value() == orderSubscriptionID.value():
-                        self.DoLog("Received order subscription event. ", MessageType.DEBUG)
-                    elif msg.correlationIds()[0].value() == _CANCEL_CORRELATION_ID:
-                        self.DoLog("Received Subscription Event for unknown correlationId= {}".format(
-                            msg.correlationIds()[0].value()), MessageType.DEBUG)
-                    else:
-                        self.DoLog("Received Subscription Event for unknown correlationId= {}".format(msg.correlationIds()[0].value()),MessageType.DEBUG)
+                    self.ProcessExecutionReports(msg)
+            elif msg.messageType() == MARKET_DATA_EVENTS:
+                self.ProcessMarketData(msg)
+            elif msg.messageType() == MARKET_BAR_START:
+                self.ProcessCandlebarStart(msg)
+            elif (msg.messageType() == MARKET_BAR_UPDATE or msg.messageType() == MARKET_BAR_INTERVAL_END or  msg.messageType() == MARKET_BAR_END):
+                self.ProcessCandlebarUpdate(msg)
+            else:
+                self.DoLog("Received message for not tracked message type . MsgType= {}".format(msg.messageType()),MessageType.ERROR)
 
     def ProcessEvent(self, event, session):
         try:
@@ -485,10 +549,7 @@ class OrderRouter( BaseCommunicationModule, ICommunicationModule):
 
         request = self.CreateRequest(newOrder)
 
-        self.DoLog(
-            "Placing Order On Market: ClOrdId {} Symbol {} secType {} orderType {} totalQty {} "
-                .format(newOrder.ClOrdId, newOrder.Security.Symbol, newOrder.Security.SecurityType,
-                        newOrder.OrdType, newOrder.OrderQty), MessageType.INFO)
+        LogHelper.LogNewOrder(self,newOrder)
 
         requestID = blpapi.CorrelationId(newOrder.ClOrdId)
 
@@ -535,11 +596,87 @@ class OrderRouter( BaseCommunicationModule, ICommunicationModule):
 
     def ProcessExecutionReportList(self,wrapper):
         threading.Thread(target=self.ProcessExecutionReportListThread, args=(wrapper,)).start()
+        self.DoLog("Subscribing to order and route events", MessageType.INFO)
+        SubscriptionHelper.CreateOrderSubscription(self, self.Configuration.EMSX_Environment, self.Session)
+        SubscriptionHelper.CreateRouteSubscription(self, self.Configuration.EMSX_Environment, self.Session)
         return CMState.BuildSuccess(self)
+
+
+    def ProcessCandleBarRequest(self,wrapper):
+        cbReq = MarketDataRequestConverter.ConvertCandleBarRequest(self, wrapper)
+        try:
+
+            if cbReq.TimeUnit != TimeUnit.Minute:
+                raise Exception("Not valid time unit for candle bar request {0}".format(cbReq.TimeUnit))
+
+            self.CandleBarSubscriptionLock.acquire()
+            if cbReq.SubscriptionRequestType == SubscriptionRequestType.Unsuscribe:
+
+                self.DoLog("Bloomberg Order Router: Received Bar Subscription Request for symbol:{0}".format(cbReq.Security.Symbol), MessageType.INFO)
+                blSymbol = "{} {} {}".cbReq(cbReq.Security.Symbol,
+                                           BloombergTranslationHelper.GetBloombergExchange(cbReq.Security.Exchange),
+                                           BloombergTranslationHelper.GetBloombergSecType(cbReq.Security.SecurityType))
+                if blSymbol in self.CandleBarSubscriptions:
+                    del self.CandleBarSubscriptions[blSymbol]
+                    requestID = blpapi.CorrelationId(blSymbol)
+                    SubscriptionHelper.EndCandleBarSubscription(self.Session,self.Configuration.MktBar_Environment, blSymbol,cbReq.Time, requestID)
+                else:
+                    self.DoLog("Symbol {} is not currently subscribed for candle bars".format(blSymbol))
+            else:
+                self.DoLog("Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:{0}".format(cbReq.Security.Symbol), MessageType.INFO)
+                blSymbol = "{} {} {}".format(cbReq.Security.Symbol,
+                                           BloombergTranslationHelper.GetBloombergExchange(cbReq.Security.Exchange),
+                                           BloombergTranslationHelper.GetBloombergSecType(cbReq.Security.SecurityType))
+                requestID = blpapi.CorrelationId(blSymbol)
+
+                self.CandleBarSubscriptions[blSymbol] = CandleBar(cbReq.Security)
+                SubscriptionHelper.CreateCandleBarSubscription(self.Session,self.Configuration.MktBar_Environment, blSymbol,cbReq.Time, requestID)
+        except Exception as e:
+            self.DoLog("Error processing candle bar request:{}".format(str(e)), MessageType.ERROR)
+        finally:
+            self.CandleBarSubscriptionLock.release()
+
+    def ProcessMarketDataRequest(self,wrapper):
+        mdReq = MarketDataRequestConverter.ConvertMarketDataRequest(self,wrapper)
+        try:
+
+            self.MarketDataSubscriptionLock.acquire()
+            if mdReq.SubscriptionRequestType == SubscriptionRequestType.Unsuscribe:
+
+                self.DoLog("Bloomberg Order Router: Received Market Data Subscription Request for symbol:{0}".format(mdReq.Security.Symbol), MessageType.INFO)
+                symbol = "{} {} {}".format(mdReq.Security.Symbol,
+                                           BloombergTranslationHelper.GetBloombergExchange(mdReq.Security.Exchange),
+                                           BloombergTranslationHelper.GetBloombergSecType(mdReq.Security.SecurityType))
+                if symbol in self.MarketDataSubscriptions:
+                    del self.MarketDataSubscriptions[symbol]
+                    requestID = blpapi.CorrelationId(symbol)
+                    SubscriptionHelper.EndMarketDataSubscription(self.Session, symbol, requestID)
+                else:
+                    self.DoLog("Symbol {} is not currently subscribed".format(symbol))
+            else:
+                self.DoLog("Bloomberg Order Router: Received Market Data Subscription Request for symbol:{0}".format(mdReq.Security.Symbol), MessageType.INFO)
+                symbol = "{} {} {}".format(mdReq.Security.Symbol,
+                                           BloombergTranslationHelper.GetBloombergExchange(mdReq.Security.Exchange),
+                                           BloombergTranslationHelper.GetBloombergSecType(mdReq.Security.SecurityType))
+                requestID = blpapi.CorrelationId(symbol)
+                mdReq.Security.MarketData.Security=mdReq.Security
+                self.MarketDataSubscriptions[symbol]=mdReq.Security
+                SubscriptionHelper.CreateMarketDataSubscription(self.Session,symbol,requestID)
+        except Exception as e:
+            self.DoLog("Error processing market data request:{}".format(str(e)), MessageType.ERROR)
+        finally:
+            self.MarketDataSubscriptionLock.release()
 
     #endregion
 
     # region Public Methods
+
+    def SetOutgoingModule(self,outgoingModule):
+        self.OnExecutionReport = outgoingModule
+
+    def SetIncomingModule(self,incomingModule):
+        self.OnMarketData = incomingModule
+
     def ProcessOutgoing(self, wrapper):
         pass
 
@@ -556,10 +693,12 @@ class OrderRouter( BaseCommunicationModule, ICommunicationModule):
                 self.CancellAllOrders(wrapper)
             elif wrapper.GetAction() == Actions.EXECUTION_REPORT_LIST_REQUEST:
                 self.ProcessExecutionReportList(wrapper)
+            elif wrapper.GetAction() == Actions.MARKET_DATA_REQUEST:
+                self.ProcessMarketDataRequest(wrapper)
+            elif wrapper.GetAction() == Actions.CANDLE_BAR_REQUEST:
+                self.ProcessCandleBarRequest(wrapper)
             else:
-                self.DoLog(
-                    "Routing to market: Order Router not prepared for routing message {}".format(wrapper.GetAction()),
-                    MessageType.WARNING)
+                self.DoLog("Routing to market: Order Router not prepared for routing message {}".format(wrapper.GetAction()), MessageType.WARNING)
 
             return CMState.BuildSuccess(self)
 
@@ -567,21 +706,24 @@ class OrderRouter( BaseCommunicationModule, ICommunicationModule):
             self.DoLog("Error running ProcessMessage @OrderRouter.Bloomberg module:{}".format(str(e)), MessageType.ERROR)
             return CMState.BuildFailure(self, Exception=e)
 
-    def Initialize(self, pInvokingModule, pConfigFile):
-        self.InvokingModule = pInvokingModule
-        self.ModuleConfigFile = pConfigFile
+    def Initialize(self,pInvokingModule, pConfigFile):
+
+        self.InvokingModule=pInvokingModule
+        self.ModuleConfigFile=pConfigFile
 
         try:
 
-            self.DoLog("Initializing Bloomberg Order Router", MessageType.INFO)
-            if self.LoadConfig():
+            if  not self.Initialized:
+                self.Initialized=True
+                self.DoLog("Initializing Bloomberg Order Router", MessageType.INFO)
+                if self.LoadConfig():
 
-                self.LoadSession()
+                    self.LoadSession()
 
-                self.DoLog("Bloomberg Order Router Initialized", MessageType.INFO)
-                return CMState.BuildSuccess(self)
-            else:
-                raise Exception("Unknown error initializing config file for Bloomberg Order Router")
+                    self.DoLog("Bloomberg Order Router Initialized", MessageType.INFO)
+                    return CMState.BuildSuccess(self)
+                else:
+                    raise Exception("Unknown error initializing config file for Bloomberg Order Router")
 
         except Exception as e:
 

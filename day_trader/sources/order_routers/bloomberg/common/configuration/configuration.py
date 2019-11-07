@@ -9,6 +9,7 @@ class Configuration:
         self.Server = config['DEFAULT']['SERVER']
         self.Port = int(config['DEFAULT']['PORT'])
         self.EMSX_Environment = config['DEFAULT']['EMSX_ENVIRONMENT']
+        self.MktBar_Environment = config['DEFAULT']['MKTBAR_ENVIRONMENT']
         self.Exchange = config['DEFAULT']['EXCHANGE']
         self.SecurityType = config['DEFAULT']['SECURITY_TYPE']
         self.DefaultBroker=config['DEFAULT']['DEFAULT_BROKER']

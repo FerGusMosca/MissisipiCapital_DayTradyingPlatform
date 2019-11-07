@@ -3,14 +3,106 @@ from blpapi import SessionOptions, Session
 from sources.order_routers.bloomberg.common.util.bloomberg_translation_helper import *
 from sources.framework.business_entities.orders.order import *
 from sources.framework.business_entities.orders.execution_report import *
-from sources.framework.common.enums.TimeInForce import *
-from sources.framework.common.enums.OrdType import *
-
+from sources.framework.business_entities.market_data.market_data import *
+from sources.framework.business_entities.market_data.candle_bar import *
 orderSubscriptionID=blpapi.CorrelationId(98)
 routeSubscriptionID=blpapi.CorrelationId(99)
 
 
 class SubscriptionHelper:
+    @staticmethod
+    def UpdateMarketData(logger,msg,sec):
+
+        if(BloombergTranslationHelper.GetSafeFloat(logger,msg,"MID",None) is not None):
+            sec.MarketData.MidPrice=BloombergTranslationHelper.GetSafeFloat(logger,msg,"MID",None)
+
+        if (BloombergTranslationHelper.GetSafeFloat(logger, msg, "LAST_PRICE", None) is not None):
+            sec.MarketData.Trade = BloombergTranslationHelper.GetSafeFloat(logger, msg, "LAST_PRICE", None)
+
+        if (BloombergTranslationHelper.GetSafeFloat(logger, msg, "BEST_BID", None) is not None):
+            sec.MarketData.BestBidPrice = BloombergTranslationHelper.GetSafeFloat(logger, msg, "BEST_BID", None)
+
+        if (BloombergTranslationHelper.GetSafeFloat(logger, msg, "BEST_ASK", None) is not None):
+            sec.MarketData.BestAskPrice = BloombergTranslationHelper.GetSafeFloat(logger, msg, "BEST_ASK", None)
+
+        if (BloombergTranslationHelper.GetSafeFloat(logger, msg, "VOLUME", None) is not None):
+            sec.MarketData.TradeVolume = BloombergTranslationHelper.GetSafeFloat(logger, msg, "VOLUME", None)
+
+        if (BloombergTranslationHelper.GetSafeFloat(logger, msg, "HIGH", None) is not None):
+            sec.MarketData.TradingSessionHighPrice = BloombergTranslationHelper.GetSafeFloat(logger, msg, "HIGH", None)
+
+        if (BloombergTranslationHelper.GetSafeFloat(logger, msg, "LOW", None) is not None):
+            sec.MarketData.TradingSessionLowPrice = BloombergTranslationHelper.GetSafeFloat(logger, msg, "LOW", None)
+
+        if (BloombergTranslationHelper.GetSafeFloat(logger, msg, "OPEN", None) is not None):
+            sec.MarketData.OpeningPrice = BloombergTranslationHelper.GetSafeFloat(logger, msg, "OPEN", None)
+
+    @staticmethod
+    def UpdateCandleBar(logger, msg, cb):
+
+        if (BloombergTranslationHelper.GetSafeDateTime(logger,msg,"TIME",None) is not None):
+            cb.Time = BloombergTranslationHelper.GetSafeDateTime(logger,msg,"TIME",None)
+
+        if (BloombergTranslationHelper.GetSafeFloat(logger,msg,"OPEN",None) is not None):
+            cb.Open = BloombergTranslationHelper.GetSafeFloat(logger, msg, "OPEN", None)
+
+        if (BloombergTranslationHelper.GetSafeFloat(logger,msg,"CLOSE",None) is not None):
+            cb.Close = BloombergTranslationHelper.GetSafeFloat(logger,msg,"CLOSE",None)
+
+        if (BloombergTranslationHelper.GetSafeFloat(logger, msg, "HIGH", None) is not None):
+            cb.High = BloombergTranslationHelper.GetSafeFloat(logger, msg, "HIGH", None)
+
+        if (BloombergTranslationHelper.GetSafeFloat(logger,msg,"LOW",None) is not None):
+            cb.Low = BloombergTranslationHelper.GetSafeFloat(logger,msg,"LOW",None)
+
+        if (BloombergTranslationHelper.GetSafeInt(logger,msg,"NUMBER_OF_TICKS",None) is not None):
+            cb.NumberOfTicks = BloombergTranslationHelper.GetSafeInt(logger,msg,"NUMBER_OF_TICKS",None)
+
+        if (BloombergTranslationHelper.GetSafeInt(logger,msg,"VALUE",None) is not None):
+            cb.Value = BloombergTranslationHelper.GetSafeInt(logger,msg,"VALUE",None)
+
+        if (BloombergTranslationHelper.GetSafeInt(logger,msg,"VOLUME",None) is not None):
+            cb.Volume = BloombergTranslationHelper.GetSafeInt(logger,msg,"VOLUME",None)
+
+        if (BloombergTranslationHelper.GetSafeDateTime(logger,msg,"DATE_TIME",None) is not None):
+            cb.DateTime = BloombergTranslationHelper.GetSafeDateTime(logger,msg,"DATE_TIME",None)
+
+
+    @staticmethod
+    def CreateCandleBarParams( candleService, fullSymbol, barSize, correlationId):
+        subscriptions = blpapi.SubscriptionList()
+        topic = candleService + fullSymbol
+        fields = "LAST_PRICE"
+        options = "bar_size={}".format( barSize)
+        subscriptions.add(topic=topic, fields=fields, options=options, correlationId=correlationId)
+        return subscriptions
+
+    @staticmethod
+    def CreateCandleBarSubscription(session, candleService, fullSymbol, barSize, correlationId):
+        subscriptions = SubscriptionHelper.CreateCandleBarParams(candleService,fullSymbol,barSize,correlationId)
+        session.subscribe(subscriptions)
+
+    @staticmethod
+    def EndCandleBarSubscription(session, candleService, fullSymbol, barSize, correlationId):
+        subscriptions = SubscriptionHelper.CreateCandleBarParams(candleService, fullSymbol, barSize, correlationId)
+        session.unsubscribe(subscriptions)
+
+    @staticmethod
+    def CreateMarketDataParams( fullSymbol , correlationId):
+        subscriptions = blpapi.SubscriptionList()
+        fields = "LAST_PRICE,BID,ASK"
+        subscriptions.add(topic=fullSymbol, fields=fields, options=None, correlationId=correlationId)
+        return subscriptions
+
+    @staticmethod
+    def CreateMarketDataSubscription(session, fullSymbol , correlationId):
+        subscriptions = SubscriptionHelper.CreateMarketDataParams(fullSymbol, correlationId)
+        session.subscribe(subscriptions)
+
+    @staticmethod
+    def EndMarketDataSubscription(session, fullSymbol, correlationId):
+        subscriptions = SubscriptionHelper.CreateMarketDataParams(fullSymbol,correlationId)
+        session.unsubscribe(subscriptions)
 
     @staticmethod
     def CreateOrderSubscription(self, service, session):

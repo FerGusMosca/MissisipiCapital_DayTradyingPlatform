@@ -25,39 +25,11 @@ class MarketOrderRouter(BaseCommunicationModule, ICommunicationModule):
         self.PreviouslyFinishedPositions = {}
 
     def LoadConfig(self):
-        """ Load current configuration from module configuration file.
-
-        Returns:
-            bool. True if finished.
-        """
         self.Configuration = Configuration(self.ModuleConfigFile)
         return True
 
-    def InitializeOrderRouter(self):
-        """ Initialize Generic Order Router with specific module name from configuration file
-
-        """
-        module_name, class_name = self.Configuration.OutgoingModule.rsplit(".", 1)
-        outgoing_module_class = getattr(importlib.import_module(module_name), class_name)
-
-        if outgoing_module_class is not None:
-            self.OutgoingModule = outgoing_module_class()
-            state = self.OutgoingModule.Initialize(self, self.Configuration.OutgoingConfigFile)
-
-            if not state.Success:
-                raise state.Exception
-        else:
-            raise Exception("Could not instantiate module {}".format(self.Configuration.OutgoingModule))
 
     def ProcessExecutionReportList(self, wrapper):
-        """
-
-        Args:
-            wrapper ():
-
-        Returns:
-
-        """
         positions = ExecutionReportListConverter.GetPositionsFromExecutionReportList(self, wrapper)
         for pos in positions:
             if not pos.IsFinishedPosition():
@@ -83,25 +55,11 @@ class MarketOrderRouter(BaseCommunicationModule, ICommunicationModule):
         return CMState.BuildSuccess(self)
 
     def ProcessPreviouslyExistingOrders(self, orderId, wrapper):
-        """
-
-        Returns:
-            object:
-        """
         mem_pos = self.MemOrderPositions[orderId]
         processed_exec_report = GenericERWrapper(mem_pos.PosId, wrapper)
         self.InvokingModule.ProcessOutgoing(processed_exec_report)
 
     def ProcessExecutionReport(self, wrapper):
-        """ Process execution report received from module that is invoked.
-
-        Args:
-            wrapper (:obj:`Wrapper`): Generic wrapper to communicate strategy with other modules.
-
-        Returns:
-            CMState object. The return value. BuildSuccess for success.
-        """
-
         try:
             cl_ord_id = wrapper.GetField(ExecutionReportField.ClOrdID)
             order_id = wrapper.GetField(ExecutionReportField.OrderID)
@@ -125,23 +83,10 @@ class MarketOrderRouter(BaseCommunicationModule, ICommunicationModule):
             self.DoLog("Error processing execution report:{}".format(e), MessageType.ERROR)
 
     def ProcessPositionListRequest(self, wrapper):
-        """
-
-        Args:
-            wrapper ():
-
-        Returns:
-
-        """
         exec_report_list_req_wrapper = ExecutionReportListRequestWrapper()
         return self.OutgoingModule.ProcessMessage(exec_report_list_req_wrapper)
 
     def ProcessNewPosition(self, wrapper):
-        """ Send a new order wrapper to ProcessMessage method from Order Router module.
-
-        Args:
-            wrapper (:obj:`Wrapper`): Generic wrapper to communicate strategy with other modules.
-        """
         new_pos = PositionConverter.ConvertPosition(self, wrapper)
         # In this Generic Order Router ClOrdID=PosId
         self.OrderPositions[new_pos.PosId] = new_pos
@@ -150,15 +95,30 @@ class MarketOrderRouter(BaseCommunicationModule, ICommunicationModule):
                                         new_pos.Strategy, new_pos.OrderType, new_pos.OrderPrice)
         self.OutgoingModule.ProcessMessage(order_wrapper)
 
+    def ProcessCandleBar(self,wrapper):
+        self.InvokingModule.ProcessIncoming(wrapper)
+
+    def ProcessMarketData(self, wrapper):
+        self.InvokingModule.ProcessIncoming(wrapper)
+
+    def ProcessIncoming(self, wrapper):
+        try:
+
+            if wrapper.GetAction() == Actions.CANDLE_BAR_DATA:
+                self.ProcessCandleBar(wrapper)
+                return CMState.BuildSuccess(self)
+            elif wrapper.GetAction() == Actions.MARKET_DATA:
+                self.ProcessMarketData(wrapper)
+                return CMState.BuildSuccess(self)
+            else:
+                raise Exception("ProcessOutgoing: GENERIC Order Router not prepared for outgoing message {}".format(
+                    wrapper.GetAction()))
+
+        except Exception as e:
+            self.DoLog("Error running ProcessOutgoing @GenericOrderRouter module:{}".format(str(e)), MessageType.ERROR)
+            return CMState.BuildFailure(self, Exception=e)
+
     def ProcessOutgoing(self, wrapper):
-        """ Receives a response from another module that is invoked.
-
-        Args:
-            wrapper (:obj:`Wrapper`): Generic wrapper to communicate strategy with other modules.
-
-        Returns:
-            CMState object. The return value. BuildSuccess for success.
-        """
         try:
 
             if wrapper.GetAction() == Actions.EXECUTION_REPORT:
@@ -176,14 +136,6 @@ class MarketOrderRouter(BaseCommunicationModule, ICommunicationModule):
             return CMState.BuildFailure(self, Exception=e)
 
     def ProcessMessage(self, wrapper):
-        """ Receives messages from “invoking” modules.
-
-        Args:
-            wrapper (:obj:`Wrapper`): Generic wrapper to communicate strategy with other modules.
-
-        Returns:
-            CMState object. The return value. BuildSuccess for success, BuildFailure otherwise.
-        """
         try:
 
             if wrapper.GetAction() == Actions.NEW_POSITION:
@@ -193,6 +145,8 @@ class MarketOrderRouter(BaseCommunicationModule, ICommunicationModule):
             elif wrapper.GetAction() == Actions.CANCEL_POSITION:
                 raise Exception("Cancel Position not implemented @Generic Order Router")
             elif wrapper.GetAction() == Actions.CANCEL_ALL_POSITIONS:
+                return self.OutgoingModule.ProcessMessage(wrapper)
+            elif wrapper.GetAction() == Actions.CANDLE_BAR_REQUEST:
                 return self.OutgoingModule.ProcessMessage(wrapper)
             else:
                 raise Exception("Generic Order Router not prepared for routing message {}".format(wrapper.GetAction()))
@@ -204,22 +158,13 @@ class MarketOrderRouter(BaseCommunicationModule, ICommunicationModule):
             return CMState.BuildFailure(self, Exception=e)
 
     def Initialize(self, pInvokingModule, pConfigFile):
-        """  initialize everything
-
-        Args:
-            pInvokingModule (ProcessOutgoing method): Invoking module.
-            pConfigFile (Ini file): Configuration file path.
-
-        Returns:
-            CMState object. The return value. BuildSuccess for success, BuildFailure otherwise.
-        """
         self.InvokingModule = pInvokingModule
         self.ModuleConfigFile = pConfigFile
 
         try:
             self.DoLog("Initializing Generic Market Order Router", MessageType.INFO)
             if self.LoadConfig():
-                self.InitializeOrderRouter()
+                self.OutgoingModule = self.InitializeSingletonModule(self.Configuration.OutgoingModule,self.Configuration.OutgoingConfigFile)
                 self.DoLog("Generic Market Order Router Initialized", MessageType.INFO)
                 return CMState.BuildSuccess(self)
             else:

@@ -5,6 +5,7 @@ from sources.framework.common.enums.TimeInForce import *
 from sources.framework.common.enums.OrdType import *
 from sources.framework.common.enums.ExecType import *
 from sources.framework.common.enums.OrdStatus import *
+from sources.framework.common.enums.SecurityType import *
 from sources.framework.common.logger.message_type import MessageType
 import datetime
 from datetime import timedelta
@@ -40,6 +41,9 @@ _ORD_TYPE_MKT="MKT"
 _ORD_TYPE_LMT="LMT"
 _TIF_DAY="DAY"
 _BLOOMBERG_FILLS_PREFIX = "EMSX_FILL_"
+
+_DEFAULT_EXCHANGE = "US"
+_CS_SECURITY_TYPE="Equity"
 
 class BloombergTranslationHelper:
 
@@ -235,6 +239,19 @@ class BloombergTranslationHelper:
             return default
 
     @staticmethod
+    def GetSafeInt(self, msg, key, default):
+
+        try:
+            if msg.hasElement(key):
+                return msg.getElementAsInteger(key)
+            else:
+                return default
+
+        except Exception as e:
+            self.DoLog("GetSafeInt from Bloomberg error:{}".format(str(e)), MessageType.DEBUG)
+            return default
+
+    @staticmethod
     def GetSafeString(self, msg, key, default):
 
         try:
@@ -246,6 +263,20 @@ class BloombergTranslationHelper:
         except Exception as e:
             self.DoLog("GetSafeString from Bloomberg error:{}".format(str(e)), MessageType.DEBUG)
             return default
+
+    @staticmethod
+    def GetSafeDateTime(self, msg, key, default):
+
+        try:
+            if msg.hasElement(key):
+                return msg.getElementAsDatetime(key)
+            else:
+                return default
+
+        except Exception as e:
+            self.DoLog("GetSafeDateTime from Bloomberg error:{}".format(str(e)), MessageType.DEBUG)
+            return default
+
 
     @staticmethod
     def GetOrdStatus(self,msg):
@@ -309,3 +340,19 @@ class BloombergTranslationHelper:
         except Exception as e:
             self.DoLog("Received unknown status from Bloomberg:{}".format(EMSX_STATUS if EMSX_STATUS is not None else "?"), MessageType.DEBUG)
             return OrdStatus.Undefined
+
+    @staticmethod
+    def GetBloombergExchange(exch):
+        if exch is not None:
+            return exch
+        else:
+            return _DEFAULT_EXCHANGE
+
+    @staticmethod
+    def GetBloombergSecType(secType):
+        if secType == SecurityType.CS:
+            return _CS_SECURITY_TYPE
+        else:
+            raise Exception("Bloomberg Translation not implemented for sec type {}".format(secType))
+
+

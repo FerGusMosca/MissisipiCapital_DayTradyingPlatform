@@ -35,6 +35,7 @@ class MarketData:
         self.MDLocalEntryDate = None
         self.TickDirection = None
         self.MDTradeSize = None
+        self.MDMkt = None
         self.SettlType = None
         self.SettlDate = None
         self.LastTradeDateTime = None

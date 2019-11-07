@@ -1,0 +1,552 @@
+2019-11-02 14:10:44 [logger INFO] SimpleCSVProcessor   Initializing
+2019-11-02 14:10:44 [logger INFO] SimpleCSVProcessor   Runner type: Now
+2019-11-02 14:10:44 [logger INFO] Initializing Generic Market Order Router
+2019-11-02 14:10:45 [logger ERROR] Error Loading Generic Market Order Router module:
+---------------------------- ENVIRONMENT -----------------------------
+Platform: Windows-10-10.0.18362-SP0
+Architecture: ('32bit', 'WindowsPE')
+Python: 3.7.2 (tags/v3.7.2:9a3ffc0492, Dec 23 2018, 22:20:52) [MSC v.1916 32 bit (Intel)]
+Python implementation: CPython
+
+blpapi 64-bit will be loaded from: "C:\blp\DAPI\blpapi3_64.dll"
+blpapi 32-bit will be loaded from: "C:\blp\DAPI\blpapi3_32.dll"
+System PATH: (* marks locations where blpapi was found)
+    "C:\Users\zimzum\Desktop\Projects\Tradehelm\Yewno\python\CSVRouter\emsxapi\env\Scripts"
+    "C:\Program Files (x86)\Common Files\Oracle\Java\javapath"
+    "C:\Program Files (x86)\Intel\iCLS Client\"
+    "C:\Program Files\Intel\iCLS Client\"
+    "C:\WINDOWS\system32"
+    "C:\WINDOWS"
+    "C:\WINDOWS\System32\Wbem"
+    "C:\WINDOWS\System32\WindowsPowerShell\v1.0\"
+    "C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL"
+    "C:\Program Files\Intel\Intel(R) Management Engine Components\DAL"
+    "C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT"
+    "C:\Program Files\Intel\Intel(R) Management Engine Components\IPT"
+    "C:\Program Files (x86)\Microsoft SQL Server\100\DTS\Binn\"
+    "C:\Program Files\Microsoft SQL Server\100\DTS\Binn\"
+    "C:\Program Files (x86)\Microsoft SQL Server\100\Tools\Binn\"
+    "C:\Program Files\Microsoft SQL Server\100\Tools\Binn\"
+    "C:\Program Files (x86)\Microsoft SQL Server\100\Tools\Binn\VSShell\Common7\IDE\"
+    "C:\Program Files (x86)\Microsoft Visual Studio 9.0\Common7\IDE\PrivateAssemblies\"
+    "C:\Program Files\Git\cmd"
+    "C:\Program Files\Microsoft\Web Platform Installer\"
+    "C:\Program Files (x86)\Microsoft ASP.NET\ASP.NET Web Pages\v1.0\"
+    "C:\WINDOWS\System32\OpenSSH\"
+  * "C:\blp\DAPI"
+    "C:\blp\DAPI\DDE"
+    "C:\Users\zimzum\AppData\Local\Programs\Python\Python37-32\Scripts\"
+    "C:\Users\zimzum\AppData\Local\Programs\Python\Python37-32\"
+    "C:\Users\zimzum\AppData\Local\Microsoft\WindowsApps"
+    "C:\Users\zimzum\AppData\Local\GitHubDesktop\bin"
+    "C:\Users\zimzum\AppData\Local\Microsoft\WindowsApps"
+    "C:\Users\zimzum\AppData\Local\Programs\Microsoft VS Code\bin"
+    "C:\Users\zimzum\AppData\Local\Programs\EmEditor"
+
+blpapi package at: "C:\Users\zimzum\Desktop\Projects\Tradehelm\Yewno\python\CSVRouter\emsxapi\env\lib\site-packages"
+
+Current directory: "C:\Users\zimzum\Desktop\Projects\Tradehelm\Yewno\python\CSVRouter\emsxapi"
+
+----------------------------------------------------------------------
+No module named '_internals'
+
+Mismatch between C++ and Python SDK libraries.
+
+Python SDK version    3.13.1
+Found C++ SDK version 3.12.3.1
+
+Download and install the latest C++ SDK from:
+
+    http://www.bloomberg.com/professional/api-library
+
+If a recent version of the C++ SDK is already installed, please ensure that the
+path to the library is added to PATH before entering the interpreter.
+
+
+
+2019-11-02 14:11:20 [logger INFO] SimpleCSVProcessor   Initializing
+2019-11-02 14:11:20 [logger INFO] SimpleCSVProcessor   Runner type: Now
+2019-11-02 14:11:20 [logger INFO] Initializing Generic Market Order Router
+2019-11-02 14:11:20 [logger ERROR] Error Loading Generic Market Order Router module:
+---------------------------- ENVIRONMENT -----------------------------
+Platform: Windows-10-10.0.18362-SP0
+Architecture: ('32bit', 'WindowsPE')
+Python: 3.7.2 (tags/v3.7.2:9a3ffc0492, Dec 23 2018, 22:20:52) [MSC v.1916 32 bit (Intel)]
+Python implementation: CPython
+
+blpapi 64-bit will be loaded from: "C:\blp\DAPI\blpapi3_64.dll"
+blpapi 32-bit will be loaded from: "C:\blp\DAPI\blpapi3_32.dll"
+System PATH: (* marks locations where blpapi was found)
+    "C:\Users\zimzum\Desktop\Projects\Tradehelm\Yewno\python\CSVRouter\emsxapi\env\Scripts"
+    "C:\Program Files (x86)\Common Files\Oracle\Java\javapath"
+    "C:\Program Files (x86)\Intel\iCLS Client\"
+    "C:\Program Files\Intel\iCLS Client\"
+    "C:\WINDOWS\system32"
+    "C:\WINDOWS"
+    "C:\WINDOWS\System32\Wbem"
+    "C:\WINDOWS\System32\WindowsPowerShell\v1.0\"
+    "C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL"
+    "C:\Program Files\Intel\Intel(R) Management Engine Components\DAL"
+    "C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT"
+    "C:\Program Files\Intel\Intel(R) Management Engine Components\IPT"
+    "C:\Program Files (x86)\Microsoft SQL Server\100\DTS\Binn\"
+    "C:\Program Files\Microsoft SQL Server\100\DTS\Binn\"
+    "C:\Program Files (x86)\Microsoft SQL Server\100\Tools\Binn\"
+    "C:\Program Files\Microsoft SQL Server\100\Tools\Binn\"
+    "C:\Program Files (x86)\Microsoft SQL Server\100\Tools\Binn\VSShell\Common7\IDE\"
+    "C:\Program Files (x86)\Microsoft Visual Studio 9.0\Common7\IDE\PrivateAssemblies\"
+    "C:\Program Files\Git\cmd"
+    "C:\Program Files\Microsoft\Web Platform Installer\"
+    "C:\Program Files (x86)\Microsoft ASP.NET\ASP.NET Web Pages\v1.0\"
+    "C:\WINDOWS\System32\OpenSSH\"
+  * "C:\blp\DAPI"
+    "C:\blp\DAPI\DDE"
+    "C:\Users\zimzum\AppData\Local\Programs\Python\Python37-32\Scripts\"
+    "C:\Users\zimzum\AppData\Local\Programs\Python\Python37-32\"
+    "C:\Users\zimzum\AppData\Local\Microsoft\WindowsApps"
+    "C:\Users\zimzum\AppData\Local\GitHubDesktop\bin"
+    "C:\Users\zimzum\AppData\Local\Microsoft\WindowsApps"
+    "C:\Users\zimzum\AppData\Local\Programs\Microsoft VS Code\bin"
+    "C:\Users\zimzum\AppData\Local\Programs\EmEditor"
+
+blpapi package at: "C:\Users\zimzum\Desktop\Projects\Tradehelm\Yewno\python\CSVRouter\emsxapi\env\lib\site-packages"
+
+Current directory: "C:\Users\zimzum\Desktop\Projects\Tradehelm\Yewno\python\CSVRouter\emsxapi"
+
+----------------------------------------------------------------------
+No module named '_internals'
+
+Mismatch between C++ and Python SDK libraries.
+
+Python SDK version    3.13.1
+Found C++ SDK version 3.12.3.1
+
+Download and install the latest C++ SDK from:
+
+    http://www.bloomberg.com/professional/api-library
+
+If a recent version of the C++ SDK is already installed, please ensure that the
+path to the library is added to PATH before entering the interpreter.
+
+
+
+2019-11-02 14:13:20 [logger INFO] SimpleCSVProcessor   Initializing
+2019-11-02 14:13:20 [logger INFO] SimpleCSVProcessor   Runner type: Now
+2019-11-02 14:13:20 [logger INFO] Initializing Generic Market Order Router
+2019-11-02 14:13:20 [logger ERROR] Error Loading Generic Market Order Router module:
+---------------------------- ENVIRONMENT -----------------------------
+Platform: Windows-10-10.0.18362-SP0
+Architecture: ('32bit', 'WindowsPE')
+Python: 3.7.2 (tags/v3.7.2:9a3ffc0492, Dec 23 2018, 22:20:52) [MSC v.1916 32 bit (Intel)]
+Python implementation: CPython
+
+blpapi 64-bit will be loaded from: "C:\blp\DAPI\blpapi3_64.dll"
+blpapi 32-bit will be loaded from: "C:\blp\DAPI\blpapi3_32.dll"
+System PATH: (* marks locations where blpapi was found)
+    "C:\Users\zimzum\Desktop\Projects\Tradehelm\Yewno\python\CSVRouter\emsxapi\env\Scripts"
+    "C:\Program Files (x86)\Common Files\Oracle\Java\javapath"
+    "C:\Program Files (x86)\Intel\iCLS Client\"
+    "C:\Program Files\Intel\iCLS Client\"
+    "C:\WINDOWS\system32"
+    "C:\WINDOWS"
+    "C:\WINDOWS\System32\Wbem"
+    "C:\WINDOWS\System32\WindowsPowerShell\v1.0\"
+    "C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL"
+    "C:\Program Files\Intel\Intel(R) Management Engine Components\DAL"
+    "C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT"
+    "C:\Program Files\Intel\Intel(R) Management Engine Components\IPT"
+    "C:\Program Files (x86)\Microsoft SQL Server\100\DTS\Binn\"
+    "C:\Program Files\Microsoft SQL Server\100\DTS\Binn\"
+    "C:\Program Files (x86)\Microsoft SQL Server\100\Tools\Binn\"
+    "C:\Program Files\Microsoft SQL Server\100\Tools\Binn\"
+    "C:\Program Files (x86)\Microsoft SQL Server\100\Tools\Binn\VSShell\Common7\IDE\"
+    "C:\Program Files (x86)\Microsoft Visual Studio 9.0\Common7\IDE\PrivateAssemblies\"
+    "C:\Program Files\Git\cmd"
+    "C:\Program Files\Microsoft\Web Platform Installer\"
+    "C:\Program Files (x86)\Microsoft ASP.NET\ASP.NET Web Pages\v1.0\"
+    "C:\WINDOWS\System32\OpenSSH\"
+  * "C:\blp\DAPI"
+    "C:\blp\DAPI\DDE"
+    "C:\Users\zimzum\AppData\Local\Programs\Python\Python37-32\Scripts\"
+    "C:\Users\zimzum\AppData\Local\Programs\Python\Python37-32\"
+    "C:\Users\zimzum\AppData\Local\Microsoft\WindowsApps"
+    "C:\Users\zimzum\AppData\Local\GitHubDesktop\bin"
+    "C:\Users\zimzum\AppData\Local\Microsoft\WindowsApps"
+    "C:\Users\zimzum\AppData\Local\Programs\Microsoft VS Code\bin"
+    "C:\Users\zimzum\AppData\Local\Programs\EmEditor"
+
+blpapi package at: "C:\Users\zimzum\Desktop\Projects\Tradehelm\Yewno\python\CSVRouter\emsxapi\env\lib\site-packages"
+
+Current directory: "C:\Users\zimzum\Desktop\Projects\Tradehelm\Yewno\python\CSVRouter\emsxapi"
+
+----------------------------------------------------------------------
+No module named '_internals'
+
+Mismatch between C++ and Python SDK libraries.
+
+Python SDK version    3.13.1
+Found C++ SDK version 3.12.3.1
+
+Download and install the latest C++ SDK from:
+
+    http://www.bloomberg.com/professional/api-library
+
+If a recent version of the C++ SDK is already installed, please ensure that the
+path to the library is added to PATH before entering the interpreter.
+
+
+
+2019-11-02 14:14:25 [logger INFO] SimpleCSVProcessor   Initializing
+2019-11-02 14:14:25 [logger INFO] SimpleCSVProcessor   Runner type: Now
+2019-11-02 14:14:25 [logger INFO] Initializing Generic Market Order Router
+2019-11-02 14:14:26 [logger ERROR] Error Loading Generic Market Order Router module:
+---------------------------- ENVIRONMENT -----------------------------
+Platform: Windows-10-10.0.18362-SP0
+Architecture: ('32bit', 'WindowsPE')
+Python: 3.7.2 (tags/v3.7.2:9a3ffc0492, Dec 23 2018, 22:20:52) [MSC v.1916 32 bit (Intel)]
+Python implementation: CPython
+
+blpapi 64-bit will be loaded from: "C:\blp\DAPI\blpapi3_64.dll"
+blpapi 32-bit will be loaded from: "C:\blp\DAPI\blpapi3_32.dll"
+System PATH: (* marks locations where blpapi was found)
+    "C:\Users\zimzum\Desktop\Projects\Tradehelm\Yewno\python\CSVRouter\emsxapi\env\Scripts"
+    "C:\Program Files (x86)\Common Files\Oracle\Java\javapath"
+    "C:\Program Files (x86)\Intel\iCLS Client\"
+    "C:\Program Files\Intel\iCLS Client\"
+    "C:\WINDOWS\system32"
+    "C:\WINDOWS"
+    "C:\WINDOWS\System32\Wbem"
+    "C:\WINDOWS\System32\WindowsPowerShell\v1.0\"
+    "C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL"
+    "C:\Program Files\Intel\Intel(R) Management Engine Components\DAL"
+    "C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT"
+    "C:\Program Files\Intel\Intel(R) Management Engine Components\IPT"
+    "C:\Program Files (x86)\Microsoft SQL Server\100\DTS\Binn\"
+    "C:\Program Files\Microsoft SQL Server\100\DTS\Binn\"
+    "C:\Program Files (x86)\Microsoft SQL Server\100\Tools\Binn\"
+    "C:\Program Files\Microsoft SQL Server\100\Tools\Binn\"
+    "C:\Program Files (x86)\Microsoft SQL Server\100\Tools\Binn\VSShell\Common7\IDE\"
+    "C:\Program Files (x86)\Microsoft Visual Studio 9.0\Common7\IDE\PrivateAssemblies\"
+    "C:\Program Files\Git\cmd"
+    "C:\Program Files\Microsoft\Web Platform Installer\"
+    "C:\Program Files (x86)\Microsoft ASP.NET\ASP.NET Web Pages\v1.0\"
+    "C:\WINDOWS\System32\OpenSSH\"
+  * "C:\blp\DAPI"
+    "C:\blp\DAPI\DDE"
+    "C:\Users\zimzum\AppData\Local\Programs\Python\Python37-32\Scripts\"
+    "C:\Users\zimzum\AppData\Local\Programs\Python\Python37-32\"
+    "C:\Users\zimzum\AppData\Local\Microsoft\WindowsApps"
+    "C:\Users\zimzum\AppData\Local\GitHubDesktop\bin"
+    "C:\Users\zimzum\AppData\Local\Microsoft\WindowsApps"
+    "C:\Users\zimzum\AppData\Local\Programs\Microsoft VS Code\bin"
+    "C:\Users\zimzum\AppData\Local\Programs\EmEditor"
+
+blpapi package at: "C:\Users\zimzum\Desktop\Projects\Tradehelm\Yewno\python\CSVRouter\emsxapi\env\lib\site-packages"
+
+Current directory: "C:\Users\zimzum\Desktop\Projects\Tradehelm\Yewno\python\CSVRouter\emsxapi"
+
+----------------------------------------------------------------------
+No module named '_internals'
+
+Mismatch between C++ and Python SDK libraries.
+
+Python SDK version    3.13.1
+Found C++ SDK version 3.12.3.1
+
+Download and install the latest C++ SDK from:
+
+    http://www.bloomberg.com/professional/api-library
+
+If a recent version of the C++ SDK is already installed, please ensure that the
+path to the library is added to PATH before entering the interpreter.
+
+
+
+2019-11-02 14:45:14 [logger INFO] SimpleCSVProcessor   Initializing
+2019-11-02 14:45:14 [logger INFO] SimpleCSVProcessor   Runner type: Now
+2019-11-02 14:45:14 [logger INFO] Initializing Generic Market Order Router
+2019-11-02 14:45:14 [logger ERROR] Error Loading Generic Market Order Router module:
+---------------------------- ENVIRONMENT -----------------------------
+Platform: Windows-10-10.0.18362-SP0
+Architecture: ('32bit', 'WindowsPE')
+Python: 3.7.2 (tags/v3.7.2:9a3ffc0492, Dec 23 2018, 22:20:52) [MSC v.1916 32 bit (Intel)]
+Python implementation: CPython
+
+blpapi 64-bit will be loaded from: "C:\blp\DAPI\blpapi3_64.dll"
+blpapi 32-bit will be loaded from: "C:\blp\DAPI\blpapi3_32.dll"
+System PATH: (* marks locations where blpapi was found)
+    "C:\Users\zimzum\Desktop\Projects\Tradehelm\Yewno\python\CSVRouter\emsxapi\env\Scripts"
+    "C:\Program Files (x86)\Common Files\Oracle\Java\javapath"
+    "C:\Program Files (x86)\Intel\iCLS Client\"
+    "C:\Program Files\Intel\iCLS Client\"
+    "C:\WINDOWS\system32"
+    "C:\WINDOWS"
+    "C:\WINDOWS\System32\Wbem"
+    "C:\WINDOWS\System32\WindowsPowerShell\v1.0\"
+    "C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL"
+    "C:\Program Files\Intel\Intel(R) Management Engine Components\DAL"
+    "C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT"
+    "C:\Program Files\Intel\Intel(R) Management Engine Components\IPT"
+    "C:\Program Files (x86)\Microsoft SQL Server\100\DTS\Binn\"
+    "C:\Program Files\Microsoft SQL Server\100\DTS\Binn\"
+    "C:\Program Files (x86)\Microsoft SQL Server\100\Tools\Binn\"
+    "C:\Program Files\Microsoft SQL Server\100\Tools\Binn\"
+    "C:\Program Files (x86)\Microsoft SQL Server\100\Tools\Binn\VSShell\Common7\IDE\"
+    "C:\Program Files (x86)\Microsoft Visual Studio 9.0\Common7\IDE\PrivateAssemblies\"
+    "C:\Program Files\Git\cmd"
+    "C:\Program Files\Microsoft\Web Platform Installer\"
+    "C:\Program Files (x86)\Microsoft ASP.NET\ASP.NET Web Pages\v1.0\"
+    "C:\WINDOWS\System32\OpenSSH\"
+  * "C:\blp\DAPI"
+    "C:\blp\DAPI\DDE"
+    "C:\Users\zimzum\AppData\Local\Programs\Python\Python37-32\Scripts\"
+    "C:\Users\zimzum\AppData\Local\Programs\Python\Python37-32\"
+    "C:\Users\zimzum\AppData\Local\Microsoft\WindowsApps"
+    "C:\Users\zimzum\AppData\Local\GitHubDesktop\bin"
+    "C:\Users\zimzum\AppData\Local\Microsoft\WindowsApps"
+    "C:\Users\zimzum\AppData\Local\Programs\Microsoft VS Code\bin"
+    "C:\Users\zimzum\AppData\Local\Programs\EmEditor"
+
+blpapi package at: "C:\Users\zimzum\Desktop\Projects\Tradehelm\Yewno\python\CSVRouter\emsxapi\env\lib\site-packages"
+
+Current directory: "C:\Users\zimzum\Desktop\Projects\Tradehelm\Yewno\python\CSVRouter\emsxapi"
+
+----------------------------------------------------------------------
+No module named '_internals'
+
+Mismatch between C++ and Python SDK libraries.
+
+Python SDK version    3.13.1
+Found C++ SDK version 3.12.3.1
+
+Download and install the latest C++ SDK from:
+
+    http://www.bloomberg.com/professional/api-library
+
+If a recent version of the C++ SDK is already installed, please ensure that the
+path to the library is added to PATH before entering the interpreter.
+
+
+
+2019-11-02 15:52:23 [logger INFO] SimpleCSVProcessor   Initializing
+2019-11-02 15:53:21 [logger INFO] SimpleCSVProcessor   Initializing
+2019-11-02 15:53:21 [logger INFO] SimpleCSVProcessor   Runner type: Now
+2019-11-02 15:53:21 [logger INFO] Initializing Generic Market Order Router
+2019-11-02 15:53:21 [logger ERROR] Error Loading Generic Market Order Router module:
+---------------------------- ENVIRONMENT -----------------------------
+Platform: Windows-10-10.0.18362-SP0
+Architecture: ('32bit', 'WindowsPE')
+Python: 3.7.2 (tags/v3.7.2:9a3ffc0492, Dec 23 2018, 22:20:52) [MSC v.1916 32 bit (Intel)]
+Python implementation: CPython
+
+blpapi 64-bit will be loaded from: "C:\blp\DAPI\blpapi3_64.dll"
+blpapi 32-bit will be loaded from: "C:\blp\DAPI\blpapi3_32.dll"
+System PATH: (* marks locations where blpapi was found)
+    "C:\Users\zimzum\Desktop\Projects\Tradehelm\Yewno\python\CSVRouter\emsxapi\env\Scripts"
+    "C:\Program Files (x86)\Common Files\Oracle\Java\javapath"
+    "C:\Program Files (x86)\Intel\iCLS Client\"
+    "C:\Program Files\Intel\iCLS Client\"
+    "C:\WINDOWS\system32"
+    "C:\WINDOWS"
+    "C:\WINDOWS\System32\Wbem"
+    "C:\WINDOWS\System32\WindowsPowerShell\v1.0\"
+    "C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL"
+    "C:\Program Files\Intel\Intel(R) Management Engine Components\DAL"
+    "C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT"
+    "C:\Program Files\Intel\Intel(R) Management Engine Components\IPT"
+    "C:\Program Files (x86)\Microsoft SQL Server\100\DTS\Binn\"
+    "C:\Program Files\Microsoft SQL Server\100\DTS\Binn\"
+    "C:\Program Files (x86)\Microsoft SQL Server\100\Tools\Binn\"
+    "C:\Program Files\Microsoft SQL Server\100\Tools\Binn\"
+    "C:\Program Files (x86)\Microsoft SQL Server\100\Tools\Binn\VSShell\Common7\IDE\"
+    "C:\Program Files (x86)\Microsoft Visual Studio 9.0\Common7\IDE\PrivateAssemblies\"
+    "C:\Program Files\Git\cmd"
+    "C:\Program Files\Microsoft\Web Platform Installer\"
+    "C:\Program Files (x86)\Microsoft ASP.NET\ASP.NET Web Pages\v1.0\"
+    "C:\WINDOWS\System32\OpenSSH\"
+  * "C:\blp\DAPI"
+    "C:\blp\DAPI\DDE"
+    "C:\Users\zimzum\AppData\Local\Programs\Python\Python37-32\Scripts\"
+    "C:\Users\zimzum\AppData\Local\Programs\Python\Python37-32\"
+    "C:\Users\zimzum\AppData\Local\Microsoft\WindowsApps"
+    "C:\Users\zimzum\AppData\Local\GitHubDesktop\bin"
+    "C:\Users\zimzum\AppData\Local\Microsoft\WindowsApps"
+    "C:\Users\zimzum\AppData\Local\Programs\Microsoft VS Code\bin"
+    "C:\Users\zimzum\AppData\Local\Programs\EmEditor"
+
+blpapi package at: "C:\Users\zimzum\Desktop\Projects\Tradehelm\Yewno\python\CSVRouter\emsxapi\env\lib\site-packages"
+
+Current directory: "C:\Users\zimzum\Desktop\Projects\Tradehelm\Missisipi\python\day_trader"
+
+----------------------------------------------------------------------
+No module named '_internals'
+
+Mismatch between C++ and Python SDK libraries.
+
+Python SDK version    3.13.1
+Found C++ SDK version 3.12.3.1
+
+Download and install the latest C++ SDK from:
+
+    http://www.bloomberg.com/professional/api-library
+
+If a recent version of the C++ SDK is already installed, please ensure that the
+path to the library is added to PATH before entering the interpreter.
+
+
+
+2019-11-02 15:55:48 [logger INFO] SimpleCSVProcessor   Initializing
+2019-11-02 15:55:48 [logger INFO] SimpleCSVProcessor   Runner type: Now
+2019-11-02 15:55:48 [logger INFO] Initializing Generic Market Order Router
+2019-11-02 15:55:48 [logger ERROR] Error Loading Generic Market Order Router module:
+---------------------------- ENVIRONMENT -----------------------------
+Platform: Windows-10-10.0.18362-SP0
+Architecture: ('32bit', 'WindowsPE')
+Python: 3.7.2 (tags/v3.7.2:9a3ffc0492, Dec 23 2018, 22:20:52) [MSC v.1916 32 bit (Intel)]
+Python implementation: CPython
+
+blpapi 64-bit will be loaded from: "C:\blp\DAPI\blpapi3_64.dll"
+blpapi 32-bit will be loaded from: "C:\blp\DAPI\blpapi3_32.dll"
+System PATH: (* marks locations where blpapi was found)
+    "C:\Users\zimzum\Desktop\Projects\Tradehelm\Yewno\python\CSVRouter\emsxapi\env\Scripts"
+    "C:\Program Files (x86)\Common Files\Oracle\Java\javapath"
+    "C:\Program Files (x86)\Intel\iCLS Client\"
+    "C:\Program Files\Intel\iCLS Client\"
+    "C:\WINDOWS\system32"
+    "C:\WINDOWS"
+    "C:\WINDOWS\System32\Wbem"
+    "C:\WINDOWS\System32\WindowsPowerShell\v1.0\"
+    "C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL"
+    "C:\Program Files\Intel\Intel(R) Management Engine Components\DAL"
+    "C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT"
+    "C:\Program Files\Intel\Intel(R) Management Engine Components\IPT"
+    "C:\Program Files (x86)\Microsoft SQL Server\100\DTS\Binn\"
+    "C:\Program Files\Microsoft SQL Server\100\DTS\Binn\"
+    "C:\Program Files (x86)\Microsoft SQL Server\100\Tools\Binn\"
+    "C:\Program Files\Microsoft SQL Server\100\Tools\Binn\"
+    "C:\Program Files (x86)\Microsoft SQL Server\100\Tools\Binn\VSShell\Common7\IDE\"
+    "C:\Program Files (x86)\Microsoft Visual Studio 9.0\Common7\IDE\PrivateAssemblies\"
+    "C:\Program Files\Git\cmd"
+    "C:\Program Files\Microsoft\Web Platform Installer\"
+    "C:\Program Files (x86)\Microsoft ASP.NET\ASP.NET Web Pages\v1.0\"
+    "C:\WINDOWS\System32\OpenSSH\"
+  * "C:\blp\DAPI"
+    "C:\blp\DAPI\DDE"
+    "C:\Users\zimzum\AppData\Local\Programs\Python\Python37-32\Scripts\"
+    "C:\Users\zimzum\AppData\Local\Programs\Python\Python37-32\"
+    "C:\Users\zimzum\AppData\Local\Microsoft\WindowsApps"
+    "C:\Users\zimzum\AppData\Local\GitHubDesktop\bin"
+    "C:\Users\zimzum\AppData\Local\Microsoft\WindowsApps"
+    "C:\Users\zimzum\AppData\Local\Programs\Microsoft VS Code\bin"
+    "C:\Users\zimzum\AppData\Local\Programs\EmEditor"
+
+blpapi package at: "C:\Users\zimzum\Desktop\Projects\Tradehelm\Yewno\python\CSVRouter\emsxapi\env\lib\site-packages"
+
+Current directory: "C:\Users\zimzum\Desktop\Projects\Tradehelm\Missisipi\python\day_trader"
+
+----------------------------------------------------------------------
+No module named '_internals'
+
+Mismatch between C++ and Python SDK libraries.
+
+Python SDK version    3.13.1
+Found C++ SDK version 3.12.3.1
+
+Download and install the latest C++ SDK from:
+
+    http://www.bloomberg.com/professional/api-library
+
+If a recent version of the C++ SDK is already installed, please ensure that the
+path to the library is added to PATH before entering the interpreter.
+
+
+
+2019-11-02 16:09:35 [logger INFO] SimpleCSVProcessor   Initializing
+2019-11-02 16:09:35 [logger INFO] SimpleCSVProcessor   Runner type: Now
+2019-11-02 16:09:36 [logger INFO] Initializing Generic Market Order Router
+2019-11-02 16:09:36 [logger ERROR] Error Loading Generic Market Order Router module:No module named 'sources.order_routers.interactive_brokers'
+2019-11-02 16:10:29 [logger INFO] SimpleCSVProcessor   Initializing
+2019-11-02 16:10:29 [logger INFO] SimpleCSVProcessor   Runner type: Now
+2019-11-02 16:10:29 [logger INFO] Initializing Generic Market Order Router
+2019-11-02 16:10:29 [logger INFO] Initializing Bloomberg Order Router
+2019-11-02 16:10:29 [logger INFO] Connecting to localhost:8194
+2019-11-02 16:12:28 [logger INFO] SimpleCSVProcessor   Initializing
+2019-11-02 16:12:28 [logger INFO] SimpleCSVProcessor   Runner type: Now
+2019-11-02 16:12:28 [logger INFO] Initializing Generic Market Order Router
+2019-11-02 16:12:28 [logger INFO] Initializing Bloomberg Order Router
+2019-11-02 16:12:28 [logger INFO] Connecting to localhost:8194
+2019-11-02 16:12:29 [logger INFO] Bloomberg Order Router Initialized
+2019-11-02 16:12:29 [logger INFO] Generic Market Order Router Initialized
+2019-11-02 16:12:29 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2019-11-02 16:12:29 [logger INFO] Bloomberg Session Connection is UP...
+2019-11-02 16:12:29 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2019-11-02 16:12:29 [logger INFO] Bloomberg Session started...
+2019-11-02 16:12:30 [logger INFO] Processing SERVICE_STATUS event
+2019-11-02 16:12:30 [logger INFO] Service //blp/emapisvc opened...
+2019-11-02 16:12:30 [logger INFO] Subscribing to order and route events
+2019-11-02 16:12:32 [logger INFO] Order subscription started successfully
+2019-11-02 16:12:32 [logger INFO] Route subscription started successfully
+2019-11-02 16:20:57 [logger INFO] DayTrader  Initializing
+2019-11-02 16:20:57 [logger INFO] Initializing Generic Market Order Router
+2019-11-02 16:20:57 [logger INFO] Initializing Bloomberg Order Router
+2019-11-02 16:20:57 [logger INFO] Connecting to localhost:8194
+2019-11-02 16:20:57 [logger INFO] Bloomberg Order Router Initialized
+2019-11-02 16:20:57 [logger INFO] Generic Market Order Router Initialized
+2019-11-02 16:20:57 [logger INFO] DayTrader Successfully initializer
+2019-11-02 16:20:57 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2019-11-02 16:20:57 [logger INFO] Bloomberg Session Connection is UP...
+2019-11-02 16:20:57 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2019-11-02 16:20:57 [logger INFO] Bloomberg Session started...
+2019-11-02 16:20:58 [logger INFO] Processing SERVICE_STATUS event
+2019-11-02 16:20:58 [logger INFO] Service //blp/emapisvc opened...
+2019-11-02 16:20:58 [logger INFO] Subscribing to order and route events
+2019-11-02 16:20:58 [logger INFO] Order subscription started successfully
+2019-11-02 16:20:58 [logger INFO] Route subscription started successfully
+2019-11-02 16:22:36 [logger INFO] DayTrader  Initializing
+2019-11-02 16:22:36 [logger INFO] Initializing Generic Market Order Router
+2019-11-02 16:22:36 [logger INFO] Initializing Bloomberg Order Router
+2019-11-02 16:22:36 [logger INFO] Connecting to localhost:8194
+2019-11-02 16:22:36 [logger INFO] Bloomberg Order Router Initialized
+2019-11-02 16:22:36 [logger INFO] Generic Market Order Router Initialized
+2019-11-02 16:22:36 [logger INFO] DayTrader Successfully initializer
+2019-11-02 16:22:36 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2019-11-02 16:22:36 [logger INFO] Bloomberg Session Connection is UP...
+2019-11-02 16:22:36 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2019-11-02 16:22:36 [logger INFO] Bloomberg Session started...
+2019-11-02 16:22:37 [logger INFO] Processing SERVICE_STATUS event
+2019-11-02 16:22:37 [logger INFO] Service //blp/emapisvc opened...
+2019-11-02 16:22:37 [logger INFO] Subscribing to order and route events
+2019-11-02 16:22:37 [logger INFO] Route subscription started successfully
+2019-11-02 16:22:37 [logger INFO] Order subscription started successfully
+2019-11-02 16:55:45 [logger INFO] DayTrader  Initializing
+2019-11-02 16:55:50 [logger INFO] Initializing Generic Market Order Router
+2019-11-02 16:55:55 [logger INFO] Initializing Bloomberg Order Router
+2019-11-02 16:55:55 [logger INFO] Connecting to localhost:8194
+2019-11-02 16:55:55 [logger INFO] Bloomberg Order Router Initialized
+2019-11-02 16:55:55 [logger INFO] Generic Market Order Router Initialized
+2019-11-02 16:55:55 [logger INFO] DayTrader Successfully initializer
+2019-11-02 16:55:55 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2019-11-02 16:55:55 [logger INFO] Bloomberg Session Connection is UP...
+2019-11-02 16:55:55 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2019-11-02 16:55:55 [logger INFO] Bloomberg Session started...
+2019-11-02 16:55:55 [logger INFO] Processing SERVICE_STATUS event
+2019-11-02 16:55:55 [logger INFO] Service //blp/emapisvc opened...
+2019-11-02 16:55:55 [logger INFO] Subscribing to order and route events
+2019-11-02 16:55:55 [logger INFO] Order subscription started successfully
+2019-11-02 16:55:55 [logger INFO] Route subscription started successfully
+2019-11-02 17:14:44 [logger INFO] DayTrader  Initializing
+2019-11-02 17:14:44 [logger INFO] Initializing Generic Market Order Router
+2019-11-02 17:14:44 [logger INFO] Initializing Bloomberg Order Router
+2019-11-02 17:14:44 [logger INFO] Connecting to localhost:8194
+2019-11-02 17:14:44 [logger INFO] Bloomberg Order Router Initialized
+2019-11-02 17:14:44 [logger INFO] Generic Market Order Router Initialized
+2019-11-02 17:14:44 [logger INFO] DayTrader Successfully initializer
+2019-11-02 17:14:44 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2019-11-02 17:14:44 [logger INFO] Bloomberg Session Connection is UP...
+2019-11-02 17:14:44 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2019-11-02 17:14:44 [logger INFO] Bloomberg Session started...
+2019-11-02 17:14:44 [logger INFO] Processing SERVICE_STATUS event
+2019-11-02 17:14:44 [logger INFO] Service //blp/emapisvc opened...
+2019-11-02 17:14:44 [logger INFO] Subscribing to order and route events
+2019-11-02 17:14:44 [logger INFO] Order subscription started successfully
+2019-11-02 17:14:44 [logger INFO] Route subscription started successfully

@@ -1,29 +1,30 @@
 from sources.framework.common.interfaces.icommunication_module import ICommunicationModule
 from sources.strategy.strategies.day_trader.common.configuration.configuration import Configuration
-from sources.strategy.strategies.day_trader.common.converters.csv_converter import *
-from sources.strategy.strategies.day_trader.common.util.csv_constants import *
-from sources.strategy.strategies.day_trader.data_access_layer.execution_report_data_access_layer import *
 from sources.framework.common.converters.execution_report_converter import *
 from sources.framework.common.enums.fields.execution_report_field import *
 from sources.framework.common.enums.fields.position_list_field import *
 from sources.framework.common.abstract.base_communication_module import *
 from sources.framework.business_entities.positions.execution_summary import *
 from sources.framework.business_entities.positions.position import *
-from sources.framework.business_entities.securities.security import *
-from sources.strategy.common.wrappers.position_wrapper import *
 from sources.framework.common.wrappers.cancel_all_wrapper import *
-from sources.framework.common.enums.Side import *
+from sources.framework.common.wrappers.market_data_request_wrapper import *
+from sources.framework.common.wrappers.candle_bar_request_wrapper import *
+from sources.framework.common.enums.SubscriptionRequestType import *
+from sources.strategy.strategies.day_trader.common.converters.market_data_converter import *
 from sources.framework.common.dto.cm_state import *
 from sources.strategy.strategies.day_trader.common.util.local_folder_file_handler import *
 from sources.strategy.common.wrappers.position_list_request_wrapper import *
-import csv
+from sources.strategy.data_access_layer.security_to_trade_manager import *
+from sources.strategy.data_access_layer.model_parameters_manager import *
+from sources.strategy.strategies.day_trader.common.util.log_helper import *
 import importlib
 import threading
 import time
 import datetime
 import uuid
-import schedule
 import queue
+
+_BAR_FREQUENCY="BAR_FREQUENCY"
 
 class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
@@ -31,12 +32,31 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
         self.Lock = threading.Lock()
         self.Configuration = None
         self.NextPostId = uuid.uuid4()
+
         self.ExecutionSummaries = {}
-        self.ExecutionReportManager = None
+
+        self.SecurityToTradeManager = None
+        self.ModelParametersManager = None
+
+        self.SecuritiesToTrade = []
+        self.ModelParameters = {}
+        self.MarketData={}
+        self.Candlebars={}
+
         self.InvokingModule = None
         self.OutgoingModule = None
+
         self.OrdersQueue = queue.Queue(maxsize=1000000)
         self.SummariesQueue = queue.Queue(maxsize=1000000)
+
+    def FetchParam(self,key):
+        if self.ModelParameters is not None:
+            if key in self.ModelParameters:
+                return self.ModelParameters[key]
+            else:
+                raise Exception("Unknown key {}",format(key))
+        else:
+            raise Exception("ModelParameters dictionary not initialized!!!!")
 
     def OrdersPersistanceThread(self):
 
@@ -79,12 +99,6 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
             time.sleep(int(1))
 
     def ProcessOrder(self,summary, isRecovery):
-        """ Persist an order in the database
-
-        Args:
-            summary (:obj:`ExecutionSummary`): Execution summary to be updated.
-        """
-
         order = summary.Position.GetLastOrder()
 
         if order is not None:
@@ -97,59 +111,19 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
             self.DoLog("Order not found for position {}".format(summary.Position.PosId), MessageType.DEBUG)
 
     def UpdateExecutionSummary(self, summary, execReport, recovered=False):
-        """ Update Summary information with Execution Report received
-
-        Args:
-            recovered ():
-            summary (:obj:`ExecutionSummary`): Execution summary to be updated.
-            execReport (:obj:`ExecutionReport`): Execution report data as input.
-        """
         summary.UpdateStatus(execReport)
 
         if not recovered:
 
             if summary.Position.IsFinishedPosition():
-                self.DoLog(
-                    "Position Finished: PosId={} Symbol={} Side={} Final Status={} OrdQty={} CumQty={} LvsQty={} "
-                    "AvgPx={} Text={} "
-                        .format(summary.Position.PosId,
-                                summary.Position.Security.Symbol,
-                                summary.Position.Side,
-                                summary.Position.PosStatus,
-                                summary.Position.Qty if summary.Position.Qty is not None else summary.Position.CashQty,
-                                summary.CumQty,
-                                summary.LeavesQty,
-                                summary.AvgPx,
-                                execReport.Text), MessageType.INFO)
+                LogHelper.LogPositionUpdate(self,"Position Finished",summary,execReport)
             else:
-                self.DoLog(
-                    "Position Updated: PosId={} Symbol={}  Side={} Final Status={} OrdQty={} CumQty={} LvsQty={} "
-                    "AvgPx={} Text={} "
-                        .format(summary.Position.PosId,
-                                summary.Position.Security.Symbol,
-                                summary.Position.Side,
-                                summary.Position.PosStatus,
-                                summary.Position.Qty if summary.Position.Qty is not None else summary.Position.CashQty,
-                                summary.CumQty,
-                                summary.LeavesQty,
-                                summary.AvgPx,
-                                execReport.Text), MessageType.INFO)
+                LogHelper.LogPositionUpdate(self, "PositionUpdated", summary, execReport)
 
         if recovered:
 
             if not summary.Position.IsFinishedPosition():
-                self.DoLog(
-                    "Recovered previously existing position: PosId={} Symbol={} Side={}  Final Status={} OrdQty={} "
-                    "CumQty={} LvsQty={} AvgPx={} Text={} "
-                        .format(summary.Position.PosId,
-                                summary.Position.Security.Symbol,
-                                summary.Position.Side,
-                                summary.Position.PosStatus,
-                                summary.Position.Qty if summary.Position.Qty is not None else summary.Position.CashQty,
-                                summary.CumQty,
-                                summary.LeavesQty,
-                                summary.AvgPx,
-                                execReport.Text if execReport is not None else ""), MessageType.INFO)
+                LogHelper.LogPositionUpdate(self, "Recovered previously existing position", summary, execReport)
                 self.ExecutionSummaries[summary.Position.PosId] = summary
 
         # Recovered or not. If it's a traded position, we fill the DB
@@ -161,23 +135,12 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                     if(recovered == False or self.Configuration.PersistRecovery):
                         self.SummariesQueue.put(summary)
                 else:
-                    self.DoLog(
-                        "Critical error saving traded position with no fill Id.PosId:{}".format(summary.Position.PosId),
-                        MessageType.ERROR)
+                    self.DoLog( "Critical error saving traded position with no fill Id.PosId:{}".format(summary.Position.PosId), MessageType.ERROR)
 
             except Exception as e:
                 self.DoLog("Error Saving to DB: {}".format(e), MessageType.ERROR)
 
     def ProcessExecutionReport(self, wrapper):
-        """ Process execution report received from module that is invoked.
-
-        Args:
-            wrapper (:obj:`Wrapper`): Generic wrapper to communicate strategy with other modules.
-
-        Returns:
-            CMState object: The return value. BuildSuccess for success.
-
-        """
         try:
 
             try:
@@ -203,30 +166,28 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
             self.DoLog("Critical error @DayTrader.ProcessExecutionReport: " + str(e), MessageType.ERROR)
 
     def LoadConfig(self):
-        """ Load current configuration from module configuration file.
-
-        Returns:
-            bool: True if finished.
-
-        """
         self.Configuration = Configuration(self.ModuleConfigFile)
         return True
 
-    def InitializeGenericOrderRouter(self):
-        """ Initialize Generic Order Router with specific module name from configuration file.
+    def LoadManagers(self):
+        self.SecurityToTradeManager = SecurityToTradeManager(self.Configuration.DBHost, self.Configuration.DBPort,
+                                                             self.Configuration.DBCatalog, self.Configuration.DBUser,
+                                                             self.Configuration.DBPassword)
 
-        """
-        module_name, class_name = self.Configuration.OutgoingModule.rsplit(".", 1)
-        outgoing_module_class = getattr(importlib.import_module(module_name), class_name)
+        self.SecuritiesToTrade = self.SecurityToTradeManager.GetSecurtitiesToTrade()
 
-        if outgoing_module_class is not None:
-            self.OutgoingModule = outgoing_module_class()
-            state = self.OutgoingModule.Initialize(self, self.Configuration.OutgoingConfigFile)
 
-            if not state.Success:
-                raise state.Exception
-        else:
-            raise Exception("Could not instantiate module {}".format(self.Configuration.OutgoingModule))
+        self.ModelParametersManager = ModelParametersManager(self.Configuration.DBHost, self.Configuration.DBPort,
+                                                             self.Configuration.DBCatalog, self.Configuration.DBUser,
+                                                             self.Configuration.DBPassword)
+
+        modelParams = self.ModelParametersManager.GetModelParametersManager()
+
+        for param in modelParams:
+            self.ModelParameters[param.Key]=param
+
+
+
 
     def CancelAllPositions(self):
 
@@ -242,8 +203,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
     def ProcessPositionList(self, wrapper):
         try:
             positions = wrapper.GetField(PositionListField.Positions)
-            self.DoLog(
-                "Received list of Open Positions: {} positions".format(Position.CountOpenPositions(self, positions)),
+            self.DoLog("Received list of Open Positions: {} positions".format(Position.CountOpenPositions(self, positions)),
                 MessageType.INFO)
             i=0
             for pos in positions:
@@ -263,25 +223,74 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
         except Exception as e:
             self.DoLog("Critical error @DayTrader.ProcessPositionList: " + str(e), MessageType.ERROR)
 
+    def ProcessMarketData(self,wrapper):
+        try:
+            md = MarketDataConverter.ConvertMarketData(wrapper)
+            self.MarketData[md.Security.Symbol]=md
+        except Exception as e:
+            self.DoLog("Critical error @DayTrader.ProcessMarketData: " + str(e), MessageType.ERROR)
+
+    def ProcessCandleBar(self,wrapper):
+        try:
+            candlebar = MarketDataConverter.ConvertCandlebar(wrapper)
+
+            if candlebar is not None:
+                cbDict = self.Candlebars[candlebar.Security.Symbol]
+                if cbDict is  None:
+                    cbDict = {}
+
+                cbDict[candlebar.DateTime] = candlebar
+                self.Candlebars[candlebar.Security.Symbol]=cbDict
+                print("aca")
+            else:
+                self.DoLog("Received unknown null candlebar",MessageType.DEBUG)
+
+        except Exception as e:
+            self.DoLog("Critical error @DayTrader.ProcessCandleBar: " + str(e), MessageType.ERROR)
+
     def RequestPositionList(self):
         time.sleep(int(self.Configuration.PauseBeforeExecutionInSeconds))
         self.DoLog("Requesting for open orders...", MessageType.INFO)
         wrapper = PositionListRequestWrapper()
-        self.OutgoingModule.ProcessMessage(wrapper)
+        self.MarketDataModule.ProcessMessage(wrapper)
+
+    def RequestMarketData(self):
+        for secIn in self.SecuritiesToTrade:
+            self.MarketData[secIn.Security.Symbol]=secIn.Security
+            mdReqWrapper = MarketDataRequestWrapper(secIn.Security,SubscriptionRequestType.SnapshotAndUpdates)
+            self.MarketDataModule.ProcessMessage(mdReqWrapper)
+
+    def RequestBars(self):
+        for secIn in self.SecuritiesToTrade:
+            sec = self.MarketData[secIn.Security.Symbol]
+            time = int( self.FetchParam(_BAR_FREQUENCY).IntValue)
+            if sec is not None:
+                self.Candlebars[secIn.Security.Symbol]=None
+                mdReqWrapper = CandleBarRequestWrapper(secIn.Security,time,TimeUnit.Minute,
+                                                       SubscriptionRequestType.SnapshotAndUpdates)
+                self.MarketDataModule.ProcessMessage(mdReqWrapper)
+            else:
+                raise Exception("Could not find security for symbol {}".format(secIn.Security.Symbol))
 
     def ProcessMessage(self, wrapper):
         pass
 
+    def ProcessIncoming(self, wrapper):
+        try:
+            if wrapper.GetAction() == Actions.MARKET_DATA:
+                threading.Thread(target=self.ProcessMarketData, args=(wrapper,)).start()
+                return CMState.BuildSuccess(self)
+            if wrapper.GetAction() == Actions.CANDLE_BAR_DATA:
+                threading.Thread(target=self.ProcessCandleBar, args=(wrapper,)).start()
+                return CMState.BuildSuccess(self)
+            else:
+                raise Exception("ProcessIncoming: Not prepared for routing message {}".format(wrapper.GetAction()))
+        except Exception as e:
+            self.DoLog("Critical error @DayTrader.ProcessIncoming: " + str(e), MessageType.ERROR)
+            return CMState.BuildFailure(self, Exception=e)
+
+
     def ProcessOutgoing(self, wrapper):
-        """ Receives a response from another module that is invoked.
-
-        Args:
-            wrapper (:obj:`Wrapper`): Generic wrapper to communicate strategy with other modules.
-
-        Returns:
-            CMState object: The return value. BuildSuccess for success, BuildFailure otherwise.
-
-        """
         try:
             if wrapper.GetAction() == Actions.EXECUTION_REPORT:
                 threading.Thread(target=self.ProcessExecutionReport, args=(wrapper,)).start()
@@ -290,18 +299,12 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                 threading.Thread(target=self.ProcessPositionList, args=(wrapper,)).start()
                 return CMState.BuildSuccess(self)
             else:
-                raise Exception("MainApp: Not prepared for routing message {}".format(wrapper.GetAction()))
+                raise Exception("ProcessOutgoing: Not prepared for routing message {}".format(wrapper.GetAction()))
         except Exception as e:
             self.DoLog("Critical error @DayTrader.ProcessOutgoing: " + str(e), MessageType.ERROR)
             return CMState.BuildFailure(self, Exception=e)
 
     def Initialize(self, pInvokingModule, pConfigFile):
-        """  Initialize everything.
-
-        Args:
-            pInvokingModule (ProcessOutgoing method): Invoking module.
-            pConfigFile (Ini file): Configuration file path.
-        """
         self.ModuleConfigFile = pConfigFile
         self.InvokingModule = pInvokingModule
         self.DoLog("DayTrader  Initializing", MessageType.INFO)
@@ -312,9 +315,21 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
             threading.Thread(target=self.TradesPersistanceThread, args=()).start()
 
-            self.InitializeGenericOrderRouter()
+            self.LoadManagers()
 
-            self.DoLog("DayTrader Successfully initializer", MessageType.INFO)
+            self.MarketDataModule =  self.InitializeSingletonModule(self.Configuration.IncomingModule,self.Configuration.IncomingConfigFile)
+
+            self.OrderRoutingModule = self.InitializeModule(self.Configuration.OutgoingModule,self.Configuration.OutgoingConfigFile)
+
+            time.sleep(self.Configuration.PauseBeforeExecutionInSeconds)
+
+            self.RequestMarketData()
+
+            self.RequestPositionList()
+
+            self.RequestBars()
+
+            self.DoLog("DayTrader Successfully initialized", MessageType.INFO)
 
 
         else:
