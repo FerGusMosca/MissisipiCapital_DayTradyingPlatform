@@ -1,10 +1,13 @@
 import blpapi
 from blpapi import SessionOptions, Session
-
+from sources.framework.util.singleton.common.util.singleton import *
 from sources.framework.common.abstract.base_communication_module import BaseCommunicationModule
 from sources.framework.common.interfaces.icommunication_module import ICommunicationModule
 from sources.framework.common.wrappers.execution_report_list_wrapper import *
 from sources.framework.common.wrappers.generic_execution_report_wrapper import *
+from sources.framework.common.wrappers.error_wrapper import *
+from sources.framework.common.enums.CxlRejReason import *
+from sources.framework.common.enums.CxlRejResponseTo import *
 from sources.framework.business_entities.market_data.candle_bar import *
 from sources.framework.common.wrappers.market_data_wrapper import *
 from sources.order_routers.bloomberg.common.wrappers.candle_bar_data_wrapper import *
@@ -17,11 +20,13 @@ from sources.framework.common.logger.message_type import MessageType
 from sources.framework.common.dto.cm_state import *
 from sources.order_routers.bloomberg.common.converter.order_converter import *
 from sources.framework.common.wrappers.empty_order_list_wrapper import *
+from sources.order_routers.bloomberg.common.wrappers.order_cancel_reject_wrapper import *
 from sources.framework.common.enums.TimeUnit import *
 from sources.order_routers.bloomberg.common.util.log_helper import *
 import threading
 import time
 from datetime import datetime
+
 
 ORDER_FIELDS      = blpapi.Name("OrderFields")
 ORDER_ROUTE_FIELDS      = blpapi.Name("OrderRouteFields")
@@ -55,6 +60,7 @@ _HALTING_TIME_IN_SECONDS=300
 
 _CANCEL_CORRELATION_ID = 90
 
+@Singleton
 class OrderRouter( BaseCommunicationModule, ICommunicationModule):
 
     # region Constructors
@@ -174,7 +180,7 @@ class OrderRouter( BaseCommunicationModule, ICommunicationModule):
     def DoSendExecutionReportThread(self,execReport):
 
         try:
-            self.InvokingModule.ProcessOutgoing(execReport)
+            self.OnExecutionReport.ProcessOutgoing(execReport)
         except Exception as e:
             self.DoLog("Error sending execution report:{}".format(str(e)), MessageType.ERROR)
 
@@ -309,12 +315,15 @@ class OrderRouter( BaseCommunicationModule, ICommunicationModule):
                 #global bEnd
                 #bEnd = True
             if msg.correlationIds()[0].value() in self.PendingCancels:
+                cancelOrder = self.PendingCancels[msg.correlationIds()[0].value()]
                 del self.PendingCancels[msg.correlationIds()[0].value()]
                 if msg.messageType() == ERROR_INFO:
                     errorCode = msg.getElementAsInteger("ERROR_CODE")
                     errorMessage = msg.getElementAsString("ERROR_MESSAGE")
-                    self.DoLog("Received Rejected cancellation for ClOrdId={}.Error Code={} Error Msg={}".format(
-                        msg.correlationIds()[0].value(),errorCode,errorMessage),MessageType.ERROR)
+                    wrapper = OrderCancelRejectWrapper(cancelOrder,"{}-{}".format((errorCode,errorMessage),
+                                                        CxlRejResponseTo.OrderCancelRequest,CxlRejReason.Other))
+                    self.OnExecutionReport.ProcessOutgoing(wrapper)
+                    self.DoLog("Received Rejected cancellation for ClOrdId={}.Error Code={} Error Msg={}".format(msg.correlationIds()[0].value(),errorCode,errorMessage),MessageType.DEBUG)
                 elif msg.messageType() == CANCEL_ROUTE:
                     status = msg.getElementAsInteger("STATUS")
                     message = msg.getElementAsString("MESSAGE")
@@ -354,8 +363,6 @@ class OrderRouter( BaseCommunicationModule, ICommunicationModule):
                 self.DoLog("Received response for unknown order:{}.".format(msg), MessageType.DEBUG)
         elif msg.correlationIds()[0].value() == orderSubscriptionID.value():
             self.DoLog("Received order subscription event. ", MessageType.DEBUG)
-        elif msg.correlationIds()[0].value() == _CANCEL_CORRELATION_ID:
-            self.DoLog("Received Cancel Subscription Event for unknown correlationId= {}".format(msg.correlationIds()[0].value()), MessageType.DEBUG)
         else:
             self.DoLog( "Received Subscription Event for unknown correlationId= {}".format(msg.correlationIds()[0].value()),MessageType.DEBUG)
 
@@ -587,7 +594,7 @@ class OrderRouter( BaseCommunicationModule, ICommunicationModule):
 
             self.DoLog("Recovered {} previously existing execution reports".format(len(executionReportWrappersList)),MessageType.INFO)
             wrapper = ExecutionReportListWrapper(executionReportWrappersList)
-            self.InvokingModule.ProcessOutgoing(wrapper)
+            self.OnExecutionReport.ProcessOutgoing(wrapper)
 
         except Exception as e:
             self.DoLog("Critical Error running ProcessExecutionReportListThread @OrderRouter.Bloomberg module:{}".format(str(e)),MessageType.ERROR)
@@ -632,7 +639,11 @@ class OrderRouter( BaseCommunicationModule, ICommunicationModule):
                 self.CandleBarSubscriptions[blSymbol] = CandleBar(cbReq.Security)
                 SubscriptionHelper.CreateCandleBarSubscription(self.Session,self.Configuration.MktBar_Environment, blSymbol,cbReq.Time, requestID)
         except Exception as e:
-            self.DoLog("Error processing candle bar request:{}".format(str(e)), MessageType.ERROR)
+            msg = "Critical error subscribing for candlebars for symbol {}:{}".format(cbReq.Security.Symbol, str(e))
+            self.DoLog(msg, MessageType.ERROR)
+            errorWrapper = ErrorWrapper(e)
+            self.OnMarketData.ProcessIncoming(errorWrapper)
+
         finally:
             self.CandleBarSubscriptionLock.release()
 
@@ -663,7 +674,10 @@ class OrderRouter( BaseCommunicationModule, ICommunicationModule):
                 self.MarketDataSubscriptions[symbol]=mdReq.Security
                 SubscriptionHelper.CreateMarketDataSubscription(self.Session,symbol,requestID)
         except Exception as e:
-            self.DoLog("Error processing market data request:{}".format(str(e)), MessageType.ERROR)
+            msg="Critical error subscribing for Market Data for symbol {}:{}".format(mdReq.Security.Symbol,str(e))
+            self.DoLog(msg, MessageType.ERROR)
+            errorWrapper = ErrorWrapper(e)
+            self.OnMarketData.ProcessIncoming(errorWrapper)
         finally:
             self.MarketDataSubscriptionLock.release()
 
@@ -724,6 +738,9 @@ class OrderRouter( BaseCommunicationModule, ICommunicationModule):
                     return CMState.BuildSuccess(self)
                 else:
                     raise Exception("Unknown error initializing config file for Bloomberg Order Router")
+
+            else:
+                return CMState.BuildSuccess(self)
 
         except Exception as e:
 

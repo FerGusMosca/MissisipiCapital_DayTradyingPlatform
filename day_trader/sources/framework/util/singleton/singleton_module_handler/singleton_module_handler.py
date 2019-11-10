@@ -6,7 +6,7 @@ from sources.framework.util.singleton.common.configuration.configuration import 
 from sources.framework.common.dto.cm_state import *
 import importlib
 
-@Singleton
+
 class SingletonModuleHandler(BaseCommunicationModule):
     def __init__(self):
         self.Configuration=None
@@ -29,7 +29,7 @@ class SingletonModuleHandler(BaseCommunicationModule):
         singleton_module_class = getattr(importlib.import_module(module_name), class_name)
 
         if singleton_module_class is not None:
-            self.SingletonHandler = singleton_module_class()
+            self.SingletonHandler = singleton_module_class.instance()
             state = self.SingletonHandler.Initialize( InvokingModule,self.Configuration.SingletonConfigFile)
 
             if not state.Success:

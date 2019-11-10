@@ -6,7 +6,8 @@ from sources.framework.common.enums.OrdType import *
 
 class Position:
     def __init__(self, PosId=None, Security=None,Side=None,PriceType=None,Qty=None,QuantityType=None,Account=None,
-                Broker=None,Strategy=None,OrderType=None, OrderPrice = None):
+                Broker=None,Strategy=None,OrderType=None, OrderPrice = None, CumQty=None, LeavesQty = None,
+                 AvgPx=None, LastQty=None,LastPx=None,LastMkt=None):
 
         #region Attributes
         self.PosId=PosId
@@ -17,6 +18,12 @@ class Position:
         self.QuantityType=QuantityType
         self.Exchange=None
         self.PriceType=PriceType
+        self.CumQty = CumQty
+        self.LeavesQty = LeavesQty
+        self.AvgPx = AvgPx
+        self.LastQty = LastQty
+        self.LastPx = LastPx
+        self.LastMkt = LastMkt
 
         self.CashQty=None
         self.Percent =None
@@ -35,12 +42,7 @@ class Position:
 
         self.ArrivalPrice= None
 
-        self.CumQty=None
-        self.LeavesQty =None
-        self.AvgPx=None
-        self.LastQty=None
-        self.LastPx=None
-        self.LastMkt=None
+
 
 
         #endregion

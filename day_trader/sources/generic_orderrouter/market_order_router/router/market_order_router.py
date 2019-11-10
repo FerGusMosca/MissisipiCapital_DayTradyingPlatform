@@ -20,65 +20,56 @@ class MarketOrderRouter(BaseCommunicationModule, ICommunicationModule):
     def __init__(self):
         self.Name = "Market Order Router"
         self.OutgoingModule = None
-        self.OrderPositions = {}
-        self.MemOrderPositions = {}  # different dictionary that works with the previously existing orders
-        self.PreviouslyFinishedPositions = {}
+        self.Positions = {}
 
     def LoadConfig(self):
         self.Configuration = Configuration(self.ModuleConfigFile)
         return True
 
-
-    def ProcessExecutionReportList(self, wrapper):
-        positions = ExecutionReportListConverter.GetPositionsFromExecutionReportList(self, wrapper)
-        for pos in positions:
-            if not pos.IsFinishedPosition():
-
-                if pos.GetLastOrder() is not None:
-                    pos.GetLastOrder().ClOrdId = pos.PosId
-                    self.MemOrderPositions[pos.GetLastOrder().OrderId] = pos
-                else:
-                    self.DoLog(
-                        "Could not find order for pre existing position on execution report initial load. PosId = {}".format(pos.PosId), MessageType.ERROR)
-            else:
-                if pos.GetLastOrder() is not None:
-                    pos.GetLastOrder().ClOrdId = pos.PosId
-                    self.PreviouslyFinishedPositions[pos.GetLastOrder().OrderId] = pos
-                else:
-                    self.DoLog(
-                        "Could not find order for finished previous position on execution report initial load. PostId "
-                        "= {}".format(
-                            pos.PosId), MessageType.ERROR)
-
-        pos_list_wrapper = PositionListWrapper(positions)
-        self.InvokingModule.ProcessOutgoing(pos_list_wrapper)
+    def ProcessError(self,wrapper):
+        self.InvokingModule.ProcessOutgoing(wrapper)
         return CMState.BuildSuccess(self)
 
-    def ProcessPreviouslyExistingOrders(self, orderId, wrapper):
-        mem_pos = self.MemOrderPositions[orderId]
-        processed_exec_report = GenericERWrapper(mem_pos.PosId, wrapper)
-        self.InvokingModule.ProcessOutgoing(processed_exec_report)
+    def ProcessOrderCancelReject(self,wrapper):
+        self.InvokingModule.ProcessOutgoing(wrapper)
+        return CMState.BuildSuccess(self)
+
+    def ProcessExecutionReportList(self, wrapper):
+        try:
+
+            positions = ExecutionReportListConverter.GetPositionsFromExecutionReportList(self, wrapper)
+
+            for pos in positions:
+                if pos.GetLastOrder() is not None:
+                    pos.GetLastOrder().ClOrdId = pos.PosId
+                    self.Positions[pos.GetLastOrder().OrderId] = pos
+                else:
+                    self.DoLog("Could not find order for pre existing position on execution report initial load. PosId = {}".format(pos.PosId), MessageType.ERROR)
+
+            pos_list_wrapper = PositionListWrapper(positions)
+            self.InvokingModule.ProcessOutgoing(pos_list_wrapper)
+            return CMState.BuildSuccess(self)
+        except Exception as e:
+            errWrapper = PositionListWrapper([],e)
+            self.InvokingModule.ProcessOutgoing(errWrapper)
+            self.DoLog("Error processing execution report list:{}".format(e), MessageType.ERROR)
+            return CMState.BuildFailure(e)
 
     def ProcessExecutionReport(self, wrapper):
         try:
             cl_ord_id = wrapper.GetField(ExecutionReportField.ClOrdID)
             order_id = wrapper.GetField(ExecutionReportField.OrderID)
+            pos = next(iter(list(filter(lambda x: x.GetLastOrder().ClOrdId == cl_ord_id, self.Positions.values()))), None)
 
-            if cl_ord_id in self.OrderPositions:
-                pos = self.OrderPositions[cl_ord_id]
+            if pos is not None:
                 processed_exec_report = GenericERWrapper(pos.PosId, wrapper)
                 self.InvokingModule.ProcessOutgoing(processed_exec_report)
-            elif order_id in self.MemOrderPositions:
-                self.ProcessPreviouslyExistingOrders(order_id, wrapper)
+            elif next(iter(list(filter(lambda x: x.GetLastOrder().OrderId == order_id, self.Positions.values()))), None) is not None:
+                pos = next(iter(list(filter(lambda x: x.GetLastOrder().OrderId == order_id, self.Positions.values()))), None)
+                processed_exec_report = GenericERWrapper(pos.PosId, wrapper)
+                self.InvokingModule.ProcessOutgoing(processed_exec_report)
             else:
-                time.sleep(10)
-                if order_id in self.MemOrderPositions:
-                    self.ProcessPreviouslyExistingOrders(order_id, wrapper)
-                else:
-                    if not order_id in self.PreviouslyFinishedPositions:  # otherwise we just ignore
-                        self.DoLog(
-                            "Received ExecutionReport for unknown ClOrdId ={} OrderId= {}".format(cl_ord_id, order_id),
-                            MessageType.WARNING)
+                self.DoLog( "Received ExecutionReport for unknown ClOrdId ={} OrderId= {}".format(cl_ord_id, order_id),MessageType.WARNING)
         except Exception as e:
             self.DoLog("Error processing execution report:{}".format(e), MessageType.ERROR)
 
@@ -89,7 +80,7 @@ class MarketOrderRouter(BaseCommunicationModule, ICommunicationModule):
     def ProcessNewPosition(self, wrapper):
         new_pos = PositionConverter.ConvertPosition(self, wrapper)
         # In this Generic Order Router ClOrdID=PosId
-        self.OrderPositions[new_pos.PosId] = new_pos
+        self.Positions[new_pos.PosId] = new_pos
         order_wrapper = NewOrderWrapper(new_pos.Security.Symbol, new_pos.OrderQty, new_pos.PosId,
                                         new_pos.Security.Currency, new_pos.Side, new_pos.Account, new_pos.Broker,
                                         new_pos.Strategy, new_pos.OrderType, new_pos.OrderPrice)
@@ -127,6 +118,10 @@ class MarketOrderRouter(BaseCommunicationModule, ICommunicationModule):
                 return CMState.BuildSuccess(self)
             elif wrapper.GetAction() == Actions.EXECUTION_REPORT_LIST:
                 return self.ProcessExecutionReportList(wrapper)
+            elif wrapper.GetAction() == Actions.ORDER_CANCEL_REJECT:
+                return self.ProcessOrderCancelReject(wrapper)
+            elif wrapper.GetAction() == Actions.ERROR:
+                return self.ProcessError(wrapper)
             else:
                 raise Exception("ProcessOutgoing: GENERIC Order Router not prepared for outgoing message {}".format(
                     wrapper.GetAction()))
@@ -164,7 +159,7 @@ class MarketOrderRouter(BaseCommunicationModule, ICommunicationModule):
         try:
             self.DoLog("Initializing Generic Market Order Router", MessageType.INFO)
             if self.LoadConfig():
-                self.OutgoingModule = self.InitializeSingletonModule(self.Configuration.OutgoingModule,self.Configuration.OutgoingConfigFile)
+                self.OutgoingModule = self.InitializeModule(self.Configuration.OutgoingModule,self.Configuration.OutgoingConfigFile)
                 self.DoLog("Generic Market Order Router Initialized", MessageType.INFO)
                 return CMState.BuildSuccess(self)
             else:

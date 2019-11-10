@@ -27,3 +27,4 @@ class Actions(Enum):
     EXECUTION_REPORT_LIST = 23,
     CANDLE_BAR_REQUEST=24
     CANDLE_BAR_DATA = 25
+    ERROR=99

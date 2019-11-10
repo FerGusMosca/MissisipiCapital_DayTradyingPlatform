@@ -1,4 +1,6 @@
 from sources.framework.common.interfaces.icommunication_module import ICommunicationModule
+from sources.framework.common.enums.fields.order_cancel_reject_field import *
+from sources.framework.common.wrappers.error_wrapper import *
 from sources.strategy.strategies.day_trader.common.configuration.configuration import Configuration
 from sources.framework.common.converters.execution_report_converter import *
 from sources.framework.common.enums.fields.execution_report_field import *
@@ -12,12 +14,10 @@ from sources.framework.common.wrappers.candle_bar_request_wrapper import *
 from sources.framework.common.enums.SubscriptionRequestType import *
 from sources.strategy.strategies.day_trader.common.converters.market_data_converter import *
 from sources.framework.common.dto.cm_state import *
-from sources.strategy.strategies.day_trader.common.util.local_folder_file_handler import *
 from sources.strategy.common.wrappers.position_list_request_wrapper import *
 from sources.strategy.data_access_layer.security_to_trade_manager import *
 from sources.strategy.data_access_layer.model_parameters_manager import *
 from sources.strategy.strategies.day_trader.common.util.log_helper import *
-import importlib
 import threading
 import time
 import datetime
@@ -46,6 +46,9 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
         self.InvokingModule = None
         self.OutgoingModule = None
 
+        self.FailureException = None
+        self.ServiceFailure = False
+
         self.OrdersQueue = queue.Queue(maxsize=1000000)
         self.SummariesQueue = queue.Queue(maxsize=1000000)
 
@@ -57,6 +60,13 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                 raise Exception("Unknown key {}",format(key))
         else:
             raise Exception("ModelParameters dictionary not initialized!!!!")
+
+    def ProcessCriticalError(self, exception,msg):
+        self.FailureException=exception
+        self.ServiceFailure=True
+        self.DoLog(msg, MessageType.ERROR)
+
+
 
     def OrdersPersistanceThread(self):
 
@@ -140,6 +150,19 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
             except Exception as e:
                 self.DoLog("Error Saving to DB: {}".format(e), MessageType.ERROR)
 
+    def ProcessOrderCancelReject(self,wrapper):
+
+        try:
+
+            orderId = wrapper.GetField(OrderCancelRejectField.OrderID)
+            msg = wrapper.GetField(OrderCancelRejectField.Text)
+            self.DoLog("Publishing cancel reject for orderId {} reason:{}".format(orderId,msg),MessageType.INFO)
+            errWrapper = ErrorWrapper (Exception(msg))
+            threading.Thread(target=self.ProcessError, args=(errWrapper,)).start()
+
+        except Exception as e:
+            self.DoLog("Critical error @DayTrader.ProcessOrderCancelReject: " + str(e), MessageType.ERROR)
+
     def ProcessExecutionReport(self, wrapper):
         try:
 
@@ -202,26 +225,31 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
     def ProcessPositionList(self, wrapper):
         try:
-            positions = wrapper.GetField(PositionListField.Positions)
-            self.DoLog("Received list of Open Positions: {} positions".format(Position.CountOpenPositions(self, positions)),
-                MessageType.INFO)
-            i=0
-            for pos in positions:
+            success = wrapper.GetField(PositionListField.Status)
+            if success:
+                positions = wrapper.GetField(PositionListField.Positions)
+                self.DoLog("Received list of Open Positions: {} positions".format(Position.CountOpenPositions(self, positions)),
+                    MessageType.INFO)
+                i=0
+                for pos in positions:
 
-                summary = ExecutionSummary(datetime.datetime.now(), pos)
-                last_exec_report = None
-                if pos.GetLastExecutionReport() is not None:
-                    last_exec_report = pos.GetLastExecutionReport()
-                    self.UpdateExecutionSummary(summary, last_exec_report,recovered=True)  # we will persist only if we have an existing position
-                    self.ProcessOrder(summary,True)
-                else:
-                    self.DoLog("Could not find execution report for position id {}".format(pos.PosId),
-                               MessageType.ERROR)
+                    summary = ExecutionSummary(datetime.datetime.now(), pos)
+                    last_exec_report = None
+                    if pos.GetLastExecutionReport() is not None:
+                        last_exec_report = pos.GetLastExecutionReport()
+                        self.UpdateExecutionSummary(summary, last_exec_report,recovered=True)  # we will persist only if we have an existing position
+                        self.ProcessOrder(summary,True)
+                    else:
+                        self.DoLog("Could not find execution report for position id {}".format(pos.PosId),
+                                   MessageType.ERROR)
 
-            self.DoLog("Starting process to fetch files", MessageType.INFO)
-            threading.Thread(target=self.FileHandler.FetchFile, args=()).start()
+                self.DoLog("Process ready to receive commands and trade", MessageType.INFO)
+            else:
+                exception= wrapper.GetField(PositionListField.Error)
+                raise exception
+
         except Exception as e:
-            self.DoLog("Critical error @DayTrader.ProcessPositionList: " + str(e), MessageType.ERROR)
+            self.ProcessCriticalError(e,"Critical error @DayTrader.ProcessPositionList:{}".format(e))
 
     def ProcessMarketData(self,wrapper):
         try:
@@ -229,6 +257,12 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
             self.MarketData[md.Security.Symbol]=md
         except Exception as e:
             self.DoLog("Critical error @DayTrader.ProcessMarketData: " + str(e), MessageType.ERROR)
+
+    def ProcessError(self,wrapper):
+        try:
+           self.InvokingModule.ProcessMessage(wrapper)
+        except Exception as e:
+            self.DoLog("Critical error @DayTrader.ProcessError: " + str(e), MessageType.ERROR)
 
     def ProcessCandleBar(self,wrapper):
         try:
@@ -241,7 +275,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
                 cbDict[candlebar.DateTime] = candlebar
                 self.Candlebars[candlebar.Security.Symbol]=cbDict
-                print("aca")
+
             else:
                 self.DoLog("Received unknown null candlebar",MessageType.DEBUG)
 
@@ -252,7 +286,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
         time.sleep(int(self.Configuration.PauseBeforeExecutionInSeconds))
         self.DoLog("Requesting for open orders...", MessageType.INFO)
         wrapper = PositionListRequestWrapper()
-        self.MarketDataModule.ProcessMessage(wrapper)
+        self.OrderRoutingModule.ProcessMessage(wrapper)
 
     def RequestMarketData(self):
         for secIn in self.SecuritiesToTrade:
@@ -280,9 +314,11 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
             if wrapper.GetAction() == Actions.MARKET_DATA:
                 threading.Thread(target=self.ProcessMarketData, args=(wrapper,)).start()
                 return CMState.BuildSuccess(self)
-            if wrapper.GetAction() == Actions.CANDLE_BAR_DATA:
+            elif wrapper.GetAction() == Actions.CANDLE_BAR_DATA:
                 threading.Thread(target=self.ProcessCandleBar, args=(wrapper,)).start()
                 return CMState.BuildSuccess(self)
+            elif wrapper.GetAction() == Actions.ERROR:
+                threading.Thread(target=self.ProcessError, args=(wrapper,)).start()
             else:
                 raise Exception("ProcessIncoming: Not prepared for routing message {}".format(wrapper.GetAction()))
         except Exception as e:
@@ -297,6 +333,12 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                 return CMState.BuildSuccess(self)
             elif wrapper.GetAction() == Actions.POSITION_LIST:
                 threading.Thread(target=self.ProcessPositionList, args=(wrapper,)).start()
+                return CMState.BuildSuccess(self)
+            elif wrapper.GetAction() == Actions.ORDER_CANCEL_REJECT:
+                threading.Thread(target=self.ProcessOrderCancelReject, args=(wrapper,)).start()
+                return CMState.BuildSuccess(self)
+            elif wrapper.GetAction() == Actions.ERROR:
+                threading.Thread(target=self.ProcessError, args=(wrapper,)).start()
                 return CMState.BuildSuccess(self)
             else:
                 raise Exception("ProcessOutgoing: Not prepared for routing message {}".format(wrapper.GetAction()))
@@ -317,7 +359,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
             self.LoadManagers()
 
-            self.MarketDataModule =  self.InitializeSingletonModule(self.Configuration.IncomingModule,self.Configuration.IncomingConfigFile)
+            self.MarketDataModule =  self.InitializeModule(self.Configuration.IncomingModule,self.Configuration.IncomingConfigFile)
 
             self.OrderRoutingModule = self.InitializeModule(self.Configuration.OutgoingModule,self.Configuration.OutgoingConfigFile)
 
