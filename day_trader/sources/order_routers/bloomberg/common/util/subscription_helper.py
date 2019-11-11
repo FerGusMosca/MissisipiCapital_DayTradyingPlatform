@@ -4,38 +4,65 @@ from sources.order_routers.bloomberg.common.util.bloomberg_translation_helper im
 from sources.framework.business_entities.orders.order import *
 from sources.framework.business_entities.orders.execution_report import *
 from sources.framework.business_entities.market_data.market_data import *
-from sources.framework.business_entities.market_data.candle_bar import *
+from sources.framework.common.enums.TimeUnit import *
 orderSubscriptionID=blpapi.CorrelationId(98)
 routeSubscriptionID=blpapi.CorrelationId(99)
 
 
 class SubscriptionHelper:
+
+
+
     @staticmethod
-    def UpdateMarketData(logger,msg,sec):
+    def UpdateMarketData(logger,msg,md):
 
         if(BloombergTranslationHelper.GetSafeFloat(logger,msg,"MID",None) is not None):
-            sec.MarketData.MidPrice=BloombergTranslationHelper.GetSafeFloat(logger,msg,"MID",None)
+            md.MidPrice=BloombergTranslationHelper.GetSafeFloat(logger,msg,"MID",None)
 
         if (BloombergTranslationHelper.GetSafeFloat(logger, msg, "LAST_PRICE", None) is not None):
-            sec.MarketData.Trade = BloombergTranslationHelper.GetSafeFloat(logger, msg, "LAST_PRICE", None)
+            md.Trade = BloombergTranslationHelper.GetSafeFloat(logger, msg, "LAST_PRICE", None)
+
+        if (BloombergTranslationHelper.GetSafeFloat(logger, msg, "PX_LAST", None) is not None):
+            md.ClosingPrice = BloombergTranslationHelper.GetSafeFloat(logger, msg, "PX_LAST", None)
+
+        if (BloombergTranslationHelper.GetSafeDateTime(logger, msg, "date", None) is not None):
+            md.MDEntryDate = BloombergTranslationHelper.GetSafeDateTime(logger, msg, "date", None)
 
         if (BloombergTranslationHelper.GetSafeFloat(logger, msg, "BEST_BID", None) is not None):
-            sec.MarketData.BestBidPrice = BloombergTranslationHelper.GetSafeFloat(logger, msg, "BEST_BID", None)
+            md.BestBidPrice = BloombergTranslationHelper.GetSafeFloat(logger, msg, "BEST_BID", None)
 
         if (BloombergTranslationHelper.GetSafeFloat(logger, msg, "BEST_ASK", None) is not None):
-            sec.MarketData.BestAskPrice = BloombergTranslationHelper.GetSafeFloat(logger, msg, "BEST_ASK", None)
+            md.BestAskPrice = BloombergTranslationHelper.GetSafeFloat(logger, msg, "BEST_ASK", None)
 
         if (BloombergTranslationHelper.GetSafeFloat(logger, msg, "VOLUME", None) is not None):
-            sec.MarketData.TradeVolume = BloombergTranslationHelper.GetSafeFloat(logger, msg, "VOLUME", None)
+            md.TradeVolume = BloombergTranslationHelper.GetSafeFloat(logger, msg, "VOLUME", None)
 
         if (BloombergTranslationHelper.GetSafeFloat(logger, msg, "HIGH", None) is not None):
-            sec.MarketData.TradingSessionHighPrice = BloombergTranslationHelper.GetSafeFloat(logger, msg, "HIGH", None)
+            md.TradingSessionHighPrice = BloombergTranslationHelper.GetSafeFloat(logger, msg, "HIGH", None)
 
         if (BloombergTranslationHelper.GetSafeFloat(logger, msg, "LOW", None) is not None):
-            sec.MarketData.TradingSessionLowPrice = BloombergTranslationHelper.GetSafeFloat(logger, msg, "LOW", None)
+            md.TradingSessionLowPrice = BloombergTranslationHelper.GetSafeFloat(logger, msg, "LOW", None)
 
         if (BloombergTranslationHelper.GetSafeFloat(logger, msg, "OPEN", None) is not None):
-            sec.MarketData.OpeningPrice = BloombergTranslationHelper.GetSafeFloat(logger, msg, "OPEN", None)
+            md.OpeningPrice = BloombergTranslationHelper.GetSafeFloat(logger, msg, "OPEN", None)
+
+    @staticmethod
+    def ProcessHistoricalPrices(logger, security,msg):
+
+        historicalPrices = []
+
+        if (msg.getElement("securityData") is not None):
+            secData = msg.getElement("securityData")
+            if secData.getElement("fieldData") is not None:
+                fieldDataArray = secData.getElement("fieldData")
+                for i in range(fieldDataArray.numValues()):
+                    fieldData = fieldDataArray.getValueAsElement(i)
+                    md = MarketData()
+                    SubscriptionHelper.UpdateMarketData(logger,fieldData,md)
+                    historicalPrices.append(md)
+
+        return historicalPrices
+
 
     @staticmethod
     def UpdateCandleBar(logger, msg, cb):
@@ -81,6 +108,24 @@ class SubscriptionHelper:
     def CreateCandleBarSubscription(session, candleService, fullSymbol, barSize, correlationId):
         subscriptions = SubscriptionHelper.CreateCandleBarParams(candleService,fullSymbol,barSize,correlationId)
         session.subscribe(subscriptions)
+
+    @staticmethod
+    def GetHistoricalPrices(session, histPricesService, fullSymbol, barSize,pastDays, correlationId):
+        session.openService(histPricesService)
+        refDataSvc = session.getService(histPricesService)
+        request=refDataSvc.createRequest("HistoricalDataRequest")
+        request.append("securities", fullSymbol )
+        request.append("fields", "PX_LAST"  )
+        request.append("fields", "OPEN")
+        request.append("fields", "HIGH")
+        request.append("fields", "LOW")
+        request.set("startDate", "20191101")
+        request.set("endDate", "20191110")
+        if barSize == TimeUnit.Day:
+            request.set("periodicitySelection", "DAILY")
+        else:
+            raise Exception("Invalid time unit requesting for historical prices:{}".format(barSize))
+        session.sendRequest(request, correlationId=correlationId)
 
     @staticmethod
     def EndCandleBarSubscription(session, candleService, fullSymbol, barSize, correlationId):

@@ -1,0 +1,1722 @@
+2019-11-10 11:57:46 [logger INFO] DayTrader  Initializing
+2019-11-10 11:57:46 [logger INFO] Initializing Bloomberg Order Router
+2019-11-10 11:57:46 [logger INFO] Connecting to localhost:8194
+2019-11-10 11:57:46 [logger INFO] Bloomberg Order Router Initialized
+2019-11-10 11:57:46 [logger INFO] SingletonModuleHandler Successfully initializer
+2019-11-10 11:57:46 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2019-11-10 11:57:46 [logger INFO] Bloomberg Session Connection is UP...
+2019-11-10 11:57:46 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2019-11-10 11:57:46 [logger INFO] Bloomberg Session started...
+2019-11-10 11:57:46 [logger INFO] Initializing Generic Market Order Router
+2019-11-10 11:57:46 [logger INFO] Generic Market Order Router Initialized
+2019-11-10 11:57:47 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 11:57:47 [logger INFO] Service //blp/emapisvc opened...
+2019-11-10 11:57:47 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:SPY
+2019-11-10 11:57:47 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:PG
+2019-11-10 11:57:47 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:JPM
+2019-11-10 11:57:48 [logger INFO] Requesting for open orders...
+2019-11-10 11:57:48 [logger WARNING] Routing to market: Order Router not prepared for routing message Actions.POSITION_LIST_REQUEST
+2019-11-10 11:57:48 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:SPY
+2019-11-10 11:57:48 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:PG
+2019-11-10 11:57:48 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:JPM
+2019-11-10 11:57:48 [logger INFO] DayTrader Successfully initialized
+2019-11-10 11:57:48 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 11:57:48 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 11:57:49 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 11:57:49 [logger INFO] Service //blp/mktbar opened...
+2019-11-10 11:57:49 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 11:57:49 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 11:57:49 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 11:57:49 [logger INFO] Service //blp/mktbar opened...
+2019-11-10 11:57:50 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 11:57:50 [logger INFO] Service //blp/mktbar opened...
+2019-11-10 11:57:50 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 11:57:50 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 13:15:02 [logger INFO] DayTrader  Initializing
+2019-11-10 13:15:02 [logger INFO] Initializing Bloomberg Order Router
+2019-11-10 13:15:02 [logger INFO] Connecting to localhost:8194
+2019-11-10 13:15:02 [logger INFO] Bloomberg Order Router Initialized
+2019-11-10 13:15:02 [logger INFO] SingletonModuleHandler Successfully initializer
+2019-11-10 13:15:02 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2019-11-10 13:15:02 [logger INFO] Bloomberg Session Connection is UP...
+2019-11-10 13:15:02 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2019-11-10 13:15:02 [logger INFO] Bloomberg Session started...
+2019-11-10 13:15:02 [logger INFO] Initializing Generic Market Order Router
+2019-11-10 13:15:02 [logger INFO] Generic Market Order Router Initialized
+2019-11-10 13:15:03 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 13:15:03 [logger INFO] Service //blp/emapisvc opened...
+2019-11-10 13:15:03 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:SPY
+2019-11-10 13:15:03 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:PG
+2019-11-10 13:15:03 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:JPM
+2019-11-10 13:15:04 [logger INFO] Requesting for open orders...
+2019-11-10 13:15:04 [logger WARNING] Routing to market: Order Router not prepared for routing message Actions.POSITION_LIST_REQUEST
+2019-11-10 13:15:04 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:SPY
+2019-11-10 13:15:04 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:PG
+2019-11-10 13:15:04 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:JPM
+2019-11-10 13:15:04 [logger INFO] DayTrader Successfully initialized
+2019-11-10 13:15:05 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 13:15:05 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 13:15:05 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 13:15:05 [logger INFO] Service //blp/mktbar opened...
+2019-11-10 13:15:05 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 13:15:05 [logger INFO] Service //blp/mktbar opened...
+2019-11-10 13:15:06 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 13:15:06 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 13:15:06 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 13:15:06 [logger INFO] Service //blp/mktbar opened...
+2019-11-10 13:15:07 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 13:15:07 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 13:21:28 [logger INFO] DayTrader  Initializing
+2019-11-10 13:21:28 [logger INFO] Initializing Bloomberg Order Router
+2019-11-10 13:21:28 [logger INFO] Connecting to localhost:8194
+2019-11-10 13:21:28 [logger INFO] Bloomberg Order Router Initialized
+2019-11-10 13:21:28 [logger INFO] SingletonModuleHandler Successfully initializer
+2019-11-10 13:21:28 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2019-11-10 13:21:28 [logger INFO] Bloomberg Session Connection is UP...
+2019-11-10 13:21:28 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2019-11-10 13:21:28 [logger INFO] Bloomberg Session started...
+2019-11-10 13:21:28 [logger INFO] Initializing Generic Market Order Router
+2019-11-10 13:21:28 [logger INFO] Generic Market Order Router Initialized
+2019-11-10 13:21:28 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 13:21:28 [logger INFO] Service //blp/emapisvc opened...
+2019-11-10 13:21:29 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:SPY
+2019-11-10 13:21:29 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:PG
+2019-11-10 13:21:29 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:JPM
+2019-11-10 13:21:30 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 13:21:30 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 13:21:30 [logger INFO] Requesting for open orders...
+2019-11-10 13:21:30 [logger WARNING] Routing to market: Order Router not prepared for routing message Actions.POSITION_LIST_REQUEST
+2019-11-10 13:21:30 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:SPY
+2019-11-10 13:21:30 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:PG
+2019-11-10 13:21:30 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:JPM
+2019-11-10 13:21:30 [logger INFO] DayTrader Successfully initialized
+2019-11-10 13:21:31 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 13:21:31 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 13:21:31 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 13:21:31 [logger INFO] Service //blp/mktbar opened...
+2019-11-10 13:21:31 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 13:21:31 [logger INFO] Service //blp/mktbar opened...
+2019-11-10 13:21:32 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 13:21:32 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 13:21:32 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 13:21:32 [logger INFO] Service //blp/mktbar opened...
+2019-11-10 13:21:50 [logger INFO] DayTrader  Initializing
+2019-11-10 13:21:50 [logger INFO] Initializing Bloomberg Order Router
+2019-11-10 13:21:50 [logger INFO] Connecting to localhost:8194
+2019-11-10 13:21:50 [logger INFO] Bloomberg Order Router Initialized
+2019-11-10 13:21:50 [logger INFO] SingletonModuleHandler Successfully initializer
+2019-11-10 13:21:50 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2019-11-10 13:21:50 [logger INFO] Bloomberg Session Connection is UP...
+2019-11-10 13:21:50 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2019-11-10 13:21:50 [logger INFO] Bloomberg Session started...
+2019-11-10 13:21:50 [logger INFO] Initializing Generic Market Order Router
+2019-11-10 13:21:50 [logger INFO] Generic Market Order Router Initialized
+2019-11-10 13:21:51 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 13:21:51 [logger INFO] Service //blp/emapisvc opened...
+2019-11-10 13:21:51 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:SPY
+2019-11-10 13:21:51 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:PG
+2019-11-10 13:21:51 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:JPM
+2019-11-10 13:21:52 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 13:21:52 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 13:21:53 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 13:21:53 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 13:21:54 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 13:21:54 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 13:21:55 [logger INFO] Requesting for open orders...
+2019-11-10 13:21:55 [logger WARNING] Routing to market: Order Router not prepared for routing message Actions.POSITION_LIST_REQUEST
+2019-11-10 13:22:00 [logger INFO] DayTrader  Initializing
+2019-11-10 13:22:00 [logger INFO] Initializing Bloomberg Order Router
+2019-11-10 13:22:00 [logger INFO] Connecting to localhost:8194
+2019-11-10 13:22:00 [logger INFO] Bloomberg Order Router Initialized
+2019-11-10 13:22:00 [logger INFO] SingletonModuleHandler Successfully initializer
+2019-11-10 13:22:00 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2019-11-10 13:22:00 [logger INFO] Bloomberg Session Connection is UP...
+2019-11-10 13:22:00 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2019-11-10 13:22:00 [logger INFO] Bloomberg Session started...
+2019-11-10 13:22:00 [logger INFO] Initializing Generic Market Order Router
+2019-11-10 13:22:00 [logger INFO] Generic Market Order Router Initialized
+2019-11-10 13:22:01 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 13:22:01 [logger INFO] Service //blp/emapisvc opened...
+2019-11-10 13:22:01 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:SPY
+2019-11-10 13:22:01 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:PG
+2019-11-10 13:22:01 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:JPM
+2019-11-10 13:22:02 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 13:22:02 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 13:22:03 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 13:22:03 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 13:22:04 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 13:22:04 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 13:22:09 [logger INFO] Requesting for open orders...
+2019-11-10 13:22:39 [logger INFO] DayTrader  Initializing
+2019-11-10 13:22:39 [logger INFO] Initializing Bloomberg Order Router
+2019-11-10 13:22:39 [logger INFO] Connecting to localhost:8194
+2019-11-10 13:22:39 [logger INFO] Bloomberg Order Router Initialized
+2019-11-10 13:22:39 [logger INFO] SingletonModuleHandler Successfully initializer
+2019-11-10 13:22:39 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2019-11-10 13:22:39 [logger INFO] Bloomberg Session Connection is UP...
+2019-11-10 13:22:39 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2019-11-10 13:22:39 [logger INFO] Bloomberg Session started...
+2019-11-10 13:22:39 [logger INFO] Initializing Generic Market Order Router
+2019-11-10 13:22:39 [logger INFO] Generic Market Order Router Initialized
+2019-11-10 13:22:40 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 13:22:40 [logger INFO] Service //blp/emapisvc opened...
+2019-11-10 13:22:40 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:SPY
+2019-11-10 13:22:40 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:PG
+2019-11-10 13:22:40 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:JPM
+2019-11-10 13:22:41 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 13:22:41 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 13:22:42 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 13:22:42 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 13:22:43 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 13:22:43 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 13:22:59 [logger INFO] Requesting for open orders...
+2019-11-10 13:23:04 [logger INFO] Waiting initial paints to finish to return active execution reports
+2019-11-10 13:23:05 [logger INFO] Subscribing to order and route events
+2019-11-10 13:23:05 [logger INFO] Waiting initial paints to finish to return active execution reports
+2019-11-10 13:23:06 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:SPY
+2019-11-10 13:23:06 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:PG
+2019-11-10 13:23:06 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:JPM
+2019-11-10 13:23:06 [logger INFO] DayTrader Successfully initialized
+2019-11-10 13:23:06 [logger INFO] Order subscription started successfully
+2019-11-10 13:23:06 [logger INFO] Route subscription started successfully
+2019-11-10 13:23:06 [logger INFO] Waiting initial paints to finish to return active execution reports
+2019-11-10 13:23:07 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 13:23:07 [logger INFO] Service //blp/mktbar opened...
+2019-11-10 13:23:07 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 13:23:07 [logger INFO] Service //blp/mktbar opened...
+2019-11-10 13:23:07 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 13:23:07 [logger INFO] Service //blp/mktbar opened...
+2019-11-10 13:23:07 [logger INFO] Recovered 2 previously existing execution reports
+2019-11-10 13:23:07 [logger ERROR] Critical error @DayTrader.ProcessOutgoing: ProcessOutgoing: Not prepared for routing message Actions.EXECUTION_REPORT_LIST
+2019-11-10 13:23:43 [logger INFO] DayTrader  Initializing
+2019-11-10 13:23:43 [logger INFO] Initializing Bloomberg Order Router
+2019-11-10 13:23:43 [logger INFO] Connecting to localhost:8194
+2019-11-10 13:23:43 [logger INFO] Bloomberg Order Router Initialized
+2019-11-10 13:23:43 [logger INFO] SingletonModuleHandler Successfully initializer
+2019-11-10 13:23:43 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2019-11-10 13:23:43 [logger INFO] Bloomberg Session Connection is UP...
+2019-11-10 13:23:43 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2019-11-10 13:23:43 [logger INFO] Bloomberg Session started...
+2019-11-10 13:23:43 [logger INFO] Initializing Generic Market Order Router
+2019-11-10 13:23:43 [logger INFO] Generic Market Order Router Initialized
+2019-11-10 13:23:44 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 13:23:44 [logger INFO] Service //blp/emapisvc opened...
+2019-11-10 13:23:44 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:SPY
+2019-11-10 13:23:44 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:PG
+2019-11-10 13:23:44 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:JPM
+2019-11-10 13:23:45 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 13:23:45 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 13:23:45 [logger INFO] Requesting for open orders...
+2019-11-10 13:23:45 [logger INFO] Subscribing to order and route events
+2019-11-10 13:23:45 [logger INFO] Waiting initial paints to finish to return active execution reports
+2019-11-10 13:23:45 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:SPY
+2019-11-10 13:23:45 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:PG
+2019-11-10 13:23:45 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:JPM
+2019-11-10 13:23:45 [logger INFO] DayTrader Successfully initialized
+2019-11-10 13:23:46 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 13:23:46 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 13:23:46 [logger INFO] Route subscription started successfully
+2019-11-10 13:23:46 [logger INFO] Order subscription started successfully
+2019-11-10 13:23:46 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 13:23:46 [logger INFO] Service //blp/mktbar opened...
+2019-11-10 13:23:46 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 13:23:46 [logger INFO] Service //blp/mktbar opened...
+2019-11-10 13:23:46 [logger INFO] Recovered 4 previously existing execution reports
+2019-11-10 13:23:46 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 13:23:46 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 13:23:46 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 13:23:46 [logger INFO] Service //blp/mktbar opened...
+2019-11-10 13:24:41 [logger INFO] DayTrader  Initializing
+2019-11-10 13:24:41 [logger INFO] Initializing Bloomberg Order Router
+2019-11-10 13:24:42 [logger INFO] Connecting to localhost:8194
+2019-11-10 13:24:42 [logger INFO] Bloomberg Order Router Initialized
+2019-11-10 13:24:42 [logger INFO] SingletonModuleHandler Successfully initializer
+2019-11-10 13:24:42 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2019-11-10 13:24:42 [logger INFO] Bloomberg Session Connection is UP...
+2019-11-10 13:24:42 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2019-11-10 13:24:42 [logger INFO] Bloomberg Session started...
+2019-11-10 13:24:42 [logger INFO] Initializing Generic Market Order Router
+2019-11-10 13:24:42 [logger INFO] Generic Market Order Router Initialized
+2019-11-10 13:24:42 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 13:24:42 [logger INFO] Service //blp/emapisvc opened...
+2019-11-10 13:24:43 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:SPY
+2019-11-10 13:24:43 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:PG
+2019-11-10 13:24:43 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:JPM
+2019-11-10 13:24:44 [logger INFO] Requesting for open orders...
+2019-11-10 13:24:44 [logger INFO] Waiting initial paints to finish to return active execution reports
+2019-11-10 13:24:44 [logger INFO] Subscribing to order and route events
+2019-11-10 13:24:44 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:SPY
+2019-11-10 13:24:44 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:PG
+2019-11-10 13:24:44 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:JPM
+2019-11-10 13:24:44 [logger INFO] DayTrader Successfully initialized
+2019-11-10 13:24:44 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 13:24:44 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 13:24:44 [logger INFO] Order subscription started successfully
+2019-11-10 13:24:44 [logger INFO] Route subscription started successfully
+2019-11-10 13:24:44 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 13:24:44 [logger INFO] Service //blp/mktbar opened...
+2019-11-10 13:24:45 [logger INFO] Recovered 2 previously existing execution reports
+2019-11-10 13:24:45 [logger ERROR] Critical Error running ProcessExecutionReportListThread @OrderRouter.Bloomberg module:'NoneType' object is not callable
+2019-11-10 13:24:45 [logger ERROR] Critical error @DayTrader.ProcessOutgoing: ProcessOutgoing: Not prepared for routing message Actions.EXECUTION_REPORT_LIST
+2019-11-10 13:24:45 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 13:24:45 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 13:24:45 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 13:24:45 [logger INFO] Service //blp/mktbar opened...
+2019-11-10 13:24:45 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 13:24:45 [logger INFO] Service //blp/mktbar opened...
+2019-11-10 13:24:45 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 13:24:45 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 14:26:22 [logger INFO] DayTrader  Initializing
+2019-11-10 14:26:22 [logger INFO] Initializing Bloomberg Order Router
+2019-11-10 14:26:22 [logger INFO] Connecting to localhost:8194
+2019-11-10 14:26:23 [logger INFO] Bloomberg Order Router Initialized
+2019-11-10 14:26:23 [logger INFO] SingletonModuleHandler Successfully initializer
+2019-11-10 14:26:23 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2019-11-10 14:26:23 [logger INFO] Bloomberg Session Connection is UP...
+2019-11-10 14:26:23 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2019-11-10 14:26:23 [logger INFO] Bloomberg Session started...
+2019-11-10 14:26:23 [logger INFO] Initializing Generic Market Order Router
+2019-11-10 14:26:23 [logger INFO] Generic Market Order Router Initialized
+2019-11-10 14:26:23 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 14:26:23 [logger INFO] Service //blp/emapisvc opened...
+2019-11-10 14:26:24 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:SPY
+2019-11-10 14:26:24 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:PG
+2019-11-10 14:26:24 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:JPM
+2019-11-10 14:26:25 [logger INFO] Requesting for open orders...
+2019-11-10 14:26:25 [logger INFO] Waiting initial paints to finish to return active execution reports
+2019-11-10 14:26:25 [logger INFO] Subscribing to order and route events
+2019-11-10 14:26:25 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:SPY
+2019-11-10 14:26:25 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:PG
+2019-11-10 14:26:25 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:JPM
+2019-11-10 14:26:25 [logger INFO] DayTrader Successfully initialized
+2019-11-10 14:26:25 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 14:26:25 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 14:26:25 [logger INFO] Order subscription started successfully
+2019-11-10 14:26:25 [logger INFO] Route subscription started successfully
+2019-11-10 14:26:25 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 14:26:25 [logger INFO] Service //blp/mktbar opened...
+2019-11-10 14:26:26 [logger INFO] Waiting initial paints to finish to return active execution reports
+2019-11-10 14:26:26 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 14:26:26 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 14:26:26 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 14:26:26 [logger INFO] Service //blp/mktbar opened...
+2019-11-10 14:26:26 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 14:26:26 [logger INFO] Service //blp/mktbar opened...
+2019-11-10 14:26:27 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 14:26:27 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 14:26:27 [logger INFO] Waiting initial paints to finish to return active execution reports
+2019-11-10 14:26:28 [logger INFO] Waiting initial paints to finish to return active execution reports
+2019-11-10 14:26:29 [logger INFO] Waiting initial paints to finish to return active execution reports
+2019-11-10 14:26:30 [logger INFO] Waiting initial paints to finish to return active execution reports
+2019-11-10 14:26:31 [logger INFO] Waiting initial paints to finish to return active execution reports
+2019-11-10 14:26:32 [logger INFO] Waiting initial paints to finish to return active execution reports
+2019-11-10 14:26:33 [logger INFO] Waiting initial paints to finish to return active execution reports
+2019-11-10 14:26:34 [logger INFO] Waiting initial paints to finish to return active execution reports
+2019-11-10 14:26:35 [logger INFO] Waiting initial paints to finish to return active execution reports
+2019-11-10 14:26:36 [logger INFO] Waiting initial paints to finish to return active execution reports
+2019-11-10 14:26:37 [logger INFO] Waiting initial paints to finish to return active execution reports
+2019-11-10 14:26:38 [logger INFO] Waiting initial paints to finish to return active execution reports
+2019-11-10 14:26:39 [logger INFO] Waiting initial paints to finish to return active execution reports
+2019-11-10 14:26:40 [logger INFO] Waiting initial paints to finish to return active execution reports
+2019-11-10 14:26:41 [logger INFO] Waiting initial paints to finish to return active execution reports
+2019-11-10 14:26:42 [logger INFO] Waiting initial paints to finish to return active execution reports
+2019-11-10 14:26:43 [logger INFO] Waiting initial paints to finish to return active execution reports
+2019-11-10 14:26:44 [logger INFO] Waiting initial paints to finish to return active execution reports
+2019-11-10 14:26:45 [logger ERROR] Critical Error running ProcessExecutionReportListThread @OrderRouter.Bloomberg module:Timeout waiting for the previous orders
+2019-11-10 14:26:45 [logger ERROR] Critical error @DayTrader.ProcessOutgoing: ProcessOutgoing: Not prepared for routing message Actions.EXECUTION_REPORT_LIST
+2019-11-10 14:29:25 [logger INFO] DayTrader  Initializing
+2019-11-10 14:29:25 [logger INFO] Initializing Bloomberg Order Router
+2019-11-10 14:29:25 [logger INFO] Connecting to localhost:8194
+2019-11-10 14:29:25 [logger INFO] Bloomberg Order Router Initialized
+2019-11-10 14:29:25 [logger INFO] SingletonModuleHandler Successfully initializer
+2019-11-10 14:29:25 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2019-11-10 14:29:25 [logger INFO] Bloomberg Session Connection is UP...
+2019-11-10 14:29:25 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2019-11-10 14:29:25 [logger INFO] Bloomberg Session started...
+2019-11-10 14:29:25 [logger INFO] Initializing Generic Market Order Router
+2019-11-10 14:29:25 [logger INFO] Generic Market Order Router Initialized
+2019-11-10 14:29:26 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 14:29:26 [logger INFO] Service //blp/emapisvc opened...
+2019-11-10 14:29:26 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:SPY
+2019-11-10 14:29:26 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:PG
+2019-11-10 14:29:26 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:JPM
+2019-11-10 14:29:27 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 14:29:27 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 14:29:27 [logger INFO] Requesting for open orders...
+2019-11-10 14:29:27 [logger INFO] Subscribing to order and route events
+2019-11-10 14:29:27 [logger INFO] Waiting initial paints to finish to return active execution reports
+2019-11-10 14:29:27 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:SPY
+2019-11-10 14:29:27 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:PG
+2019-11-10 14:29:27 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:JPM
+2019-11-10 14:29:27 [logger INFO] DayTrader Successfully initialized
+2019-11-10 14:29:27 [logger INFO] Order subscription started successfully
+2019-11-10 14:29:27 [logger INFO] Route subscription started successfully
+2019-11-10 14:29:28 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 14:29:28 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 14:29:28 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 14:29:28 [logger INFO] Service //blp/mktbar opened...
+2019-11-10 14:29:28 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 14:29:28 [logger INFO] Service //blp/mktbar opened...
+2019-11-10 14:29:28 [logger INFO] Recovered 2 previously existing execution reports
+2019-11-10 14:29:28 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 14:29:28 [logger INFO] Service //blp/mktbar opened...
+2019-11-10 14:29:29 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 14:29:29 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 14:29:42 [logger INFO] DayTrader  Initializing
+2019-11-10 14:29:42 [logger INFO] Initializing Bloomberg Order Router
+2019-11-10 14:29:42 [logger INFO] Connecting to localhost:8194
+2019-11-10 14:29:42 [logger INFO] Bloomberg Order Router Initialized
+2019-11-10 14:29:42 [logger INFO] SingletonModuleHandler Successfully initializer
+2019-11-10 14:29:42 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2019-11-10 14:29:42 [logger INFO] Bloomberg Session Connection is UP...
+2019-11-10 14:29:42 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2019-11-10 14:29:42 [logger INFO] Bloomberg Session started...
+2019-11-10 14:29:42 [logger INFO] Initializing Generic Market Order Router
+2019-11-10 14:29:42 [logger INFO] Generic Market Order Router Initialized
+2019-11-10 14:29:43 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 14:29:43 [logger INFO] Service //blp/emapisvc opened...
+2019-11-10 14:29:43 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:SPY
+2019-11-10 14:29:43 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:PG
+2019-11-10 14:29:43 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:JPM
+2019-11-10 14:29:44 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 14:29:44 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 14:29:44 [logger INFO] Requesting for open orders...
+2019-11-10 14:29:44 [logger INFO] Waiting initial paints to finish to return active execution reports
+2019-11-10 14:29:44 [logger INFO] Subscribing to order and route events
+2019-11-10 14:29:44 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:SPY
+2019-11-10 14:29:44 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:PG
+2019-11-10 14:29:44 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:JPM
+2019-11-10 14:29:44 [logger INFO] DayTrader Successfully initialized
+2019-11-10 14:29:44 [logger INFO] Order subscription started successfully
+2019-11-10 14:29:44 [logger INFO] Route subscription started successfully
+2019-11-10 14:29:45 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 14:29:45 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 14:29:45 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 14:29:45 [logger INFO] Service //blp/mktbar opened...
+2019-11-10 14:29:45 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 14:29:45 [logger INFO] Service //blp/mktbar opened...
+2019-11-10 14:29:45 [logger INFO] Recovered 2 previously existing execution reports
+2019-11-10 14:29:45 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 14:29:45 [logger INFO] Service //blp/mktbar opened...
+2019-11-10 14:29:46 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 14:29:46 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 14:30:06 [logger INFO] DayTrader  Initializing
+2019-11-10 14:30:07 [logger INFO] Initializing Bloomberg Order Router
+2019-11-10 14:30:07 [logger INFO] Connecting to localhost:8194
+2019-11-10 14:30:07 [logger INFO] Bloomberg Order Router Initialized
+2019-11-10 14:30:07 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2019-11-10 14:30:07 [logger INFO] Bloomberg Session Connection is UP...
+2019-11-10 14:30:07 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2019-11-10 14:30:07 [logger INFO] Bloomberg Session started...
+2019-11-10 14:30:07 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 14:30:07 [logger INFO] Service //blp/emapisvc opened...
+2019-11-10 14:30:10 [logger INFO] SingletonModuleHandler Successfully initializer
+2019-11-10 14:30:10 [logger INFO] Initializing Generic Market Order Router
+2019-11-10 14:30:10 [logger INFO] Generic Market Order Router Initialized
+2019-11-10 14:30:11 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:SPY
+2019-11-10 14:30:11 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:PG
+2019-11-10 14:30:11 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:JPM
+2019-11-10 14:30:11 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 14:30:11 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 14:30:12 [logger INFO] Requesting for open orders...
+2019-11-10 14:30:12 [logger INFO] Subscribing to order and route events
+2019-11-10 14:30:12 [logger INFO] Waiting initial paints to finish to return active execution reports
+2019-11-10 14:30:12 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:SPY
+2019-11-10 14:30:12 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:PG
+2019-11-10 14:30:12 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:JPM
+2019-11-10 14:30:12 [logger INFO] DayTrader Successfully initialized
+2019-11-10 14:30:12 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 14:30:12 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 14:30:13 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 14:30:13 [logger INFO] Service //blp/mktbar opened...
+2019-11-10 14:30:13 [logger INFO] Order subscription started successfully
+2019-11-10 14:30:13 [logger INFO] Route subscription started successfully
+2019-11-10 14:30:13 [logger INFO] Waiting initial paints to finish to return active execution reports
+2019-11-10 14:30:13 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 14:30:13 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 14:30:13 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 14:30:13 [logger INFO] Service //blp/mktbar opened...
+2019-11-10 14:30:14 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 14:30:14 [logger INFO] Service //blp/mktbar opened...
+2019-11-10 14:30:14 [logger INFO] Recovered 2 previously existing execution reports
+2019-11-10 14:31:59 [logger INFO] DayTrader  Initializing
+2019-11-10 14:31:59 [logger INFO] Initializing Bloomberg Order Router
+2019-11-10 14:31:59 [logger INFO] Connecting to localhost:8194
+2019-11-10 14:31:59 [logger INFO] Bloomberg Order Router Initialized
+2019-11-10 14:31:59 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2019-11-10 14:31:59 [logger INFO] Bloomberg Session Connection is UP...
+2019-11-10 14:31:59 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2019-11-10 14:31:59 [logger INFO] Bloomberg Session started...
+2019-11-10 14:32:00 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 14:32:00 [logger INFO] Service //blp/emapisvc opened...
+2019-11-10 14:32:04 [logger INFO] SingletonModuleHandler Successfully initializer
+2019-11-10 14:37:22 [logger INFO] DayTrader  Initializing
+2019-11-10 14:37:22 [logger INFO] Initializing Bloomberg Order Router
+2019-11-10 14:37:22 [logger INFO] Connecting to localhost:8194
+2019-11-10 14:37:22 [logger INFO] Bloomberg Order Router Initialized
+2019-11-10 14:37:22 [logger INFO] SingletonModuleHandler Successfully initializer
+2019-11-10 14:37:22 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2019-11-10 14:37:22 [logger INFO] Bloomberg Session Connection is UP...
+2019-11-10 14:37:22 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2019-11-10 14:37:22 [logger INFO] Bloomberg Session started...
+2019-11-10 14:37:23 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 14:37:23 [logger INFO] Service //blp/emapisvc opened...
+2019-11-10 14:38:18 [logger INFO] DayTrader  Initializing
+2019-11-10 14:38:18 [logger INFO] Initializing Bloomberg Order Router
+2019-11-10 14:38:18 [logger INFO] Connecting to localhost:8194
+2019-11-10 14:38:18 [logger INFO] Bloomberg Order Router Initialized
+2019-11-10 14:38:18 [logger INFO] SingletonModuleHandler Successfully initializer
+2019-11-10 14:38:18 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2019-11-10 14:38:18 [logger INFO] Bloomberg Session Connection is UP...
+2019-11-10 14:38:18 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2019-11-10 14:38:18 [logger INFO] Bloomberg Session started...
+2019-11-10 14:38:19 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 14:38:19 [logger INFO] Service //blp/emapisvc opened...
+2019-11-10 14:38:33 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:SPY
+2019-11-10 14:38:33 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:PG
+2019-11-10 14:38:33 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:JPM
+2019-11-10 14:38:34 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 14:38:34 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 14:38:34 [logger INFO] Requesting for open orders...
+2019-11-10 14:38:34 [logger WARNING] Routing to market: Order Router not prepared for routing message Actions.POSITION_LIST_REQUEST
+2019-11-10 14:38:34 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:SPY
+2019-11-10 14:38:34 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:PG
+2019-11-10 14:38:34 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:JPM
+2019-11-10 14:38:34 [logger INFO] DayTrader Successfully initialized
+2019-11-10 14:38:34 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 14:38:34 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 14:38:34 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 14:38:34 [logger INFO] Service //blp/mktbar opened...
+2019-11-10 14:38:34 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 14:38:34 [logger INFO] Service //blp/mktbar opened...
+2019-11-10 14:38:35 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 14:38:35 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 14:38:35 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 14:38:35 [logger INFO] Service //blp/mktbar opened...
+2019-11-10 14:38:48 [logger INFO] DayTrader  Initializing
+2019-11-10 14:38:48 [logger INFO] Initializing Bloomberg Order Router
+2019-11-10 14:38:48 [logger INFO] Connecting to localhost:8194
+2019-11-10 14:38:48 [logger INFO] Bloomberg Order Router Initialized
+2019-11-10 14:38:48 [logger INFO] SingletonModuleHandler Successfully initializer
+2019-11-10 14:38:48 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2019-11-10 14:38:48 [logger INFO] Bloomberg Session Connection is UP...
+2019-11-10 14:38:48 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2019-11-10 14:38:48 [logger INFO] Bloomberg Session started...
+2019-11-10 14:38:48 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 14:38:48 [logger INFO] Service //blp/emapisvc opened...
+2019-11-10 14:39:16 [logger INFO] DayTrader  Initializing
+2019-11-10 14:39:17 [logger INFO] Initializing Bloomberg Order Router
+2019-11-10 14:39:17 [logger INFO] Connecting to localhost:8194
+2019-11-10 14:39:17 [logger INFO] Bloomberg Order Router Initialized
+2019-11-10 14:39:17 [logger INFO] SingletonModuleHandler Successfully initializer
+2019-11-10 14:39:17 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2019-11-10 14:39:17 [logger INFO] Bloomberg Session Connection is UP...
+2019-11-10 14:39:17 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2019-11-10 14:39:17 [logger INFO] Bloomberg Session started...
+2019-11-10 14:39:17 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 14:39:17 [logger INFO] Service //blp/emapisvc opened...
+2019-11-10 14:46:17 [logger INFO] DayTrader  Initializing
+2019-11-10 14:46:35 [logger INFO] Initializing Bloomberg Order Router
+2019-11-10 14:46:36 [logger INFO] Connecting to localhost:8194
+2019-11-10 14:46:36 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2019-11-10 14:46:36 [logger INFO] Bloomberg Session Connection is UP...
+2019-11-10 14:46:36 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2019-11-10 14:46:36 [logger INFO] Bloomberg Session started...
+2019-11-10 14:46:36 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 14:46:36 [logger INFO] Service //blp/emapisvc opened...
+2019-11-10 14:46:36 [logger INFO] Bloomberg Order Router Initialized
+2019-11-10 14:46:44 [logger INFO] SingletonModuleHandler Successfully initializer
+2019-11-10 14:47:38 [logger INFO] DayTrader  Initializing
+2019-11-10 14:47:40 [logger INFO] Initializing Bloomberg Order Router
+2019-11-10 14:47:40 [logger INFO] Connecting to localhost:8194
+2019-11-10 14:47:40 [logger INFO] Bloomberg Order Router Initialized
+2019-11-10 14:47:40 [logger INFO] SingletonModuleHandler Successfully initializer
+2019-11-10 14:47:40 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2019-11-10 14:47:40 [logger INFO] Bloomberg Session Connection is UP...
+2019-11-10 14:47:40 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2019-11-10 14:47:40 [logger INFO] Bloomberg Session started...
+2019-11-10 14:47:41 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 14:47:41 [logger INFO] Service //blp/emapisvc opened...
+2019-11-10 14:48:07 [logger INFO] SingletonModuleHandler Successfully initializer
+2019-11-10 14:48:27 [logger INFO] DayTrader  Initializing
+2019-11-10 14:48:31 [logger INFO] Initializing Bloomberg Order Router
+2019-11-10 14:48:31 [logger INFO] Connecting to localhost:8194
+2019-11-10 14:48:31 [logger INFO] Bloomberg Order Router Initialized
+2019-11-10 14:48:31 [logger INFO] SingletonModuleHandler Successfully initializer
+2019-11-10 14:48:31 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2019-11-10 14:48:31 [logger INFO] Bloomberg Session Connection is UP...
+2019-11-10 14:48:31 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2019-11-10 14:48:31 [logger INFO] Bloomberg Session started...
+2019-11-10 14:48:32 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 14:48:32 [logger INFO] Service //blp/emapisvc opened...
+2019-11-10 14:48:37 [logger INFO] SingletonModuleHandler Successfully initializer
+2019-11-10 14:48:38 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:SPY
+2019-11-10 14:48:39 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:PG
+2019-11-10 14:48:39 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:JPM
+2019-11-10 14:48:39 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 14:48:39 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 14:48:40 [logger INFO] Requesting for open orders...
+2019-11-10 14:48:40 [logger WARNING] Routing to market: Order Router not prepared for routing message Actions.POSITION_LIST_REQUEST
+2019-11-10 14:48:40 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:SPY
+2019-11-10 14:48:40 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:PG
+2019-11-10 14:48:40 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:JPM
+2019-11-10 14:48:40 [logger INFO] DayTrader Successfully initialized
+2019-11-10 14:48:40 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 14:48:40 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 14:48:40 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 14:48:40 [logger INFO] Service //blp/mktbar opened...
+2019-11-10 14:48:40 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 14:48:40 [logger INFO] Service //blp/mktbar opened...
+2019-11-10 14:48:40 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 14:48:40 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 14:48:40 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 14:48:40 [logger INFO] Service //blp/mktbar opened...
+2019-11-10 14:49:17 [logger INFO] DayTrader  Initializing
+2019-11-10 14:49:17 [logger INFO] Initializing Bloomberg Order Router
+2019-11-10 14:49:17 [logger INFO] Connecting to localhost:8194
+2019-11-10 14:49:17 [logger INFO] Bloomberg Order Router Initialized
+2019-11-10 14:49:17 [logger INFO] SingletonModuleHandler Successfully initializer
+2019-11-10 14:49:17 [logger INFO] SingletonModuleHandler Successfully initializer
+2019-11-10 14:49:17 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2019-11-10 14:49:17 [logger INFO] Bloomberg Session Connection is UP...
+2019-11-10 14:49:17 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2019-11-10 14:49:17 [logger INFO] Bloomberg Session started...
+2019-11-10 14:49:17 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 14:49:17 [logger INFO] Service //blp/emapisvc opened...
+2019-11-10 14:49:18 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:SPY
+2019-11-10 14:49:18 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:PG
+2019-11-10 14:49:18 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:JPM
+2019-11-10 14:49:19 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 14:49:19 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 14:49:19 [logger INFO] Requesting for open orders...
+2019-11-10 14:49:19 [logger WARNING] Routing to market: Order Router not prepared for routing message Actions.POSITION_LIST_REQUEST
+2019-11-10 14:49:19 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:SPY
+2019-11-10 14:49:19 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:PG
+2019-11-10 14:49:19 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:JPM
+2019-11-10 14:49:19 [logger INFO] DayTrader Successfully initialized
+2019-11-10 14:49:19 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 14:49:19 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 14:49:19 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 14:49:19 [logger INFO] Service //blp/mktbar opened...
+2019-11-10 14:49:19 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 14:49:19 [logger INFO] Service //blp/mktbar opened...
+2019-11-10 14:49:20 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 14:49:20 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 14:49:20 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 14:49:20 [logger INFO] Service //blp/mktbar opened...
+2019-11-10 14:49:36 [logger INFO] DayTrader  Initializing
+2019-11-10 14:49:36 [logger INFO] Initializing Bloomberg Order Router
+2019-11-10 14:49:36 [logger INFO] Connecting to localhost:8194
+2019-11-10 14:49:36 [logger INFO] Bloomberg Order Router Initialized
+2019-11-10 14:49:36 [logger INFO] SingletonModuleHandler Successfully initializer
+2019-11-10 14:49:36 [logger INFO] SingletonModuleHandler Successfully initializer
+2019-11-10 14:49:36 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2019-11-10 14:49:36 [logger INFO] Bloomberg Session Connection is UP...
+2019-11-10 14:49:36 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2019-11-10 14:49:36 [logger INFO] Bloomberg Session started...
+2019-11-10 14:49:36 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 14:49:36 [logger INFO] Service //blp/emapisvc opened...
+2019-11-10 14:49:37 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:SPY
+2019-11-10 14:49:37 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:PG
+2019-11-10 14:49:37 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:JPM
+2019-11-10 14:49:38 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 14:49:38 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 14:49:38 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 14:49:38 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 14:49:39 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 14:49:39 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 14:49:41 [logger INFO] Requesting for open orders...
+2019-11-10 14:50:14 [logger INFO] DayTrader  Initializing
+2019-11-10 14:50:14 [logger INFO] Initializing Bloomberg Order Router
+2019-11-10 14:50:14 [logger INFO] Connecting to localhost:8194
+2019-11-10 14:50:14 [logger INFO] Bloomberg Order Router Initialized
+2019-11-10 14:50:14 [logger INFO] SingletonModuleHandler Successfully initializer
+2019-11-10 14:50:14 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2019-11-10 14:50:14 [logger INFO] Bloomberg Session Connection is UP...
+2019-11-10 14:50:14 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2019-11-10 14:50:14 [logger INFO] Bloomberg Session started...
+2019-11-10 14:50:14 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 14:50:14 [logger INFO] Service //blp/emapisvc opened...
+2019-11-10 14:52:02 [logger INFO] DayTrader  Initializing
+2019-11-10 14:52:02 [logger INFO] Initializing Bloomberg Order Router
+2019-11-10 14:52:02 [logger INFO] Connecting to localhost:8194
+2019-11-10 14:52:02 [logger INFO] Bloomberg Order Router Initialized
+2019-11-10 14:52:02 [logger INFO] SingletonModuleHandler Successfully initializer
+2019-11-10 14:52:02 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2019-11-10 14:52:02 [logger INFO] Bloomberg Session Connection is UP...
+2019-11-10 14:52:02 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2019-11-10 14:52:02 [logger INFO] Bloomberg Session started...
+2019-11-10 14:52:02 [logger INFO] Initializing Generic Market Order Router
+2019-11-10 14:52:02 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 14:52:02 [logger INFO] Service //blp/emapisvc opened...
+2019-11-10 14:52:29 [logger INFO] DayTrader  Initializing
+2019-11-10 14:52:30 [logger INFO] Initializing Bloomberg Order Router
+2019-11-10 14:52:30 [logger INFO] Connecting to localhost:8194
+2019-11-10 14:52:30 [logger INFO] Bloomberg Order Router Initialized
+2019-11-10 14:52:30 [logger INFO] SingletonModuleHandler Successfully initializer
+2019-11-10 14:52:30 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2019-11-10 14:52:30 [logger INFO] Bloomberg Session Connection is UP...
+2019-11-10 14:52:30 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2019-11-10 14:52:30 [logger INFO] Bloomberg Session started...
+2019-11-10 14:52:30 [logger INFO] Initializing Generic Market Order Router
+2019-11-10 14:52:30 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 14:52:30 [logger INFO] Service //blp/emapisvc opened...
+2019-11-10 14:52:33 [logger INFO] SingletonModuleHandler Successfully initializer
+2019-11-10 14:52:33 [logger INFO] Generic Market Order Router Initialized
+2019-11-10 14:52:34 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:SPY
+2019-11-10 14:52:34 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:PG
+2019-11-10 14:52:34 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:JPM
+2019-11-10 14:52:35 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 14:52:35 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 14:52:35 [logger INFO] Requesting for open orders...
+2019-11-10 14:52:35 [logger INFO] Subscribing to order and route events
+2019-11-10 14:52:35 [logger INFO] Waiting initial paints to finish to return active execution reports
+2019-11-10 14:52:35 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:SPY
+2019-11-10 14:52:35 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:PG
+2019-11-10 14:52:35 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:JPM
+2019-11-10 14:52:35 [logger INFO] DayTrader Successfully initialized
+2019-11-10 14:52:36 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 14:52:36 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 14:52:36 [logger INFO] Order subscription started successfully
+2019-11-10 14:52:36 [logger INFO] Route subscription started successfully
+2019-11-10 14:52:36 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 14:52:36 [logger INFO] Service //blp/mktbar opened...
+2019-11-10 14:52:36 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 14:52:36 [logger INFO] Service //blp/mktbar opened...
+2019-11-10 14:52:36 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 14:52:36 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 14:52:36 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 14:52:36 [logger INFO] Service //blp/mktbar opened...
+2019-11-10 14:52:36 [logger INFO] Recovered 2 previously existing execution reports
+2019-11-10 14:52:40 [logger ERROR] Critical Error running ProcessExecutionReportListThread @OrderRouter.Bloomberg module:'MarketOrderRouter' object is not callable
+2019-11-10 14:52:40 [logger INFO] Received list of Open Positions: 0 positions
+2019-11-10 14:52:40 [logger INFO] Starting process to fetch files
+2019-11-10 14:52:40 [logger ERROR] Critical error @DayTrader.ProcessPositionList: 'DayTrader' object has no attribute 'FileHandler'
+2019-11-10 14:53:40 [logger INFO] DayTrader  Initializing
+2019-11-10 14:53:40 [logger INFO] Initializing Bloomberg Order Router
+2019-11-10 14:53:40 [logger INFO] Connecting to localhost:8194
+2019-11-10 14:53:40 [logger INFO] Bloomberg Order Router Initialized
+2019-11-10 14:53:40 [logger INFO] SingletonModuleHandler Successfully initializer
+2019-11-10 14:53:41 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2019-11-10 14:53:41 [logger INFO] Bloomberg Session Connection is UP...
+2019-11-10 14:53:41 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2019-11-10 14:53:41 [logger INFO] Bloomberg Session started...
+2019-11-10 14:53:41 [logger INFO] Initializing Generic Market Order Router
+2019-11-10 14:53:41 [logger INFO] SingletonModuleHandler Successfully initializer
+2019-11-10 14:53:41 [logger INFO] Generic Market Order Router Initialized
+2019-11-10 14:53:41 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 14:53:41 [logger INFO] Service //blp/emapisvc opened...
+2019-11-10 14:53:42 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:SPY
+2019-11-10 14:53:42 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:PG
+2019-11-10 14:53:42 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:JPM
+2019-11-10 14:53:42 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 14:53:42 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 14:53:43 [logger INFO] Requesting for open orders...
+2019-11-10 14:53:43 [logger INFO] Waiting initial paints to finish to return active execution reports
+2019-11-10 14:53:43 [logger INFO] Subscribing to order and route events
+2019-11-10 14:53:43 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:SPY
+2019-11-10 14:53:43 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:PG
+2019-11-10 14:53:43 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:JPM
+2019-11-10 14:53:43 [logger INFO] DayTrader Successfully initialized
+2019-11-10 14:53:43 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 14:53:43 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 14:53:43 [logger INFO] Order subscription started successfully
+2019-11-10 14:53:43 [logger INFO] Route subscription started successfully
+2019-11-10 14:53:43 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 14:53:43 [logger INFO] Service //blp/mktbar opened...
+2019-11-10 14:53:43 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 14:53:43 [logger INFO] Service //blp/mktbar opened...
+2019-11-10 14:53:43 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 14:53:43 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 14:53:43 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 14:53:43 [logger INFO] Service //blp/mktbar opened...
+2019-11-10 14:53:44 [logger INFO] Recovered 2 previously existing execution reports
+2019-11-10 14:53:44 [logger ERROR] Critical Error running ProcessExecutionReportListThread @OrderRouter.Bloomberg module:'MarketOrderRouter' object is not callable
+2019-11-10 14:53:53 [logger INFO] Received list of Open Positions: 0 positions
+2019-11-10 14:55:00 [logger INFO] DayTrader  Initializing
+2019-11-10 14:55:01 [logger INFO] Initializing Bloomberg Order Router
+2019-11-10 14:55:01 [logger INFO] Connecting to localhost:8194
+2019-11-10 14:55:01 [logger INFO] Bloomberg Order Router Initialized
+2019-11-10 14:55:01 [logger INFO] SingletonModuleHandler Successfully initializer
+2019-11-10 14:55:01 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2019-11-10 14:55:01 [logger INFO] Bloomberg Session Connection is UP...
+2019-11-10 14:55:01 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2019-11-10 14:55:01 [logger INFO] Bloomberg Session started...
+2019-11-10 14:55:01 [logger INFO] Initializing Generic Market Order Router
+2019-11-10 14:55:01 [logger INFO] SingletonModuleHandler Successfully initializer
+2019-11-10 14:55:01 [logger INFO] Generic Market Order Router Initialized
+2019-11-10 14:55:01 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 14:55:01 [logger INFO] Service //blp/emapisvc opened...
+2019-11-10 14:55:02 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:SPY
+2019-11-10 14:55:02 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:PG
+2019-11-10 14:55:02 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:JPM
+2019-11-10 14:55:03 [logger INFO] Requesting for open orders...
+2019-11-10 14:55:03 [logger INFO] Subscribing to order and route events
+2019-11-10 14:55:03 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 14:55:03 [logger INFO] Waiting initial paints to finish to return active execution reports
+2019-11-10 14:55:03 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 14:55:03 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:SPY
+2019-11-10 14:55:03 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:PG
+2019-11-10 14:55:03 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:JPM
+2019-11-10 14:55:03 [logger INFO] DayTrader Successfully initialized
+2019-11-10 14:55:03 [logger INFO] Order subscription started successfully
+2019-11-10 14:55:03 [logger INFO] Route subscription started successfully
+2019-11-10 14:55:04 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 14:55:04 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 14:55:04 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 14:55:04 [logger INFO] Service //blp/mktbar opened...
+2019-11-10 14:55:04 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 14:55:04 [logger INFO] Service //blp/mktbar opened...
+2019-11-10 14:55:04 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 14:55:04 [logger INFO] Service //blp/mktbar opened...
+2019-11-10 14:55:05 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 14:55:05 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 14:55:22 [logger INFO] Recovered 2 previously existing execution reports
+2019-11-10 14:55:42 [logger INFO] DayTrader  Initializing
+2019-11-10 14:55:43 [logger INFO] Initializing Bloomberg Order Router
+2019-11-10 14:55:43 [logger INFO] Connecting to localhost:8194
+2019-11-10 14:55:43 [logger INFO] Bloomberg Order Router Initialized
+2019-11-10 14:55:43 [logger INFO] SingletonModuleHandler Successfully initializer
+2019-11-10 14:55:43 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2019-11-10 14:55:43 [logger INFO] Bloomberg Session Connection is UP...
+2019-11-10 14:55:43 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2019-11-10 14:55:43 [logger INFO] Bloomberg Session started...
+2019-11-10 14:55:43 [logger INFO] Initializing Generic Market Order Router
+2019-11-10 14:55:43 [logger INFO] SingletonModuleHandler Successfully initializer
+2019-11-10 14:55:43 [logger INFO] Generic Market Order Router Initialized
+2019-11-10 14:55:43 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 14:55:43 [logger INFO] Service //blp/emapisvc opened...
+2019-11-10 14:55:44 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:SPY
+2019-11-10 14:55:44 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:PG
+2019-11-10 14:55:44 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:JPM
+2019-11-10 14:55:45 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 14:55:45 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 14:55:45 [logger INFO] Requesting for open orders...
+2019-11-10 14:55:45 [logger INFO] Subscribing to order and route events
+2019-11-10 14:55:45 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:SPY
+2019-11-10 14:55:45 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:PG
+2019-11-10 14:55:45 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:JPM
+2019-11-10 14:55:45 [logger INFO] DayTrader Successfully initialized
+2019-11-10 14:55:45 [logger INFO] Waiting initial paints to finish to return active execution reports
+2019-11-10 14:55:45 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 14:55:45 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 14:55:45 [logger INFO] Order subscription started successfully
+2019-11-10 14:55:45 [logger INFO] Route subscription started successfully
+2019-11-10 14:55:46 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 14:55:46 [logger INFO] Service //blp/mktbar opened...
+2019-11-10 14:55:46 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 14:55:46 [logger INFO] Service //blp/mktbar opened...
+2019-11-10 14:55:46 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 14:55:46 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 14:55:46 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 14:55:46 [logger INFO] Service //blp/mktbar opened...
+2019-11-10 14:55:51 [logger INFO] Recovered 2 previously existing execution reports
+2019-11-10 14:57:33 [logger INFO] DayTrader  Initializing
+2019-11-10 14:57:33 [logger INFO] Initializing Bloomberg Order Router
+2019-11-10 14:57:33 [logger INFO] Connecting to localhost:8194
+2019-11-10 14:57:33 [logger INFO] Bloomberg Order Router Initialized
+2019-11-10 14:57:33 [logger INFO] SingletonModuleHandler Successfully initializer
+2019-11-10 14:57:33 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2019-11-10 14:57:33 [logger INFO] Bloomberg Session Connection is UP...
+2019-11-10 14:57:33 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2019-11-10 14:57:33 [logger INFO] Bloomberg Session started...
+2019-11-10 14:57:33 [logger INFO] Initializing Generic Market Order Router
+2019-11-10 14:57:33 [logger INFO] SingletonModuleHandler Successfully initializer
+2019-11-10 14:57:33 [logger INFO] Generic Market Order Router Initialized
+2019-11-10 14:57:34 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 14:57:34 [logger INFO] Service //blp/emapisvc opened...
+2019-11-10 14:57:34 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:SPY
+2019-11-10 14:57:34 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:PG
+2019-11-10 14:57:34 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:JPM
+2019-11-10 14:57:35 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 14:57:35 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 14:57:35 [logger INFO] Requesting for open orders...
+2019-11-10 14:57:35 [logger INFO] Waiting initial paints to finish to return active execution reports
+2019-11-10 14:57:35 [logger INFO] Subscribing to order and route events
+2019-11-10 14:57:35 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:SPY
+2019-11-10 14:57:35 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:PG
+2019-11-10 14:57:35 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:JPM
+2019-11-10 14:57:35 [logger INFO] DayTrader Successfully initialized
+2019-11-10 14:57:35 [logger INFO] Order subscription started successfully
+2019-11-10 14:57:35 [logger INFO] Route subscription started successfully
+2019-11-10 14:57:36 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 14:57:36 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 14:57:36 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 14:57:36 [logger INFO] Service //blp/mktbar opened...
+2019-11-10 14:57:36 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 14:57:36 [logger INFO] Service //blp/mktbar opened...
+2019-11-10 14:57:36 [logger INFO] Recovered 2 previously existing execution reports
+2019-11-10 14:57:37 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 14:57:37 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 14:57:37 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 14:57:37 [logger INFO] Service //blp/mktbar opened...
+2019-11-10 14:57:59 [logger INFO] DayTrader  Initializing
+2019-11-10 14:57:59 [logger INFO] Initializing Bloomberg Order Router
+2019-11-10 14:57:59 [logger INFO] Connecting to localhost:8194
+2019-11-10 14:57:59 [logger INFO] Bloomberg Order Router Initialized
+2019-11-10 14:57:59 [logger INFO] SingletonModuleHandler Successfully initializer
+2019-11-10 14:57:59 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2019-11-10 14:57:59 [logger INFO] Bloomberg Session Connection is UP...
+2019-11-10 14:57:59 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2019-11-10 14:57:59 [logger INFO] Bloomberg Session started...
+2019-11-10 14:57:59 [logger INFO] Initializing Generic Market Order Router
+2019-11-10 14:57:59 [logger INFO] SingletonModuleHandler Successfully initializer
+2019-11-10 14:57:59 [logger INFO] Generic Market Order Router Initialized
+2019-11-10 14:57:59 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 14:57:59 [logger INFO] Service //blp/emapisvc opened...
+2019-11-10 14:58:00 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:SPY
+2019-11-10 14:58:00 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:PG
+2019-11-10 14:58:00 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:JPM
+2019-11-10 14:58:01 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 14:58:01 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 14:58:01 [logger INFO] Requesting for open orders...
+2019-11-10 14:58:01 [logger INFO] Waiting initial paints to finish to return active execution reports
+2019-11-10 14:58:01 [logger INFO] Subscribing to order and route events
+2019-11-10 14:58:01 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:SPY
+2019-11-10 14:58:01 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:PG
+2019-11-10 14:58:01 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:JPM
+2019-11-10 14:58:01 [logger INFO] DayTrader Successfully initialized
+2019-11-10 14:58:01 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 14:58:01 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 14:58:02 [logger INFO] Order subscription started successfully
+2019-11-10 14:58:02 [logger INFO] Route subscription started successfully
+2019-11-10 14:58:02 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 14:58:02 [logger INFO] Service //blp/mktbar opened...
+2019-11-10 14:58:02 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 14:58:02 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 14:58:02 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 14:58:02 [logger INFO] Service //blp/mktbar opened...
+2019-11-10 14:58:02 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 14:58:02 [logger INFO] Service //blp/mktbar opened...
+2019-11-10 14:58:02 [logger INFO] Recovered 2 previously existing execution reports
+2019-11-10 14:58:28 [logger ERROR] Error running ProcessOutgoing @GenericOrderRouter module:__init__() got an unexpected keyword argument 'CumQty'
+2019-11-10 14:58:32 [logger INFO] DayTrader  Initializing
+2019-11-10 14:58:32 [logger INFO] Initializing Bloomberg Order Router
+2019-11-10 14:58:32 [logger INFO] Connecting to localhost:8194
+2019-11-10 14:58:32 [logger INFO] Bloomberg Order Router Initialized
+2019-11-10 14:58:32 [logger INFO] SingletonModuleHandler Successfully initializer
+2019-11-10 14:58:32 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2019-11-10 14:58:32 [logger INFO] Bloomberg Session Connection is UP...
+2019-11-10 14:58:32 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2019-11-10 14:58:32 [logger INFO] Bloomberg Session started...
+2019-11-10 14:58:32 [logger INFO] Initializing Generic Market Order Router
+2019-11-10 14:58:32 [logger INFO] SingletonModuleHandler Successfully initializer
+2019-11-10 14:58:32 [logger INFO] Generic Market Order Router Initialized
+2019-11-10 14:58:32 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 14:58:32 [logger INFO] Service //blp/emapisvc opened...
+2019-11-10 14:58:33 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:SPY
+2019-11-10 14:58:33 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:PG
+2019-11-10 14:58:33 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:JPM
+2019-11-10 14:58:34 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 14:58:34 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 14:58:34 [logger INFO] Requesting for open orders...
+2019-11-10 14:58:34 [logger INFO] Subscribing to order and route events
+2019-11-10 14:58:34 [logger INFO] Waiting initial paints to finish to return active execution reports
+2019-11-10 14:58:34 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:SPY
+2019-11-10 14:58:34 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:PG
+2019-11-10 14:58:34 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:JPM
+2019-11-10 14:58:34 [logger INFO] DayTrader Successfully initialized
+2019-11-10 14:58:34 [logger INFO] Order subscription started successfully
+2019-11-10 14:58:34 [logger INFO] Route subscription started successfully
+2019-11-10 14:58:34 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 14:58:34 [logger INFO] Service //blp/mktbar opened...
+2019-11-10 14:58:35 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 14:58:35 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 14:58:35 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 14:58:35 [logger INFO] Service //blp/mktbar opened...
+2019-11-10 14:58:35 [logger INFO] Recovered 2 previously existing execution reports
+2019-11-10 14:58:35 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 14:58:35 [logger INFO] Service //blp/mktbar opened...
+2019-11-10 14:58:35 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 14:58:35 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 14:59:01 [logger INFO] DayTrader  Initializing
+2019-11-10 14:59:01 [logger INFO] Initializing Bloomberg Order Router
+2019-11-10 14:59:01 [logger INFO] Connecting to localhost:8194
+2019-11-10 14:59:01 [logger INFO] Bloomberg Order Router Initialized
+2019-11-10 14:59:01 [logger INFO] SingletonModuleHandler Successfully initializer
+2019-11-10 14:59:01 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2019-11-10 14:59:01 [logger INFO] Bloomberg Session Connection is UP...
+2019-11-10 14:59:01 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2019-11-10 14:59:01 [logger INFO] Bloomberg Session started...
+2019-11-10 14:59:01 [logger INFO] Initializing Generic Market Order Router
+2019-11-10 14:59:01 [logger INFO] SingletonModuleHandler Successfully initializer
+2019-11-10 14:59:01 [logger INFO] Generic Market Order Router Initialized
+2019-11-10 14:59:02 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 14:59:02 [logger INFO] Service //blp/emapisvc opened...
+2019-11-10 14:59:02 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:SPY
+2019-11-10 14:59:02 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:PG
+2019-11-10 14:59:02 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:JPM
+2019-11-10 14:59:03 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 14:59:03 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 14:59:03 [logger INFO] Requesting for open orders...
+2019-11-10 14:59:03 [logger INFO] Waiting initial paints to finish to return active execution reports
+2019-11-10 14:59:03 [logger INFO] Subscribing to order and route events
+2019-11-10 14:59:03 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:SPY
+2019-11-10 14:59:03 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:PG
+2019-11-10 14:59:03 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:JPM
+2019-11-10 14:59:03 [logger INFO] DayTrader Successfully initialized
+2019-11-10 14:59:03 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 14:59:03 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 14:59:04 [logger INFO] Route subscription started successfully
+2019-11-10 14:59:04 [logger INFO] Order subscription started successfully
+2019-11-10 14:59:04 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 14:59:04 [logger INFO] Service //blp/mktbar opened...
+2019-11-10 14:59:04 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 14:59:04 [logger INFO] Service //blp/mktbar opened...
+2019-11-10 14:59:04 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 14:59:04 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 14:59:04 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 14:59:04 [logger INFO] Service //blp/mktbar opened...
+2019-11-10 14:59:04 [logger INFO] Recovered 2 previously existing execution reports
+2019-11-10 15:00:57 [logger INFO] DayTrader  Initializing
+2019-11-10 15:00:58 [logger INFO] Initializing Bloomberg Order Router
+2019-11-10 15:00:58 [logger INFO] Connecting to localhost:8194
+2019-11-10 15:00:58 [logger INFO] Bloomberg Order Router Initialized
+2019-11-10 15:00:58 [logger INFO] SingletonModuleHandler Successfully initializer
+2019-11-10 15:00:58 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2019-11-10 15:00:58 [logger INFO] Bloomberg Session Connection is UP...
+2019-11-10 15:00:58 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2019-11-10 15:00:58 [logger INFO] Bloomberg Session started...
+2019-11-10 15:00:58 [logger INFO] Initializing Generic Market Order Router
+2019-11-10 15:00:58 [logger INFO] SingletonModuleHandler Successfully initializer
+2019-11-10 15:00:58 [logger INFO] Generic Market Order Router Initialized
+2019-11-10 15:00:58 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:00:58 [logger INFO] Service //blp/emapisvc opened...
+2019-11-10 15:00:59 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:SPY
+2019-11-10 15:00:59 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:PG
+2019-11-10 15:00:59 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:JPM
+2019-11-10 15:01:00 [logger INFO] Requesting for open orders...
+2019-11-10 15:01:00 [logger INFO] Waiting initial paints to finish to return active execution reports
+2019-11-10 15:01:00 [logger INFO] Subscribing to order and route events
+2019-11-10 15:01:00 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:SPY
+2019-11-10 15:01:00 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:PG
+2019-11-10 15:01:00 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:JPM
+2019-11-10 15:01:00 [logger INFO] DayTrader Successfully initialized
+2019-11-10 15:01:00 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:01:00 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 15:01:00 [logger INFO] Route subscription started successfully
+2019-11-10 15:01:00 [logger INFO] Order subscription started successfully
+2019-11-10 15:01:00 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:01:00 [logger INFO] Service //blp/mktbar opened...
+2019-11-10 15:01:01 [logger INFO] Recovered 2 previously existing execution reports
+2019-11-10 15:01:01 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:01:01 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 15:01:01 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:01:01 [logger INFO] Service //blp/mktbar opened...
+2019-11-10 15:01:01 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:01:01 [logger INFO] Service //blp/mktbar opened...
+2019-11-10 15:01:02 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:01:02 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 15:02:13 [logger INFO] DayTrader  Initializing
+2019-11-10 15:02:13 [logger INFO] Initializing Bloomberg Order Router
+2019-11-10 15:02:13 [logger INFO] Connecting to localhost:8194
+2019-11-10 15:02:13 [logger INFO] Bloomberg Order Router Initialized
+2019-11-10 15:02:13 [logger INFO] SingletonModuleHandler Successfully initializer
+2019-11-10 15:02:13 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2019-11-10 15:02:13 [logger INFO] Bloomberg Session Connection is UP...
+2019-11-10 15:02:13 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2019-11-10 15:02:13 [logger INFO] Bloomberg Session started...
+2019-11-10 15:02:13 [logger INFO] Initializing Generic Market Order Router
+2019-11-10 15:02:13 [logger INFO] SingletonModuleHandler Successfully initializer
+2019-11-10 15:02:13 [logger INFO] Generic Market Order Router Initialized
+2019-11-10 15:02:13 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:02:13 [logger INFO] Service //blp/emapisvc opened...
+2019-11-10 15:02:14 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:SPY
+2019-11-10 15:02:14 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:PG
+2019-11-10 15:02:14 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:JPM
+2019-11-10 15:02:15 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:02:15 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 15:02:15 [logger INFO] Requesting for open orders...
+2019-11-10 15:02:15 [logger INFO] Waiting initial paints to finish to return active execution reports
+2019-11-10 15:02:15 [logger INFO] Subscribing to order and route events
+2019-11-10 15:02:15 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:SPY
+2019-11-10 15:02:15 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:PG
+2019-11-10 15:02:15 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:JPM
+2019-11-10 15:02:15 [logger INFO] DayTrader Successfully initialized
+2019-11-10 15:02:15 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:02:15 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 15:02:15 [logger INFO] Order subscription started successfully
+2019-11-10 15:02:16 [logger INFO] Route subscription started successfully
+2019-11-10 15:02:16 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:02:16 [logger INFO] Service //blp/mktbar opened...
+2019-11-10 15:02:16 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:02:16 [logger INFO] Service //blp/mktbar opened...
+2019-11-10 15:02:16 [logger INFO] Recovered 2 previously existing execution reports
+2019-11-10 15:02:16 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:02:16 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 15:02:16 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:02:16 [logger INFO] Service //blp/mktbar opened...
+2019-11-10 15:02:54 [logger INFO] Received list of Open Positions: 0 positions
+2019-11-10 15:03:00 [logger INFO] Starting process to fetch files
+2019-11-10 15:09:13 [logger INFO] DayTrader  Initializing
+2019-11-10 15:09:13 [logger INFO] Initializing Bloomberg Order Router
+2019-11-10 15:09:13 [logger INFO] Connecting to localhost:8194
+2019-11-10 15:09:13 [logger INFO] Bloomberg Order Router Initialized
+2019-11-10 15:09:13 [logger INFO] SingletonModuleHandler Successfully initializer
+2019-11-10 15:09:13 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2019-11-10 15:09:13 [logger INFO] Bloomberg Session Connection is UP...
+2019-11-10 15:09:13 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2019-11-10 15:09:13 [logger INFO] Bloomberg Session started...
+2019-11-10 15:09:13 [logger INFO] Initializing Generic Market Order Router
+2019-11-10 15:09:13 [logger INFO] SingletonModuleHandler Successfully initializer
+2019-11-10 15:09:13 [logger INFO] Generic Market Order Router Initialized
+2019-11-10 15:09:13 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:09:13 [logger INFO] Service //blp/emapisvc opened...
+2019-11-10 15:09:14 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:SPY
+2019-11-10 15:09:14 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:PG
+2019-11-10 15:09:14 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:JPM
+2019-11-10 15:09:15 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:09:15 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 15:09:15 [logger INFO] Requesting for open orders...
+2019-11-10 15:09:15 [logger INFO] Waiting initial paints to finish to return active execution reports
+2019-11-10 15:09:15 [logger INFO] Subscribing to order and route events
+2019-11-10 15:09:15 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:SPY
+2019-11-10 15:09:15 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:PG
+2019-11-10 15:09:15 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:JPM
+2019-11-10 15:09:15 [logger INFO] DayTrader Successfully initialized
+2019-11-10 15:09:15 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:09:15 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 15:09:15 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:09:15 [logger INFO] Service //blp/mktbar opened...
+2019-11-10 15:09:15 [logger INFO] Order subscription started successfully
+2019-11-10 15:09:15 [logger INFO] Route subscription started successfully
+2019-11-10 15:09:16 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:09:16 [logger INFO] Service //blp/mktbar opened...
+2019-11-10 15:09:16 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:09:16 [logger INFO] Service //blp/mktbar opened...
+2019-11-10 15:10:22 [logger INFO] DayTrader  Initializing
+2019-11-10 15:10:22 [logger INFO] Initializing Bloomberg Order Router
+2019-11-10 15:10:22 [logger INFO] Connecting to localhost:8194
+2019-11-10 15:10:22 [logger INFO] Bloomberg Order Router Initialized
+2019-11-10 15:10:22 [logger INFO] SingletonModuleHandler Successfully initializer
+2019-11-10 15:10:22 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2019-11-10 15:10:22 [logger INFO] Bloomberg Session Connection is UP...
+2019-11-10 15:10:22 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2019-11-10 15:10:22 [logger INFO] Bloomberg Session started...
+2019-11-10 15:10:22 [logger INFO] Initializing Generic Market Order Router
+2019-11-10 15:10:22 [logger INFO] SingletonModuleHandler Successfully initializer
+2019-11-10 15:10:22 [logger INFO] Generic Market Order Router Initialized
+2019-11-10 15:10:22 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:10:22 [logger INFO] Service //blp/emapisvc opened...
+2019-11-10 15:10:23 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:SPY
+2019-11-10 15:10:23 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:PG
+2019-11-10 15:10:23 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:JPM
+2019-11-10 15:10:24 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:10:24 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 15:10:24 [logger INFO] Requesting for open orders...
+2019-11-10 15:10:24 [logger INFO] Waiting initial paints to finish to return active execution reports
+2019-11-10 15:10:24 [logger INFO] Subscribing to order and route events
+2019-11-10 15:10:24 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:SPY
+2019-11-10 15:10:24 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:PG
+2019-11-10 15:10:24 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:JPM
+2019-11-10 15:10:24 [logger INFO] DayTrader Successfully initialized
+2019-11-10 15:10:24 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:10:24 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 15:10:24 [logger INFO] Route subscription started successfully
+2019-11-10 15:10:24 [logger INFO] Order subscription started successfully
+2019-11-10 15:10:24 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:10:24 [logger INFO] Service //blp/mktbar opened...
+2019-11-10 15:10:25 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:10:25 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 15:10:25 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:10:25 [logger INFO] Service //blp/mktbar opened...
+2019-11-10 15:10:25 [logger INFO] Recovered 2 previously existing execution reports
+2019-11-10 15:10:30 [logger INFO] Received list of Open Positions: 0 positions
+2019-11-10 15:10:30 [logger INFO] Process ready to receive commands and trade
+2019-11-10 15:13:00 [logger INFO] DayTrader  Initializing
+2019-11-10 15:13:00 [logger INFO] Initializing Bloomberg Order Router
+2019-11-10 15:13:00 [logger INFO] Connecting to localhost:8194
+2019-11-10 15:13:00 [logger INFO] Bloomberg Order Router Initialized
+2019-11-10 15:13:00 [logger INFO] SingletonModuleHandler Successfully initializer
+2019-11-10 15:13:00 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2019-11-10 15:13:00 [logger INFO] Bloomberg Session Connection is UP...
+2019-11-10 15:13:00 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2019-11-10 15:13:00 [logger INFO] Bloomberg Session started...
+2019-11-10 15:13:00 [logger INFO] Initializing Generic Market Order Router
+2019-11-10 15:13:00 [logger INFO] SingletonModuleHandler Successfully initializer
+2019-11-10 15:13:00 [logger INFO] Generic Market Order Router Initialized
+2019-11-10 15:13:01 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:13:01 [logger INFO] Service //blp/emapisvc opened...
+2019-11-10 15:13:01 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:SPY
+2019-11-10 15:13:01 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:PG
+2019-11-10 15:13:01 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:JPM
+2019-11-10 15:13:02 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:13:02 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 15:13:02 [logger INFO] Requesting for open orders...
+2019-11-10 15:13:02 [logger INFO] Waiting initial paints to finish to return active execution reports
+2019-11-10 15:13:02 [logger INFO] Subscribing to order and route events
+2019-11-10 15:13:02 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:SPY
+2019-11-10 15:13:02 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:PG
+2019-11-10 15:13:02 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:JPM
+2019-11-10 15:13:02 [logger INFO] DayTrader Successfully initialized
+2019-11-10 15:13:03 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:13:03 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 15:13:03 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:13:03 [logger INFO] Service //blp/mktbar opened...
+2019-11-10 15:13:03 [logger INFO] Route subscription started successfully
+2019-11-10 15:13:03 [logger INFO] Order subscription started successfully
+2019-11-10 15:13:03 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:13:03 [logger INFO] Service //blp/mktbar opened...
+2019-11-10 15:13:03 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:13:03 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 15:13:03 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:13:03 [logger INFO] Service //blp/mktbar opened...
+2019-11-10 15:13:03 [logger INFO] Recovered 2 previously existing execution reports
+2019-11-10 15:13:03 [logger INFO] Received list of Open Positions: 0 positions
+2019-11-10 15:13:03 [logger INFO] Process ready to receive commands and trade
+2019-11-10 15:14:03 [logger INFO] DayTrader  Initializing
+2019-11-10 15:14:03 [logger INFO] Initializing Bloomberg Order Router
+2019-11-10 15:14:03 [logger INFO] Connecting to localhost:8194
+2019-11-10 15:14:03 [logger INFO] Bloomberg Order Router Initialized
+2019-11-10 15:14:03 [logger INFO] SingletonModuleHandler Successfully initializer
+2019-11-10 15:14:03 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2019-11-10 15:14:03 [logger INFO] Bloomberg Session Connection is UP...
+2019-11-10 15:14:03 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2019-11-10 15:14:03 [logger INFO] Bloomberg Session started...
+2019-11-10 15:14:04 [logger INFO] Initializing Generic Market Order Router
+2019-11-10 15:14:04 [logger INFO] SingletonModuleHandler Successfully initializer
+2019-11-10 15:14:04 [logger INFO] Generic Market Order Router Initialized
+2019-11-10 15:14:04 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:14:04 [logger INFO] Service //blp/emapisvc opened...
+2019-11-10 15:14:05 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:SPY
+2019-11-10 15:14:05 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:PG
+2019-11-10 15:14:05 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:JPM
+2019-11-10 15:14:05 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:14:05 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 15:14:06 [logger INFO] Requesting for open orders...
+2019-11-10 15:14:06 [logger INFO] Waiting initial paints to finish to return active execution reports
+2019-11-10 15:14:06 [logger INFO] Subscribing to order and route events
+2019-11-10 15:14:06 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:SPY
+2019-11-10 15:14:06 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:PG
+2019-11-10 15:14:06 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:JPM
+2019-11-10 15:14:06 [logger INFO] DayTrader Successfully initialized
+2019-11-10 15:14:06 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:14:06 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 15:14:06 [logger INFO] Route subscription started successfully
+2019-11-10 15:14:06 [logger INFO] Order subscription started successfully
+2019-11-10 15:14:06 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:14:06 [logger INFO] Service //blp/mktbar opened...
+2019-11-10 15:14:06 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:14:06 [logger INFO] Service //blp/mktbar opened...
+2019-11-10 15:14:06 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:14:06 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 15:14:06 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:14:06 [logger INFO] Service //blp/mktbar opened...
+2019-11-10 15:14:07 [logger INFO] Recovered 2 previously existing execution reports
+2019-11-10 15:14:30 [logger INFO] DayTrader  Initializing
+2019-11-10 15:14:30 [logger INFO] Initializing Bloomberg Order Router
+2019-11-10 15:14:30 [logger INFO] Connecting to localhost:8194
+2019-11-10 15:14:30 [logger INFO] Bloomberg Order Router Initialized
+2019-11-10 15:14:30 [logger INFO] SingletonModuleHandler Successfully initializer
+2019-11-10 15:14:30 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2019-11-10 15:14:30 [logger INFO] Bloomberg Session Connection is UP...
+2019-11-10 15:14:30 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2019-11-10 15:14:30 [logger INFO] Bloomberg Session started...
+2019-11-10 15:14:30 [logger INFO] Initializing Generic Market Order Router
+2019-11-10 15:14:30 [logger INFO] SingletonModuleHandler Successfully initializer
+2019-11-10 15:14:30 [logger INFO] Generic Market Order Router Initialized
+2019-11-10 15:14:30 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:14:30 [logger INFO] Service //blp/emapisvc opened...
+2019-11-10 15:14:31 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:SPY
+2019-11-10 15:14:31 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:PG
+2019-11-10 15:14:31 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:JPM
+2019-11-10 15:14:32 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:14:32 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 15:14:32 [logger INFO] Requesting for open orders...
+2019-11-10 15:14:32 [logger INFO] Waiting initial paints to finish to return active execution reports
+2019-11-10 15:14:32 [logger INFO] Subscribing to order and route events
+2019-11-10 15:14:32 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:SPY
+2019-11-10 15:14:32 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:PG
+2019-11-10 15:14:32 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:JPM
+2019-11-10 15:14:32 [logger INFO] DayTrader Successfully initialized
+2019-11-10 15:14:32 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:14:32 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 15:14:32 [logger INFO] Order subscription started successfully
+2019-11-10 15:14:32 [logger INFO] Route subscription started successfully
+2019-11-10 15:14:32 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:14:32 [logger INFO] Service //blp/mktbar opened...
+2019-11-10 15:14:33 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:14:33 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 15:14:33 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:14:33 [logger INFO] Service //blp/mktbar opened...
+2019-11-10 15:14:33 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:14:33 [logger INFO] Service //blp/mktbar opened...
+2019-11-10 15:14:33 [logger INFO] Recovered 2 previously existing execution reports
+2019-11-10 15:16:14 [logger INFO] DayTrader  Initializing
+2019-11-10 15:16:14 [logger INFO] Initializing Bloomberg Order Router
+2019-11-10 15:16:14 [logger INFO] Connecting to localhost:8194
+2019-11-10 15:16:15 [logger INFO] Bloomberg Order Router Initialized
+2019-11-10 15:16:15 [logger INFO] SingletonModuleHandler Successfully initializer
+2019-11-10 15:16:15 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2019-11-10 15:16:15 [logger INFO] Bloomberg Session Connection is UP...
+2019-11-10 15:16:15 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2019-11-10 15:16:15 [logger INFO] Bloomberg Session started...
+2019-11-10 15:16:15 [logger INFO] Initializing Generic Market Order Router
+2019-11-10 15:16:15 [logger INFO] SingletonModuleHandler Successfully initializer
+2019-11-10 15:16:15 [logger INFO] Generic Market Order Router Initialized
+2019-11-10 15:16:15 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:16:15 [logger INFO] Service //blp/emapisvc opened...
+2019-11-10 15:16:16 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:SPY
+2019-11-10 15:16:16 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:PG
+2019-11-10 15:16:16 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:JPM
+2019-11-10 15:16:16 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:16:16 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 15:16:17 [logger INFO] Requesting for open orders...
+2019-11-10 15:16:17 [logger INFO] Waiting initial paints to finish to return active execution reports
+2019-11-10 15:16:17 [logger INFO] Subscribing to order and route events
+2019-11-10 15:16:17 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:SPY
+2019-11-10 15:16:17 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:PG
+2019-11-10 15:16:17 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:JPM
+2019-11-10 15:16:17 [logger INFO] DayTrader Successfully initialized
+2019-11-10 15:16:17 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:16:17 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 15:16:17 [logger INFO] Order subscription started successfully
+2019-11-10 15:16:17 [logger INFO] Route subscription started successfully
+2019-11-10 15:16:17 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:16:17 [logger INFO] Service //blp/mktbar opened...
+2019-11-10 15:16:17 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:16:17 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 15:16:17 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:16:17 [logger INFO] Service //blp/mktbar opened...
+2019-11-10 15:16:17 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:16:17 [logger INFO] Service //blp/mktbar opened...
+2019-11-10 15:16:18 [logger INFO] Recovered 2 previously existing execution reports
+2019-11-10 15:16:46 [logger INFO] DayTrader  Initializing
+2019-11-10 15:16:46 [logger INFO] Initializing Bloomberg Order Router
+2019-11-10 15:16:46 [logger INFO] Connecting to localhost:8194
+2019-11-10 15:16:46 [logger INFO] Bloomberg Order Router Initialized
+2019-11-10 15:16:46 [logger INFO] SingletonModuleHandler Successfully initializer
+2019-11-10 15:16:46 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2019-11-10 15:16:46 [logger INFO] Bloomberg Session Connection is UP...
+2019-11-10 15:16:46 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2019-11-10 15:16:47 [logger INFO] Bloomberg Session started...
+2019-11-10 15:16:47 [logger INFO] Initializing Generic Market Order Router
+2019-11-10 15:16:47 [logger INFO] SingletonModuleHandler Successfully initializer
+2019-11-10 15:16:47 [logger INFO] Generic Market Order Router Initialized
+2019-11-10 15:16:47 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:16:47 [logger INFO] Service //blp/emapisvc opened...
+2019-11-10 15:16:48 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:SPY
+2019-11-10 15:16:48 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:PG
+2019-11-10 15:16:48 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:JPM
+2019-11-10 15:16:48 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:16:48 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 15:16:49 [logger INFO] Requesting for open orders...
+2019-11-10 15:16:49 [logger INFO] Waiting initial paints to finish to return active execution reports
+2019-11-10 15:16:49 [logger INFO] Subscribing to order and route events
+2019-11-10 15:16:49 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:SPY
+2019-11-10 15:16:49 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:PG
+2019-11-10 15:16:49 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:JPM
+2019-11-10 15:16:49 [logger INFO] DayTrader Successfully initialized
+2019-11-10 15:16:49 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:16:49 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 15:16:49 [logger INFO] Route subscription started successfully
+2019-11-10 15:16:49 [logger INFO] Order subscription started successfully
+2019-11-10 15:16:49 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:16:49 [logger INFO] Service //blp/mktbar opened...
+2019-11-10 15:16:49 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:16:49 [logger INFO] Service //blp/mktbar opened...
+2019-11-10 15:16:49 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:16:49 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 15:16:49 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:16:49 [logger INFO] Service //blp/mktbar opened...
+2019-11-10 15:16:50 [logger INFO] Recovered 2 previously existing execution reports
+2019-11-10 15:17:10 [logger INFO] DayTrader  Initializing
+2019-11-10 15:17:10 [logger INFO] Initializing Bloomberg Order Router
+2019-11-10 15:17:10 [logger INFO] Connecting to localhost:8194
+2019-11-10 15:17:10 [logger INFO] Bloomberg Order Router Initialized
+2019-11-10 15:17:10 [logger INFO] SingletonModuleHandler Successfully initializer
+2019-11-10 15:17:10 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2019-11-10 15:17:10 [logger INFO] Bloomberg Session Connection is UP...
+2019-11-10 15:17:10 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2019-11-10 15:17:10 [logger INFO] Bloomberg Session started...
+2019-11-10 15:17:10 [logger INFO] Initializing Generic Market Order Router
+2019-11-10 15:17:10 [logger INFO] SingletonModuleHandler Successfully initializer
+2019-11-10 15:17:10 [logger INFO] Generic Market Order Router Initialized
+2019-11-10 15:17:10 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:17:10 [logger INFO] Service //blp/emapisvc opened...
+2019-11-10 15:17:11 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:SPY
+2019-11-10 15:17:11 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:PG
+2019-11-10 15:17:11 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:JPM
+2019-11-10 15:17:12 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:17:12 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 15:17:12 [logger INFO] Requesting for open orders...
+2019-11-10 15:17:12 [logger INFO] Waiting initial paints to finish to return active execution reports
+2019-11-10 15:17:12 [logger INFO] Subscribing to order and route events
+2019-11-10 15:17:12 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:SPY
+2019-11-10 15:17:12 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:PG
+2019-11-10 15:17:12 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:JPM
+2019-11-10 15:17:12 [logger INFO] DayTrader Successfully initialized
+2019-11-10 15:17:12 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:17:12 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 15:17:12 [logger INFO] Route subscription started successfully
+2019-11-10 15:17:12 [logger INFO] Order subscription started successfully
+2019-11-10 15:17:12 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:17:12 [logger INFO] Service //blp/mktbar opened...
+2019-11-10 15:17:13 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:17:13 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 15:17:13 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:17:13 [logger INFO] Service //blp/mktbar opened...
+2019-11-10 15:17:13 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:17:13 [logger INFO] Service //blp/mktbar opened...
+2019-11-10 15:17:13 [logger INFO] Recovered 2 previously existing execution reports
+2019-11-10 15:20:48 [logger INFO] DayTrader  Initializing
+2019-11-10 15:20:48 [logger INFO] Initializing Bloomberg Order Router
+2019-11-10 15:20:48 [logger INFO] Connecting to localhost:8194
+2019-11-10 15:20:48 [logger INFO] Bloomberg Order Router Initialized
+2019-11-10 15:20:48 [logger INFO] SingletonModuleHandler Successfully initializer
+2019-11-10 15:20:48 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2019-11-10 15:20:48 [logger INFO] Bloomberg Session Connection is UP...
+2019-11-10 15:20:48 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2019-11-10 15:20:48 [logger INFO] Bloomberg Session started...
+2019-11-10 15:20:48 [logger INFO] Initializing Generic Market Order Router
+2019-11-10 15:20:48 [logger INFO] SingletonModuleHandler Successfully initializer
+2019-11-10 15:20:48 [logger INFO] Generic Market Order Router Initialized
+2019-11-10 15:20:49 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:20:49 [logger INFO] Service //blp/emapisvc opened...
+2019-11-10 15:20:49 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:SPY
+2019-11-10 15:20:49 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:PG
+2019-11-10 15:20:49 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:JPM
+2019-11-10 15:20:50 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:20:50 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 15:20:50 [logger INFO] Requesting for open orders...
+2019-11-10 15:20:50 [logger INFO] Waiting initial paints to finish to return active execution reports
+2019-11-10 15:20:50 [logger INFO] Subscribing to order and route events
+2019-11-10 15:20:50 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:SPY
+2019-11-10 15:20:50 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:PG
+2019-11-10 15:20:50 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:JPM
+2019-11-10 15:20:50 [logger INFO] DayTrader Successfully initialized
+2019-11-10 15:20:51 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:20:51 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 15:20:51 [logger INFO] Order subscription started successfully
+2019-11-10 15:20:51 [logger INFO] Route subscription started successfully
+2019-11-10 15:20:51 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:20:51 [logger INFO] Service //blp/mktbar opened...
+2019-11-10 15:20:51 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:20:51 [logger INFO] Service //blp/mktbar opened...
+2019-11-10 15:20:51 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:20:51 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 15:20:51 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:20:51 [logger INFO] Service //blp/mktbar opened...
+2019-11-10 15:20:51 [logger INFO] Recovered 2 previously existing execution reports
+2019-11-10 15:41:01 [logger INFO] DayTrader  Initializing
+2019-11-10 15:41:02 [logger INFO] Initializing Bloomberg Order Router
+2019-11-10 15:41:02 [logger INFO] Connecting to localhost:8194
+2019-11-10 15:41:02 [logger INFO] Bloomberg Order Router Initialized
+2019-11-10 15:41:02 [logger INFO] SingletonModuleHandler Successfully initializer
+2019-11-10 15:41:02 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2019-11-10 15:41:02 [logger INFO] Bloomberg Session Connection is UP...
+2019-11-10 15:41:02 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2019-11-10 15:41:02 [logger INFO] Bloomberg Session started...
+2019-11-10 15:41:02 [logger INFO] Initializing Generic Market Order Router
+2019-11-10 15:41:02 [logger INFO] SingletonModuleHandler Successfully initializer
+2019-11-10 15:41:02 [logger INFO] Generic Market Order Router Initialized
+2019-11-10 15:41:02 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:41:02 [logger INFO] Service //blp/emapisvc opened...
+2019-11-10 15:41:03 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:SPY
+2019-11-10 15:41:03 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:PG
+2019-11-10 15:41:03 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:JPM
+2019-11-10 15:41:04 [logger INFO] Requesting for open orders...
+2019-11-10 15:41:04 [logger INFO] Waiting initial paints to finish to return active execution reports
+2019-11-10 15:41:04 [logger INFO] Subscribing to order and route events
+2019-11-10 15:41:04 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:SPY
+2019-11-10 15:41:04 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:PG
+2019-11-10 15:41:04 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:JPM
+2019-11-10 15:41:04 [logger INFO] DayTrader Successfully initialized
+2019-11-10 15:41:04 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:41:04 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 15:41:04 [logger INFO] Route subscription started successfully
+2019-11-10 15:41:04 [logger INFO] Order subscription started successfully
+2019-11-10 15:41:04 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:41:04 [logger INFO] Service //blp/mktbar opened...
+2019-11-10 15:41:04 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:41:04 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 15:41:04 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:41:04 [logger INFO] Service //blp/mktbar opened...
+2019-11-10 15:41:05 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:41:05 [logger INFO] Service //blp/mktbar opened...
+2019-11-10 15:41:05 [logger INFO] Recovered 2 previously existing execution reports
+2019-11-10 15:41:05 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:41:05 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 15:41:32 [logger ERROR] Error processing execution report list:todos putos
+2019-11-10 15:42:21 [logger INFO] DayTrader  Initializing
+2019-11-10 15:42:21 [logger INFO] Initializing Bloomberg Order Router
+2019-11-10 15:42:21 [logger INFO] Connecting to localhost:8194
+2019-11-10 15:42:21 [logger INFO] Bloomberg Order Router Initialized
+2019-11-10 15:42:21 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2019-11-10 15:42:21 [logger INFO] SingletonModuleHandler Successfully initializer
+2019-11-10 15:42:21 [logger INFO] Bloomberg Session Connection is UP...
+2019-11-10 15:42:21 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2019-11-10 15:42:21 [logger INFO] Bloomberg Session started...
+2019-11-10 15:42:21 [logger INFO] Initializing Generic Market Order Router
+2019-11-10 15:42:21 [logger INFO] SingletonModuleHandler Successfully initializer
+2019-11-10 15:42:21 [logger INFO] Generic Market Order Router Initialized
+2019-11-10 15:42:21 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:42:21 [logger INFO] Service //blp/emapisvc opened...
+2019-11-10 15:42:22 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:SPY
+2019-11-10 15:42:22 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:PG
+2019-11-10 15:42:22 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:JPM
+2019-11-10 15:42:23 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:42:23 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 15:42:23 [logger INFO] Requesting for open orders...
+2019-11-10 15:42:23 [logger INFO] Waiting initial paints to finish to return active execution reports
+2019-11-10 15:42:23 [logger INFO] Subscribing to order and route events
+2019-11-10 15:42:23 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:SPY
+2019-11-10 15:42:23 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:PG
+2019-11-10 15:42:23 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:JPM
+2019-11-10 15:42:23 [logger INFO] DayTrader Successfully initialized
+2019-11-10 15:42:23 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:42:23 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 15:42:23 [logger INFO] Route subscription started successfully
+2019-11-10 15:42:23 [logger INFO] Order subscription started successfully
+2019-11-10 15:42:23 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:42:23 [logger INFO] Service //blp/mktbar opened...
+2019-11-10 15:42:24 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:42:24 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 15:42:24 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:42:24 [logger INFO] Service //blp/mktbar opened...
+2019-11-10 15:42:24 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:42:24 [logger INFO] Service //blp/mktbar opened...
+2019-11-10 15:42:24 [logger INFO] Recovered 2 previously existing execution reports
+2019-11-10 15:42:25 [logger ERROR] Error processing execution report list:todos putos
+2019-11-10 15:43:24 [logger INFO] DayTrader  Initializing
+2019-11-10 15:43:24 [logger INFO] Initializing Bloomberg Order Router
+2019-11-10 15:43:24 [logger INFO] Connecting to localhost:8194
+2019-11-10 15:43:24 [logger INFO] Bloomberg Order Router Initialized
+2019-11-10 15:43:24 [logger INFO] SingletonModuleHandler Successfully initializer
+2019-11-10 15:43:24 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2019-11-10 15:43:24 [logger INFO] Bloomberg Session Connection is UP...
+2019-11-10 15:43:24 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2019-11-10 15:43:24 [logger INFO] Bloomberg Session started...
+2019-11-10 15:43:24 [logger INFO] Initializing Generic Market Order Router
+2019-11-10 15:43:24 [logger INFO] SingletonModuleHandler Successfully initializer
+2019-11-10 15:43:24 [logger INFO] Generic Market Order Router Initialized
+2019-11-10 15:43:24 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:43:24 [logger INFO] Service //blp/emapisvc opened...
+2019-11-10 15:43:25 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:SPY
+2019-11-10 15:43:25 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:PG
+2019-11-10 15:43:25 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:JPM
+2019-11-10 15:43:25 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:43:25 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 15:43:26 [logger INFO] Requesting for open orders...
+2019-11-10 15:43:26 [logger INFO] Waiting initial paints to finish to return active execution reports
+2019-11-10 15:43:26 [logger INFO] Subscribing to order and route events
+2019-11-10 15:43:26 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:SPY
+2019-11-10 15:43:26 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:PG
+2019-11-10 15:43:26 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:JPM
+2019-11-10 15:43:26 [logger INFO] DayTrader Successfully initialized
+2019-11-10 15:43:26 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:43:26 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 15:43:26 [logger INFO] Order subscription started successfully
+2019-11-10 15:43:26 [logger INFO] Route subscription started successfully
+2019-11-10 15:43:26 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:43:26 [logger INFO] Service //blp/mktbar opened...
+2019-11-10 15:43:27 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:43:27 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 15:43:27 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:43:27 [logger INFO] Service //blp/mktbar opened...
+2019-11-10 15:43:27 [logger INFO] Recovered 2 previously existing execution reports
+2019-11-10 15:43:27 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:43:27 [logger INFO] Service //blp/mktbar opened...
+2019-11-10 15:43:33 [logger ERROR] Error processing execution report list:todos putos
+2019-11-10 15:45:30 [logger INFO] DayTrader  Initializing
+2019-11-10 15:45:30 [logger INFO] Initializing Bloomberg Order Router
+2019-11-10 15:45:30 [logger INFO] Connecting to localhost:8194
+2019-11-10 15:45:30 [logger INFO] Bloomberg Order Router Initialized
+2019-11-10 15:45:30 [logger INFO] SingletonModuleHandler Successfully initializer
+2019-11-10 15:45:30 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2019-11-10 15:45:30 [logger INFO] Bloomberg Session Connection is UP...
+2019-11-10 15:45:30 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2019-11-10 15:45:30 [logger INFO] Bloomberg Session started...
+2019-11-10 15:45:30 [logger INFO] Initializing Generic Market Order Router
+2019-11-10 15:45:30 [logger INFO] SingletonModuleHandler Successfully initializer
+2019-11-10 15:45:30 [logger INFO] Generic Market Order Router Initialized
+2019-11-10 15:45:30 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:45:30 [logger INFO] Service //blp/emapisvc opened...
+2019-11-10 15:45:31 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:SPY
+2019-11-10 15:45:31 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:PG
+2019-11-10 15:45:31 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:JPM
+2019-11-10 15:45:32 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:45:32 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 15:45:32 [logger INFO] Requesting for open orders...
+2019-11-10 15:45:32 [logger INFO] Waiting initial paints to finish to return active execution reports
+2019-11-10 15:45:32 [logger INFO] Subscribing to order and route events
+2019-11-10 15:45:32 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:SPY
+2019-11-10 15:45:32 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:PG
+2019-11-10 15:45:32 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:JPM
+2019-11-10 15:45:32 [logger INFO] DayTrader Successfully initialized
+2019-11-10 15:45:32 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:45:32 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 15:45:32 [logger INFO] Order subscription started successfully
+2019-11-10 15:45:32 [logger INFO] Route subscription started successfully
+2019-11-10 15:45:32 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:45:32 [logger INFO] Service //blp/mktbar opened...
+2019-11-10 15:45:33 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:45:33 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 15:45:33 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:45:33 [logger INFO] Service //blp/mktbar opened...
+2019-11-10 15:45:33 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:45:33 [logger INFO] Service //blp/mktbar opened...
+2019-11-10 15:45:33 [logger INFO] Recovered 2 previously existing execution reports
+2019-11-10 15:45:35 [logger ERROR] Error processing execution report list:todos putos
+2019-11-10 15:46:36 [logger INFO] DayTrader  Initializing
+2019-11-10 15:46:36 [logger INFO] Initializing Bloomberg Order Router
+2019-11-10 15:46:36 [logger INFO] Connecting to localhost:8194
+2019-11-10 15:46:36 [logger INFO] Bloomberg Order Router Initialized
+2019-11-10 15:46:36 [logger INFO] SingletonModuleHandler Successfully initializer
+2019-11-10 15:46:36 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2019-11-10 15:46:36 [logger INFO] Bloomberg Session Connection is UP...
+2019-11-10 15:46:36 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2019-11-10 15:46:36 [logger INFO] Bloomberg Session started...
+2019-11-10 15:46:36 [logger INFO] Initializing Generic Market Order Router
+2019-11-10 15:46:36 [logger INFO] SingletonModuleHandler Successfully initializer
+2019-11-10 15:46:36 [logger INFO] Generic Market Order Router Initialized
+2019-11-10 15:46:37 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:46:37 [logger INFO] Service //blp/emapisvc opened...
+2019-11-10 15:46:37 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:SPY
+2019-11-10 15:46:37 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:PG
+2019-11-10 15:46:37 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:JPM
+2019-11-10 15:46:38 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:46:38 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 15:46:38 [logger INFO] Requesting for open orders...
+2019-11-10 15:46:38 [logger INFO] Waiting initial paints to finish to return active execution reports
+2019-11-10 15:46:38 [logger INFO] Subscribing to order and route events
+2019-11-10 15:46:38 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:SPY
+2019-11-10 15:46:38 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:PG
+2019-11-10 15:46:38 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:JPM
+2019-11-10 15:46:38 [logger INFO] DayTrader Successfully initialized
+2019-11-10 15:46:39 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:46:39 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 15:46:39 [logger INFO] Order subscription started successfully
+2019-11-10 15:46:39 [logger INFO] Route subscription started successfully
+2019-11-10 15:46:39 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:46:39 [logger INFO] Service //blp/mktbar opened...
+2019-11-10 15:46:39 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:46:39 [logger INFO] Service //blp/mktbar opened...
+2019-11-10 15:46:39 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:46:39 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 15:46:39 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:46:39 [logger INFO] Service //blp/mktbar opened...
+2019-11-10 15:46:39 [logger INFO] Recovered 2 previously existing execution reports
+2019-11-10 15:46:40 [logger ERROR] Error processing execution report list:todos putos
+2019-11-10 15:47:05 [logger INFO] DayTrader  Initializing
+2019-11-10 15:47:05 [logger INFO] Initializing Bloomberg Order Router
+2019-11-10 15:47:05 [logger INFO] Connecting to localhost:8194
+2019-11-10 15:47:05 [logger INFO] Bloomberg Order Router Initialized
+2019-11-10 15:47:05 [logger INFO] SingletonModuleHandler Successfully initializer
+2019-11-10 15:47:05 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2019-11-10 15:47:05 [logger INFO] Bloomberg Session Connection is UP...
+2019-11-10 15:47:05 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2019-11-10 15:47:05 [logger INFO] Bloomberg Session started...
+2019-11-10 15:47:05 [logger INFO] Initializing Generic Market Order Router
+2019-11-10 15:47:05 [logger INFO] SingletonModuleHandler Successfully initializer
+2019-11-10 15:47:05 [logger INFO] Generic Market Order Router Initialized
+2019-11-10 15:47:06 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:47:06 [logger INFO] Service //blp/emapisvc opened...
+2019-11-10 15:47:06 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:SPY
+2019-11-10 15:47:06 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:PG
+2019-11-10 15:47:06 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:JPM
+2019-11-10 15:47:07 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:47:07 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 15:47:07 [logger INFO] Requesting for open orders...
+2019-11-10 15:47:07 [logger INFO] Waiting initial paints to finish to return active execution reports
+2019-11-10 15:47:07 [logger INFO] Subscribing to order and route events
+2019-11-10 15:47:07 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:SPY
+2019-11-10 15:47:07 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:PG
+2019-11-10 15:47:07 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:JPM
+2019-11-10 15:47:07 [logger INFO] DayTrader Successfully initialized
+2019-11-10 15:47:08 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:47:08 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 15:47:08 [logger INFO] Order subscription started successfully
+2019-11-10 15:47:08 [logger INFO] Route subscription started successfully
+2019-11-10 15:47:08 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:47:08 [logger INFO] Service //blp/mktbar opened...
+2019-11-10 15:47:08 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:47:08 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 15:47:08 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:47:08 [logger INFO] Service //blp/mktbar opened...
+2019-11-10 15:47:08 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:47:08 [logger INFO] Service //blp/mktbar opened...
+2019-11-10 15:47:08 [logger INFO] Recovered 2 previously existing execution reports
+2019-11-10 15:47:10 [logger ERROR] Error processing execution report list:todos putos
+2019-11-10 15:48:04 [logger INFO] DayTrader  Initializing
+2019-11-10 15:48:04 [logger INFO] Initializing Bloomberg Order Router
+2019-11-10 15:48:04 [logger INFO] Connecting to localhost:8194
+2019-11-10 15:48:04 [logger INFO] Bloomberg Order Router Initialized
+2019-11-10 15:48:04 [logger INFO] SingletonModuleHandler Successfully initializer
+2019-11-10 15:48:04 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2019-11-10 15:48:04 [logger INFO] Bloomberg Session Connection is UP...
+2019-11-10 15:48:04 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2019-11-10 15:48:04 [logger INFO] Bloomberg Session started...
+2019-11-10 15:48:04 [logger INFO] Initializing Generic Market Order Router
+2019-11-10 15:48:04 [logger INFO] SingletonModuleHandler Successfully initializer
+2019-11-10 15:48:04 [logger INFO] Generic Market Order Router Initialized
+2019-11-10 15:48:04 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:48:04 [logger INFO] Service //blp/emapisvc opened...
+2019-11-10 15:48:05 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:SPY
+2019-11-10 15:48:05 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:PG
+2019-11-10 15:48:05 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:JPM
+2019-11-10 15:48:06 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:48:06 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 15:48:06 [logger INFO] Requesting for open orders...
+2019-11-10 15:48:06 [logger INFO] Waiting initial paints to finish to return active execution reports
+2019-11-10 15:48:06 [logger INFO] Subscribing to order and route events
+2019-11-10 15:48:06 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:SPY
+2019-11-10 15:48:06 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:PG
+2019-11-10 15:48:06 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:JPM
+2019-11-10 15:48:06 [logger INFO] DayTrader Successfully initialized
+2019-11-10 15:48:06 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:48:06 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 15:48:06 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:48:06 [logger INFO] Service //blp/mktbar opened...
+2019-11-10 15:48:06 [logger INFO] Order subscription started successfully
+2019-11-10 15:48:06 [logger INFO] Route subscription started successfully
+2019-11-10 15:48:07 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:48:07 [logger INFO] Service //blp/mktbar opened...
+2019-11-10 15:48:07 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:48:07 [logger INFO] Service //blp/mktbar opened...
+2019-11-10 15:48:07 [logger INFO] Recovered 2 previously existing execution reports
+2019-11-10 15:48:07 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:48:07 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 15:48:09 [logger ERROR] Error processing execution report list:todos putos
+2019-11-10 15:48:10 [logger ERROR] Critical error @DayTrader.ProcessPositionList:todos putos
+2019-11-10 15:48:32 [logger INFO] DayTrader  Initializing
+2019-11-10 15:48:32 [logger INFO] Initializing Bloomberg Order Router
+2019-11-10 15:48:32 [logger INFO] Connecting to localhost:8194
+2019-11-10 15:48:32 [logger INFO] Bloomberg Order Router Initialized
+2019-11-10 15:48:32 [logger INFO] SingletonModuleHandler Successfully initializer
+2019-11-10 15:48:32 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2019-11-10 15:48:32 [logger INFO] Bloomberg Session Connection is UP...
+2019-11-10 15:48:32 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2019-11-10 15:48:32 [logger INFO] Bloomberg Session started...
+2019-11-10 15:48:32 [logger INFO] Initializing Generic Market Order Router
+2019-11-10 15:48:32 [logger INFO] SingletonModuleHandler Successfully initializer
+2019-11-10 15:48:32 [logger INFO] Generic Market Order Router Initialized
+2019-11-10 15:48:32 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:48:32 [logger INFO] Service //blp/emapisvc opened...
+2019-11-10 15:48:33 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:SPY
+2019-11-10 15:48:33 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:PG
+2019-11-10 15:48:33 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:JPM
+2019-11-10 15:48:34 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:48:34 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 15:48:34 [logger INFO] Requesting for open orders...
+2019-11-10 15:48:34 [logger INFO] Subscribing to order and route events
+2019-11-10 15:48:34 [logger INFO] Waiting initial paints to finish to return active execution reports
+2019-11-10 15:48:34 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:SPY
+2019-11-10 15:48:34 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:PG
+2019-11-10 15:48:34 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:JPM
+2019-11-10 15:48:34 [logger INFO] DayTrader Successfully initialized
+2019-11-10 15:48:34 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:48:34 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 15:48:34 [logger INFO] Route subscription started successfully
+2019-11-10 15:48:34 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:48:34 [logger INFO] Service //blp/mktbar opened...
+2019-11-10 15:48:34 [logger INFO] Order subscription started successfully
+2019-11-10 15:48:34 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:48:34 [logger INFO] Service //blp/mktbar opened...
+2019-11-10 15:48:35 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:48:35 [logger INFO] Service //blp/mktdata opened...
+2019-11-10 15:48:35 [logger INFO] Processing SERVICE_STATUS event
+2019-11-10 15:48:35 [logger INFO] Service //blp/mktbar opened...
+2019-11-10 15:48:35 [logger INFO] Recovered 2 previously existing execution reports
+2019-11-10 15:48:39 [logger INFO] Received list of Open Positions: 0 positions
+2019-11-10 15:48:39 [logger INFO] Process ready to receive commands and trade

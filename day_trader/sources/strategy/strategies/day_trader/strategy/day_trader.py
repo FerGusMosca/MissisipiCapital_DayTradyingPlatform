@@ -10,6 +10,7 @@ from sources.framework.business_entities.positions.execution_summary import *
 from sources.framework.business_entities.positions.position import *
 from sources.framework.common.wrappers.cancel_all_wrapper import *
 from sources.framework.common.wrappers.market_data_request_wrapper import *
+from sources.framework.common.wrappers.historical_prices_request_wrapper import *
 from sources.framework.common.wrappers.candle_bar_request_wrapper import *
 from sources.framework.common.enums.SubscriptionRequestType import *
 from sources.strategy.strategies.day_trader.common.converters.market_data_converter import *
@@ -42,6 +43,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
         self.ModelParameters = {}
         self.MarketData={}
         self.Candlebars={}
+        self.HistoricalPrices={}
 
         self.InvokingModule = None
         self.OutgoingModule = None
@@ -306,6 +308,18 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
             else:
                 raise Exception("Could not find security for symbol {}".format(secIn.Security.Symbol))
 
+    def RequestHistoricalPrices(self):
+        for secIn in self.SecuritiesToTrade:
+            sec = self.MarketData[secIn.Security.Symbol]
+
+            if sec is not None:
+                self.HistoricalPrices[secIn.Security.Symbol]=None
+                hpReqWrapper = HistoricalPricesRequestWrapper(secIn.Security,self.Configuration.HistoricalPricesPastDays,
+                                                              TimeUnit.Day, SubscriptionRequestType.Snapshot)
+                self.MarketDataModule.ProcessMessage(hpReqWrapper)
+            else:
+                raise Exception("Could not find security for symbol {}".format(secIn.Security.Symbol))
+
     def ProcessMessage(self, wrapper):
         pass
 
@@ -370,6 +384,8 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
             self.RequestPositionList()
 
             self.RequestBars()
+
+            self.RequestHistoricalPrices()
 
             self.DoLog("DayTrader Successfully initialized", MessageType.INFO)
 

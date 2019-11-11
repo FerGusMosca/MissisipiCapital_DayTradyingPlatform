@@ -35,6 +35,7 @@ MARKET_BAR_START      = blpapi.Name("MarketBarStart")
 MARKET_BAR_UPDATE      = blpapi.Name("MarketBarUpdate")
 MARKET_BAR_INTERVAL_END      = blpapi.Name("MarketBarIntervalEnd")
 MARKET_BAR_END      = blpapi.Name("MarketBarEnd")
+HISTORICAL_DATA_REPONSE      = blpapi.Name("HistoricalDataResponse")
 SESSION_STARTED         = blpapi.Name("SessionStarted")
 SESSION_TERMINATED      = blpapi.Name("SessionTerminated")
 SESSION_STARTUP_FAILURE = blpapi.Name("SessionStartupFailure")
@@ -73,6 +74,7 @@ class OrderRouter( BaseCommunicationModule, ICommunicationModule):
         self.id = None
         self.MarketDataSubscriptionLock=threading.Lock()
         self.CandleBarSubscriptionLock = threading.Lock()
+        self.HistoricalPricesSubscriptionLock = threading.Lock()
         self.ActiveOrdersLock = threading.Lock()
 
         self.ClOrdIdsTranslators = {}
@@ -80,6 +82,7 @@ class OrderRouter( BaseCommunicationModule, ICommunicationModule):
 
         self.MarketDataSubscriptions = {}
         self.CandleBarSubscriptions = {}
+        self.HistoricalPricesRequests= {}
 
         self.PendingCancels = {}
         self.ActiveOrders = {}
@@ -276,6 +279,21 @@ class OrderRouter( BaseCommunicationModule, ICommunicationModule):
         for msg in event:
             self.DoLog("MESSAGE: %s" % (msg.tostring()),MessageType.DEBUG)
 
+    def ProcessHistoricalPrice(self,msg):
+
+        try:
+
+            marketDataArr = SubscriptionHelper.ProcessHistoricalPrices(self,None,msg)
+            #TODO: Find security
+            #TODO: Create wrapper
+            #TODO: publish and save
+            #TODO: El rango de fecha inicial que calcule bien los ultimos 5 dias
+        except Exception as e:
+            #TODO: Publish Error
+            self.DoLog("Error @ProcessHistoricalPrice:{}".format(str(e)), MessageType.ERROR)
+
+
+
     def ProcessResponseEvent(self, event):
 
         for msg in event:
@@ -314,7 +332,7 @@ class OrderRouter( BaseCommunicationModule, ICommunicationModule):
 
                 #global bEnd
                 #bEnd = True
-            if msg.correlationIds()[0].value() in self.PendingCancels:
+            elif msg.correlationIds()[0].value() in self.PendingCancels:
                 cancelOrder = self.PendingCancels[msg.correlationIds()[0].value()]
                 del self.PendingCancels[msg.correlationIds()[0].value()]
                 if msg.messageType() == ERROR_INFO:
@@ -329,6 +347,9 @@ class OrderRouter( BaseCommunicationModule, ICommunicationModule):
                     message = msg.getElementAsString("MESSAGE")
                     self.DoLog("Received Pending Cancel confirmation for ClOrdId={}.Status={} Msg={}".format(
                         msg.correlationIds()[0].value(), status, message), MessageType.DEBUG)
+            elif msg.messageType() == HISTORICAL_DATA_REPONSE:
+
+                self.ProcessHistoricalPrice(msg)
             else:
                 self.DoLog("Received response for unknown CorrelationId {}".format(msg.correlationIds()[0].value()),MessageType.DEBUG)
 
@@ -370,7 +391,7 @@ class OrderRouter( BaseCommunicationModule, ICommunicationModule):
         if msg.correlationIds()[0].value() in self.MarketDataSubscriptions:
             symbol = msg.correlationIds()[0].value()
             sec = self.MarketDataSubscriptions[msg.correlationIds()[0].value()]
-            SubscriptionHelper.UpdateMarketData(self, msg, sec)
+            SubscriptionHelper.UpdateMarketData(self, msg, sec.MarketData)
             LogHelper.LogPublishMarketDataOnSecurity(self, symbol, sec)
             mdWrapper = MarketDataWrapper(sec.MarketData)
             self.OnMarketData.ProcessIncoming(mdWrapper)
@@ -412,6 +433,7 @@ class OrderRouter( BaseCommunicationModule, ICommunicationModule):
             elif (msg.messageType() == MARKET_BAR_UPDATE or msg.messageType() == MARKET_BAR_INTERVAL_END or  msg.messageType() == MARKET_BAR_END):
                 self.ProcessCandlebarUpdate(msg)
             else:
+
                 self.DoLog("Received message for not tracked message type . MsgType= {}".format(msg.messageType()),MessageType.ERROR)
 
     def ProcessEvent(self, event, session):
@@ -610,16 +632,16 @@ class OrderRouter( BaseCommunicationModule, ICommunicationModule):
 
 
     def ProcessCandleBarRequest(self,wrapper):
-        cbReq = MarketDataRequestConverter.ConvertCandleBarRequest(self, wrapper)
+        cbReq = MarketDataRequestConverter.ConvertCandleBarRequest( wrapper)
         try:
 
             if cbReq.TimeUnit != TimeUnit.Minute:
-                raise Exception("Not valid time unit for candle bar request {0}".format(cbReq.TimeUnit))
+                raise Exception("Not valid time unit for candle bar request {}".format(cbReq.TimeUnit))
 
             self.CandleBarSubscriptionLock.acquire()
             if cbReq.SubscriptionRequestType == SubscriptionRequestType.Unsuscribe:
 
-                self.DoLog("Bloomberg Order Router: Received Bar Subscription Request for symbol:{0}".format(cbReq.Security.Symbol), MessageType.INFO)
+                self.DoLog("Bloomberg Order Router: Received Bar Subscription Request for symbol:{}".format(cbReq.Security.Symbol), MessageType.INFO)
                 blSymbol = "{} {} {}".cbReq(cbReq.Security.Symbol,
                                            BloombergTranslationHelper.GetBloombergExchange(cbReq.Security.Exchange),
                                            BloombergTranslationHelper.GetBloombergSecType(cbReq.Security.SecurityType))
@@ -630,7 +652,7 @@ class OrderRouter( BaseCommunicationModule, ICommunicationModule):
                 else:
                     self.DoLog("Symbol {} is not currently subscribed for candle bars".format(blSymbol))
             else:
-                self.DoLog("Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:{0}".format(cbReq.Security.Symbol), MessageType.INFO)
+                self.DoLog("Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:{}".format(cbReq.Security.Symbol), MessageType.INFO)
                 blSymbol = "{} {} {}".format(cbReq.Security.Symbol,
                                            BloombergTranslationHelper.GetBloombergExchange(cbReq.Security.Exchange),
                                            BloombergTranslationHelper.GetBloombergSecType(cbReq.Security.SecurityType))
@@ -647,8 +669,40 @@ class OrderRouter( BaseCommunicationModule, ICommunicationModule):
         finally:
             self.CandleBarSubscriptionLock.release()
 
+    def ProcessHistoricalPricesRequest(self,wrapper):
+        hpReq = MarketDataRequestConverter.ConvertHistoricalPricesRequest( wrapper)
+        try:
+
+            if hpReq.TimeUnit != TimeUnit.Day:
+                raise Exception("Not valid time unit for historical prices request {}".format(hpReq.TimeUnit))
+
+            self.HistoricalPricesSubscriptionLock.acquire()
+            if hpReq.SubscriptionRequestType == SubscriptionRequestType.Snapshot:
+                self.DoLog("Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:{}".format(hpReq.Security.Symbol), MessageType.INFO)
+                blSymbol = "{} {} {}".format(hpReq.Security.Symbol,
+                                           BloombergTranslationHelper.GetBloombergExchange(hpReq.Security.Exchange),
+                                           BloombergTranslationHelper.GetBloombergSecType(hpReq.Security.SecurityType))
+                requestID = blpapi.CorrelationId(blSymbol)
+
+                self.HistoricalPricesRequests[blSymbol] = CandleBar(hpReq.Security)
+                SubscriptionHelper.GetHistoricalPrices(self.Session,self.Configuration.RefData_Environment,
+                                                       blSymbol,
+                                                       hpReq.TimeUnit,
+                                                       hpReq.Time,
+                                                       requestID)
+            else:
+                self.DoLog("Bloomberg Order Router: Invalid subscription type for historical prices for symbol {}:{}".format(
+                    hpReq.Security.Symbol,hpReq.SubscriptionRequestType), MessageType.ERROR)
+        except Exception as e:
+            msg = "Critical error subscribing for historical prices for symbol {}:{}".format(hpReq.Security.Symbol, str(e))
+            self.DoLog(msg, MessageType.ERROR)
+            errorWrapper = ErrorWrapper(e)
+            self.OnMarketData.ProcessIncoming(errorWrapper)
+        finally:
+            self.HistoricalPricesSubscriptionLock.release()
+
     def ProcessMarketDataRequest(self,wrapper):
-        mdReq = MarketDataRequestConverter.ConvertMarketDataRequest(self,wrapper)
+        mdReq = MarketDataRequestConverter.ConvertMarketDataRequest(wrapper)
         try:
 
             self.MarketDataSubscriptionLock.acquire()
@@ -711,6 +765,8 @@ class OrderRouter( BaseCommunicationModule, ICommunicationModule):
                 self.ProcessMarketDataRequest(wrapper)
             elif wrapper.GetAction() == Actions.CANDLE_BAR_REQUEST:
                 self.ProcessCandleBarRequest(wrapper)
+            elif wrapper.GetAction() == Actions.HISTORICAL_PRICES_REQUEST:
+                self.ProcessHistoricalPricesRequest(wrapper)
             else:
                 self.DoLog("Routing to market: Order Router not prepared for routing message {}".format(wrapper.GetAction()), MessageType.WARNING)
 
