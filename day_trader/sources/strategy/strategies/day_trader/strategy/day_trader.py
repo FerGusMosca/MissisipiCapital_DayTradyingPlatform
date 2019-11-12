@@ -257,14 +257,30 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
         try:
             md = MarketDataConverter.ConvertMarketData(wrapper)
             self.MarketData[md.Security.Symbol]=md
+            self.DoLog("Marktet Data successfully loaded for symbol {} ".format(md.Security.Symbol),MessageType.DEBUG)
+
         except Exception as e:
-            self.DoLog("Critical error @DayTrader.ProcessMarketData: " + str(e), MessageType.ERROR)
+            self.ProcessError("@DayTrader.ProcessMarketData", e)
+
+    def ProcessError(self,method,e):
+        msg = "Critical error @{}:{} ".format(method,str(e))
+        error = ErrorWrapper(Exception(msg))
+        self.ProcessError(error)
+        self.DoLog(msg, MessageType.ERROR)
 
     def ProcessError(self,wrapper):
         try:
            self.InvokingModule.ProcessMessage(wrapper)
         except Exception as e:
             self.DoLog("Critical error @DayTrader.ProcessError: " + str(e), MessageType.ERROR)
+
+    def ProcessHistoricalPrices(self,wrapper):
+        try:
+            security = MarketDataConverter.ConvertHistoricalPrices(wrapper)
+            self.HistoricalPrices[security.Symbol]=security.MarketDataArr
+            self.DoLog("Historical prices successfully loaded for symbol {} ".format(security.Symbol), MessageType.INFO)
+        except Exception as e:
+            self.ProcessError("@DayTrader.ProcessHistoricalPrices",e)
 
     def ProcessCandleBar(self,wrapper):
         try:
@@ -278,11 +294,12 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                 cbDict[candlebar.DateTime] = candlebar
                 self.Candlebars[candlebar.Security.Symbol]=cbDict
 
+                self.DoLog("Candlebars successfully loaded for symbol {} ".format(candlebar.Security.Symbol),MessageType.DEBUG)
             else:
                 self.DoLog("Received unknown null candlebar",MessageType.DEBUG)
 
         except Exception as e:
-            self.DoLog("Critical error @DayTrader.ProcessCandleBar: " + str(e), MessageType.ERROR)
+            self.ProcessError("@DayTrader.ProcessCandleBar", e)
 
     def RequestPositionList(self):
         time.sleep(int(self.Configuration.PauseBeforeExecutionInSeconds))
@@ -330,6 +347,8 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                 return CMState.BuildSuccess(self)
             elif wrapper.GetAction() == Actions.CANDLE_BAR_DATA:
                 threading.Thread(target=self.ProcessCandleBar, args=(wrapper,)).start()
+            elif wrapper.GetAction() == Actions.HISTORICAL_PRICES:
+                threading.Thread(target=self.ProcessHistoricalPrices, args=(wrapper,)).start()
                 return CMState.BuildSuccess(self)
             elif wrapper.GetAction() == Actions.ERROR:
                 threading.Thread(target=self.ProcessError, args=(wrapper,)).start()
@@ -377,6 +396,8 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
             self.OrderRoutingModule = self.InitializeModule(self.Configuration.OutgoingModule,self.Configuration.OutgoingConfigFile)
 
+            self.WebsocketModule = self.InitializeModule(self.Configuration.WebsocketModule,self.Configuration.WebsocketConfigFile)
+
             time.sleep(self.Configuration.PauseBeforeExecutionInSeconds)
 
             self.RequestMarketData()
@@ -389,6 +410,10 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
             self.DoLog("DayTrader Successfully initialized", MessageType.INFO)
 
+            return CMState.BuildSuccess(self)
+
 
         else:
-            self.DoLog("Error initializing config file for SimpleCSVProcessor", MessageType.ERROR)
+            msg = "Error initializing config file for SimpleCSVProcessor"
+            self.DoLog(msg, MessageType.ERROR)
+            return CMState.BuildFailure(self,errorMsg=msg)

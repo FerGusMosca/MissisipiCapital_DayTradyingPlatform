@@ -6,6 +6,7 @@ from sources.framework.common.interfaces.icommunication_module import ICommunica
 from sources.framework.common.wrappers.execution_report_list_wrapper import *
 from sources.framework.common.wrappers.generic_execution_report_wrapper import *
 from sources.framework.common.wrappers.error_wrapper import *
+from sources.order_routers.bloomberg.common.wrappers.historical_prices_wrapper import *
 from sources.framework.common.enums.CxlRejReason import *
 from sources.framework.common.enums.CxlRejResponseTo import *
 from sources.framework.business_entities.market_data.candle_bar import *
@@ -82,7 +83,6 @@ class OrderRouter( BaseCommunicationModule, ICommunicationModule):
 
         self.MarketDataSubscriptions = {}
         self.CandleBarSubscriptions = {}
-        self.HistoricalPricesRequests= {}
 
         self.PendingCancels = {}
         self.ActiveOrders = {}
@@ -282,17 +282,16 @@ class OrderRouter( BaseCommunicationModule, ICommunicationModule):
     def ProcessHistoricalPrice(self,msg):
 
         try:
-
-            marketDataArr = SubscriptionHelper.ProcessHistoricalPrices(self,None,msg)
-            #TODO: Find security
-            #TODO: Create wrapper
-            #TODO: publish and save
-            #TODO: El rango de fecha inicial que calcule bien los ultimos 5 dias
+            sec = SubscriptionHelper.ExtractSecurity(self, msg)
+            if sec is not None:
+                histPricesWrapper = HistoricalPricesWrapper(self,TimeUnit.Day,msg)
+                self.OnMarketData.ProcessIncoming(histPricesWrapper)
+            else:
+                raise Exception("Could not find security when recovering market data:{}".format(str(msg)))
         except Exception as e:
-            #TODO: Publish Error
+            errWrapper =  ErrorWrapper(Exception("Error recovering historical price:{}".format(str(e))))
+            self.OnMarketData.ProcessIncoming(errWrapper)
             self.DoLog("Error @ProcessHistoricalPrice:{}".format(str(e)), MessageType.ERROR)
-
-
 
     def ProcessResponseEvent(self, event):
 
@@ -684,7 +683,6 @@ class OrderRouter( BaseCommunicationModule, ICommunicationModule):
                                            BloombergTranslationHelper.GetBloombergSecType(hpReq.Security.SecurityType))
                 requestID = blpapi.CorrelationId(blSymbol)
 
-                self.HistoricalPricesRequests[blSymbol] = CandleBar(hpReq.Security)
                 SubscriptionHelper.GetHistoricalPrices(self.Session,self.Configuration.RefData_Environment,
                                                        blSymbol,
                                                        hpReq.TimeUnit,

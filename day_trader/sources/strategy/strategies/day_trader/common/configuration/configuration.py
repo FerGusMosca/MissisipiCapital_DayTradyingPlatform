@@ -21,3 +21,6 @@ class Configuration:
         self.DBCatalog = config['DB']['CATALOG']
         self.DBUser = config['DB']['USER']
         self.DBPassword = config['DB']['PASSWORD']
+
+        self.WebsocketModule = config['DEFAULT']['WEBSOCKET_MODULE']
+        self.WebsocketConfigFile = config['DEFAULT']['WEBSOCKET_CONFIG_FILE']

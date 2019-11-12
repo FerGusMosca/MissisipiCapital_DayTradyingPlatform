@@ -92,6 +92,9 @@ class MarketOrderRouter(BaseCommunicationModule, ICommunicationModule):
     def ProcessMarketData(self, wrapper):
         self.InvokingModule.ProcessIncoming(wrapper)
 
+    def ProcessHistoricalPrices(self,wrapper):
+        self.InvokingModule.ProcessIncoming(wrapper)
+
     def ProcessIncoming(self, wrapper):
         try:
 
@@ -100,6 +103,9 @@ class MarketOrderRouter(BaseCommunicationModule, ICommunicationModule):
                 return CMState.BuildSuccess(self)
             elif wrapper.GetAction() == Actions.MARKET_DATA:
                 self.ProcessMarketData(wrapper)
+                return CMState.BuildSuccess(self)
+            elif wrapper.GetAction() == Actions.HISTORICAL_PRICES:
+                self.ProcessHistoricalPrices(wrapper)
                 return CMState.BuildSuccess(self)
             else:
                 raise Exception("ProcessOutgoing: GENERIC Order Router not prepared for outgoing message {}".format(

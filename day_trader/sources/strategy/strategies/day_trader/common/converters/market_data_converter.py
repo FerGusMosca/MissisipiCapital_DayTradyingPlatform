@@ -3,8 +3,19 @@ from sources.framework.business_entities.securities.security import *
 from sources.framework.business_entities.market_data.candle_bar import *
 from sources.framework.common.enums.fields.market_data_field import *
 from sources.framework.common.enums.fields.candle_bar_field import *
+from sources.framework.common.enums.fields.historical_prices_field import *
 
 class MarketDataConverter:
+
+    @staticmethod
+    def ValidateHistoricalPrices(wrapper):
+        try:
+            if wrapper.GetField(HistoricalPricesField.Security) == None:
+                raise Exception("Missing parameter {} for historical prices".format(HistoricalPricesField.Security))
+            elif wrapper.GetField(HistoricalPricesField.MarketDataArray) == None:
+                raise Exception("Missing parameter {} for historical prices".format(HistoricalPricesField.MarketDataArray))
+        except Exception as e:
+            raise Exception("Error processing market data msg:{}".format(str(e)))
 
     @staticmethod
     def ValidateMarketData(wrapper):
@@ -30,6 +41,19 @@ class MarketDataConverter:
         sec.Currency = wrapper.GetField(MarketDataField.Currency)
         sec.Exchange = wrapper.GetField(MarketDataField.MDMkt)
         return sec
+
+    @staticmethod
+    def ConvertHistoricalPrices(wrapper):
+        MarketDataConverter.ValidateHistoricalPrices(wrapper)
+
+        sec = wrapper.GetField(HistoricalPricesField.Security)
+        marketDataArr =wrapper.GetField(HistoricalPricesField.MarketDataArray)
+
+        for md in marketDataArr:
+            sec.MarketDataArr [ md.MDEntryDate]=md
+
+        return sec
+
 
     @staticmethod
     def ConvertMarketData(wrapper):

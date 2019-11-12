@@ -47,6 +47,33 @@ class SubscriptionHelper:
             md.OpeningPrice = BloombergTranslationHelper.GetSafeFloat(logger, msg, "OPEN", None)
 
     @staticmethod
+    def ExtractSecurity(logger, msg):
+        if (msg.getElement("securityData") is not None):
+            secData = msg.getElement("securityData")
+
+            if secData.hasElement("securityError"):
+                error = secData.getElement("securityError")
+                raise Exception("{}:{}".format( BloombergTranslationHelper.GetSafeString(logger,secData,"security", "unknown security"),
+                                                BloombergTranslationHelper.GetSafeString(logger,error,"message","unknown error")))
+
+            fullSymbol = BloombergTranslationHelper.GetSafeString(logger,secData,"security",None)
+            if fullSymbol is not None:
+                cleanSymbol = BloombergTranslationHelper.GetCleanStrSymbol(logger,fullSymbol)
+                strSecType = BloombergTranslationHelper.GetCleanSecType(logger,fullSymbol)
+                exchange = BloombergTranslationHelper.GetCleanExchange(logger,fullSymbol)
+
+                sec = Security(Symbol=cleanSymbol,
+                               SecType=BloombergTranslationHelper.GetSecType(strSecType),
+                               Exchange=exchange)
+                return sec
+            else:
+                return None
+        else:
+            return None
+
+
+
+    @staticmethod
     def ProcessHistoricalPrices(logger, security,msg):
 
         historicalPrices = []
@@ -119,8 +146,12 @@ class SubscriptionHelper:
         request.append("fields", "OPEN")
         request.append("fields", "HIGH")
         request.append("fields", "LOW")
-        request.set("startDate", "20191101")
-        request.set("endDate", "20191110")
+
+        yesterday_end= datetime.datetime.today() - datetime.timedelta(days=1)
+        start = datetime.datetime.today() - datetime.timedelta(days=pastDays+5)#buffer for holidays <yesterday -4>
+
+        request.set("startDate", start.strftime("%Y%m%d"))
+        request.set("endDate", yesterday_end.strftime("%Y%m%d"))
         if barSize == TimeUnit.Day:
             request.set("periodicitySelection", "DAILY")
         else:

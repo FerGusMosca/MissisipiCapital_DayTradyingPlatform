@@ -70,7 +70,7 @@ class BloombergTranslationHelper:
         return timestamp
 
     @staticmethod
-    def GetCleanSymbol(self, msg):
+    def GetCleanSymbol(logger, msg):
         try:
             EMSX_TICKER = msg.getElementAsString("EMSX_TICKER")
 
@@ -342,6 +342,37 @@ class BloombergTranslationHelper:
             return OrdStatus.Undefined
 
     @staticmethod
+    def GetCleanStrSymbol(logger, dirtySymbol):
+
+        symbolFields = dirtySymbol.split(" ")
+
+        if (len(symbolFields) == 3):
+            return symbolFields[0]
+        else:
+            return ""
+
+    @staticmethod
+    def GetCleanSecType(logger,dirtySymbol):
+
+        symbolFields = dirtySymbol.split(" ")
+
+        if (len(symbolFields) ==3 ):
+            return symbolFields[2]
+        else:
+            return ""
+
+    @staticmethod
+    def GetCleanExchange(logger,dirtySymbol):
+
+        symbolFields = dirtySymbol.split(" ")
+
+        if (len(symbolFields) == 3):
+            return symbolFields[1]
+        else:
+            return ""
+
+
+    @staticmethod
     def GetBloombergExchange(exch):
         if exch is not None:
             return exch
@@ -354,5 +385,12 @@ class BloombergTranslationHelper:
             return _CS_SECURITY_TYPE
         else:
             raise Exception("Bloomberg Translation not implemented for sec type {}".format(secType))
+
+    @staticmethod
+    def GetSecType(blSecType):
+        if blSecType == _CS_SECURITY_TYPE:
+            return  SecurityType.CS
+        else:
+            SecurityType.OTH
 
 

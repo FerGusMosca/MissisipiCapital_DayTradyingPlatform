@@ -12,5 +12,6 @@ class Security:
         self.Currency=Currency
         self.SecurityType=SecType
         self.MarketData = MarketData()
+        self.MarketDataArr={}
 
         #endregion
