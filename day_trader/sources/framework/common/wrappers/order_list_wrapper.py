@@ -10,22 +10,9 @@ class OrderListWrapper(Wrapper):
         # region Public Methods
 
     def GetAction(self):
-        """
-
-        Returns:
-
-        """
         return Actions.ORDER_LIST
 
     def GetField(self, field):
-        """
-
-        Args:
-            field ():
-
-        Returns:
-
-        """
         if field == None:
             return None
 

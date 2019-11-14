@@ -12,6 +12,8 @@ class Configuration:
         self.Currency = config['DEFAULT']['CURRENCY']
         self.PauseBeforeExecutionInSeconds = int( config['DEFAULT']['PAUSE_BEFORE_EXECUTION_IN_SECONDS'])
         self.HistoricalPricesPastDays = int(config['DEFAULT']['HISTORICAL_PRICES_PAST_DAYS'])
+        self.DefaultExchange= config['DEFAULT']['DEFAULT_EXCHANGE']
+
 
         self.PersistRecovery = config['DEFAULT']['PERSIST_RECOVERY'] == "True"
         self.PersistFullOrders = config['DEFAULT']['PERSIST_FULL_ORDERS']=="True"

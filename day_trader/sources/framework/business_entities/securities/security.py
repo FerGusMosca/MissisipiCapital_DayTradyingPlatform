@@ -1,6 +1,6 @@
 from sources.framework.common.enums.SecurityType import SecurityType
 from sources.framework.business_entities.market_data.market_data import *
-
+import json
 
 class Security:
     def __init__(self, Symbol=None, Exchange=None,Currency=None, SecType=None):
@@ -15,3 +15,6 @@ class Security:
         self.MarketDataArr={}
 
         #endregion
+
+    def toJSON(self):
+        return json.dumps(self, default=lambda o: o.__dict__,sort_keys=True, indent=4)
