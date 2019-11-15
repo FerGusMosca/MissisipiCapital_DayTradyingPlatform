@@ -5,6 +5,7 @@ from sources.framework.common.logger.message_type import *
 from sources.framework.common.enums.Actions import *
 from sources.framework.common.dto.cm_state import *
 from sources.framework.common.enums.fields.portfolio_positions_list_field import *
+from sources.framework.common.enums.fields.error_field import *
 from sources.strategy.strategies.day_trader.strategy.services.websocket.data_access_layer.websocket_server import *
 import tornado
 import threading
@@ -58,6 +59,21 @@ class WebSocketModule(BaseCommunicationModule, ICommunicationModule):
 
     #region Event Methods
 
+    def ProcessError(self,wrapper):
+        try:
+            errMessage = wrapper.GetField(ErrorField.ErrorMessage)
+            self.LockConnections.acquire()
+            for conn in self.Connections:
+                conn.PublishError(errMessage)
+
+            return CMState.BuildSuccess(self)
+
+        except Exception as e:
+            self.DoLog("Exception @WebsocketModule.ProcessError:{}".format(str(e)), MessageType.ERROR)
+            return CMState.BuildFailure(self, Exception=e)
+        finally:
+            self.LockConnections.release()
+
     def ProcessPortfolioPositions(self,wrapper):
         try:
             success = wrapper.GetField(PortfolioPositionListFields.Status)
@@ -72,7 +88,7 @@ class WebSocketModule(BaseCommunicationModule, ICommunicationModule):
                 for conn in self.Connections:
                     conn.PublishError(err)
 
-            return CMState.BuildSuccess()
+            return CMState.BuildSuccess(self)
 
         except Exception as e:
             self.DoLog("Exception @WebsocketModule.ProcessPortfolioPositions:{}".format(str(e)), MessageType.ERROR)
@@ -88,8 +104,7 @@ class WebSocketModule(BaseCommunicationModule, ICommunicationModule):
     def ProcessMessage(self, wrapper):
         try:
             if wrapper.GetAction() == Actions.ERROR:
-                #TODO: publish errores
-                return CMState.BuildSuccess(self)
+                return self.ProcessError(wrapper)
             elif wrapper.GetAction() == Actions.PORTFOLIO_POSITIONS:
                 return self.ProcessPortfolioPositions(wrapper)
             else:
@@ -107,6 +122,8 @@ class WebSocketModule(BaseCommunicationModule, ICommunicationModule):
             if wrapper.GetAction() == Actions.PORTFOLIO_POSITIONS_REQUEST:
                 return self.InvokingModule.ProcessMessage(wrapper)
             elif wrapper.GetAction() == Actions.NEW_POSITION:
+                return self.InvokingModule.ProcessMessage(wrapper)
+            elif wrapper.GetAction() == Actions.CANCEL_ALL_POSITIONS:
                 return self.InvokingModule.ProcessMessage(wrapper)
             else:
                 raise Exception("ProcessIncoming: Not prepared to process message {}".format(wrapper.GetAction()))

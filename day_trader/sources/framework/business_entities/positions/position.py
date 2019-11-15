@@ -42,9 +42,6 @@ class Position:
 
         self.ArrivalPrice= None
 
-
-
-
         #endregion
 
 

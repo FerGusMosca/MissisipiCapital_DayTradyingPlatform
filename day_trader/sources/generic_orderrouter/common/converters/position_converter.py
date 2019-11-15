@@ -8,11 +8,6 @@ class PositionConverter:
 
     @staticmethod
     def ValidatePosition(self, wrapper):
-        """
-
-        Args:
-            wrapper ():
-        """
         if wrapper.GetField(PositionField.PosId) is None:
             raise Exception("Missing parameter {} for position".format(PositionField.PosId))
 
@@ -37,14 +32,6 @@ class PositionConverter:
 
     @staticmethod
     def ConvertPosition(self, wrapper):
-        """
-
-        Args:
-            wrapper ():
-
-        Returns:
-
-        """
         PositionConverter.ValidatePosition(self, wrapper)
 
         pos = Position()

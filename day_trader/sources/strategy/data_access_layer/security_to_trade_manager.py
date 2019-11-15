@@ -37,7 +37,7 @@ class SecurityToTradeManager():
                        )
 
     def BuildSecurityToTrade(self, row,security):
-        return SecurityToTrade(security=security,shares=row['shares_quantity'],active=True)
+        return SecurityToTrade(id=row['id'],security=security,shares=row['shares_quantity'],active=True)
 
     #endregion
 

@@ -59,13 +59,13 @@ class MarketOrderRouter(BaseCommunicationModule, ICommunicationModule):
         try:
             cl_ord_id = wrapper.GetField(ExecutionReportField.ClOrdID)
             order_id = wrapper.GetField(ExecutionReportField.OrderID)
-            pos = next(iter(list(filter(lambda x: x.GetLastOrder().ClOrdId == cl_ord_id, self.Positions.values()))), None)
+            pos = next(iter(list(filter(lambda x:x.GetLastOrder() is not None and  x.GetLastOrder().ClOrdId == cl_ord_id, self.Positions.values()))), None)
 
             if pos is not None:
                 processed_exec_report = GenericERWrapper(pos.PosId, wrapper)
                 self.InvokingModule.ProcessOutgoing(processed_exec_report)
-            elif next(iter(list(filter(lambda x: x.GetLastOrder().OrderId == order_id, self.Positions.values()))), None) is not None:
-                pos = next(iter(list(filter(lambda x: x.GetLastOrder().OrderId == order_id, self.Positions.values()))), None)
+            elif next(iter(list(filter(lambda x: x.GetLastOrder() is not None and x.GetLastOrder().OrderId == order_id, self.Positions.values()))), None) is not None:
+                pos = next(iter(list(filter(lambda x: x.GetLastOrder() is not None and x.GetLastOrder().OrderId == order_id, self.Positions.values()))), None)
                 processed_exec_report = GenericERWrapper(pos.PosId, wrapper)
                 self.InvokingModule.ProcessOutgoing(processed_exec_report)
             else:
@@ -84,6 +84,12 @@ class MarketOrderRouter(BaseCommunicationModule, ICommunicationModule):
         order_wrapper = NewOrderWrapper(new_pos.Security.Symbol, new_pos.OrderQty, new_pos.PosId,
                                         new_pos.Security.Currency, new_pos.Side, new_pos.Account, new_pos.Broker,
                                         new_pos.Strategy, new_pos.OrderType, new_pos.OrderPrice)
+        new_pos.Orders.append(Order(ClOrdId=new_pos.PosId,Security=new_pos.Security,SettlType=SettlType.Regular,
+                                    Side=new_pos.Side,Exchange=new_pos.Exchange,OrdType=OrdType.Market,
+                                    QuantityType=new_pos.QuantityType,OrderQty=new_pos.Qty,PriceType=new_pos.PriceType,
+                                    Price=None,StopPx=None,Currency=new_pos.Security.Currency,
+                                    TimeInForce=TimeInForce.Day,Account=new_pos.Account,
+                                    OrdStatus=OrdStatus.PendingNew,Broker=new_pos.Broker,Strategy=new_pos.Strategy))
         self.OutgoingModule.ProcessMessage(order_wrapper)
 
     def ProcessCandleBar(self,wrapper):

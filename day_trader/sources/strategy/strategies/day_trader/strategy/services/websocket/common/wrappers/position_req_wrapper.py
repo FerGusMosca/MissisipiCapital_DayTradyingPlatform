@@ -37,6 +37,8 @@ class PositionReqWrapper(Wrapper):
 
         if field == PositionField.Symbol:
             return self.RoutePositionReq.Symbol
+        if field == PositionField.PosId:
+            return self.RoutePositionReq.PosId
         elif field == PositionField.QuantityType:
             return QuantityType.SHARES
         elif field == PositionField.PriceType:
@@ -47,7 +49,7 @@ class PositionReqWrapper(Wrapper):
             return self.GetSide()
         elif field == PositionField.PosStatus:
             return PositionStatus.PendingNew
-        elif field == PositionField.Error:
+        elif field == PositionField.SecurityType:
             return SecurityType.CS
         elif field == PositionField.Account:
             return self.RoutePositionReq.Account

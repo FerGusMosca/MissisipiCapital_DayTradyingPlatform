@@ -4,13 +4,18 @@ import asyncio
 from sources.strategy.strategies.day_trader.strategy.services.websocket.websocket_module.websocket_module import *
 from sources.strategy.strategies.day_trader.strategy.services.websocket.common.DTO.subscriptions.websocket_subscribe_message import *
 from sources.strategy.strategies.day_trader.strategy.services.websocket.common.DTO.order_routing.route_position_req import *
+from sources.strategy.strategies.day_trader.strategy.services.websocket.common.DTO.order_routing.cancel_position_req import *
+from sources.strategy.strategies.day_trader.strategy.services.websocket.common.DTO.order_routing.cancel_position_ack import *
 from sources.strategy.strategies.day_trader.strategy.services.websocket.common.DTO.order_routing.route_position_ack import *
+from sources.strategy.strategies.day_trader.strategy.services.websocket.common.DTO.order_routing.cancel_all_position_ack import *
 from sources.strategy.strategies.day_trader.strategy.services.websocket.common.DTO.subscriptions.subscription_reponse import *
 from sources.strategy.strategies.day_trader.strategy.services.websocket.common.DTO.batchs.get_open_positions_batch import *
 from sources.framework.common.wrappers.portfolio_position_list_request_wrapper import *
 from sources.strategy.strategies.day_trader.strategy.services.websocket.common.DTO.error_message import *
 from sources.strategy.strategies.day_trader.strategy.services.websocket.common.DTO.positions.position_dto import *
 from sources.strategy.strategies.day_trader.strategy.services.websocket.common.wrappers.position_req_wrapper import *
+from sources.strategy.strategies.day_trader.strategy.services.websocket.common.wrappers.cancel_all_position_wrapper import *
+from sources.strategy.strategies.day_trader.strategy.services.websocket.common.wrappers.cancel_position_wrapper import *
 
 _OPEN_POSITIONS_SERVICE = "OP"
 
@@ -23,7 +28,7 @@ class WSHandler(tornado.websocket.WebSocketHandler):
       self.InvokingModule.DoLog(msg,type)
 
   def DoSend(self,obj):
-    #self.write_message(obj.__dict__)
+    asyncio.set_event_loop(asyncio.new_event_loop())
     self.write_message(obj.toJSON())
   #endregion
 
@@ -39,7 +44,6 @@ class WSHandler(tornado.websocket.WebSocketHandler):
         posDTOArr.append(posDTO)
 
       posBatch = GetOpenPositionsBatch("GetOpenPositionsBatch",posDTOArr)
-      asyncio.set_event_loop(asyncio.new_event_loop())
       self.DoSend(posBatch)
       #self.write_message("test test")
 
@@ -77,6 +81,53 @@ class WSHandler(tornado.websocket.WebSocketHandler):
     #Unsubscription don't have confirmation messages
     if subscrMsg.Service not in self.SubscribedServices:
       del self.SubscribedServices[subscrMsg.Service]
+
+
+  def ProcessCancelPositionReq(self,cancelRouteReq):
+    try:
+
+      self.DoLog("Incoming Cancel Position Req for positionId {}".format(cancelRouteReq.PosId),MessageType.INFO)
+      wrapper =  CancelPositionWrapper()
+
+      state=self.InvokingModule.ProcessIncoming(wrapper)
+
+      if state.Success:
+        ack = CancelPositionAck(Msg="CancelAllPositionAck", UUID=cancelRouteReq.UUID,
+                                ReqId=cancelRouteReq.ReqId,PosId=cancelRouteReq.PosId)
+        self.DoSend(ack)
+        self.DoLog("Cancel positions id {} sent...".format(cancelRouteReq.PosId),MessageType.INFO)
+      else:
+        raise state.Exception
+
+
+    except Exception as e:
+      msg = "Critical ERROR for Incoming Cancel Position Req for posId {}. Error:{}".format(cancelRouteReq.PosId,str(e))
+      self.DoLog(msg, MessageType.ERROR)
+      ack = CancelAllPositionAck(Msg="CancelAllPositionAck", UUID=cancelRouteReq.UUID, ReqId=cancelRouteReq.ReqId,
+                                 PosId=cancelRouteReq.PosId,Success=False, Error=msg)
+      self.DoSend(ack)
+
+  def ProcessCancelAllPositionReq(self,cancelAllRouteReq):
+    try:
+
+      self.DoLog("Incoming Cancel All Positions Req ",MessageType.INFO)
+      wrapper =  CancelAllPositionsWrapper()
+
+      state=self.InvokingModule.ProcessIncoming(wrapper)
+
+      if state.Success:
+        ack = CancelAllPositionAck(Msg="CancelAllPositionAck", UUID=cancelAllRouteReq.UUID, ReqId=cancelAllRouteReq.ReqId)
+        self.DoSend(ack)
+        self.DoLog("Cancel All positions sent...",MessageType.INFO)
+      else:
+        raise state.Exception
+
+
+    except Exception as e:
+      msg = "Critical ERROR for Incoming Cancel all Positions Req . Error:{}".format(str(e))
+      self.DoLog(msg, MessageType.ERROR)
+      ack = CancelAllPositionAck(Msg="CancelAllPositionAck", UUID=cancelAllRouteReq.UUID, ReqId=cancelAllRouteReq.ReqId, Success=False, Error=msg)
+      self.DoSend(ack)
 
 
   def ProcessRoutePositionReq(self,routePos):
@@ -151,6 +202,15 @@ class WSHandler(tornado.websocket.WebSocketHandler):
       elif "Msg" in fieldsDict and fieldsDict["Msg"]=="RoutePositionReq":
         routePos = RoutePositionReq(**json.loads(message))
         self.ProcessRoutePositionReq(routePos)
+      elif "Msg" in fieldsDict and fieldsDict["Msg"] == "RouteSymbolReq":
+        routePos = RoutePositionReq(**json.loads(message))
+        self.ProcessRoutePositionReq(routePos)
+      elif "Msg" in fieldsDict and fieldsDict["Msg"]=="CancelAllPositionReq":
+        cancelAllPos = CancelPositionReq(**json.loads(message))
+        self.ProcessCancelAllPositionReq(cancelAllPos)
+      elif "Msg" in fieldsDict and fieldsDict["Msg"]=="CancelPositionReq":
+        cancelPos = CancelPositionReq(**json.loads(message))
+        self.ProcessCancelPositionReq(cancelPos)
       else:
         self.DoLog("Unknown message :{}".format(message),MessageType.ERROR)
 

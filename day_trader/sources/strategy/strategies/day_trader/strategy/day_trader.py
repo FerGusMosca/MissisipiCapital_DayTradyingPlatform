@@ -38,7 +38,8 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
         self.Configuration = None
         self.NextPostId = uuid.uuid4()
 
-        self.ExecutionSummaries = {}
+        self.PositionSecurities = {}
+        self.SingleExecutionSummaries = {}
 
         self.SecurityToTradeManager = None
         self.ModelParametersManager = None
@@ -82,13 +83,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                 try:
 
                     order = self.OrdersQueue.get()
-                    #print("order {} get".format(order.OrderId))
-                    if self.ExecutionReportManager is not None:
-                        self.DoLog("Persisting order {}".format(order.OrderId),MessageType.DEBUG)
-                        self.ExecutionReportManager.PersistOrder(order)
-                    else:
-                        self.DoLog("Not persisiting order with order id {} because not established connection to DB".format(order.OrderId),MessageType.INFO)
-                    #print("order {} persisted".format(order.OrderId))
+                    #TODO persist orders!
                 except Exception as e:
                     self.DoLog("Error Saving Orders to DB: {}".format(e), MessageType.ERROR)
             time.sleep(int(1))
@@ -101,13 +96,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
                 try:
                     summary = self.SummariesQueue.get()
-                    if self.ExecutionReportManager is not None:
-                        first_trade_exec_rep = summary.Position.GetFirstTradeExecutionReport()
-                        if first_trade_exec_rep is not None:
-                            self.DoLog("Persisting trade {} ".format(first_trade_exec_rep.ExecId),MessageType.DEBUG)
-                            self.ExecutionReportManager.PersistExecutionSummary(first_trade_exec_rep.ExecId,summary)
-                    else:
-                        self.DoLog("Not persisiting trade for PosId {} because not established connection to DB".format(summary.Position.PosId),MessageType.INFO)
+                    #TODO: persist trades/summaries!!
 
                 except Exception as e:
                     self.DoLog("Error Saving Trades to DB: {}".format(e), MessageType.ERROR)
@@ -125,21 +114,41 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
         else:
             self.DoLog("Order not found for position {}".format(summary.Position.PosId), MessageType.DEBUG)
 
-    def UpdateExecutionSummary(self, summary, execReport, recovered=False):
+
+    def UpdateManagedPosExecutionSummary(self, summary, execReport):
+        summary.UpdateStatus(execReport)
+        if summary.Position.IsFinishedPosition():
+            LogHelper.LogPositionUpdate(self, "Managed Position Finished", summary, execReport)
+        else:
+            LogHelper.LogPositionUpdate(self, "Managed Position Updated", summary, execReport)
+
+        if summary.Position.IsTradedPosition():
+            try:
+                first_trade_exec_rep = summary.Position.GetFirstTradeExecutionReport()
+                # if recovered ==  False:
+                if first_trade_exec_rep is not None:
+                    self.SummariesQueue.put(summary)
+                else:
+                    self.DoLog( "Critical error saving traded managed position with no fill Id.PosId:{}".format(summary.Position.PosId), MessageType.ERROR)
+
+            except Exception as e:
+                self.DoLog("Error Saving to DB: {}".format(e), MessageType.ERROR)
+
+    def UpdateSinglePosExecutionSummary(self, summary, execReport, recovered=False):
         summary.UpdateStatus(execReport)
 
         if not recovered:
 
             if summary.Position.IsFinishedPosition():
-                LogHelper.LogPositionUpdate(self,"Position Finished",summary,execReport)
+                LogHelper.LogPositionUpdate(self,"Single Position Finished",summary,execReport)
             else:
-                LogHelper.LogPositionUpdate(self, "PositionUpdated", summary, execReport)
+                LogHelper.LogPositionUpdate(self, "Single Position Updated", summary, execReport)
 
         if recovered:
 
             if not summary.Position.IsFinishedPosition():
                 LogHelper.LogPositionUpdate(self, "Recovered previously existing position", summary, execReport)
-                self.ExecutionSummaries[summary.Position.PosId] = summary
+                self.SingleExecutionSummaries[summary.Position.PosId] = summary
 
         # Recovered or not. If it's a traded position, we fill the DB
         if summary.Position.IsTradedPosition():
@@ -150,7 +159,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                     if(recovered == False or self.Configuration.PersistRecovery):
                         self.SummariesQueue.put(summary)
                 else:
-                    self.DoLog( "Critical error saving traded position with no fill Id.PosId:{}".format(summary.Position.PosId), MessageType.ERROR)
+                    self.DoLog( "Critical error saving traded single position with no fill Id.PosId:{}".format(summary.Position.PosId), MessageType.ERROR)
 
             except Exception as e:
                 self.DoLog("Error Saving to DB: {}".format(e), MessageType.ERROR)
@@ -181,10 +190,23 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
             pos_id = wrapper.GetField(ExecutionReportField.PosId)
 
             if pos_id is not None:
-                if pos_id in self.ExecutionSummaries:
-                    summary = self.ExecutionSummaries[pos_id]
-                    self.UpdateExecutionSummary(summary, exec_report)
-                    self.ProcessOrder(summary,False)
+
+                if pos_id in self.PositionSecurities:
+                    secToTrade = self.PositionSecurities[pos_id]
+                    if pos_id in secToTrade.ExecutionSummaries:
+                        summary = secToTrade.ExecutionSummaries[pos_id]
+                        self.UpdateManagedPosExecutionSummary(summary,exec_report)
+                        self.ProcessOrder(summary, False)
+                        return CMState.BuildSuccess(self)
+                    else:
+                        self.DoLog("Received execution report for a managed position, but we cannot find its execution summary",MessageType.ERROR)
+
+
+                elif pos_id in self.SingleExecutionSummaries:
+                    #we have a single position
+                    summary = self.SingleExecutionSummaries[pos_id]
+                    self.UpdateSinglePosExecutionSummary(summary, exec_report)
+                    self.ProcessOrder(summary, False)
                     return CMState.BuildSuccess(self)
                 else:
                     raise Exception("Received execution report for unknown PosId {}".format(pos_id))
@@ -215,15 +237,18 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
             self.ModelParameters[param.Key]=param
 
 
-
-
     def CancelAllPositions(self):
 
-        for posId in self.ExecutionSummaries:
-            if(self.ExecutionSummaries[posId].Position.IsOpenPosition()):
-                pos = self.ExecutionSummaries[posId]
+        for posId in self.SingleExecutionSummaries:
+            if(self.SingleExecutionSummaries[posId].Position.IsOpenPosition()):
+                pos = self.SingleExecutionSummaries[posId]
                 pos.PosStatus = PositionStatus.PendingCancel
 
+        for posId in self.PositionSecurities:
+            secToTrade = self.PositionSecurities[posId]
+            for sPosId in secToTrade.ExecutionSummaries:
+                pos = secToTrade.ExecutionSummaries[sPosId]
+                pos.PosStatus = PositionStatus.PendingCancel
 
         cancelWrapper = CancelAllWrapper()
         self.OutgoingModule.ProcessMessage(cancelWrapper)
@@ -239,15 +264,12 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                 for pos in positions:
 
                     summary = ExecutionSummary(datetime.datetime.now(), pos)
-                    last_exec_report = None
                     if pos.GetLastExecutionReport() is not None:
-                        last_exec_report = pos.GetLastExecutionReport()
-                        self.UpdateExecutionSummary(summary, last_exec_report,recovered=True)  # we will persist only if we have an existing position
+                        self.UpdateSinglePosExecutionSummary(summary, pos.GetLastExecutionReport(),recovered=True)  # we will persist only if we have an existing position
                         self.ProcessOrder(summary,True)
                     else:
-                        self.DoLog("Could not find execution report for position id {}".format(pos.PosId),
-                                   MessageType.ERROR)
-
+                        self.DoLog("Could not find execution report for position id {}".format(pos.PosId),MessageType.ERROR)
+                self.PositionsSynchronization= False
                 self.DoLog("Process ready to receive commands and trade", MessageType.INFO)
             else:
                 exception= wrapper.GetField(PositionListField.Error)
@@ -319,30 +341,122 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
             return self.Lock.release()
 
 
-    def ProcessNewPositionReqThread(self,wrapper):
+    #we just route a position and ignore the answers
+    def ProcessNewPositionReqSinglePos(self,wrapper):
         try:
+
             symbol = wrapper.GetField(PositionField.Symbol)
             secType = wrapper.GetField(PositionField.SecurityType)
             side = wrapper.GetField(PositionField.Side)
             qty = wrapper.GetField(PositionField.Qty)
             account = wrapper.GetField(PositionField.Account)
 
+            self.RoutingLock.acquire()
+
             newPos = Position(PosId=self.NextPostId,
-                              Security=Security(Symbol=symbol,Exchange=self.Configuration.DefaultExchange,SecurityType=secType),
+                              Security=Security(Symbol=symbol,Exchange=self.Configuration.DefaultExchange,SecType=secType),
                               Side=side,PriceType=PriceType.FixedAmount,Qty=qty,QuantityType=QuantityType.SHARES,
                               Account=account,Broker=None,Strategy=None,OrderType=OrdType.Market)
 
             newPos.ValidateNewPosition()
 
-            self.ExecutionSummaries[self.NextPostId] = ExecutionSummary(datetime.datetime.now(), newPos)
+            self.SingleExecutionSummaries[self.NextPostId] = ExecutionSummary(datetime.datetime.now(), newPos)
+            self.NextPostId = uuid.uuid4()
+            self.RoutingLock.release()
+
             posWrapper = PositionWrapper(newPos)
             self.OrderRoutingModule.ProcessMessage(posWrapper)
-            self.NextPostId = uuid.uuid4()
+
+        except Exception as e:
+            msg = "Exception @DayTrader.ProcessNewPositionReqSinglePos: {}!".format(str(e))
+            self.ProcessCriticalError(e, msg)
+            self.CommandsModule.ProcessMessage(ErrorWrapper(Exception(msg)))
+        finally:
+            self.RoutingLock.release()
+
+    #now we are trading a managed position
+    def ProcessNewPositionReqManagedPos(self,wrapper):
+
+        posId = wrapper.GetField(PositionField.PosId)
+        try:
+
+            secToTrade = next(iter(list(filter(lambda x: x.Id == posId, self.SecuritiesToTrade.values()))), None)
+            if(secToTrade is not None):
+
+                side = wrapper.GetField(PositionField.Side)
+                qty = wrapper.GetField(PositionField.Qty)
+                account = wrapper.GetField(PositionField.Account)
+
+                self.RoutingLock.acquire()
+
+                newPos = Position(PosId=self.NextPostId,
+                                  Security=secToTrade.Security,
+                                  Side=side,PriceType=PriceType.FixedAmount,Qty=qty,QuantityType=QuantityType.SHARES,
+                                  Account=account,Broker=None,Strategy=None,OrderType=OrdType.Market)
+
+                newPos.ValidateNewPosition()
+
+                secToTrade.ExecutionSummaries[self.NextPostId] = ExecutionSummary(datetime.datetime.now(), newPos)
+                secToTrade.PositionSecurities[self.NextPostId] = secToTrade
+                self.NextPostId = uuid.uuid4()
+                self.RoutingLock.release()
+
+                posWrapper = PositionWrapper(newPos)
+                self.OrderRoutingModule.ProcessMessage(posWrapper)
+
+            else:
+                raise Exception("Could not find a security to trade (position) for position id {}".format(posId))
+
+
+        except Exception as e:
+            msg = "Exception @DayTrader.ProcessNewPositionReqManagedPos: {}!".format(str(e))
+            self.ProcessCriticalError(e, msg)
+            self.CommandsModule.ProcessMessage(ErrorWrapper(Exception(msg)))
+        finally:
+            self.RoutingLock.release()
+
+    def ProcessNewPositionReqThread(self,wrapper):
+        try:
+
+            symbol = wrapper.GetField(PositionField.Symbol)
+            posId = wrapper.GetField(PositionField.PosId)
+
+            if symbol is not None:
+                self.ProcessNewPositionReqSinglePos(wrapper)
+            elif posId is not None:
+                self.ProcessNewPositionReqManagedPos(wrapper)
+            else:
+                raise Exception("You need to provide the symbol or positionId for a new position!")
 
         except Exception as e:
             msg = "Exception @DayTrader.ProcessNewPositionReqThread: {}!".format(str(e))
             self.ProcessCriticalError(e, msg)
-            self.CommandsModule(ErrorWrapper(Exception(msg)))
+            self.CommandsModule.ProcessMessage(ErrorWrapper(Exception(msg)))
+
+    def ProcessCancelAllPositionReqThread(self,wrapper):
+        try:
+            self.OrderRoutingModule.ProcessMessage(wrapper)
+        except Exception as e:
+            msg = "Exception @DayTrader.ProcessCancelAllPositionReqThread: {}!".format(str(e))
+            #self.ProcessCriticalError(e, msg)
+            self.CommandsModule.ProcessMessage(ErrorWrapper(Exception(msg)))
+
+    def ProcessCancelAllPositionReq(self,wrapper):
+        try:
+
+            if self.PositionsSynchronization:
+                raise Exception("The engine is in the synchronization process. Please try again later!")
+
+            if self.ServiceFailure:
+                return CMState.BuildFailure(self.FailureException)
+
+            threading.Thread(target=self.ProcessCancelAllPositionReqThread, args=(wrapper,)).start()
+
+        except Exception as e:
+            msg = "Critical Error sending new position to the exchange: {}!".format(str(e))
+            self.ProcessCriticalError(e, msg)
+            self.CommandsModule.ProcessMessage(ErrorWrapper(Exception(msg)))
+
 
     def ProcessNewPositionReq(self,wrapper):
 
@@ -354,12 +468,12 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
             if self.ServiceFailure:
                 return CMState.BuildFailure(self.FailureException)
 
-            threading.Thread(target=self.ProcessPortfolioPositionsRequestThread, args=(wrapper,)).start()
+            threading.Thread(target=self.ProcessNewPositionReqThread, args=(wrapper,)).start()
 
         except Exception as e:
             msg = "Critical Error sending new position to the exchange: {}!".format(str(e))
             self.ProcessCriticalError(e, msg)
-            self.CommandsModule(ErrorWrapper(Exception(msg)))
+            self.CommandsModule.ProcessMessage(ErrorWrapper(Exception(msg)))
 
     def ProcessPortfolioPositionsRequest(self,wrapper):
         
@@ -368,7 +482,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
         threading.Thread(target=self.ProcessPortfolioPositionsRequestThread, args=(wrapper,)).start()
 
-        return CMState.BuildSuccess()
+        return CMState.BuildSuccess(self)
 
     def RequestPositionList(self):
         time.sleep(int(self.Configuration.PauseBeforeExecutionInSeconds))
@@ -413,6 +527,9 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                 return CMState.BuildSuccess(self)
             elif wrapper.GetAction() == Actions.NEW_POSITION:
                 self.ProcessNewPositionReq(wrapper)
+                return CMState.BuildSuccess(self)
+            elif wrapper.GetAction() == Actions.CANCEL_ALL_POSITIONS:
+                self.ProcessCancelAllPositionReq(wrapper)
                 return CMState.BuildSuccess(self)
             else:
                 raise Exception("DayTrader.ProcessMessage: Not prepared for routing message {}".format(wrapper.GetAction()))

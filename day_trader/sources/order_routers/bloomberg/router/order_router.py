@@ -183,7 +183,7 @@ class OrderRouter( BaseCommunicationModule, ICommunicationModule):
     def DoSendExecutionReportThread(self,execReport):
 
         try:
-            self.OnExecutionReport.ProcessOutgoing(execReport)
+                self.OnExecutionReport.ProcessOutgoing(execReport)
         except Exception as e:
             self.DoLog("Error sending execution report:{}".format(str(e)), MessageType.ERROR)
 
