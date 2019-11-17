@@ -81,6 +81,10 @@ class OrderRouter( BaseCommunicationModule, ICommunicationModule):
         self.ClOrdIdsTranslators = {}
         self.PendingNewOrders = {}
 
+        self.ApiSeqNum = 0
+
+        self.ExecutionReportsPendinToBeSent = {}
+
         self.MarketDataSubscriptions = {}
         self.CandleBarSubscriptions = {}
 
@@ -183,17 +187,31 @@ class OrderRouter( BaseCommunicationModule, ICommunicationModule):
     def DoSendExecutionReportThread(self,execReport):
 
         try:
-                self.OnExecutionReport.ProcessOutgoing(execReport)
+                if self.InitialPaintExecutionReports and self.InitialPaintOrder:
+                    self.OnExecutionReport.ProcessOutgoing(execReport)
+                else:#the initial paint is still in progress
+                    self.ExecutionReportsPendinToBeSent.append(execReport)
+
+
         except Exception as e:
             self.DoLog("Error sending execution report:{}".format(str(e)), MessageType.ERROR)
 
     def DoSendExecutionReport(self,activeOrder,msg):
+        try:
+            self.ActiveOrdersLock.acquire()
+            msgSeqNum=BloombergTranslationHelper.GetSafeInt(self,msg,"API_SEQ_NUM",0)
 
-        if activeOrder is not None:
-            activeOrder.OrdStatus = BloombergTranslationHelper.GetOrdStatus(self,msg)
+            if msgSeqNum>=self.ApiSeqNum:
+                self.ApiSeqNum=msgSeqNum
+                if activeOrder is not None:
+                    activeOrder.OrdStatus = BloombergTranslationHelper.GetOrdStatus(self,msg)
 
-        execReport = ExecutionReportWrapper(activeOrder,msg,pParent=self)
-        self.DoSendExecutionReportThread(execReport)
+                execReport = ExecutionReportWrapper(activeOrder,msg,pParent=self)
+                self.DoSendExecutionReportThread(execReport)
+            else:
+                self.DoLog("Ignoring execution report because out of sync with seq num {}".format(msgSeqNum),MessageType.WARNING)
+        finally:
+            self.ActiveOrdersLock.release()
         #threading.Thread(target=self.DoSendExecutionReportThread, args=(execReport,)).start()
 
     def LoadConfig(self):
@@ -599,6 +617,8 @@ class OrderRouter( BaseCommunicationModule, ICommunicationModule):
                 if i>MAX_ATTEMPTS:
                     raise Exception("Timeout waiting for the previous orders")
 
+            self.ActiveOrdersLock.acquire()
+
             executionReportWrappersList = []
             for execReport in self.PreExistingExecutionReports:
                 order = self.FetchPreExistingOrder(execReport.Order.OrderId) if execReport.Order is not None else None
@@ -617,10 +637,17 @@ class OrderRouter( BaseCommunicationModule, ICommunicationModule):
             wrapper = ExecutionReportListWrapper(executionReportWrappersList)
             self.OnExecutionReport.ProcessOutgoing(wrapper)
 
+            self.ActiveOrdersLock.release()
+
+            for execReport in self.ExecutionReportsPendinToBeSent:
+                self.DoSendExecutionReport(execReport)
+
         except Exception as e:
             self.DoLog("Critical Error running ProcessExecutionReportListThread @OrderRouter.Bloomberg module:{}".format(str(e)),MessageType.ERROR)
             emptyWrapper = ExecutionReportListWrapper([])
             self.InvokingModule.ProcessOutgoing(emptyWrapper)
+        finally:
+            self.ActiveOrdersLock.release()
 
     def ProcessExecutionReportList(self,wrapper):
         threading.Thread(target=self.ProcessExecutionReportListThread, args=(wrapper,)).start()

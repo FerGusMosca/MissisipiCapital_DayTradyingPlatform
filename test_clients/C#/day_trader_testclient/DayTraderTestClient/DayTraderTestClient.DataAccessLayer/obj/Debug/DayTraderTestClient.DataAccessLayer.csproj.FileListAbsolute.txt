@@ -1,0 +1,9 @@
+C:\Users\zimzum\Desktop\Projects\Tradehelm\Missisipi\C#\day_trader_testclient\DayTraderTestClient\DayTraderTestClient.DataAccessLayer\bin\Debug\DayTraderTestClient.DataAccessLayer.dll
+C:\Users\zimzum\Desktop\Projects\Tradehelm\Missisipi\C#\day_trader_testclient\DayTraderTestClient\DayTraderTestClient.DataAccessLayer\bin\Debug\DayTraderTestClient.DataAccessLayer.pdb
+C:\Users\zimzum\Desktop\Projects\Tradehelm\Missisipi\C#\day_trader_testclient\DayTraderTestClient\DayTraderTestClient.DataAccessLayer\bin\Debug\DayTraderTestClient.Common.dll
+C:\Users\zimzum\Desktop\Projects\Tradehelm\Missisipi\C#\day_trader_testclient\DayTraderTestClient\DayTraderTestClient.DataAccessLayer\bin\Debug\Newtonsoft.Json.dll
+C:\Users\zimzum\Desktop\Projects\Tradehelm\Missisipi\C#\day_trader_testclient\DayTraderTestClient\DayTraderTestClient.DataAccessLayer\bin\Debug\DayTraderTestClient.Common.pdb
+C:\Users\zimzum\Desktop\Projects\Tradehelm\Missisipi\C#\day_trader_testclient\DayTraderTestClient\DayTraderTestClient.DataAccessLayer\bin\Debug\Newtonsoft.Json.xml
+C:\Users\zimzum\Desktop\Projects\Tradehelm\Missisipi\C#\day_trader_testclient\DayTraderTestClient\DayTraderTestClient.DataAccessLayer\obj\Debug\DayTraderTestClient.DataAccessLayer.csprojResolveAssemblyReference.cache
+C:\Users\zimzum\Desktop\Projects\Tradehelm\Missisipi\C#\day_trader_testclient\DayTraderTestClient\DayTraderTestClient.DataAccessLayer\obj\Debug\DayTraderTestClient.DataAccessLayer.dll
+C:\Users\zimzum\Desktop\Projects\Tradehelm\Missisipi\C#\day_trader_testclient\DayTraderTestClient\DayTraderTestClient.DataAccessLayer\obj\Debug\DayTraderTestClient.DataAccessLayer.pdb

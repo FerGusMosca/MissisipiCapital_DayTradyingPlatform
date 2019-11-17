@@ -336,7 +336,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
         except Exception as e:
             msg="Critical error @DayTrader.ProcessPortfolioPositionsRequestThread.:{}".format(str(e))
             self.ProcessCriticalError(e,msg)
-            self.CommandsModule(ErrorWrapper(Exception(msg)))
+            self.ProcessError(ErrorWrapper(Exception(msg)))
         finally:
             return self.Lock.release()
 
@@ -370,7 +370,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
         except Exception as e:
             msg = "Exception @DayTrader.ProcessNewPositionReqSinglePos: {}!".format(str(e))
             self.ProcessCriticalError(e, msg)
-            self.CommandsModule.ProcessMessage(ErrorWrapper(Exception(msg)))
+            self.ProcessError.ProcessMessage(ErrorWrapper(Exception(msg)))
         finally:
             self.RoutingLock.release()
 
@@ -411,7 +411,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
         except Exception as e:
             msg = "Exception @DayTrader.ProcessNewPositionReqManagedPos: {}!".format(str(e))
             self.ProcessCriticalError(e, msg)
-            self.CommandsModule.ProcessMessage(ErrorWrapper(Exception(msg)))
+            self.ProcessError.ProcessMessage(ErrorWrapper(Exception(msg)))
         finally:
             self.RoutingLock.release()
 
@@ -431,7 +431,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
         except Exception as e:
             msg = "Exception @DayTrader.ProcessNewPositionReqThread: {}!".format(str(e))
             self.ProcessCriticalError(e, msg)
-            self.CommandsModule.ProcessMessage(ErrorWrapper(Exception(msg)))
+            self.ProcessError.ProcessMessage(ErrorWrapper(Exception(msg)))
 
     def ProcessCancelAllPositionReqThread(self,wrapper):
         try:
@@ -439,7 +439,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
         except Exception as e:
             msg = "Exception @DayTrader.ProcessCancelAllPositionReqThread: {}!".format(str(e))
             #self.ProcessCriticalError(e, msg)
-            self.CommandsModule.ProcessMessage(ErrorWrapper(Exception(msg)))
+            self.ProcessError.ProcessMessage(ErrorWrapper(Exception(msg)))
 
     def ProcessCancelAllPositionReq(self,wrapper):
         try:
@@ -455,7 +455,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
         except Exception as e:
             msg = "Critical Error sending new position to the exchange: {}!".format(str(e))
             self.ProcessCriticalError(e, msg)
-            self.CommandsModule.ProcessMessage(ErrorWrapper(Exception(msg)))
+            self.ProcessError.ProcessMessage(ErrorWrapper(Exception(msg)))
 
 
     def ProcessNewPositionReq(self,wrapper):
@@ -473,7 +473,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
         except Exception as e:
             msg = "Critical Error sending new position to the exchange: {}!".format(str(e))
             self.ProcessCriticalError(e, msg)
-            self.CommandsModule.ProcessMessage(ErrorWrapper(Exception(msg)))
+            self.ProcessError.ProcessMessage(ErrorWrapper(Exception(msg)))
 
     def ProcessPortfolioPositionsRequest(self,wrapper):
         

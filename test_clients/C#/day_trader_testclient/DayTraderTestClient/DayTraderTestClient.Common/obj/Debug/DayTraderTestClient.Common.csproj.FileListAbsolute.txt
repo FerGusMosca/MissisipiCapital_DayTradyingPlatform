@@ -1,0 +1,5 @@
+C:\Users\zimzum\Desktop\Projects\Tradehelm\Missisipi\C#\day_trader_testclient\DayTraderTestClient\DayTraderTestClient.Common\bin\Debug\DayTraderTestClient.Common.dll
+C:\Users\zimzum\Desktop\Projects\Tradehelm\Missisipi\C#\day_trader_testclient\DayTraderTestClient\DayTraderTestClient.Common\bin\Debug\DayTraderTestClient.Common.pdb
+C:\Users\zimzum\Desktop\Projects\Tradehelm\Missisipi\C#\day_trader_testclient\DayTraderTestClient\DayTraderTestClient.Common\obj\Debug\DayTraderTestClient.Common.dll
+C:\Users\zimzum\Desktop\Projects\Tradehelm\Missisipi\C#\day_trader_testclient\DayTraderTestClient\DayTraderTestClient.Common\obj\Debug\DayTraderTestClient.Common.pdb
+C:\Users\zimzum\Desktop\Projects\Tradehelm\Missisipi\C#\day_trader_testclient\DayTraderTestClient\DayTraderTestClient.Common\obj\Debug\DayTraderTestClient.Common.csprojResolveAssemblyReference.cache
