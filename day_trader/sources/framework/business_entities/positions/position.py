@@ -1,8 +1,30 @@
 from sources.framework.common.enums.PositionsStatus import PositionStatus
 from sources.framework.common.enums.ExecType import *
+from sources.framework.common.enums.Side import *
 from sources.framework.common.enums.PriceType import PriceType
 from sources.framework.common.enums.QuantityType import QuantityType
 from sources.framework.common.enums.OrdType import *
+
+
+_New = "New"
+_DoneForDay = "DoneForDay"
+_Canceled = "Canceled"
+_Replaced = "Replaced"
+_PendingCancel = "PendingCancel"
+_Stopped = "Stopped"
+_Rejected = "Rejected"
+_Suspended = "Suspended"
+_PendingNew = "PendingNew"
+_Calculated = "Calculated"
+_Expired = "Expired"
+_PendingReplace = "PendingReplace"
+_PartiallyFilled = "PartiallyFilled"
+_Filled = "Filled"
+_Unknown = "Unknown"
+
+_Side_Buy="Buy"
+_Side_Sell="Sell"
+_Side_Uknown="Unknown"
 
 class Position:
     def __init__(self, PosId=None, Security=None,Side=None,PriceType=None,Qty=None,QuantityType=None,Account=None,
@@ -178,6 +200,53 @@ class Position:
                 i+=1
 
         return i
+
+
+    def GetStrStatus(self):
+
+        if self.PosStatus is None:
+            return _Unknown
+        elif self.PosStatus==PositionStatus.New:
+            return _New
+        elif self.PosStatus==PositionStatus.DoneForDay:
+            return _DoneForDay
+        elif self.PosStatus==PositionStatus.Canceled:
+            return _Canceled
+        elif self.PosStatus==PositionStatus.Replaced:
+            return _Replaced
+        elif self.PosStatus==PositionStatus.PendingCancel:
+            return _PendingCancel
+        elif self.PosStatus==PositionStatus.Stopped:
+            return _Stopped
+        elif self.PosStatus==PositionStatus.Rejected:
+            return _Rejected
+        elif self.PosStatus==PositionStatus.Suspended:
+            return _Suspended
+        elif self.PosStatus==PositionStatus.Calculated:
+            return _Calculated
+        elif self.PosStatus==PositionStatus.Expired:
+            return _Expired
+        elif self.PosStatus==PositionStatus.PendingReplace:
+            return _PendingReplace
+        elif self.PosStatus==PositionStatus.PartiallyFilled:
+            return _PartiallyFilled
+        elif self.PosStatus==PositionStatus.Filled:
+            return _Filled
+        elif self.PosStatus==PositionStatus.Unknown:
+            return _Unknown
+        else:
+            return _Unknown
+
+    def GetStrSide(self):
+
+        if self.Side is None:
+            return _Side_Uknown
+        elif self.Side==Side.Buy:
+            return _Side_Buy
+        elif self.Side == Side.Sell:
+            return _Side_Sell
+        else:
+            return _Side_Uknown
 
 
     def GetMarketArrivalTime(self):

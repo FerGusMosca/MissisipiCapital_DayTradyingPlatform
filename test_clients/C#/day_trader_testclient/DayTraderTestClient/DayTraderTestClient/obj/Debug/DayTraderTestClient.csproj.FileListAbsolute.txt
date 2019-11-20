@@ -12,3 +12,17 @@ C:\Users\zimzum\Desktop\Projects\Tradehelm\Missisipi\C#\day_trader_testclient\Da
 C:\Users\zimzum\Desktop\Projects\Tradehelm\Missisipi\C#\day_trader_testclient\DayTraderTestClient\DayTraderTestClient\obj\Debug\DayTraderTestClient.csprojResolveAssemblyReference.cache
 C:\Users\zimzum\Desktop\Projects\Tradehelm\Missisipi\C#\day_trader_testclient\DayTraderTestClient\DayTraderTestClient\obj\Debug\DayTraderTestClient.exe
 C:\Users\zimzum\Desktop\Projects\Tradehelm\Missisipi\C#\day_trader_testclient\DayTraderTestClient\DayTraderTestClient\obj\Debug\DayTraderTestClient.pdb
+C:\Users\zimzum\Desktop\Projects\Tradehelm\Missisipi\python\test_clients\C#\day_trader_testclient\DayTraderTestClient\DayTraderTestClient\bin\Debug\DayTraderTestClient.exe.config
+C:\Users\zimzum\Desktop\Projects\Tradehelm\Missisipi\python\test_clients\C#\day_trader_testclient\DayTraderTestClient\DayTraderTestClient\obj\Debug\DayTraderTestClient.exe
+C:\Users\zimzum\Desktop\Projects\Tradehelm\Missisipi\python\test_clients\C#\day_trader_testclient\DayTraderTestClient\DayTraderTestClient\obj\Debug\DayTraderTestClient.pdb
+C:\Users\zimzum\Desktop\Projects\Tradehelm\Missisipi\python\test_clients\C#\day_trader_testclient\DayTraderTestClient\DayTraderTestClient\bin\Debug\DayTraderTestClient.exe
+C:\Users\zimzum\Desktop\Projects\Tradehelm\Missisipi\python\test_clients\C#\day_trader_testclient\DayTraderTestClient\DayTraderTestClient\bin\Debug\DayTraderTestClient.pdb
+C:\Users\zimzum\Desktop\Projects\Tradehelm\Missisipi\python\test_clients\C#\day_trader_testclient\DayTraderTestClient\DayTraderTestClient\bin\Debug\DayTraderTestClient.Common.dll
+C:\Users\zimzum\Desktop\Projects\Tradehelm\Missisipi\python\test_clients\C#\day_trader_testclient\DayTraderTestClient\DayTraderTestClient\bin\Debug\DayTraderTestClient.DataAccessLayer.dll
+C:\Users\zimzum\Desktop\Projects\Tradehelm\Missisipi\python\test_clients\C#\day_trader_testclient\DayTraderTestClient\DayTraderTestClient\bin\Debug\MDFShared.dll
+C:\Users\zimzum\Desktop\Projects\Tradehelm\Missisipi\python\test_clients\C#\day_trader_testclient\DayTraderTestClient\DayTraderTestClient\bin\Debug\Newtonsoft.Json.dll
+C:\Users\zimzum\Desktop\Projects\Tradehelm\Missisipi\python\test_clients\C#\day_trader_testclient\DayTraderTestClient\DayTraderTestClient\bin\Debug\ToolsShared.dll
+C:\Users\zimzum\Desktop\Projects\Tradehelm\Missisipi\python\test_clients\C#\day_trader_testclient\DayTraderTestClient\DayTraderTestClient\bin\Debug\DayTraderTestClient.Common.pdb
+C:\Users\zimzum\Desktop\Projects\Tradehelm\Missisipi\python\test_clients\C#\day_trader_testclient\DayTraderTestClient\DayTraderTestClient\bin\Debug\DayTraderTestClient.DataAccessLayer.pdb
+C:\Users\zimzum\Desktop\Projects\Tradehelm\Missisipi\python\test_clients\C#\day_trader_testclient\DayTraderTestClient\DayTraderTestClient\bin\Debug\Newtonsoft.Json.xml
+C:\Users\zimzum\Desktop\Projects\Tradehelm\Missisipi\python\test_clients\C#\day_trader_testclient\DayTraderTestClient\DayTraderTestClient\obj\Debug\DayTraderTestClient.csprojResolveAssemblyReference.cache

@@ -2,7 +2,7 @@ from sources.framework.business_entities.securities.security import *
 import json
 from json import JSONEncoder
 
-class SecurityToTrade():
+class DayTradingPosition():
 
     def __init__(self,id ,security,shares,active):
         self.Id=id

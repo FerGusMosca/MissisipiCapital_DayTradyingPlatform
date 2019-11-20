@@ -81,8 +81,9 @@ namespace DayTraderTestClient.DataAccessLayer
                             {
                                 GetOpenPositionsBatch getOpenPositionsBatch = JsonConvert.DeserializeObject<GetOpenPositionsBatch>(resp);
                                 OnEvent(getOpenPositionsBatch);
-                            
-                            }
+
+                            }//
+                           
                             else
                             {
 

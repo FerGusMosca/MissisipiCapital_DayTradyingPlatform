@@ -57,7 +57,7 @@ _EVENT_STATUS_INIT_PAINT = 4
 _EVENT_STATUS_NEW_ORDER = 6
 _EVENT_STATUS_UPD_ORDER = 7
 _EVENT_STATUS_DELETE_ORDER = 8
-_EVENT_STATUS_INIT_PAINT_END = 11
+_EVENT_STATUS_INIT_PAINT_END = 1
 _HALTING_TIME_IN_SECONDS=300
 
 _CANCEL_CORRELATION_ID = 90
@@ -163,8 +163,8 @@ class OrderRouter( BaseCommunicationModule, ICommunicationModule):
                     else:
                         activeOrder= self.FetchPreExistingOrder(EMSX_SEQUENCE)
                 finally:
-                    pass
-                    self.ActiveOrdersLock.release()
+                    if self.ActiveOrdersLock.locked():
+                        self.ActiveOrdersLock.release()
                 return activeOrder
             else:
                 return None
@@ -173,16 +173,20 @@ class OrderRouter( BaseCommunicationModule, ICommunicationModule):
             raise e
 
     def ProcessOrderInitialPaint(self,msg):
-        self.ActiveOrdersLock.acquire()
-        order = SubscriptionHelper.BuildOrder(self,msg)
-        self.PreExitingOrders.append(order)
-        self.ActiveOrdersLock.release()
+        try:
+            self.ActiveOrdersLock.acquire()
+            order = SubscriptionHelper.BuildOrder(self,msg)
+            self.PreExitingOrders.append(order)
+        finally:
+            self.ActiveOrdersLock.release()
 
     def ProcessExecutionReportsInitialPaint(self,msg):
-        self.ActiveOrdersLock.acquire()
-        execReport = SubscriptionHelper.BuildExecutionReport(self,msg)
-        self.PreExistingExecutionReports.append(execReport)
-        self.ActiveOrdersLock.release()
+        try:
+            self.ActiveOrdersLock.acquire()
+            execReport = SubscriptionHelper.BuildExecutionReport(self,msg)
+            self.PreExistingExecutionReports.append(execReport)
+        finally:
+            self.ActiveOrdersLock.release()
 
     def DoSendExecutionReportThread(self,execReport):
 
@@ -365,7 +369,6 @@ class OrderRouter( BaseCommunicationModule, ICommunicationModule):
                     self.DoLog("Received Pending Cancel confirmation for ClOrdId={}.Status={} Msg={}".format(
                         msg.correlationIds()[0].value(), status, message), MessageType.DEBUG)
             elif msg.messageType() == HISTORICAL_DATA_REPONSE:
-
                 self.ProcessHistoricalPrice(msg)
             else:
                 self.DoLog("Received response for unknown CorrelationId {}".format(msg.correlationIds()[0].value()),MessageType.DEBUG)
@@ -632,6 +635,8 @@ class OrderRouter( BaseCommunicationModule, ICommunicationModule):
                     execReportWrapper = ExecutionReportWrapper(tempOrder, execReport,pParent=self)
 
                 executionReportWrappersList.append(execReportWrapper)
+                if order.IsOpenOrder() and execReport.LeavesQty>0:
+                    self.ActiveOrders[order.OrderId]=order
 
             self.DoLog("Recovered {} previously existing execution reports".format(len(executionReportWrappersList)),MessageType.INFO)
             wrapper = ExecutionReportListWrapper(executionReportWrappersList)
@@ -647,7 +652,8 @@ class OrderRouter( BaseCommunicationModule, ICommunicationModule):
             emptyWrapper = ExecutionReportListWrapper([])
             self.InvokingModule.ProcessOutgoing(emptyWrapper)
         finally:
-            self.ActiveOrdersLock.release()
+            if self.ActiveOrdersLock.locked():
+                self.ActiveOrdersLock.release()
 
     def ProcessExecutionReportList(self,wrapper):
         threading.Thread(target=self.ProcessExecutionReportListThread, args=(wrapper,)).start()
@@ -693,7 +699,8 @@ class OrderRouter( BaseCommunicationModule, ICommunicationModule):
             self.OnMarketData.ProcessIncoming(errorWrapper)
 
         finally:
-            self.CandleBarSubscriptionLock.release()
+            if self.CandleBarSubscriptionLock.locked():
+                self.CandleBarSubscriptionLock.release()
 
     def ProcessHistoricalPricesRequest(self,wrapper):
         hpReq = MarketDataRequestConverter.ConvertHistoricalPricesRequest( wrapper)
@@ -724,7 +731,8 @@ class OrderRouter( BaseCommunicationModule, ICommunicationModule):
             errorWrapper = ErrorWrapper(e)
             self.OnMarketData.ProcessIncoming(errorWrapper)
         finally:
-            self.HistoricalPricesSubscriptionLock.release()
+            if self.HistoricalPricesSubscriptionLock.locked():
+                self.HistoricalPricesSubscriptionLock.release()
 
     def ProcessMarketDataRequest(self,wrapper):
         mdReq = MarketDataRequestConverter.ConvertMarketDataRequest(wrapper)
@@ -758,7 +766,8 @@ class OrderRouter( BaseCommunicationModule, ICommunicationModule):
             errorWrapper = ErrorWrapper(e)
             self.OnMarketData.ProcessIncoming(errorWrapper)
         finally:
-            self.MarketDataSubscriptionLock.release()
+            if self.MarketDataSubscriptionLock.locked():
+                self.MarketDataSubscriptionLock.release()
 
     #endregion
 

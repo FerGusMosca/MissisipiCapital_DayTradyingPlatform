@@ -2,6 +2,7 @@ from sources.framework.business_entities.positions.position import Position
 from sources.framework.business_entities.orders.execution_report import *
 import datetime
 
+_TRADE_ID_PREFIX="trd_"
 
 class ExecutionSummary:
     def __init__(self, Date, Position):
@@ -17,11 +18,6 @@ class ExecutionSummary:
         self.LastTradeTime = None
 
     def UpdateStatus(self, execReport):
-        """ Update execution summary fields with execution report data.
-
-        Args:
-            execReport (:obj:`ExecutionReport`): Execution report data as input.
-        """
         self.CumQty = execReport.CumQty
         self.LeavesQty = execReport.LeavesQty
         self.AvgPx = execReport.AvgPx
@@ -41,3 +37,13 @@ class ExecutionSummary:
 
         if execReport.Order is not None:
             self.Position.AppendOrder(execReport.Order)
+
+
+    def GetTradeId(self):
+        if(self.Position is None):
+            raise Exception("Could not save execution summary without position")
+
+        if(self.Position.GetLastOrder()is None):
+            raise ExecutionSummary("Could not create trade id for execution summary (PosId={}) whose position doesn't have an order".format(self.Position.PosId))
+
+        return "{}_{}_{}".format(_TRADE_ID_PREFIX,self.Position.Security.Symbol,self.Position.GetLastOrder().OrderId)

@@ -5,6 +5,9 @@ from sources.framework.common.logger.message_type import *
 from sources.framework.common.enums.Actions import *
 from sources.framework.common.dto.cm_state import *
 from sources.framework.common.enums.fields.portfolio_positions_list_field import *
+from sources.framework.common.enums.fields.portfolio_position_field import *
+from sources.framework.common.enums.fields.summary_field import *
+from sources.framework.common.enums.fields.summary_list_fields import *
 from sources.framework.common.enums.fields.error_field import *
 from sources.strategy.strategies.day_trader.strategy.services.websocket.data_access_layer.websocket_server import *
 import tornado
@@ -72,17 +75,84 @@ class WebSocketModule(BaseCommunicationModule, ICommunicationModule):
             self.DoLog("Exception @WebsocketModule.ProcessError:{}".format(str(e)), MessageType.ERROR)
             return CMState.BuildFailure(self, Exception=e)
         finally:
-            self.LockConnections.release()
+            if self.LockConnections.locked():
+                self.LockConnections.release()
+
+    def ProcessExecutionSummaryList(self,wrapper):
+        try:
+            success = wrapper.GetField(SummaryListFields.Status)
+            self.LockConnections.acquire()
+            if success:
+                summaries = wrapper.GetField(SummaryListFields.Summaries)
+                dayTradingPosId = wrapper.GetField(SummaryListFields.PositionId)
+
+                for conn in self.Connections:
+                    conn.PublishExecutionSummaries(summaries,dayTradingPosId)
+            else:
+                err = wrapper.GetField(SummaryFields.Error)
+                for conn in self.Connections:
+                    conn.PublishError(err)
+
+            return CMState.BuildSuccess(self)
+
+        except Exception as e:
+            self.DoLog("Exception @WebsocketModule.ProcessExecutionSummaryList:{}".format(str(e)), MessageType.ERROR)
+            return CMState.BuildFailure(self, Exception=e)
+        finally:
+            if self.LockConnections.locked():
+                self.LockConnections.release()
+
+
+    def ProcessExecutionSummary(self,wrapper):
+        try:
+            success = wrapper.GetField(SummaryFields.Status)
+            self.LockConnections.acquire()
+            if success:
+                summary = wrapper.GetField(SummaryFields.Summary)
+                dayTradingPosId  = wrapper.GetField(SummaryFields.PositionId)
+
+                for conn in self.Connections:
+                    conn.PublishExecutionSummary(summary,dayTradingPosId)
+            else:
+                err = wrapper.GetField(SummaryFields.Error)
+                for conn in self.Connections:
+                    conn.PublishError(err)
+
+            return CMState.BuildSuccess(self)
+
+        except Exception as e:
+            self.DoLog("Exception @WebsocketModule.ProcessExecutionSummary:{}".format(str(e)), MessageType.ERROR)
+            return CMState.BuildFailure(self, Exception=e)
+        finally:
+            if self.LockConnections.locked():
+                self.LockConnections.release()
+
+    def ProcessPortfolioPosition(self,wrapper):
+        try:
+
+            self.LockConnections.acquire()
+            dayTradingPosition = wrapper.GetField(PortfolioPositionFields.PortfolioPosition)
+            for conn in self.Connections:
+                conn.PublishOpenPosition(dayTradingPosition)
+
+            return CMState.BuildSuccess(self)
+
+        except Exception as e:
+            self.DoLog("Exception @WebsocketModule.ProcessPortfolioPosition:{}".format(str(e)), MessageType.ERROR)
+            return CMState.BuildFailure(self, Exception=e)
+        finally:
+            if self.LockConnections.locked():
+                self.LockConnections.release()
 
     def ProcessPortfolioPositions(self,wrapper):
         try:
             success = wrapper.GetField(PortfolioPositionListFields.Status)
             self.LockConnections.acquire()
             if success:
-                securities = wrapper.GetField(PortfolioPositionListFields.PortfolioPositions)
+                dayTradingPositions = wrapper.GetField(PortfolioPositionListFields.PortfolioPositions)
 
                 for conn in self.Connections:
-                    conn.PublishOpenPosition(securities)
+                    conn.PublishOpenPositions(dayTradingPositions)
             else:
                 err = wrapper.GetField(PortfolioPositionListFields.Error)
                 for conn in self.Connections:
@@ -94,7 +164,8 @@ class WebSocketModule(BaseCommunicationModule, ICommunicationModule):
             self.DoLog("Exception @WebsocketModule.ProcessPortfolioPositions:{}".format(str(e)), MessageType.ERROR)
             return CMState.BuildFailure(self, Exception=e)
         finally:
-            self.LockConnections.release()
+            if self.LockConnections.locked():
+                self.LockConnections.release()
 
 
     #endregion
@@ -107,6 +178,12 @@ class WebSocketModule(BaseCommunicationModule, ICommunicationModule):
                 return self.ProcessError(wrapper)
             elif wrapper.GetAction() == Actions.PORTFOLIO_POSITIONS:
                 return self.ProcessPortfolioPositions(wrapper)
+            elif wrapper.GetAction() == Actions.PORTFOLIO_POSITION:
+                return self.ProcessPortfolioPosition(wrapper)
+            elif wrapper.GetAction() == Actions.EXECUTION_SUMMARIES_LIST:
+                return self.ProcessExecutionSummaryList(wrapper)
+            elif wrapper.GetAction() == Actions.EXECUTION_SUMMARY:
+                return self.ProcessExecutionSummary(wrapper)
             else:
                 raise Exception("ProcessMessage: Not prepared to process message {}".format(wrapper.GetAction()))
         except Exception as e:
@@ -121,9 +198,13 @@ class WebSocketModule(BaseCommunicationModule, ICommunicationModule):
         try:
             if wrapper.GetAction() == Actions.PORTFOLIO_POSITIONS_REQUEST:
                 return self.InvokingModule.ProcessMessage(wrapper)
+            elif wrapper.GetAction() == Actions.PORTFOLIO_POSITION_TRADE_LIST_REQUEST:
+                return self.InvokingModule.ProcessMessage(wrapper)
             elif wrapper.GetAction() == Actions.NEW_POSITION:
                 return self.InvokingModule.ProcessMessage(wrapper)
             elif wrapper.GetAction() == Actions.CANCEL_ALL_POSITIONS:
+                return self.InvokingModule.ProcessMessage(wrapper)
+            elif wrapper.GetAction() == Actions.CANCEL_POSITION:
                 return self.InvokingModule.ProcessMessage(wrapper)
             else:
                 raise Exception("ProcessIncoming: Not prepared to process message {}".format(wrapper.GetAction()))

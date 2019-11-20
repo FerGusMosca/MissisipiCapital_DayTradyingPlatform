@@ -10,14 +10,18 @@ from sources.strategy.strategies.day_trader.strategy.services.websocket.common.D
 from sources.strategy.strategies.day_trader.strategy.services.websocket.common.DTO.order_routing.cancel_all_position_ack import *
 from sources.strategy.strategies.day_trader.strategy.services.websocket.common.DTO.subscriptions.subscription_reponse import *
 from sources.strategy.strategies.day_trader.strategy.services.websocket.common.DTO.batchs.get_open_positions_batch import *
+from sources.strategy.strategies.day_trader.strategy.services.websocket.common.DTO.batchs.get_position_execution_summaries_batch import *
 from sources.framework.common.wrappers.portfolio_position_list_request_wrapper import *
 from sources.strategy.strategies.day_trader.strategy.services.websocket.common.DTO.error_message import *
 from sources.strategy.strategies.day_trader.strategy.services.websocket.common.DTO.positions.position_dto import *
+from sources.strategy.strategies.day_trader.strategy.services.websocket.common.DTO.positions.execution_summary_dto import *
 from sources.strategy.strategies.day_trader.strategy.services.websocket.common.wrappers.position_req_wrapper import *
 from sources.strategy.strategies.day_trader.strategy.services.websocket.common.wrappers.cancel_all_position_wrapper import *
 from sources.strategy.strategies.day_trader.strategy.services.websocket.common.wrappers.cancel_position_wrapper import *
+from sources.framework.common.wrappers.portfolio_position_trade_list_request_wrapper import *
 
 _OPEN_POSITIONS_SERVICE = "OP"
+_POSITION_EXECUTIONS_SERVICE="PE"
 
 
 class WSHandler(tornado.websocket.WebSocketHandler):
@@ -34,7 +38,7 @@ class WSHandler(tornado.websocket.WebSocketHandler):
 
   #endregion IncomingMethods
 
-  def PublishOpenPosition(self,positions):
+  def PublishOpenPositions(self,positions):
     if _OPEN_POSITIONS_SERVICE in self.SubscribedServices:
 
       posDTOArr = []
@@ -45,7 +49,30 @@ class WSHandler(tornado.websocket.WebSocketHandler):
 
       posBatch = GetOpenPositionsBatch("GetOpenPositionsBatch",posDTOArr)
       self.DoSend(posBatch)
-      #self.write_message("test test")
+
+  def PublishOpenPosition(self, dayTradingPos):
+    if _OPEN_POSITIONS_SERVICE in self.SubscribedServices:
+      posDTO = PositionDTO(dayTradingPos)
+      self.DoSend(posDTO)
+
+
+  def PublishExecutionSummaries(self,executionSummaries,dayTradingPosId):
+    if _POSITION_EXECUTIONS_SERVICE in self.SubscribedServices:
+
+      executionsDTOArr = []
+
+      for summary in executionSummaries:
+        summaryDTO = ExecutionSummaryDTO(summary,dayTradingPosId)
+        executionsDTOArr.append(summaryDTO)
+
+      summariesBatch = GetPositionExecutionSummariesBatch("GetPositionExecutionSummariesBatch",executionsDTOArr)
+      self.DoSend(summariesBatch)
+
+
+  def PublishExecutionSummary(self,summary,dayTradingPosId):
+    if _POSITION_EXECUTIONS_SERVICE in self.SubscribedServices:
+      summaryDTO = ExecutionSummaryDTO(summary,dayTradingPosId)
+      self.DoSend(summaryDTO)
 
 
   def PublishError(self,error):
@@ -67,6 +94,14 @@ class WSHandler(tornado.websocket.WebSocketHandler):
                .format(subscrMsg.UUID,subscrMsg.Service,subscrMsg.ServiceKey,resp.Success), MessageType.INFO)
     self.DoSend(resp)
 
+  def ProcessPositionsExecutions(self,subscrMsg):
+    self.SubscribeService(subscrMsg.Service)
+
+    wrapper = PortfolioPositionTradeListRequestWrapper(subscrMsg.ServiceKey)
+
+    self.InvokingModule.ProcessIncoming(wrapper)
+
+    self.ProcessSubscriptionResponse(subscrMsg)
 
   def ProcessOpenPositions(self,subscrMsg):
     self.SubscribeService(subscrMsg.Service)
@@ -76,6 +111,7 @@ class WSHandler(tornado.websocket.WebSocketHandler):
     self.InvokingModule.ProcessIncoming(wrapper)
 
     self.ProcessSubscriptionResponse(subscrMsg)
+
 
   def UnsubscribeService(self,subscrMsg):
     #Unsubscription don't have confirmation messages
@@ -87,7 +123,7 @@ class WSHandler(tornado.websocket.WebSocketHandler):
     try:
 
       self.DoLog("Incoming Cancel Position Req for positionId {}".format(cancelRouteReq.PosId),MessageType.INFO)
-      wrapper =  CancelPositionWrapper()
+      wrapper =  CancelPositionWrapper(cancelRouteReq.PosId)
 
       state=self.InvokingModule.ProcessIncoming(wrapper)
 
@@ -161,6 +197,8 @@ class WSHandler(tornado.websocket.WebSocketHandler):
 
       if subscrMsg.Service == _OPEN_POSITIONS_SERVICE:
         self.ProcessOpenPositions(subscrMsg)
+      elif subscrMsg.Service == _POSITION_EXECUTIONS_SERVICE:
+        self.ProcessPositionsExecutions(subscrMsg)
       else:
         self.DoLog("Not processed service {} for subscription".format(subscrMsg.Service),MessageType.ERROR)
 

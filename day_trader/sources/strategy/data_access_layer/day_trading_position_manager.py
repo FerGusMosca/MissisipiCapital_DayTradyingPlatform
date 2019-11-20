@@ -1,11 +1,11 @@
 import pymssql
 from sources.framework.business_entities.securities.security import *
-from sources.strategy.strategies.day_trader.business_entities.security_to_trade import *
+from sources.strategy.strategies.day_trader.business_entities.day_trading_position import *
 
 
 _CS_SEC_TYPE = "Equity"
 
-class SecurityToTradeManager():
+class DayTradingPositionManager():
 
     #region Constructors
 
@@ -37,24 +37,24 @@ class SecurityToTradeManager():
                        )
 
     def BuildSecurityToTrade(self, row,security):
-        return SecurityToTrade(id=row['id'],security=security,shares=row['shares_quantity'],active=True)
+        return DayTradingPosition(id=row['id'],security=security,shares=row['shares_quantity'],active=True)
 
     #endregion
 
     #region Public Methods
 
-    def GetSecurtitiesToTrade(self):
-        securitiesToTrade=[]
+    def GetDayTradingPositions(self):
+        datTradingPositions=[]
         with self.connection.cursor(as_dict=True) as cursor:
             params = (True,)
-            cursor.callproc("GetSecuritiesToTrade", params)
+            cursor.callproc("GetDayTradingPositions", params)
 
             for row in cursor:
                 sec = self.BuildSecurity(row)
-                secToTrade = self.BuildSecurityToTrade(row,sec)
-                securitiesToTrade.append(secToTrade)
+                dayTradingPos = self.BuildSecurityToTrade(row,sec)
+                datTradingPositions.append(dayTradingPos)
 
-        return securitiesToTrade
+        return datTradingPositions
 
     #endregion
 
