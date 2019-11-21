@@ -5,15 +5,14 @@ import json
 class ExecutionSummaryDTO:
     def __init__(self, summary,posId):
         self.Msg="ExecutionSummary"
-        self.Date = str(summary.LastUpdateTime)
         self.DayTradingPositionId = posId
         self.TradeId = summary.GetTradeId()
         self.Symbol = summary.Position.Security.Symbol
         self.QuantityRequested= summary.Position.Qty
         self.QuantityFilled = summary.CumQty
         self.Side = summary.Position.GetStrSide()
-        self.Status = summary.Position.PosStatus
-        self.StatusDesc = summary.Position.GetStrStatus()
+        #self.Status = summary.Position.PosStatus
+        self.Status = summary.Position.GetStrStatus()
         self.LeavesQty = summary.LeavesQty
         self.LastFilledTime = str(summary.LastTradeTime) if summary.LastTradeTime is not None else None
         self.AvgPx = summary.AvgPx

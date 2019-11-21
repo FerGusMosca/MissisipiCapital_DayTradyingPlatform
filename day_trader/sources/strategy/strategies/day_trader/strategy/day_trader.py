@@ -229,6 +229,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                 raise Exception("Received execution report without PosId")
         except Exception as e:
             self.DoLog("Critical error @DayTrader.ProcessExecutionReport: " + str(e), MessageType.ERROR)
+            return CMState.BuildFailure(self, Exception=e)
 
     def LoadConfig(self):
         self.Configuration = Configuration(self.ModuleConfigFile)
@@ -519,7 +520,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                 raise Exception("The engine is in the synchronization process. Please try again later!")
 
             if self.ServiceFailure:
-                return CMState.BuildFailure(self.FailureException)
+                return CMState.BuildFailure(self,Exception=self.FailureException)
 
             threading.Thread(target=self.ProcessCancePositionReqThread, args=(wrapper,)).start()
 
@@ -529,6 +530,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
             msg = "Critical Error cancelling position to the exchange: {}!".format(str(e))
             self.ProcessCriticalError(e, msg)
             self.ProcessError(ErrorWrapper(Exception(msg)))
+            return CMState.BuildFailure(self, Exception=e)
 
     def ProcessCancelAllPositionReq(self,wrapper):
         try:
@@ -537,7 +539,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                 raise Exception("The engine is in the synchronization process. Please try again later!")
 
             if self.ServiceFailure:
-                return CMState.BuildFailure(self.FailureException)
+                return CMState.BuildFailure(self,Exception=self.FailureException)
 
             threading.Thread(target=self.ProcessCancelAllPositionReqThread, args=(wrapper,)).start()
 
@@ -547,7 +549,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
             msg = "Critical Error sending new position to the exchange: {}!".format(str(e))
             self.ProcessCriticalError(e, msg)
             self.ProcessError(ErrorWrapper(Exception(msg)))
-
+            return CMState.BuildFailure(self, Exception=e)
 
     def ProcessNewPositionReq(self,wrapper):
 
@@ -557,7 +559,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                 raise Exception("The engine is in the synchronization process. Please try again later!")
 
             if self.ServiceFailure:
-                return CMState.BuildFailure(self.FailureException)
+                return CMState.BuildFailure(self,Exception=self.FailureException)
 
             threading.Thread(target=self.ProcessNewPositionReqThread, args=(wrapper,)).start()
 
@@ -567,10 +569,11 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
             msg = "Critical Error sending new position to the exchange: {}!".format(str(e))
             self.ProcessCriticalError(e, msg)
             self.ProcessError(ErrorWrapper(Exception(msg)))
+            return CMState.BuildFailure(self, Exception=e)
 
     def ProcessPortfolioPositionsTradeListRequest(self,wrapper):
         if self.ServiceFailure:
-            return CMState.BuildFailure(self.FailureException)
+            return CMState.BuildFailure(self,Exception=self.FailureException)
 
         threading.Thread(target=self.ProcessPortfolioPositionsTradeListRequestThread, args=(wrapper,)).start()
 
@@ -579,7 +582,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
     def ProcessPortfolioPositionsRequest(self,wrapper):
         
         if self.ServiceFailure:
-            return CMState.BuildFailure(self.FailureException)
+            return CMState.BuildFailure(self,Exception=self.FailureException)
 
         threading.Thread(target=self.ProcessPortfolioPositionsRequestThread, args=(wrapper,)).start()
 

@@ -441,7 +441,8 @@ class SubscriptionHelper:
     def BuildExecutionReport(self, msg):
 
         execReport= ExecutionReport(
-                        TransactTime=BloombergTranslationHelper.GetTimeFromEpoch(self, msg,"EMSX_ROUTE_LAST_UPDATE_TIME_MICROSEC"),
+                        TransactTime=BloombergTranslationHelper.GetTimeFromEpoch(self, msg,"EMSX_ROUTE_LAST_UPDATE_TIME"),
+                        LastFillTime=BloombergTranslationHelper.GetTimeFromDate(self,msg,"EMSX_LAST_FILL_DATE","EMSX_LAST_FILL_TIME"),
                         ExecType=BloombergTranslationHelper.GetExecType(self, msg),
                         ExecId=BloombergTranslationHelper.GetFillId(self, msg),
                         OrdStatus=BloombergTranslationHelper.GetOrdStatus(self, msg),

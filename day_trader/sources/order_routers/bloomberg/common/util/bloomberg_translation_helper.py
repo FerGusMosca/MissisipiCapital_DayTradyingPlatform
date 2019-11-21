@@ -62,10 +62,32 @@ class BloombergTranslationHelper:
             return None
 
     @staticmethod
-    def GetTimeFromEpoch(self, msg,key):
+    def GetTimeFromDate(self, msg,keyDate,keyTime):
+
+        if (BloombergTranslationHelper.GetSafeInt(self,msg,keyDate,0)!=0 \
+            and BloombergTranslationHelper.GetSafeInt(self,msg,keyTime,0)!=0 ):
+            try:
+                intDate = msg.getElementAsInteger(keyDate)
+                strYear =  str(intDate)[:4]
+                strMonth = str ( intDate)[4:-2]
+                strDay = str(intDate)[6:]
+                date = datetime.datetime(year=int(strYear),month=int(strMonth),day=int(strDay))
+
+                secondsFromDate = msg.getElementAsInteger(keyTime)
+                timestamp = date + timedelta(seconds=secondsFromDate)
+                return timestamp
+            except Exception as e:
+                self.DoLog("Invalid format for date:{}".format(strDay), MessageType.ERROR)
+                return None
+        else:
+            return None
+
+
+    @staticmethod
+    def GetTimeFromEpoch(self, msg, key):
 
         secondsFromToday = msg.getElementAsInteger(key)
-        now = datetime.datetime.now().replace(hour=0,minute=0,second=0, microsecond=0)
+        now = datetime.datetime.now().replace(hour=0, minute=0, second=0, microsecond=0)
         timestamp = now + timedelta(seconds=secondsFromToday)
         return timestamp
 

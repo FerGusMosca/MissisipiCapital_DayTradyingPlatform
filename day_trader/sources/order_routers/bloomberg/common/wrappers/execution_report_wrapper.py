@@ -36,6 +36,9 @@ class ExecutionReportWrapper(Wrapper):
     def GetAvgPx(self):
         return BloombergTranslationHelper.GetSafeFloat(self.Parent, self.Message, "EMSX_AVG_PRICE", 0)
 
+    def GetLastFillTime(self):
+        return BloombergTranslationHelper.GetTimeFromDate(self.Parent,self.Message,"EMSX_LAST_FILL_DATE","EMSX_LAST_FILL_TIME")
+
     def GetArrivalPrice(self):
         return BloombergTranslationHelper.GetSafeFloat(self.Parent, self.Message, "EMSX_ARRIVAL_PRICE", 0)
 
@@ -94,6 +97,8 @@ class ExecutionReportWrapper(Wrapper):
             return BloombergTranslationHelper.GetSafeFloat(self.Parent, self.Message, "EMSX_LAST_MARKET", 0)
         elif field == ExecutionReportField.OrderID:
             return self.Order.OrderId if self.Order is not None else None
+        elif field == ExecutionReportField.Currency:
+            return self.Order.Currency if self.Order is not None else None
         elif field == ExecutionReportField.ClOrdID:
             return self.Order.ClOrdId if self.Order is not None else None
         elif field == ExecutionReportField.OrigClOrdID:
@@ -126,6 +131,8 @@ class ExecutionReportWrapper(Wrapper):
             return self.Order if self.Order is not None else None
         elif field == ExecutionReportField.ArrivalPrice:
             return self.GetArrivalPrice()
+        elif field == ExecutionReportField.LastFillTime:
+            return self.GetLastFillTime()
         else:
             return None
 

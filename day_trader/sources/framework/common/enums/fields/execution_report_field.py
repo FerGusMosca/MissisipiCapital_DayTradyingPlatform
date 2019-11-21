@@ -37,3 +37,4 @@ class ExecutionReportField(Enum):
     Order = 33
     ArrivalPrice = 34
     MarketArrivalTime=35
+    LastFillTime = 36

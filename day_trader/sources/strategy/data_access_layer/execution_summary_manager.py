@@ -26,9 +26,11 @@ class ExecutionSummaryManager():
 
         with self.connection.cursor(as_dict=True) as cursor:
             params = (summary.GetTradeId(),summary.Position.Security.Symbol,int(summary.Position.Qty),
-                      int(summary.Position.CumQty if summary.Position.CumQty is not None else 0),
+                      int(summary.CumQty if summary.CumQty is not None else 0),
                       summary.Position.GetStrSide(),summary.Position.GetStrStatus(),
-                      int(summary.Position.LeavesQty),summary.LastTradeTime,summary.AvgPx,
+                      int(summary.LeavesQty),
+                      summary.LastTradeTime if summary.LastTradeTime is not None else None,
+                      summary.AvgPx,
                       summary.Position.GetLastOrder().OrderId if summary.Position.GetLastOrder() is not None else None,
                       int(dayTradingPositionId) if dayTradingPositionId is not None else None,
                       summary.Position.Account,summary.LastUpdateTime)

@@ -71,8 +71,13 @@ class WSHandler(tornado.websocket.WebSocketHandler):
 
   def PublishExecutionSummary(self,summary,dayTradingPosId):
     if _POSITION_EXECUTIONS_SERVICE in self.SubscribedServices:
-      summaryDTO = ExecutionSummaryDTO(summary,dayTradingPosId)
-      self.DoSend(summaryDTO)
+      try:
+        if summary.Position.GetLastOrder() is not None:
+          summaryDTO = ExecutionSummaryDTO(summary,dayTradingPosId)
+          self.DoSend(summaryDTO)
+      except Exception as e:
+        self.DoLog("Exception @WebsocketRaise.ProcessExecutionSummary:{}".format(str(e)), MessageType.ERROR)
+        raise e
 
 
   def PublishError(self,error):

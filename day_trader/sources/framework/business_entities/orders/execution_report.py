@@ -5,10 +5,11 @@ from sources.framework.common.enums.OrdRejReason import OrdRejReason
 
 
 class ExecutionReport:
-    def __init__(self, TransactTime=None, ExecType=None,ExecId =None , OrdStatus=None, Order=None, LastQty=None, LastPx=None,
+    def __init__(self, TransactTime=None, LastFillTime = None, ExecType=None,ExecId =None , OrdStatus=None, Order=None, LastQty=None, LastPx=None,
                  LastMkt=None, LeavesQty=None, CumQty=None, AvgPx=None, Commission=None, Text=None, ArrivalPrice=None):
         # region Attributes
         self.TransactTime = TransactTime
+        self.LastFillTime=LastFillTime
         self.ExecId = ExecId
         self.ExecType = ExecType
         self.OrdStatus = OrdStatus

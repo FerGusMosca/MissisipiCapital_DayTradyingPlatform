@@ -76,6 +76,7 @@ class ExecutionReportConverter:
         # execReport.QuantityType = wrapper.GetField(ExecutionReportField.QuantityType)
         execReport.PriceType = wrapper.GetField(ExecutionReportField.PriceType)
         execReport.ArrivalPrice = wrapper.GetField(ExecutionReportField.ArrivalPrice)
+        execReport.LastFillTime = wrapper.GetField(ExecutionReportField.LastFillTime)
 
         execReport.Order = wrapper.GetField(ExecutionReportField.Order)
 

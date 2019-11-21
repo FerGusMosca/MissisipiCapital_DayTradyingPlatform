@@ -73,6 +73,8 @@ class GenericExecutionReportWrapper(Wrapper):
             return self.Order.PriceType
         elif field == ExecutionReportField.ArrivalPrice:
             return self.ExecutionReport.ArrivalPrice
+        elif field == ExecutionReportField.LastFillTime:
+            return self.ExecutionReport.LastFillTime
         elif field == ExecutionReportField.Order:
             return self.Order
         else:

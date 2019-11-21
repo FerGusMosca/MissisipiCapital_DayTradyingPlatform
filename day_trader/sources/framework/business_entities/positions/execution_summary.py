@@ -19,21 +19,24 @@ class ExecutionSummary:
 
     def UpdateStatus(self, execReport):
         self.CumQty = execReport.CumQty
-        self.LeavesQty = execReport.LeavesQty
         self.AvgPx = execReport.AvgPx
         self.Commission = execReport.Commission
         self.Text = execReport.Text
+
         self.Position.LeavesQty = execReport.LeavesQty
+        self.Position.CumQty=execReport.CumQty
+        self.Position.AvgPx=execReport.AvgPx
+
         self.Position.SetPositionStatusFromExecution(execReport)
         self.Position.ExecutionReports.append(execReport)
+        self.LeavesQty = execReport.LeavesQty if self.Position.IsOpenPosition() else 0
 
         self.LastUpdateTime = datetime.datetime.now()
 
         if execReport.ArrivalPrice is not None:
             self.Position.ArrivalPrice=execReport.ArrivalPrice
 
-        if self.Position.IsTradedPosition():
-            self.LastTradeTime=execReport.TransactTime
+        self.LastTradeTime=execReport.LastFillTime
 
         if execReport.Order is not None:
             self.Position.AppendOrder(execReport.Order)
@@ -43,7 +46,11 @@ class ExecutionSummary:
         if(self.Position is None):
             raise Exception("Could not save execution summary without position")
 
-        if(self.Position.GetLastOrder()is None):
-            raise ExecutionSummary("Could not create trade id for execution summary (PosId={}) whose position doesn't have an order".format(self.Position.PosId))
+        orderId=None
 
-        return "{}_{}_{}".format(_TRADE_ID_PREFIX,self.Position.Security.Symbol,self.Position.GetLastOrder().OrderId)
+        if(self.Position.GetLastOrder()is None):
+            orderId="-"
+        else:
+            orderId=self.Position.GetLastOrder().OrderId
+
+        return "{}_{}_{}".format(_TRADE_ID_PREFIX,self.Position.Security.Symbol,orderId)

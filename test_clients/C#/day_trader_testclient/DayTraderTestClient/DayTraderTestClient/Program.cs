@@ -257,7 +257,7 @@ namespace DayTraderTestClient
             {
                 UnknownMessage unknownMsg = (UnknownMessage)msg;
 
-                DoLog(string.Format("<<unknown {0}", unknownMsg.Resp));
+                DoLog(string.Format("<<<{0}", unknownMsg.Resp));
 
             }
             else if (msg is ErrorMessage)
