@@ -2,24 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e8dcb44a-98f3-452c-abc0-45825b180530" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/sources/framework/common/wrappers/cancel_order_wrapper.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/sources/strategy/strategies/day_trader/common/wrappers/cancel_position_wrapper.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sources/framework/business_entities/orders/execution_report.py" beforeDir="false" afterPath="$PROJECT_DIR$/sources/framework/business_entities/orders/execution_report.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sources/framework/business_entities/positions/execution_summary.py" beforeDir="false" afterPath="$PROJECT_DIR$/sources/framework/business_entities/positions/execution_summary.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sources/framework/common/converters/execution_report_converter.py" beforeDir="false" afterPath="$PROJECT_DIR$/sources/framework/common/converters/execution_report_converter.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sources/framework/common/enums/fields/execution_report_field.py" beforeDir="false" afterPath="$PROJECT_DIR$/sources/framework/common/enums/fields/execution_report_field.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sources/framework/common/wrappers/generic_execution_report_wrapper.py" beforeDir="false" afterPath="$PROJECT_DIR$/sources/framework/common/wrappers/generic_execution_report_wrapper.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sources/order_routers/bloomberg/common/util/bloomberg_translation_helper.py" beforeDir="false" afterPath="$PROJECT_DIR$/sources/order_routers/bloomberg/common/util/bloomberg_translation_helper.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sources/order_routers/bloomberg/common/util/subscription_helper.py" beforeDir="false" afterPath="$PROJECT_DIR$/sources/order_routers/bloomberg/common/util/subscription_helper.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sources/order_routers/bloomberg/common/wrappers/execution_report_wrapper.py" beforeDir="false" afterPath="$PROJECT_DIR$/sources/order_routers/bloomberg/common/wrappers/execution_report_wrapper.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sources/framework/common/enums/fields/order_field.py" beforeDir="false" afterPath="$PROJECT_DIR$/sources/framework/common/enums/fields/order_field.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sources/order_routers/bloomberg/common/wrappers/order_cancel_reject_wrapper.py" beforeDir="false" afterPath="$PROJECT_DIR$/sources/framework/common/wrappers/order_cancel_reject_wrapper.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sources/order_routers/bloomberg/router/order_router.py" beforeDir="false" afterPath="$PROJECT_DIR$/sources/order_routers/bloomberg/router/order_router.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sources/strategy/data_access_layer/execution_summary_manager.py" beforeDir="false" afterPath="$PROJECT_DIR$/sources/strategy/data_access_layer/execution_summary_manager.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sources/strategy/strategies/day_trader/strategy/day_trader.py" beforeDir="false" afterPath="$PROJECT_DIR$/sources/strategy/strategies/day_trader/strategy/day_trader.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sources/strategy/strategies/day_trader/strategy/services/websocket/common/DTO/positions/execution_summary_dto.py" beforeDir="false" afterPath="$PROJECT_DIR$/sources/strategy/strategies/day_trader/strategy/services/websocket/common/DTO/positions/execution_summary_dto.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sources/strategy/strategies/day_trader/strategy/services/websocket/data_access_layer/websocket_server.py" beforeDir="false" afterPath="$PROJECT_DIR$/sources/strategy/strategies/day_trader/strategy/services/websocket/data_access_layer/websocket_server.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../test_clients/C#/day_trader_testclient/DayTraderTestClient/DayTraderTestClient/Program.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../test_clients/C#/day_trader_testclient/DayTraderTestClient/DayTraderTestClient/Program.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../test_clients/C#/day_trader_testclient/DayTraderTestClient/DayTraderTestClient/bin/Debug/DayTraderTestClient.exe" beforeDir="false" afterPath="$PROJECT_DIR$/../test_clients/C#/day_trader_testclient/DayTraderTestClient/DayTraderTestClient/bin/Debug/DayTraderTestClient.exe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../test_clients/C#/day_trader_testclient/DayTraderTestClient/DayTraderTestClient/bin/Debug/DayTraderTestClient.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/../test_clients/C#/day_trader_testclient/DayTraderTestClient/DayTraderTestClient/bin/Debug/DayTraderTestClient.pdb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../test_clients/C#/day_trader_testclient/DayTraderTestClient/DayTraderTestClient/obj/Debug/DayTraderTestClient.exe" beforeDir="false" afterPath="$PROJECT_DIR$/../test_clients/C#/day_trader_testclient/DayTraderTestClient/DayTraderTestClient/obj/Debug/DayTraderTestClient.exe" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../test_clients/C#/day_trader_testclient/DayTraderTestClient/DayTraderTestClient/obj/Debug/DayTraderTestClient.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/../test_clients/C#/day_trader_testclient/DayTraderTestClient/DayTraderTestClient/obj/Debug/DayTraderTestClient.pdb" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -30,7 +20,7 @@
   <component name="CoverageDataManager">
     <SUITE FILE_PATH="coverage/day_trader$candle_bar_data_wrapper.coverage" NAME="candle_bar_data_wrapper Coverage Results" MODIFIED="1573140790433" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/sources/order_routers/bloomberg/common/wrappers" />
     <SUITE FILE_PATH="coverage/emsxapi$main.coverage" NAME="main Coverage Results" MODIFIED="1572717625086" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/" />
-    <SUITE FILE_PATH="coverage/day_trader$main.coverage" NAME="main Coverage Results" MODIFIED="1574355565451" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/" />
+    <SUITE FILE_PATH="coverage/day_trader$main.coverage" NAME="main Coverage Results" MODIFIED="1574470328247" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/" />
     <SUITE FILE_PATH="coverage/emsxapi$order_router.coverage" NAME="main Coverage Results" MODIFIED="1567618440959" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/" />
   </component>
   <component name="FavoritesManager">
@@ -39,12 +29,100 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/sources/order_routers/bloomberg/common/util/subscription_helper.py">
+        <entry file="file://$PROJECT_DIR$/sources/strategy/strategies/day_trader/strategy/services/websocket/data_access_layer/websocket_server.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="88">
-              <caret line="441" selection-start-line="441" selection-end-line="441" />
+            <state relative-caret-position="42">
+              <caret line="205" column="145" selection-start-line="205" selection-start-column="145" selection-end-line="205" selection-end-column="145" />
               <folding>
-                <element signature="e#0#13#0" expanded="true" />
+                <element signature="e#0#24#0" expanded="true" />
+                <element signature="e#8900#9740#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/sources/strategy/strategies/day_trader/strategy/services/websocket/common/DTO/order_routing/route_position_req.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="144">
+              <caret line="18" column="8" selection-start-line="18" selection-start-column="8" selection-end-line="18" selection-end-column="8" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/env/Lib/site-packages/tornado/websocket.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="143">
+              <caret line="648" selection-start-line="648" selection-end-line="648" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37/Lib/asyncio/events.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="221">
+              <caret line="756" column="35" selection-start-line="756" selection-start-column="35" selection-end-line="756" selection-end-column="35" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/sources/strategy/strategies/day_trader/strategy/services/websocket/websocket_module/websocket_module.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="160">
+              <caret line="51" column="12" selection-start-line="51" selection-start-column="12" selection-end-line="51" selection-end-column="12" />
+              <folding>
+                <element signature="e#0#90#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/sources/generic_orderrouter/market_order_router/router/market_order_router.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="31">
+              <caret line="131" column="41" selection-start-line="131" selection-start-column="41" selection-end-line="131" selection-end-column="41" />
+              <folding>
+                <element signature="e#0#16#0" expanded="true" />
+                <element signature="e#1691#1777#0" />
+                <element signature="e#1853#1939#0" />
+                <element signature="e#2046#3197#0" />
+                <element signature="e#4329#5593#0" />
+                <element signature="e#5655#6417#0" />
+                <element signature="e#6902#8319#0" />
+                <element signature="e#8070#8114#0" />
+                <element signature="e#8166#8210#0" />
+                <element signature="e#8267#8311#0" />
+                <element signature="e#8361#9244#0" />
+                <element signature="e#9294#10338#0" />
+                <element signature="e#10387#11423#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/sources/strategy/strategies/day_trader/strategy/day_trader.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="177">
+              <caret line="482" column="8" selection-start-line="482" selection-start-column="8" selection-end-line="482" selection-end-column="8" />
+              <folding>
+                <element signature="e#0#90#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/sources/strategy/strategies/day_trader/common/wrappers/execution_summary_list_wrapper.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-51">
+              <caret line="6" column="8" selection-start-line="6" selection-start-column="8" selection-end-line="6" selection-end-column="8" />
+              <folding>
+                <element signature="e#0#61#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -53,8 +131,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/sources/order_routers/bloomberg/common/wrappers/execution_report_wrapper.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="71">
-              <caret line="39" selection-start-line="39" selection-end-line="39" />
+            <state relative-caret-position="86">
+              <caret line="88" selection-start-line="88" selection-end-line="88" />
             </state>
           </provider>
         </entry>
@@ -62,77 +140,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/sources/order_routers/bloomberg/common/util/bloomberg_translation_helper.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="156">
-              <caret line="78" column="34" selection-start-line="78" selection-start-column="34" selection-end-line="78" selection-end-column="34" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/sources/generic_orderrouter/market_order_router/router/market_order_router.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="88">
-              <caret line="65" selection-start-line="65" selection-end-line="65" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/sources/generic_orderrouter/market_order_router/common/wrappers/execution_report_wrapper.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="96">
-              <caret line="34" selection-start-line="34" selection-end-line="34" />
-              <folding>
-                <element signature="e#0#61#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/sources/strategy/strategies/day_trader/strategy/day_trader.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="6" column="43" selection-start-line="6" selection-start-column="43" selection-end-line="6" selection-end-column="50" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/sources/strategy/data_access_layer/execution_summary_manager.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="433">
-              <caret line="37" selection-start-line="37" selection-end-line="37" />
-              <folding>
-                <element signature="e#0#14#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/_pydevd_bundle/pydevd_resolver.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-7">
-              <caret line="200" selection-start-line="200" selection-end-line="200" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/sources/framework/common/converters/execution_report_converter.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="71">
-              <caret line="78" selection-start-line="78" selection-end-line="78" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/sources/framework/business_entities/positions/execution_summary.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="158">
-              <caret line="21" selection-start-line="21" selection-end-line="21" />
+            <state relative-caret-position="121">
+              <caret line="280" selection-start-line="280" selection-end-line="280" />
             </state>
           </provider>
         </entry>
@@ -148,36 +157,36 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>initialpaint</find>
-      <find>EXECUTION_REPORT_LIST</find>
-      <find>LASTTRA</find>
-      <find>LastF</find>
-      <find>Error processing execution report</find>
-      <find>Dosend</find>
+      <find>initiali</find>
+      <find>asyncio</find>
+      <find>sleep</find>
+      <find>do</find>
+      <find>Task was destroyed but it is pending</find>
+      <find>exce</find>
+      <find>on_mess</find>
+      <find>write_message</find>
+      <find>init</find>
+      <find>on_message</find>
+      <find>LOCK</find>
+      <find>INITIALIZ</find>
+      <find>hola</find>
+      <find>asyncio.run</find>
+      <find>DoSend</find>
+      <find>req</find>
       <find>dosend</find>
-      <find>GetPositionsFromExecutionReportList</find>
-      <find>Currency</find>
-      <find>Lastfill</find>
-      <find>rror Saving Trades to DB</find>
+      <find>self.DoSend</find>
+      <find>self.DoSend(</find>
+      <find>PublishError</find>
+      <find>DoSend(</find>
+      <find>thread</find>
+      <find>lock</find>
+      <find>ProcessExecutionReport</find>
+      <find>ProcessNewPosition</find>
+      <find>EXECUTION_rEPORT</find>
       <find>Critical ERROR for Incoming Route Position Req for symbol</find>
-      <find>new_posi</find>
-      <find>CMState.BuildSuccess</find>
-      <find>Buildfail</find>
-      <find>.empty</find>
-      <find>LastTradeTime</find>
-      <find>LastFillTime</find>
-      <find>execution_report</find>
-      <find>dosendexecutionreport</find>
-      <find>lastf</find>
-      <find>getsafeint</find>
-      <find>lastfi</find>
-      <find>GetLastFillTime</find>
-      <find>dosendexectuio</find>
-      <find>lastfill</find>
-      <find>EXECUTION_REPORT</find>
-      <find>.EMPTY</find>
-      <find>SummariesQueue</find>
-      <find>LASTTRADE</find>
+      <find>ProcessOrderCancelReject</find>
+      <find>new_position</find>
+      <find>Error processing execution report</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -192,17 +201,12 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/sources/strategy/strategies/day_trader/strategy/services/websocket/common/DTO/error_message.py" />
-        <option value="$PROJECT_DIR$/configs/orderRouter.Bloomberg.ini" />
-        <option value="$PROJECT_DIR$/sources/strategy/strategies/day_trader/strategy/services/websocket/common/DTO/order_routing/cancel_position_Req.py" />
         <option value="$PROJECT_DIR$/sources/strategy/strategies/day_trader/strategy/services/websocket/common/wrappers/cancel_all_position_wrapper.py" />
         <option value="$PROJECT_DIR$/sources/strategy/strategies/day_trader/strategy/services/websocket/common/wrappers/position_req_wrapper.py" />
         <option value="$PROJECT_DIR$/sources/strategy/strategies/day_trader/business_entities/security_to_trade.py" />
         <option value="$PROJECT_DIR$/sources/generic_orderrouter/common/converters/position_converter.py" />
-        <option value="$PROJECT_DIR$/sources/generic_orderrouter/market_order_router/router/market_order_router.py" />
         <option value="$PROJECT_DIR$/sources/framework/business_entities/market_data/candle_bar.py" />
         <option value="$PROJECT_DIR$/sources/strategy/strategies/day_trader/strategy/services/websocket/common/wrappers/cancel_position_wrapper.py" />
-        <option value="$PROJECT_DIR$/sources/order_routers/bloomberg/router/order_router.py" />
         <option value="$PROJECT_DIR$/sources/strategy/data_access_layer/security_to_trade_manager.py" />
         <option value="$PROJECT_DIR$/sources/strategy/strategies/day_trader/business_entities/day_trading_position.py" />
         <option value="$PROJECT_DIR$/sources/framework/common/enums/fields/trade_list_fields.py" />
@@ -230,19 +234,24 @@
         <option value="$PROJECT_DIR$/sources/framework/business_entities/positions/position.py" />
         <option value="$PROJECT_DIR$/sources/strategy/strategies/day_trader/common/util/log_helper.py" />
         <option value="$PROJECT_DIR$/sources/strategy/strategies/day_trader/common/wrappers/execution_summary_wrapper.py" />
-        <option value="$PROJECT_DIR$/sources/strategy/strategies/day_trader/strategy/services/websocket/websocket_module/websocket_module.py" />
-        <option value="$PROJECT_DIR$/sources/strategy/strategies/day_trader/strategy/services/websocket/common/DTO/positions/execution_summary_dto.py" />
-        <option value="$PROJECT_DIR$/sources/strategy/strategies/day_trader/strategy/services/websocket/data_access_layer/websocket_server.py" />
         <option value="$PROJECT_DIR$/sources/framework/business_entities/orders/execution_report.py" />
         <option value="$PROJECT_DIR$/sources/order_routers/bloomberg/common/util/subscription_helper.py" />
         <option value="$PROJECT_DIR$/sources/framework/common/enums/fields/execution_report_field.py" />
         <option value="$PROJECT_DIR$/sources/framework/common/wrappers/generic_execution_report_wrapper.py" />
         <option value="$PROJECT_DIR$/sources/framework/common/converters/execution_report_converter.py" />
-        <option value="$PROJECT_DIR$/sources/strategy/strategies/day_trader/strategy/day_trader.py" />
-        <option value="$PROJECT_DIR$/sources/strategy/data_access_layer/execution_summary_manager.py" />
         <option value="$PROJECT_DIR$/sources/order_routers/bloomberg/common/util/bloomberg_translation_helper.py" />
         <option value="$PROJECT_DIR$/sources/order_routers/bloomberg/common/wrappers/execution_report_wrapper.py" />
         <option value="$PROJECT_DIR$/sources/framework/business_entities/positions/execution_summary.py" />
+        <option value="$PROJECT_DIR$/sources/strategy/data_access_layer/execution_summary_manager.py" />
+        <option value="$PROJECT_DIR$/sources/strategy/strategies/day_trader/strategy/services/websocket/common/DTO/positions/execution_summary_dto.py" />
+        <option value="$PROJECT_DIR$/sources/framework/common/enums/fields/order_field.py" />
+        <option value="$PROJECT_DIR$/sources/framework/common/wrappers/cancel_order_wrapper.py" />
+        <option value="$PROJECT_DIR$/sources/framework/common/wrappers/order_cancel_reject_wrapper.py" />
+        <option value="$PROJECT_DIR$/sources/order_routers/bloomberg/router/order_router.py" />
+        <option value="$PROJECT_DIR$/sources/strategy/strategies/day_trader/strategy/services/websocket/websocket_module/websocket_module.py" />
+        <option value="$PROJECT_DIR$/sources/strategy/strategies/day_trader/strategy/day_trader.py" />
+        <option value="$PROJECT_DIR$/sources/generic_orderrouter/market_order_router/router/market_order_router.py" />
+        <option value="$PROJECT_DIR$/sources/strategy/strategies/day_trader/strategy/services/websocket/data_access_layer/websocket_server.py" />
       </list>
     </option>
   </component>
@@ -274,12 +283,6 @@
               <item name="day_trader" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
               <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
               <item name="sources" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-            </path>
-            <path>
-              <item name="day_trader" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
-              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
-              <item name="sources" type="9f88c78c:ScopeViewTreeModel$FileNode" />
-              <item name="generic_orderrouter" type="9f88c78c:ScopeViewTreeModel$FileNode" />
             </path>
             <path>
               <item name="day_trader" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
@@ -332,6 +335,51 @@
               <item name="day_trader" type="9f88c78c:ScopeViewTreeModel$FileNode" />
               <item name="strategy" type="9f88c78c:ScopeViewTreeModel$FileNode" />
             </path>
+            <path>
+              <item name="day_trader" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="sources" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="strategy" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="strategies" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="day_trader" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="strategy" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="services" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="day_trader" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="sources" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="strategy" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="strategies" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="day_trader" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="strategy" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="services" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="websocket" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="day_trader" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="sources" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="strategy" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="strategies" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="day_trader" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="strategy" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="services" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="websocket" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="data_access_layer" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
+            <path>
+              <item name="day_trader" type="3d21c010:ScopeViewTreeModel$ProjectNode" />
+              <item name="" type="442cc68d:ScopeViewTreeModel$RootNode" />
+              <item name="sources" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="strategy" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="strategies" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="day_trader" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="strategy" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="services" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="websocket" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+              <item name="websocket_module" type="9f88c78c:ScopeViewTreeModel$FileNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -347,13 +395,14 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\zimzum\Desktop\Projects\Tradehelm\Missisipi\python\day_trader\sources\strategy\strategies\day_trader\common\wrappers" />
       <recent name="C:\Users\zimzum\Desktop\Projects\Tradehelm\Missisipi\python\day_trader\configs" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\zimzum\Desktop\Projects\Tradehelm\Missisipi\python\day_trader\sources\framework\common\wrappers" />
       <recent name="C:\Users\zimzum\Desktop\Projects\Tradehelm\Missisipi\python\day_trader\sources\strategy\strategies\day_trader\strategy\services\websocket\common\DTO\positions" />
       <recent name="C:\Users\zimzum\Desktop\Projects\Tradehelm\Missisipi\python\day_trader\sources\strategy\strategies\day_trader\strategy\services\websocket\common\DTO\subscriptions" />
       <recent name="C:\Users\zimzum\Desktop\Projects\Tradehelm\Missisipi\python\day_trader\sources\order_routers\bloomberg\common\wrappers" />
-      <recent name="C:\Users\zimzum\Desktop\Projects\Tradehelm\Missisipi\python\day_trader\sources\framework\common\wrappers" />
       <recent name="C:\Users\zimzum\Desktop\Projects\Tradehelm\Yewno\python\CSVRouter\emsxapi\sources\framework\common\converters" />
     </key>
   </component>
@@ -493,12 +542,12 @@
       <workItem from="1573396639753" duration="41282000" />
       <workItem from="1573648702413" duration="35633000" />
       <workItem from="1573832041739" duration="22606000" />
-      <workItem from="1574086012752" duration="38489000" />
+      <workItem from="1574086012752" duration="63569000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="601809000" />
+    <option name="totallyTimeSpent" value="626889000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -513,13 +562,13 @@
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49918166" visible="true" weight="0.24583964" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49918166" visible="true" weight="0.23071104" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" sideWeight="0.5008183" side_tool="true" weight="0.24508321" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3535188" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49924356" weight="0.5286416" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.65302783" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49924356" weight="0.6710311" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.7152209" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3289689" />
@@ -568,19 +617,9 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/sources/strategy/strategies/day_trader/strategy/services/websocket/websocket_module/websocket_module.py</url>
-          <line>123</line>
-          <option name="timeStamp" value="64" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/sources/framework/business_entities/positions/execution_summary.py</url>
-          <line>51</line>
-          <option name="timeStamp" value="72" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$APPLICATION_HOME_DIR$/helpers/pydev/_pydevd_bundle/pydevd_resolver.py</url>
-          <line>200</line>
-          <option name="timeStamp" value="99" />
+          <url>file://$PROJECT_DIR$/sources/strategy/strategies/day_trader/strategy/services/websocket/data_access_layer/websocket_server.py</url>
+          <line>205</line>
+          <option name="timeStamp" value="137" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
@@ -594,6 +633,11 @@
   </component>
   <component name="debuggerHistoryManager">
     <expressions id="evaluateCodeFragment">
+      <expression>
+        <expression-string>msg.getElementAsString(key)</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
+      </expression>
       <expression>
         <expression-string>wrapper.GetField(ExecutionReportField.LastFillTime)[0]</expression-string>
         <language-id>Python</language-id>
@@ -634,110 +678,9 @@
         <language-id>Python</language-id>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
-      <expression>
-        <expression-string>msg.getElementAsInteger(keyDate)</expression-string>
-        <language-id>Python</language-id>
-        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
-      </expression>
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/sources/framework/common/enums/fields/portfolio_positions_list_field.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret selection-end-line="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sources/strategy/strategies/day_trader/business_entities/day_trading_position.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="21" selection-start-line="4" selection-start-column="6" selection-end-line="4" selection-end-column="24" />
-          <folding>
-            <element signature="e#0#69#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sources/strategy/strategies/day_trader/common/wrappers/position_wrapper.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret selection-end-line="59" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sources/framework/common/enums/fields/summary_list_fields.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret selection-end-line="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sources/framework/common/enums/fields/trade_fields.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sources/framework/common/wrappers/portfolio_position_list_request_wrapper.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret selection-end-line="15" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sources/framework/common/wrappers/order_list_wrapper.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="22" column="23" lean-forward="true" selection-start-line="19" selection-start-column="8" selection-end-line="22" selection-end-column="23" />
-          <folding>
-            <element signature="e#0#52#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sources/framework/common/enums/fields/position_field.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret selection-end-line="23" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sources/framework/common/wrappers/portfolio_position_trade_list_request_wrapper.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="46" selection-start-line="4" selection-start-column="6" selection-end-line="4" selection-end-column="46" />
-          <folding>
-            <element signature="e#0#52#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sources/framework/common/enums/Actions.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="36" column="4" selection-start-line="36" selection-start-column="4" selection-end-line="36" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sources/framework/common/enums/fields/portfolio_positions_trade_list_request_field.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" column="45" selection-start-line="1" selection-start-column="6" selection-end-line="1" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sources/strategy/strategies/day_trader/strategy/services/websocket/common/DTO/order_routing/route_position_req.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-204">
-          <caret column="82" selection-start-column="82" selection-end-column="82" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sources/strategy/strategies/day_trader/strategy/services/websocket/common/DTO/order_routing/cancel_position_req.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="82" selection-start-column="82" selection-end-column="82" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/sources/strategy/strategies/day_trader/strategy/services/websocket/common/DTO/order_routing/cancel_position_ack.py">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -776,30 +719,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/sources/framework/business_entities/orders/order.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="21" column="13" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
-          <folding>
-            <element signature="e#0#76#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/configs/day_trader.ini">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="111">
-          <caret line="13" column="21" selection-start-line="13" selection-start-column="21" selection-end-line="13" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37/Lib/threading.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="122">
-          <caret line="864" selection-start-line="864" selection-end-line="864" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37/Lib/enum.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="122">
@@ -828,16 +747,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="85">
           <caret line="5" column="30" selection-start-line="5" selection-start-column="6" selection-end-line="5" selection-end-column="30" />
-          <folding>
-            <element signature="e#0#61#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sources/strategy/strategies/day_trader/common/wrappers/execution_summary_list_wrapper.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="21" selection-start-line="7" selection-start-column="21" selection-end-line="7" selection-end-column="21" />
           <folding>
             <element signature="e#0#61#0" expanded="true" />
           </folding>
@@ -888,16 +797,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/sources/strategy/strategies/day_trader/strategy/services/websocket/websocket_module/websocket_module.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="130">
-          <caret line="123" selection-start-line="123" selection-end-line="123" />
-          <folding>
-            <element signature="e#0#90#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/sources/framework/business_entities/orders/execution_report.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="187">
@@ -939,54 +838,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/sources/strategy/strategies/day_trader/strategy/services/websocket/data_access_layer/websocket_server.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="363">
-          <caret line="192" column="11" selection-start-line="192" selection-start-column="11" selection-end-line="192" selection-end-column="11" />
-          <folding>
-            <element signature="e#0#24#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/sources/framework/common/dto/cm_state.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="195">
           <caret line="17" column="8" selection-start-line="17" selection-start-column="8" selection-end-line="17" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sources/strategy/strategies/day_trader/strategy/services/websocket/common/DTO/positions/execution_summary_dto.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="71">
-          <caret line="16" column="42" selection-start-line="16" selection-start-column="42" selection-end-line="16" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sources/order_routers/bloomberg/router/order_router.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3">
-          <caret line="190" column="53" selection-start-line="190" selection-start-column="53" selection-end-line="190" selection-end-column="53" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sources/generic_orderrouter/market_order_router/router/market_order_router.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="88">
-          <caret line="65" selection-start-line="65" selection-end-line="65" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sources/generic_orderrouter/market_order_router/common/wrappers/execution_report_wrapper.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="96">
-          <caret line="34" selection-start-line="34" selection-end-line="34" />
-          <folding>
-            <element signature="e#0#61#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1000,27 +855,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/sources/order_routers/bloomberg/common/util/bloomberg_translation_helper.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="156">
-          <caret line="78" column="34" selection-start-line="78" selection-start-column="34" selection-end-line="78" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sources/framework/common/converters/execution_report_converter.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="71">
-          <caret line="78" selection-start-line="78" selection-end-line="78" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sources/order_routers/bloomberg/common/wrappers/execution_report_wrapper.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="71">
-          <caret line="39" selection-start-line="39" selection-end-line="39" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$APPLICATION_HOME_DIR$/helpers/pydev/_pydevd_bundle/pydevd_resolver.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-7">
@@ -1028,10 +862,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/configs/day_trader.ini">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="13" column="21" selection-start-line="13" selection-start-column="21" selection-end-line="13" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/configs/orderRouter.Bloomberg.ini">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/sources/strategy/data_access_layer/execution_summary_manager.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="433">
-          <caret line="37" selection-start-line="37" selection-end-line="37" />
+        <state relative-caret-position="391">
+          <caret line="35" column="63" selection-start-line="35" selection-start-column="63" selection-end-line="35" selection-end-column="63" />
           <folding>
             <element signature="e#0#14#0" expanded="true" />
           </folding>
@@ -1040,15 +884,224 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/sources/framework/business_entities/positions/execution_summary.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="158">
-          <caret line="21" selection-start-line="21" selection-end-line="21" />
+        <state relative-caret-position="177">
+          <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sources/strategy/strategies/day_trader/strategy/services/websocket/common/DTO/positions/execution_summary_dto.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="20" column="32" selection-start-line="20" selection-start-column="32" selection-end-line="20" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sources/framework/common/wrappers/cancel_all_wrapper.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret selection-end-line="29" />
+          <folding>
+            <element signature="e#0#52#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sources/framework/common/enums/Actions.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="15" column="4" selection-start-line="15" selection-start-column="4" selection-end-line="15" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sources/framework/common/enums/fields/order_field.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="4" selection-start-line="8" selection-start-column="4" selection-end-line="8" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sources/framework/common/wrappers/error_wrapper.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#52#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sources/framework/common/wrappers/cancel_order_wrapper.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" selection-start-line="3" selection-end-line="3" />
+          <folding>
+            <element signature="e#0#52#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/env/Lib/site-packages/blpapi/internals.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="152" column="44" selection-start-line="152" selection-start-column="44" selection-end-line="152" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sources/framework/common/wrappers/order_cancel_reject_wrapper.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="8" column="59" selection-start-line="8" selection-start-column="21" selection-end-line="8" selection-end-column="59" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sources/strategy/strategies/day_trader/common/wrappers/cancel_position_wrapper.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/env/Lib/site-packages/blpapi/event.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="115" column="44" selection-start-line="115" selection-start-column="44" selection-end-line="115" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sources/framework/business_entities/orders/order.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="433">
+          <caret line="40" column="8" selection-start-line="40" selection-start-column="8" selection-end-line="40" selection-end-column="8" />
+          <folding>
+            <element signature="e#0#76#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37/Lib/threading.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="122">
+          <caret line="864" selection-start-line="864" selection-end-line="864" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sources/order_routers/bloomberg/router/order_router.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="69">
+          <caret line="190" selection-start-line="190" selection-end-line="190" />
+          <folding>
+            <element signature="e#0#68#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sources/framework/common/converters/execution_report_converter.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="155">
+          <caret line="58" selection-start-line="58" selection-end-line="58" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sources/generic_orderrouter/market_order_router/common/wrappers/execution_report_wrapper.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="34" selection-start-line="34" selection-end-line="34" />
+          <folding>
+            <element signature="e#0#61#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sources/order_routers/bloomberg/common/util/bloomberg_translation_helper.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="121">
+          <caret line="280" selection-start-line="280" selection-end-line="280" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sources/order_routers/bloomberg/common/wrappers/execution_report_wrapper.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="86">
+          <caret line="88" selection-start-line="88" selection-end-line="88" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sources/strategy/strategies/day_trader/common/wrappers/execution_summary_list_wrapper.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-51">
+          <caret line="6" column="8" selection-start-line="6" selection-start-column="8" selection-end-line="6" selection-end-column="8" />
+          <folding>
+            <element signature="e#0#61#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37/Lib/asyncio/events.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="756" column="35" selection-start-line="756" selection-start-column="35" selection-end-line="756" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/env/Lib/site-packages/tornado/websocket.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="143">
+          <caret line="648" selection-start-line="648" selection-end-line="648" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sources/strategy/strategies/day_trader/strategy/services/websocket/websocket_module/websocket_module.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="160">
+          <caret line="51" column="12" selection-start-line="51" selection-start-column="12" selection-end-line="51" selection-end-column="12" />
+          <folding>
+            <element signature="e#0#90#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sources/strategy/strategies/day_trader/strategy/services/websocket/common/DTO/order_routing/route_position_req.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="18" column="8" selection-start-line="18" selection-start-column="8" selection-end-line="18" selection-end-column="8" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/sources/strategy/strategies/day_trader/strategy/day_trader.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="43" selection-start-line="6" selection-start-column="43" selection-end-line="6" selection-end-column="50" />
+        <state relative-caret-position="177">
+          <caret line="482" column="8" selection-start-line="482" selection-start-column="8" selection-end-line="482" selection-end-column="8" />
+          <folding>
+            <element signature="e#0#90#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sources/strategy/strategies/day_trader/strategy/services/websocket/data_access_layer/websocket_server.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="42">
+          <caret line="205" column="145" selection-start-line="205" selection-start-column="145" selection-end-line="205" selection-end-column="145" />
+          <folding>
+            <element signature="e#0#24#0" expanded="true" />
+            <element signature="e#8900#9740#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sources/generic_orderrouter/market_order_router/router/market_order_router.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="31">
+          <caret line="131" column="41" selection-start-line="131" selection-start-column="41" selection-end-line="131" selection-end-column="41" />
+          <folding>
+            <element signature="e#0#16#0" expanded="true" />
+            <element signature="e#1691#1777#0" />
+            <element signature="e#1853#1939#0" />
+            <element signature="e#2046#3197#0" />
+            <element signature="e#4329#5593#0" />
+            <element signature="e#5655#6417#0" />
+            <element signature="e#6902#8319#0" />
+            <element signature="e#8070#8114#0" />
+            <element signature="e#8166#8210#0" />
+            <element signature="e#8267#8311#0" />
+            <element signature="e#8361#9244#0" />
+            <element signature="e#9294#10338#0" />
+            <element signature="e#10387#11423#0" />
+          </folding>
         </state>
       </provider>
     </entry>

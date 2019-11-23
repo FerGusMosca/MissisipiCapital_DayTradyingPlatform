@@ -6,12 +6,15 @@ from sources.order_routers.bloomberg.common.util.bloomberg_translation_helper im
 
 class OrderCancelRejectWrapper(Wrapper):
 
-    def __init__(self,pText,pCxlRejResponseTo,pCxlRejReason,pOrder):
+    def __init__(self,pText,pCxlRejResponseTo,pCxlRejReason,pOrder=None,pClOrdId=None,pOrigClOrdId=None,pOrderId=None):
 
         self.Order = pOrder
         self.Text=pText
         self.CxlRejResponseTo=pCxlRejResponseTo
         self.CxlRejReason=pCxlRejReason
+        self.ClOrdId = pClOrdId
+        self.OrigClOrdId=pOrigClOrdId
+        self.OrderId = pOrderId
 
     # region Public Methods
 
@@ -24,11 +27,11 @@ class OrderCancelRejectWrapper(Wrapper):
             return None
 
         if field == OrderCancelRejectField.OrderID:
-            return self.Order.OrderId if self.Order is not None else None
+            return self.Order.OrderId if self.Order is not None else self.OrderId
         elif field == OrderCancelRejectField.ClOrdID:
-            return self.Order.ClOrdId if self.Order is not None else None
+            return self.Order.ClOrdId if self.Order is not None else self.ClOrdId
         elif field == OrderCancelRejectField.OrigClOrdID:
-            return self.Order.OrigClOrdId if self.Order is not None else None
+            return self.Order.OrigClOrdId if self.Order is not None else self.OrigClOrdId
         elif field == OrderCancelRejectField.Text:
             return self.Text
         elif field == OrderCancelRejectField.OrdStatus:

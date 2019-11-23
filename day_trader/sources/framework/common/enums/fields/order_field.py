@@ -23,3 +23,4 @@ class OrderField(Enum):
     Account=21
     Broker=22
     Strategy=23
+    OrderId=24

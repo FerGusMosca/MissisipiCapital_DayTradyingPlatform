@@ -1,6 +1,8 @@
 import tornado.websocket
 import json
+import time
 import asyncio
+import threading
 from sources.strategy.strategies.day_trader.strategy.services.websocket.websocket_module.websocket_module import *
 from sources.strategy.strategies.day_trader.strategy.services.websocket.common.DTO.subscriptions.websocket_subscribe_message import *
 from sources.strategy.strategies.day_trader.strategy.services.websocket.common.DTO.order_routing.route_position_req import *
@@ -31,16 +33,22 @@ class WSHandler(tornado.websocket.WebSocketHandler):
     if(self.InvokingModule is not None):
       self.InvokingModule.DoLog(msg,type)
 
-  def DoSend(self,obj):
-    asyncio.set_event_loop(asyncio.new_event_loop())
+  async def WriteMessage(self,obj):
     self.write_message(obj.toJSON())
+
+  def DoSendAsync(self,obj):
+    routine = self.WriteMessage(obj)
+    asyncio.run(routine)
+
+  def DoSendResponse(self,obj):
+    self.write_message(obj.toJSON())
+
   #endregion
 
   #endregion IncomingMethods
 
   def PublishOpenPositions(self,positions):
-    if _OPEN_POSITIONS_SERVICE in self.SubscribedServices:
-
+    if self.IsSubscribed(_OPEN_POSITIONS_SERVICE,None):
       posDTOArr = []
 
       for pos in positions:
@@ -48,17 +56,16 @@ class WSHandler(tornado.websocket.WebSocketHandler):
         posDTOArr.append(posDTO)
 
       posBatch = GetOpenPositionsBatch("GetOpenPositionsBatch",posDTOArr)
-      self.DoSend(posBatch)
+      self.DoSendAsync(posBatch)
 
   def PublishOpenPosition(self, dayTradingPos):
-    if _OPEN_POSITIONS_SERVICE in self.SubscribedServices:
+    if self.IsSubscribed(_OPEN_POSITIONS_SERVICE, None):
       posDTO = PositionDTO(dayTradingPos)
-      self.DoSend(posDTO)
+      self.DoSendAsync(posDTO)
 
 
   def PublishExecutionSummaries(self,executionSummaries,dayTradingPosId):
-    if _POSITION_EXECUTIONS_SERVICE in self.SubscribedServices:
-
+    if self.IsSubscribed(_POSITION_EXECUTIONS_SERVICE, dayTradingPosId):
       executionsDTOArr = []
 
       for summary in executionSummaries:
@@ -66,15 +73,15 @@ class WSHandler(tornado.websocket.WebSocketHandler):
         executionsDTOArr.append(summaryDTO)
 
       summariesBatch = GetPositionExecutionSummariesBatch("GetPositionExecutionSummariesBatch",executionsDTOArr)
-      self.DoSend(summariesBatch)
+      self.DoSendAsync(summariesBatch)
 
 
   def PublishExecutionSummary(self,summary,dayTradingPosId):
-    if _POSITION_EXECUTIONS_SERVICE in self.SubscribedServices:
+    if self.IsSubscribed(_POSITION_EXECUTIONS_SERVICE, dayTradingPosId):
       try:
         if summary.Position.GetLastOrder() is not None:
           summaryDTO = ExecutionSummaryDTO(summary,dayTradingPosId)
-          self.DoSend(summaryDTO)
+          self.DoSendAsync(summaryDTO)
       except Exception as e:
         self.DoLog("Exception @WebsocketRaise.ProcessExecutionSummary:{}".format(str(e)), MessageType.ERROR)
         raise e
@@ -82,14 +89,20 @@ class WSHandler(tornado.websocket.WebSocketHandler):
 
   def PublishError(self,error):
     msg = ErrorMessage(error)
-    self.DoSend(msg)
+    self.DoSendAsync(msg)
   #endregion
 
   #region Protected Methods
 
-  def SubscribeService(self,service):
-    if service not in self.SubscribedServices:
-      self.SubscribedServices.append(service)
+  def IsSubscribed(self,service, serviceKey):
+    if service in self.SubscribedServices:
+      subscrMesage = self.SubscribedServices[service]
+      return str(subscrMesage.ServiceKey)==str(serviceKey) or serviceKey is None
+    else:
+      return False
+
+  def SubscribeService(self,subscrMsg):
+    self.SubscribedServices[subscrMsg.Service]=subscrMsg
 
   def ProcessSubscriptionResponse(self,subscrMsg,success=True,message=None):
     resp = SubscriptionResponse(Msg="SubscriptionResponse",SubscriptionType= subscrMsg.SubscriptionType,
@@ -97,10 +110,10 @@ class WSHandler(tornado.websocket.WebSocketHandler):
                                 Success= success,Message= message,UUID = subscrMsg.UUID )
     self.DoLog("SubscriptionResponse UUID:{} Service:{} ServiceKey:{} Success:{}"
                .format(subscrMsg.UUID,subscrMsg.Service,subscrMsg.ServiceKey,resp.Success), MessageType.INFO)
-    self.DoSend(resp)
+    self.DoSendResponse(resp)
 
   def ProcessPositionsExecutions(self,subscrMsg):
-    self.SubscribeService(subscrMsg.Service)
+    self.SubscribeService(subscrMsg)
 
     wrapper = PortfolioPositionTradeListRequestWrapper(subscrMsg.ServiceKey)
 
@@ -135,7 +148,7 @@ class WSHandler(tornado.websocket.WebSocketHandler):
       if state.Success:
         ack = CancelPositionAck(Msg="CancelAllPositionAck", UUID=cancelRouteReq.UUID,
                                 ReqId=cancelRouteReq.ReqId,PosId=cancelRouteReq.PosId)
-        self.DoSend(ack)
+        self.DoSendResponse(ack)
         self.DoLog("Cancel positions id {} sent...".format(cancelRouteReq.PosId),MessageType.INFO)
       else:
         raise state.Exception
@@ -146,7 +159,7 @@ class WSHandler(tornado.websocket.WebSocketHandler):
       self.DoLog(msg, MessageType.ERROR)
       ack = CancelAllPositionAck(Msg="CancelAllPositionAck", UUID=cancelRouteReq.UUID, ReqId=cancelRouteReq.ReqId,
                                  PosId=cancelRouteReq.PosId,Success=False, Error=msg)
-      self.DoSend(ack)
+      self.DoSendResponse(ack)
 
   def ProcessCancelAllPositionReq(self,cancelAllRouteReq):
     try:
@@ -158,7 +171,7 @@ class WSHandler(tornado.websocket.WebSocketHandler):
 
       if state.Success:
         ack = CancelAllPositionAck(Msg="CancelAllPositionAck", UUID=cancelAllRouteReq.UUID, ReqId=cancelAllRouteReq.ReqId)
-        self.DoSend(ack)
+        self.DoSendResponse(ack)
         self.DoLog("Cancel All positions sent...",MessageType.INFO)
       else:
         raise state.Exception
@@ -168,14 +181,14 @@ class WSHandler(tornado.websocket.WebSocketHandler):
       msg = "Critical ERROR for Incoming Cancel all Positions Req . Error:{}".format(str(e))
       self.DoLog(msg, MessageType.ERROR)
       ack = CancelAllPositionAck(Msg="CancelAllPositionAck", UUID=cancelAllRouteReq.UUID, ReqId=cancelAllRouteReq.ReqId, Success=False, Error=msg)
-      self.DoSend(ack)
+      self.DoSendResponse(ack)
 
 
   def ProcessRoutePositionReq(self,routePos):
 
     try:
 
-      self.DoLog("Incoming Route Position Req for symbol {} qty {} side {}".format(routePos.Symbol,routePos.Qty,routePos.Side),MessageType.INFO)
+      self.DoLog("Incoming Route Position Req for symbol {} PosId {} qty {} side {}".format(routePos.Symbol,routePos.PosId,routePos.Qty,routePos.Side),MessageType.INFO)
 
       wrapper = PositionReqWrapper(routePos)
 
@@ -183,17 +196,17 @@ class WSHandler(tornado.websocket.WebSocketHandler):
 
       if state.Success:
         ack = RoutePositionAck(Msg="RoutePositionAck", UUID=routePos.UUID, ReqId=routePos.ReqId)
-        self.DoSend(ack)
-        self.DoLog("Incoming Route Position Req for symbol {} qty {} side {} successfully processed".format(routePos.Symbol, routePos.Qty, routePos.Side),MessageType.INFO)
+        self.DoSendResponse(ack)
+        self.DoLog("Incoming Route Position Req for symbol {} PosId {} qty {} side {} successfully processed".format(routePos.Symbol,routePos.PosId, routePos.Qty, routePos.Side),MessageType.INFO)
       else:
         raise state.Exception
 
 
     except Exception as e:
-      msg="Critical ERROR for Incoming Route Position Req for symbol {} qty {} side {}. Error:{}".format(routePos.Symbol, routePos.Qty, routePos.Side,str(e))
+      msg="Critical ERROR for Incoming Route Position Req for symbol {} PosId {} qty {} side {}. Error:{}".format(routePos.Symbol, routePos.PosId, routePos.Qty, routePos.Side,str(e))
       self.DoLog(msg, MessageType.ERROR)
       ack = RoutePositionAck(Msg="RoutePositionAck", UUID=routePos.UUID, ReqId=routePos.ReqId,Success=False,Error=msg)
-      self.DoSend(ack)
+      self.DoSendResponse(ack)
 
   def ProcessSubscriptions(self,subscrMsg):
 
@@ -219,7 +232,9 @@ class WSHandler(tornado.websocket.WebSocketHandler):
 
   def initialize(self, pInvokingModule):
     self.InvokingModule = pInvokingModule
-    self.SubscribedServices = []
+    self.SubscribedServices = {}
+    self.Lock = threading.Lock()
+
 
   def open(self):
 
@@ -237,6 +252,7 @@ class WSHandler(tornado.websocket.WebSocketHandler):
 
 
     try:
+      #self.write_message("{'Msg': 'hola'}")
       fieldsDict=json.loads(message)
 
       if "Msg" in fieldsDict and fieldsDict["Msg"]=="Subscribe":

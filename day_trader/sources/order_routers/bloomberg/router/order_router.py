@@ -1,5 +1,3 @@
-import blpapi
-from blpapi import SessionOptions, Session
 from sources.framework.util.singleton.common.util.singleton import *
 from sources.framework.common.abstract.base_communication_module import BaseCommunicationModule
 from sources.framework.common.interfaces.icommunication_module import ICommunicationModule
@@ -17,11 +15,9 @@ from sources.order_routers.bloomberg.common.configuration.configuration import C
 from sources.order_routers.bloomberg.common.wrappers.rejected_execution_report_wrapper import *
 from sources.order_routers.bloomberg.common.wrappers.execution_report_wrapper import *
 from sources.order_routers.bloomberg.common.util.subscription_helper import *
-from sources.framework.common.logger.message_type import MessageType
 from sources.framework.common.dto.cm_state import *
 from sources.order_routers.bloomberg.common.converter.order_converter import *
-from sources.framework.common.wrappers.empty_order_list_wrapper import *
-from sources.order_routers.bloomberg.common.wrappers.order_cancel_reject_wrapper import *
+from sources.framework.common.wrappers.order_cancel_reject_wrapper import *
 from sources.framework.common.enums.TimeUnit import *
 from sources.order_routers.bloomberg.common.util.log_helper import *
 import threading
@@ -359,8 +355,10 @@ class OrderRouter( BaseCommunicationModule, ICommunicationModule):
                 if msg.messageType() == ERROR_INFO:
                     errorCode = msg.getElementAsInteger("ERROR_CODE")
                     errorMessage = msg.getElementAsString("ERROR_MESSAGE")
-                    wrapper = OrderCancelRejectWrapper(cancelOrder,"{}-{}".format((errorCode,errorMessage),
-                                                        CxlRejResponseTo.OrderCancelRequest,CxlRejReason.Other))
+                    wrapper = OrderCancelRejectWrapper(pText="{}-{}".format(errorCode,errorMessage),
+                                                       pCxlRejResponseTo=CxlRejResponseTo.OrderCancelRequest,
+                                                       pCxlRejReason=CxlRejReason.Other,
+                                                       pOrder= cancelOrder,pClOrdId=None,pOrigClOrdId=None,pOrderId=None)
                     self.OnExecutionReport.ProcessOutgoing(wrapper)
                     self.DoLog("Received Rejected cancellation for ClOrdId={}.Error Code={} Error Msg={}".format(msg.correlationIds()[0].value(),errorCode,errorMessage),MessageType.DEBUG)
                 elif msg.messageType() == CANCEL_ROUTE:
@@ -564,27 +562,83 @@ class OrderRouter( BaseCommunicationModule, ICommunicationModule):
 
         return request
 
+    def ProcessOrderCancelReject(self,orderId,ex):
+
+        try:
+            msg = "Error processing order cancel request for orderId {}: {} ".format(orderId,str(ex))
+            order=self.ActiveOrders[orderId] if (orderId is not None and orderId in self.ActiveOrders) else None
+            rejWrapper = OrderCancelRejectWrapper(pText=msg, pCxlRejResponseTo=CxlRejResponseTo.OrderCancelRequest,
+                                                  pCxlRejReason=CxlRejReason.Other,pOrder=order)
+            self.OnExecutionReport.ProcessOutgoing(rejWrapper)
+
+        except Exception as e:
+            msg = "Critical Error @ProcessOrderCancelReject @OrderRouter.Bloomberg module :{}".format(str(e))
+            self.DoLog(msg, MessageType.ERROR)
+
+
+    def DoCancel(self,activeOrder):
+        service = self.Session.getService(self.Configuration.EMSX_Environment)
+
+        request = service.createRequest("CancelRoute")
+
+        routes = request.getElement("ROUTES")
+
+        route = routes.appendElement()
+        route.getElement("EMSX_SEQUENCE").setValue(activeOrder.OrderId)
+        route.getElement("EMSX_ROUTE_ID").setValue(1)
+
+        requestID = blpapi.CorrelationId(activeOrder.ClOrdId)
+
+        self.PendingCancels[activeOrder.ClOrdId] = activeOrder
+
+        self.Session.sendRequest(request, correlationId=requestID)
+
+
+    def FetchOrderByIds(self,wrapper):
+        clOrdId = wrapper.GetField(OrderField.ClOrdID)
+        orderId = wrapper.GetField(OrderField.OrderId)
+        if (orderId is not None and orderId in self.ActiveOrders):
+            return self.ActiveOrders[orderId]
+        elif(clOrdId is not None):
+            return next(iter(list(filter(lambda x: x.ClOrdId is not None and x.ClOrdId == clOrdId, self.ActiveOrders.values()))),None)
+        else:
+            return None
+
+    def CancelOrder(self,wrapper):
+        self.ActiveOrdersLock.acquire()
+        orderId = None
+        try:
+            order= self.FetchOrderByIds(wrapper)
+
+            orderId = order.OrderId if order is not None else None
+
+            if order.IsOpenOrder():
+                self.DoCancel(order)
+            else:
+                raise Exception("OrderId {} is not an active order".format(orderId))
+
+        except Exception as e:
+            self.ProcessOrderCancelReject(orderId,e)
+        finally:
+            self.ActiveOrdersLock.release()
+
+
     def CancellAllOrders(self,wrapper):
 
 
+        self.ActiveOrdersLock.acquire()
+
         for orderId in self.ActiveOrders:
-            if self.ActiveOrders[orderId].IsOpenOrder():
-                activeOrder = self.ActiveOrders[orderId]
-                service = self.Session.getService(self.Configuration.EMSX_Environment)
+            try:
+                if self.ActiveOrders[orderId].IsOpenOrder():
+                    activeOrder = self.ActiveOrders[orderId]
+                    self.DoCancel(activeOrder)
 
-                request = service.createRequest("CancelRoute")
+            except Exception as e:
+               self.ProcessOrderCancelReject(orderId,e)
 
-                routes = request.getElement("ROUTES")
+        self.ActiveOrdersLock.release()
 
-                route = routes.appendElement()
-                route.getElement("EMSX_SEQUENCE").setValue(orderId)
-                route.getElement("EMSX_ROUTE_ID").setValue(1)
-
-                requestID = blpapi.CorrelationId(activeOrder.ClOrdId)
-
-                self.PendingCancels[activeOrder.ClOrdId]=activeOrder
-
-                self.Session.sendRequest(request, correlationId=requestID)
 
     def ProcessNewOrder(self, wrapper):
 
@@ -628,14 +682,13 @@ class OrderRouter( BaseCommunicationModule, ICommunicationModule):
 
                 if order is not None:
                     execReportWrapper = GenericExecutionReportWrapper(order,execReport)
-                    self.ActiveOrders[order.OrderId] = order
                 else:
                     tempOrder = Order()
                     tempOrder.OrderId=execReport.Order.OrderId if execReport.Order is not None else None
                     execReportWrapper = ExecutionReportWrapper(tempOrder, execReport,pParent=self)
 
                 executionReportWrappersList.append(execReportWrapper)
-                if order.IsOpenOrder() and execReport.LeavesQty>0:
+                if order is not None and order.IsOpenOrder() and execReport.LeavesQty>0:
                     self.ActiveOrders[order.OrderId]=order
 
             self.DoLog("Recovered {} previously existing execution reports".format(len(executionReportWrappersList)),MessageType.INFO)
@@ -790,7 +843,7 @@ class OrderRouter( BaseCommunicationModule, ICommunicationModule):
             elif wrapper.GetAction() == Actions.UPDATE_ORDER:
                 raise Exception("Update Order not implemented @Bloomberg order router")
             elif wrapper.GetAction() == Actions.CANCEL_ORDER:
-                raise Exception("Cancel Order not implemented @Bloomberg order router")
+                self.CancelOrder(wrapper)
             elif wrapper.GetAction() == Actions.CANCEL_ALL_POSITIONS:
                 self.CancellAllOrders(wrapper)
             elif wrapper.GetAction() == Actions.EXECUTION_REPORT_LIST_REQUEST:

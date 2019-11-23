@@ -13,6 +13,7 @@ from sources.framework.business_entities.positions.position import *
 from sources.framework.common.wrappers.cancel_all_wrapper import *
 from sources.framework.common.wrappers.market_data_request_wrapper import *
 from sources.framework.common.wrappers.historical_prices_request_wrapper import *
+from sources.strategy.strategies.day_trader.common.wrappers.cancel_position_wrapper import *
 from sources.framework.common.wrappers.candle_bar_request_wrapper import *
 from sources.framework.common.enums.SubscriptionRequestType import *
 from sources.strategy.strategies.day_trader.common.converters.market_data_converter import *
@@ -373,7 +374,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
             dayTradingPos = next(iter(list(filter(lambda x: x.Id == dayTradingPosId, self.DayTradingPositions))), None)
 
             if dayTradingPos is not None:
-                wrapper = ExecutionSummaryListWrapper(self.DayTradingPositions[dayTradingPosId])
+                wrapper = ExecutionSummaryListWrapper(dayTradingPos)
                 self.SendToInvokingModule(wrapper)
             else:
                 wrapper = ExecutionSummaryListWrapper(pDayTradingPosition=None,pError="Could not find day trading position for position Id {}".format(dayTradingPosId))
@@ -507,7 +508,21 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
     def ProcessCancePositionReqThread(self,wrapper):
         try:
-            self.OrderRoutingModule.ProcessMessage(wrapper)
+
+            posId = wrapper.GetField(PositionField.PosId)
+
+            if posId is not None:
+                dayTradingPos = next(iter(list(filter(lambda x: x.Id == posId, self.DayTradingPositions))),None)
+                if dayTradingPos is not None:
+                    for routPosId in dayTradingPos.ExecutionSummaries:
+                        summary = dayTradingPos.ExecutionSummaries[routPosId]
+                        if summary.Position.IsOpenPosition():
+                            cxlWrapper = CancelPositionWrapper(summary.Position.PosId)
+                            self.OrderRoutingModule.ProcessMessage(cxlWrapper)
+                else:
+                    raise Exception("Could not find a daytrading position for Id {}".format(posId))
+            else:
+                raise Exception("You have to specify a position id to cancel a position")
         except Exception as e:
             msg = "Exception @DayTrader.ProcessCancePositionReqThread: {}!".format(str(e))
             # self.ProcessCriticalError(e, msg)

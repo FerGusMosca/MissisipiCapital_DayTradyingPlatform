@@ -33,7 +33,8 @@ class ExecutionSummaryManager():
                       summary.AvgPx,
                       summary.Position.GetLastOrder().OrderId if summary.Position.GetLastOrder() is not None else None,
                       int(dayTradingPositionId) if dayTradingPositionId is not None else None,
-                      summary.Position.Account,summary.LastUpdateTime)
+                      summary.Position.Account,summary.LastUpdateTime,
+                      summary.Text)
             cursor.callproc("PersistExecutionSummary", params)
             self.connection.commit()
 

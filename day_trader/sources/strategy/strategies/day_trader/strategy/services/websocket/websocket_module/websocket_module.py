@@ -219,8 +219,6 @@ class WebSocketModule(BaseCommunicationModule, ICommunicationModule):
 
         if self.LoadConfig():
 
-
-
             threading.Thread(target=self.OpenWebsocket, args=()).start()
 
             self.DoLog("DayTrader Successfully initialized", MessageType.INFO)

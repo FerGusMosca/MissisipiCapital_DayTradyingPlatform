@@ -18,6 +18,7 @@ class ExecutionSummaryDTO:
         self.AvgPx = summary.AvgPx
         self.OrderId = summary.Position.GetLastOrder().OrderId if summary.Position.GetLastOrder() is not None else ""
         self.AccountId= summary.Position.Account
+        self.Text = summary.Text
 
 
 
