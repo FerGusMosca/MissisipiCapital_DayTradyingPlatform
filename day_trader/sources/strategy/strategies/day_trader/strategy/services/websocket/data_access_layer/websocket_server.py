@@ -122,7 +122,7 @@ class WSHandler(tornado.websocket.WebSocketHandler):
     self.ProcessSubscriptionResponse(subscrMsg)
 
   def ProcessOpenPositions(self,subscrMsg):
-    self.SubscribeService(subscrMsg.Service)
+    self.SubscribeService(subscrMsg)
 
     wrapper = PortfolioPositionListRequestWrapper()
 

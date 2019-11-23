@@ -29,6 +29,7 @@ from sources.strategy.data_access_layer.execution_summary_manager import *
 from sources.strategy.strategies.day_trader.common.util.log_helper import *
 from sources.strategy.strategies.day_trader.common.wrappers.portfolio_position_list_wrapper import *
 from sources.strategy.strategies.day_trader.common.wrappers.portfolio_position_wrapper import *
+from sources.strategy.strategies.day_trader.common.util.model_parameters_handler import *
 import threading
 import time
 import datetime
@@ -53,8 +54,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
         self.ModelParametersManager = None
         self.ExecutionSummaryManager = None
 
-
-        self.ModelParameters = {}
+        self.ModelParametrsHandler = None
         self.MarketData={}
         self.Candlebars={}
         self.HistoricalPrices={}
@@ -68,15 +68,8 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
         self.OrdersQueue = queue.Queue(maxsize=1000000)
         self.SummariesQueue = queue.Queue(maxsize=1000000)
+        self.DayTradingPositionsQueue = queue.Queue(maxsize=1000000)
 
-    def FetchParam(self,key):
-        if self.ModelParameters is not None:
-            if key in self.ModelParameters:
-                return self.ModelParameters[key]
-            else:
-                raise Exception("Unknown key {}",format(key))
-        else:
-            raise Exception("ModelParameters dictionary not initialized!!!!")
 
     def ProcessCriticalError(self, exception,msg):
         self.FailureException=exception
@@ -92,6 +85,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
     def PublishPortfolioPositionThread(self,dayTradingPos):
         try:
+            self.DayTradingPositionsQueue.put(dayTradingPos)
             dayTradingPosWrapper = PortfolioPositionWrapper(dayTradingPos)
             self.SendToInvokingModule(dayTradingPosWrapper)
         except Exception as e:
@@ -102,13 +96,25 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
         while True:
 
             while not self.OrdersQueue.empty():
-
                 try:
-
                     order = self.OrdersQueue.get()
                     #TODO persist orders!
                 except Exception as e:
                     self.DoLog("Error Saving Orders to DB: {}".format(e), MessageType.ERROR)
+            time.sleep(int(1))
+
+    def DayTradingPersistanceThread(self):
+
+        while True:
+
+            while not self.DayTradingPositionsQueue.empty():
+
+                try:
+                    dayTradingPos = self.DayTradingPositionsQueue.get()
+                    self.DayTradingPositionManager.PersistDayTradingPosition(dayTradingPos)
+
+                except Exception as e:
+                    self.DoLog("Error Saving Day Trading Position to DB: {}".format(e), MessageType.ERROR)
             time.sleep(int(1))
 
     def TradesPersistanceThread(self):
@@ -142,8 +148,10 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
             self.DoLog("Order not found for position {}".format(summary.Position.PosId), MessageType.DEBUG)
 
 
-    def UpdateManagedPosExecutionSummary(self, summary, execReport):
+    def UpdateManagedPosExecutionSummary(self,dayTradingPos, summary, execReport):
+
         summary.UpdateStatus(execReport)
+        dayTradingPos.UpdateRouting() #order is important!
         if summary.Position.IsFinishedPosition():
             LogHelper.LogPositionUpdate(self, "Managed Position Finished", summary, execReport)
         else:
@@ -209,7 +217,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                     dayTradingPos = self.PositionSecurities[pos_id]
                     if pos_id in dayTradingPos.ExecutionSummaries:
                         summary = dayTradingPos.ExecutionSummaries[pos_id]
-                        self.UpdateManagedPosExecutionSummary(summary,exec_report)
+                        self.UpdateManagedPosExecutionSummary(dayTradingPos,summary,exec_report)
                         self.ProcessOrder(summary, False)
                         threading.Thread(target=self.PublishPortfolioPositionThread, args=(dayTradingPos,)).start()
                         threading.Thread(target=self.PublishSummaryThread, args=(summary, dayTradingPos.Id)).start()
@@ -254,10 +262,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                                                              self.Configuration.DBPassword)
 
         modelParams = self.ModelParametersManager.GetModelParametersManager()
-
-        for param in modelParams:
-            self.ModelParameters[param.Key]=param
-
+        self.ModelParametrsHandler = ModelParametersHandler(modelParams)
 
     def CancelAllPositions(self):
 
@@ -458,6 +463,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
                 summary =ExecutionSummary(datetime.datetime.now(), newPos)
                 dayTradingPos.ExecutionSummaries[self.NextPostId] = summary
+                dayTradingPos.UpdateRouting()
                 self.PositionSecurities[self.NextPostId] = dayTradingPos
                 self.NextPostId = uuid.uuid4()
                 self.RoutingLock.release()
@@ -619,7 +625,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
     def RequestBars(self):
         for secIn in self.DayTradingPositions:
             sec = self.MarketData[secIn.Security.Symbol]
-            time = int( self.FetchParam(_BAR_FREQUENCY).IntValue)
+            time = int( self.ModelParametrsHandler.Get(ModelParametersHandler.BAR_FREQUENCY()).IntValue)
             if sec is not None:
                 self.Candlebars[secIn.Security.Symbol]=None
                 mdReqWrapper = CandleBarRequestWrapper(secIn.Security,time,TimeUnit.Minute,
@@ -708,6 +714,8 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
             threading.Thread(target=self.TradesPersistanceThread, args=()).start()
 
+            threading.Thread(target=self.DayTradingPersistanceThread, args=()).start()
+
             self.LoadManagers()
 
             self.CommandsModule = self.InitializeModule(self.Configuration.WebsocketModule, self.Configuration.WebsocketConfigFile)
@@ -732,6 +740,6 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
 
         else:
-            msg = "Error initializing config file for SimpleCSVProcessor"
+            msg = "Error initializing Day Trader"
             self.DoLog(msg, MessageType.ERROR)
             return CMState.BuildFailure(self,errorMsg=msg)

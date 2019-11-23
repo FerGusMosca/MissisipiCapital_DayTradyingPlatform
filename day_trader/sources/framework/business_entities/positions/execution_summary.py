@@ -1,6 +1,7 @@
 from sources.framework.business_entities.positions.position import Position
 from sources.framework.business_entities.orders.execution_report import *
 import datetime
+from sources.framework.common.enums.Side import *
 
 _TRADE_ID_PREFIX="trd_"
 
@@ -41,6 +42,17 @@ class ExecutionSummary:
         if execReport.Order is not None:
             self.Position.AppendOrder(execReport.Order)
 
+    def GetTradedSummary(self):
+        if self.CumQty>0 and self.AvgPx is not None:
+            return self.CumQty*self.AvgPx
+        else:
+            return 0
+
+    def GetNetShares(self):
+        return self.CumQty if self.CumQty is not None else 0
+
+    def IsLongPosition(self):
+        return self.Position.Side==Side.Buy
 
     def GetTradeId(self):
         if(self.Position is None):

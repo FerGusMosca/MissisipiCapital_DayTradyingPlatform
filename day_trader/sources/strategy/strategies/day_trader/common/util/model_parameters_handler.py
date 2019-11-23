@@ -1,0 +1,83 @@
+from sources.strategy.strategies.day_trader.business_entities.model_parameter import *
+
+
+class ModelParametersHandler:
+    def __init__(self,pModelParameters):
+
+        self.ModelParametersDict ={}
+        for modelParam in pModelParameters:
+            self.ModelParametersDict[modelParam.Key]=modelParam
+
+
+    #region Static Attributes
+
+    @staticmethod
+    def DAILY_BIAS():
+        return "DAILY_BIAS"
+
+    @staticmethod
+    def BAR_FREQUENCY():
+        return "BAR_FREQUENCY"
+
+    @staticmethod
+    def DAILY_SLOPE():
+        return "DAILY_SLOPE"
+
+    @staticmethod
+    def MAXIM_PCT_CHANGE_3_MIN():
+        return "MAXIM_PCT_CHANGE_3_MIN"
+
+    @staticmethod
+    def POS_LONG_MAX_DELTA():
+        return "POS_LONG_MAX_DELTA"
+
+    @staticmethod
+    def POS_SHORT_MAX_DELTA():
+        return "POS_SHORT_MAX_DELTA"
+
+    @staticmethod
+    def MAX_GAIN_FOR_DAY():
+        return "MAX_GAIN_FOR_DAY"
+
+    @staticmethod
+    def PCT_MAX_GAIN_CLOSING():
+        return "PCT_MAX_GAIN_CLOSING"
+
+    @staticmethod
+    def MAX_LOSS_FOR_DAY():
+        return "MAX_LOSS_FOR_DAY"
+
+    @staticmethod
+    def PCT_MAX_LOSS_CLOSING():
+        return "PCT_MAX_LOSS_CLOSING"
+
+    @staticmethod
+    def TAKE_GAIN_LIMIT():
+        return "TAKE_GAIN_LIMIT"
+
+    @staticmethod
+    def STOP_LOSS_LIMIT():
+        return "STOP_LOSS_LIMIT"
+
+    @staticmethod
+    def PCT_SLOPE_TO_CLOSE_LONG():
+        return "PCT_SLOPE_TO_CLOSE_LONG"
+
+    @staticmethod
+    def PCT_SLOPE_TO_CLOSE_SHORT():
+        return "PCT_SLOPE_TO_CLOSE_SHORT"
+
+
+
+    #endregion
+
+    #region Public Methods
+
+    def Get(self,key):
+
+        if key in self.ModelParametersDict:
+            return self.ModelParametersDict[key]
+        else:
+            raise Exception("Critical error! Could not find model parameters {} in memory".format(key))
+
+    #endregion

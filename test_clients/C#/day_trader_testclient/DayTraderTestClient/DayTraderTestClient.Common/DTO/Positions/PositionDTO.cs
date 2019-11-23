@@ -12,8 +12,25 @@ namespace DayTraderTestClient.Common.DTO.positions
 
         public int PositionSize { get; set; }
 
+        public bool IsRouting { get; set; }
+
+        public bool LongSignal { get; set; }
+
+        public bool ShortSignal { get; set; }
+
+        public string SignalType { get; set; }
+
+        public string SignalDesc { get; set; }
+
         public bool IsOpen { get; set; }
 
         public decimal? CurrentMarketPrice { get; set; }
+
+        public decimal? CurrentProfit { get; set; }
+
+        public decimal? MaxProxit { get; set; }
+
+        public decimal? MaxLoss { get; set; }
+
     }
 }

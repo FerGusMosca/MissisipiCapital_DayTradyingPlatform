@@ -37,11 +37,38 @@ class DayTradingPositionManager():
                        )
 
     def BuildSecurityToTrade(self, row,security):
-        return DayTradingPosition(id=row['id'],security=security,shares=row['shares_quantity'],active=True)
+        return DayTradingPosition(
+            id=int(row['id']),
+            security=security,
+            shares=int(row['shares_quantity']),
+            active=bool(row['active']),
+            open=bool(row['open']),
+            routing=bool(row['routing']),
+            longSignal=bool(row['long_signal']),
+            shortSignal=bool(row['short_signal']),
+            signalType=str(row['signal_type'])  if row['signal_type'] is not None else None ,
+            signalDesc=str(row['signal_desc']) if row['signal_desc'] is not None else None,
+
+        )
 
     #endregion
 
     #region Public Methods
+
+    def PersistDayTradingPosition(self, dayTradingPosition):
+
+        with self.connection.cursor(as_dict=True) as cursor:
+            params = (dayTradingPosition.Id, dayTradingPosition.Security.Symbol,
+                      int(dayTradingPosition.SharesQuantity),
+                      bool(dayTradingPosition.Active),
+                      bool(dayTradingPosition.Routing),
+                      bool(dayTradingPosition.Open),
+                      bool(dayTradingPosition.LongSignal),
+                      bool(dayTradingPosition.ShortSignal),
+                      dayTradingPosition.SignalType if not None else None,
+                      dayTradingPosition.SignalDesc if not None else None)
+            cursor.callproc("PersistDayTradingPosition", params)
+            self.connection.commit()
 
     def GetDayTradingPositions(self):
         datTradingPositions=[]
