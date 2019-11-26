@@ -201,13 +201,17 @@ class OrderRouter( BaseCommunicationModule, ICommunicationModule):
             self.ActiveOrdersLock.acquire()
             msgSeqNum=BloombergTranslationHelper.GetSafeInt(self,msg,"API_SEQ_NUM",0)
 
+
             if msgSeqNum>=self.ApiSeqNum:
                 self.ApiSeqNum=msgSeqNum
                 if activeOrder is not None:
                     activeOrder.OrdStatus = BloombergTranslationHelper.GetOrdStatus(self,msg)
 
+                self.DoLog("Bloomberg Order Router: Sending message with SeqNum {} for OrderId{}"
+                           .format(msgSeqNum,activeOrder.OrderId if activeOrder is not None else ""), MessageType.DEBUG)
                 execReport = ExecutionReportWrapper(activeOrder,msg,pParent=self)
                 self.DoSendExecutionReportThread(execReport)
+                time.sleep(50 / 1000)
             else:
                 self.DoLog("Ignoring execution report because out of sync with seq num {}".format(msgSeqNum),MessageType.WARNING)
         finally:

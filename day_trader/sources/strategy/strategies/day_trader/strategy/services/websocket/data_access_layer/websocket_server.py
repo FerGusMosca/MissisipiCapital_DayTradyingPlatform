@@ -117,18 +117,18 @@ class WSHandler(tornado.websocket.WebSocketHandler):
 
     wrapper = PortfolioPositionTradeListRequestWrapper(subscrMsg.ServiceKey)
 
-    self.InvokingModule.ProcessIncoming(wrapper)
+    state=self.InvokingModule.ProcessIncoming(wrapper)
 
-    self.ProcessSubscriptionResponse(subscrMsg)
+    self.ProcessSubscriptionResponse(subscrMsg, state.Success,str(state.Exception) if state.Exception is not None else None)
 
   def ProcessOpenPositions(self,subscrMsg):
     self.SubscribeService(subscrMsg)
 
     wrapper = PortfolioPositionListRequestWrapper()
 
-    self.InvokingModule.ProcessIncoming(wrapper)
+    state = self.InvokingModule.ProcessIncoming(wrapper)
 
-    self.ProcessSubscriptionResponse(subscrMsg)
+    self.ProcessSubscriptionResponse(subscrMsg, state.Success,str(state.Exception) if state.Exception is not None else None)
 
 
   def UnsubscribeService(self,subscrMsg):
@@ -153,7 +153,6 @@ class WSHandler(tornado.websocket.WebSocketHandler):
       else:
         raise state.Exception
 
-
     except Exception as e:
       msg = "Critical ERROR for Incoming Cancel Position Req for posId {}. Error:{}".format(cancelRouteReq.PosId,str(e))
       self.DoLog(msg, MessageType.ERROR)
@@ -175,7 +174,6 @@ class WSHandler(tornado.websocket.WebSocketHandler):
         self.DoLog("Cancel All positions sent...",MessageType.INFO)
       else:
         raise state.Exception
-
 
     except Exception as e:
       msg = "Critical ERROR for Incoming Cancel all Positions Req . Error:{}".format(str(e))

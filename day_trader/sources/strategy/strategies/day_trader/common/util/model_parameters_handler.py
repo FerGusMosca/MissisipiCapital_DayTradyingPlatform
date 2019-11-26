@@ -12,6 +12,10 @@ class ModelParametersHandler:
     #region Static Attributes
 
     @staticmethod
+    def TRADING_MODE():
+        return "TRADING_MODE"
+
+    @staticmethod
     def DAILY_BIAS():
         return "DAILY_BIAS"
 
@@ -66,6 +70,10 @@ class ModelParametersHandler:
     @staticmethod
     def PCT_SLOPE_TO_CLOSE_SHORT():
         return "PCT_SLOPE_TO_CLOSE_SHORT"
+
+    @staticmethod
+    def BACKWARD_DAYS_SUMMARIES_IN_MEMORY():
+        return "BACKWARD_DAYS_SUMMARIES_IN_MEMORY"
 
 
 

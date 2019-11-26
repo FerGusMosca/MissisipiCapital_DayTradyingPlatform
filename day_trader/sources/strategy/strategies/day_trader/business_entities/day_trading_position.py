@@ -2,6 +2,8 @@ from sources.framework.business_entities.securities.security import *
 from sources.framework.business_entities.market_data.candle_bar import *
 
 from sources.strategy.common.dto.position_statistical_parameters import *
+from sources.strategy.common.dto.position_profits_and_losses import *
+
 import json
 from datetime import datetime, timedelta
 from json import JSONEncoder
@@ -42,31 +44,41 @@ class DayTradingPosition():
     #region Private Methods
 
     def GetMmmov(self, candleBarArr, skip, length):
-        sortedBars = list(filter(lambda x: x is not None, candleBarArr)).sort(key=lambda x:x.DateTime,reverse = True)
+        sortedBars = sorted(list(filter(lambda x: x is not None, candleBarArr)),key=lambda x:x.DateTime,reverse = True)
 
-        if len(sortedBars)<(length+skip):
+        if sortedBars is None or len(sortedBars)<(length+skip):
             return None
 
         if length==0:
             raise Exception("Wrong value 0 for length calculating moving average")
 
         sum=0
-        for i in range (skip,length):
+        for i in range (skip,skip + length):
             if sortedBars[i] is not None:
-                sum+=sortedBars[i].Close
+                if sortedBars[i].Close is not None:
+                    sum+=sortedBars[i].Close
+                else:
+                    return None
             else:
                 return None #Not enough info to calculate
 
         return sum/length
 
     def GetSlope (self,currMovAvg,prevMovAvg):
-        return (currMovAvg-prevMovAvg)/prevMovAvg
+
+        if currMovAvg is not None and prevMovAvg is not None:
+            return (currMovAvg-prevMovAvg)/prevMovAvg
+        else:
+            return None
 
     def GetSpecificBar(self,candleBarArr, index):
-        sortedBars = list(filter(lambda x: x is not None, candleBarArr)).sort(key=lambda x: x.DateTime, reverse=True)
+        sortedBars = sorted(list(filter(lambda x: x is not None, candleBarArr)),key=lambda x: x.DateTime, reverse=True)
 
-        if(len(candleBarArr)>=index):
-            return candleBarArr[index-1]
+        if(sortedBars is not None and len(sortedBars)>=index):
+            return sortedBars[index-1]
+        else:
+            return None
+
 
     def GetStatisticalParameters(self,candlebarsArr):
         fiftyMinNoSkipMovAvg = self.GetMmmov(candlebarsArr, 0, 50)
@@ -76,6 +88,7 @@ class DayTradingPosition():
         threeMinSkipTrheeMovAvg = self.GetMmmov(candlebarsArr, 3, 3)
 
         threeMinSkipSixMovAvg = self.GetMmmov(candlebarsArr, 6, 3)
+
         threeMinSkipNineMovAvg = self.GetMmmov(candlebarsArr, 9, 3)
 
         barPosNow = self.GetSpecificBar(candlebarsArr, 1)
@@ -91,79 +104,79 @@ class DayTradingPosition():
         threeToSixMinSkipSlope = self.GetSlope(threeMinSkipTrheeMovAvg, threeMinSkipSixMovAvg)
 
         # Previous 6 to 9 minute slope of 3 minute moving average
-        threeToNineMinSkipSlope = self.GetSlope(threeMinSkipTrheeMovAvg, threeMinSkipNineMovAvg)
+        sixToNineMinSkipSlope = self.GetSlope(threeMinSkipSixMovAvg, threeMinSkipNineMovAvg)
 
         # Maximum change in last 3 minutes
-        pctChangeLastThreeMinSlope = self.GetSpecificBar(barPosNow.Close, barPosMinusThree.Close)
+        pctChangeLastThreeMinSlope = self.GetSlope(barPosNow.Close if barPosNow is not None else None, barPosMinusThree.Close if barPosMinusThree is not None else None)
 
         # Delta between current value and 50MMA
-        deltaCurrValueAndFiftyMMov = self.GetSlope(barPosNow.Close, fiftyMinNoSkipMovAvg)
+        deltaCurrValueAndFiftyMMov = self.GetSlope(barPosNow.Close if barPosNow is not None else None, fiftyMinNoSkipMovAvg)
 
-        return PositionStatisticalParameters(tenMinSkipSlope=tenMinSkipSlope,threeMinSkipSlope=threeMinSkipSlope,
+        return PositionStatisticalParameters( tenMinSkipSlope=tenMinSkipSlope,
+                                              threeMinSkipSlope=threeMinSkipSlope,
                                               threeToSixMinSkipSlope=threeToSixMinSkipSlope,
-                                              threeToNineMinSkipSlope=threeToNineMinSkipSlope,
+                                              sixToNineMinSkipSlope=sixToNineMinSkipSlope,
                                               pctChangeLastThreeMinSlope=pctChangeLastThreeMinSlope,
                                               deltaCurrValueAndFiftyMMov=deltaCurrValueAndFiftyMMov)
 
 
-    def CalculateProfits(self,netShares,moneyOutflow,moneyIncome,posMTM):
+    def CalculateProfits(self,profitsAndLosses):
+
         profits = 0 #as a percentaje
 
-        if netShares > 0:
-            if (moneyOutflow > 0):
-                profits = (moneyIncome + posMTM) / moneyOutflow
+        if profitsAndLosses.NetShares > 0:
+            if (profitsAndLosses.MoneyOutflow > 0):
+                profits = ((profitsAndLosses.MoneyIncome + profitsAndLosses.PosMTM) / profitsAndLosses.MoneyOutflow) - 1
             else:
-                raise Exception(
-                    "Could not calculate profit for a LONG position (+ {} shares) and not money outflow for symbol {}"
-                    .format(netShares, self.Security.Symbol))
-        elif netShares < 0:
-            netToCover = moneyOutflow + (posMTM * (-1))
+                raise Exception("Could not calculate profit for a LONG position (+ {} shares) and not money outflow for symbol {}"
+                                .format(profitsAndLosses.NetShares, self.Security.Symbol))
+        elif profitsAndLosses.NetShares < 0:
+            netToCover = profitsAndLosses.MoneyOutflow + (profitsAndLosses.PosMTM * (-1))#if short PosMTM should be negative
 
             if netToCover > 0:
-                profits = (moneyIncome) / netToCover
-            raise Exception(
-                "Could not calculate profit for a SHORT position where the money outflow is {} USD and the net ammount to cover is {} USD for symbol {}"
-                    .format(moneyOutflow, posMTM, self.Security.Symbol))
-        else:
-            if (moneyOutflow > 0):
-                profits = moneyIncome / moneyOutflow
+                profits = (profitsAndLosses.MoneyIncome / netToCover)-1
             else:
-                raise Exception( "Could not calculate profit for not open position where money outflow  is 0, for symbol {}" .format(self.Security.Symbol))
+                raise Exception("Could not calculate profit for a SHORT position where the money outflow is {} USD and the net ammount to cover is {} USD for symbol {}"
+                                .format(profitsAndLosses.MoneyOutflow, profitsAndLosses.PosMTM, self.Security.Symbol))
+        else:
+            if profitsAndLosses.MoneyOutflow > 0:
+                profits = (profitsAndLosses.MoneyIncome / profitsAndLosses.MoneyOutflow)-1
+            elif profitsAndLosses.MoneyIncome ==0:
+                profits = 0
+            else:
+                raise Exception( "Could not calculate profit for closed position where money outflow is 0, for symbol {}" .format(self.Security.Symbol))
         return profits
 
-    def CalculateMarkToMarket(self,marketData,netShares,foundOpenPositions):
+    def CalculateMarkToMarket(self,marketData,profitsAndLosses,foundOpenPositions):
 
         posMTM=0
+
         if(marketData.Trade is not None):
-            posMTM= marketData.Trade*netShares
+            posMTM= marketData.Trade*profitsAndLosses.NetShares
         elif(marketData.ClosingPrice is not None):
-            posMTM= marketData.ClosingPrice*netShares
+            posMTM= marketData.ClosingPrice*profitsAndLosses.NetShares
         elif foundOpenPositions:
             raise Exception("Could not calculate profits as there are not last trade nor closing price for symbol "
                             .format(self.Security.Symbol))
 
         return posMTM
 
-    def CalculateClosedPositionsProfit(self,moneyOutflow,moneyIncome,netShares):
-        todaySummaries = list(filter(lambda x: x.Date == datetime.now() and x.CumQty >= 0, self.ExecutionSummaries)) \
-                        .sort(key=lambda x: x.Date, reverse=False)
-
-        moneyOutflow = 0
-        moneyIncome = 0
-        netShares = 0
-        posMTM = 0
+    def CalculatePositionsProfit(self,profitsAndLosses):
+        todaySummaries = sorted(list(filter(lambda x: x.Timestamp.date() == datetime.now().date() and x.CumQty >= 0, self.ExecutionSummaries.values())),
+                                            key=lambda x: x.Timestamp, reverse=False)
         foundOpenPositions = False
 
         for summary in todaySummaries:
             # first we calculate the traded positions
-            if not summary.Position.IsOpenPosition():
+            if summary.GetTradedSummary()>0:
                 if summary.IsLongPosition():
-                    moneyOutflow += summary.GetTradedSummary()
-                    netShares += summary.GetNetShares()
+                    profitsAndLosses.MoneyOutflow += summary.GetTradedSummary()
+                    profitsAndLosses.NetShares += summary.GetNetShares()
                 else:
-                    moneyIncome += summary.GetTradedSummary()
-                    netShares -= summary.GetNetShares()
-            else:
+                    profitsAndLosses.MoneyIncome += summary.GetTradedSummary()
+                    profitsAndLosses.NetShares -= summary.GetNetShares()
+
+            if summary.Position.IsOpenPosition():
                 foundOpenPositions = True
 
         return foundOpenPositions
@@ -178,28 +191,21 @@ class DayTradingPosition():
         nextOpenPos = next(iter(list(filter(lambda x: x.Position.IsOpenPosition(), self.ExecutionSummaries.values()))), None)
         self.Routing= nextOpenPos is not None
 
-
-
-
     def CalculateCurrentDayProfits(self,marketData):
-        todaySummaries = list(filter(lambda x: x.Date == datetime.now() and x.CumQty>=0 , self.ExecutionSummaries))\
-                        .sort(key=lambda x: x.Date, reverse=False)
 
-        moneyOutflow = 0
-        moneyIncome = 0
-        netShares=0
+        profitsAndLosses = PositionsProfitsAndLosses()
 
-        foundOpenPositions = self.CalculateClosedPositionsProfit(moneyOutflow,moneyIncome,netShares)
-        posMTM = self.CalculateMarkToMarket(marketData,netShares,foundOpenPositions)
-        profits=self.CalculateProfits(netShares,moneyOutflow,moneyIncome,posMTM)
+        foundOpenPositions = self.CalculatePositionsProfit(profitsAndLosses)
+        profitsAndLosses.PosMTM = self.CalculateMarkToMarket(marketData,profitsAndLosses,foundOpenPositions)
+        profitsAndLosses.Profits = self.CalculateProfits(profitsAndLosses)
 
-        if(profits>self.MaxProxit):
-            self.MaxProxit=profits
+        if(profitsAndLosses.Profits>self.MaxProxit):
+            self.MaxProxit=profitsAndLosses.Profits
 
-        if(profits<self.MaxLoss):
-            self.MaxLoss=profits
+        if(profitsAndLosses.Profits<self.MaxLoss):
+            self.MaxLoss=profitsAndLosses.Profits
 
-        self.CurrentProfit=profits
+        self.CurrentProfit=profitsAndLosses.Profits
 
     def EvaluateLongTrade(self,dailyBiasModelParam,dailySlopeModelParam, posMaximChangeParam,
                           posMaxLongDeltaParam,candlebarsArr):
@@ -209,6 +215,11 @@ class DayTradingPosition():
 
         statisticalParams = self.GetStatisticalParameters(candlebarsArr)
 
+        if  (statisticalParams.TenMinSkipSlope is None or statisticalParams.ThreeMinSkipSlope
+            or statisticalParams.ThreeToSixMinSkipSlope or statisticalParams.SixToNineMinSkipSlope
+            or statisticalParams.PctChangeLastThreeMinSlope or statisticalParams.DeltaCurrValueAndFiftyMMov):
+            return False
+
         if  (    dailyBiasModelParam.FloatValue>=0 #Daily Bias
                 # Last 10 minute slope of 50 minute moving average
             and  statisticalParams.TenMinSkipSlope >= dailySlopeModelParam.FloatValue
@@ -217,11 +228,11 @@ class DayTradingPosition():
                 # Previous 3 to 6 minute slope of 3 minute moving average
             and statisticalParams.ThreeToSixMinSkipSlope > dailySlopeModelParam.FloatValue
                 # Previous 6 to 9 minute slope of 3 minute moving average
-            and statisticalParams.ThreeToNineMinSkipSlope > dailySlopeModelParam.FloatValue
+            and statisticalParams.SixToNineMinSkipSlope > dailySlopeModelParam.FloatValue
                 # Maximum change in last 3 minutes
-            and statisticalParams.PctChangeLastThreeMinSlope > posMaximChangeParam.FloatValue
+            and statisticalParams.PctChangeLastThreeMinSlope < posMaximChangeParam.FloatValue
                 # Delta between current value and 50MMA
-            and statisticalParams.DeltaCurrValueAndFiftyMMov > posMaxLongDeltaParam.FloatValue
+            and statisticalParams.DeltaCurrValueAndFiftyMMov < posMaxLongDeltaParam.FloatValue
         ):
             return True
         else:

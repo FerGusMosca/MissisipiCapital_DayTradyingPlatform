@@ -47,7 +47,7 @@ class MarketOrderRouter(BaseCommunicationModule, ICommunicationModule):
             for pos in positions:
                 if pos.GetLastOrder() is not None:
                     pos.GetLastOrder().ClOrdId = pos.PosId
-                    self.Positions[pos.GetLastOrder().OrderId] = pos
+                    self.Positions[pos.PosId] = pos
                 else:
                     self.DoLog("Could not find order for pre existing position on execution report initial load. PosId = {}".format(pos.PosId), MessageType.ERROR)
             self.PositionsLock.release()

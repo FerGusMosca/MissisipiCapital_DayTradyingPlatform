@@ -237,6 +237,42 @@ class Position:
         else:
             return _Unknown
 
+    @staticmethod
+    def FromStrStatus(strStatus):
+
+        if strStatus == _Unknown :
+            return PositionStatus.Unknown
+        elif strStatus==_New:
+            return  PositionStatus.New
+        elif strStatus==_DoneForDay:
+            return PositionStatus.DoneForDay
+        elif strStatus==_Canceled:
+            return  PositionStatus.Canceled
+        elif strStatus== _Replaced:
+            return PositionStatus.Replaced
+        elif strStatus== _PendingCancel:
+            return PositionStatus.PendingCancel
+        elif strStatus== _Stopped:
+            return PositionStatus.Stopped
+        elif strStatus==_Rejected:
+            return PositionStatus.Rejected
+        elif strStatus== _Suspended:
+            return PositionStatus.Suspended
+        elif strStatus== _Calculated:
+            return PositionStatus.Calculated
+        elif strStatus== _Expired:
+            return PositionStatus.Expired
+        elif strStatus== _PendingReplace:
+            return PositionStatus.PendingReplace
+        elif strStatus== _PartiallyFilled:
+            return PositionStatus.PartiallyFilled
+        elif strStatus== _Filled:
+            return PositionStatus.Filled
+        elif strStatus== _Unknown:
+            return PositionStatus.Unknown
+        else:
+            return _Unknown
+
     def GetStrSide(self):
 
         if self.Side is None:
@@ -247,6 +283,18 @@ class Position:
             return _Side_Sell
         else:
             return _Side_Uknown
+
+    @staticmethod
+    def FromStrSide(strSide):
+
+        if strSide ==_Side_Uknown:
+            return Side.Unknown
+        elif strSide==_Side_Buy:
+            return Side.Buy
+        elif strSide == _Side_Sell:
+            return Side.Sell
+        else:
+            return Side.Unknown
 
 
     def GetMarketArrivalTime(self):

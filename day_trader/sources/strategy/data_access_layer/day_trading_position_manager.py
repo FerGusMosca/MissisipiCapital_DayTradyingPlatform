@@ -36,7 +36,7 @@ class DayTradingPositionManager():
                         SecType=self.GetSecurityTypeFromStrSecType(row['security_type'])
                        )
 
-    def BuildSecurityToTrade(self, row,security):
+    def BuildDayTradingPosition(self, row,security):
         return DayTradingPosition(
             id=int(row['id']),
             security=security,
@@ -78,7 +78,7 @@ class DayTradingPositionManager():
 
             for row in cursor:
                 sec = self.BuildSecurity(row)
-                dayTradingPos = self.BuildSecurityToTrade(row,sec)
+                dayTradingPos = self.BuildDayTradingPosition(row,sec)
                 datTradingPositions.append(dayTradingPos)
 
         return datTradingPositions

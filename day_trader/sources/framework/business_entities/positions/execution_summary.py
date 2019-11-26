@@ -16,6 +16,7 @@ class ExecutionSummary:
         self.Text = None
         self.Position = Position
         self.LastUpdateTime =datetime.datetime.now()
+        self.Timestamp = datetime.datetime.now()
         self.LastTradeTime = None
 
     def UpdateStatus(self, execReport):
@@ -32,7 +33,9 @@ class ExecutionSummary:
         self.Position.ExecutionReports.append(execReport)
         self.LeavesQty = execReport.LeavesQty if self.Position.IsOpenPosition() else 0
 
-        self.LastUpdateTime = datetime.datetime.now()
+        self.LastUpdateTime =  datetime.datetime.now()
+        if(execReport.LastFillTime is not None):
+            self.Timestamp = execReport.LastFillTime
 
         if execReport.ArrivalPrice is not None:
             self.Position.ArrivalPrice=execReport.ArrivalPrice
