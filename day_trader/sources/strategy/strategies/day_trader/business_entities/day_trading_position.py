@@ -5,6 +5,8 @@ from sources.strategy.common.dto.position_statistical_parameters import *
 from sources.strategy.common.dto.position_profits_and_losses import *
 
 import json
+import statistics
+import time
 from datetime import datetime, timedelta
 from json import JSONEncoder
 
@@ -36,9 +38,12 @@ class DayTradingPosition():
         self.ShortSignal = shortSignal
         self.SignalType=signalType
         self.SignalDesc = signalDesc
+
         self.CurrentProfit = 0
-        self.MaxProxit = 0
+        self.MaxProfit = 0
         self.MaxLoss=0
+        self.LastNDaysStdDev = 0
+        self.LastProfitCalculationDay = None
 
 
     #region Private Methods
@@ -83,6 +88,13 @@ class DayTradingPosition():
     def GetStatisticalParameters(self,candlebarsArr):
         fiftyMinNoSkipMovAvg = self.GetMmmov(candlebarsArr, 0, 50)
         FiftyMinSkipTenMovAvg = self.GetMmmov(candlebarsArr, 10, 50)
+
+        #if we don't have enough values --> we use what we have!
+        if(fiftyMinNoSkipMovAvg is None):
+            fiftyMinNoSkipMovAvg = self.GetMmov(candlebarsArr,0,len(candlebarsArr))
+        # if we don't have enough values --> we use what we have!
+        if (FiftyMinSkipTenMovAvg is None):
+            FiftyMinSkipTenMovAvg = self.GetMmov(candlebarsArr, 0, len(candlebarsArr))
 
         threeMinNoSkipMovAvg = self.GetMmmov(candlebarsArr, 0, 3)
         threeMinSkipTrheeMovAvg = self.GetMmmov(candlebarsArr, 3, 3)
@@ -191,7 +203,16 @@ class DayTradingPosition():
         nextOpenPos = next(iter(list(filter(lambda x: x.Position.IsOpenPosition(), self.ExecutionSummaries.values()))), None)
         self.Routing= nextOpenPos is not None
 
+
+    def ResetProfitCounters(self,now):
+        self.CurrentProfit = 0
+        self.MaxLoss = 0
+        self.MaxProfit = 0
+        self.LastProfitCalculationDay = datetime.now()
+
     def CalculateCurrentDayProfits(self,marketData):
+
+
 
         profitsAndLosses = PositionsProfitsAndLosses()
 
@@ -199,13 +220,14 @@ class DayTradingPosition():
         profitsAndLosses.PosMTM = self.CalculateMarkToMarket(marketData,profitsAndLosses,foundOpenPositions)
         profitsAndLosses.Profits = self.CalculateProfits(profitsAndLosses)
 
-        if(profitsAndLosses.Profits>self.MaxProxit):
-            self.MaxProxit=profitsAndLosses.Profits
+        if(profitsAndLosses.Profits>self.MaxProfit):
+            self.MaxProfit=profitsAndLosses.Profits
 
         if(profitsAndLosses.Profits<self.MaxLoss):
             self.MaxLoss=profitsAndLosses.Profits
 
         self.CurrentProfit=profitsAndLosses.Profits
+        self.LastProfitCalculationDay=datetime.now()
 
     def EvaluateLongTrade(self,dailyBiasModelParam,dailySlopeModelParam, posMaximChangeParam,
                           posMaxLongDeltaParam,candlebarsArr):
@@ -249,8 +271,8 @@ class DayTradingPosition():
         statisticalParams = self.GetStatisticalParameters(candlebarsArr)
 
         #Maximum Gain during the trade exceeds a certain value and then drops to a percentage of that value
-        if(self.MaxProxit > maxGainForClosingModelParam.FloatValue
-            and self.CurrentProfit<pctMaxGainForClosingModelParam.FloatValue*self.MaxProxit):
+        if(self.MaxProfit > maxGainForClosingModelParam.FloatValue
+            and self.CurrentProfit<pctMaxGainForClosingModelParam.FloatValue*self.MaxProfit):
             return _EXIT_LONG_COND_1
 
         #Maximum Loss during the trade exceeds (worse than) a certain value and then drops to a percentage of that value
@@ -272,6 +294,55 @@ class DayTradingPosition():
         if(statisticalParams.ThreeMinSkipSlope < pctSlopeToCloseLongModelParam.FloatValue):
             return _EXIT_LONG_COND_5
 
+
+    def EvaluateTimeRange(self,timeFromModelParam,timeToModelParam):
+        now = datetime.now()
+        fromTimeLowVol = time.strptime(timeFromModelParam.StringValue, "%I:%M %p")
+        toTimeLowVol = time.strptime(timeToModelParam.StringValue, "%I:%M %p")
+        todayStart = now.replace(hour=fromTimeLowVol.tm_hour, minute=fromTimeLowVol.tm_min, second=0, microsecond=0)
+        todayEnd = now.replace(hour=toTimeLowVol.tm_hour, minute=toTimeLowVol.tm_min,
+                               second=0, microsecond=0)
+
+        return todayStart<now and now<todayEnd
+
+    def EvaluateValidTimeToEnterTrade(self,lowVolEntryThresholdModelParam,highVolEntryThresholdModelParam,
+                                      lowVolFromTimeModelParam,lowVolToTimeModelParam,
+                                      highVolFromTime1,highVolToTime1,highVolFromTime2,highVolToTime2):
+
+        if(self.LastNDaysStdDev is not None):
+
+            if self.LastNDaysStdDev<lowVolEntryThresholdModelParam.FloatValue:
+                if (self.EvaluateTimeRange(lowVolFromTimeModelParam,lowVolToTimeModelParam)):
+                    return True
+
+            if self.LastNDaysStdDev >= highVolEntryThresholdModelParam.FloatValue:
+                if (self.EvaluateTimeRange(highVolFromTime1, highVolToTime1)):
+                    return True
+
+                if (self.EvaluateTimeRange(highVolFromTime2, highVolToTime2)):
+                    return True
+
+            return False
+
+        else:
+            return False
+
+
+    def CalculateStdDevForLastNDays(self,marketDataArr,nDaysModelParam):
+
+        if nDaysModelParam is not None:
+            sortedMDArr= sorted(list(filter(lambda x: x.ClosingPrice is not None, marketDataArr.values())), key=lambda x: x.MDEntryDate,
+                                reverse=True)[:nDaysModelParam.IntValue]
+
+            closingPrices = []
+
+            for md in sortedMDArr:
+                closingPrices.append(md.ClosingPrice)
+
+            self.LastNDaysStdDev = statistics.stdev(closingPrices)
+
+        else:
+            self.LastNDaysStdDev = None
 
 
     #endregion

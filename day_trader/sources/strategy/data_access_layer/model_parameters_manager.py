@@ -22,6 +22,7 @@ class ModelParametersManager():
 
     def BuildModelParameter(self,row):
         modParam = ModelParameter(key=row["key"],
+                                  symbol=row["symbol"],
                                   stringValue=row["string_value"],
                                   intValue=int(row["int_value"]) if row["int_value"] is not None else None,
                                   floatValue=float(row['float_value']) if row["float_value"] is not None else None
@@ -31,6 +32,13 @@ class ModelParametersManager():
     #endregion
 
     #region Public Methods
+
+    def PersistModelParameter(self, modelPrameter):
+        with self.connection.cursor(as_dict=True) as cursor:
+            params = (modelPrameter.Key,modelPrameter.Symbol,modelPrameter.StringValue,modelPrameter.IntValue,
+                      modelPrameter.FloatValue)
+            cursor.callproc("PersistModelParameter", params)
+            self.connection.commit()
 
     def GetModelParametersManager(self):
         modelParameters=[]

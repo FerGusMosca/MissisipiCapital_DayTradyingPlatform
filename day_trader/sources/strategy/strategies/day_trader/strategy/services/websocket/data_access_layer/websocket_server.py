@@ -8,6 +8,8 @@ from sources.strategy.strategies.day_trader.strategy.services.websocket.common.D
 from sources.strategy.strategies.day_trader.strategy.services.websocket.common.DTO.order_routing.route_position_req import *
 from sources.strategy.strategies.day_trader.strategy.services.websocket.common.DTO.order_routing.cancel_position_req import *
 from sources.strategy.strategies.day_trader.strategy.services.websocket.common.DTO.order_routing.cancel_position_ack import *
+from sources.strategy.strategies.day_trader.strategy.services.websocket.common.DTO.config.update_model_param_req import *
+from sources.strategy.strategies.day_trader.strategy.services.websocket.common.DTO.config.update_model_param_ack import *
 from sources.strategy.strategies.day_trader.strategy.services.websocket.common.DTO.order_routing.route_position_ack import *
 from sources.strategy.strategies.day_trader.strategy.services.websocket.common.DTO.order_routing.cancel_all_position_ack import *
 from sources.strategy.strategies.day_trader.strategy.services.websocket.common.DTO.subscriptions.subscription_reponse import *
@@ -19,6 +21,7 @@ from sources.strategy.strategies.day_trader.strategy.services.websocket.common.D
 from sources.strategy.strategies.day_trader.strategy.services.websocket.common.DTO.positions.execution_summary_dto import *
 from sources.strategy.strategies.day_trader.strategy.services.websocket.common.wrappers.position_req_wrapper import *
 from sources.strategy.strategies.day_trader.strategy.services.websocket.common.wrappers.cancel_all_position_wrapper import *
+from sources.strategy.strategies.day_trader.strategy.services.websocket.common.wrappers.update_model_parameter_req_wrapper import *
 from sources.strategy.strategies.day_trader.strategy.services.websocket.common.wrappers.cancel_position_wrapper import *
 from sources.framework.common.wrappers.portfolio_position_trade_list_request_wrapper import *
 
@@ -160,6 +163,30 @@ class WSHandler(tornado.websocket.WebSocketHandler):
                                  PosId=cancelRouteReq.PosId,Success=False, Error=msg)
       self.DoSendResponse(ack)
 
+  def ProcessUpdateModelParamReq(self, updateModelParamReq):
+    try:
+
+      self.DoLog("Incoming Model Param Upd Req ",MessageType.INFO)
+      wrapper =  UpdateModelParamReqWrapper(updateModelParamReq)
+
+      state=self.InvokingModule.ProcessIncoming(wrapper)
+
+      if state.Success:
+        ack = UpdateModelParamAck(Msg="UpdateModelParamAck", UUID=updateModelParamReq.UUID,symbol=updateModelParamReq.Symbol,
+                                  key=updateModelParamReq.Key, ReqId=updateModelParamReq.ReqId)
+        self.DoSendResponse(ack)
+        self.DoLog("Model Param Upd Req sent...",MessageType.INFO)
+      else:
+        raise state.Exception
+
+    except Exception as e:
+      msg = "Critical ERROR for Model Param Upd Req . Error:{}".format(str(e))
+      self.DoLog(msg, MessageType.ERROR)
+      ack = UpdateModelParamAck(Msg="UpdateModelParamAck", UUID=updateModelParamReq.UUID,
+                                symbol=updateModelParamReq.Symbol,key=updateModelParamReq.Key, ReqId=updateModelParamReq.ReqId,
+                                Success=False, Error=msg)
+      self.DoSendResponse(ack)
+
   def ProcessCancelAllPositionReq(self,cancelAllRouteReq):
     try:
 
@@ -265,6 +292,9 @@ class WSHandler(tornado.websocket.WebSocketHandler):
       elif "Msg" in fieldsDict and fieldsDict["Msg"]=="CancelAllPositionReq":
         cancelAllPos = CancelPositionReq(**json.loads(message))
         self.ProcessCancelAllPositionReq(cancelAllPos)
+      elif "Msg" in fieldsDict and fieldsDict["Msg"]=="UpdateModelParamReq":
+        updModelParamReq = UpdateModelParamReq(**json.loads(message))
+        self.ProcessUpdateModelParamReq(updModelParamReq)
       elif "Msg" in fieldsDict and fieldsDict["Msg"]=="CancelPositionReq":
         cancelPos = CancelPositionReq(**json.loads(message))
         self.ProcessCancelPositionReq(cancelPos)

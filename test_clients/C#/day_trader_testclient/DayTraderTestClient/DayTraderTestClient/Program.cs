@@ -1,5 +1,6 @@
 ﻿using DayTraderTestClient.Common.DTO;
 using DayTraderTestClient.Common.DTO.batchs;
+using DayTraderTestClient.Common.DTO.Config;
 using DayTraderTestClient.Common.DTO.Order_Routing;
 using DayTraderTestClient.Common.DTO.Subscription;
 using DayTraderTestClient.DataAccessLayer;
@@ -69,6 +70,7 @@ namespace DayTraderTestClient
             Console.WriteLine("RoutePositionReq <posId> <side> <qty> <account>");
             Console.WriteLine("CancelPos <posId>");
             Console.WriteLine("CancelAll");
+            Console.WriteLine("UpdateModelParamReq <key> <symbol> <intValue> <stringValue> <floatValue>");
             Console.WriteLine("Unsubscribe <Service> <ServiceKey>");
             Console.WriteLine("-CLEAR");
             Console.WriteLine();
@@ -137,6 +139,30 @@ namespace DayTraderTestClient
             else
                 DoLog(string.Format("Missing mandatory parameters for CancelAllPositionReq message"));
 
+        }
+
+        private static void ProcessUpdateModelParamReq(string[] param)
+        {
+
+            if (param.Length == 6)
+            {
+                UpdateModelParamReq updParamReq = new UpdateModelParamReq()
+                {
+                    Msg = "UpdateModelParamReq",
+                    UUID = UUID,
+                    ReqId = Guid.NewGuid().ToString(),
+                    Key = param[1],
+                    Symbol = param[2] != "*" ? param[2] : null,
+                    IntValue = param[3] != "*" ? (int?)Convert.ToInt32(param[3]) : null,
+                    StringValue = param[4] != "*" ? param[4] : null,
+                    FloatValue = param[5] != "*" ? (decimal?)Convert.ToDecimal(param[5]) : null
+                };
+
+                DoSend<UpdateModelParamReq>(updParamReq);
+            }
+            else
+                DoLog(string.Format("Missing mandatory parameters for UpdateModelParamReq message"));
+        
         }
 
         private static void ProcessRouteSymbolReq(string[] param)
@@ -219,6 +245,10 @@ namespace DayTraderTestClient
             else if (mainCmd == "RouteSymbolReq")
             {
                 ProcessRouteSymbolReq(param);
+            }
+            else if (mainCmd == "UpdateModelParamReq")
+            {
+                ProcessUpdateModelParamReq(param);
             }
             else if (mainCmd == "RoutePositionReq")
             {

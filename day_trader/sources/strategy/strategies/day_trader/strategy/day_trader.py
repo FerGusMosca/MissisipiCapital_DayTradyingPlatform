@@ -5,6 +5,7 @@ from sources.strategy.strategies.day_trader.common.configuration.configuration i
 from sources.framework.common.converters.execution_report_converter import *
 from sources.framework.common.enums.fields.execution_report_field import *
 from sources.framework.common.enums.fields.position_list_field import *
+from sources.strategy.strategies.day_trader.common.enums.fields.model_param_field import *
 from sources.framework.common.enums.fields.portfolio_positions_trade_list_request_field import *
 from sources.framework.common.enums.fields.position_field import *
 from sources.framework.common.abstract.base_communication_module import *
@@ -43,7 +44,7 @@ _TRADING_MODE_MANUAL = "MANUAL"
 class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
     def __init__(self):
-        self.Lock = threading.Lock()
+
         self.LockCandlebar = threading.Lock()
         self.LockMarketData = threading.Lock()
         self.RoutingLock = threading.Lock()
@@ -58,7 +59,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
         self.ModelParametersManager = None
         self.ExecutionSummaryManager = None
 
-        self.ModelParametrsHandler = None
+        self.ModelParametersHandler = None
         self.MarketData={}
         self.Candlebars={}
         self.HistoricalPrices={}
@@ -73,6 +74,8 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
         self.OrdersQueue = queue.Queue(maxsize=1000000)
         self.SummariesQueue = queue.Queue(maxsize=1000000)
         self.DayTradingPositionsQueue = queue.Queue(maxsize=1000000)
+
+        self.LastSubscriptionDateTime = None
 
 
     def ProcessCriticalError(self, exception,msg):
@@ -138,6 +141,44 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                 except Exception as e:
                     self.DoLog("Error Saving Trades to DB: {}".format(e), MessageType.ERROR)
             time.sleep(int(1))
+
+    def MarketSubscriptionsThread(self):
+        while True:
+            try:
+                now = datetime.datetime.now()
+
+                resetTime = time.strptime(self.Configuration.MarketDataSubscriptionResetTime, "%I:%M %p")
+                todayResetTime = now.replace(hour=resetTime.tm_hour, minute=resetTime.tm_min, second=0,microsecond=0)
+
+                if (self.LastSubscriptionDateTime is None or
+                    (self.LastSubscriptionDateTime.day != todayResetTime.day and now> todayResetTime)):
+
+                    self.RoutingLock.acquire()
+
+                    for dayTradingPos in self.DayTradingPositions:
+                        dayTradingPos.ResetProfitCounters(now)
+
+                    self.LastSubscriptionDateTime = now
+
+                    self.RequestMarketData()
+
+                    self.RequestPositionList()
+
+                    self.RequestBars()
+
+                    self.RequestHistoricalPrices()
+
+                    self.RoutingLock.release()
+
+                time.sleep(1)
+
+            except Exception as e:
+                msg = "Critical error @DayTrader.MarketSubscriptionsThread:{}".format(str(e))
+                self.ProcessCriticalError(e, msg)
+                self.SendToInvokingModule(ErrorWrapper(Exception(msg)))
+            finally:
+                if self.RoutingLock.locked():
+                    self.RoutingLock.release()
 
     def ProcessOrder(self,summary, isRecovery):
         order = summary.Position.GetLastOrder()
@@ -209,13 +250,15 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
             try:
                 exec_report = ExecutionReportConverter.ConvertExecutionReport(wrapper)
             except Exception as e:
-                self.DoLog("Discarding execution reprot with bad data: " + str(e), MessageType.INFO)
+                self.DoLog("Discarding execution report with bad data: " + str(e), MessageType.INFO)
                 #exec_report = ExecutionReportConverter.ConvertExecutionReport(wrapper)
                 return
 
             pos_id = wrapper.GetField(ExecutionReportField.PosId)
 
             if pos_id is not None:
+
+                self.RoutingLock.acquire()
 
                 if pos_id in self.PositionSecurities:
                     dayTradingPos = self.PositionSecurities[pos_id]
@@ -225,6 +268,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                         self.ProcessOrder(summary, False)
                         threading.Thread(target=self.PublishPortfolioPositionThread, args=(dayTradingPos,)).start()
                         threading.Thread(target=self.PublishSummaryThread, args=(summary, dayTradingPos.Id)).start()
+                        self.RoutingLock.release()
                         return CMState.BuildSuccess(self)
                     else:
                         self.DoLog("Received execution report for a managed position, but we cannot find its execution summary",MessageType.ERROR)
@@ -235,6 +279,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                     self.UpdateSinglePosExecutionSummary(summary, exec_report)
                     self.ProcessOrder(summary, False)
                     threading.Thread(target=self.PublishSummaryThread, args=(summary, None)).start()
+                    self.RoutingLock.release()
                     return CMState.BuildSuccess(self)
                 else:
                     raise Exception("Received execution report for unknown PosId {}".format(pos_id))
@@ -243,6 +288,9 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
         except Exception as e:
             self.DoLog("Critical error @DayTrader.ProcessExecutionReport: " + str(e), MessageType.ERROR)
             return CMState.BuildFailure(self, Exception=e)
+        finally:
+            if self.RoutingLock.locked():
+                self.RoutingLock.release()
 
     def LoadConfig(self):
         self.Configuration = Configuration(self.ModuleConfigFile)
@@ -280,9 +328,10 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                                                              self.Configuration.DBPassword)
 
         modelParams = self.ModelParametersManager.GetModelParametersManager()
-        self.ModelParametrsHandler = ModelParametersHandler(modelParams)
+        self.ModelParametersHandler = ModelParametersHandler(modelParams)
 
-        self.LoadExecutionSummaryForPositions(self.ModelParametrsHandler.Get(ModelParametersHandler.BACKWARD_DAYS_SUMMARIES_IN_MEMORY()))
+        self.LoadExecutionSummaryForPositions(self.ModelParametersHandler.Get(ModelParametersHandler.BACKWARD_DAYS_SUMMARIES_IN_MEMORY()))
+
 
     def CancelAllPositions(self):
 
@@ -355,7 +404,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                 self.DoLog("Received list of Open Positions: {} positions".format(Position.CountOpenPositions(self, positions)),
                     MessageType.INFO)
                 i=0
-
+                self.RoutingLock.acquire()
                 for pos in positions:
 
                     summary = ExecutionSummary(datetime.datetime.now(), pos)
@@ -374,6 +423,9 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
         except Exception as e:
             self.ProcessCriticalError(e,"Critical error @DayTrader.ProcessPositionList:{}".format(e))
+        finally:
+            if self.RoutingLock.locked():
+                self.RoutingLock.release()
 
     def ProcessMarketData(self,wrapper):
         try:
@@ -423,33 +475,65 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
         try:
             security = MarketDataConverter.ConvertHistoricalPrices(wrapper)
             self.HistoricalPrices[security.Symbol]=security.MarketDataArr
+
+            datTradingPos = next(iter(list(filter(lambda x:  x.Security.Symbol==security.Symbol, self.DayTradingPositions))), None)
+
+            if(datTradingPos is not None):
+                try:
+                    datTradingPos.CalculateStdDevForLastNDays(security.MarketDataArr,
+                                                              self.ModelParametersHandler.Get(ModelParametersHandler.HISTORICAL_PRICES_PAST_DAYS()))
+                except Exception as e:
+                    self.DoLog(str(e),MessageType.ERROR)
+                    self.SendToInvokingModule(ErrorWrapper(str(e)))
+
+
             self.DoLog("Historical prices successfully loaded for symbol {} ".format(security.Symbol), MessageType.INFO)
         except Exception as e:
             self.ProcessErrorInMethod("@DayTrader.ProcessHistoricalPrices",e)
 
     def EvaluateOpeningPositions(self, candlebar,cbDict):
 
-        tradingMode = self.ModelParametrsHandler.Get(ModelParametersHandler.TRADING_MODE())
+        symbol = candlebar.Security.Symbol
+
+        tradingMode = self.ModelParametersHandler.Get(ModelParametersHandler.TRADING_MODE(),symbol)
 
         if tradingMode.StringValue == _TRADING_MODE_AUTOMATIC:
 
             dayTradingPos =  next(iter(list(filter(lambda x: x.Security.Symbol == candlebar.Security.Symbol, self.DayTradingPositions))), None)
             if dayTradingPos is not None:
 
-                dayTradingPos.EvaluateLongTrade(self.ModelParametrsHandler.Get(ModelParametersHandler.DAILY_BIAS()),
-                                                self.ModelParametrsHandler.Get(ModelParametersHandler.DAILY_SLOPE()),
-                                                self.ModelParametrsHandler.Get(ModelParametersHandler.MAXIM_PCT_CHANGE_3_MIN()),
-                                                self.ModelParametrsHandler.Get(ModelParametersHandler.POS_LONG_MAX_DELTA()),
-                                                list(cbDict.values()))
+
+                if dayTradingPos.EvaluateValidTimeToEnterTrade(self.ModelParametersHandler.Get(ModelParametersHandler.LOW_VOL_ENTRY_THRESHOLD(),symbol),
+                                                               self.ModelParametersHandler.Get(ModelParametersHandler.HIGH_VOL_ENTRY_THRESHOLD(),symbol),
+                                                               self.ModelParametersHandler.Get(ModelParametersHandler.LOW_VOL_FROM_TIME(),symbol),
+                                                               self.ModelParametersHandler.Get(ModelParametersHandler.LOW_VOL_TO_TIME(),symbol),
+                                                               self.ModelParametersHandler.Get(ModelParametersHandler.HIGH_VOL_FROM_TIME_1(),symbol),
+                                                               self.ModelParametersHandler.Get(ModelParametersHandler.HIGH_VOL_TO_TIME_1(),symbol),
+                                                               self.ModelParametersHandler.Get(ModelParametersHandler.HIGH_VOL_FROM_TIME_2(),symbol),
+                                                               self.ModelParametersHandler.Get(ModelParametersHandler.HIGH_VOL_TO_TIME_2(), symbol),
+                                                               ):
+
+                    return dayTradingPos.EvaluateLongTrade(self.ModelParametersHandler.Get(ModelParametersHandler.DAILY_BIAS(),symbol),
+                                                        self.ModelParametersHandler.Get(ModelParametersHandler.DAILY_SLOPE(),symbol),
+                                                        self.ModelParametersHandler.Get(ModelParametersHandler.MAXIM_PCT_CHANGE_3_MIN(),symbol),
+                                                        self.ModelParametersHandler.Get(ModelParametersHandler.POS_LONG_MAX_DELTA(),symbol),
+                                                        list(cbDict.values()))
+                else:
+                    return False
             else:
                 msg = "Could not find Day Trading Position for candlebar symbol {}. Please Resync.".format(
                     candlebar.Security.Symbol)
                 self.SendToInvokingModule(ErrorWrapper(Exception(msg)))
                 self.DoLog(msg, MessageType.ERROR)
+                return False
+        else:
+            return False
 
     def EvaluateClosingPositions(self, candlebar,cbDict):
 
-        tradingMode = self.ModelParametrsHandler.Get(ModelParametersHandler.TRADING_MODE())
+        symbol = candlebar.Security.Symbol
+
+        tradingMode = self.ModelParametersHandler.Get(ModelParametersHandler.TRADING_MODE(),symbol)
 
         if tradingMode.StringValue == _TRADING_MODE_AUTOMATIC:
 
@@ -457,13 +541,13 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
             if dayTradingPos is not None:
 
                 dayTradingPos.EvaluateClosingLongTrade(list(cbDict.values()),
-                                                self.ModelParametrsHandler.Get(ModelParametersHandler.MAX_GAIN_FOR_DAY()),
-                                                self.ModelParametrsHandler.Get(ModelParametersHandler.PCT_MAX_GAIN_CLOSING()),
-                                                self.ModelParametrsHandler.Get(ModelParametersHandler.MAX_LOSS_FOR_DAY()),
-                                                self.ModelParametrsHandler.Get(ModelParametersHandler.PCT_MAX_LOSS_CLOSING()),
-                                                self.ModelParametrsHandler.Get(ModelParametersHandler.TAKE_GAIN_LIMIT()),
-                                                self.ModelParametrsHandler.Get(ModelParametersHandler.STOP_LOSS_LIMIT()),
-                                                self.ModelParametrsHandler.Get(ModelParametersHandler.PCT_SLOPE_TO_CLOSE_LONG()),
+                                                self.ModelParametersHandler.Get(ModelParametersHandler.MAX_GAIN_FOR_DAY(),symbol),
+                                                self.ModelParametersHandler.Get(ModelParametersHandler.PCT_MAX_GAIN_CLOSING(),symbol),
+                                                self.ModelParametersHandler.Get(ModelParametersHandler.MAX_LOSS_FOR_DAY(),symbol),
+                                                self.ModelParametersHandler.Get(ModelParametersHandler.PCT_MAX_LOSS_CLOSING(),symbol),
+                                                self.ModelParametersHandler.Get(ModelParametersHandler.TAKE_GAIN_LIMIT(),symbol),
+                                                self.ModelParametersHandler.Get(ModelParametersHandler.STOP_LOSS_LIMIT(),symbol),
+                                                self.ModelParametersHandler.Get(ModelParametersHandler.PCT_SLOPE_TO_CLOSE_LONG(),symbol),
                                                 )
             else:
                 msg = "Could not find Day Trading Position for candlebar symbol {}. Please Resync.".format(candlebar.Security.Symbol)
@@ -482,7 +566,10 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
                 cbDict[candlebar.DateTime] = candlebar
                 self.Candlebars[candlebar.Security.Symbol]=cbDict
+                self.LockCandlebar.release()
+
                 self.EvaluateOpeningPositions(candlebar,cbDict)
+                self.EvaluateClosingPositions(candlebar,cbDict)
                 self.DoLog("Candlebars successfully loaded for symbol {} ".format(candlebar.Security.Symbol),MessageType.DEBUG)
             else:
                 self.DoLog("Received unknown null candlebar",MessageType.DEBUG)
@@ -490,13 +577,15 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
         except Exception as e:
             self.ProcessErrorInMethod("@DayTrader.ProcessCandleBar", e)
         finally:
-            self.LockCandlebar.release()
+            if self.LockCandlebar.locked():
+                self.LockCandlebar.release()
 
     def ProcessPortfolioPositionsTradeListRequestThread(self,wrapper):
         try:
-            self.Lock.acquire()
+            self.RoutingLock.acquire()
             dayTradingPosId = int( wrapper.GetField(PortfolioPositionTradeListRequestFields.PositionId))
             dayTradingPos = next(iter(list(filter(lambda x: x.Id == dayTradingPosId, self.DayTradingPositions))), None)
+            self.RoutingLock.release()
 
             if dayTradingPos is not None:
                 wrapper = ExecutionSummaryListWrapper(dayTradingPos)
@@ -509,11 +598,11 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
             self.ProcessCriticalError(e,msg)
             self.ProcessError(ErrorWrapper(Exception(msg)))
         finally:
-            self.Lock.release()
+            if self.RoutingLock.locked():
+                self.RoutingLock.release()
 
     def ProcessPortfolioPositionsRequestThread(self,wrapper):
         try:
-            self.Lock.acquire()
 
             portfListWrapper = PortfolioPositionListWrapper(self.DayTradingPositions)
             self.CommandsModule.ProcessMessage(portfListWrapper)
@@ -521,9 +610,6 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
             msg="Critical error @DayTrader.ProcessPortfolioPositionsRequestThread.:{}".format(str(e))
             self.ProcessCriticalError(e,msg)
             self.ProcessError(ErrorWrapper(Exception(msg)))
-        finally:
-            self.Lock.release()
-
 
     #we just route a position and ignore the answers
     def ProcessNewPositionReqSinglePos(self,wrapper):
@@ -638,11 +724,14 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
             posId = wrapper.GetField(PositionField.PosId)
 
             if posId is not None:
+
+                self.RoutingLock.acquire()
                 dayTradingPos = next(iter(list(filter(lambda x: x.Id == posId, self.DayTradingPositions))),None)
                 if dayTradingPos is not None:
                     for routPosId in dayTradingPos.ExecutionSummaries:
                         summary = dayTradingPos.ExecutionSummaries[routPosId]
                         if summary.Position.IsOpenPosition():
+                            self.RoutingLock.release()
                             cxlWrapper = CancelPositionWrapper(summary.Position.PosId)
                             self.OrderRoutingModule.ProcessMessage(cxlWrapper)
                 else:
@@ -653,6 +742,42 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
             msg = "Exception @DayTrader.ProcessCancePositionReqThread: {}!".format(str(e))
             # self.ProcessCriticalError(e, msg)
             self.ProcessError(ErrorWrapper(Exception(msg)))
+        finally:
+            if self.RoutingLock.locked():
+                self.RoutingLock.release()
+
+    def ProcessUpdateModelParamReq(self,wrapper):
+
+        try:
+            symbol = wrapper.GetField(ModelParamField.Symbol)
+            key = wrapper.GetField(ModelParamField.Key)
+            intValue = int( wrapper.GetField(ModelParamField.IntValue)) if wrapper.GetField(ModelParamField.IntValue) is not None else None
+            stringValue =  str( wrapper.GetField(ModelParamField.StringValue)) if wrapper.GetField(ModelParamField.StringValue) is not None else None
+            floatValue = float( wrapper.GetField(ModelParamField.FloatValue)) if wrapper.GetField(ModelParamField.FloatValue) is not None else None
+
+            paramToUpd = ModelParameter(key=key,symbol=symbol,stringValue=stringValue,intValue=intValue,floatValue=floatValue)
+
+            paramInMem = self.ModelParametersHandler.GetLight(key,symbol)
+
+            if paramInMem is None:
+                raise Exception("Could not find a model parameters in memory for key {} and symbol{}. Parameters insertion should be made "
+                                .format(key,symbol if symbol is not None else "unknown"))
+
+            self.ModelParametersManager.PersistModelParameter(paramToUpd)
+
+            paramInMem.IntValue=paramToUpd.IntValue
+            paramInMem.StringValue = paramToUpd.StringValue
+            paramInMem.FloatValue = paramToUpd.FloatValue
+
+            if(key is None):
+                raise Exception("Model parameter key cannot be null")
+
+            return CMState.BuildSuccess(self)
+        except Exception as e:
+            msg = "Critical Error updating model param: {}!".format(str(e))
+            self.ProcessError(ErrorWrapper(Exception(msg)))
+            self.DoLog(msg,MessageType.ERROR)
+            return CMState.BuildFailure(self, Exception=e)
 
     def ProcessCancePositionReq(self,wrapper):
         try:
@@ -737,34 +862,36 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
     def RequestMarketData(self):
         for secIn in self.DayTradingPositions:
-            self.MarketData[secIn.Security.Symbol]=secIn.Security
-            mdReqWrapper = MarketDataRequestWrapper(secIn.Security,SubscriptionRequestType.SnapshotAndUpdates)
-            self.MarketDataModule.ProcessMessage(mdReqWrapper)
+            try:
+                self.LockMarketData.acquire()
+                self.MarketData[secIn.Security.Symbol]=secIn.Security
+                mdReqWrapper = MarketDataRequestWrapper(secIn.Security,SubscriptionRequestType.SnapshotAndUpdates)
+                self.MarketDataModule.ProcessMessage(mdReqWrapper)
+            finally:
+                self.LockMarketData.release()
 
 
     def RequestBars(self):
+
         for secIn in self.DayTradingPositions:
-            sec = self.MarketData[secIn.Security.Symbol]
-            time = int( self.ModelParametrsHandler.Get(ModelParametersHandler.BAR_FREQUENCY()).IntValue)
-            if sec is not None:
-                self.Candlebars[secIn.Security.Symbol]=None
-                mdReqWrapper = CandleBarRequestWrapper(secIn.Security,time,TimeUnit.Minute,
-                                                       SubscriptionRequestType.SnapshotAndUpdates)
-                self.MarketDataModule.ProcessMessage(mdReqWrapper)
-            else:
-                raise Exception("Could not find security for symbol {}".format(secIn.Security.Symbol))
+
+            time = int( self.ModelParametersHandler.Get(ModelParametersHandler.BAR_FREQUENCY(),secIn.Security.Symbol).IntValue)
+
+            self.Candlebars[secIn.Security.Symbol]=None
+            mdReqWrapper = CandleBarRequestWrapper(secIn.Security,time,TimeUnit.Minute,
+                                                   SubscriptionRequestType.SnapshotAndUpdates)
+
+            self.MarketDataModule.ProcessMessage(mdReqWrapper)
+
 
     def RequestHistoricalPrices(self):
         for secIn in self.DayTradingPositions:
-            sec = self.MarketData[secIn.Security.Symbol]
+            self.HistoricalPrices[secIn.Security.Symbol]=None
+            hpReqWrapper = HistoricalPricesRequestWrapper(secIn.Security,
+                                                          self.ModelParametersHandler.Get(ModelParametersHandler.HISTORICAL_PRICES_CAL_DAYS_TO_REQ(),secIn.Security.Symbol).IntValue,
+                                                          TimeUnit.Day, SubscriptionRequestType.Snapshot)
+            self.MarketDataModule.ProcessMessage(hpReqWrapper)
 
-            if sec is not None:
-                self.HistoricalPrices[secIn.Security.Symbol]=None
-                hpReqWrapper = HistoricalPricesRequestWrapper(secIn.Security,self.Configuration.HistoricalPricesPastDays,
-                                                              TimeUnit.Day, SubscriptionRequestType.Snapshot)
-                self.MarketDataModule.ProcessMessage(hpReqWrapper)
-            else:
-                raise Exception("Could not find security for symbol {}".format(secIn.Security.Symbol))
 
     def ProcessMessage(self, wrapper):
         try:
@@ -778,6 +905,8 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                 return self.ProcessCancelAllPositionReq(wrapper)
             elif wrapper.GetAction() == Actions.CANCEL_POSITION:
                 return self.ProcessCancePositionReq(wrapper)
+            elif wrapper.GetAction() == Actions.UPDATE_MODEL_PARAM_REQUEST:
+                return self.ProcessUpdateModelParamReq(wrapper)
             else:
                 raise Exception("DayTrader.ProcessMessage: Not prepared for routing message {}".format(wrapper.GetAction()))
         except Exception as e:
@@ -846,18 +975,11 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
             time.sleep(self.Configuration.PauseBeforeExecutionInSeconds)
 
-            self.RequestMarketData()
-
-            self.RequestPositionList()
-
-            self.RequestBars()
-
-            self.RequestHistoricalPrices()
+            threading.Thread(target=self.MarketSubscriptionsThread, args=()).start()
 
             self.DoLog("DayTrader Successfully initialized", MessageType.INFO)
 
             return CMState.BuildSuccess(self)
-
 
         else:
             msg = "Error initializing Day Trader"

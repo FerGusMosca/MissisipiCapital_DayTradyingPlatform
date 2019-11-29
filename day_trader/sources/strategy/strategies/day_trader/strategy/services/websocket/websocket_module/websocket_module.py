@@ -206,6 +206,8 @@ class WebSocketModule(BaseCommunicationModule, ICommunicationModule):
                 return self.InvokingModule.ProcessMessage(wrapper)
             elif wrapper.GetAction() == Actions.CANCEL_POSITION:
                 return self.InvokingModule.ProcessMessage(wrapper)
+            elif wrapper.GetAction() == Actions.UPDATE_MODEL_PARAM_REQUEST:
+                return self.InvokingModule.ProcessMessage(wrapper)
             else:
                 raise Exception("ProcessIncoming: Not prepared to process message {}".format(wrapper.GetAction()))
         except Exception as e:
