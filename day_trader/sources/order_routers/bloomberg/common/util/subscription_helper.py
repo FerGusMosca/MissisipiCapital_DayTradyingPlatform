@@ -22,8 +22,8 @@ class SubscriptionHelper:
         if (BloombergTranslationHelper.GetSafeFloat(logger, msg, "LAST_PRICE", None) is not None):
             md.Trade = BloombergTranslationHelper.GetSafeFloat(logger, msg, "LAST_PRICE", None)
 
-        if (BloombergTranslationHelper.GetSafeFloat(logger, msg, "PX_LAST", None) is not None):
-            md.ClosingPrice = BloombergTranslationHelper.GetSafeFloat(logger, msg, "PX_LAST", None)
+        if (BloombergTranslationHelper.GetSafeFloat(logger, msg, "PX_OFFICIAL_CLOSE_RT", None) is not None):
+            md.ClosingPrice = BloombergTranslationHelper.GetSafeFloat(logger, msg, "PX_OFFICIAL_CLOSE_RT", None)
 
         if (BloombergTranslationHelper.GetSafeDateTime(logger, msg, "date", None) is not None):
             md.MDEntryDate = BloombergTranslationHelper.GetSafeDateTime(logger, msg, "date", None)

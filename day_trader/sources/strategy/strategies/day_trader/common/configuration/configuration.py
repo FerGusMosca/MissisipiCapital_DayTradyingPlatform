@@ -17,11 +17,7 @@ class Configuration:
         self.PersistRecovery = config['DEFAULT']['PERSIST_RECOVERY'] == "True"
         self.PersistFullOrders = config['DEFAULT']['PERSIST_FULL_ORDERS']=="True"
 
-        self.DBHost = config['DB']['HOST']
-        self.DBPort = config['DB']['PORT']
-        self.DBCatalog = config['DB']['CATALOG']
-        self.DBUser = config['DB']['USER']
-        self.DBPassword = config['DB']['PASSWORD']
+        self.DBConectionString = config['DB']['CONNECTION_STRING']
 
         self.WebsocketModule = config['DEFAULT']['WEBSOCKET_MODULE']
         self.WebsocketConfigFile = config['DEFAULT']['WEBSOCKET_CONFIG_FILE']

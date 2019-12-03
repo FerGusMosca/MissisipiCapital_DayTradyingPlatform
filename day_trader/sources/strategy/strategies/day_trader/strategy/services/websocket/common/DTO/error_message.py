@@ -2,6 +2,7 @@ from sources.strategy.strategies.day_trader.strategy.services.websocket.common.D
 import json
 class ErrorMessage(WebSocketMessage):
     def __init__(self, Error):
+        self.Msg= "ErrorMessage"
         self.Error = Error
 
     def toJSON(self):

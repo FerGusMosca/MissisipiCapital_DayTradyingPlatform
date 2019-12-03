@@ -6,7 +6,7 @@ class PositionDTO:
         self.Msg="DayTradingPosition"
         self.Symbol = dayTradingPos.Security.Symbol
         self.PositionSize = dayTradingPos.SharesQuantity
-        self.IsOpen=dayTradingPos.Open
+        self.IsOpen=dayTradingPos.Open()
         self.IsRouting = dayTradingPos.Routing
         self.LongSignal = dayTradingPos.LongSignal
         self.ShortSignal = dayTradingPos.ShortSignal
@@ -14,7 +14,7 @@ class PositionDTO:
         self.SignalDesc = dayTradingPos.SignalDesc
         self.CurrentMarketPrice = dayTradingPos.MarketData.Trade if dayTradingPos.MarketData is not None else None
         self.CurrentProfit = dayTradingPos.CurrentProfit * 100 if dayTradingPos.CurrentProfit is not None else None
-        self.MaxProxit = dayTradingPos.MaxProxit * 100 if dayTradingPos.MaxProxit is not None else None
+        self.MaxProfit = dayTradingPos.MaxProfit * 100 if dayTradingPos.MaxProfit is not None else None
         self.MaxLoss = dayTradingPos.MaxLoss * 100 if dayTradingPos.MaxLoss is not None else None
 
     def toJSON(self):

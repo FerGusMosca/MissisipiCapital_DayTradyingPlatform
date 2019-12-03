@@ -33,7 +33,7 @@ class DayTradingPosition():
         self.MarketData=None
         self.ExecutionSummaries={}
         self.Routing =routing
-        self.Open=open
+        #self.Open=open
         self.LongSignal = longSignal
         self.ShortSignal = shortSignal
         self.SignalType=signalType
@@ -48,7 +48,7 @@ class DayTradingPosition():
 
     #region Private Methods
 
-    def GetMmmov(self, candleBarArr, skip, length):
+    def GetMov(self, candleBarArr, skip, length):
         sortedBars = sorted(list(filter(lambda x: x is not None, candleBarArr)),key=lambda x:x.DateTime,reverse = True)
 
         if sortedBars is None or len(sortedBars)<(length+skip):
@@ -69,6 +69,9 @@ class DayTradingPosition():
 
         return sum/length
 
+    def Open(self):
+        return self.GetNetOpenShares()!=0
+
     def GetSlope (self,currMovAvg,prevMovAvg):
 
         if currMovAvg is not None and prevMovAvg is not None:
@@ -86,22 +89,22 @@ class DayTradingPosition():
 
 
     def GetStatisticalParameters(self,candlebarsArr):
-        fiftyMinNoSkipMovAvg = self.GetMmmov(candlebarsArr, 0, 50)
-        FiftyMinSkipTenMovAvg = self.GetMmmov(candlebarsArr, 10, 50)
+        fiftyMinNoSkipMovAvg = self.GetMov(candlebarsArr, 0, 50)
+        FiftyMinSkipTenMovAvg = self.GetMov(candlebarsArr, 10, 50)
 
         #if we don't have enough values --> we use what we have!
-        if(fiftyMinNoSkipMovAvg is None):
-            fiftyMinNoSkipMovAvg = self.GetMmov(candlebarsArr,0,len(candlebarsArr))
+        if(fiftyMinNoSkipMovAvg is None and len(candlebarsArr)>=3):
+            fiftyMinNoSkipMovAvg = self.GetMov(candlebarsArr,0,len(candlebarsArr))
         # if we don't have enough values --> we use what we have!
-        if (FiftyMinSkipTenMovAvg is None):
-            FiftyMinSkipTenMovAvg = self.GetMmov(candlebarsArr, 0, len(candlebarsArr))
+        if (FiftyMinSkipTenMovAvg is None and len(candlebarsArr)>=3):
+            FiftyMinSkipTenMovAvg = self.GetMov(candlebarsArr, 0, len(candlebarsArr))
 
-        threeMinNoSkipMovAvg = self.GetMmmov(candlebarsArr, 0, 3)
-        threeMinSkipTrheeMovAvg = self.GetMmmov(candlebarsArr, 3, 3)
+        threeMinNoSkipMovAvg = self.GetMov(candlebarsArr, 0, 3)
+        threeMinSkipTrheeMovAvg = self.GetMov(candlebarsArr, 3, 3)
 
-        threeMinSkipSixMovAvg = self.GetMmmov(candlebarsArr, 6, 3)
+        threeMinSkipSixMovAvg = self.GetMov(candlebarsArr, 6, 3)
 
-        threeMinSkipNineMovAvg = self.GetMmmov(candlebarsArr, 9, 3)
+        threeMinSkipNineMovAvg = self.GetMov(candlebarsArr, 9, 3)
 
         barPosNow = self.GetSpecificBar(candlebarsArr, 1)
         barPosMinusThree = self.GetSpecificBar(candlebarsArr, 3)
@@ -173,6 +176,21 @@ class DayTradingPosition():
 
         return posMTM
 
+    def GetNetOpenShares(self):
+        todaySummaries = sorted(list(filter(lambda x: x.Timestamp.date() == datetime.now().date() and x.CumQty >= 0,
+                                            self.ExecutionSummaries.values())),
+                                key=lambda x: x.Timestamp, reverse=False)
+        netShares = 0
+        for summary in todaySummaries:
+            # first we calculate the traded positions
+            if summary.GetTradedSummary() > 0:
+                if summary.IsLongPosition():
+                    netShares += summary.GetNetShares()
+                else:
+                    netShares -= summary.GetNetShares()
+
+        return netShares
+
     def CalculatePositionsProfit(self,profitsAndLosses):
         todaySummaries = sorted(list(filter(lambda x: x.Timestamp.date() == datetime.now().date() and x.CumQty >= 0, self.ExecutionSummaries.values())),
                                             key=lambda x: x.Timestamp, reverse=False)
@@ -203,6 +221,8 @@ class DayTradingPosition():
         nextOpenPos = next(iter(list(filter(lambda x: x.Position.IsOpenPosition(), self.ExecutionSummaries.values()))), None)
         self.Routing= nextOpenPos is not None
 
+    def GetOpenSummaries(self):
+        return list(filter(lambda x: x.Position.IsOpenPosition(), self.ExecutionSummaries.values()))
 
     def ResetProfitCounters(self,now):
         self.CurrentProfit = 0
@@ -232,8 +252,11 @@ class DayTradingPosition():
     def EvaluateLongTrade(self,dailyBiasModelParam,dailySlopeModelParam, posMaximChangeParam,
                           posMaxLongDeltaParam,candlebarsArr):
 
-        if self.Open:
+        if self.Open():
             return False #Position already opened
+
+        if self.Routing:
+            return False #cannot open positions that are being routed
 
         statisticalParams = self.GetStatisticalParameters(candlebarsArr)
 
@@ -265,34 +288,45 @@ class DayTradingPosition():
                                   maxLossForClosingModelParam,pctMaxLossForClosingModelParam,
                                   takeGainLimitModelParam,stopLossLimitModelParam,
                                   pctSlopeToCloseLongModelParam):
-        if not self.Open:
+        if not self.Open():
             return None #Position not opened
 
         statisticalParams = self.GetStatisticalParameters(candlebarsArr)
 
         #Maximum Gain during the trade exceeds a certain value and then drops to a percentage of that value
-        if(self.MaxProfit > maxGainForClosingModelParam.FloatValue
+        if(     self.MaxProfit is not None
+            and self.CurrentProfit is not None
+            and self.MaxProfit >= maxGainForClosingModelParam.FloatValue
             and self.CurrentProfit<pctMaxGainForClosingModelParam.FloatValue*self.MaxProfit):
             return _EXIT_LONG_COND_1
 
         #Maximum Loss during the trade exceeds (worse than) a certain value and then drops to a percentage of that value
-        if (self.MaxLoss < maxLossForClosingModelParam.FloatValue):
+        if (
+                self.CurrentProfit is not None
+            and self.MaxLoss is not None
+            and self.MaxLoss <= maxLossForClosingModelParam.FloatValue
+            and self.CurrentProfit<0):
             absProfit = self.CurrentProfit if self.CurrentProfit>0 else (-1*self.CurrentProfit)
             absMaxLoss= self.MaxLoss if self.MaxLoss>0 else (-1*self.MaxLoss)
             if(absProfit < (pctMaxLossForClosingModelParam.FloatValue*absMaxLoss)):
                 return _EXIT_LONG_COND_2
 
         #CUMULATIVE Gain for the Day exceeds Take Gain Limit
-        if(self.CurrentProfit > takeGainLimitModelParam.FloatValue):
+        if(     self.CurrentProfit is not None
+            and self.CurrentProfit > takeGainLimitModelParam.FloatValue):
             return _EXIT_LONG_COND_3
 
         #CUMULATIVE Loss for the Day exceeds (worse than) Stop Loss Limit
-        if (self.CurrentProfit < stopLossLimitModelParam.FloatValue):
+        if (     self.CurrentProfit is not None
+             and self.CurrentProfit < stopLossLimitModelParam.FloatValue):
             return _EXIT_LONG_COND_4
 
         #Last 3 minute slope of 3 minute moving average exceeds a certain value AGAINST the Trade
-        if(statisticalParams.ThreeMinSkipSlope < pctSlopeToCloseLongModelParam.FloatValue):
+        if(     statisticalParams.ThreeMinSkipSlope is not None
+            and statisticalParams.ThreeMinSkipSlope < pctSlopeToCloseLongModelParam.FloatValue):
             return _EXIT_LONG_COND_5
+
+        return None
 
 
     def EvaluateTimeRange(self,timeFromModelParam,timeToModelParam):

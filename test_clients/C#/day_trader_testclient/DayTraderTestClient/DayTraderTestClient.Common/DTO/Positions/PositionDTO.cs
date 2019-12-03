@@ -22,7 +22,7 @@ namespace DayTraderTestClient.Common.DTO.positions
 
         public string SignalDesc { get; set; }
 
-        public bool IsOpen { get; set; }
+        public string IsOpen { get; set; }
 
         public decimal? CurrentMarketPrice { get; set; }
 
@@ -31,6 +31,8 @@ namespace DayTraderTestClient.Common.DTO.positions
         public decimal? MaxProxit { get; set; }
 
         public decimal? MaxLoss { get; set; }
+
+        public string Msg { get; set; }
 
     }
 }

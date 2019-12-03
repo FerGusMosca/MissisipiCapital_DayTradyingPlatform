@@ -312,20 +312,13 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                 self.PositionSecurities[summary.Position.PosId]=dayTradingPosition
 
     def LoadManagers(self):
-        self.DayTradingPositionManager = DayTradingPositionManager(self.Configuration.DBHost, self.Configuration.DBPort,
-                                                             self.Configuration.DBCatalog, self.Configuration.DBUser,
-                                                             self.Configuration.DBPassword)
+        self.DayTradingPositionManager = DayTradingPositionManager(self.Configuration.DBConectionString)
 
-        self.ExecutionSummaryManager = ExecutionSummaryManager(self.Configuration.DBHost, self.Configuration.DBPort,
-                                                                   self.Configuration.DBCatalog,
-                                                                   self.Configuration.DBUser,
-                                                                   self.Configuration.DBPassword)
+        self.ExecutionSummaryManager = ExecutionSummaryManager(self.Configuration.DBConectionString)
 
         self.DayTradingPositions = self.DayTradingPositionManager.GetDayTradingPositions()
 
-        self.ModelParametersManager = ModelParametersManager(self.Configuration.DBHost, self.Configuration.DBPort,
-                                                             self.Configuration.DBCatalog, self.Configuration.DBUser,
-                                                             self.Configuration.DBPassword)
+        self.ModelParametersManager = ModelParametersManager(self.Configuration.DBConectionString)
 
         modelParams = self.ModelParametersManager.GetModelParametersManager()
         self.ModelParametersHandler = ModelParametersHandler(modelParams)
@@ -513,11 +506,13 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                                                                self.ModelParametersHandler.Get(ModelParametersHandler.HIGH_VOL_TO_TIME_2(), symbol),
                                                                ):
 
-                    return dayTradingPos.EvaluateLongTrade(self.ModelParametersHandler.Get(ModelParametersHandler.DAILY_BIAS(),symbol),
+                    if dayTradingPos.EvaluateLongTrade(self.ModelParametersHandler.Get(ModelParametersHandler.DAILY_BIAS(),symbol),
                                                         self.ModelParametersHandler.Get(ModelParametersHandler.DAILY_SLOPE(),symbol),
                                                         self.ModelParametersHandler.Get(ModelParametersHandler.MAXIM_PCT_CHANGE_3_MIN(),symbol),
                                                         self.ModelParametersHandler.Get(ModelParametersHandler.POS_LONG_MAX_DELTA(),symbol),
-                                                        list(cbDict.values()))
+                                                        list(cbDict.values())):
+
+                        self.ProcessNewPositionReqManagedPos(dayTradingPos, Side.Buy, dayTradingPos.SharesQuantity, "106")
                 else:
                     return False
             else:
@@ -540,7 +535,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
             dayTradingPos =  next(iter(list(filter(lambda x: x.Security.Symbol == candlebar.Security.Symbol, self.DayTradingPositions))), None)
             if dayTradingPos is not None:
 
-                dayTradingPos.EvaluateClosingLongTrade(list(cbDict.values()),
+                closingCond = dayTradingPos.EvaluateClosingLongTrade(list(cbDict.values()),
                                                 self.ModelParametersHandler.Get(ModelParametersHandler.MAX_GAIN_FOR_DAY(),symbol),
                                                 self.ModelParametersHandler.Get(ModelParametersHandler.PCT_MAX_GAIN_CLOSING(),symbol),
                                                 self.ModelParametersHandler.Get(ModelParametersHandler.MAX_LOSS_FOR_DAY(),symbol),
@@ -549,6 +544,18 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                                                 self.ModelParametersHandler.Get(ModelParametersHandler.STOP_LOSS_LIMIT(),symbol),
                                                 self.ModelParametersHandler.Get(ModelParametersHandler.PCT_SLOPE_TO_CLOSE_LONG(),symbol),
                                                 )
+                if closingCond is not None:
+                    #1-We search for open summaries
+                        if dayTradingPos.Routing:
+                            #TODO: cancel ALL routing positions if not pending cancel
+                            pass
+                        else:
+                            netShares = dayTradingPos.GetNetOpenShares()
+                            self.ProcessNewPositionReqManagedPos(dayTradingPos,
+                                                                 Side.Sell if netShares>0 else Side.Buy,
+                                                                 netShares if netShares>0 else netShares*(-1),
+                                                                 "106")
+
             else:
                 msg = "Could not find Day Trading Position for candlebar symbol {}. Please Resync.".format(candlebar.Security.Symbol)
                 self.SendToInvokingModule(ErrorWrapper(Exception(msg)))
@@ -645,8 +652,35 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
             if self.RoutingLock.locked():
                 self.RoutingLock.release()
 
+    def ProcessNewPositionReqManagedPos(self, dayTradingPos, side,qty,account):
+        try:
+            self.RoutingLock.acquire()
+
+            newPos = Position(PosId=self.NextPostId,
+                              Security=dayTradingPos.Security,
+                              Side=side, PriceType=PriceType.FixedAmount, Qty=qty, QuantityType=QuantityType.SHARES,
+                              Account=account, Broker=None, Strategy=None, OrderType=OrdType.Market)
+
+            newPos.ValidateNewPosition()
+
+            summary = ExecutionSummary(datetime.datetime.now(), newPos)
+            dayTradingPos.ExecutionSummaries[self.NextPostId] = summary
+            dayTradingPos.UpdateRouting()
+            self.PositionSecurities[self.NextPostId] = dayTradingPos
+            self.NextPostId = uuid.uuid4()
+            self.RoutingLock.release()
+
+            posWrapper = PositionWrapper(newPos)
+            self.OrderRoutingModule.ProcessMessage(posWrapper)
+
+            threading.Thread(target=self.PublishPortfolioPositionThread, args=(dayTradingPos,)).start()
+            threading.Thread(target=self.PublishSummaryThread, args=(summary, dayTradingPos.Id)).start()
+        finally:
+            if self.RoutingLock.locked():
+                self.RoutingLock.release()
+
     #now we are trading a managed position
-    def ProcessNewPositionReqManagedPos(self,wrapper):
+    def ProcessManualNewPositionReqManagedPos(self,wrapper):
 
         posId = wrapper.GetField(PositionField.PosId)
         try:
@@ -658,39 +692,14 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                 qty = wrapper.GetField(PositionField.Qty)
                 account = wrapper.GetField(PositionField.Account)
 
-                self.RoutingLock.acquire()
-
-                newPos = Position(PosId=self.NextPostId,
-                                  Security=dayTradingPos.Security,
-                                  Side=side,PriceType=PriceType.FixedAmount,Qty=qty,QuantityType=QuantityType.SHARES,
-                                  Account=account,Broker=None,Strategy=None,OrderType=OrdType.Market)
-
-                newPos.ValidateNewPosition()
-
-                summary =ExecutionSummary(datetime.datetime.now(), newPos)
-                dayTradingPos.ExecutionSummaries[self.NextPostId] = summary
-                dayTradingPos.UpdateRouting()
-                self.PositionSecurities[self.NextPostId] = dayTradingPos
-                self.NextPostId = uuid.uuid4()
-                self.RoutingLock.release()
-
-                posWrapper = PositionWrapper(newPos)
-                self.OrderRoutingModule.ProcessMessage(posWrapper)
-
-                threading.Thread(target=self.PublishPortfolioPositionThread, args=(dayTradingPos,)).start()
-                threading.Thread(target=self.PublishSummaryThread, args=(summary, dayTradingPos.Id)).start()
-
+                self.ProcessNewPositionReqManagedPos(dayTradingPos,side,qty,account)
             else:
                 raise Exception("Could not find a security to trade (position) for position id {}".format(posId))
 
-
         except Exception as e:
-            msg = "Exception @DayTrader.ProcessNewPositionReqManagedPos: {}!".format(str(e))
+            msg = "Exception @DayTrader.ProcessManualNewPositionReqManagedPos: {}!".format(str(e))
             self.ProcessCriticalError(e, msg)
             self.ProcessError(ErrorWrapper(Exception(msg)))
-        finally:
-            if self.RoutingLock.locked():
-                self.RoutingLock.release()
 
     def ProcessNewPositionReqThread(self,wrapper):
         try:
@@ -701,7 +710,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
             if symbol is not None:
                 self.ProcessNewPositionReqSinglePos(wrapper)
             elif posId is not None:
-                self.ProcessNewPositionReqManagedPos(wrapper)
+                self.ProcessManualNewPositionReqManagedPos(wrapper)
             else:
                 raise Exception("You need to provide the symbol or positionId for a new position!")
 

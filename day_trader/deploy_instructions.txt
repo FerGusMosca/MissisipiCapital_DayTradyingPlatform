@@ -1,0 +1,22 @@
+
+====================== Instalación desde 0
+-Install Python 3.7
+ Install Bloomberg Platform 
+	--> PATH environment is automatically updated. If plaftform is remote, manually update
+	--> Copy blpapi_cpp_3.13.1.1 y copiar dlls @blpapi_cpp_3.13.1.1 folder to C:\blp\DAPI
+-Install Visual Studio SDK < Visual Studio Build Tools 2017>
+	--> Activate checkboxes in the following link
+	--> https://visualstudio.microsoft.com/es/thank-you-downloading-visual-studio/?sku=BuildTools&rel=15
+- Deploy python app
+- Validate that  Enable TCP/IP for SQL Server is true. Validate SQL Server Agent is running
+- run generate_env
+- if everythin ok --> run python main.py
+
+
+
+
+==================== Special commands
+python -m pip install --index-url=https://bloomberg.bintray.com/pip/simple blpapi
+
+
+
