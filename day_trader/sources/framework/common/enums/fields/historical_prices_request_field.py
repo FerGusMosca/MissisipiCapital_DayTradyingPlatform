@@ -6,4 +6,6 @@ class HistoricalPricesRequestField(Enum):
     TimeUnit = 2
     Time = 3
     SubscriptionRequestType = 4
+    From = 5
+    To = 6
 

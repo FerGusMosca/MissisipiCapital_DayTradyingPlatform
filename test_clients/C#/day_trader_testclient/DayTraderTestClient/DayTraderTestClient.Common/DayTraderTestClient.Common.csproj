@@ -42,6 +42,7 @@
     <Compile Include="DTO\Batchs\GetOpenPositionsBatch.cs" />
     <Compile Include="DTO\Config\UpdateModelParamReq.cs" />
     <Compile Include="DTO\ErrorMessage.cs" />
+    <Compile Include="DTO\Market Data\HistoricalPricesReq.cs" />
     <Compile Include="DTO\Order Routing\CancelAllPositionReq.cs" />
     <Compile Include="DTO\Order Routing\CancelPositionReq.cs" />
     <Compile Include="DTO\Order Routing\RoutePositionReq.cs" />

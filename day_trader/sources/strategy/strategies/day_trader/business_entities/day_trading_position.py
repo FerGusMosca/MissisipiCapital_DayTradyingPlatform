@@ -15,13 +15,14 @@ _EXIT_LONG_COND_2="EXIT_LONG_COND_2"
 _EXIT_LONG_COND_3="EXIT_LONG_COND_3"
 _EXIT_LONG_COND_4="EXIT_LONG_COND_4"
 _EXIT_LONG_COND_5="EXIT_LONG_COND_5"
+_EXIT_LONG_COND_EOF="EXIT_LONG_COND_EOF"
 
 _EXIT_SHORT_COND_1="EXIT_SHORT_COND_1"
 _EXIT_SHORT_COND_2="EXIT_SHORT_COND_2"
 _EXIT_SHORT_COND_3="EXIT_SHORT_COND_3"
 _EXIT_SHORT_COND_4="EXIT_SHORT_COND_4"
 _EXIT_SHORT_COND_5="EXIT_SHORT_COND_5"
-
+_EXIT_SHORT_COND_EOF="EXIT_SHORT_COND_EOF"
 
 class DayTradingPosition():
 
@@ -253,16 +254,18 @@ class DayTradingPosition():
                           posMaxLongDeltaParam,candlebarsArr):
 
         if self.Open():
+            print ("Not opening because is opened:{}".format(self.Security.Symbol))
             return False #Position already opened
 
         if self.Routing:
+            print("Not opening because is routing:{}".format(self.Security.Symbol))
             return False #cannot open positions that are being routed
 
         statisticalParams = self.GetStatisticalParameters(candlebarsArr)
 
-        if  (statisticalParams.TenMinSkipSlope is None or statisticalParams.ThreeMinSkipSlope
-            or statisticalParams.ThreeToSixMinSkipSlope or statisticalParams.SixToNineMinSkipSlope
-            or statisticalParams.PctChangeLastThreeMinSlope or statisticalParams.DeltaCurrValueAndFiftyMMov):
+        if  (statisticalParams.TenMinSkipSlope is None or statisticalParams.ThreeMinSkipSlope is None
+            or statisticalParams.ThreeToSixMinSkipSlope is None or statisticalParams.SixToNineMinSkipSlope is None
+            or statisticalParams.PctChangeLastThreeMinSlope is None or statisticalParams.DeltaCurrValueAndFiftyMMov is None):
             return False
 
         if  (    dailyBiasModelParam.FloatValue>=0 #Daily Bias
@@ -287,11 +290,16 @@ class DayTradingPosition():
                                   maxGainForClosingModelParam,pctMaxGainForClosingModelParam,
                                   maxLossForClosingModelParam,pctMaxLossForClosingModelParam,
                                   takeGainLimitModelParam,stopLossLimitModelParam,
-                                  pctSlopeToCloseLongModelParam):
+                                  pctSlopeToCloseLongModelParam,
+                                  endOfdayLimitModelParam):
         if not self.Open():
             return None #Position not opened
 
         statisticalParams = self.GetStatisticalParameters(candlebarsArr)
+
+        #EXIT any open trades at 2:59 PMcentral time
+        if self.EvaluateBiggerDate(endOfdayLimitModelParam):
+            return _EXIT_LONG_COND_EOF
 
         #Maximum Gain during the trade exceeds a certain value and then drops to a percentage of that value
         if(     self.MaxProfit is not None
@@ -336,8 +344,13 @@ class DayTradingPosition():
         todayStart = now.replace(hour=fromTimeLowVol.tm_hour, minute=fromTimeLowVol.tm_min, second=0, microsecond=0)
         todayEnd = now.replace(hour=toTimeLowVol.tm_hour, minute=toTimeLowVol.tm_min,
                                second=0, microsecond=0)
+        return todayStart < now and now <todayEnd
 
-        return todayStart<now and now<todayEnd
+    def EvaluateBiggerDate(self, timeFromModelParam):
+        now = datetime.now()
+        fromTime = time.strptime(timeFromModelParam.StringValue, "%I:%M %p")
+        todayStart = now.replace(hour=fromTime.tm_hour, minute=fromTime.tm_min, second=0, microsecond=0)
+        return todayStart<now
 
     def EvaluateValidTimeToEnterTrade(self,lowVolEntryThresholdModelParam,highVolEntryThresholdModelParam,
                                       lowVolFromTimeModelParam,lowVolToTimeModelParam,
@@ -365,6 +378,7 @@ class DayTradingPosition():
     def CalculateStdDevForLastNDays(self,marketDataArr,nDaysModelParam):
 
         if nDaysModelParam is not None:
+
             sortedMDArr= sorted(list(filter(lambda x: x.ClosingPrice is not None, marketDataArr.values())), key=lambda x: x.MDEntryDate,
                                 reverse=True)[:nDaysModelParam.IntValue]
 

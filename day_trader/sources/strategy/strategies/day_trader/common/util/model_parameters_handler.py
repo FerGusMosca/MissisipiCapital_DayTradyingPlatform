@@ -119,6 +119,10 @@ class ModelParametersHandler:
     def HIGH_VOL_TO_TIME_2():
         return "HIGH_VOL_TO_TIME_2"
 
+    @staticmethod
+    def END_OF_DAY_LIMIT():
+        return "END_OF_DAY_LIMIT"
+
     #endregion
 
     #region Public Methods

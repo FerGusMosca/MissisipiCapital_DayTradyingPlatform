@@ -25,6 +25,9 @@ class SubscriptionHelper:
         if (BloombergTranslationHelper.GetSafeFloat(logger, msg, "PX_OFFICIAL_CLOSE_RT", None) is not None):
             md.ClosingPrice = BloombergTranslationHelper.GetSafeFloat(logger, msg, "PX_OFFICIAL_CLOSE_RT", None)
 
+        if (BloombergTranslationHelper.GetSafeFloat(logger, msg, "PX_LAST", None) is not None):
+            md.ClosingPrice = BloombergTranslationHelper.GetSafeFloat(logger, msg, "PX_LAST", None)
+
         if (BloombergTranslationHelper.GetSafeDateTime(logger, msg, "date", None) is not None):
             md.MDEntryDate = BloombergTranslationHelper.GetSafeDateTime(logger, msg, "date", None)
 
@@ -70,8 +73,6 @@ class SubscriptionHelper:
                 return None
         else:
             return None
-
-
 
     @staticmethod
     def ProcessHistoricalPrices(logger, security,msg):
@@ -142,7 +143,7 @@ class SubscriptionHelper:
         refDataSvc = session.getService(histPricesService)
         request=refDataSvc.createRequest("HistoricalDataRequest")
         request.append("securities", fullSymbol )
-        request.append("fields", "PX_LAST"  )
+        request.append("fields", "PX_LAST")
         request.append("fields", "OPEN")
         request.append("fields", "HIGH")
         request.append("fields", "LOW")

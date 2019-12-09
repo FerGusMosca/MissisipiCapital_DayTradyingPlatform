@@ -1,6 +1,7 @@
 ﻿using DayTraderTestClient.Common.DTO;
 using DayTraderTestClient.Common.DTO.batchs;
 using DayTraderTestClient.Common.DTO.Config;
+using DayTraderTestClient.Common.DTO.Market_Data;
 using DayTraderTestClient.Common.DTO.Order_Routing;
 using DayTraderTestClient.Common.DTO.Subscription;
 using DayTraderTestClient.DataAccessLayer;
@@ -68,6 +69,7 @@ namespace DayTraderTestClient
             Console.WriteLine("Subscribe <Service> <ServiceKey>");
             Console.WriteLine("RouteSymbolReq <symbol> <side> <qty> <account>");
             Console.WriteLine("RoutePositionReq <posId> <side> <qty> <account>");
+            Console.WriteLine("HistoricalPricesReq <symbol>");
             Console.WriteLine("CancelPos <posId>");
             Console.WriteLine("CancelAll");
             Console.WriteLine("UpdateModelParamReq <key> <symbol> <intValue> <stringValue> <floatValue>");
@@ -100,6 +102,28 @@ namespace DayTraderTestClient
             else
                 DoLog(string.Format("Missing mandatory parameters for subscription message"));
 
+        }
+
+        private static void ProcessHistoricalPricesReq(string[] param)
+        {
+            if (param.Length == 2)
+            {
+                HistoricalPricesReq histPricesReq = new HistoricalPricesReq()
+                {
+                    Msg = "HistoricalPricesReq",
+                    Symbol = param[1],
+                    To=DateTime.Now.Date,
+                    From = DateTime.Now.Date.AddDays(-5),
+                    UUID = UUID,
+                    ReqId = Guid.NewGuid().ToString(),
+                };
+
+                DoSend<HistoricalPricesReq>(histPricesReq);
+            }
+            else
+                DoLog(string.Format("Missing mandatory parameters for HistoricalPricesReq message"));
+
+        
         }
 
         private static void ProcessCancelPos(string[] param)
@@ -261,6 +285,10 @@ namespace DayTraderTestClient
             else if (mainCmd == "CancelPos")
             {
                 ProcessCancelPos(param);
+            }
+            else if (mainCmd == "HistoricalPricesReq")
+            {
+                ProcessHistoricalPricesReq(param);
             }
             else if (mainCmd == "Unsubscribe")
             {

@@ -13,9 +13,7 @@ class Configuration:
         self.PauseBeforeExecutionInSeconds = int( config['DEFAULT']['PAUSE_BEFORE_EXECUTION_IN_SECONDS'])
         self.DefaultExchange= config['DEFAULT']['DEFAULT_EXCHANGE']
         self.MarketDataSubscriptionResetTime = config['DEFAULT']['MARKET_DATA_SUBSCRIPTION_RESET_TIME']
-
-        self.PersistRecovery = config['DEFAULT']['PERSIST_RECOVERY'] == "True"
-        self.PersistFullOrders = config['DEFAULT']['PERSIST_FULL_ORDERS']=="True"
+        self.DefaultAccount = config['DEFAULT']['DEFAULT_ACCOUNT']
 
         self.DBConectionString = config['DB']['CONNECTION_STRING']
 

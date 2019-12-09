@@ -7,6 +7,8 @@ from sources.strategy.strategies.day_trader.strategy.services.websocket.websocke
 from sources.strategy.strategies.day_trader.strategy.services.websocket.common.DTO.subscriptions.websocket_subscribe_message import *
 from sources.strategy.strategies.day_trader.strategy.services.websocket.common.DTO.order_routing.route_position_req import *
 from sources.strategy.strategies.day_trader.strategy.services.websocket.common.DTO.order_routing.cancel_position_req import *
+from sources.strategy.strategies.day_trader.strategy.services.websocket.common.DTO.market_data.historical_prices_req import *
+from sources.strategy.strategies.day_trader.strategy.services.websocket.common.DTO.market_data.historical_prices_ack import *
 from sources.strategy.strategies.day_trader.strategy.services.websocket.common.DTO.order_routing.cancel_position_ack import *
 from sources.strategy.strategies.day_trader.strategy.services.websocket.common.DTO.config.update_model_param_req import *
 from sources.strategy.strategies.day_trader.strategy.services.websocket.common.DTO.config.update_model_param_ack import *
@@ -14,16 +16,20 @@ from sources.strategy.strategies.day_trader.strategy.services.websocket.common.D
 from sources.strategy.strategies.day_trader.strategy.services.websocket.common.DTO.order_routing.cancel_all_position_ack import *
 from sources.strategy.strategies.day_trader.strategy.services.websocket.common.DTO.subscriptions.subscription_reponse import *
 from sources.strategy.strategies.day_trader.strategy.services.websocket.common.DTO.batchs.get_open_positions_batch import *
+from sources.strategy.strategies.day_trader.strategy.services.websocket.common.DTO.batchs.get_historical_prices_batch import *
 from sources.strategy.strategies.day_trader.strategy.services.websocket.common.DTO.batchs.get_position_execution_summaries_batch import *
 from sources.framework.common.wrappers.portfolio_position_list_request_wrapper import *
 from sources.strategy.strategies.day_trader.strategy.services.websocket.common.DTO.error_message import *
 from sources.strategy.strategies.day_trader.strategy.services.websocket.common.DTO.positions.position_dto import *
+from sources.strategy.strategies.day_trader.strategy.services.websocket.common.DTO.market_data.historical_price_dto import *
 from sources.strategy.strategies.day_trader.strategy.services.websocket.common.DTO.positions.execution_summary_dto import *
 from sources.strategy.strategies.day_trader.strategy.services.websocket.common.wrappers.position_req_wrapper import *
 from sources.strategy.strategies.day_trader.strategy.services.websocket.common.wrappers.cancel_all_position_wrapper import *
 from sources.strategy.strategies.day_trader.strategy.services.websocket.common.wrappers.update_model_parameter_req_wrapper import *
 from sources.strategy.strategies.day_trader.strategy.services.websocket.common.wrappers.cancel_position_wrapper import *
 from sources.framework.common.wrappers.portfolio_position_trade_list_request_wrapper import *
+from sources.strategy.strategies.day_trader.strategy.services.websocket.common.wrappers.historical_prices_req_wrapper import *
+
 
 _OPEN_POSITIONS_SERVICE = "OP"
 _POSITION_EXECUTIONS_SERVICE="PE"
@@ -78,6 +84,22 @@ class WSHandler(tornado.websocket.WebSocketHandler):
       summariesBatch = GetPositionExecutionSummariesBatch("GetPositionExecutionSummariesBatch",executionsDTOArr)
       self.DoSendAsync(summariesBatch)
 
+
+  def PublishHistoricalPrices(self,symbol,marketDataArr):
+    try:
+
+      HistPriceDTOArr = []
+
+      for md in marketDataArr:
+        histPriceDTO = HistoricalPriceDTO(md)
+        HistPriceDTOArr.append(histPriceDTO)
+
+      histBatch = GetHistoricalPricesBatch("GetHistoricalPricesBatch",symbol, HistPriceDTOArr)
+      self.DoSendAsync(histBatch)
+
+    except Exception as e:
+      self.DoLog("Exception @WebsocketRaise.PublishHistoricalPrices:{}".format(str(e)), MessageType.ERROR)
+      raise e
 
   def PublishExecutionSummary(self,summary,dayTradingPosId):
     if self.IsSubscribed(_POSITION_EXECUTIONS_SERVICE, dayTradingPosId):
@@ -139,6 +161,29 @@ class WSHandler(tornado.websocket.WebSocketHandler):
     if subscrMsg.Service not in self.SubscribedServices:
       del self.SubscribedServices[subscrMsg.Service]
 
+
+  def ProcessHistoricalPricesReq(self,histPricesReq):
+    try:
+
+      self.DoLog("Incoming Historical Prices Req from {} to {} for symbol {} ".format(histPricesReq.From,histPricesReq.To,histPricesReq.Symbol ), MessageType.INFO)
+      wrapper = HistoricalPricesReqWrapper(histPricesReq.Symbol, histPricesReq.From,histPricesReq.To)
+
+      state = self.InvokingModule.ProcessIncoming(wrapper)
+
+      if state.Success:
+        ack = HistoricalPricesAck(Msg="HistoricalPricesAck", UUID=histPricesReq.UUID,ReqId=histPricesReq.ReqId)
+        self.DoSendResponse(ack)
+        self.DoLog("Historical prices request sent for symbol {}...".format(histPricesReq.Symbol), MessageType.INFO)
+      else:
+        raise state.Exception
+    except Exception as e:
+      msg = "Critical ERROR for Historical Prices Req for Symbol {} From {} To {}. Error:{}".format(histPricesReq.Symbol,
+                                                                                                    histPricesReq.From,
+                                                                                                    histPricesReq.To,
+                                                                                                    str(e))
+      self.DoLog(msg, MessageType.ERROR)
+      ack = HistoricalPricesAck(Msg="HistoricalPricesAck", UUID=histPricesReq.UUID, ReqId=histPricesReq.ReqId, Success=False, Error=msg)
+      self.DoSendResponse(ack)
 
   def ProcessCancelPositionReq(self,cancelRouteReq):
     try:
@@ -298,6 +343,9 @@ class WSHandler(tornado.websocket.WebSocketHandler):
       elif "Msg" in fieldsDict and fieldsDict["Msg"]=="CancelPositionReq":
         cancelPos = CancelPositionReq(**json.loads(message))
         self.ProcessCancelPositionReq(cancelPos)
+      elif "Msg" in fieldsDict and fieldsDict["Msg"] == "HistoricalPricesReq":
+        histPricesReq = HistoricalPricesReq(**json.loads(message))
+        self.ProcessHistoricalPricesReq(histPricesReq)
       else:
         self.DoLog("Unknown message :{}".format(message),MessageType.ERROR)
 

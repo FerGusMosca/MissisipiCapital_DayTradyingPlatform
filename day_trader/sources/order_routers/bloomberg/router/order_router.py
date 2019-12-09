@@ -23,6 +23,7 @@ from sources.order_routers.bloomberg.common.util.log_helper import *
 import threading
 import time
 from datetime import datetime
+import traceback
 
 
 ORDER_FIELDS      = blpapi.Name("OrderFields")
@@ -296,10 +297,10 @@ class OrderRouter( BaseCommunicationModule, ICommunicationModule):
 
     def ProcessMiscEvents(self, event):
 
-        self.DoLog("Processing " + event.eventType() + " event",MessageType.DEBUG)
+        self.DoLog("Processing {} event".format(str(event.eventType())),MessageType.DEBUG)
 
         for msg in event:
-            self.DoLog("MESSAGE: %s" % (msg.tostring()),MessageType.DEBUG)
+            self.DoLog("MESSAGE: %s" % (str(msg)),MessageType.DEBUG)
 
     def ProcessHistoricalPrice(self,msg):
 
@@ -482,6 +483,7 @@ class OrderRouter( BaseCommunicationModule, ICommunicationModule):
                 self.ProcessMiscEvents(event)
 
         except Exception as e:
+            traceback.print_exc()
             self.DoLog("Error processing Bloomberg event ({} @ProcessEvent) @OrderRouter.Bloomberg module:{}".format(event.eventType(),str(e)), MessageType.ERROR)
 
     def LoadStrategy(self, request, strategy_name):
