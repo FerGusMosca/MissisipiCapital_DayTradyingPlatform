@@ -23,6 +23,7 @@ from sources.framework.common.dto.cm_state import *
 from sources.strategy.common.wrappers.position_list_request_wrapper import *
 from sources.strategy.common.wrappers.position_wrapper import *
 from sources.strategy.common.wrappers.position_wrapper import *
+from sources.strategy.strategies.day_trader.common.wrappers.model_param_wrapper import *
 from sources.strategy.strategies.day_trader.common.wrappers.execution_summary_list_wrapper import *
 from sources.strategy.strategies.day_trader.common.wrappers.execution_summary_wrapper import *
 from sources.strategy.data_access_layer.day_trading_position_manager import *
@@ -770,6 +771,26 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                 self.RoutingLock.release()
 
 
+    def ProcessModelParamReq(self,wrapper):
+        try:
+            symbol = wrapper.GetField(ModelParamField.Symbol)
+            key = wrapper.GetField(ModelParamField.Key)
+
+
+            paramInMem = self.ModelParametersHandler.Get(key=key,symbol=symbol if symbol is not None else None)
+
+            modelParmWrapper = ModelParameterWrapper (paramInMem)
+
+            threading.Thread(target=self.SendToInvokingModule, args=(modelParmWrapper,)).start()
+
+            return CMState.BuildSuccess(self)
+
+        except Exception as e:
+            msg = "Critical Error recovering model parameter from memory: {}!".format(str(e))
+            self.ProcessError(ErrorWrapper(Exception(msg)))
+            self.DoLog(msg, MessageType.ERROR)
+            return CMState.BuildFailure(self, Exception=e)
+
     def ProcessHistoricalPricesReq(self,wrapper):
         try:
             symbol = wrapper.GetField(HistoricalPricesRequestField.Security)
@@ -962,6 +983,8 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                 return self.ProcessUpdateModelParamReq(wrapper)
             elif wrapper.GetAction() == Actions.HISTORICAL_PRICES_REQUEST:
                 return self.ProcessHistoricalPricesReq(wrapper)
+            elif wrapper.GetAction() == Actions.MODEL_PARAM_REQUEST:
+                return self.ProcessModelParamReq(wrapper)
             else:
                 raise Exception("DayTrader.ProcessMessage: Not prepared for routing message {}".format(wrapper.GetAction()))
         except Exception as e:

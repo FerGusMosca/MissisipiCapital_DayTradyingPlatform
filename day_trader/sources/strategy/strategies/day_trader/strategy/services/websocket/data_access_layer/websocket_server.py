@@ -9,6 +9,8 @@ from sources.strategy.strategies.day_trader.strategy.services.websocket.common.D
 from sources.strategy.strategies.day_trader.strategy.services.websocket.common.DTO.order_routing.cancel_position_req import *
 from sources.strategy.strategies.day_trader.strategy.services.websocket.common.DTO.market_data.historical_prices_req import *
 from sources.strategy.strategies.day_trader.strategy.services.websocket.common.DTO.market_data.historical_prices_ack import *
+from sources.strategy.strategies.day_trader.strategy.services.websocket.common.DTO.config.model_param_req import *
+from sources.strategy.strategies.day_trader.strategy.services.websocket.common.DTO.config.model_param_ack import *
 from sources.strategy.strategies.day_trader.strategy.services.websocket.common.DTO.order_routing.cancel_position_ack import *
 from sources.strategy.strategies.day_trader.strategy.services.websocket.common.DTO.config.update_model_param_req import *
 from sources.strategy.strategies.day_trader.strategy.services.websocket.common.DTO.config.update_model_param_ack import *
@@ -21,6 +23,7 @@ from sources.strategy.strategies.day_trader.strategy.services.websocket.common.D
 from sources.framework.common.wrappers.portfolio_position_list_request_wrapper import *
 from sources.strategy.strategies.day_trader.strategy.services.websocket.common.DTO.error_message import *
 from sources.strategy.strategies.day_trader.strategy.services.websocket.common.DTO.positions.position_dto import *
+from sources.strategy.strategies.day_trader.strategy.services.websocket.common.DTO.config.model_param_dto import *
 from sources.strategy.strategies.day_trader.strategy.services.websocket.common.DTO.market_data.historical_price_dto import *
 from sources.strategy.strategies.day_trader.strategy.services.websocket.common.DTO.positions.execution_summary_dto import *
 from sources.strategy.strategies.day_trader.strategy.services.websocket.common.wrappers.position_req_wrapper import *
@@ -29,7 +32,7 @@ from sources.strategy.strategies.day_trader.strategy.services.websocket.common.w
 from sources.strategy.strategies.day_trader.strategy.services.websocket.common.wrappers.cancel_position_wrapper import *
 from sources.framework.common.wrappers.portfolio_position_trade_list_request_wrapper import *
 from sources.strategy.strategies.day_trader.strategy.services.websocket.common.wrappers.historical_prices_req_wrapper import *
-
+from sources.strategy.strategies.day_trader.strategy.services.websocket.common.wrappers.model_parameter_req_wrapper import *
 
 _OPEN_POSITIONS_SERVICE = "OP"
 _POSITION_EXECUTIONS_SERVICE="PE"
@@ -84,6 +87,13 @@ class WSHandler(tornado.websocket.WebSocketHandler):
       summariesBatch = GetPositionExecutionSummariesBatch("GetPositionExecutionSummariesBatch",executionsDTOArr)
       self.DoSendAsync(summariesBatch)
 
+  def PublishModelParam (self,modelParam):
+    try:
+      self.DoSendAsync(modelParam)
+
+    except Exception as e:
+      self.DoLog("Exception @WebsocketRaise.PublishModelParam:{}".format(str(e)), MessageType.ERROR)
+      raise e
 
   def PublishHistoricalPrices(self,symbol,marketDataArr):
     try:
@@ -161,6 +171,29 @@ class WSHandler(tornado.websocket.WebSocketHandler):
     if subscrMsg.Service not in self.SubscribedServices:
       del self.SubscribedServices[subscrMsg.Service]
 
+
+  def ProcessModelParamReq(self, modelParamReq):
+    try:
+
+      self.DoLog("Incoming model param Req for key {} for symbol {} ".format(modelParamReq.Key,modelParamReq.Symbol if modelParamReq.Symbol is not None else "-" ), MessageType.INFO)
+      wrapper = ModelParamReqWrapper(modelParamReq)
+
+      state = self.InvokingModule.ProcessIncoming(wrapper)
+
+      if state.Success:
+        ack = ModelParamAck(Msg="ModelParamAck", UUID=modelParamReq.UUID,ReqId=modelParamReq.ReqId,key=modelParamReq.Key,symbol=modelParamReq.Symbol)
+        self.DoSendResponse(ack)
+        self.DoLog("Model param request sent for symbol {}...".format(modelParamReq.Symbol), MessageType.INFO)
+      else:
+        raise state.Exception
+    except Exception as e:
+      msg = "Critical ERROR for Model Param Req for key {} for symbol {}. Error:{}".format(modelParamReq.Key,
+                                                                                           modelParamReq.Symbol if modelParamReq.Symbol is not None else "-",
+                                                                                           str(e))
+      self.DoLog(msg, MessageType.ERROR)
+      ack = ModelParamAck(Msg="ModelParamAck", UUID=modelParamReq.UUID, ReqId=modelParamReq.ReqId,key=modelParamReq.Key,
+                          symbol=modelParamReq.Symbol, Success=False, Error=msg)
+      self.DoSendResponse(ack)
 
   def ProcessHistoricalPricesReq(self,histPricesReq):
     try:
@@ -300,6 +333,9 @@ class WSHandler(tornado.websocket.WebSocketHandler):
 
   #region WS Handler Methods
 
+  def check_origin(self, origin):
+    return True
+
   def initialize(self, pInvokingModule):
     self.InvokingModule = pInvokingModule
     self.SubscribedServices = {}
@@ -322,7 +358,7 @@ class WSHandler(tornado.websocket.WebSocketHandler):
 
 
     try:
-      #self.write_message("{'Msg': 'hola'}")
+
       fieldsDict=json.loads(message)
 
       if "Msg" in fieldsDict and fieldsDict["Msg"]=="Subscribe":
@@ -346,6 +382,9 @@ class WSHandler(tornado.websocket.WebSocketHandler):
       elif "Msg" in fieldsDict and fieldsDict["Msg"] == "HistoricalPricesReq":
         histPricesReq = HistoricalPricesReq(**json.loads(message))
         self.ProcessHistoricalPricesReq(histPricesReq)
+      elif "Msg" in fieldsDict and fieldsDict["Msg"] == "ModelParamReq":
+        modelParamReq = ModelParamReq(**json.loads(message))
+        self.ProcessModelParamReq(modelParamReq)
       else:
         self.DoLog("Unknown message :{}".format(message),MessageType.ERROR)
 

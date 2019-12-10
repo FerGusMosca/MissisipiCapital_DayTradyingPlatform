@@ -72,6 +72,7 @@ namespace DayTraderTestClient
             Console.WriteLine("HistoricalPricesReq <symbol>");
             Console.WriteLine("CancelPos <posId>");
             Console.WriteLine("CancelAll");
+            Console.WriteLine("ModelParamReq <key> <symbol>");
             Console.WriteLine("UpdateModelParamReq <key> <symbol> <intValue> <stringValue> <floatValue>");
             Console.WriteLine("Unsubscribe <Service> <ServiceKey>");
             Console.WriteLine("-CLEAR");
@@ -163,6 +164,26 @@ namespace DayTraderTestClient
             else
                 DoLog(string.Format("Missing mandatory parameters for CancelAllPositionReq message"));
 
+        }
+
+        private static void ProcessModelParamReq(string[] param)
+        {
+            if (param.Length == 3)
+            {
+                ModelParamReq paramReq = new ModelParamReq()
+                {
+                    Msg = "ModelParamReq",
+                    UUID = UUID,
+                    ReqId = Guid.NewGuid().ToString(),
+                    Key = param[1],
+                    Symbol = param[2] != "*" ? param[2] : null,
+                };
+
+                DoSend<ModelParamReq>(paramReq);
+            }
+            else
+                DoLog(string.Format("Missing mandatory parameters for ModelParamReq message"));
+        
         }
 
         private static void ProcessUpdateModelParamReq(string[] param)
@@ -269,6 +290,10 @@ namespace DayTraderTestClient
             else if (mainCmd == "RouteSymbolReq")
             {
                 ProcessRouteSymbolReq(param);
+            }
+            else if (mainCmd == "ModelParamReq")
+            {
+                ProcessModelParamReq(param);
             }
             else if (mainCmd == "UpdateModelParamReq")
             {

@@ -10,6 +10,7 @@ from sources.framework.common.enums.fields.portfolio_position_field import *
 from sources.framework.common.enums.fields.summary_field import *
 from sources.framework.common.enums.fields.summary_list_fields import *
 from sources.framework.common.enums.fields.error_field import *
+from sources.strategy.strategies.day_trader.strategy.services.websocket.common.DTO.config.model_param_dto import *
 from sources.strategy.strategies.day_trader.strategy.services.websocket.data_access_layer.websocket_server import *
 import tornado
 import threading
@@ -103,6 +104,27 @@ class WebSocketModule(BaseCommunicationModule, ICommunicationModule):
             if self.LockConnections.locked():
                 self.LockConnections.release()
 
+    def ProcessModelParam(self,wrapper):
+        try:
+            symbol = wrapper.GetField(ModelParamField.Symbol)
+            key = wrapper.GetField(ModelParamField.Key)
+            intValue = wrapper.GetField(ModelParamField.IntValue)
+            stringValue = wrapper.GetField(ModelParamField.StringValue)
+            floatValue = wrapper.GetField(ModelParamField.FloatValue)
+
+            modelParamDto = ModelParamDto(key,symbol,intValue,stringValue,floatValue)
+
+            self.LockConnections.acquire()
+            for conn in self.Connections:
+                conn.PublishModelParam(modelParamDto)
+
+            return CMState.BuildSuccess(self)
+        except Exception as e:
+            self.DoLog("Exception @WebsocketModule.PublishModelParam:{}".format(str(e)), MessageType.ERROR)
+            return CMState.BuildFailure(self, Exception=e)
+        finally:
+            if self.LockConnections.locked():
+                self.LockConnections.release()
 
     def ProcessHistoricalPrices(self,wrapper):
         try:
@@ -204,6 +226,8 @@ class WebSocketModule(BaseCommunicationModule, ICommunicationModule):
                 return self.ProcessExecutionSummary(wrapper)
             elif wrapper.GetAction() == Actions.HISTORICAL_PRICES:
                 return self.ProcessHistoricalPrices(wrapper)
+            elif wrapper.GetAction() == Actions.MODEL_PARAM:
+                return self.ProcessModelParam(wrapper)
             else:
                 raise Exception("ProcessMessage: Not prepared to process message {}".format(wrapper.GetAction()))
         except Exception as e:
@@ -229,6 +253,8 @@ class WebSocketModule(BaseCommunicationModule, ICommunicationModule):
             elif wrapper.GetAction() == Actions.UPDATE_MODEL_PARAM_REQUEST:
                 return self.InvokingModule.ProcessMessage(wrapper)
             elif wrapper.GetAction() == Actions.HISTORICAL_PRICES_REQUEST:
+                return self.InvokingModule.ProcessMessage(wrapper)
+            elif wrapper.GetAction() == Actions.MODEL_PARAM_REQUEST:
                 return self.InvokingModule.ProcessMessage(wrapper)
             else:
                 raise Exception("ProcessIncoming: Not prepared to process message {}".format(wrapper.GetAction()))
