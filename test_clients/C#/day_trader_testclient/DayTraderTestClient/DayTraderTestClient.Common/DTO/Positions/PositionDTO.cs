@@ -28,9 +28,21 @@ namespace DayTraderTestClient.Common.DTO.positions
 
         public decimal? CurrentProfit { get; set; }
 
+        public decimal? CurrentProfitMonetary { get; set; }
+
+        public decimal? CurrentProfitLastTrade { get; set; }
+
+        public decimal? CurrentProfitMonetaryLastTrade { get; set; }
+
+        public decimal? IncreaseDecrease { get; set; }
+
         public decimal? MaxProxit { get; set; }
 
         public decimal? MaxLoss { get; set; }
+
+        public int NetShares { get; set; }
+
+        public string Direction { get; set; }
 
         public string Msg { get; set; }
 

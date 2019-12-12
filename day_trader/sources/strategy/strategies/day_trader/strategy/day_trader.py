@@ -202,7 +202,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
             LogHelper.LogPositionUpdate(self, "Managed Position Finished", summary, execReport)
             if summary.Position.PosId in self.PendingCancels:
                 print("removing pending cancel for posId {} for security {}".format(summary.Position.PosId,summary.Position.Security.Symbol))
-                del self.PendingCancels[summary.Position.PosId.summary.Position.PosId]
+                del self.PendingCancels[summary.Position.PosId]
         else:
             LogHelper.LogPositionUpdate(self, "Managed Position Updated", summary, execReport)
 
@@ -290,6 +290,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
             else:
                 raise Exception("Received execution report without PosId")
         except Exception as e:
+            traceback.print_exc()
             self.DoLog("Critical error @DayTrader.ProcessExecutionReport: " + str(e), MessageType.ERROR)
             return CMState.BuildFailure(self, Exception=e)
         finally:

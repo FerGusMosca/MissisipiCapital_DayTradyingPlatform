@@ -41,6 +41,11 @@ class DayTradingPosition():
         self.SignalDesc = signalDesc
 
         self.CurrentProfit = 0
+        self.CurrentProfitLastTrade = 0
+        self.CurrentProfitMonetary = 0
+        self.CurrentProfitMonetaryLastTrade = 0
+        self.IncreaseDecrease = 0
+
         self.MaxProfit = 0
         self.MaxLoss=0
         self.LastNDaysStdDev = 0
@@ -135,8 +140,24 @@ class DayTradingPosition():
                                               pctChangeLastThreeMinSlope=pctChangeLastThreeMinSlope,
                                               deltaCurrValueAndFiftyMMov=deltaCurrValueAndFiftyMMov)
 
+    def CalculateMonetaryProfits(self, profitsAndLosses):
 
-    def CalculateProfits(self,profitsAndLosses):
+        monProfits = 0  #USD
+
+        if self.Security.Symbol=="DY":
+            print("aca")
+
+        if profitsAndLosses.NetShares > 0:
+            monProfits = (profitsAndLosses.MoneyIncome + profitsAndLosses.PosMTM - profitsAndLosses.MoneyOutflow)
+        elif profitsAndLosses.NetShares < 0:
+            monProfits=profitsAndLosses.MoneyIncome - profitsAndLosses.PosMTM - profitsAndLosses.MoneyOutflow
+        else:
+            monProfits = profitsAndLosses.MoneyIncome - profitsAndLosses.MoneyOutflow
+
+        return monProfits
+
+
+    def CalculatePercentageProfits(self,profitsAndLosses):
 
         profits = 0 #as a percentaje
 
@@ -192,6 +213,28 @@ class DayTradingPosition():
 
         return netShares
 
+    def CalculateLastTradeProfit(self, profitsAndLosses, marketData):
+
+        lastTradedSummaries = sorted(list(filter(lambda x: x.Timestamp.date() == datetime.now().date() and x.GetNetShares() > 0,
+                           self.ExecutionSummaries.values())),key=lambda x: x.Timestamp, reverse=True)
+
+        lastTradedSummary=None
+        if(len(lastTradedSummaries)>0):
+            lastTradedSummary=lastTradedSummaries[0]
+
+        if lastTradedSummary is not None and marketData.Trade is not None and lastTradedSummary.AvgPx is not None:
+            profitsAndLosses.IncreaseDecrease = marketData.Trade-  lastTradedSummary.AvgPx
+            if lastTradedSummary.IsLongPosition():#LONG
+                profitsAndLosses.MonetaryProfitLastTrade=( marketData.Trade-lastTradedSummary.AvgPx)*lastTradedSummary.GetNetShares()
+                profitsAndLosses.ProfitLastTrade = ((marketData.Trade/lastTradedSummary.AvgPx)-1)*100 if lastTradedSummary.AvgPx >0 else 0
+            else:#SHORT
+                profitsAndLosses.MonetaryProfitLastTrade = ( lastTradedSummary.AvgPx - marketData.Trade)*lastTradedSummary.GetNetShares()
+                profitsAndLosses.ProfitLastTrade = ((lastTradedSummary.AvgPx/marketData.Trade)-1)*100 if marketData.Trade >0 else 0
+        else:
+            profitsAndLosses.MonetaryProfitLastTrade = 0
+            profitsAndLosses.ProfitLastTrade = 0
+
+
     def CalculatePositionsProfit(self,profitsAndLosses):
         todaySummaries = sorted(list(filter(lambda x: x.Timestamp.date() == datetime.now().date() and x.CumQty >= 0, self.ExecutionSummaries.values())),
                                             key=lambda x: x.Timestamp, reverse=False)
@@ -227,19 +270,26 @@ class DayTradingPosition():
 
     def ResetProfitCounters(self,now):
         self.CurrentProfit = 0
+        self.CurrentProfitLastTrade= 0
+        self.CurrentProfitMonetary = 0
+        self.CurrentProfitMonetaryLastTrade= 0
+
         self.MaxLoss = 0
         self.MaxProfit = 0
         self.LastProfitCalculationDay = datetime.now()
 
     def CalculateCurrentDayProfits(self,marketData):
 
-
-
         profitsAndLosses = PositionsProfitsAndLosses()
 
         foundOpenPositions = self.CalculatePositionsProfit(profitsAndLosses)
         profitsAndLosses.PosMTM = self.CalculateMarkToMarket(marketData,profitsAndLosses,foundOpenPositions)
-        profitsAndLosses.Profits = self.CalculateProfits(profitsAndLosses)
+
+        profitsAndLosses.Profits = self.CalculatePercentageProfits(profitsAndLosses)
+        profitsAndLosses.MonetaryProfits = self.CalculateMonetaryProfits(profitsAndLosses)
+
+        if foundOpenPositions:
+            self.CalculateLastTradeProfit(profitsAndLosses,marketData)
 
         if(profitsAndLosses.Profits>self.MaxProfit):
             self.MaxProfit=profitsAndLosses.Profits
@@ -248,6 +298,9 @@ class DayTradingPosition():
             self.MaxLoss=profitsAndLosses.Profits
 
         self.CurrentProfit=profitsAndLosses.Profits
+        self.CurrentProfitMonetary = profitsAndLosses.MonetaryProfits
+        self.CurrentProfitLastTrade = profitsAndLosses.ProfitLastTrade
+        self.CurrentProfitMonetaryLastTrade = profitsAndLosses.MonetaryProfitLastTrade
         self.LastProfitCalculationDay=datetime.now()
 
     def EvaluateLongTrade(self,dailyBiasModelParam,dailySlopeModelParam, posMaximChangeParam,

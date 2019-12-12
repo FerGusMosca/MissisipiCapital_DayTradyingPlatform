@@ -114,7 +114,7 @@ namespace DayTraderTestClient
                     Msg = "HistoricalPricesReq",
                     Symbol = param[1],
                     To=DateTime.Now.Date,
-                    From = DateTime.Now.Date.AddDays(-5),
+                    From = DateTime.Now.Date.AddDays(-7),
                     UUID = UUID,
                     ReqId = Guid.NewGuid().ToString(),
                 };

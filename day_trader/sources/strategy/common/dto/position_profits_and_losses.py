@@ -8,7 +8,11 @@ class PositionsProfitsAndLosses():
         self.MoneyIncome =0
         self.NetShares=0
         self.Profits=0
+        self.MonetaryProfits = 0
+        self.ProfitLastTrade = 0
+        self.MonetaryProfitLastTrade = 0
         self.PosMTM=0
+        self.IncreaseDecrease = 0
 
 
     #endregion

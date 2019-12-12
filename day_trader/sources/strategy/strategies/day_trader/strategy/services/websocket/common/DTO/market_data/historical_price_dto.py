@@ -4,7 +4,7 @@ import json
 class HistoricalPriceDTO:
     def __init__(self, historicalPrice):
         self.Msg="HistoricalPrice"
-        self.MDEntryDate=historicalPrice.MDEntryDate
+        self.MDEntryDate=str( historicalPrice.MDEntryDate)
         self.OpeningPrice=historicalPrice.OpeningPrice
         self.ClosingPrice=historicalPrice.ClosingPrice
         self.TradingSessionHighPrice=historicalPrice.TradingSessionHighPrice
