@@ -256,6 +256,8 @@ class WebSocketModule(BaseCommunicationModule, ICommunicationModule):
                 return self.InvokingModule.ProcessMessage(wrapper)
             elif wrapper.GetAction() == Actions.MODEL_PARAM_REQUEST:
                 return self.InvokingModule.ProcessMessage(wrapper)
+            elif wrapper.GetAction() == Actions.DAY_TRADING_POSITION_UPDATE_REQUEST:
+                return self.InvokingModule.ProcessMessage(wrapper)
             else:
                 raise Exception("ProcessIncoming: Not prepared to process message {}".format(wrapper.GetAction()))
         except Exception as e:

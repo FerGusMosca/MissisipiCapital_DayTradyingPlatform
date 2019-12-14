@@ -23,6 +23,8 @@ from sources.strategy.strategies.day_trader.strategy.services.websocket.common.D
 from sources.framework.common.wrappers.portfolio_position_list_request_wrapper import *
 from sources.strategy.strategies.day_trader.strategy.services.websocket.common.DTO.error_message import *
 from sources.strategy.strategies.day_trader.strategy.services.websocket.common.DTO.positions.position_dto import *
+from sources.strategy.strategies.day_trader.strategy.services.websocket.common.DTO.positions.position_update_req import *
+from sources.strategy.strategies.day_trader.strategy.services.websocket.common.DTO.positions.position_update_ack import *
 from sources.strategy.strategies.day_trader.strategy.services.websocket.common.DTO.config.model_param_dto import *
 from sources.strategy.strategies.day_trader.strategy.services.websocket.common.DTO.market_data.historical_price_dto import *
 from sources.strategy.strategies.day_trader.strategy.services.websocket.common.DTO.positions.execution_summary_dto import *
@@ -30,6 +32,7 @@ from sources.strategy.strategies.day_trader.strategy.services.websocket.common.w
 from sources.strategy.strategies.day_trader.strategy.services.websocket.common.wrappers.cancel_all_position_wrapper import *
 from sources.strategy.strategies.day_trader.strategy.services.websocket.common.wrappers.update_model_parameter_req_wrapper import *
 from sources.strategy.strategies.day_trader.strategy.services.websocket.common.wrappers.cancel_position_wrapper import *
+from sources.strategy.strategies.day_trader.strategy.services.websocket.common.wrappers.position_update_req_wrapper import *
 from sources.framework.common.wrappers.portfolio_position_trade_list_request_wrapper import *
 from sources.strategy.strategies.day_trader.strategy.services.websocket.common.wrappers.historical_prices_req_wrapper import *
 from sources.strategy.strategies.day_trader.strategy.services.websocket.common.wrappers.model_parameter_req_wrapper import *
@@ -170,6 +173,27 @@ class WSHandler(tornado.websocket.WebSocketHandler):
     #Unsubscription don't have confirmation messages
     if subscrMsg.Service not in self.SubscribedServices:
       del self.SubscribedServices[subscrMsg.Service]
+
+
+  def ProcessPositionUpdateReq(self,posUpdateReq):
+    try:
+
+      self.DoLog("Incoming position update Req for posId {}".format(posUpdateReq.PosId), MessageType.INFO)
+      wrapper = PositionUpdateReqWrapper(posUpdateReq)
+
+      state = self.InvokingModule.ProcessIncoming(wrapper)
+
+      if state.Success:
+        ack = PositionUpdateAck(Msg="PositionUpdateAck", UUID=posUpdateReq.UUID,ReqId=posUpdateReq.ReqId)
+        self.DoSendResponse(ack)
+        self.DoLog("Position Update request sent for PosId {}...".format(posUpdateReq.PosId), MessageType.INFO)
+      else:
+        raise state.Exception
+    except Exception as e:
+      msg = "Critical ERROR for PositionUpdate Req for posId {}. Error:{}".format(posUpdateReq.PosId,str(e))
+      self.DoLog(msg, MessageType.ERROR)
+      ack = ModelParamAck(Msg="PositionUpdateAck", UUID=posUpdateReq.UUID, ReqId=posUpdateReq.ReqId, Success=False, Error=msg)
+      self.DoSendResponse(ack)
 
 
   def ProcessModelParamReq(self, modelParamReq):
@@ -385,6 +409,9 @@ class WSHandler(tornado.websocket.WebSocketHandler):
       elif "Msg" in fieldsDict and fieldsDict["Msg"] == "ModelParamReq":
         modelParamReq = ModelParamReq(**json.loads(message))
         self.ProcessModelParamReq(modelParamReq)
+      elif "Msg" in fieldsDict and fieldsDict["Msg"] == "PositionUpdateReq":
+        positionUpdateReq = PositionUpdateReq(**json.loads(message))
+        self.ProcessPositionUpdateReq(positionUpdateReq)
       else:
         self.DoLog("Unknown message :{}".format(message),MessageType.ERROR)
 

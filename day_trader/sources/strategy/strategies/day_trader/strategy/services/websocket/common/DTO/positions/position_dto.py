@@ -26,9 +26,9 @@ class PositionDTO:
         self.CurrentMarketPrice = dayTradingPos.MarketData.Trade if dayTradingPos.MarketData is not None else None
         self.CurrentProfit = dayTradingPos.CurrentProfit * 100 if dayTradingPos.CurrentProfit is not None else None
         self.CurrentProfitMonetary = dayTradingPos.CurrentProfitMonetary
-        self.CurrentProfitLastTrade  = dayTradingPos.self.CurrentProfitLastTrade
-        self.CurrentProfitMonetaryLastTrade = dayTradingPos.self.CurrentProfitMonetaryLastTrade
-        self.IncreaseDecrease = dayTradingPos.self.IncreaseDecrease
+        self.CurrentProfitLastTrade  = dayTradingPos.CurrentProfitLastTrade
+        self.CurrentProfitMonetaryLastTrade = dayTradingPos.CurrentProfitMonetaryLastTrade
+        self.IncreaseDecrease = dayTradingPos.IncreaseDecrease
         self.MaxProfit = dayTradingPos.MaxProfit * 100 if dayTradingPos.MaxProfit is not None else None
         self.MaxLoss = dayTradingPos.MaxLoss * 100 if dayTradingPos.MaxLoss is not None else None
 

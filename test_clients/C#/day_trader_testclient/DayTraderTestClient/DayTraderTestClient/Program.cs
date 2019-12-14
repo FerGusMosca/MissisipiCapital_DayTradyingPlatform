@@ -3,6 +3,7 @@ using DayTraderTestClient.Common.DTO.batchs;
 using DayTraderTestClient.Common.DTO.Config;
 using DayTraderTestClient.Common.DTO.Market_Data;
 using DayTraderTestClient.Common.DTO.Order_Routing;
+using DayTraderTestClient.Common.DTO.Positions;
 using DayTraderTestClient.Common.DTO.Subscription;
 using DayTraderTestClient.DataAccessLayer;
 using Newtonsoft.Json;
@@ -73,6 +74,7 @@ namespace DayTraderTestClient
             Console.WriteLine("CancelPos <posId>");
             Console.WriteLine("CancelAll");
             Console.WriteLine("ModelParamReq <key> <symbol>");
+            Console.WriteLine("PositionUpdateReq <posId> <qty> <active>");
             Console.WriteLine("UpdateModelParamReq <key> <symbol> <intValue> <stringValue> <floatValue>");
             Console.WriteLine("Unsubscribe <Service> <ServiceKey>");
             Console.WriteLine("-CLEAR");
@@ -103,6 +105,27 @@ namespace DayTraderTestClient
             else
                 DoLog(string.Format("Missing mandatory parameters for subscription message"));
 
+        }
+
+        private static void ProcessPositionUpdateReq(string[] param)
+        {
+            if (param.Length == 4)
+            {
+                PositionUpdateReq posUpdReq = new PositionUpdateReq()
+                {
+                    Msg = "PositionUpdateReq",
+                    PosId = Convert.ToInt32(param[1]),
+                    SharesQuantity = param[2] != "*" ? (int?)Convert.ToInt32(param[2]) : null,
+                    Active = param[3] != "*" ? (bool?)Convert.ToBoolean(param[3]) : null,
+                    UUID = UUID,
+                    ReqId = Guid.NewGuid().ToString(),
+                };
+
+                DoSend<PositionUpdateReq>(posUpdReq);
+            }
+            else
+                DoLog(string.Format("Missing mandatory parameters for PositionUpdateReq message"));
+        
         }
 
         private static void ProcessHistoricalPricesReq(string[] param)
@@ -314,6 +337,10 @@ namespace DayTraderTestClient
             else if (mainCmd == "HistoricalPricesReq")
             {
                 ProcessHistoricalPricesReq(param);
+            }
+            else if (mainCmd == "PositionUpdateReq")
+            {
+                ProcessPositionUpdateReq(param);
             }
             else if (mainCmd == "Unsubscribe")
             {

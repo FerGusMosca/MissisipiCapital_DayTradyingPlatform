@@ -144,9 +144,6 @@ class DayTradingPosition():
 
         monProfits = 0  #USD
 
-        if self.Security.Symbol=="DY":
-            print("aca")
-
         if profitsAndLosses.NetShares > 0:
             monProfits = (profitsAndLosses.MoneyIncome + profitsAndLosses.PosMTM - profitsAndLosses.MoneyOutflow)
         elif profitsAndLosses.NetShares < 0:

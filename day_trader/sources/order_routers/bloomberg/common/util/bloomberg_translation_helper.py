@@ -181,7 +181,7 @@ class BloombergTranslationHelper:
         except Exception as e:
             self.DoLog("Received unknown time in force from Bloomberg:{}".format(EMSX_TIF), MessageType.DEBUG)
             return TimeInForce.Day
-        c
+
 
     @staticmethod
     def GetExecType(self,msg):

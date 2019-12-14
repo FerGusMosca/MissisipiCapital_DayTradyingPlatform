@@ -40,7 +40,7 @@ namespace DayTraderTestClient.Common.DTO.positions
 
         public decimal? MaxLoss { get; set; }
 
-        public int NetShares { get; set; }
+        public decimal NetShares { get; set; }
 
         public string Direction { get; set; }
 

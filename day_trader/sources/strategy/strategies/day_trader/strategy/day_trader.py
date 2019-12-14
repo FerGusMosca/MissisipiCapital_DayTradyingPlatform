@@ -229,8 +229,8 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
         try:
             if  (recovered == False):
                 self.SummariesQueue.put(summary)
-            else:
-                self.DoLog( "Critical error saving traded single position with no fill Id.PosId:{}".format(summary.Position.PosId), MessageType.ERROR)
+            #else:
+                #self.DoLog( "Critical error saving traded single position with no fill Id.PosId:{}".format(summary.Position.PosId), MessageType.ERROR)
 
         except Exception as e:
             self.DoLog("Error Saving to DB: {}".format(e), MessageType.ERROR)
@@ -670,6 +670,9 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
         try:
             self.RoutingLock.acquire()
 
+            if dayTradingPos.Routing:
+                return
+
             newPos = Position(PosId=self.NextPostId,
                               Security=dayTradingPos.Security,
                               Side=side, PriceType=PriceType.FixedAmount, Qty=qty, QuantityType=QuantityType.SHARES,
@@ -771,6 +774,32 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
             if self.RoutingLock.locked():
                 self.RoutingLock.release()
 
+    def ProcessDayTradingPositionUpdateReq (self,wrapper):
+        try:
+            posId = wrapper.GetField(PositionField.PosId)
+            qtyShares = wrapper.GetField(PositionField.Qty)
+            active = wrapper.GetField(PositionField.PosStatus)
+
+            dayTradingPos = next( iter(list(filter(lambda x: x.Id == posId, self.DayTradingPositions))),None)
+
+            if dayTradingPos is not None:
+
+                if qtyShares is not None:
+                    dayTradingPos.SharesQuantity=qtyShares
+                if active is not None:
+                    dayTradingPos.Active=active
+
+                threading.Thread(target=self.PublishPortfolioPositionThread, args=(dayTradingPos,)).start()
+
+                return CMState.BuildSuccess(self)
+            else:
+                raise Exception("Could not find a day traing position for posId {}".format(posId if posId is not None else "-"))
+
+        except Exception as e:
+            msg = "Critical Error updating day trading position attribute: {}!".format(str(e))
+            self.ProcessError(ErrorWrapper(Exception(msg)))
+            self.DoLog(msg, MessageType.ERROR)
+            return CMState.BuildFailure(self, Exception=e)
 
     def ProcessModelParamReq(self,wrapper):
         try:
@@ -986,6 +1015,8 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                 return self.ProcessHistoricalPricesReq(wrapper)
             elif wrapper.GetAction() == Actions.MODEL_PARAM_REQUEST:
                 return self.ProcessModelParamReq(wrapper)
+            elif wrapper.GetAction() == Actions.DAY_TRADING_POSITION_UPDATE_REQUEST:
+                return self.ProcessDayTradingPositionUpdateReq(wrapper)
             else:
                 raise Exception("DayTrader.ProcessMessage: Not prepared for routing message {}".format(wrapper.GetAction()))
         except Exception as e:

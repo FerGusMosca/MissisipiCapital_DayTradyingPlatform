@@ -71,7 +71,7 @@ class DayTradingPositionManager():
                       int(dayTradingPosition.SharesQuantity),
                       bool(dayTradingPosition.Active),
                       bool(dayTradingPosition.Routing),
-                      bool(dayTradingPosition.Open),
+                      bool(dayTradingPosition.Open()),
                       bool(dayTradingPosition.LongSignal),
                       bool(dayTradingPosition.ShortSignal),
                       dayTradingPosition.SignalType if not None else None,
