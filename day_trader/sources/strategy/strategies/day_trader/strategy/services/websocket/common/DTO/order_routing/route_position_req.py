@@ -16,11 +16,13 @@ class RoutePositionReq(WebSocketMessage):
 
     #endregion
 
-    def __init__(self, Msg,Side,ReqId,Qty,Account,Symbol=None,PosId=None,UUID=None):
+    def __init__(self, Msg,Side,ReqId,Qty, Type=None,Account=None,Symbol=None,PosId=None,Price=None,UUID=None):
         super(RoutePositionReq, self).__init__(Msg)
         self.Symbol=Symbol
         self.PosId = PosId
+        self.Type=Type
         self.Side=Side
+        self.Price = Price
         self.UUID = UUID
         self.ReqId = ReqId
         self.Qty = Qty

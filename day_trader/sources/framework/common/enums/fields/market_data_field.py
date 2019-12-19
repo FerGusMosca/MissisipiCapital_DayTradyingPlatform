@@ -42,3 +42,5 @@ class MarketDataField(Enum):
     BestBidCashSize=40
     BestAskCashSize=41
     LastTradeDateTime=42
+    Change = 43
+    StdDev = 44

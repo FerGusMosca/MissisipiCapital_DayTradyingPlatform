@@ -79,6 +79,8 @@ class MarketDataConverter:
         md.MDTradeSize = wrapper.GetField(MarketDataField.MDTradeSize)
         md.BestAskExch = wrapper.GetField(MarketDataField.BestAskExch)
         md.BestBidExch = wrapper.GetField(MarketDataField.BestBidExch)
+        md.Change = wrapper.GetField(MarketDataField.Change)
+        md.StdDev = wrapper.GetField(MarketDataField.StdDev)
 
 
         return md

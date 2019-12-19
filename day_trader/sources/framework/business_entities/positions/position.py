@@ -70,11 +70,6 @@ class Position:
         #region Public Methods
 
     def SetPositionStatusFromExecution(self,execReport):
-        """
-
-        Args:
-            execReport ():
-        """
 
         execType=execReport.ExecType
 
@@ -119,11 +114,7 @@ class Position:
                or self.PosStatus == PositionStatus.PendingCancel
 
     def IsFinishedPosition(self):
-        """
 
-        Returns:
-
-        """
         if (self.PosStatus == PositionStatus.Filled
             or self.PosStatus == PositionStatus.DoneForDay
             or self.PosStatus == PositionStatus.Stopped
@@ -136,11 +127,7 @@ class Position:
             return  False
 
     def IsTradedPosition(self):
-        """
 
-        Returns:
-
-        """
         if (self.PosStatus == PositionStatus.Filled
             or self.PosStatus == PositionStatus.PartiallyFilled):
             return True

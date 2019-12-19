@@ -40,4 +40,6 @@ class MarketData:
         self.SettlDate = None
         self.LastTradeDateTime = None
         self.Security = None
+        self.Change = None
+        self.StdDev= None
 

@@ -68,8 +68,9 @@ namespace DayTraderTestClient
             //Console.WriteLine("LoginClient <userId> <UUID> <Password>");
             //Console.WriteLine("LogoutClient (Cxt credentials will be used)");
             Console.WriteLine("Subscribe <Service> <ServiceKey>");
-            Console.WriteLine("RouteSymbolReq <symbol> <side> <qty> <account>");
-            Console.WriteLine("RoutePositionReq <posId> <side> <qty> <account>");
+            Console.WriteLine("RouteSymbolReq <symbol> <side> <qty> <account> <price>");
+            Console.WriteLine("RoutePositionReq <posId> <side> <qty> <account>  <price>");
+            Console.WriteLine("MarketDataReq <symbol>");
             Console.WriteLine("HistoricalPricesReq <symbol>");
             Console.WriteLine("CancelPos <posId>");
             Console.WriteLine("CancelAll");
@@ -126,6 +127,24 @@ namespace DayTraderTestClient
             else
                 DoLog(string.Format("Missing mandatory parameters for PositionUpdateReq message"));
         
+        }
+
+        private static void ProcessMarketDataReq(string[] param)
+        {
+            if (param.Length == 2)
+            {
+                MarketDataReq marketDataReq = new MarketDataReq()
+                {
+                    Msg = "MarketDataReq",
+                    Symbol = param[1],
+                    UUID = UUID,
+                    ReqId = Guid.NewGuid().ToString(),
+                };
+
+                DoSend<MarketDataReq>(marketDataReq);
+            }
+            else
+                DoLog(string.Format("Missing mandatory parameters for MarketDataReq message"));
         }
 
         private static void ProcessHistoricalPricesReq(string[] param)
@@ -235,7 +254,7 @@ namespace DayTraderTestClient
 
         private static void ProcessRouteSymbolReq(string[] param)
         {
-            if (param.Length == 5)
+            if (param.Length == 6)
             {
                 RoutePositionReq routePos = new RoutePositionReq()
                 {
@@ -245,7 +264,8 @@ namespace DayTraderTestClient
                     UUID = UUID,
                     ReqId = Guid.NewGuid().ToString(),
                     Qty = Convert.ToInt32(param[3]),
-                    Account = param[4]
+                    Account = param[4],
+                    Price = param[5] != "*" ? (decimal?)Convert.ToDecimal(param[5]) : null
                 };
 
                 DoSend<RoutePositionReq>(routePos);
@@ -257,7 +277,7 @@ namespace DayTraderTestClient
 
         private static void ProcessRoutePositionReq(string[] param)
         {
-            if (param.Length == 5)
+            if (param.Length == 6)
             {
                 RoutePositionReq routePos = new RoutePositionReq()
                 {
@@ -267,7 +287,8 @@ namespace DayTraderTestClient
                     UUID = UUID,
                     ReqId = Guid.NewGuid().ToString(),
                     Qty = Convert.ToInt32(param[3]),
-                    Account = param[4]
+                    Account = param[4],
+                    Price = param[5] != "*" ? (decimal?)Convert.ToDecimal(param[5]) : null
                 };
 
                 DoSend<RoutePositionReq>(routePos);
@@ -337,6 +358,10 @@ namespace DayTraderTestClient
             else if (mainCmd == "HistoricalPricesReq")
             {
                 ProcessHistoricalPricesReq(param);
+            }
+            else if (mainCmd == "MarketDataReq")
+            {
+                ProcessMarketDataReq(param);
             }
             else if (mainCmd == "PositionUpdateReq")
             {

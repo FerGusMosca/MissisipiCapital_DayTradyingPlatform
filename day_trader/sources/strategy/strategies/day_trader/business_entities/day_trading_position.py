@@ -299,6 +299,7 @@ class DayTradingPosition():
         self.CurrentProfitLastTrade = profitsAndLosses.ProfitLastTrade
         self.CurrentProfitMonetaryLastTrade = profitsAndLosses.MonetaryProfitLastTrade
         self.LastProfitCalculationDay=datetime.now()
+        self.IncreaseDecrease=profitsAndLosses.IncreaseDecrease
 
     def EvaluateLongTrade(self,dailyBiasModelParam,dailySlopeModelParam, posMaximChangeParam,
                           posMaxLongDeltaParam,candlebarsArr):

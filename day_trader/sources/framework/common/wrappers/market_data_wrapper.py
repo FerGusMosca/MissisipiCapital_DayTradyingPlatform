@@ -10,22 +10,10 @@ class MarketDataWrapper(Wrapper):
         # region Public Methods
 
     def GetAction(self):
-        """
-
-        Returns:
-
-        """
         return Actions.MARKET_DATA
 
     def GetField(self, field):
-        """
 
-        Args:
-            field ():
-
-        Returns:
-
-        """
         if field == None:
             return None
 
@@ -94,6 +82,10 @@ class MarketDataWrapper(Wrapper):
             return self.MarketData.MDLocalEntryDate
         elif field == MarketDataField.LastTradeDateTime:
             return self.MarketData.LastTradeDateTime
+        elif field == MarketDataField.Change:
+            return self.MarketData.Change
+        elif field == MarketDataField.StdDev:
+            return self.MarketData.StdDev
         else:
             return None
 

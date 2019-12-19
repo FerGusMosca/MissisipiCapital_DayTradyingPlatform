@@ -21,7 +21,7 @@ from sources.framework.common.enums.SubscriptionRequestType import *
 from sources.strategy.strategies.day_trader.common.converters.market_data_converter import *
 from sources.framework.common.dto.cm_state import *
 from sources.strategy.common.wrappers.position_list_request_wrapper import *
-from sources.strategy.common.wrappers.position_wrapper import *
+from sources.framework.common.wrappers.market_data_wrapper import *
 from sources.strategy.common.wrappers.position_wrapper import *
 from sources.strategy.strategies.day_trader.common.wrappers.model_param_wrapper import *
 from sources.strategy.strategies.day_trader.common.wrappers.execution_summary_list_wrapper import *
@@ -227,8 +227,9 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
         # Recovered or not. If it's a traded position, we fill the DB
 
         try:
-            if  (recovered == False):
-                self.SummariesQueue.put(summary)
+            self.SummariesQueue.put(summary)
+            #if  (recovered == False):
+                #self.SummariesQueue.put(summary)
             #else:
                 #self.DoLog( "Critical error saving traded single position with no fill Id.PosId:{}".format(summary.Position.PosId), MessageType.ERROR)
 
@@ -283,7 +284,8 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                     self.UpdateSinglePosExecutionSummary(summary, exec_report)
                     self.ProcessOrder(summary, False)
                     threading.Thread(target=self.PublishSummaryThread, args=(summary, None)).start()
-                    self.RoutingLock.release()
+                    if self.RoutingLock.locked():
+                        self.RoutingLock.release()
                     return CMState.BuildSuccess(self)
                 else:
                     raise Exception("Received execution report for unknown PosId {}".format(pos_id))
@@ -358,16 +360,22 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
                 #if summary is not None and routePos.IsOpenPosition():
                 if summary is not None:
+
                     del dayTradingPos.ExecutionSummaries[summary.Position.PosId]
                     del self.PositionSecurities[summary.Position.PosId]
 
                     summary.Position.PosId = routePos.PosId
                     dayTradingPos.ExecutionSummaries[summary.Position.PosId]=summary
                     self.PositionSecurities[summary.Position.PosId]=dayTradingPos
+
                     summary.UpdateStatus(routePos.GetLastExecutionReport())
+                    dayTradingPos.UpdateRouting()
+
                     self.SummariesQueue.put(summary)
+                    self.DayTradingPositionsQueue.put(dayTradingPos)
                     #self.ExecutionSummaryManager.PersistExecutionSummary(summary, dayTradingPos.Id)
                     threading.Thread(target=self.PublishSummaryThread, args=(summary, dayTradingPos.Id)).start()
+                    threading.Thread(target=self.PublishPortfolioPositionThread, args=(dayTradingPos,)).start()
                     return True
             except Exception as e:
                 msg = "Critical error @DayTrader.UpdateManagedPositionOnInitialLoad for symbol {} :{}".format(dayTradingPos.Security.Symbol,e)
@@ -640,6 +648,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
             side = wrapper.GetField(PositionField.Side)
             qty = wrapper.GetField(PositionField.Qty)
             account = wrapper.GetField(PositionField.Account)
+            price = wrapper.GetField(PositionField.OrderPrice)
 
             self.RoutingLock.acquire()
 
@@ -647,7 +656,9 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                               Security=Security(Symbol=symbol,Exchange=self.Configuration.DefaultExchange,SecType=secType),
                               Side=side,PriceType=PriceType.FixedAmount,Qty=qty,QuantityType=QuantityType.SHARES,
                               Account=account if account is not None else self.Configuration.DefaultAccount,
-                              Broker=None,Strategy=None,OrderType=OrdType.Market)
+                              Broker=None,Strategy=None,
+                              OrderType=OrdType.Market if price is None else OrdType.Limit,
+                              OrderPrice=price)
 
             newPos.ValidateNewPosition()
 
@@ -666,7 +677,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
             if self.RoutingLock.locked():
                 self.RoutingLock.release()
 
-    def ProcessNewPositionReqManagedPos(self, dayTradingPos, side,qty,account):
+    def ProcessNewPositionReqManagedPos(self, dayTradingPos, side,qty,account, price = None):
         try:
             self.RoutingLock.acquire()
 
@@ -677,13 +688,15 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                               Security=dayTradingPos.Security,
                               Side=side, PriceType=PriceType.FixedAmount, Qty=qty, QuantityType=QuantityType.SHARES,
                               Account=account if account is not None else self.Configuration.DefaultAccount,
-                              Broker=None, Strategy=None, OrderType=OrdType.Market)
+                              Broker=None, Strategy=None,
+                              OrderType=OrdType.Market if price is None else OrdType.Limit,
+                              OrderPrice=price)
 
             newPos.ValidateNewPosition()
 
             summary = ExecutionSummary(datetime.datetime.now(), newPos)
             dayTradingPos.ExecutionSummaries[self.NextPostId] = summary
-            dayTradingPos.UpdateRouting()
+            dayTradingPos.Routing=True
             self.PositionSecurities[self.NextPostId] = dayTradingPos
             self.NextPostId = uuid.uuid4()
             self.RoutingLock.release()
@@ -706,17 +719,21 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
             dayTradingPos = next(iter(list(filter(lambda x: x.Id == posId, self.DayTradingPositions))), None)
             if(dayTradingPos is not None):
 
+                if(dayTradingPos.Routing):
+                    raise Exception("Could not send a new order for a position that is already routing. Cancel the previous order.")
+
                 side = wrapper.GetField(PositionField.Side)
                 qty = wrapper.GetField(PositionField.Qty)
                 account = wrapper.GetField(PositionField.Account)
+                price = wrapper.GetField(PositionField.OrderPrice)
 
-                self.ProcessNewPositionReqManagedPos(dayTradingPos,side,qty,account)
+                self.ProcessNewPositionReqManagedPos(dayTradingPos,side,qty,account,price)
             else:
                 raise Exception("Could not find a security to trade (position) for position id {}".format(posId))
 
         except Exception as e:
             msg = "Exception @DayTrader.ProcessManualNewPositionReqManagedPos: {}!".format(str(e))
-            self.ProcessCriticalError(e, msg)
+            #self.ProcessCriticalError(e, msg)
             self.ProcessError(ErrorWrapper(Exception(msg)))
 
     def ProcessNewPositionReqThread(self,wrapper):
@@ -734,7 +751,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
         except Exception as e:
             msg = "Exception @DayTrader.ProcessNewPositionReqThread: {}!".format(str(e))
-            self.ProcessCriticalError(e, msg)
+            #self.ProcessCriticalError(e, msg)
             self.ProcessError(ErrorWrapper(Exception(msg)))
 
     def ProcessCancelAllPositionReqThread(self,wrapper):
@@ -773,6 +790,33 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
         finally:
             if self.RoutingLock.locked():
                 self.RoutingLock.release()
+
+    def ProcessMarketDataReq(self,wrapper):
+        try:
+            symbol = wrapper.GetField(MarketDataRequestField.Symbol)
+
+            if symbol in self.MarketData:
+
+                md = self.MarketData[symbol]
+
+                dayTradingPos = next(iter(list(filter(lambda x: x.Security.Symbol == symbol, self.DayTradingPositions))), None)
+
+                md.StdDev=dayTradingPos.LastNDaysStdDev if dayTradingPos is not None else None
+
+                mdWrapper = MarketDataWrapper(md)
+
+                threading.Thread(target=self.SendToInvokingModule, args=(mdWrapper,)).start()
+
+                return CMState.BuildSuccess(self)
+            else:
+                raise Exception(
+                    "Could not find market data for symbol {}".format(symbol if symbol is not None else "-"))
+
+        except Exception as e:
+            msg = "Critical Error requesting market data: {}!".format(str(e))
+            self.ProcessError(ErrorWrapper(Exception(msg)))
+            self.DoLog(msg, MessageType.ERROR)
+            return CMState.BuildFailure(self, Exception=e)
 
     def ProcessDayTradingPositionUpdateReq (self,wrapper):
         try:
@@ -1017,6 +1061,8 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                 return self.ProcessModelParamReq(wrapper)
             elif wrapper.GetAction() == Actions.DAY_TRADING_POSITION_UPDATE_REQUEST:
                 return self.ProcessDayTradingPositionUpdateReq(wrapper)
+            elif wrapper.GetAction() == Actions.MARKET_DATA_REQUEST:
+                return self.ProcessMarketDataReq(wrapper)
             else:
                 raise Exception("DayTrader.ProcessMessage: Not prepared for routing message {}".format(wrapper.GetAction()))
         except Exception as e:

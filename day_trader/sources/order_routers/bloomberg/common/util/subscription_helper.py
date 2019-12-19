@@ -49,6 +49,9 @@ class SubscriptionHelper:
         if (BloombergTranslationHelper.GetSafeFloat(logger, msg, "OPEN", None) is not None):
             md.OpeningPrice = BloombergTranslationHelper.GetSafeFloat(logger, msg, "OPEN", None)
 
+        if (BloombergTranslationHelper.GetSafeFloat(logger, msg, "PERCENT_CHANGE_ON_DAY_TODAY_RT", None) is not None):
+            md.Change = BloombergTranslationHelper.GetSafeFloat(logger, msg, "PERCENT_CHANGE_ON_DAY_TODAY_RT", None)
+
     @staticmethod
     def ExtractSecurity(logger, msg):
         if (msg.getElement("securityData") is not None):

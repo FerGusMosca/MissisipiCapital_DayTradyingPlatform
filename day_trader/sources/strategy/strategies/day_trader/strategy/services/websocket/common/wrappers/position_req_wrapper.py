@@ -43,6 +43,8 @@ class PositionReqWrapper(Wrapper):
             return QuantityType.SHARES
         elif field == PositionField.PriceType:
             return PriceType.FixedAmount
+        elif field == PositionField.OrderPrice:
+            return self.RoutePositionReq.Price
         elif field == PositionField.Qty:
             return self.RoutePositionReq.Qty
         elif field == PositionField.Side:

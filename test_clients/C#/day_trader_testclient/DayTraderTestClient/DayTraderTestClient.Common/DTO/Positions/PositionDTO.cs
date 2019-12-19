@@ -8,6 +8,8 @@ namespace DayTraderTestClient.Common.DTO.positions
 {
     public class PositionDTO
     {
+        public int PosId { get; set; }
+
         public string Symbol { get; set; }
 
         public int PositionSize { get; set; }

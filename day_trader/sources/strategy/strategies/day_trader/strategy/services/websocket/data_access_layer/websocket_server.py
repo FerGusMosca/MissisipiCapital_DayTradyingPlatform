@@ -8,7 +8,9 @@ from sources.strategy.strategies.day_trader.strategy.services.websocket.common.D
 from sources.strategy.strategies.day_trader.strategy.services.websocket.common.DTO.order_routing.route_position_req import *
 from sources.strategy.strategies.day_trader.strategy.services.websocket.common.DTO.order_routing.cancel_position_req import *
 from sources.strategy.strategies.day_trader.strategy.services.websocket.common.DTO.market_data.historical_prices_req import *
+from sources.strategy.strategies.day_trader.strategy.services.websocket.common.DTO.market_data.market_data_req import *
 from sources.strategy.strategies.day_trader.strategy.services.websocket.common.DTO.market_data.historical_prices_ack import *
+from sources.strategy.strategies.day_trader.strategy.services.websocket.common.DTO.market_data.market_data_ack import *
 from sources.strategy.strategies.day_trader.strategy.services.websocket.common.DTO.config.model_param_req import *
 from sources.strategy.strategies.day_trader.strategy.services.websocket.common.DTO.config.model_param_ack import *
 from sources.strategy.strategies.day_trader.strategy.services.websocket.common.DTO.order_routing.cancel_position_ack import *
@@ -23,6 +25,7 @@ from sources.strategy.strategies.day_trader.strategy.services.websocket.common.D
 from sources.framework.common.wrappers.portfolio_position_list_request_wrapper import *
 from sources.strategy.strategies.day_trader.strategy.services.websocket.common.DTO.error_message import *
 from sources.strategy.strategies.day_trader.strategy.services.websocket.common.DTO.positions.position_dto import *
+from sources.strategy.strategies.day_trader.strategy.services.websocket.common.DTO.market_data.market_data_dto import *
 from sources.strategy.strategies.day_trader.strategy.services.websocket.common.DTO.positions.position_update_req import *
 from sources.strategy.strategies.day_trader.strategy.services.websocket.common.DTO.positions.position_update_ack import *
 from sources.strategy.strategies.day_trader.strategy.services.websocket.common.DTO.config.model_param_dto import *
@@ -36,6 +39,7 @@ from sources.strategy.strategies.day_trader.strategy.services.websocket.common.w
 from sources.framework.common.wrappers.portfolio_position_trade_list_request_wrapper import *
 from sources.strategy.strategies.day_trader.strategy.services.websocket.common.wrappers.historical_prices_req_wrapper import *
 from sources.strategy.strategies.day_trader.strategy.services.websocket.common.wrappers.model_parameter_req_wrapper import *
+from sources.strategy.strategies.day_trader.strategy.services.websocket.common.wrappers.market_data_req_wrapper import *
 
 _OPEN_POSITIONS_SERVICE = "OP"
 _POSITION_EXECUTIONS_SERVICE="PE"
@@ -61,6 +65,10 @@ class WSHandler(tornado.websocket.WebSocketHandler):
   #endregion
 
   #endregion IncomingMethods
+
+  def PublishMarketData(self,md):
+    mdDTO = MarketDataDTO(md)
+    self.DoSendAsync(mdDTO)
 
   def PublishOpenPositions(self,positions):
     if self.IsSubscribed(_OPEN_POSITIONS_SERVICE,None):
@@ -217,6 +225,26 @@ class WSHandler(tornado.websocket.WebSocketHandler):
       self.DoLog(msg, MessageType.ERROR)
       ack = ModelParamAck(Msg="ModelParamAck", UUID=modelParamReq.UUID, ReqId=modelParamReq.ReqId,key=modelParamReq.Key,
                           symbol=modelParamReq.Symbol, Success=False, Error=msg)
+      self.DoSendResponse(ack)
+
+  def ProcessMarketDataReqReq(self,marketDataReq):
+    try:
+
+      self.DoLog("Incoming Market Data Req for symbol {} ".format(marketDataReq.Symbol), MessageType.INFO)
+      wrapper = MarketDataReqWrapper(marketDataReq.Symbol)
+
+      state = self.InvokingModule.ProcessIncoming(wrapper)
+
+      if state.Success:
+        ack =MarketDataAck(Msg="MarketDataReqReq", UUID=marketDataReq.UUID, ReqId=marketDataReq.ReqId)
+        self.DoSendResponse(ack)
+        self.DoLog("Market Data request sent for symbol {}...".format(marketDataReq.Symbol), MessageType.INFO)
+      else:
+        raise state.Exception
+    except Exception as e:
+      msg = "Critical ERROR for Market Data Req for Symbol . Error:{}".format(marketDataReq.Symbol,str(e))
+      self.DoLog(msg, MessageType.ERROR)
+      ack = MarketDataAck(Msg="HistoricalPricesAck", UUID=marketDataReq.UUID, ReqId=marketDataReq.ReqId,Success=False, Error=msg)
       self.DoSendResponse(ack)
 
   def ProcessHistoricalPricesReq(self,histPricesReq):
@@ -406,6 +434,9 @@ class WSHandler(tornado.websocket.WebSocketHandler):
       elif "Msg" in fieldsDict and fieldsDict["Msg"] == "HistoricalPricesReq":
         histPricesReq = HistoricalPricesReq(**json.loads(message))
         self.ProcessHistoricalPricesReq(histPricesReq)
+      elif "Msg" in fieldsDict and fieldsDict["Msg"] == "MarketDataReq":
+        mdReq = MarketDataReqReq(**json.loads(message))
+        self.ProcessMarketDataReqReq(mdReq)
       elif "Msg" in fieldsDict and fieldsDict["Msg"] == "ModelParamReq":
         modelParamReq = ModelParamReq(**json.loads(message))
         self.ProcessModelParamReq(modelParamReq)

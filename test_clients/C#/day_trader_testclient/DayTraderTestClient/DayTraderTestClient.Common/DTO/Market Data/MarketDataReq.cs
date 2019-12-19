@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DayTraderTestClient.Common.DTO.Order_Routing
+namespace DayTraderTestClient.Common.DTO.Market_Data
 {
-    public class RoutePositionReq : WebSocketMessage
+    public class MarketDataReq : WebSocketMessage
     {
         #region Public Attributes
 
@@ -15,16 +15,6 @@ namespace DayTraderTestClient.Common.DTO.Order_Routing
         public string ReqId { get; set; }
 
         public string Symbol { get; set; }
-
-        public int? PosId { get; set; }
-
-        public string Side { get; set; }
-
-        public int Qty { get; set; }
-
-        public string Account { get; set; }
-
-        public decimal? Price { get; set; }
 
         #endregion
     }
