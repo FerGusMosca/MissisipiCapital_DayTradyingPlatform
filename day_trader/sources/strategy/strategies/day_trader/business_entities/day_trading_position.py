@@ -305,11 +305,11 @@ class DayTradingPosition():
                           posMaxLongDeltaParam,candlebarsArr):
 
         if self.Open():
-            print ("Not opening because is opened:{}".format(self.Security.Symbol))
+            #print ("Not opening because is opened:{}".format(self.Security.Symbol))
             return False #Position already opened
 
         if self.Routing:
-            print("Not opening because is routing:{}".format(self.Security.Symbol))
+            #print("Not opening because is routing:{}".format(self.Security.Symbol))
             return False #cannot open positions that are being routed
 
         statisticalParams = self.GetStatisticalParameters(candlebarsArr)

@@ -211,8 +211,8 @@ class OrderRouter( BaseCommunicationModule, ICommunicationModule):
                 self.DoLog("Bloomberg Order Router: Sending message with SeqNum {} for OrderId{}"
                            .format(msgSeqNum,activeOrder.OrderId if activeOrder is not None else ""), MessageType.DEBUG)
                 execReport = ExecutionReportWrapper(activeOrder,msg,pParent=self)
-                if(execReport.GetExecType()==ExecType.Canceled):
-                    print("Received canceled exec report for security {}".format(execReport.GetField(ExecutionReportField.Symbol)))
+                #if(execReport.GetExecType()==ExecType.Canceled):
+                    #print("Received canceled exec report for security {}".format(execReport.GetField(ExecutionReportField.Symbol)))
                 self.DoSendExecutionReportThread(execReport)
                 time.sleep(50 / 1000)
             else:

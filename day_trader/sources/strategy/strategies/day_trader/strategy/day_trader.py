@@ -351,38 +351,48 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
     def UpdateManagedPositionOnInitialLoad(self,routePos):
 
-        for dayTradingPos in self.DayTradingPositions:
-            try:
-                summary = next(iter(list(filter(lambda x:    x.Position.GetLastOrder() is not None
-                                                         and routePos.GetLastOrder() is not None
-                                                         and x.Position.GetLastOrder().OrderId == routePos.GetLastOrder().OrderId,
-                                     dayTradingPos.ExecutionSummaries.values()))), None)
+        dayTradingPos = next(iter(list(filter(lambda x: x.Security.Symbol==routePos.Security.Symbol, self.DayTradingPositions))), None)
 
-                #if summary is not None and routePos.IsOpenPosition():
-                if summary is not None:
 
-                    del dayTradingPos.ExecutionSummaries[summary.Position.PosId]
-                    del self.PositionSecurities[summary.Position.PosId]
+        if dayTradingPos is None:
+            return False
 
-                    summary.Position.PosId = routePos.PosId
-                    dayTradingPos.ExecutionSummaries[summary.Position.PosId]=summary
-                    self.PositionSecurities[summary.Position.PosId]=dayTradingPos
 
-                    summary.UpdateStatus(routePos.GetLastExecutionReport())
-                    dayTradingPos.UpdateRouting()
+        try:
+            summary = next(iter(list(filter(lambda x:    x.Position.GetLastOrder() is not None
+                                                     and routePos.GetLastOrder() is not None
+                                                     and x.Position.GetLastOrder().OrderId == routePos.GetLastOrder().OrderId,
+                                 dayTradingPos.ExecutionSummaries.values()))), None)
 
-                    self.SummariesQueue.put(summary)
-                    self.DayTradingPositionsQueue.put(dayTradingPos)
-                    #self.ExecutionSummaryManager.PersistExecutionSummary(summary, dayTradingPos.Id)
-                    threading.Thread(target=self.PublishSummaryThread, args=(summary, dayTradingPos.Id)).start()
-                    threading.Thread(target=self.PublishPortfolioPositionThread, args=(dayTradingPos,)).start()
-                    return True
-            except Exception as e:
-                msg = "Critical error @DayTrader.UpdateManagedPositionOnInitialLoad for symbol {} :{}".format(dayTradingPos.Security.Symbol,e)
-                self.ProcessCriticalError(e,msg )
-                self.SendToInvokingModule(ErrorWrapper(Exception(msg)))
+            #if summary is not None and routePos.IsOpenPosition():
+            if summary is not None:
 
-        return False
+                del dayTradingPos.ExecutionSummaries[summary.Position.PosId]
+                del self.PositionSecurities[summary.Position.PosId]
+
+                summary.Position.PosId = routePos.PosId
+                dayTradingPos.ExecutionSummaries[summary.Position.PosId]=summary
+                self.PositionSecurities[summary.Position.PosId]=dayTradingPos
+
+                summary.UpdateStatus(routePos.GetLastExecutionReport())
+                dayTradingPos.UpdateRouting()
+
+                self.SummariesQueue.put(summary)
+                self.DayTradingPositionsQueue.put(dayTradingPos)
+                #self.ExecutionSummaryManager.PersistExecutionSummary(summary, dayTradingPos.Id)
+                threading.Thread(target=self.PublishSummaryThread, args=(summary, dayTradingPos.Id)).start()
+                threading.Thread(target=self.PublishPortfolioPositionThread, args=(dayTradingPos,)).start()
+            else:
+                self.DoLog("External trading detected. It won't be considered for statistics. Symbol:{}".format(dayTradingPos.Security.Symbol),MessageType.INFO)
+
+        except Exception as e:
+            msg = "Critical error @DayTrader.UpdateManagedPositionOnInitialLoad for symbol {} :{}".format(dayTradingPos.Security.Symbol,e)
+            self.ProcessCriticalError(e,msg )
+            self.SendToInvokingModule(ErrorWrapper(Exception(msg)))
+        finally:
+            return True
+
+
 
     def ClosedUnknownStatusSummaries(self,positions):
 
@@ -564,13 +574,13 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                         if dayTradingPos.Routing :
                             for summary in dayTradingPos.GetOpenSummaries()  :
                                 if summary.IsLongPosition()  and summary.Position.PosId not in self.PendingCancels:
-                                    print("want to close position for security {} but first closing order for {}".format(dayTradingPos.Security.Symbol,summary.CumQty))
+                                    #print("want to close position for security {} but first closing order for {}".format(dayTradingPos.Security.Symbol,summary.CumQty))
                                     self.PendingCancels[summary.Position.PosId]=summary
                                     cxlWrapper = CancelPositionWrapper(summary.Position.PosId)
                                     self.OrderRoutingModule.ProcessMessage(cxlWrapper)
                         else:
                             netShares = dayTradingPos.GetNetOpenShares()
-                            print("Now we do close positions for security {} for net open shares {}".format(dayTradingPos.Security.Symbol, netShares))
+                            #print("Now we do close positions for security {} for net open shares {}".format(dayTradingPos.Security.Symbol, netShares))
                             self.ProcessNewPositionReqManagedPos(dayTradingPos,
                                                                  Side.Sell if netShares>0 else Side.Buy,
                                                                  netShares if netShares>0 else netShares*(-1),
