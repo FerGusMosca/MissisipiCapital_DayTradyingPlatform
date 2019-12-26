@@ -610,7 +610,8 @@ class OrderRouter( BaseCommunicationModule, ICommunicationModule):
         elif(clOrdId is not None):
             return next(iter(list(filter(lambda x: x.ClOrdId is not None and x.ClOrdId == clOrdId, self.ActiveOrders.values()))),None)
         else:
-            return None
+            raise Exception("Could not find an order for OrderId {} - ClOrdId {}".format(orderId if orderId is not None else "-",clOrdId if clOrdId is not None else "-" ))
+            #return None
 
     def CancelOrder(self,wrapper):
         self.ActiveOrdersLock.acquire()

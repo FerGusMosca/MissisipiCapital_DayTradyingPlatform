@@ -260,6 +260,7 @@ class DayTradingPosition():
 
     def UpdateRouting(self):
         nextOpenPos = next(iter(list(filter(lambda x: x.Position.IsOpenPosition(), self.ExecutionSummaries.values()))), None)
+
         self.Routing= nextOpenPos is not None
 
     def GetOpenSummaries(self):
@@ -301,6 +302,42 @@ class DayTradingPosition():
         self.LastProfitCalculationDay=datetime.now()
         self.IncreaseDecrease=profitsAndLosses.IncreaseDecrease
 
+    def EvaluateShortTrade(self,dailyBiasModelParam,dailySlopeModelParam, posMaximShortChangeParam,
+                           posMaxShortDeltaParam,candlebarsArr):
+
+        if self.Open():
+            #print ("Not opening because is opened:{}".format(self.Security.Symbol))
+            return False #Position already opened
+
+        if self.Routing:
+            #print("Not opening because is routing:{}".format(self.Security.Symbol))
+            return False #cannot open positions that are being routed
+
+        statisticalParams = self.GetStatisticalParameters(candlebarsArr)
+
+        if  (statisticalParams.TenMinSkipSlope is None or statisticalParams.ThreeMinSkipSlope is None
+            or statisticalParams.ThreeToSixMinSkipSlope is None or statisticalParams.SixToNineMinSkipSlope is None
+            or statisticalParams.PctChangeLastThreeMinSlope is None or statisticalParams.DeltaCurrValueAndFiftyMMov is None):
+            return False
+
+        if  (    dailyBiasModelParam.FloatValue<0 #Daily Bias
+                # Last 10 minute slope of 50 minute moving average
+            and  statisticalParams.TenMinSkipSlope < dailySlopeModelParam.FloatValue
+                # Last 3 minute slope of 3 minute moving average
+            and statisticalParams.ThreeMinSkipSlope < dailySlopeModelParam.FloatValue
+                # Previous 3 to 6 minute slope of 3 minute moving average
+            and statisticalParams.ThreeToSixMinSkipSlope < dailySlopeModelParam.FloatValue
+                # Previous 6 to 9 minute slope of 3 minute moving average
+            and statisticalParams.SixToNineMinSkipSlope < dailySlopeModelParam.FloatValue
+                # Maximum change in last 3 minutes
+            and statisticalParams.PctChangeLastThreeMinSlope > posMaximShortChangeParam.FloatValue
+                # Delta between current value and 50MMA
+            and statisticalParams.DeltaCurrValueAndFiftyMMov > posMaxShortDeltaParam.FloatValue
+        ):
+            return True
+        else:
+            return False
+
     def EvaluateLongTrade(self,dailyBiasModelParam,dailySlopeModelParam, posMaximChangeParam,
                           posMaxLongDeltaParam,candlebarsArr):
 
@@ -337,6 +374,67 @@ class DayTradingPosition():
         else:
             return False
 
+    def EvaluateClosingShortTrade(self,candlebarsArr,
+                                  maxGainForClosingModelParam,pctMaxGainForClosingModelParam,
+                                  maxLossForClosingModelParam,pctMaxLossForClosingModelParam,
+                                  takeGainLimitModelParam,stopLossLimitModelParam,
+                                  pctSlopeToCloseShortModelParam,
+                                  endOfdayLimitModelParam):
+        if not self.Open():
+            return None #Position not opened
+
+        if self.GetNetOpenShares()>0:
+            return None#We are in a long position
+
+        statisticalParams = self.GetStatisticalParameters(candlebarsArr)
+
+        #EXIT any open trades at 2:59 PMcentral time
+        if self.EvaluateBiggerDate(endOfdayLimitModelParam):
+            return _EXIT_LONG_COND_EOF
+
+        #Maximum Gain during the trade exceeds a certain value and then drops to a percentage of that value
+        if(     self.MaxProfit is not None
+            and self.CurrentProfit is not None
+            and self.MaxProfit >= maxGainForClosingModelParam.FloatValue
+            and self.CurrentProfit<pctMaxGainForClosingModelParam.FloatValue*self.MaxProfit):
+            return _EXIT_LONG_COND_1
+
+        #Maximum Loss during the trade exceeds (worse than) a certain value and then drops to a percentage of that value
+        if (
+                self.CurrentProfit is not None
+            and self.MaxLoss is not None
+            and self.MaxLoss <= maxLossForClosingModelParam.FloatValue
+            and self.CurrentProfit<0):
+            absProfit = self.CurrentProfit if self.CurrentProfit>0 else (-1*self.CurrentProfit)
+            absMaxLoss= self.MaxLoss if self.MaxLoss>0 else (-1*self.MaxLoss)
+            if(absProfit < (pctMaxLossForClosingModelParam.FloatValue*absMaxLoss)):
+                return _EXIT_LONG_COND_2
+
+        #CUMULATIVE Gain for the Day exceeds Take Gain Limit
+        if(     self.CurrentProfit is not None
+            and self.CurrentProfit > takeGainLimitModelParam.FloatValue):
+            return _EXIT_LONG_COND_3
+
+        #CUMULATIVE Loss for the Day exceeds (worse than) Stop Loss Limit
+        if (     self.CurrentProfit is not None
+             and self.CurrentProfit < stopLossLimitModelParam.FloatValue):
+            return _EXIT_LONG_COND_4
+
+        #Last 3 minute slope of 3 minute moving average exceeds a certain value AGAINST the Trade
+        if(     statisticalParams.ThreeMinSkipSlope is not None
+            and statisticalParams.ThreeMinSkipSlope >= pctSlopeToCloseShortModelParam.FloatValue):
+            return _EXIT_LONG_COND_5
+
+        return None
+
+    #Defines if the condition for closing the day, will imply not opening another position duriing the day
+    def IsTerminalCondition(self,cond):
+        if (cond == _EXIT_LONG_COND_EOF or cond == _EXIT_LONG_COND_1 or cond == _EXIT_LONG_COND_2
+            or cond == _EXIT_LONG_COND_3 or cond == _EXIT_LONG_COND_4):
+            return True
+        else:
+            return False
+
     def EvaluateClosingLongTrade(self,candlebarsArr,
                                   maxGainForClosingModelParam,pctMaxGainForClosingModelParam,
                                   maxLossForClosingModelParam,pctMaxLossForClosingModelParam,
@@ -345,6 +443,9 @@ class DayTradingPosition():
                                   endOfdayLimitModelParam):
         if not self.Open():
             return None #Position not opened
+
+        if self.GetNetOpenShares()<=0:
+            return None#We are in a short position
 
         statisticalParams = self.GetStatisticalParameters(candlebarsArr)
 

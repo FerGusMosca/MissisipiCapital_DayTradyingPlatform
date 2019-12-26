@@ -44,6 +44,14 @@ class ModelParametersHandler:
         return "POS_SHORT_MAX_DELTA"
 
     @staticmethod
+    def MAXIM_SHORT_PCT_CHANGE_3_MIN():
+        return "MAXIM_SHORT_PCT_CHANGE_3_MIN"
+
+    @staticmethod
+    def POS_SHORT_MAX_DELTA():
+        return "POS_SHORT_MAX_DELTA"
+
+    @staticmethod
     def MAX_GAIN_FOR_DAY():
         return "MAX_GAIN_FOR_DAY"
 
@@ -70,6 +78,10 @@ class ModelParametersHandler:
     @staticmethod
     def PCT_SLOPE_TO_CLOSE_LONG():
         return "PCT_SLOPE_TO_CLOSE_LONG"
+
+    @staticmethod
+    def PCT_SLOPE_TO_CLOSE_SHORT():
+        return "PCT_SLOPE_TO_CLOSE_SHORT"
 
     @staticmethod
     def PCT_SLOPE_TO_CLOSE_SHORT():

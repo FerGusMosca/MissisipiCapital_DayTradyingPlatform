@@ -447,7 +447,9 @@ class WSHandler(tornado.websocket.WebSocketHandler):
         self.DoLog("Unknown message :{}".format(message),MessageType.ERROR)
 
     except Exception as e:
-      self.DoLog("Critical error @on_message @WSHandler: " + str(e), MessageType.ERROR)
+      msg="Critical error @on_message @WSHandler: " + str(e)
+      self.DoLog(msg, MessageType.ERROR)
+      #self.PublishError(msg)
 
   def on_close(self):
     try:

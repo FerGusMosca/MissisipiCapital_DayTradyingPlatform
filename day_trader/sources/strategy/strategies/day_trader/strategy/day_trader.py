@@ -273,7 +273,8 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                         self.ProcessOrder(summary, False)
                         threading.Thread(target=self.PublishPortfolioPositionThread, args=(dayTradingPos,)).start()
                         threading.Thread(target=self.PublishSummaryThread, args=(summary, dayTradingPos.Id)).start()
-                        self.RoutingLock.release()
+                        if self.RoutingLock.locked():
+                            self.RoutingLock.release()
                         return CMState.BuildSuccess(self)
                     else:
                         self.DoLog("Received execution report for a managed position, but we cannot find its execution summary",MessageType.ERROR)
@@ -420,6 +421,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                 self.DoLog("Received list of Open Positions: {} positions".format(Position.CountOpenPositions(self, positions)),
                     MessageType.INFO)
                 i=0
+
                 self.RoutingLock.acquire()
                 for pos in positions:
 
@@ -444,6 +446,9 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                 self.RoutingLock.release()
 
     def ProcessMarketData(self,wrapper):
+
+        md = MarketDataConverter.ConvertMarketData(wrapper)
+
         try:
             self.LockMarketData.acquire()
             md = MarketDataConverter.ConvertMarketData(wrapper)
@@ -461,13 +466,13 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                 dayTradingPos.CalculateCurrentDayProfits(md)
 
         except Exception as e:
-            self.ProcessErrorInMethod("@DayTrader.ProcessMarketData", e)
+            self.ProcessErrorInMethod("@DayTrader.ProcessMarketData", e,md.Security.Symbol is md if not None else None)
         finally:
             self.LockMarketData.release()
 
-    def ProcessErrorInMethod(self,method,e):
+    def ProcessErrorInMethod(self,method,e, symbol=None):
         try:
-            msg = "Error @{}:{} ".format(method,str(e))
+            msg = "Error @{} for security {}:{} ".format(method, symbol if symbol is not None else "-",str(e))
             error = ErrorWrapper(Exception(msg))
             self.ProcessError(error)
             self.DoLog(msg, MessageType.ERROR)
@@ -488,8 +493,11 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
             self.DoLog("Critical error @DayTrader.ProcessError: " + str(e), MessageType.ERROR)
 
     def ProcessHistoricalPrices(self,wrapper):
+
+        security = MarketDataConverter.ConvertHistoricalPrices(wrapper)
+
         try:
-            security = MarketDataConverter.ConvertHistoricalPrices(wrapper)
+
             self.HistoricalPrices[security.Symbol]=security.MarketDataArr
 
             datTradingPos = next(iter(list(filter(lambda x:  x.Security.Symbol==security.Symbol, self.DayTradingPositions))), None)
@@ -505,7 +513,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
             self.DoLog("Historical prices successfully loaded for symbol {} ".format(security.Symbol), MessageType.INFO)
         except Exception as e:
-            self.ProcessErrorInMethod("@DayTrader.ProcessHistoricalPrices",e)
+            self.ProcessErrorInMethod("@DayTrader.ProcessHistoricalPrices",e,security.Symbol if security is not None else None)
 
     def EvaluateOpeningPositions(self, candlebar,cbDict):
 
@@ -534,8 +542,17 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                                                         self.ModelParametersHandler.Get(ModelParametersHandler.MAXIM_PCT_CHANGE_3_MIN(),symbol),
                                                         self.ModelParametersHandler.Get(ModelParametersHandler.POS_LONG_MAX_DELTA(),symbol),
                                                         list(cbDict.values())):
-                        print ("running trade for symbol {}".format(dayTradingPos.Security.Symbol))
+                        #print ("running long trade for symbol {}".format(dayTradingPos.Security.Symbol))
                         self.ProcessNewPositionReqManagedPos(dayTradingPos, Side.Buy, dayTradingPos.SharesQuantity,
+                                                             self.Configuration.DefaultAccount)
+
+                    if dayTradingPos.EvaluateShortTrade(self.ModelParametersHandler.Get(ModelParametersHandler.DAILY_BIAS(),symbol),
+                                                        self.ModelParametersHandler.Get(ModelParametersHandler.DAILY_SLOPE(),symbol),
+                                                        self.ModelParametersHandler.Get(ModelParametersHandler.MAXIM_SHORT_PCT_CHANGE_3_MIN(),symbol),
+                                                        self.ModelParametersHandler.Get(ModelParametersHandler.POS_SHORT_MAX_DELTA(),symbol),
+                                                        list(cbDict.values())):
+                        print ("running short trade for symbol {}".format(dayTradingPos.Security.Symbol))
+                        self.ProcessNewPositionReqManagedPos(dayTradingPos, Side.Sell, dayTradingPos.SharesQuantity,
                                                              self.Configuration.DefaultAccount)
                 else:
                     return False
@@ -548,7 +565,23 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
         else:
             return False
 
-    def EvaluateClosingPositions(self, candlebar,cbDict):
+    def RunClose(self,dayTradingPos,side,condition):
+        if dayTradingPos.Routing:
+            for summary in dayTradingPos.GetOpenSummaries():
+
+                # we just cancel summaries whose side is different than the closing side. We don't want to cancel the close
+                if summary.Position.PosId not in self.PendingCancels and summary.Position.Side !=side:
+                    #print("want to close position for security {} but first closing order for {}".format(dayTradingPos.Security.Symbol,summary.CumQty))
+                    self.PendingCancels[summary.Position.PosId] = summary
+                    cxlWrapper = CancelPositionWrapper(summary.Position.PosId)
+                    self.OrderRoutingModule.ProcessMessage(cxlWrapper)
+        else:
+            netShares = dayTradingPos.GetNetOpenShares()
+            if netShares!=0: #if there is something to close
+                # print("Now we do close positions for security {} for net open shares {}".format(dayTradingPos.Security.Symbol, netShares))
+                self.ProcessNewPositionReqManagedPos(dayTradingPos,side,netShares if netShares > 0 else netShares * (-1),self.Configuration.DefaultAccount)
+
+    def EvaluateClosingLongPositions(self, candlebar,cbDict):
 
         symbol = candlebar.Security.Symbol
 
@@ -557,6 +590,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
         if tradingMode.StringValue == _TRADING_MODE_AUTOMATIC:
 
             dayTradingPos =  next(iter(list(filter(lambda x: x.Security.Symbol == candlebar.Security.Symbol, self.DayTradingPositions))), None)
+
             if dayTradingPos is not None:
 
                 closingCond = dayTradingPos.EvaluateClosingLongTrade(list(cbDict.values()),
@@ -569,22 +603,41 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                                                 self.ModelParametersHandler.Get(ModelParametersHandler.PCT_SLOPE_TO_CLOSE_LONG(),symbol),
                                                 self.ModelParametersHandler.Get(ModelParametersHandler.END_OF_DAY_LIMIT(),symbol)
                                                 )
+
                 if closingCond is not None:
-                    #1-We search for open summaries
-                        if dayTradingPos.Routing :
-                            for summary in dayTradingPos.GetOpenSummaries()  :
-                                if summary.IsLongPosition()  and summary.Position.PosId not in self.PendingCancels:
-                                    #print("want to close position for security {} but first closing order for {}".format(dayTradingPos.Security.Symbol,summary.CumQty))
-                                    self.PendingCancels[summary.Position.PosId]=summary
-                                    cxlWrapper = CancelPositionWrapper(summary.Position.PosId)
-                                    self.OrderRoutingModule.ProcessMessage(cxlWrapper)
-                        else:
-                            netShares = dayTradingPos.GetNetOpenShares()
-                            #print("Now we do close positions for security {} for net open shares {}".format(dayTradingPos.Security.Symbol, netShares))
-                            self.ProcessNewPositionReqManagedPos(dayTradingPos,
-                                                                 Side.Sell if netShares>0 else Side.Buy,
-                                                                 netShares if netShares>0 else netShares*(-1),
-                                                                 self.Configuration.DefaultAccount)
+                    self.RunClose(dayTradingPos,Side.Sell if dayTradingPos.GetNetOpenShares() > 0 else Side.Buy,closingCond)
+
+            else:
+                msg = "Could not find Day Trading Position for candlebar symbol {}. Please Resync.".format(candlebar.Security.Symbol)
+                self.SendToInvokingModule(ErrorWrapper(Exception(msg)))
+                self.DoLog(msg, MessageType.ERROR)
+
+    def EvaluateClosingShortPositions(self, candlebar,cbDict):
+
+        symbol = candlebar.Security.Symbol
+
+        tradingMode = self.ModelParametersHandler.Get(ModelParametersHandler.TRADING_MODE(),symbol)
+
+        if tradingMode.StringValue == _TRADING_MODE_AUTOMATIC:
+
+            dayTradingPos =  next(iter(list(filter(lambda x: x.Security.Symbol == candlebar.Security.Symbol, self.DayTradingPositions))), None)
+
+            if dayTradingPos is not None:
+
+                closingCond = dayTradingPos.EvaluateClosingShortTrade(list(cbDict.values()),
+                                                self.ModelParametersHandler.Get(ModelParametersHandler.MAX_GAIN_FOR_DAY(),symbol),
+                                                self.ModelParametersHandler.Get(ModelParametersHandler.PCT_MAX_GAIN_CLOSING(),symbol),
+                                                self.ModelParametersHandler.Get(ModelParametersHandler.MAX_LOSS_FOR_DAY(),symbol),
+                                                self.ModelParametersHandler.Get(ModelParametersHandler.PCT_MAX_LOSS_CLOSING(),symbol),
+                                                self.ModelParametersHandler.Get(ModelParametersHandler.TAKE_GAIN_LIMIT(),symbol),
+                                                self.ModelParametersHandler.Get(ModelParametersHandler.STOP_LOSS_LIMIT(),symbol),
+                                                self.ModelParametersHandler.Get(ModelParametersHandler.PCT_SLOPE_TO_CLOSE_SHORT(),symbol),
+                                                self.ModelParametersHandler.Get(ModelParametersHandler.END_OF_DAY_LIMIT(),symbol)
+                                                )
+
+                if closingCond is not None:
+                    print("closing short position for security {}".format(dayTradingPos.Security.Symbol))
+                    self.RunClose(dayTradingPos,Side.Sell if dayTradingPos.GetNetOpenShares() > 0 else Side.Buy,closingCond)
 
             else:
                 msg = "Could not find Day Trading Position for candlebar symbol {}. Please Resync.".format(candlebar.Security.Symbol)
@@ -592,10 +645,11 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                 self.DoLog(msg, MessageType.ERROR)
 
     def ProcessCandleBar(self,wrapper):
+
+        candlebar = MarketDataConverter.ConvertCandlebar(wrapper)
+
         try:
             self.LockCandlebar.acquire()
-
-            candlebar = MarketDataConverter.ConvertCandlebar(wrapper)
 
             if candlebar is not None:
                 cbDict = self.Candlebars[candlebar.Security.Symbol]
@@ -605,7 +659,8 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                 cbDict[candlebar.DateTime] = candlebar
                 self.Candlebars[candlebar.Security.Symbol]=cbDict
                 self.EvaluateOpeningPositions(candlebar,cbDict)
-                self.EvaluateClosingPositions(candlebar,cbDict)
+                self.EvaluateClosingLongPositions(candlebar,cbDict)
+                self.EvaluateClosingShortPositions(candlebar, cbDict)
 
                 self.DoLog("Candlebars successfully loaded for symbol {} ".format(candlebar.Security.Symbol),MessageType.DEBUG)
             else:
@@ -613,7 +668,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
         except Exception as e:
             traceback.print_exc()
-            self.ProcessErrorInMethod("@DayTrader.ProcessCandleBar", e)
+            self.ProcessErrorInMethod("@DayTrader.ProcessCandleBar", e,candlebar.Security.Symbol if candlebar is not None else None)
         finally:
             if self.LockCandlebar.locked():
                 self.LockCandlebar.release()
