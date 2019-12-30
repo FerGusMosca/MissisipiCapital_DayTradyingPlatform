@@ -388,37 +388,15 @@ class DayTradingPosition():
 
         statisticalParams = self.GetStatisticalParameters(candlebarsArr)
 
-        #EXIT any open trades at 2:59 PMcentral time
-        if self.EvaluateBiggerDate(endOfdayLimitModelParam):
-            return _EXIT_LONG_COND_EOF
+        terminalCond = self.EvaluateClosingTerminalCondition(candlebarsArr, endOfdayLimitModelParam,
+                                                             maxGainForClosingModelParam,
+                                                             pctMaxGainForClosingModelParam,
+                                                             maxLossForClosingModelParam,
+                                                             pctMaxGainForClosingModelParam, takeGainLimitModelParam,
+                                                             stopLossLimitModelParam)
 
-        #Maximum Gain during the trade exceeds a certain value and then drops to a percentage of that value
-        if(     self.MaxProfit is not None
-            and self.CurrentProfit is not None
-            and self.MaxProfit >= maxGainForClosingModelParam.FloatValue
-            and self.CurrentProfit<pctMaxGainForClosingModelParam.FloatValue*self.MaxProfit):
-            return _EXIT_LONG_COND_1
-
-        #Maximum Loss during the trade exceeds (worse than) a certain value and then drops to a percentage of that value
-        if (
-                self.CurrentProfit is not None
-            and self.MaxLoss is not None
-            and self.MaxLoss <= maxLossForClosingModelParam.FloatValue
-            and self.CurrentProfit<0):
-            absProfit = self.CurrentProfit if self.CurrentProfit>0 else (-1*self.CurrentProfit)
-            absMaxLoss= self.MaxLoss if self.MaxLoss>0 else (-1*self.MaxLoss)
-            if(absProfit < (pctMaxLossForClosingModelParam.FloatValue*absMaxLoss)):
-                return _EXIT_LONG_COND_2
-
-        #CUMULATIVE Gain for the Day exceeds Take Gain Limit
-        if(     self.CurrentProfit is not None
-            and self.CurrentProfit > takeGainLimitModelParam.FloatValue):
-            return _EXIT_LONG_COND_3
-
-        #CUMULATIVE Loss for the Day exceeds (worse than) Stop Loss Limit
-        if (     self.CurrentProfit is not None
-             and self.CurrentProfit < stopLossLimitModelParam.FloatValue):
-            return _EXIT_LONG_COND_4
+        if terminalCond is not None:
+            return terminalCond
 
         #Last 3 minute slope of 3 minute moving average exceeds a certain value AGAINST the Trade
         if(     statisticalParams.ThreeMinSkipSlope is not None
@@ -427,13 +405,40 @@ class DayTradingPosition():
 
         return None
 
-    #Defines if the condition for closing the day, will imply not opening another position duriing the day
-    def IsTerminalCondition(self,cond):
-        if (cond == _EXIT_LONG_COND_EOF or cond == _EXIT_LONG_COND_1 or cond == _EXIT_LONG_COND_2
-            or cond == _EXIT_LONG_COND_3 or cond == _EXIT_LONG_COND_4):
-            return True
-        else:
-            return False
+    #Defines if the condition for closing the day, will imply not opening another position during the day
+    def EvaluateClosingTerminalCondition(self,candlebarsArr,endOfdayLimitModelParam,maxGainForClosingModelParam	,pctMaxGainForClosingModelParam,
+                                         maxLossForClosingModelParam,pctMaxLossForClosingModelParam,takeGainLimitModelParam,stopLossLimitModelParam):
+
+        # EXIT any open trades at 2:59 PM central time
+        if self.EvaluateBiggerDate(endOfdayLimitModelParam):
+            return _EXIT_LONG_COND_EOF
+
+        # Maximum Gain during the trade exceeds a certain value and then drops to a percentage of that value
+        if (self.MaxProfit is not None
+                and self.CurrentProfit is not None
+                and self.MaxProfit >= maxGainForClosingModelParam.FloatValue
+                and self.CurrentProfit < pctMaxGainForClosingModelParam.FloatValue * self.MaxProfit):
+            return _EXIT_LONG_COND_1
+
+        # Maximum Loss during the trade exceeds (worse than) a certain value and then drops to a percentage of that value
+        if (self.CurrentProfit is not None
+            and self.MaxLoss is not None
+            and self.MaxLoss <= maxLossForClosingModelParam.FloatValue
+            and self.CurrentProfit < 0):
+            absProfit = self.CurrentProfit if self.CurrentProfit > 0 else (-1 * self.CurrentProfit)
+            absMaxLoss = self.MaxLoss if self.MaxLoss > 0 else (-1 * self.MaxLoss)
+            if (absProfit < (pctMaxLossForClosingModelParam.FloatValue * absMaxLoss)):
+                return _EXIT_LONG_COND_2
+
+        # CUMULATIVE Gain for the Day exceeds Take Gain Limit
+        if (self.CurrentProfit is not None and self.CurrentProfit > takeGainLimitModelParam.FloatValue):
+            return _EXIT_LONG_COND_3
+
+        # CUMULATIVE Loss for the Day exceeds (worse than) Stop Loss Limit
+        if (self.CurrentProfit is not None and self.CurrentProfit < stopLossLimitModelParam.FloatValue):
+            return _EXIT_LONG_COND_4
+
+        return None
 
     def EvaluateClosingLongTrade(self,candlebarsArr,
                                   maxGainForClosingModelParam,pctMaxGainForClosingModelParam,
@@ -449,37 +454,11 @@ class DayTradingPosition():
 
         statisticalParams = self.GetStatisticalParameters(candlebarsArr)
 
-        #EXIT any open trades at 2:59 PMcentral time
-        if self.EvaluateBiggerDate(endOfdayLimitModelParam):
-            return _EXIT_LONG_COND_EOF
+        terminalCond = self.EvaluateClosingTerminalCondition(candlebarsArr,endOfdayLimitModelParam,maxGainForClosingModelParam,pctMaxGainForClosingModelParam,
+                                                             maxLossForClosingModelParam,pctMaxLossForClosingModelParam,takeGainLimitModelParam,stopLossLimitModelParam)
 
-        #Maximum Gain during the trade exceeds a certain value and then drops to a percentage of that value
-        if(     self.MaxProfit is not None
-            and self.CurrentProfit is not None
-            and self.MaxProfit >= maxGainForClosingModelParam.FloatValue
-            and self.CurrentProfit<pctMaxGainForClosingModelParam.FloatValue*self.MaxProfit):
-            return _EXIT_LONG_COND_1
-
-        #Maximum Loss during the trade exceeds (worse than) a certain value and then drops to a percentage of that value
-        if (
-                self.CurrentProfit is not None
-            and self.MaxLoss is not None
-            and self.MaxLoss <= maxLossForClosingModelParam.FloatValue
-            and self.CurrentProfit<0):
-            absProfit = self.CurrentProfit if self.CurrentProfit>0 else (-1*self.CurrentProfit)
-            absMaxLoss= self.MaxLoss if self.MaxLoss>0 else (-1*self.MaxLoss)
-            if(absProfit < (pctMaxLossForClosingModelParam.FloatValue*absMaxLoss)):
-                return _EXIT_LONG_COND_2
-
-        #CUMULATIVE Gain for the Day exceeds Take Gain Limit
-        if(     self.CurrentProfit is not None
-            and self.CurrentProfit > takeGainLimitModelParam.FloatValue):
-            return _EXIT_LONG_COND_3
-
-        #CUMULATIVE Loss for the Day exceeds (worse than) Stop Loss Limit
-        if (     self.CurrentProfit is not None
-             and self.CurrentProfit < stopLossLimitModelParam.FloatValue):
-            return _EXIT_LONG_COND_4
+        if terminalCond is not None:
+            return terminalCond
 
         #Last 3 minute slope of 3 minute moving average exceeds a certain value AGAINST the Trade
         if(     statisticalParams.ThreeMinSkipSlope is not None

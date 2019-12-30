@@ -527,7 +527,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
             if dayTradingPos is not None:
 
 
-                if dayTradingPos.EvaluateValidTimeToEnterTrade(self.ModelParametersHandler.Get(ModelParametersHandler.LOW_VOL_ENTRY_THRESHOLD(),symbol),
+                if (dayTradingPos.EvaluateValidTimeToEnterTrade(self.ModelParametersHandler.Get(ModelParametersHandler.LOW_VOL_ENTRY_THRESHOLD(),symbol),
                                                                self.ModelParametersHandler.Get(ModelParametersHandler.HIGH_VOL_ENTRY_THRESHOLD(),symbol),
                                                                self.ModelParametersHandler.Get(ModelParametersHandler.LOW_VOL_FROM_TIME(),symbol),
                                                                self.ModelParametersHandler.Get(ModelParametersHandler.LOW_VOL_TO_TIME(),symbol),
@@ -535,7 +535,17 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                                                                self.ModelParametersHandler.Get(ModelParametersHandler.HIGH_VOL_TO_TIME_1(),symbol),
                                                                self.ModelParametersHandler.Get(ModelParametersHandler.HIGH_VOL_FROM_TIME_2(),symbol),
                                                                self.ModelParametersHandler.Get(ModelParametersHandler.HIGH_VOL_TO_TIME_2(), symbol),
-                                                               ):
+                                                               )
+
+                    and  dayTradingPos.EvaluateClosingTerminalCondition(list(cbDict.values()),
+                                                                        self.ModelParametersHandler.Get(ModelParametersHandler.END_OF_DAY_LIMIT(),symbol),
+                                                                        self.ModelParametersHandler.Get(ModelParametersHandler.MAX_GAIN_FOR_DAY(),symbol),
+                                                                        self.ModelParametersHandler.Get(ModelParametersHandler.PCT_MAX_GAIN_CLOSING(),symbol),
+                                                                        self.ModelParametersHandler.Get(ModelParametersHandler.MAX_LOSS_FOR_DAY(),symbol),
+                                                                        self.ModelParametersHandler.Get(ModelParametersHandler.PCT_MAX_LOSS_CLOSING(),symbol),
+                                                                        self.ModelParametersHandler.Get( ModelParametersHandler.TAKE_GAIN_LIMIT(),symbol),
+                                                                        self.ModelParametersHandler.Get(ModelParametersHandler.STOP_LOSS_LIMIT(),symbol)) is  None
+                ):
 
                     if dayTradingPos.EvaluateLongTrade(self.ModelParametersHandler.Get(ModelParametersHandler.DAILY_BIAS(),symbol),
                                                         self.ModelParametersHandler.Get(ModelParametersHandler.DAILY_SLOPE(),symbol),
