@@ -137,6 +137,7 @@ class MarketOrderRouter(BaseCommunicationModule, ICommunicationModule):
 
     def ProcessNewPosition(self, wrapper):
         try:
+
             self.PositionsLock.acquire()
             new_pos = PositionConverter.ConvertPosition(self, wrapper)
             # In this Generic Order Router ClOrdID=PosId
@@ -151,7 +152,9 @@ class MarketOrderRouter(BaseCommunicationModule, ICommunicationModule):
                                         TimeInForce=TimeInForce.Day,Account=new_pos.Account,
                                         OrdStatus=OrdStatus.PendingNew,Broker=new_pos.Broker,Strategy=new_pos.Strategy))
             self.PositionsLock.release()
-            self.OutgoingModule.ProcessMessage(order_wrapper)
+            return self.OutgoingModule.ProcessMessage(order_wrapper)
+        except Exception as e:
+            raise e
         finally:
             if self.PositionsLock.locked():
                 self.PositionsLock.release()
@@ -210,7 +213,7 @@ class MarketOrderRouter(BaseCommunicationModule, ICommunicationModule):
         try:
 
             if wrapper.GetAction() == Actions.NEW_POSITION:
-                self.ProcessNewPosition(wrapper)
+                return self.ProcessNewPosition(wrapper)
             elif wrapper.GetAction() == Actions.POSITION_LIST_REQUEST:
                 return self.ProcessPositionListRequest(wrapper)
             elif wrapper.GetAction() == Actions.CANCEL_POSITION:

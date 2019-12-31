@@ -416,6 +416,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
     def ProcessPositionList(self, wrapper):
         try:
             success = wrapper.GetField(PositionListField.Status)
+
             if success:
                 positions = wrapper.GetField(PositionListField.Positions)
                 self.DoLog("Received list of Open Positions: {} positions".format(Position.CountOpenPositions(self, positions)),
@@ -585,6 +586,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                     self.PendingCancels[summary.Position.PosId] = summary
                     cxlWrapper = CancelPositionWrapper(summary.Position.PosId)
                     self.OrderRoutingModule.ProcessMessage(cxlWrapper)
+
         else:
             netShares = dayTradingPos.GetNetOpenShares()
             if netShares!=0: #if there is something to close
@@ -777,10 +779,17 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
             self.RoutingLock.release()
 
             posWrapper = PositionWrapper(newPos)
-            self.OrderRoutingModule.ProcessMessage(posWrapper)
+            state = self.OrderRoutingModule.ProcessMessage(posWrapper)
 
-            threading.Thread(target=self.PublishPortfolioPositionThread, args=(dayTradingPos,)).start()
-            threading.Thread(target=self.PublishSummaryThread, args=(summary, dayTradingPos.Id)).start()
+            if state.Success:
+                threading.Thread(target=self.PublishPortfolioPositionThread, args=(dayTradingPos,)).start()
+                threading.Thread(target=self.PublishSummaryThread, args=(summary, dayTradingPos.Id)).start()
+            else:
+                del dayTradingPos.ExecutionSummaries[summary.Position.PosId]
+                del self.PositionSecurities[summary.Position.PosId]
+                dayTradingPos.Routing=False
+                raise state.Exception
+
         finally:
             if self.RoutingLock.locked():
                 self.RoutingLock.release()

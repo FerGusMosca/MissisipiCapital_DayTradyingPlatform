@@ -15,9 +15,10 @@ class SingletonModuleHandler(BaseCommunicationModule):
 
     def ProcessMessage(self, wrapper):
         try:
-            self.SingletonHandler.ProcessMessage (wrapper)
+            return self.SingletonHandler.ProcessMessage (wrapper)
         except Exception as e:
             self.DoLog("@{}:Error @ProcessMessage. Error={} ".format(self.Configuration.Name,e), MessageType.ERROR)
+            return CMState.BuildFailure(self, Exception=e)
 
     def LoadConfig(self):
         self.Configuration = Configuration(self.ModuleConfigFile)
