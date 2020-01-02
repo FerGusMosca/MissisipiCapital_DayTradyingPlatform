@@ -614,9 +614,11 @@ class OrderRouter( BaseCommunicationModule, ICommunicationModule):
             #return None
 
     def CancelOrder(self,wrapper):
+
         self.ActiveOrdersLock.acquire()
         orderId = None
         try:
+
             order= self.FetchOrderByIds(wrapper)
 
             orderId = order.OrderId if order is not None else None

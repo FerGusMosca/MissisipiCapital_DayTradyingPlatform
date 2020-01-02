@@ -173,7 +173,8 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
                     self.RequestHistoricalPrices()
 
-                    self.RoutingLock.release()
+                    if self.RoutingLock.locked():
+                        self.RoutingLock.release()
 
                 time.sleep(1)
 
@@ -434,7 +435,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                     else:
                         self.DoLog("Could not find execution report for position id {}".format(pos.PosId),MessageType.ERROR)
                 self.ClosedUnknownStatusSummaries(positions)
-                self.PositionsSynchronization= False
+
                 self.DoLog("Process ready to receive commands and trade", MessageType.INFO)
             else:
                 exception= wrapper.GetField(PositionListField.Error)
@@ -443,6 +444,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
         except Exception as e:
             self.ProcessCriticalError(e,"Critical error @DayTrader.ProcessPositionList:{}".format(e))
         finally:
+            self.PositionsSynchronization = False
             if self.RoutingLock.locked():
                 self.RoutingLock.release()
 
@@ -840,7 +842,11 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
     def ProcessCancelAllPositionReqThread(self,wrapper):
         try:
-            self.OrderRoutingModule.ProcessMessage(wrapper)
+            state = self.OrderRoutingModule.ProcessMessage(wrapper)
+
+            if not state.Success:
+                self.ProcessError(ErrorWrapper(state.Exception))
+
         except Exception as e:
             msg = "Exception @DayTrader.ProcessCancelAllPositionReqThread: {}!".format(str(e))
             #self.ProcessCriticalError(e, msg)
@@ -862,7 +868,10 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                         if summary.Position.IsOpenPosition():
 
                             cxlWrapper = CancelPositionWrapper(summary.Position.PosId)
-                            self.OrderRoutingModule.ProcessMessage(cxlWrapper)
+                            state = self.OrderRoutingModule.ProcessMessage(cxlWrapper)
+
+                            if not state.Success:
+                                self.ProcessError(ErrorWrapper(state.Exception))
                 else:
                     raise Exception("Could not find a daytrading position for Id {}".format(posId))
             else:

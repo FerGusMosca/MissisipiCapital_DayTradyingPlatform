@@ -289,8 +289,8 @@ class WSHandler(tornado.websocket.WebSocketHandler):
     except Exception as e:
       msg = "Critical ERROR for Incoming Cancel Position Req for posId {}. Error:{}".format(cancelRouteReq.PosId,str(e))
       self.DoLog(msg, MessageType.ERROR)
-      ack = CancelAllPositionAck(Msg="CancelAllPositionAck", UUID=cancelRouteReq.UUID, ReqId=cancelRouteReq.ReqId,
-                                 PosId=cancelRouteReq.PosId,Success=False, Error=msg)
+      ack = CancelPositionAck(Msg="CancelAllPositionAck", UUID=cancelRouteReq.UUID, ReqId=cancelRouteReq.ReqId,
+                               PosId=cancelRouteReq.PosId,Success=False, Error=msg)
       self.DoSendResponse(ack)
 
   def ProcessUpdateModelParamReq(self, updateModelParamReq):
