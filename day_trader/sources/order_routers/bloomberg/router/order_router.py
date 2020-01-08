@@ -631,7 +631,8 @@ class OrderRouter( BaseCommunicationModule, ICommunicationModule):
         except Exception as e:
             self.ProcessOrderCancelReject(orderId,e)
         finally:
-            self.ActiveOrdersLock.release()
+            if self.ActiveOrdersLock.locked():
+                self.ActiveOrdersLock.release()
 
 
     def CancellAllOrders(self,wrapper):

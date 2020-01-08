@@ -1,6 +1,6 @@
 from sources.framework.business_entities.securities.security import *
 from sources.framework.business_entities.market_data.candle_bar import *
-
+from sources.framework.common.enums.Side import *
 from sources.strategy.common.dto.position_statistical_parameters import *
 from sources.strategy.common.dto.position_profits_and_losses import *
 
@@ -212,7 +212,8 @@ class DayTradingPosition():
 
     def CalculateLastTradeProfit(self, profitsAndLosses, marketData):
 
-        lastTradedSummaries = sorted(list(filter(lambda x: x.Timestamp.date() == datetime.now().date() and x.GetNetShares() > 0,
+        lastTradedSummaries = sorted(list(filter(lambda x: x.Timestamp.date() == datetime.now().date() and x.GetNetShares() != 0
+                                                 and (x.Position.Side==Side.Buy if self.GetNetOpenShares()>0 else x.Position.Side==Side.Sell),
                            self.ExecutionSummaries.values())),key=lambda x: x.Timestamp, reverse=True)
 
         lastTradedSummary=None
@@ -315,6 +316,9 @@ class DayTradingPosition():
 
         statisticalParams = self.GetStatisticalParameters(candlebarsArr)
 
+        #if statisticalParams.TenMinSkipSlope is not None:
+            #print("Open Short - Ten Min Skip Slope {} for security {}".format(statisticalParams.TenMinSkipSlope,self.Security.Symbol))
+
         if  (statisticalParams.TenMinSkipSlope is None or statisticalParams.ThreeMinSkipSlope is None
             or statisticalParams.ThreeToSixMinSkipSlope is None or statisticalParams.SixToNineMinSkipSlope is None
             or statisticalParams.PctChangeLastThreeMinSlope is None or statisticalParams.DeltaCurrValueAndFiftyMMov is None):
@@ -380,13 +384,13 @@ class DayTradingPosition():
                                   takeGainLimitModelParam,stopLossLimitModelParam,
                                   pctSlopeToCloseShortModelParam,
                                   endOfdayLimitModelParam):
-        if not self.Open():
-            return None #Position not opened
 
-        if self.GetNetOpenShares()>0:
-            return None#We are in a long position
+
 
         statisticalParams = self.GetStatisticalParameters(candlebarsArr)
+
+        #if statisticalParams.TenMinSkipSlope is not None:
+            #print( "Close Short Trade - Ten Min Skip Slope {} for security {}".format(statisticalParams.TenMinSkipSlope, self.Security.Symbol))
 
         terminalCond = self.EvaluateClosingTerminalCondition(candlebarsArr, endOfdayLimitModelParam,
                                                              maxGainForClosingModelParam,
@@ -394,6 +398,12 @@ class DayTradingPosition():
                                                              maxLossForClosingModelParam,
                                                              pctMaxGainForClosingModelParam, takeGainLimitModelParam,
                                                              stopLossLimitModelParam)
+
+        if not self.Open():
+            return None #Position not opened
+
+        if self.GetNetOpenShares()>0:
+            return None#We are in a long position
 
         if terminalCond is not None:
             return terminalCond
@@ -446,19 +456,25 @@ class DayTradingPosition():
                                   takeGainLimitModelParam,stopLossLimitModelParam,
                                   pctSlopeToCloseLongModelParam,
                                   endOfdayLimitModelParam):
-        if not self.Open():
-            return None #Position not opened
 
-        if self.GetNetOpenShares()<=0:
-            return None#We are in a short position
+
 
         statisticalParams = self.GetStatisticalParameters(candlebarsArr)
+
+        #if statisticalParams.TenMinSkipSlope is not None:
+            #print( "Close Long Trade - Ten Min Skip Slope {} for security {}".format(statisticalParams.TenMinSkipSlope,self.Security.Symbol))
 
         terminalCond = self.EvaluateClosingTerminalCondition(candlebarsArr,endOfdayLimitModelParam,maxGainForClosingModelParam,pctMaxGainForClosingModelParam,
                                                              maxLossForClosingModelParam,pctMaxLossForClosingModelParam,takeGainLimitModelParam,stopLossLimitModelParam)
 
         if terminalCond is not None:
             return terminalCond
+
+        if not self.Open():
+            return None  # Position not opened
+
+        if self.GetNetOpenShares() < 0:
+            return None  # We are in a short position
 
         #Last 3 minute slope of 3 minute moving average exceeds a certain value AGAINST the Trade
         if(     statisticalParams.ThreeMinSkipSlope is not None

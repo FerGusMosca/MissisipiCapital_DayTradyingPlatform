@@ -290,7 +290,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                         self.RoutingLock.release()
                     return CMState.BuildSuccess(self)
                 else:
-                    raise Exception("Received execution report for unknown PosId {}".format(pos_id))
+                    self.DoLog("Received execution report for unknown PosId {}".format(pos_id), MessageType.INFO)
             else:
                 raise Exception("Received execution report without PosId")
         except Exception as e:
@@ -316,6 +316,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
         for dayTradingPosition in self.DayTradingPositions:
             summaries = self.ExecutionSummaryManager.GetExecutionSummaries(dayTradingPosition,fromDate)
+            self.DoLog("Loading {} summaries for security {}".format(len(summaries),dayTradingPosition.Security.Symbol),MessageType.INFO)
             for summary in summaries:
                 dayTradingPosition.ExecutionSummaries[summary.Position.PosId]=summary
                 self.PositionSecurities[summary.Position.PosId]=dayTradingPosition
@@ -564,7 +565,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                                                         self.ModelParametersHandler.Get(ModelParametersHandler.MAXIM_SHORT_PCT_CHANGE_3_MIN(),symbol),
                                                         self.ModelParametersHandler.Get(ModelParametersHandler.POS_SHORT_MAX_DELTA(),symbol),
                                                         list(cbDict.values())):
-                        print ("running short trade for symbol {}".format(dayTradingPos.Security.Symbol))
+                        self.DoLog ("Running short trade for symbol {}".format(dayTradingPos.Security.Symbol), MessageType.ERROR)
                         self.ProcessNewPositionReqManagedPos(dayTradingPos, Side.Sell, dayTradingPos.SharesQuantity,
                                                              self.Configuration.DefaultAccount)
                 else:
@@ -583,11 +584,16 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
             for summary in dayTradingPos.GetOpenSummaries():
 
                 # we just cancel summaries whose side is different than the closing side. We don't want to cancel the close
-                if summary.Position.PosId not in self.PendingCancels and summary.Position.Side !=side:
-                    #print("want to close position for security {} but first closing order for {}".format(dayTradingPos.Security.Symbol,summary.CumQty))
+                if  (
+                    summary.Position.PosId not in self.PendingCancels  and
+                    (dayTradingPos.GetNetOpenShares() ==0 or summary.Position.Side !=side)
+                    ):
+                    self.DoLog("Cancelling order previously to closing position for symbol {}".format(dayTradingPos.Security.Symbol),MessageType.INFO)
                     self.PendingCancels[summary.Position.PosId] = summary
                     cxlWrapper = CancelPositionWrapper(summary.Position.PosId)
-                    self.OrderRoutingModule.ProcessMessage(cxlWrapper)
+                    state= self.OrderRoutingModule.ProcessMessage(cxlWrapper)
+                    if not state.Success:
+                        self.ProcessError(state.Exception)
 
         else:
             netShares = dayTradingPos.GetNetOpenShares()
@@ -650,7 +656,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                                                 )
 
                 if closingCond is not None:
-                    print("closing short position for security {}".format(dayTradingPos.Security.Symbol))
+                    #print("closing short position for security {}".format(dayTradingPos.Security.Symbol))
                     self.RunClose(dayTradingPos,Side.Sell if dayTradingPos.GetNetOpenShares() > 0 else Side.Buy,closingCond)
 
             else:
