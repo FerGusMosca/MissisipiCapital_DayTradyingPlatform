@@ -488,6 +488,7 @@ class OrderRouter( BaseCommunicationModule, ICommunicationModule):
             traceback.print_exc()
             self.DoLog("Error processing Bloomberg event ({} @ProcessEvent) @OrderRouter.Bloomberg module:{}".format(event.eventType(),str(e)), MessageType.ERROR)
 
+
     def LoadStrategy(self, request, strategy_name):
         strategy = request.getElement("EMSX_STRATEGY_PARAMS")
         strategy.setElement("EMSX_STRATEGY_NAME", strategy_name)
@@ -499,18 +500,18 @@ class OrderRouter( BaseCommunicationModule, ICommunicationModule):
         # of GetBrokerStrategyInfo request for the order. The indicator value is 0 for
         # a field that carries a value, and 1 where the field should be ignored
 
+        #OMEGA2 strategy doesn't have any parameters
+        #data.appendElement().setElement("EMSX_FIELD_DATA", "")  # Display Size
+        #indicator.appendElement().setElement("EMSX_FIELD_INDICATOR", 1)
 
-        data.appendElement().setElement("EMSX_FIELD_DATA", "")  # Display Size
-        indicator.appendElement().setElement("EMSX_FIELD_INDICATOR", 1)
+        #data.appendElement().setElement("EMSX_FIELD_DATA", "")  # SOR Pref
+        #indicator.appendElement().setElement("EMSX_FIELD_INDICATOR", 1)
 
-        data.appendElement().setElement("EMSX_FIELD_DATA", "")  # SOR Pref
-        indicator.appendElement().setElement("EMSX_FIELD_INDICATOR", 1)
+        #data.appendElement().setElement("EMSX_FIELD_DATA", "")  # Session Pref
+        #indicator.appendElement().setElement("EMSX_FIELD_INDICATOR", 1)
 
-        data.appendElement().setElement("EMSX_FIELD_DATA", "")  # Session Pref
-        indicator.appendElement().setElement("EMSX_FIELD_INDICATOR", 1)
-
-        data.appendElement().setElement("EMSX_FIELD_DATA", "")  # Algo Instr
-        indicator.appendElement().setElement("EMSX_FIELD_INDICATOR", 1)
+        #data.appendElement().setElement("EMSX_FIELD_DATA", "")  # Algo Instr
+        #indicator.appendElement().setElement("EMSX_FIELD_INDICATOR", 1)
 
     def LoadSession(self):
 
@@ -564,9 +565,8 @@ class OrderRouter( BaseCommunicationModule, ICommunicationModule):
         if(newOrder.Account is not None):
             request.set("EMSX_ACCOUNT", newOrder.Account)
 
-        if(self.Configuration.ImplementStrategy ==True):
-            if (newOrder.Strategy is not None):
-                self.LoadStrategy(request,newOrder.Strategy)
+        if(self.Configuration.ImplementStrategy is not None and self.Configuration.ImplementStrategy !="NONE"):
+            self.LoadStrategy(request,self.Configuration.ImplementStrategy)
 
         return request
 

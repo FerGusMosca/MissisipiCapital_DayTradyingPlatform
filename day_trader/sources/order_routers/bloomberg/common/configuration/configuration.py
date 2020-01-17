@@ -17,9 +17,8 @@ class Configuration:
         self.DefaultBroker=config['DEFAULT']['DEFAULT_BROKER']
         self.DefaultTIF = config['DEFAULT']['DEFAULT_TIF']
 
-
-
-        self.ImplementStrategy = config['DEFAULT'].getboolean('IMPLEMENT_STRATEGY')
+        self.ImplementStrategy = config['DEFAULT']['IMPLEMENT_STRATEGY']
+        #self.ImplementStrategy = config['DEFAULT'].getboolean('IMPLEMENT_STRATEGY')
         self.HandInst = config['DEFAULT']['HANDLE_INST']
         self.MaxOrdersPerSecond = int(config['DEFAULT']['MAX_ORDERS_PER_SECOND'])
         self.InitialRecoveryTimeoutInSeconds = int(config['DEFAULT']['INITIAL_RECOVERY_TIMEOUT_IN_SECONDS'])

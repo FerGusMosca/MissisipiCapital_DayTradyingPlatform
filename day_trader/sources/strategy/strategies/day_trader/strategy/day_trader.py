@@ -519,6 +519,11 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
         except Exception as e:
             self.ProcessErrorInMethod("@DayTrader.ProcessHistoricalPrices",e,security.Symbol if security is not None else None)
 
+    def UpdateTechnicalAnalysisParameters(self, candlebar,candlebarDict):
+        dayTradingPos = next(iter(list(filter(lambda x: x.Security.Symbol == candlebar.Security.Symbol, self.DayTradingPositions))),None)
+        if dayTradingPos is not None:
+            dayTradingPos.RSIIndicator.Update(candlebarDict.values())
+
     def EvaluateOpeningPositions(self, candlebar,cbDict):
 
         symbol = candlebar.Security.Symbol
@@ -678,6 +683,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
                 cbDict[candlebar.DateTime] = candlebar
                 self.Candlebars[candlebar.Security.Symbol]=cbDict
+                self.UpdateTechnicalAnalysisParameters(candlebar,cbDict)
                 self.EvaluateOpeningPositions(candlebar,cbDict)
                 self.EvaluateClosingLongPositions(candlebar,cbDict)
                 self.EvaluateClosingShortPositions(candlebar, cbDict)

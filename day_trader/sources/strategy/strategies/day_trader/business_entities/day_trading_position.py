@@ -3,6 +3,7 @@ from sources.framework.business_entities.market_data.candle_bar import *
 from sources.framework.common.enums.Side import *
 from sources.strategy.common.dto.position_statistical_parameters import *
 from sources.strategy.common.dto.position_profits_and_losses import *
+from sources.strategy.strategies.day_trader.business_entities.rsi_indicator import *
 
 import json
 import statistics
@@ -51,6 +52,8 @@ class DayTradingPosition():
         self.LastNDaysStdDev = 0
         self.LastProfitCalculationDay = None
 
+        self.RSIIndicator = RSIIndicator()
+
 
     #region Private Methods
 
@@ -80,7 +83,7 @@ class DayTradingPosition():
 
     def GetSlope (self,currMovAvg,prevMovAvg):
 
-        if currMovAvg is not None and prevMovAvg is not None:
+        if currMovAvg is not None and prevMovAvg is not None and prevMovAvg!=0:
             return (currMovAvg-prevMovAvg)/prevMovAvg
         else:
             return None
@@ -93,24 +96,26 @@ class DayTradingPosition():
         else:
             return None
 
+    def GetMovOnData(self,candlebarsArr, skip, length):
+        if len(candlebarsArr)> (length+skip):
+            return self.GetMov(candlebarsArr,skip,length)
+        elif len(candlebarsArr)> skip:
+            return self.GetMov(candlebarsArr, skip, len(candlebarsArr)-skip)
+        else:
+            return 0
 
     def GetStatisticalParameters(self,candlebarsArr):
-        fiftyMinNoSkipMovAvg = self.GetMov(candlebarsArr, 0, 50)
-        FiftyMinSkipTenMovAvg = self.GetMov(candlebarsArr, 10, 50)
+        fiftyMinNoSkipMovAvg = self.GetMovOnData(candlebarsArr, 0, 50)
 
-        #if we don't have enough values --> we use what we have!
-        if(fiftyMinNoSkipMovAvg is None and len(candlebarsArr)>=3):
-            fiftyMinNoSkipMovAvg = self.GetMov(candlebarsArr,0,len(candlebarsArr))
-        # if we don't have enough values --> we use what we have!
-        if (FiftyMinSkipTenMovAvg is None and len(candlebarsArr)>=3):
-            FiftyMinSkipTenMovAvg = self.GetMov(candlebarsArr, 0, len(candlebarsArr))
+        FiftyMinSkipTenMovAvg = self.GetMovOnData(candlebarsArr, 10, 50)
 
-        threeMinNoSkipMovAvg = self.GetMov(candlebarsArr, 0, 3)
-        threeMinSkipTrheeMovAvg = self.GetMov(candlebarsArr, 3, 3)
+        threeMinNoSkipMovAvg = self.GetMovOnData(candlebarsArr, 0, 3)
 
-        threeMinSkipSixMovAvg = self.GetMov(candlebarsArr, 6, 3)
+        threeMinSkipTrheeMovAvg = self.GetMovOnData(candlebarsArr, 3, 3)
 
-        threeMinSkipNineMovAvg = self.GetMov(candlebarsArr, 9, 3)
+        threeMinSkipSixMovAvg = self.GetMovOnData(candlebarsArr, 6, 3)
+
+        threeMinSkipNineMovAvg = self.GetMovOnData(candlebarsArr, 9, 3)
 
         barPosNow = self.GetSpecificBar(candlebarsArr, 1)
         barPosMinusThree = self.GetSpecificBar(candlebarsArr, 3)
@@ -276,6 +281,8 @@ class DayTradingPosition():
         self.MaxLoss = 0
         self.MaxProfit = 0
         self.LastProfitCalculationDay = datetime.now()
+
+        self.RSIIndicator.Reset()
 
     def CalculateCurrentDayProfits(self,marketData):
 

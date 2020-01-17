@@ -46,6 +46,8 @@ namespace DayTraderTestClient.Common.DTO.positions
 
         public string Direction { get; set; }
 
+        public decimal? RSI { get; set; }
+        
         public string Msg { get; set; }
 
     }
