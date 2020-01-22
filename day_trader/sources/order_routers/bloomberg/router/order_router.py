@@ -335,7 +335,7 @@ class OrderRouter( BaseCommunicationModule, ICommunicationModule):
                     activeOrder.RejReason = errorMsg
 
                     execReportWrapper = RejectedExecutionReportWrapper(activeOrder, errorMsg)
-                    self.InvokingModule.ProcessOutgoing(execReportWrapper)
+                    self.OnExecutionReport.ProcessOutgoing(execReportWrapper)
                     self.DoLog("Received rejection for order {}:{}".format(activeOrder.ClOrdId,errorMessage),MessageType.INFO)
 
                 elif msg.messageType() == CREATE_ORDER_AND_ROUTE_EX:
@@ -538,7 +538,10 @@ class OrderRouter( BaseCommunicationModule, ICommunicationModule):
         newOrder = OrderConverter.ConvertNewOrder(self, wrapper)
 
         execReportWrapper = RejectedExecutionReportWrapper(newOrder,reason)
-        self.InvokingModule.ProcessOutgoing(execReportWrapper)
+        self.OnExecutionReport.ProcessOutgoing(execReportWrapper)
+
+        errorWrapper = ErrorWrapper(Exception(reason))
+        self.OnExecutionReport.ProcessOutgoing(errorWrapper)
         return CMState.BuildSuccess(self)
 
     def CreateRequest(self, newOrder):
@@ -715,7 +718,7 @@ class OrderRouter( BaseCommunicationModule, ICommunicationModule):
         except Exception as e:
             self.DoLog("Critical Error running ProcessExecutionReportListThread @OrderRouter.Bloomberg module:{}".format(str(e)),MessageType.ERROR)
             emptyWrapper = ExecutionReportListWrapper([])
-            self.InvokingModule.ProcessOutgoing(emptyWrapper)
+            self.OnExecutionReport.ProcessOutgoing(emptyWrapper)
         finally:
             if self.ActiveOrdersLock.locked():
                 self.ActiveOrdersLock.release()
