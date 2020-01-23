@@ -730,6 +730,24 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
             self.ProcessCriticalError(e,msg)
             self.ProcessError(ErrorWrapper(Exception(msg)))
 
+    def TranslateSide(self, dayTradingPos,side):
+        if self.Configuration.ImplementDetailedSides:
+
+            if dayTradingPos is not None:
+                if dayTradingPos.GetNetOpenShares()>0:
+                    return side
+                elif dayTradingPos.GetNetOpenShares() == 0 and side==Side.Sell:
+                    return Side.SellShort
+                elif dayTradingPos.GetNetOpenShares() == 0 and side==Side.Buy:
+                    return Side.Buy
+                else:
+                    return Side.SellShort if side==Side.Sell else Side.BuyToClose
+            else:
+                return side
+        else:
+            return side
+
+
     #we just route a position and ignore the answers
     def ProcessNewPositionReqSinglePos(self,wrapper):
         try:
@@ -774,6 +792,8 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
             if dayTradingPos.Routing:
                 return
+
+            side = self.TranslateSide(dayTradingPos, side)
 
             newPos = Position(PosId=self.NextPostId,
                               Security=dayTradingPos.Security,
@@ -977,7 +997,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
             toDate = parse( wrapper.GetField(HistoricalPricesRequestField.To))
 
 
-            if symbol in self.HistoricalPrices:
+            if symbol in self.HistoricalPrices and self.HistoricalPrices[symbol] is not None :
 
                 #we won't validate that the date range is too big
                 marketDataArr  = list(filter(lambda x:  x.MDEntryDate >=fromDate.date() and x.MDEntryDate<=toDate.date(), self.HistoricalPrices[symbol].values()))

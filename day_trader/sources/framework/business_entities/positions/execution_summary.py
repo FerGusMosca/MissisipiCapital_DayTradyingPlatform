@@ -55,7 +55,7 @@ class ExecutionSummary:
         return self.CumQty if self.CumQty is not None else 0
 
     def IsLongPosition(self):
-        return self.Position.Side==Side.Buy
+        return self.Position.Side==Side.Buy or self.Position.Side==Side.BuyToClose
 
     def GetTradeId(self):
         if(self.Position is None):

@@ -500,18 +500,14 @@ class OrderRouter( BaseCommunicationModule, ICommunicationModule):
         # of GetBrokerStrategyInfo request for the order. The indicator value is 0 for
         # a field that carries a value, and 1 where the field should be ignored
 
-        #OMEGA2 strategy doesn't have any parameters
-        #data.appendElement().setElement("EMSX_FIELD_DATA", "")  # Display Size
-        #indicator.appendElement().setElement("EMSX_FIELD_INDICATOR", 1)
+        
+        data.appendElement().setElement("EMSX_FIELD_DATA", "")  # Display Quantity:
+        indicator.appendElement().setElement("EMSX_FIELD_INDICATOR", 1)
 
-        #data.appendElement().setElement("EMSX_FIELD_DATA", "")  # SOR Pref
-        #indicator.appendElement().setElement("EMSX_FIELD_INDICATOR", 1)
+        data.appendElement().setElement("EMSX_FIELD_DATA", "")  # Aggressiveness
+        indicator.appendElement().setElement("EMSX_FIELD_INDICATOR", 1)
 
-        #data.appendElement().setElement("EMSX_FIELD_DATA", "")  # Session Pref
-        #indicator.appendElement().setElement("EMSX_FIELD_INDICATOR", 1)
-
-        #data.appendElement().setElement("EMSX_FIELD_DATA", "")  # Algo Instr
-        #indicator.appendElement().setElement("EMSX_FIELD_INDICATOR", 1)
+      
 
     def LoadSession(self):
 

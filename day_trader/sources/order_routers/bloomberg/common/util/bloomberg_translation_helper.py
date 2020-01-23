@@ -116,6 +116,10 @@ class BloombergTranslationHelper:
                 return Side.Buy
             elif EMSX_SIDE==_SIDE_SELL:
                 return  Side.Sell
+            elif EMSX_SIDE==_SIDE_BUY_TO_CLOSE:
+                return  Side.BuyToClose
+            elif EMSX_SIDE==_SIDE_SELL_SHORT:
+                return  Side.SellShort
             else:
                 self.DoLog("Received unknown side:{}".format(EMSX_SIDE), MessageType.DEBUG)
                 return Side.Unknown
