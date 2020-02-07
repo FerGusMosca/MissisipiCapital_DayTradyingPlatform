@@ -3,7 +3,7 @@ from sources.framework.business_entities.securities.security import *
 from sources.strategy.strategies.day_trader.business_entities.day_trading_position import *
 
 
-_CS_SEC_TYPE = "Equity"
+_CS_SEC_TYPE = "CS"
 
 _id=0
 _symbol=1
@@ -39,6 +39,13 @@ class DayTradingPositionManager():
         else:
             raise Exception("Unknown security type {0}".format(strSecType))
 
+    def GetStrSecurityTypeFromSecType(self, secType):
+
+        if secType ==  SecurityType.CS:
+            return _CS_SEC_TYPE
+        else:
+            raise Exception("Unknown security type {0}".format(secType))
+
     def BuildSecurity(self,row):
         return Security(Symbol=row[_symbol],
                         Exchange=row[_exchange],
@@ -68,6 +75,8 @@ class DayTradingPositionManager():
 
         with self.connection.cursor() as cursor:
             params = (dayTradingPosition.Id, dayTradingPosition.Security.Symbol,
+                      self.GetStrSecurityTypeFromSecType(dayTradingPosition.Security.SecurityType),
+                      dayTradingPosition.Security.Exchange,
                       int(dayTradingPosition.SharesQuantity),
                       bool(dayTradingPosition.Active),
                       bool(dayTradingPosition.Routing),
@@ -77,14 +86,14 @@ class DayTradingPositionManager():
                       dayTradingPosition.SignalType if not None else None,
                       dayTradingPosition.SignalDesc if not None else None)
 
-            cursor.execute("{CALL PersistDayTradingPosition (?,?,?,?,?,?,?,?,?,?)}", params)
+            cursor.execute("{CALL PersistDayTradingPosition (?,?,?,?,?,?,?,?,?,?,?,?)}", params)
             self.connection.commit()
 
     def GetDayTradingPositions(self):
         datTradingPositions=[]
         with self.connection.cursor() as cursor:
-            params = (True,)
-            cursor.execute("{CALL GetDayTradingPositions (?)}", params)
+            params = (True,None)
+            cursor.execute("{CALL GetDayTradingPositions (?,?)}", params)
 
             for row in cursor:
                 sec = self.BuildSecurity(row)
@@ -92,6 +101,21 @@ class DayTradingPositionManager():
                 datTradingPositions.append(dayTradingPos)
 
         return datTradingPositions
+
+    def GetDayTradingPosition(self,symbol):
+
+        dayTradingPos = None
+
+        with self.connection.cursor() as cursor:
+            params = (True,symbol)
+            cursor.execute("{CALL GetDayTradingPositions (?,?)}", params)
+
+            for row in cursor:
+                sec = self.BuildSecurity(row)
+                dayTradingPos = self.BuildDayTradingPosition(row,sec)
+
+
+        return dayTradingPos
 
     #endregion
 

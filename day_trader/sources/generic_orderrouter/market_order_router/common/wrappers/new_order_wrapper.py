@@ -5,10 +5,9 @@ from sources.generic_orderrouter.market_order_router.common.wrappers.order_wrapp
 
 
 class NewOrderWrapper(OrderWrapper):
-    def __init__(self, pSymbol, pQty, pClOrdId, pCurrency, pSide=None, pAccount=None, pBroker=None, pStrategy=None,
-                 pOrderType=None,
-                 pOrderPrice=None):
-        super().__init__(pSymbol, pQty, pClOrdId, pCurrency, pSide, pAccount, pBroker, pStrategy, pOrderType,
+    def __init__(self, pSymbol, pQty, pClOrdId, pCurrency,pSecType,pExchange, pSide=None, pAccount=None, pBroker=None, pStrategy=None,
+                 pOrderType=None,pOrderPrice=None):
+        super().__init__(pSymbol, pQty, pClOrdId, pCurrency,pSecType,pExchange, pSide, pAccount, pBroker, pStrategy, pOrderType,
                          pOrderPrice)
 
     def GetAction(self):

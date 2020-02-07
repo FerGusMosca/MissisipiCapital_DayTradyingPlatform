@@ -16,5 +16,13 @@ class Security:
 
         #endregion
 
+    @staticmethod
+    def GetSecurityType(secType):
+        if secType=="CS":
+            return SecurityType.CS
+        else:
+            raise Exception("Not implemented security type conversion for CS {}".format(secType))
+
+
     def toJSON(self):
         return json.dumps(self, default=lambda o: o.__dict__,sort_keys=True, indent=4)

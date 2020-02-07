@@ -163,4 +163,7 @@ class ModelParametersHandler:
         else:
             return None
 
+    def Set(self, key, symbol,modelParam):
+        self.ModelParametersDict[symbol + _KEY_CHAR +key] = modelParam
+
     #endregion

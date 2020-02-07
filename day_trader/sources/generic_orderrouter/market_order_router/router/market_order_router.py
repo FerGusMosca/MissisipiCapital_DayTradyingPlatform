@@ -143,7 +143,8 @@ class MarketOrderRouter(BaseCommunicationModule, ICommunicationModule):
             # In this Generic Order Router ClOrdID=PosId
             self.Positions[new_pos.PosId] = new_pos
             order_wrapper = NewOrderWrapper(new_pos.Security.Symbol, new_pos.OrderQty, new_pos.PosId,
-                                            new_pos.Security.Currency, new_pos.Side, new_pos.Account, new_pos.Broker,
+                                            new_pos.Security.Currency,new_pos.Security.SecurityType,new_pos.Security.Exchange,
+                                            new_pos.Side, new_pos.Account, new_pos.Broker,
                                             new_pos.Strategy, new_pos.OrderType, new_pos.OrderPrice)
             new_pos.Orders.append(Order(ClOrdId=new_pos.PosId,Security=new_pos.Security,SettlType=SettlType.Regular,
                                         Side=new_pos.Side,Exchange=new_pos.Exchange,OrdType=OrdType.Market,

@@ -10,10 +10,12 @@ from sources.framework.common.enums.TimeInForce import *
 
 
 class OrderWrapper(Wrapper):
-    def __init__(self, pSymbol, pQty, pClOrdId, pCurrency, pSide=None, pAccount=None, pBroker=None, pStrategy=None,
+    def __init__(self, pSymbol, pQty, pClOrdId, pCurrency,pSecurityType=None,pExchange=None, pSide=None, pAccount=None, pBroker=None, pStrategy=None,
                  pOrderType=None,
                  pOrderPrice=None):
         self.Symbol = pSymbol
+        self.SecurityType=pSecurityType
+        self.Exchange=pExchange
         self.OrderQty = pQty
         self.ClOrdId = pClOrdId
         self.Currency = pCurrency
@@ -87,11 +89,11 @@ class OrderWrapper(Wrapper):
         elif field == OrderField.SettlDate:
             return None  # default
         elif field == OrderField.SecurityType:
-            return SecurityType.CS  # default CS=Common Stock
+            return self.SecurityType
         elif field == OrderField.Currency:
             return self.Currency
         elif field == OrderField.Exchange:
-            return None  # default
+            return self.Exchange
         elif field == OrderField.OrdType:
             return self.GetOrdType()
         elif field == OrderField.PriceType:

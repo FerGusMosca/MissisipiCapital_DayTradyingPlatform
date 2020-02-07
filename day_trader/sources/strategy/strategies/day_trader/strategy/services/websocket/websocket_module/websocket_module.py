@@ -277,6 +277,8 @@ class WebSocketModule(BaseCommunicationModule, ICommunicationModule):
                 return self.InvokingModule.ProcessMessage(wrapper)
             elif wrapper.GetAction() == Actions.DAY_TRADING_POSITION_UPDATE_REQUEST:
                 return self.InvokingModule.ProcessMessage(wrapper)
+            elif wrapper.GetAction() == Actions.DAY_TRADING_POSITION_NEW_REQUEST:
+                return self.InvokingModule.ProcessMessage(wrapper)
             elif wrapper.GetAction() == Actions.MARKET_DATA_REQUEST:
                 return self.InvokingModule.ProcessMessage(wrapper)
             else:

@@ -943,6 +943,50 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
             self.DoLog(msg, MessageType.ERROR)
             return CMState.BuildFailure(self, Exception=e)
 
+
+    def ProcessDayTradingPositionNewReq (self,wrapper):
+        try:
+            symbol = wrapper.GetField(PositionField.Symbol)
+            secType = wrapper.GetField(PositionField.SecurityType)
+            exchange = wrapper.GetField(PositionField.Exchange)
+
+            if self.DayTradingPositionManager.GetDayTradingPosition(symbol) is not None:
+                raise Exception("There is already an active position for symbol {}".format(symbol))
+
+            # We instantiate the new DayTradingPositon
+            dayTradingPos = DayTradingPosition(-1,Security(Symbol=symbol,
+                                                           SecType= Security.GetSecurityType(secType),
+                                                           Exchange= exchange
+                                                           ),
+                                               shares=0,active=True,routing=False,open=False,
+                                               longSignal=False,shortSignal=False,signalType=None,signalDesc="")
+
+            self.DayTradingPositionManager.PersistDayTradingPosition(dayTradingPos)
+            persistedDayTradingPos = self.DayTradingPositionManager.GetDayTradingPosition(dayTradingPos.Security.Symbol)
+
+            paramBias = ModelParameter(key=ModelParametersHandler.DAILY_BIAS(), symbol=symbol, stringValue=None, intValue=None, floatValue=0)
+            self.ModelParametersManager.PersistModelParameter(paramBias)
+            self.ModelParametersHandler.Set(ModelParametersHandler.DAILY_BIAS(),symbol,paramBias)
+
+            paramMode = ModelParameter(key=ModelParametersHandler.TRADING_MODE(), symbol=symbol, stringValue="MANUAL",intValue=None, floatValue=None)
+            self.ModelParametersManager.PersistModelParameter(paramMode)
+            self.ModelParametersHandler.Set(ModelParametersHandler.TRADING_MODE(), symbol, paramMode)
+
+            if persistedDayTradingPos is None:
+                raise Exception("Position created for symbol {} could not be recovered from database!".format(symbol))
+
+            self.DayTradingPositions.append(persistedDayTradingPos)
+
+            threading.Thread(target=self.PublishPortfolioPositionThread, args=(persistedDayTradingPos,)).start()
+
+            return CMState.BuildSuccess(self)
+
+        except Exception as e:
+            msg = "Critical Error creating day trading position : {}!".format(str(e))
+            self.ProcessError(ErrorWrapper(Exception(msg)))
+            self.DoLog(msg, MessageType.ERROR)
+            return CMState.BuildFailure(self, Exception=e)
+
     def ProcessDayTradingPositionUpdateReq (self,wrapper):
         try:
             posId = wrapper.GetField(PositionField.PosId)
@@ -1186,6 +1230,8 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                 return self.ProcessModelParamReq(wrapper)
             elif wrapper.GetAction() == Actions.DAY_TRADING_POSITION_UPDATE_REQUEST:
                 return self.ProcessDayTradingPositionUpdateReq(wrapper)
+            elif wrapper.GetAction() == Actions.DAY_TRADING_POSITION_NEW_REQUEST:
+                return self.ProcessDayTradingPositionNewReq(wrapper)
             elif wrapper.GetAction() == Actions.MARKET_DATA_REQUEST:
                 return self.ProcessMarketDataReq(wrapper)
             else:

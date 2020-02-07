@@ -40,6 +40,7 @@ class PositionConverter:
         pos.Security.Symbol = wrapper.GetField(PositionField.Symbol)
         pos.Security.SecurityType = wrapper.GetField(PositionField.SecurityType)
         pos.Security.Currency = wrapper.GetField(PositionField.Currency)
+        pos.Security.Exchange = wrapper.GetField(PositionField.Exchange)
 
         pos.OrderQty = wrapper.GetField(PositionField.Qty)
         pos.PosId = wrapper.GetField(PositionField.PosId)

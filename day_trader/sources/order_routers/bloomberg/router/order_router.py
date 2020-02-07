@@ -546,7 +546,9 @@ class OrderRouter( BaseCommunicationModule, ICommunicationModule):
         request = service.createRequest("CreateOrderAndRouteEx")
 
         # The fields below are mandatory
-        request.set("EMSX_TICKER", "{} {} {}".format(newOrder.Security.Symbol,self.Configuration.Exchange,self.Configuration.SecurityType))
+        request.set("EMSX_TICKER", "{} {} {}".format(newOrder.Security.Symbol,
+                                                     newOrder.Security.Exchange if newOrder.Security.Exchange is not None else self.Configuration.Exchange,
+                                                     BloombergTranslationHelper.GetBloombergSecType(newOrder.Security.SecurityType) if newOrder.Security.SecurityType is not None else self.Configuration.SecurityType))
         request.set("EMSX_AMOUNT", newOrder.OrderQty)
         request.set("EMSX_ORDER_TYPE", BloombergTranslationHelper.GetBloombergOrdType(self,newOrder.OrdType))
         request.set("EMSX_TIF", self.Configuration.DefaultTIF)

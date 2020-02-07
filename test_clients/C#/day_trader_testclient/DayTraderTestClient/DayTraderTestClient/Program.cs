@@ -75,6 +75,7 @@ namespace DayTraderTestClient
             Console.WriteLine("CancelPos <posId>");
             Console.WriteLine("CancelAll");
             Console.WriteLine("ModelParamReq <key> <symbol>");
+            Console.WriteLine("PositionNewReq <symbol> <secType> <exchange>");
             Console.WriteLine("PositionUpdateReq <posId> <qty> <active>");
             Console.WriteLine("UpdateModelParamReq <key> <symbol> <intValue> <stringValue> <floatValue>");
             Console.WriteLine("Unsubscribe <Service> <ServiceKey>");
@@ -105,6 +106,27 @@ namespace DayTraderTestClient
             }
             else
                 DoLog(string.Format("Missing mandatory parameters for subscription message"));
+
+        }
+
+        private static void ProcessPositionNewReq(string[] param)
+        {
+            if (param.Length == 4)
+            {
+                PositionNewReq posNewReq = new PositionNewReq()
+                {
+                    Msg = "PositionNewReq",
+                    Symbol = param[1],
+                    SecurityType = param[2],
+                    Exchange = param[3],
+                    UUID = UUID,
+                    ReqId = Guid.NewGuid().ToString(),
+                };
+
+                DoSend<PositionNewReq>(posNewReq);
+            }
+            else
+                DoLog(string.Format("Missing mandatory parameters for PositionNewReq message"));
 
         }
 
@@ -366,6 +388,10 @@ namespace DayTraderTestClient
             else if (mainCmd == "PositionUpdateReq")
             {
                 ProcessPositionUpdateReq(param);
+            }
+            else if (mainCmd == "PositionNewReq")
+            {
+                ProcessPositionNewReq(param);
             }
             else if (mainCmd == "Unsubscribe")
             {

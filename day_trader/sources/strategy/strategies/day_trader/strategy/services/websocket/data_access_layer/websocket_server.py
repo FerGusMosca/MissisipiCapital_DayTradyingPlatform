@@ -3,6 +3,9 @@ import json
 import time
 import asyncio
 import threading
+
+from sources.strategy.strategies.day_trader.strategy.services.websocket.common.wrappers.position_new_req_wrapper import \
+  PositionNewReqWrapper
 from sources.strategy.strategies.day_trader.strategy.services.websocket.websocket_module.websocket_module import *
 from sources.strategy.strategies.day_trader.strategy.services.websocket.common.DTO.subscriptions.websocket_subscribe_message import *
 from sources.strategy.strategies.day_trader.strategy.services.websocket.common.DTO.order_routing.route_position_req import *
@@ -28,10 +31,13 @@ from sources.strategy.strategies.day_trader.strategy.services.websocket.common.D
 from sources.strategy.strategies.day_trader.strategy.services.websocket.common.DTO.market_data.market_data_dto import *
 from sources.strategy.strategies.day_trader.strategy.services.websocket.common.DTO.positions.position_update_req import *
 from sources.strategy.strategies.day_trader.strategy.services.websocket.common.DTO.positions.position_update_ack import *
+from sources.strategy.strategies.day_trader.strategy.services.websocket.common.DTO.positions.position_new_req import *
+from sources.strategy.strategies.day_trader.strategy.services.websocket.common.DTO.positions.position_new_ack import *
 from sources.strategy.strategies.day_trader.strategy.services.websocket.common.DTO.config.model_param_dto import *
 from sources.strategy.strategies.day_trader.strategy.services.websocket.common.DTO.market_data.historical_price_dto import *
 from sources.strategy.strategies.day_trader.strategy.services.websocket.common.DTO.positions.execution_summary_dto import *
 from sources.strategy.strategies.day_trader.strategy.services.websocket.common.wrappers.position_req_wrapper import *
+from sources.strategy.strategies.day_trader.strategy.services.websocket.common.wrappers.position_new_req_wrapper import *
 from sources.strategy.strategies.day_trader.strategy.services.websocket.common.wrappers.cancel_all_position_wrapper import *
 from sources.strategy.strategies.day_trader.strategy.services.websocket.common.wrappers.update_model_parameter_req_wrapper import *
 from sources.strategy.strategies.day_trader.strategy.services.websocket.common.wrappers.cancel_position_wrapper import *
@@ -182,6 +188,26 @@ class WSHandler(tornado.websocket.WebSocketHandler):
     if subscrMsg.Service not in self.SubscribedServices:
       del self.SubscribedServices[subscrMsg.Service]
 
+
+  def ProcessNewPositionReq(self,posNewReq):
+    try:
+
+      self.DoLog("Incoming new position Req for symbol {}".format(posNewReq.Symbol), MessageType.INFO)
+      wrapper = PositionNewReqWrapper(posNewReq)
+
+      state = self.InvokingModule.ProcessIncoming(wrapper)
+
+      if state.Success:
+        ack = PositionNewAck(Msg="PositionNewAck", UUID=posNewReq.UUID, ReqId=posNewReq.ReqId)
+        self.DoSendResponse(ack)
+        self.DoLog("Position New request sent for Symbol {}...".format(posNewReq.Symbol), MessageType.INFO)
+      else:
+        raise state.Exception
+    except Exception as e:
+      msg = "Critical ERROR for PositionNew Req for symbol {}. Error:{}".format(posNewReq.Symbol, str(e))
+      self.DoLog(msg, MessageType.ERROR)
+      ack = PositionNewAck(Msg="PositionNewAck", UUID=posNewReq.UUID, ReqId=posNewReq.ReqId, Success=False, Error=msg)
+      self.DoSendResponse(ack)
 
   def ProcessPositionUpdateReq(self,posUpdateReq):
     try:
@@ -443,6 +469,9 @@ class WSHandler(tornado.websocket.WebSocketHandler):
       elif "Msg" in fieldsDict and fieldsDict["Msg"] == "PositionUpdateReq":
         positionUpdateReq = PositionUpdateReq(**json.loads(message))
         self.ProcessPositionUpdateReq(positionUpdateReq)
+      elif "Msg" in fieldsDict and fieldsDict["Msg"] == "PositionNewReq":
+        newPositionReq = PositionNewReq(**json.loads(message))
+        self.ProcessNewPositionReq(newPositionReq)
       else:
         self.DoLog("Unknown message :{}".format(message),MessageType.ERROR)
 

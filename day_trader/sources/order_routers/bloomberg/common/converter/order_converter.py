@@ -42,6 +42,7 @@ class OrderConverter:
 
         order.Security.Symbol = wrapper.GetField(OrderField.Symbol)
         order.Security.SecurityType = wrapper.GetField(OrderField.SecurityType)
+        order.Security.Exchange = wrapper.GetField(OrderField.Exchange)
 
         order.OrderQty = wrapper.GetField(OrderField.OrderQty)
         order.OrdType = wrapper.GetField(OrderField.OrdType)

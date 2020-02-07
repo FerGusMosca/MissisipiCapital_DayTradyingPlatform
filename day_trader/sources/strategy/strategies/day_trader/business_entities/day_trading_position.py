@@ -27,7 +27,7 @@ _EXIT_SHORT_COND_EOF="EXIT_SHORT_COND_EOF"
 
 class DayTradingPosition():
 
-    def __init__(self,id ,security,shares,active,routing,open,longSignal,shortSignal,signalType,signalDesc):
+    def __init__(self,id ,security,shares,active,routing,open,longSignal,shortSignal,signalType=None,signalDesc=None):
         self.Id=id
         self.Security = security
         self.SharesQuantity= shares
