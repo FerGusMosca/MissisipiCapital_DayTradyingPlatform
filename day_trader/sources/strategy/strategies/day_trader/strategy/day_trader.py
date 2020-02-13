@@ -29,10 +29,12 @@ from sources.strategy.strategies.day_trader.common.wrappers.execution_summary_wr
 from sources.strategy.data_access_layer.day_trading_position_manager import *
 from sources.strategy.data_access_layer.model_parameters_manager import *
 from sources.strategy.data_access_layer.execution_summary_manager import *
+from sources.strategy.data_access_layer.trading_signal_manager import *
 from sources.strategy.strategies.day_trader.common.util.log_helper import *
 from sources.strategy.strategies.day_trader.common.wrappers.portfolio_position_list_wrapper import *
 from sources.strategy.strategies.day_trader.common.wrappers.portfolio_position_wrapper import *
 from sources.strategy.strategies.day_trader.common.util.model_parameters_handler import *
+from sources.strategy.strategies.day_trader.common.util.trading_signal_helper import *
 from dateutil.parser import parse
 import threading
 import time
@@ -44,6 +46,9 @@ import traceback
 _BAR_FREQUENCY="BAR_FREQUENCY"
 _TRADING_MODE_AUTOMATIC = "AUTOMATIC"
 _TRADING_MODE_MANUAL = "MANUAL"
+
+_ACTION_OPEN="OPEN"
+_ACTION_CLOSE="CLOSE"
 
 class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
@@ -63,6 +68,8 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
         self.DayTradingPositionManager = None
         self.ModelParametersManager = None
         self.ExecutionSummaryManager = None
+        self.TradingSignalManager = None
+        self.TradingSignalHelper=None
 
         self.ModelParametersHandler = None
         self.MarketData={}
@@ -330,10 +337,14 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
         self.ModelParametersManager = ModelParametersManager(self.Configuration.DBConectionString)
 
+        self.TradingSignalManager = TradingSignalManager(self.Configuration.DBConectionString)
+
         modelParams = self.ModelParametersManager.GetModelParametersManager()
         self.ModelParametersHandler = ModelParametersHandler(modelParams)
 
         self.LoadExecutionSummaryForPositions(self.ModelParametersHandler.Get(ModelParametersHandler.BACKWARD_DAYS_SUMMARIES_IN_MEMORY()))
+
+        self.TradingSignalHelper = TradingSignalHelper(self.ModelParametersHandler, self.TradingSignalManager)
 
 
     def CancelAllPositions(self):
@@ -524,6 +535,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
         if dayTradingPos is not None:
             dayTradingPos.RSIIndicator.Update(candlebarDict.values())
 
+
     def EvaluateOpeningPositions(self, candlebar,cbDict):
 
         symbol = candlebar.Security.Symbol
@@ -534,7 +546,6 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
             dayTradingPos =  next(iter(list(filter(lambda x: x.Security.Symbol == candlebar.Security.Symbol, self.DayTradingPositions))), None)
             if dayTradingPos is not None:
-
 
                 if (dayTradingPos.EvaluateValidTimeToEnterTrade(self.ModelParametersHandler.Get(ModelParametersHandler.LOW_VOL_ENTRY_THRESHOLD(),symbol),
                                                                self.ModelParametersHandler.Get(ModelParametersHandler.HIGH_VOL_ENTRY_THRESHOLD(),symbol),
@@ -561,18 +572,18 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                                                         self.ModelParametersHandler.Get(ModelParametersHandler.MAXIM_PCT_CHANGE_3_MIN(),symbol),
                                                         self.ModelParametersHandler.Get(ModelParametersHandler.POS_LONG_MAX_DELTA(),symbol),
                                                         list(cbDict.values())):
-                        #print ("running long trade for symbol {}".format(dayTradingPos.Security.Symbol))
-                        self.ProcessNewPositionReqManagedPos(dayTradingPos, Side.Buy, dayTradingPos.SharesQuantity,
-                                                             self.Configuration.DefaultAccount)
+                        self.DoLog ("Running long trade for symbol {}".format(dayTradingPos.Security.Symbol), MessageType.INFO)
+                        self.TradingSignalHelper.PersistTradingSignal(dayTradingPos,TradingSignalHelper._ACTION_OPEN(),Side.Buy,dayTradingPos.GetStatisticalParameters(list(cbDict.values())),candlebar,self)
+                        self.ProcessNewPositionReqManagedPos(dayTradingPos, Side.Buy, dayTradingPos.SharesQuantity,self.Configuration.DefaultAccount)
 
                     if dayTradingPos.EvaluateShortTrade(self.ModelParametersHandler.Get(ModelParametersHandler.DAILY_BIAS(),symbol),
                                                         self.ModelParametersHandler.Get(ModelParametersHandler.DAILY_SLOPE(),symbol),
                                                         self.ModelParametersHandler.Get(ModelParametersHandler.MAXIM_SHORT_PCT_CHANGE_3_MIN(),symbol),
                                                         self.ModelParametersHandler.Get(ModelParametersHandler.POS_SHORT_MAX_DELTA(),symbol),
                                                         list(cbDict.values())):
-                        self.DoLog ("Running short trade for symbol {}".format(dayTradingPos.Security.Symbol), MessageType.ERROR)
-                        self.ProcessNewPositionReqManagedPos(dayTradingPos, Side.Sell, dayTradingPos.SharesQuantity,
-                                                             self.Configuration.DefaultAccount)
+                        self.DoLog ("Running short trade for symbol {}".format(dayTradingPos.Security.Symbol), MessageType.INFO)
+                        self.TradingSignalHelper.PersistTradingSignal(dayTradingPos, TradingSignalHelper._ACTION_OPEN(),Side.SellShort, dayTradingPos.GetStatisticalParameters(list(cbDict.values())), candlebar, self)
+                        self.ProcessNewPositionReqManagedPos(dayTradingPos, Side.Sell, dayTradingPos.SharesQuantity,self.Configuration.DefaultAccount)
                 else:
                     return False
             else:
@@ -630,6 +641,10 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                                                 )
 
                 if closingCond is not None:
+                    self.TradingSignalHelper.PersistTradingSignal(dayTradingPos, TradingSignalHelper._ACTION_CLOSE(),
+                                                                  Side.Sell if dayTradingPos.GetNetOpenShares() > 0 else Side.BuyToClose,
+                                                                  dayTradingPos.GetStatisticalParameters(list(cbDict.values())), candlebar, self)
+
                     self.RunClose(dayTradingPos,Side.Sell if dayTradingPos.GetNetOpenShares() > 0 else Side.Buy,closingCond)
 
             else:
@@ -662,6 +677,9 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
                 if closingCond is not None:
                     #print("closing short position for security {}".format(dayTradingPos.Security.Symbol))
+                    self.TradingSignalHelper.PersistTradingSignal(dayTradingPos, TradingSignalHelper._ACTION_CLOSE(),
+                                                                  Side.Sell if dayTradingPos.GetNetOpenShares() > 0 else Side.BuyToClose,
+                                                                  dayTradingPos.GetStatisticalParameters(list(cbDict.values())), candlebar, self)
                     self.RunClose(dayTradingPos,Side.Sell if dayTradingPos.GetNetOpenShares() > 0 else Side.Buy,closingCond)
 
             else:
@@ -1014,19 +1032,35 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
             self.DoLog(msg, MessageType.ERROR)
             return CMState.BuildFailure(self, Exception=e)
 
+    def SendBulkModelParameters(self,parameters):
+        try:
+            for paramInMem in parameters:
+                modelParmWrapper = ModelParameterWrapper(paramInMem)
+                self.SendToInvokingModule(modelParmWrapper)
+        except Exception as e:
+            msg = "Critical Error @SendBulkModelParameters: {}!".format(str(e))
+            self.ProcessError(ErrorWrapper(Exception(msg)))
+            self.DoLog(msg, MessageType.ERROR)
+
     def ProcessModelParamReq(self,wrapper):
         try:
             symbol = wrapper.GetField(ModelParamField.Symbol)
             key = wrapper.GetField(ModelParamField.Key)
 
 
-            paramInMem = self.ModelParametersHandler.Get(key=key,symbol=symbol if symbol is not None else None)
+            if(key is not None and key !="*"):
 
-            modelParmWrapper = ModelParameterWrapper (paramInMem)
+                paramInMem = self.ModelParametersHandler.Get(key=key,symbol=symbol if symbol is not None else None)
 
-            threading.Thread(target=self.SendToInvokingModule, args=(modelParmWrapper,)).start()
+                modelParmWrapper = ModelParameterWrapper (paramInMem)
 
-            return CMState.BuildSuccess(self)
+                threading.Thread(target=self.SendToInvokingModule, args=(modelParmWrapper,)).start()
+
+                return CMState.BuildSuccess(self)
+            else:
+                parameters = self.ModelParametersHandler.GetAll(symbol=symbol if symbol !="*" else None )
+                threading.Thread(target=self.SendBulkModelParameters, args=(parameters,)).start()
+                return CMState.BuildSuccess(self)
 
         except Exception as e:
             msg = "Critical Error recovering model parameter from memory: {}!".format(str(e))

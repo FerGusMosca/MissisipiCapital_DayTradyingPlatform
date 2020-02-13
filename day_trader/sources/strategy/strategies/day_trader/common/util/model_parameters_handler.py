@@ -139,6 +139,22 @@ class ModelParametersHandler:
 
     #region Public Methods
 
+    def GetAll(self,  symbol):
+
+        modelParamArr=[]
+
+        for key in self.ModelParametersDict:
+            if symbol is None:
+                if not _KEY_CHAR in key:
+                    modelParamArr.append(self.ModelParametersDict[key])
+            else:
+                if key.startswith(symbol):
+                    modelParamArr.append(self.ModelParametersDict[key])
+
+        return modelParamArr
+
+
+
     def Get(self, key, symbol=None):
 
         finalKey=key
