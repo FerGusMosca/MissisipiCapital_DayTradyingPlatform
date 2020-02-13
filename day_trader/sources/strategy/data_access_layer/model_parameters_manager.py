@@ -35,7 +35,10 @@ class ModelParametersManager():
 
     def PersistModelParameter(self, modelPrameter):
         with self.connection.cursor() as cursor:
-            params = (modelPrameter.Key,modelPrameter.Symbol,modelPrameter.StringValue,modelPrameter.IntValue,
+            params = (modelPrameter.Key,
+                      modelPrameter.Symbol if modelPrameter.Symbol is not None and modelPrameter.Symbol !="*" else None,
+                      modelPrameter.StringValue,
+                      modelPrameter.IntValue,
                       modelPrameter.FloatValue)
             cursor.execute("{CALL PersistModelParameter (?,?,?,?,?)}", params)
             self.connection.commit()

@@ -1096,6 +1096,35 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
             self.DoLog(msg, MessageType.ERROR)
             return CMState.BuildFailure(self, Exception=e)
 
+    def ProcessCreateModelParamReq(self,wrapper):
+
+        try:
+            symbol = wrapper.GetField(ModelParamField.Symbol)
+            key = wrapper.GetField(ModelParamField.Key)
+            intValue = int( wrapper.GetField(ModelParamField.IntValue)) if wrapper.GetField(ModelParamField.IntValue) is not None else None
+            stringValue =  str( wrapper.GetField(ModelParamField.StringValue)) if wrapper.GetField(ModelParamField.StringValue) is not None else None
+            floatValue = float( wrapper.GetField(ModelParamField.FloatValue)) if wrapper.GetField(ModelParamField.FloatValue) is not None else None
+
+            paramToUpd = ModelParameter(key=key,symbol=symbol,stringValue=stringValue,intValue=intValue,floatValue=floatValue)
+
+            paramInMem = self.ModelParametersHandler.GetLight(key,symbol)
+
+            if paramInMem is not None:
+                raise Exception("Could not create a model parameters for a key-symbol that already exsits!-> key: {}  symbol:{}. Update the existing parameters "
+                                .format(key,symbol if symbol is not None else "*"))
+
+            self.ModelParametersManager.PersistModelParameter(paramToUpd)
+
+            self.ModelParametersHandler.Set(key,symbol,paramToUpd)
+
+            return CMState.BuildSuccess(self)
+        except Exception as e:
+            msg = "Critical Error creating model param: {}!".format(str(e))
+            self.ProcessError(ErrorWrapper(Exception(msg)))
+            self.DoLog(msg,MessageType.ERROR)
+            return CMState.BuildFailure(self, Exception=e)
+
+
 
     def ProcessUpdateModelParamReq(self,wrapper):
 
@@ -1256,6 +1285,8 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                 return self.ProcessCancelAllPositionReq(wrapper)
             elif wrapper.GetAction() == Actions.CANCEL_POSITION:
                 return self.ProcessCancePositionReq(wrapper)
+            elif wrapper.GetAction() == Actions.CREATE_MODEL_PARAM_REQUEST:
+                return self.ProcessCreateModelParamReq(wrapper)
             elif wrapper.GetAction() == Actions.UPDATE_MODEL_PARAM_REQUEST:
                 return self.ProcessUpdateModelParamReq(wrapper)
             elif wrapper.GetAction() == Actions.HISTORICAL_PRICES_REQUEST:

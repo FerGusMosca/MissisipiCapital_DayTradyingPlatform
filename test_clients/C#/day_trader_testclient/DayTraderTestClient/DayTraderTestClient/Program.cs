@@ -78,6 +78,7 @@ namespace DayTraderTestClient
             Console.WriteLine("PositionNewReq <symbol> <secType> <exchange>");
             Console.WriteLine("PositionUpdateReq <posId> <qty> <active>");
             Console.WriteLine("UpdateModelParamReq <key> <symbol> <intValue> <stringValue> <floatValue>");
+            Console.WriteLine("CreateModelParamReq <key> <symbol> <intValue> <stringValue> <floatValue>");
             Console.WriteLine("Unsubscribe <Service> <ServiceKey>");
             Console.WriteLine("-CLEAR");
             Console.WriteLine();
@@ -250,6 +251,31 @@ namespace DayTraderTestClient
         
         }
 
+        //
+        private static void ProcessCreateModelParamReq(string[] param)
+        {
+
+            if (param.Length == 6)
+            {
+                CreateModelParamReq createParamReq = new CreateModelParamReq()
+                {
+                    Msg = "CreateModelParamReq",
+                    UUID = UUID,
+                    ReqId = Guid.NewGuid().ToString(),
+                    Key = param[1],
+                    Symbol = param[2] != "*" ? param[2] : null,
+                    IntValue = param[3] != "*" ? (int?)Convert.ToInt32(param[3]) : null,
+                    StringValue = param[4] != "*" ? param[4] : null,
+                    FloatValue = param[5] != "*" ? (decimal?)Convert.ToDecimal(param[5]) : null
+                };
+
+                DoSend<CreateModelParamReq>(createParamReq);
+            }
+            else
+                DoLog(string.Format("Missing mandatory parameters for CreateModelParamReq message"));
+
+        }
+
         private static void ProcessUpdateModelParamReq(string[] param)
         {
 
@@ -364,6 +390,10 @@ namespace DayTraderTestClient
             else if (mainCmd == "UpdateModelParamReq")
             {
                 ProcessUpdateModelParamReq(param);
+            }
+            else if (mainCmd == "CreateModelParamReq")
+            {
+                ProcessCreateModelParamReq(param);
             }
             else if (mainCmd == "RoutePositionReq")
             {

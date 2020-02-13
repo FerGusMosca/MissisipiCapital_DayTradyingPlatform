@@ -180,6 +180,9 @@ class ModelParametersHandler:
             return None
 
     def Set(self, key, symbol,modelParam):
-        self.ModelParametersDict[symbol + _KEY_CHAR +key] = modelParam
+        if(symbol is not None and symbol!="*"):
+            self.ModelParametersDict[symbol + _KEY_CHAR +key] = modelParam
+        else:
+            self.ModelParametersDict[key] = modelParam
 
     #endregion

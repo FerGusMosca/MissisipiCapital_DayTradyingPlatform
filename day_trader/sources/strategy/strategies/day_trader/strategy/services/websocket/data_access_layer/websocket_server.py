@@ -19,6 +19,8 @@ from sources.strategy.strategies.day_trader.strategy.services.websocket.common.D
 from sources.strategy.strategies.day_trader.strategy.services.websocket.common.DTO.order_routing.cancel_position_ack import *
 from sources.strategy.strategies.day_trader.strategy.services.websocket.common.DTO.config.update_model_param_req import *
 from sources.strategy.strategies.day_trader.strategy.services.websocket.common.DTO.config.update_model_param_ack import *
+from sources.strategy.strategies.day_trader.strategy.services.websocket.common.DTO.config.create_model_param_req import *
+from sources.strategy.strategies.day_trader.strategy.services.websocket.common.DTO.config.create_model_param_ack import *
 from sources.strategy.strategies.day_trader.strategy.services.websocket.common.DTO.order_routing.route_position_ack import *
 from sources.strategy.strategies.day_trader.strategy.services.websocket.common.DTO.order_routing.cancel_all_position_ack import *
 from sources.strategy.strategies.day_trader.strategy.services.websocket.common.DTO.subscriptions.subscription_reponse import *
@@ -40,6 +42,7 @@ from sources.strategy.strategies.day_trader.strategy.services.websocket.common.w
 from sources.strategy.strategies.day_trader.strategy.services.websocket.common.wrappers.position_new_req_wrapper import *
 from sources.strategy.strategies.day_trader.strategy.services.websocket.common.wrappers.cancel_all_position_wrapper import *
 from sources.strategy.strategies.day_trader.strategy.services.websocket.common.wrappers.update_model_parameter_req_wrapper import *
+from sources.strategy.strategies.day_trader.strategy.services.websocket.common.wrappers.create_model_param_req_wrapper import *
 from sources.strategy.strategies.day_trader.strategy.services.websocket.common.wrappers.cancel_position_wrapper import *
 from sources.strategy.strategies.day_trader.strategy.services.websocket.common.wrappers.position_update_req_wrapper import *
 from sources.framework.common.wrappers.portfolio_position_trade_list_request_wrapper import *
@@ -319,6 +322,33 @@ class WSHandler(tornado.websocket.WebSocketHandler):
                                PosId=cancelRouteReq.PosId,Success=False, Error=msg)
       self.DoSendResponse(ack)
 
+
+  def ProcessCreateModelParamReq(self,createModelParamReq):
+    try:
+
+      self.DoLog("Incoming Model Param Create Req ", MessageType.INFO)
+      wrapper = CreateModelParamReqWrapper(createModelParamReq)
+
+      state = self.InvokingModule.ProcessIncoming(wrapper)
+
+      if state.Success:
+        ack = CreateModelParamAck(Msg="CreateModelParamAck", UUID=createModelParamReq.UUID,
+                                  symbol=createModelParamReq.Symbol,
+                                  key=createModelParamReq.Key, ReqId=createModelParamReq.ReqId)
+        self.DoSendResponse(ack)
+        self.DoLog("Model Param Create Req sent...", MessageType.INFO)
+      else:
+        raise state.Exception
+
+    except Exception as e:
+      msg = "Critical ERROR for Model Param Create Req . Error:{}".format(str(e))
+      self.DoLog(msg, MessageType.ERROR)
+      ack = UpdateModelParamAck(Msg="CreateModelParamAck", UUID=createModelParamReq.UUID,
+                                symbol=createModelParamReq.Symbol, key=createModelParamReq.Key,
+                                ReqId=createModelParamReq.ReqId,
+                                Success=False, Error=msg)
+      self.DoSendResponse(ack)
+
   def ProcessUpdateModelParamReq(self, updateModelParamReq):
     try:
 
@@ -454,6 +484,9 @@ class WSHandler(tornado.websocket.WebSocketHandler):
       elif "Msg" in fieldsDict and fieldsDict["Msg"]=="UpdateModelParamReq":
         updModelParamReq = UpdateModelParamReq(**json.loads(message))
         self.ProcessUpdateModelParamReq(updModelParamReq)
+      elif "Msg" in fieldsDict and fieldsDict["Msg"] == "CreateModelParamReq":
+        createModelParamReq = CreateModelParamReq(**json.loads(message))
+        self.ProcessCreateModelParamReq(createModelParamReq)
       elif "Msg" in fieldsDict and fieldsDict["Msg"]=="CancelPositionReq":
         cancelPos = CancelPositionReq(**json.loads(message))
         self.ProcessCancelPositionReq(cancelPos)
