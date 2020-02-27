@@ -595,7 +595,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
         else:
             return False
 
-    def RunClose(self,dayTradingPos,side,condition):
+    def RunClose(self,dayTradingPos,side,statisticalParam,candlebar):
         if dayTradingPos.Routing:
             for summary in dayTradingPos.GetOpenSummaries():
 
@@ -615,6 +615,10 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
             netShares = dayTradingPos.GetNetOpenShares()
             if netShares!=0: #if there is something to close
                 # print("Now we do close positions for security {} for net open shares {}".format(dayTradingPos.Security.Symbol, netShares))
+
+                self.TradingSignalHelper.PersistTradingSignal(dayTradingPos, TradingSignalHelper._ACTION_CLOSE(),
+                                                              self.TranslateSide(dayTradingPos,side), statisticalParam,candlebar, self)
+
                 self.ProcessNewPositionReqManagedPos(dayTradingPos,side,netShares if netShares > 0 else netShares * (-1),self.Configuration.DefaultAccount)
 
     def EvaluateClosingLongPositions(self, candlebar,cbDict):
@@ -641,11 +645,9 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                                                 )
 
                 if closingCond is not None:
-                    self.TradingSignalHelper.PersistTradingSignal(dayTradingPos, TradingSignalHelper._ACTION_CLOSE(),
-                                                                  Side.Sell if dayTradingPos.GetNetOpenShares() > 0 else Side.BuyToClose,
-                                                                  dayTradingPos.GetStatisticalParameters(list(cbDict.values())), candlebar, self)
 
-                    self.RunClose(dayTradingPos,Side.Sell if dayTradingPos.GetNetOpenShares() > 0 else Side.Buy,closingCond)
+                    self.RunClose(dayTradingPos,Side.Sell if dayTradingPos.GetNetOpenShares() > 0 else Side.Buy,
+                                  dayTradingPos.GetStatisticalParameters(list(cbDict.values())), candlebar)
 
             else:
                 msg = "Could not find Day Trading Position for candlebar symbol {}. Please Resync.".format(candlebar.Security.Symbol)
@@ -677,10 +679,9 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
                 if closingCond is not None:
                     #print("closing short position for security {}".format(dayTradingPos.Security.Symbol))
-                    self.TradingSignalHelper.PersistTradingSignal(dayTradingPos, TradingSignalHelper._ACTION_CLOSE(),
-                                                                  Side.Sell if dayTradingPos.GetNetOpenShares() > 0 else Side.BuyToClose,
-                                                                  dayTradingPos.GetStatisticalParameters(list(cbDict.values())), candlebar, self)
-                    self.RunClose(dayTradingPos,Side.Sell if dayTradingPos.GetNetOpenShares() > 0 else Side.Buy,closingCond)
+
+                    self.RunClose(dayTradingPos,Side.Sell if dayTradingPos.GetNetOpenShares() > 0 else Side.Buy,
+                                  dayTradingPos.GetStatisticalParameters(list(cbDict.values())), candlebar)
 
             else:
                 msg = "Could not find Day Trading Position for candlebar symbol {}. Please Resync.".format(candlebar.Security.Symbol)

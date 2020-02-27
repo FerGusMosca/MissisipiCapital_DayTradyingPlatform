@@ -208,7 +208,7 @@ class DayTradingPosition():
         for summary in todaySummaries:
             # first we calculate the traded positions
             if summary.GetTradedSummary() > 0:
-                if summary.IsLongPosition():
+                if summary.SharesAcquired():
                     netShares += summary.GetNetShares()
                 else:
                     netShares -= summary.GetNetShares()
@@ -218,7 +218,7 @@ class DayTradingPosition():
     def CalculateLastTradeProfit(self, profitsAndLosses, marketData):
 
         lastTradedSummaries = sorted(list(filter(lambda x: x.Timestamp.date() == datetime.now().date() and x.GetNetShares() != 0
-                                                 and (x.Position.Side==Side.Buy if self.GetNetOpenShares()>0 else x.Position.Side==Side.Sell),
+                                                 and (x.Position.LongPositionOpened() if self.GetNetOpenShares()>0 else x.Position.ShortPositionOpened()),
                            self.ExecutionSummaries.values())),key=lambda x: x.Timestamp, reverse=True)
 
         lastTradedSummary=None
@@ -246,7 +246,7 @@ class DayTradingPosition():
         for summary in todaySummaries:
             # first we calculate the traded positions
             if summary.GetTradedSummary()>0:
-                if summary.IsLongPosition():
+                if summary.SharesAcquired():
                     profitsAndLosses.MoneyOutflow += summary.GetTradedSummary()
                     profitsAndLosses.NetShares += summary.GetNetShares()
                 else:

@@ -106,6 +106,12 @@ class Position:
 
         #endregion
 
+    def LongPositionOpened(self):
+        return self.Side==Side.Buy
+
+    def ShortPositionOpened(self):
+        return self.Side==Side.SellShort or self.Side==Side.Sell
+
     def IsOpenPosition(self):
         return self.PosStatus == PositionStatus.New or self.PosStatus == PositionStatus.PendingNew \
                or self.PosStatus == PositionStatus.PartiallyFilled or self.PosStatus == PositionStatus.Replaced \

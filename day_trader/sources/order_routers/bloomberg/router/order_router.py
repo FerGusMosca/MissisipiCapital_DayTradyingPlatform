@@ -622,9 +622,8 @@ class OrderRouter( BaseCommunicationModule, ICommunicationModule):
 
             order= self.FetchOrderByIds(wrapper)
 
-            orderId = order.OrderId if order is not None else None
-
-            if order.IsOpenOrder():
+            if order is not None and order.IsOpenOrder():
+                orderId = order.OrderId
                 self.DoCancel(order)
             else:
                 raise Exception("OrderId {} is not an active order".format(orderId))

@@ -30,6 +30,7 @@ class TradingSignalHelper:
             self.PersistingLock.acquire()
 
             now=datetime.datetime.now()
+
             self.TradingSignalManager.PersistTradingSignal(dayTradingPos,now,action, SideConverter.ConvertSideToString(side),
                                                            candlebar)
 

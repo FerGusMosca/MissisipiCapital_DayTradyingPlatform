@@ -54,7 +54,7 @@ class ExecutionSummary:
     def GetNetShares(self):
         return self.CumQty if self.CumQty is not None else 0
 
-    def IsLongPosition(self):
+    def SharesAcquired(self):
         return self.Position.Side==Side.Buy or self.Position.Side==Side.BuyToClose
 
     def GetTradeId(self):
