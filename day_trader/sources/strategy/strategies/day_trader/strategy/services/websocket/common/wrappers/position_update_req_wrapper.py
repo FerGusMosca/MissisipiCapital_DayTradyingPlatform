@@ -32,6 +32,10 @@ class PositionUpdateReqWrapper(Wrapper):
             return self.PosUpdateReq.SharesQuantity
         elif field == PositionField.PosStatus:
             return self.PosUpdateReq.Active
+        elif field == PositionField.TradingMode:
+            return self.PosUpdateReq.TradingMode
+        elif field == PositionField.Depurate:
+            return self.PosUpdateReq.Depurate
         else:
             return None
 

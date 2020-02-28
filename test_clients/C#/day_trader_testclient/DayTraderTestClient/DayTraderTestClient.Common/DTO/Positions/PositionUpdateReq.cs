@@ -20,6 +20,10 @@ namespace DayTraderTestClient.Common.DTO.Positions
 
         public bool? Active { get; set; }
 
+        public bool? Depurate { get; set; }
+
+        public string TradingMode { get; set; }
+
         #endregion
     }
 }

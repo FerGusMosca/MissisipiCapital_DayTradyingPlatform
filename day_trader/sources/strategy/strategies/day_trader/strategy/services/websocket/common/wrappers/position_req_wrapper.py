@@ -45,6 +45,12 @@ class PositionReqWrapper(Wrapper):
             return PriceType.FixedAmount
         elif field == PositionField.OrderPrice:
             return self.RoutePositionReq.Price
+        elif field == PositionField.StopLoss:
+            return self.RoutePositionReq.StopLoss
+        elif field == PositionField.TakeProfit:
+            return self.RoutePositionReq.TakeProfit
+        elif field == PositionField.CloseEndOfDay:
+            return self.RoutePositionReq.CloseEndOfDay
         elif field == PositionField.Qty:
             return self.RoutePositionReq.Qty
         elif field == PositionField.Side:

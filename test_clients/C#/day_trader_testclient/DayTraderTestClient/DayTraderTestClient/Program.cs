@@ -70,6 +70,7 @@ namespace DayTraderTestClient
             Console.WriteLine("Subscribe <Service> <ServiceKey>");
             Console.WriteLine("RouteSymbolReq <symbol> <side> <qty> <account> <price>");
             Console.WriteLine("RoutePositionReq <posId> <side> <qty> <account>  <price>");
+            Console.WriteLine("RoutePositionReqExt <posId> <side> <qty> <account>  <price> <stopLoss> <takeProfit> <CloseEndOfDay>");
             Console.WriteLine("MarketDataReq <symbol>");
             Console.WriteLine("HistoricalPricesReq <symbol>");
             Console.WriteLine("CancelPos <posId>");
@@ -77,6 +78,8 @@ namespace DayTraderTestClient
             Console.WriteLine("ModelParamReq <key> <symbol>");
             Console.WriteLine("PositionNewReq <symbol> <secType> <exchange>");
             Console.WriteLine("PositionUpdateReq <posId> <qty> <active>");
+            Console.WriteLine("PositionUpdateReqTradingMode <posId> <tradingMode>");
+            Console.WriteLine("DepuratePosition <posId>");
             Console.WriteLine("UpdateModelParamReq <key> <symbol> <intValue> <stringValue> <floatValue>");
             Console.WriteLine("CreateModelParamReq <key> <symbol> <intValue> <stringValue> <floatValue>");
             Console.WriteLine("Unsubscribe <Service> <ServiceKey>");
@@ -110,6 +113,26 @@ namespace DayTraderTestClient
 
         }
 
+        private static void ProcessDepuratePosition(string[] param)
+        {
+
+            if (param.Length == 2)
+            {
+                PositionUpdateReq posUpdReq = new PositionUpdateReq()
+                {
+                    Msg = "PositionUpdateReq",
+                    PosId = Convert.ToInt32(param[1]),
+                    Depurate = true,
+                    UUID = UUID,
+                    ReqId = Guid.NewGuid().ToString(),
+                };
+
+                DoSend<PositionUpdateReq>(posUpdReq);
+            }
+            else
+                DoLog(string.Format("Missing mandatory parameters for ProcessDepuratePosition message"));
+        }
+
         private static void ProcessPositionNewReq(string[] param)
         {
             if (param.Length == 4)
@@ -129,6 +152,26 @@ namespace DayTraderTestClient
             else
                 DoLog(string.Format("Missing mandatory parameters for PositionNewReq message"));
 
+        }
+
+        private static void ProcessPositionUpdateReqTradingMode(string[] param)
+        {
+            if (param.Length == 3)
+            {
+                PositionUpdateReq posUpdReq = new PositionUpdateReq()
+                {
+                    Msg = "PositionUpdateReq",
+                    PosId = Convert.ToInt32(param[1]),
+                    TradingMode = param[2],
+                    UUID = UUID,
+                    ReqId = Guid.NewGuid().ToString(),
+                };
+
+                DoSend<PositionUpdateReq>(posUpdReq);
+            }
+            else
+                DoLog(string.Format("Missing mandatory parameters for ProcessPositionUpdateReqTradingMode message"));
+        
         }
 
         private static void ProcessPositionUpdateReq(string[] param)
@@ -323,6 +366,32 @@ namespace DayTraderTestClient
         
         }
 
+        private static void ProcessRoutePositionReqExt(string[] param)
+        {
+            if (param.Length == 9)
+            {
+                RoutePositionReq routePos = new RoutePositionReq()
+                {
+                    Msg = "RoutePositionReq",
+                    PosId = Convert.ToInt32(param[1]),
+                    Side = param[2],
+                    UUID = UUID,
+                    ReqId = Guid.NewGuid().ToString(),
+                    Qty = Convert.ToInt32(param[3]),
+                    Account = param[4],
+                    Price = param[5] != "*" ? (decimal?)Convert.ToDecimal(param[5]) : null,
+                    StopLoss= Convert.ToDecimal(param[6]),
+                    TakeProfit = Convert.ToDecimal(param[7]),
+                    CloseEndOfDay=Convert.ToBoolean(param[8]),
+                };
+
+                DoSend<RoutePositionReq>(routePos);
+            }
+            else
+                DoLog(string.Format("Missing mandatory parameters for ProcessRoutePositionReqExt message"));
+
+        }
+
         private static void ProcessRoutePositionReq(string[] param)
         {
             if (param.Length == 6)
@@ -399,6 +468,10 @@ namespace DayTraderTestClient
             {
                 ProcessRoutePositionReq(param);
             }
+            else if (mainCmd == "RoutePositionReqExt")
+            {
+                ProcessRoutePositionReqExt(param);
+            }
             else if (mainCmd == "CancelAll")
             {
                 ProcessCancelAll(param);
@@ -419,9 +492,17 @@ namespace DayTraderTestClient
             {
                 ProcessPositionUpdateReq(param);
             }
+            else if (mainCmd == "PositionUpdateReqTradingMode")
+            {
+                ProcessPositionUpdateReqTradingMode(param);
+            }
             else if (mainCmd == "PositionNewReq")
             {
                 ProcessPositionNewReq(param);
+            }
+            else if (mainCmd == "DepuratePosition")
+            {
+                ProcessDepuratePosition(param);
             }
             else if (mainCmd == "Unsubscribe")
             {

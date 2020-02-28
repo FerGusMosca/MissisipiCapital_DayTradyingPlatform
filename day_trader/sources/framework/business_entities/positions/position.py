@@ -24,6 +24,8 @@ _Unknown = "Unknown"
 
 _Side_Buy="Buy"
 _Side_Sell="Sell"
+_Side_Sell_Short="SellShort"
+_Side_Buy_To_Close="BuyToClose"
 _Side_Uknown="Unknown"
 
 class Position:
@@ -63,6 +65,10 @@ class Position:
         self.OrderPrice = OrderPrice
 
         self.ArrivalPrice= None
+
+        self.StopLoss=None
+        self.TakeProfit=None
+        self.CloseEndOfDay =None
 
         #endregion
 
@@ -274,6 +280,10 @@ class Position:
             return _Side_Buy
         elif self.Side == Side.Sell:
             return _Side_Sell
+        elif self.Side == Side.SellShort:
+            return _Side_Sell_Short
+        elif self.Side == Side.BuyToClose:
+            return _Side_Buy_To_Close
         else:
             return _Side_Uknown
 
@@ -286,6 +296,10 @@ class Position:
             return Side.Buy
         elif strSide == _Side_Sell:
             return Side.Sell
+        elif strSide == _Side_Sell_Short:
+            return Side.SellShort
+        elif strSide == _Side_Buy_To_Close:
+            return Side.BuyToClose
         else:
             return Side.Unknown
 

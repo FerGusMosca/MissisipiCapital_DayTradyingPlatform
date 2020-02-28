@@ -805,7 +805,8 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
             if self.RoutingLock.locked():
                 self.RoutingLock.release()
 
-    def ProcessNewPositionReqManagedPos(self, dayTradingPos, side,qty,account, price = None):
+    def ProcessNewPositionReqManagedPos(self, dayTradingPos, side,qty,account, price = None,stopLoss=None,
+                                        takeProfit=None,closeEndOfDay=None):
         try:
             self.RoutingLock.acquire()
 
@@ -821,6 +822,10 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                               Broker=None, Strategy=None,
                               OrderType=OrdType.Market if price is None else OrdType.Limit,
                               OrderPrice=price)
+
+            newPos.StopLoss=stopLoss
+            newPos.TakeProfit=takeProfit
+            newPos.CloseEndOfDay=closeEndOfDay
 
             newPos.ValidateNewPosition()
 
@@ -863,8 +868,11 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                 qty = wrapper.GetField(PositionField.Qty)
                 account = wrapper.GetField(PositionField.Account)
                 price = wrapper.GetField(PositionField.OrderPrice)
+                stopLoss = wrapper.GetField(PositionField.StopLoss)
+                takeProfit = wrapper.GetField(PositionField.TakeProfit)
+                closeEndOfDay = wrapper.GetField(PositionField.CloseEndOfDay)
 
-                self.ProcessNewPositionReqManagedPos(dayTradingPos,side,qty,account,price)
+                self.ProcessNewPositionReqManagedPos(dayTradingPos,side,qty,account,price,stopLoss,takeProfit,closeEndOfDay)
             else:
                 raise Exception("Could not find a security to trade (position) for position id {}".format(posId))
 
@@ -1006,11 +1014,40 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
             self.DoLog(msg, MessageType.ERROR)
             return CMState.BuildFailure(self, Exception=e)
 
+    def ProcessDepurateDayTradingPosition(self,dayTradingPos):
+        depuratedSummaries = dayTradingPos.DepurateSummaries()
+
+        for depuratedSummary in depuratedSummaries:
+            self.SummariesQueue.put(depuratedSummary)
+            threading.Thread(target=self.PublishSummaryThread, args=(depuratedSummary, dayTradingPos.Id)).start()
+
+        self.DayTradingPositionsQueue.put(dayTradingPos)
+        threading.Thread(target=self.PublishPortfolioPositionThread, args=(dayTradingPos,)).start()
+
+
+    def ProcessDayTradingPositionTradingModeUpdate(self,dayTradingPos,tradingMode):
+        if tradingMode != _TRADING_MODE_AUTOMATIC and tradingMode != _TRADING_MODE_MANUAL:
+            raise Exception("Invalid trading mode {}".format(tradingMode))
+
+        tradingModeInMem = self.ModelParametersHandler.Get(ModelParametersHandler.TRADING_MODE(),
+                                                           dayTradingPos.Security.Symbol)
+
+        if tradingModeInMem is None or tradingModeInMem.Symbol is None:
+            raise Exception("Security {} has a generic trading mode".format(dayTradingPos.Security.Symbol))
+
+        if tradingModeInMem.StringValue != tradingMode:
+            tradingModeInMem.StringValue = tradingMode
+            self.ModelParametersManager.PersistModelParameter(tradingModeInMem)
+
+
+
     def ProcessDayTradingPositionUpdateReq (self,wrapper):
         try:
             posId = wrapper.GetField(PositionField.PosId)
             qtyShares = wrapper.GetField(PositionField.Qty)
             active = wrapper.GetField(PositionField.PosStatus)
+            tradingMode = wrapper.GetField(PositionField.TradingMode)
+            depurate = wrapper.GetField(PositionField.Depurate)
 
             dayTradingPos = next( iter(list(filter(lambda x: x.Id == posId, self.DayTradingPositions))),None)
 
@@ -1020,6 +1057,11 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                     dayTradingPos.SharesQuantity=qtyShares
                 if active is not None:
                     dayTradingPos.Active=active
+                if tradingMode is not None:
+                    self.ProcessDayTradingPositionTradingModeUpdate(dayTradingPos,tradingMode)
+                if depurate is not None:
+                    self.ProcessDepurateDayTradingPosition(dayTradingPos)
+
 
                 threading.Thread(target=self.PublishPortfolioPositionThread, args=(dayTradingPos,)).start()
 

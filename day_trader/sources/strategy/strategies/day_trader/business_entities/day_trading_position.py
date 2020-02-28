@@ -1,6 +1,7 @@
 from sources.framework.business_entities.securities.security import *
 from sources.framework.business_entities.market_data.candle_bar import *
 from sources.framework.common.enums.Side import *
+from sources.framework.common.enums.PositionsStatus import PositionStatus
 from sources.strategy.common.dto.position_statistical_parameters import *
 from sources.strategy.common.dto.position_profits_and_losses import *
 from sources.strategy.strategies.day_trader.business_entities.rsi_indicator import *
@@ -151,8 +152,8 @@ class DayTradingPosition():
 
         if profitsAndLosses.NetShares > 0:
             monProfits = (profitsAndLosses.MoneyIncome + profitsAndLosses.PosMTM - profitsAndLosses.MoneyOutflow)
-        elif profitsAndLosses.NetShares < 0:
-            monProfits=profitsAndLosses.MoneyIncome - profitsAndLosses.PosMTM - profitsAndLosses.MoneyOutflow
+        elif profitsAndLosses.NetShares < 0: #in short positions, the PosMTM is negative
+            monProfits=profitsAndLosses.MoneyIncome + profitsAndLosses.PosMTM - profitsAndLosses.MoneyOutflow
         else:
             monProfits = profitsAndLosses.MoneyIncome - profitsAndLosses.MoneyOutflow
 
@@ -184,7 +185,7 @@ class DayTradingPosition():
                 profits = 0
             else:
                 raise Exception( "Could not calculate profit for closed position where money outflow is 0, for symbol {}" .format(self.Security.Symbol))
-        return profits
+        return profits*100 #as a percentage
 
     def CalculateMarkToMarket(self,marketData,profitsAndLosses,foundOpenPositions):
 
@@ -227,7 +228,7 @@ class DayTradingPosition():
 
         if lastTradedSummary is not None and marketData.Trade is not None and lastTradedSummary.AvgPx is not None:
             profitsAndLosses.IncreaseDecrease = marketData.Trade-  lastTradedSummary.AvgPx
-            if lastTradedSummary.IsLongPosition():#LONG
+            if lastTradedSummary.SharesAcquired():#LONG
                 profitsAndLosses.MonetaryProfitLastTrade=( marketData.Trade-lastTradedSummary.AvgPx)*lastTradedSummary.GetNetShares()
                 profitsAndLosses.ProfitLastTrade = ((marketData.Trade/lastTradedSummary.AvgPx)-1)*100 if lastTradedSummary.AvgPx >0 else 0
             else:#SHORT
@@ -264,6 +265,17 @@ class DayTradingPosition():
     def toJSON(self):
         return json.dumps(self, default=lambda o: o.__dict__,sort_keys=True, indent=4)
 
+    def DepurateSummaries(self):
+        openSummaries = list(filter(lambda x: x.Position.IsOpenPosition(), self.ExecutionSummaries.values()))
+
+        for openSummary in openSummaries:
+            openSummary.PosStatus = PositionStatus.Unknown
+            openSummary.Position.PosStatus = PositionStatus.Unknown
+
+        self.UpdateRouting()
+
+        return openSummaries
+
     def UpdateRouting(self):
         nextOpenPos = next(iter(list(filter(lambda x: x.Position.IsOpenPosition(), self.ExecutionSummaries.values()))), None)
 
@@ -294,8 +306,8 @@ class DayTradingPosition():
         profitsAndLosses.Profits = self.CalculatePercentageProfits(profitsAndLosses)
         profitsAndLosses.MonetaryProfits = self.CalculateMonetaryProfits(profitsAndLosses)
 
-        if foundOpenPositions:
-            self.CalculateLastTradeProfit(profitsAndLosses,marketData)
+        #if foundOpenPositions:
+        self.CalculateLastTradeProfit(profitsAndLosses,marketData)
 
         if(profitsAndLosses.Profits>self.MaxProfit):
             self.MaxProfit=profitsAndLosses.Profits

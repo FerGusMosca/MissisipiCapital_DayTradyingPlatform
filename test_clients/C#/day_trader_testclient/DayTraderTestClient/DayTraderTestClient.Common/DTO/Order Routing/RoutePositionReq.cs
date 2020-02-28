@@ -26,6 +26,12 @@ namespace DayTraderTestClient.Common.DTO.Order_Routing
 
         public decimal? Price { get; set; }
 
+        public decimal? StopLoss { get; set; }
+
+        public decimal? TakeProfit { get; set; }
+
+        public bool? CloseEndOfDay { get; set; }
+
         #endregion
     }
 }

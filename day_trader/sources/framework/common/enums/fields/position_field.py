@@ -22,3 +22,9 @@ class PositionField(Enum):
     Strategy=20
     OrderType=21
     OrderPrice=22
+    StopLoss = 23
+    TakeProfit = 24
+    CloseEndOfDay = 25
+
+    TradingMode= 99
+    Depurate = 100

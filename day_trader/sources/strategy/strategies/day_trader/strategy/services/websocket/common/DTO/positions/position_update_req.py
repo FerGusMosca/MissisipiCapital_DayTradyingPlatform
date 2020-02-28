@@ -5,12 +5,14 @@ import json
 class PositionUpdateReq(WebSocketMessage):
 
 
-    def __init__(self, Msg,ReqId,PosId,SharesQuantity=None,Active=None,UUID=None):
+    def __init__(self, Msg,ReqId,PosId,SharesQuantity=None,Active=None,UUID=None, TradingMode=None, Depurate=None):
         super(PositionUpdateReq, self).__init__(Msg)
         self.PosId=PosId
         self.SharesQuantity=SharesQuantity
         self.Active = Active
         self.UUID = UUID
+        self.TradingMode = TradingMode
+        self.Depurate=Depurate
         self.ReqId = ReqId
 
     def toJSON(self):

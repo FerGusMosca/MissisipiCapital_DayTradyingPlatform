@@ -229,7 +229,7 @@ class WSHandler(tornado.websocket.WebSocketHandler):
     except Exception as e:
       msg = "Critical ERROR for PositionUpdate Req for posId {}. Error:{}".format(posUpdateReq.PosId,str(e))
       self.DoLog(msg, MessageType.ERROR)
-      ack = ModelParamAck(Msg="PositionUpdateAck", UUID=posUpdateReq.UUID, ReqId=posUpdateReq.ReqId, Success=False, Error=msg)
+      ack = PositionUpdateAck(Msg="PositionUpdateAck", UUID=posUpdateReq.UUID, ReqId=posUpdateReq.ReqId, Success=False, Error=msg)
       self.DoSendResponse(ack)
 
 
