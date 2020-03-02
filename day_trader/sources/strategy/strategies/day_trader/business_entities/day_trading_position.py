@@ -178,7 +178,7 @@ class DayTradingPosition():
             else:
                 raise Exception("Could not calculate profit for a SHORT position where the money outflow is {} USD and the net ammount to cover is {} USD for symbol {}"
                                 .format(profitsAndLosses.MoneyOutflow, profitsAndLosses.PosMTM, self.Security.Symbol))
-        else:
+        else: #all liquid
             if profitsAndLosses.MoneyOutflow > 0:
                 profits = (profitsAndLosses.MoneyIncome / profitsAndLosses.MoneyOutflow)-1
             elif profitsAndLosses.MoneyIncome ==0:
@@ -237,6 +237,7 @@ class DayTradingPosition():
         else:
             profitsAndLosses.MonetaryProfitLastTrade = 0
             profitsAndLosses.ProfitLastTrade = 0
+            profitsAndLosses.IncreaseDecrease = 0
 
 
     def CalculatePositionsProfit(self,profitsAndLosses):
@@ -301,26 +302,35 @@ class DayTradingPosition():
         profitsAndLosses = PositionsProfitsAndLosses()
 
         foundOpenPositions = self.CalculatePositionsProfit(profitsAndLosses)
-        profitsAndLosses.PosMTM = self.CalculateMarkToMarket(marketData,profitsAndLosses,foundOpenPositions)
+
+        profitsAndLosses.PosMTM = self.CalculateMarkToMarket(marketData, profitsAndLosses, foundOpenPositions)
 
         profitsAndLosses.Profits = self.CalculatePercentageProfits(profitsAndLosses)
         profitsAndLosses.MonetaryProfits = self.CalculateMonetaryProfits(profitsAndLosses)
 
-        #if foundOpenPositions:
-        self.CalculateLastTradeProfit(profitsAndLosses,marketData)
+        if self.Open():
 
-        if(profitsAndLosses.Profits>self.MaxProfit):
-            self.MaxProfit=profitsAndLosses.Profits
+            self.CalculateLastTradeProfit(profitsAndLosses,marketData)
 
-        if(profitsAndLosses.Profits<self.MaxLoss):
-            self.MaxLoss=profitsAndLosses.Profits
+            if(profitsAndLosses.Profits>self.MaxProfit):
+                self.MaxProfit=profitsAndLosses.Profits
 
-        self.CurrentProfit=profitsAndLosses.Profits
-        self.CurrentProfitMonetary = profitsAndLosses.MonetaryProfits
-        self.CurrentProfitLastTrade = profitsAndLosses.ProfitLastTrade
-        self.CurrentProfitMonetaryLastTrade = profitsAndLosses.MonetaryProfitLastTrade
-        self.LastProfitCalculationDay=datetime.now()
-        self.IncreaseDecrease=profitsAndLosses.IncreaseDecrease
+            if(profitsAndLosses.Profits<self.MaxLoss):
+                self.MaxLoss=profitsAndLosses.Profits
+
+            self.CurrentProfit=profitsAndLosses.Profits
+            self.CurrentProfitMonetary = profitsAndLosses.MonetaryProfits
+            self.CurrentProfitLastTrade = profitsAndLosses.ProfitLastTrade
+            self.CurrentProfitMonetaryLastTrade = profitsAndLosses.MonetaryProfitLastTrade
+            self.LastProfitCalculationDay=datetime.now()
+            self.IncreaseDecrease=profitsAndLosses.IncreaseDecrease
+        else:
+            #Last Trade remains as the last estimation while was opened
+            self.CurrentProfit = profitsAndLosses.Profits
+            self.CurrentProfitMonetary = profitsAndLosses.MonetaryProfits
+            self.LastProfitCalculationDay = datetime.now()
+            self.IncreaseDecrease = 0
+
 
     def EvaluateShortTrade(self,dailyBiasModelParam,dailySlopeModelParam, posMaximShortChangeParam,
                            posMaxShortDeltaParam,candlebarsArr):
@@ -468,6 +478,64 @@ class DayTradingPosition():
             return _EXIT_LONG_COND_4
 
         return None
+
+    def EvaluateClosingOnEndOfDay(self,candlebar,endOfdayLimitModelParam):
+        if not self.Open():
+            return False  # Position not opened
+
+        openSummaries = self.GetOpenSummaries()
+        for openSummary in openSummaries:
+            if (openSummary.Position.CloseEndOfDay is not None
+                and openSummary.Position.CloseEndOfDay
+                and self.EvaluateTimeRange(datetime.now(), endOfdayLimitModelParam)
+                and self.GetNetOpenShares()!=0):
+                return True
+
+        return False
+
+    def EvaluateClosingOnStopLoss(self, candlebar):
+
+        if not self.Open():
+            return False  # Position not opened
+
+        if self.GetNetOpenShares() < 0: #Stop loss on short position
+            openSummaries = self.GetOpenSummaries()
+            for openSummary in openSummaries:
+                if openSummary.Position.StopLoss is not None and candlebar.Close > openSummary.Position.StopLoss:
+                    return True
+
+            return False
+        elif self.GetNetOpenShares() > 0: #Stop loss on long position
+            openSummaries = self.GetOpenSummaries()
+            for openSummary in openSummaries:
+                if openSummary.Position.StopLoss is not None and  candlebar.Close < openSummary.Position.StopLoss:
+                    return True
+
+            return False
+        else:
+            return False
+
+    def EvaluateClosingOnTakeProfit(self, candlebar):
+
+        if not self.Open():
+            return False  # Position not opened
+
+        if self.GetNetOpenShares() < 0: #Stop loss on short position
+            openSummaries = self.GetOpenSummaries()
+            for openSummary in openSummaries:
+                if openSummary.Position.TakeProfit is not None and  candlebar.Close < openSummary.Position.TakeProfit:
+                    return True
+
+            return False
+        elif self.GetNetOpenShares() > 0: #Stop loss on long position
+            openSummaries = self.GetOpenSummaries()
+            for openSummary in openSummaries:
+                if  openSummary.Position.TakeProfit is not None and  candlebar.Close > openSummary.Position.TakeProfit:
+                    return True
+
+            return False
+        else:
+            return False
 
     def EvaluateClosingLongTrade(self,candlebarsArr,
                                   maxGainForClosingModelParam,pctMaxGainForClosingModelParam,

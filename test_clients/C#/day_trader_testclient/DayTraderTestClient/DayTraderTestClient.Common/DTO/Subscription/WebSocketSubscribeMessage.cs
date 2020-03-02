@@ -26,6 +26,8 @@ namespace DayTraderTestClient.Common.DTO.Subscription
 
         public string ServiceKey { get; set; }
 
+        public string ReqId { get; set; }
+
         #endregion
     }
 }

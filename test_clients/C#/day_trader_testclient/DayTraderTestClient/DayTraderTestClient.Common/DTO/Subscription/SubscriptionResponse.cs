@@ -12,6 +12,8 @@ namespace DayTraderTestClient.Common.DTO.Subscription
 
         public string UUID { get; set; }
 
+        public string ReqId { get; set; }
+
         public string ServiceKey { get; set; }
 
         public bool Success { get; set; }

@@ -23,6 +23,9 @@ _position_id=10
 _account_id=11
 _timestamp=12
 _text=13
+_stop_loss=14
+_take_profit=15
+_close_end_of_day=16
 
 class ExecutionSummaryManager():
 
@@ -51,7 +54,9 @@ class ExecutionSummaryManager():
         newPos.PosStatus = Position.FromStrStatus(str(row[_status]))
         newPos.LeavesQty=int(row[_leaves_quantity])
         newPos.AvgPx= float(row[_average_price]) if row[_average_price] is not None else None
-
+        newPos.StopLoss= float(row[_stop_loss]) if row[_stop_loss] is not None else None
+        newPos.TakeProfit = float(row[_take_profit]) if row[_take_profit] is not None else None
+        newPos.CloseEndOfDay = float(row[_close_end_of_day]) if row[_close_end_of_day] is not None else None
 
         order = Order()
         order.OrderId=str(row[_order_id]) if row[_order_id] is not None else None
@@ -102,8 +107,8 @@ class ExecutionSummaryManager():
                       summary.Position.GetLastOrder().OrderId if summary.Position.GetLastOrder() is not None else None,
                       int(dayTradingPositionId) if dayTradingPositionId is not None else None,
                       summary.Position.Account,summary.Timestamp,
-                      summary.Text)
-            cursor.execute("{CALL PersistExecutionSummary (?,?,?,?,?,?,?,?,?,?,?,?,?,?)}", params)
+                      summary.Text,summary.Position.StopLoss,summary.Position.TakeProfit,summary.Position.CloseEndOfDay)
+            cursor.execute("{CALL PersistExecutionSummary (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}", params)
             self.connection.commit()
 
     #endregion

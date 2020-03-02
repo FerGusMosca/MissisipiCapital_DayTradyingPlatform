@@ -126,7 +126,6 @@ class TradingSignalHelper:
             self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "PctChangeLastThreeMinSlope",
                                                                         statisticalParam.PctChangeLastThreeMinSlope)
             self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "DeltaCurrValueAndFiftyMMov",
-
                                                                         statisticalParam.DeltaCurrValueAndFiftyMMov)
 
             self.TradingSignalManager.Commit()

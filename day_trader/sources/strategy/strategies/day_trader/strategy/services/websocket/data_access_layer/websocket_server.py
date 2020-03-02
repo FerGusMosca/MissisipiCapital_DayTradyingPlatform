@@ -159,12 +159,12 @@ class WSHandler(tornado.websocket.WebSocketHandler):
   def SubscribeService(self,subscrMsg):
     self.SubscribedServices[subscrMsg.Service]=subscrMsg
 
-  def ProcessSubscriptionResponse(self,subscrMsg,success=True,message=None):
+  def ProcessSubscriptionResponse(self,subscrMsg,success=True,message=None,ReqId=None):
     resp = SubscriptionResponse(Msg="SubscriptionResponse",SubscriptionType= subscrMsg.SubscriptionType,
                                 Service= subscrMsg.Service,ServiceKey= subscrMsg.ServiceKey,
-                                Success= success,Message= message,UUID = subscrMsg.UUID )
-    self.DoLog("SubscriptionResponse UUID:{} Service:{} ServiceKey:{} Success:{}"
-               .format(subscrMsg.UUID,subscrMsg.Service,subscrMsg.ServiceKey,resp.Success), MessageType.INFO)
+                                Success= success,Message= message,UUID = subscrMsg.UUID, ReqId=ReqId )
+    self.DoLog("SubscriptionResponse UUID:{} ReqId:{} Service:{} ServiceKey:{} Success:{}"
+               .format(subscrMsg.UUID,ReqId,subscrMsg.Service,subscrMsg.ServiceKey,resp.Success), MessageType.INFO)
     self.DoSendResponse(resp)
 
   def ProcessPositionsExecutions(self,subscrMsg):
@@ -174,7 +174,7 @@ class WSHandler(tornado.websocket.WebSocketHandler):
 
     state=self.InvokingModule.ProcessIncoming(wrapper)
 
-    self.ProcessSubscriptionResponse(subscrMsg, state.Success,str(state.Exception) if state.Exception is not None else None)
+    self.ProcessSubscriptionResponse(subscrMsg, state.Success,str(state.Exception) if state.Exception is not None else None,subscrMsg.ReqId)
 
   def ProcessOpenPositions(self,subscrMsg):
     self.SubscribeService(subscrMsg)
@@ -183,7 +183,7 @@ class WSHandler(tornado.websocket.WebSocketHandler):
 
     state = self.InvokingModule.ProcessIncoming(wrapper)
 
-    self.ProcessSubscriptionResponse(subscrMsg, state.Success,str(state.Exception) if state.Exception is not None else None)
+    self.ProcessSubscriptionResponse(subscrMsg, state.Success,str(state.Exception) if state.Exception is not None else None, subscrMsg.ReqId)
 
 
   def UnsubscribeService(self,subscrMsg):

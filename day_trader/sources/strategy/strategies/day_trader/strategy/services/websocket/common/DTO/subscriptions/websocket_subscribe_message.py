@@ -12,11 +12,12 @@ class WebSocketSubscribeMessage(WebSocketMessage):
     def _SUBSCRIPTION_TYPE_SUBSCRIBE():
         return "S"
 
-    def __init__(self, Msg ,SubscriptionType ,Service,ServiceKey,UUID=None):
+    def __init__(self, Msg ,SubscriptionType ,Service,ServiceKey,UUID=None, ReqId = None):
         super(WebSocketSubscribeMessage, self).__init__(Msg)
         self.UUID = UUID
         self.SubscriptionType = SubscriptionType
         self.Service = Service
         self.ServiceKey = ServiceKey
+        self.ReqId = ReqId
 
 

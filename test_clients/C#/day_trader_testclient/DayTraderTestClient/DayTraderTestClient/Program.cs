@@ -102,7 +102,8 @@ namespace DayTraderTestClient
                     //JsonWebToken = Token,
                     Service = param[1],
                     ServiceKey = param.Length == 3 ? param[2] : "*",
-                    UUID = UUID
+                    UUID = UUID,
+                    ReqId = "testReqId"
 
                 };
 
