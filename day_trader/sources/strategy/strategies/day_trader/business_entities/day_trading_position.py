@@ -53,7 +53,8 @@ class DayTradingPosition():
         self.LastNDaysStdDev = 0
         self.LastProfitCalculationDay = None
 
-        self.RSIIndicator = RSIIndicator()
+        self.MinuteRSIIndicator = RSIIndicator()
+        self.DailyRSIIndicator = RSIIndicator()
 
 
     #region Private Methods
@@ -285,6 +286,17 @@ class DayTradingPosition():
     def GetOpenSummaries(self):
         return list(filter(lambda x: x.Position.IsOpenPosition(), self.ExecutionSummaries.values()))
 
+
+    def GetLastTradedSummary(self,side):
+
+        #All the traded summaries for a side, order in a descending fashion
+        lastTradedSummaries = sorted(list(filter(lambda x: x.GetNetShares() != 0
+                                                 and x.Position.LongPositionOpened() if side==Side.Buy else x.Position.ShortPositionOpened(),
+                                                 self.ExecutionSummaries.values())), key=lambda x: x.Timestamp, reverse=True)
+
+        return lastTradedSummaries[0] if (len(lastTradedSummaries) > 0) else None
+
+
     def ResetProfitCounters(self,now):
         self.CurrentProfit = 0
         self.CurrentProfitLastTrade= 0
@@ -295,7 +307,7 @@ class DayTradingPosition():
         self.MaxProfit = 0
         self.LastProfitCalculationDay = datetime.now()
 
-        self.RSIIndicator.Reset()
+        self.MinuteRSIIndicator.Reset()
 
     def CalculateCurrentDayProfits(self,marketData):
 
@@ -483,15 +495,15 @@ class DayTradingPosition():
         if not self.Open():
             return False  # Position not opened
 
-        openSummaries = self.GetOpenSummaries()
-        for openSummary in openSummaries:
-            if (openSummary.Position.CloseEndOfDay is not None
-                and openSummary.Position.CloseEndOfDay
-                and self.EvaluateTimeRange(datetime.now(), endOfdayLimitModelParam)
-                and self.GetNetOpenShares()!=0):
-                return True
+        openSummary = self.GetLastTradedSummary(Side.Buy if self.GetNetOpenShares()>0 else Side.Sell)
 
-        return False
+        if ( openSummary is not None
+            and openSummary.Position.CloseEndOfDay is not None
+            and self.EvaluateBiggerDate( endOfdayLimitModelParam)
+            and self.GetNetOpenShares()!=0):
+            return True
+        else:
+            return False
 
     def EvaluateClosingOnStopLoss(self, candlebar):
 
@@ -499,19 +511,26 @@ class DayTradingPosition():
             return False  # Position not opened
 
         if self.GetNetOpenShares() < 0: #Stop loss on short position
-            openSummaries = self.GetOpenSummaries()
-            for openSummary in openSummaries:
-                if openSummary.Position.StopLoss is not None and candlebar.Close > openSummary.Position.StopLoss:
-                    return True
+            openSummary = self.GetLastTradedSummary(Side.Sell)
 
-            return False
+            if (openSummary is not None and openSummary.AvgPx is not None and openSummary.Position.StopLoss is not None \
+                and candlebar.Close > (openSummary.AvgPx + openSummary.Position.StopLoss)#Short --> bigger than
+                ):
+                return True
+            else:
+                return False
+
         elif self.GetNetOpenShares() > 0: #Stop loss on long position
-            openSummaries = self.GetOpenSummaries()
-            for openSummary in openSummaries:
-                if openSummary.Position.StopLoss is not None and  candlebar.Close < openSummary.Position.StopLoss:
-                    return True
+            openSummary = self.GetLastTradedSummary(Side.Buy)
 
-            return False
+            if (openSummary is not None
+                and openSummary.Position.StopLoss is not None
+                and openSummary.AvgPx is not None
+                and  candlebar.Close < (openSummary.AvgPx - openSummary.Position.StopLoss)#Long --> lower than
+                ):
+                return True
+            else:
+                return False
         else:
             return False
 
@@ -520,20 +539,30 @@ class DayTradingPosition():
         if not self.Open():
             return False  # Position not opened
 
-        if self.GetNetOpenShares() < 0: #Stop loss on short position
-            openSummaries = self.GetOpenSummaries()
-            for openSummary in openSummaries:
-                if openSummary.Position.TakeProfit is not None and  candlebar.Close < openSummary.Position.TakeProfit:
-                    return True
+        if self.GetNetOpenShares() < 0: #take profit on short position
+            openSummary = self.GetLastTradedSummary(Side.Sell)
 
-            return False
+            if ( openSummary is not None
+                and openSummary.Position.TakeProfit is not None
+                and openSummary.AvgPx is not None
+                and  candlebar.Close < (openSummary.AvgPx - openSummary.Position.TakeProfit)
+                ):#Short position --> lower than AvgPx - take profit
+                return True
+            else:
+                return False
         elif self.GetNetOpenShares() > 0: #Stop loss on long position
-            openSummaries = self.GetOpenSummaries()
-            for openSummary in openSummaries:
-                if  openSummary.Position.TakeProfit is not None and  candlebar.Close > openSummary.Position.TakeProfit:
-                    return True
 
-            return False
+            openSummary = self.GetLastTradedSummary(Side.Buy)
+
+            if  (
+                    openSummary is not None
+                    and openSummary.AvgPx is not None
+                    and openSummary.Position.TakeProfit is not None
+                    and candlebar.Close > (openSummary.AvgPx + openSummary.Position.TakeProfit)
+                ):
+                return True
+            else:
+                return False
         else:
             return False
 

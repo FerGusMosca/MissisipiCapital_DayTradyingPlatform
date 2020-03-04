@@ -14,7 +14,8 @@ class PositionDTO:
         self.SignalType = dayTradingPos.SignalType
         self.SignalDesc = dayTradingPos.SignalDesc
 
-        self.RSI=dayTradingPos.RSIIndicator.RSI
+        self.RSI=dayTradingPos.MinuteRSIIndicator.RSI
+        self.DailyRSI = dayTradingPos.DailyRSIIndicator.RSI
 
         self.NetShares = dayTradingPos.GetNetOpenShares()
 

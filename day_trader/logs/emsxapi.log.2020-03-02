@@ -1,0 +1,63 @@
+2020-03-02 15:59:36 [logger INFO] DayTrader  Initializing
+2020-03-02 16:00:22 [logger INFO] DayTrader  Initializing
+2020-03-02 16:00:25 [logger INFO] Loading 13 summaries for security SPY
+2020-03-02 16:00:25 [logger INFO] WebSocketModule  Initializing
+2020-03-02 16:00:25 [logger INFO] DayTrader Successfully initialized
+2020-03-02 16:00:25 [logger INFO] Websocket commands successfully opened on port 9192: 
+2020-03-02 16:00:25 [logger INFO] Initializing Bloomberg Order Router
+2020-03-02 16:00:25 [logger INFO] Connecting to localhost:8194
+2020-03-02 16:00:26 [logger INFO] Bloomberg Order Router Initialized
+2020-03-02 16:00:26 [logger INFO] SingletonModuleHandler Successfully initializer
+2020-03-02 16:00:26 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2020-03-02 16:00:26 [logger INFO] Bloomberg Session Connection is UP...
+2020-03-02 16:00:26 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2020-03-02 16:00:26 [logger INFO] Bloomberg Session started...
+2020-03-02 16:00:26 [logger INFO] Initializing Generic Market Order Router
+2020-03-02 16:00:26 [logger INFO] SingletonModuleHandler Successfully initializer
+2020-03-02 16:00:26 [logger INFO] Generic Market Order Router Initialized
+2020-03-02 16:00:26 [logger INFO] Processing SERVICE_STATUS event
+2020-03-02 16:00:26 [logger INFO] Service //blp/emapisvc opened...
+2020-03-02 16:00:27 [logger INFO] DayTrader Successfully initialized
+2020-03-02 16:00:27 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:SPY
+2020-03-02 16:00:28 [logger INFO] Requesting for open orders...
+2020-03-02 16:00:28 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-03-02 16:00:28 [logger INFO] Subscribing to order and route events
+2020-03-02 16:00:28 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:SPY
+2020-03-02 16:00:28 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:SPY
+2020-03-02 16:00:28 [logger INFO] Processing SERVICE_STATUS event
+2020-03-02 16:00:28 [logger INFO] Service //blp/mktdata opened...
+2020-03-02 16:00:28 [logger INFO] Processing SERVICE_STATUS event
+2020-03-02 16:00:28 [logger INFO] Service //blp/mktbar opened...
+2020-03-02 16:00:28 [logger INFO] Processing SERVICE_STATUS event
+2020-03-02 16:00:28 [logger INFO] Service //blp/refdata opened...
+2020-03-02 16:00:29 [logger ERROR] Error Subscribing to Bloomberg Events:7-User is not enabled for EMSX API (Symbol 98)
+2020-03-02 16:00:29 [logger ERROR] Error Subscribing to Bloomberg Events:7-User is not enabled for EMSX API (Symbol 99)
+2020-03-02 16:00:29 [logger ERROR] Error Subscribing to Bloomberg Events:7-user lmnu disabled (Symbol SPY US Equity)
+2020-03-02 16:00:29 [logger ERROR] Error Subscribing to Bloomberg Events:7-user lmnu disabled (Symbol SPY US Equity)
+2020-03-02 16:00:29 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-03-02 16:00:29 [logger ERROR] Error @ProcessHistoricalPrice:Choice sub-element not found for name 'securityData'. (0x00020002)
+2020-03-02 16:00:30 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-03-02 16:00:31 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-03-02 16:00:32 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-03-02 16:00:33 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-03-02 16:00:34 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-03-02 16:00:35 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-03-02 16:00:36 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-03-02 16:00:37 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-03-02 16:00:38 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-03-02 16:00:39 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-03-02 16:00:40 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-03-02 16:00:41 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-03-02 16:00:42 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-03-02 16:00:43 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-03-02 16:00:44 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-03-02 16:00:45 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-03-02 16:00:46 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-03-02 16:00:47 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-03-02 16:00:48 [logger INFO] Client succesfully connected 
+2020-03-02 16:00:48 [logger ERROR] Critical Error running ProcessExecutionReportListThread @OrderRouter.Bloomberg module:Timeout waiting for the previous orders
+2020-03-02 16:00:48 [logger INFO] Received list of Open Positions: 0 positions
+2020-03-02 16:00:48 [logger INFO] Process ready to receive commands and trade
+2020-03-02 16:01:10 [logger INFO] Incoming subscription for service PE - ServiceKey:1 
+2020-03-02 16:01:10 [logger INFO] SubscriptionResponse UUID:None ReqId:testReqId Service:PE ServiceKey:1 Success:True
+2020-03-02 16:01:21 [logger INFO] Client succesfully disconnected 

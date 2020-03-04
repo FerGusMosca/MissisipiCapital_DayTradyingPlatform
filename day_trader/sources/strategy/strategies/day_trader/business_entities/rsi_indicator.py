@@ -1,9 +1,6 @@
 from sources.framework.business_entities.market_data.candle_bar import *
 class RSIIndicator():
 
-    @staticmethod
-    def RSI_LENGTH():
-        return 14
 
     def __init__(self):
         self.UpOpen=0
@@ -25,17 +22,17 @@ class RSIIndicator():
         self.BootstrapDownOpen = 0
         self.RSI= 0
 
-    def CalculatedCumAvg(self,sortedBars,bootStrap, xOpen, prevValue):
+    def CalculatedCumAvg(self,sortedBars,bootStrap, xOpen, prevValue,MINUTES_RSI_LENGTH):
 
-        if len(sortedBars)==(RSIIndicator.RSI_LENGTH()+1):
-            return bootStrap/(RSIIndicator.RSI_LENGTH()+1)
-        elif len(sortedBars)>(RSIIndicator.RSI_LENGTH()+1):
-            return ( (prevValue*(RSIIndicator.RSI_LENGTH()-1))  + xOpen)/(RSIIndicator.RSI_LENGTH())
+        if len(sortedBars)==MINUTES_RSI_LENGTH:
+            return bootStrap/MINUTES_RSI_LENGTH
+        elif len(sortedBars)>MINUTES_RSI_LENGTH:
+            return ( (prevValue*(MINUTES_RSI_LENGTH-2))  + xOpen)/((MINUTES_RSI_LENGTH-1))
         else:
             return 0
 
 
-    def Update(self,candleBarArr):
+    def Update(self,candleBarArr,MINUTES_RSI_LENGTH):
 
         sortedBars = sorted(list(filter(lambda x: x is not None, candleBarArr)), key=lambda x: x.DateTime, reverse=True)
 
@@ -44,12 +41,41 @@ class RSIIndicator():
             if sortedBars[0].Close is None or sortedBars[1].Close is None:
                 return
 
-            self.UpOpen= sortedBars[0].Close  if (sortedBars[0].Close >= sortedBars[1].Close) else 0
-            self.DownOpen = sortedBars[0].Close if (sortedBars[0].Close < sortedBars[1].Close) else 0
+            self.UpOpen= sortedBars[0].Close - sortedBars[1].Close  if (sortedBars[0].Close >= sortedBars[1].Close) else 0
+            self.DownOpen = sortedBars[1].Close - sortedBars[0].Close if (sortedBars[0].Close < sortedBars[1].Close) else 0
 
-            self.BootstrapUpOpen += self.UpOpen if len(sortedBars)<=(RSIIndicator.RSI_LENGTH()+1) else 0
-            self.BootstrapDownOpen += self.DownOpen if len(sortedBars)<=(RSIIndicator.RSI_LENGTH()+1) else 0
+            self.BootstrapUpOpen += self.UpOpen if len(sortedBars)<=(MINUTES_RSI_LENGTH) else 0
+            self.BootstrapDownOpen += self.DownOpen if len(sortedBars)<=(MINUTES_RSI_LENGTH) else 0
 
-            self.SmoothUp = self.CalculatedCumAvg(sortedBars,self.BootstrapUpOpen,self.UpOpen,self.SmoothUp)
-            self.SmoothDown = self.CalculatedCumAvg(sortedBars,self.BootstrapDownOpen,self.DownOpen,self.SmoothDown)
+            self.SmoothUp = self.CalculatedCumAvg(sortedBars,self.BootstrapUpOpen,self.UpOpen,self.SmoothUp,MINUTES_RSI_LENGTH)
+            self.SmoothDown = self.CalculatedCumAvg(sortedBars,self.BootstrapDownOpen,self.DownOpen,self.SmoothDown,MINUTES_RSI_LENGTH)
             self.RSI= (100-(100/(1+(self.SmoothUp/self.SmoothDown)))) if self.SmoothDown>0 else 0
+
+
+
+    def UpdateDaily(self,marketDataArr, DAILY_RSI_LENGTH):
+
+        sortedMDs = sorted(list(filter(lambda x: x is not None, list(marketDataArr.values()))), key=lambda x: x.MDEntryDate, reverse=False)
+
+        if len(sortedMDs)>=DAILY_RSI_LENGTH:
+
+            prevDailyMD = None
+            i = 0
+            for dailyMD in sortedMDs:
+
+
+                #If I have more market data in marketDataArr than values needed in DAILY_RSI_LENGTH, I skip the first (len(marketDataArr)- DAILY_RSI_LENGTH)
+                if prevDailyMD is not None and ( (len(sortedMDs)-i)<=DAILY_RSI_LENGTH):
+                    self.BootstrapUpOpen+= dailyMD.ClosingPrice - prevDailyMD.ClosingPrice  if (dailyMD.ClosingPrice >= prevDailyMD.ClosingPrice) else 0
+                    self.BootstrapDownOpen += prevDailyMD.ClosingPrice - dailyMD.ClosingPrice if (dailyMD.ClosingPrice < prevDailyMD.ClosingPrice) else 0
+
+                prevDailyMD=dailyMD
+                i+=1
+
+
+            self.SmoothUp = self.BootstrapUpOpen / DAILY_RSI_LENGTH
+            self.SmoothDown = self.BootstrapDownOpen / DAILY_RSI_LENGTH
+            self.RSI= (100-(100/(1+(self.SmoothUp/self.SmoothDown)))) if self.SmoothDown>0 else 0
+
+        else:
+            raise Exception("Could not calculate daily RSI as market data array length={} and RSI daily length ={}".format(len(sortedMDs),DAILY_RSI_LENGTH))

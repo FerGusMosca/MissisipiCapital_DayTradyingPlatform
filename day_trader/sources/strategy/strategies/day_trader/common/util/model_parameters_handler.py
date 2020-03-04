@@ -92,8 +92,16 @@ class ModelParametersHandler:
         return "BACKWARD_DAYS_SUMMARIES_IN_MEMORY"
 
     @staticmethod
-    def HISTORICAL_PRICES_PAST_DAYS():
-        return "HISTORICAL_PRICES_PAST_DAYS"
+    def HISTORICAL_PRICES_PAST_DAYS_STD_DEV():
+        return "HISTORICAL_PRICES_PAST_DAYS_STD_DEV"
+
+    @staticmethod
+    def HISTORICAL_PRICES_PAST_DAYS_DAILY_RSI():
+        return "HISTORICAL_PRICES_PAST_DAYS_DAILY_RSI"
+
+    @staticmethod
+    def CANDLE_BARS_MINUTES_RSI():
+        return "CANDLE_BARS_MINUTES_RSI"
 
     @staticmethod
     def HISTORICAL_PRICES_CAL_DAYS_TO_REQ():

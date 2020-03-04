@@ -520,7 +520,11 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
             if(datTradingPos is not None):
                 try:
                     datTradingPos.CalculateStdDevForLastNDays(security.MarketDataArr,
-                                                              self.ModelParametersHandler.Get(ModelParametersHandler.HISTORICAL_PRICES_PAST_DAYS()))
+                                                              self.ModelParametersHandler.Get(ModelParametersHandler.HISTORICAL_PRICES_PAST_DAYS_STD_DEV()))
+
+                    datTradingPos.DailyRSIIndicator.UpdateDaily(security.MarketDataArr,
+                                                                self.ModelParametersHandler.Get(ModelParametersHandler.HISTORICAL_PRICES_PAST_DAYS_DAILY_RSI()).IntValue)
+                    #print("RSI calculated for symbol {}:{}".format(security.Symbol,datTradingPos.DailyRSIIndicator.RSI))
                 except Exception as e:
                     self.DoLog(str(e),MessageType.ERROR)
                     self.SendToInvokingModule(ErrorWrapper(str(e)))
@@ -533,7 +537,8 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
     def UpdateTechnicalAnalysisParameters(self, candlebar,candlebarDict):
         dayTradingPos = next(iter(list(filter(lambda x: x.Security.Symbol == candlebar.Security.Symbol, self.DayTradingPositions))),None)
         if dayTradingPos is not None:
-            dayTradingPos.RSIIndicator.Update(candlebarDict.values())
+            dayTradingPos.MinuteRSIIndicator.Update(candlebarDict.values(),
+                                                    self.ModelParametersHandler.Get(ModelParametersHandler.CANDLE_BARS_MINUTES_RSI()).IntValue)
 
 
     def EvaluateOpeningPositions(self, candlebar,cbDict):
@@ -595,7 +600,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
         else:
             return False
 
-    def RunClose(self,dayTradingPos,side,statisticalParam,candlebar):
+    def RunClose(self,dayTradingPos,side,statisticalParam,candlebar, text=None):
 
         if dayTradingPos.Routing:
             for summary in dayTradingPos.GetOpenSummaries():
@@ -620,7 +625,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                 self.TradingSignalHelper.PersistTradingSignal(dayTradingPos, TradingSignalHelper._ACTION_CLOSE(),
                                                               self.TranslateSide(dayTradingPos,side), statisticalParam,candlebar, self)
 
-                self.ProcessNewPositionReqManagedPos(dayTradingPos,side,netShares if netShares > 0 else netShares * (-1),self.Configuration.DefaultAccount)
+                self.ProcessNewPositionReqManagedPos(dayTradingPos,side,netShares if netShares > 0 else netShares * (-1),self.Configuration.DefaultAccount,text=text)
 
 
     def EvaluateClosingForManualConditions(self,candlebar,cbDict):
@@ -634,16 +639,19 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
                 if dayTradingPos.EvaluateClosingOnStopLoss(candlebar):
                     self.RunClose(dayTradingPos,Side.Sell if dayTradingPos.GetNetOpenShares() > 0 else Side.Buy,
-                                  dayTradingPos.GetStatisticalParameters(list(cbDict.values())), candlebar)
+                                  dayTradingPos.GetStatisticalParameters(list(cbDict.values())), candlebar,
+                                  text="Closing fon stop loss")
 
                 if dayTradingPos.EvaluateClosingOnTakeProfit(candlebar):
                     self.RunClose(dayTradingPos,Side.Sell if dayTradingPos.GetNetOpenShares() > 0 else Side.Buy,
-                                  dayTradingPos.GetStatisticalParameters(list(cbDict.values())), candlebar)
+                                  dayTradingPos.GetStatisticalParameters(list(cbDict.values())), candlebar,
+                                  text="Closing on take profit")
 
                 if dayTradingPos.EvaluateClosingOnEndOfDay(candlebar,
                                                            self.ModelParametersHandler.Get(ModelParametersHandler.END_OF_DAY_LIMIT(),dayTradingPos.Security.Symbol)):
                     self.RunClose(dayTradingPos,Side.Sell if dayTradingPos.GetNetOpenShares() > 0 else Side.Buy,
-                                  dayTradingPos.GetStatisticalParameters(list(cbDict.values())), candlebar)
+                                  dayTradingPos.GetStatisticalParameters(list(cbDict.values())), candlebar,
+                                  text="Closing on end of day for manual trades")
 
             else:
                 msg = "Could not find Day Trading Position for candlebar symbol {}. Please Resync.".format(candlebar.Security.Symbol)
@@ -836,7 +844,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                 self.RoutingLock.release()
 
     def ProcessNewPositionReqManagedPos(self, dayTradingPos, side,qty,account, price = None,stopLoss=None,
-                                        takeProfit=None,closeEndOfDay=None):
+                                        takeProfit=None,closeEndOfDay=None, text=None):
         try:
             self.RoutingLock.acquire()
 
@@ -860,6 +868,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
             newPos.ValidateNewPosition()
 
             summary = ExecutionSummary(datetime.datetime.now(), newPos)
+            summary.Text=text
             dayTradingPos.ExecutionSummaries[self.NextPostId] = summary
             dayTradingPos.Routing=True
             self.PositionSecurities[self.NextPostId] = dayTradingPos

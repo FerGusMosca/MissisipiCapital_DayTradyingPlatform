@@ -152,7 +152,8 @@ class SubscriptionHelper:
         request.append("fields", "LOW")
 
         yesterday_end= datetime.datetime.today() - datetime.timedelta(days=1)
-        start = datetime.datetime.today() - datetime.timedelta(days=pastDays+5)#buffer for holidays <yesterday -4>
+        
+        start = datetime.datetime.today() - datetime.timedelta(days=pastDays+10)#buffer for holidays <yesterday -4>
 
         request.set("startDate", start.strftime("%Y%m%d"))
         request.set("endDate", yesterday_end.strftime("%Y%m%d"))
