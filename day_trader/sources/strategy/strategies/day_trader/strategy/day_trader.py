@@ -576,6 +576,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                                                         self.ModelParametersHandler.Get(ModelParametersHandler.DAILY_SLOPE(),symbol),
                                                         self.ModelParametersHandler.Get(ModelParametersHandler.MAXIM_PCT_CHANGE_3_MIN(),symbol),
                                                         self.ModelParametersHandler.Get(ModelParametersHandler.POS_LONG_MAX_DELTA(),symbol),
+                                                        self.ModelParametersHandler.Get( ModelParametersHandler.SMOOTHED_14_MIN_RSI_LONG_THRESHOLD(), symbol),
                                                         list(cbDict.values())):
                         self.DoLog ("Running long trade for symbol {}".format(dayTradingPos.Security.Symbol), MessageType.INFO)
                         self.TradingSignalHelper.PersistTradingSignal(dayTradingPos,TradingSignalHelper._ACTION_OPEN(),Side.Buy,dayTradingPos.GetStatisticalParameters(list(cbDict.values())),candlebar,self)
@@ -585,6 +586,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                                                         self.ModelParametersHandler.Get(ModelParametersHandler.DAILY_SLOPE(),symbol),
                                                         self.ModelParametersHandler.Get(ModelParametersHandler.MAXIM_SHORT_PCT_CHANGE_3_MIN(),symbol),
                                                         self.ModelParametersHandler.Get(ModelParametersHandler.POS_SHORT_MAX_DELTA(),symbol),
+                                                        self.ModelParametersHandler.Get(ModelParametersHandler.SMOOTHED_14_MIN_RSI_SHORT_THRESHOLD(),symbol),
                                                         list(cbDict.values())):
                         self.DoLog ("Running short trade for symbol {}".format(dayTradingPos.Security.Symbol), MessageType.INFO)
                         self.TradingSignalHelper.PersistTradingSignal(dayTradingPos, TradingSignalHelper._ACTION_OPEN(),Side.SellShort, dayTradingPos.GetStatisticalParameters(list(cbDict.values())), candlebar, self)
@@ -640,7 +642,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                 if dayTradingPos.EvaluateClosingOnStopLoss(candlebar):
                     self.RunClose(dayTradingPos,Side.Sell if dayTradingPos.GetNetOpenShares() > 0 else Side.Buy,
                                   dayTradingPos.GetStatisticalParameters(list(cbDict.values())), candlebar,
-                                  text="Closing fon stop loss")
+                                  text="Closing for stop loss")
 
                 if dayTradingPos.EvaluateClosingOnTakeProfit(candlebar):
                     self.RunClose(dayTradingPos,Side.Sell if dayTradingPos.GetNetOpenShares() > 0 else Side.Buy,
@@ -678,7 +680,8 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                                                 self.ModelParametersHandler.Get(ModelParametersHandler.TAKE_GAIN_LIMIT(),symbol),
                                                 self.ModelParametersHandler.Get(ModelParametersHandler.STOP_LOSS_LIMIT(),symbol),
                                                 self.ModelParametersHandler.Get(ModelParametersHandler.PCT_SLOPE_TO_CLOSE_LONG(),symbol),
-                                                self.ModelParametersHandler.Get(ModelParametersHandler.END_OF_DAY_LIMIT(),symbol)
+                                                self.ModelParametersHandler.Get(ModelParametersHandler.END_OF_DAY_LIMIT(),symbol),
+                                                self.ModelParametersHandler.Get(ModelParametersHandler.SMOOTHED_14_MIN_RSI_SHORT_THRESHOLD(),symbol),
                                                 )
 
                 if closingCond is not None:
@@ -711,7 +714,8 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                                                 self.ModelParametersHandler.Get(ModelParametersHandler.TAKE_GAIN_LIMIT(),symbol),
                                                 self.ModelParametersHandler.Get(ModelParametersHandler.STOP_LOSS_LIMIT(),symbol),
                                                 self.ModelParametersHandler.Get(ModelParametersHandler.PCT_SLOPE_TO_CLOSE_SHORT(),symbol),
-                                                self.ModelParametersHandler.Get(ModelParametersHandler.END_OF_DAY_LIMIT(),symbol)
+                                                self.ModelParametersHandler.Get(ModelParametersHandler.END_OF_DAY_LIMIT(),symbol),
+                                                self.ModelParametersHandler.Get(ModelParametersHandler.SMOOTHED_14_MIN_RSI_LONG_THRESHOLD(),symbol)
                                                 )
 
                 if closingCond is not None:
@@ -873,7 +877,8 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
             dayTradingPos.Routing=True
             self.PositionSecurities[self.NextPostId] = dayTradingPos
             self.NextPostId = uuid.uuid4()
-            self.RoutingLock.release()
+            if self.RoutingLock.locked():
+                self.RoutingLock.release()
 
             posWrapper = PositionWrapper(newPos)
             state = self.OrderRoutingModule.ProcessMessage(posWrapper)

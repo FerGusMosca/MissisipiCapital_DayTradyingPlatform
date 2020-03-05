@@ -10,6 +10,7 @@ class RSIIndicator():
         self.BootstrapUpOpen = 0
         self.BootstrapDownOpen = 0
         self.RSI= 0
+        self.PrevRSI = None
 
 
 
@@ -21,6 +22,7 @@ class RSIIndicator():
         self.BootstrapUpOpen = 0
         self.BootstrapDownOpen = 0
         self.RSI= 0
+        self.PrevRSI = None
 
     def CalculatedCumAvg(self,sortedBars,bootStrap, xOpen, prevValue,MINUTES_RSI_LENGTH):
 
@@ -49,6 +51,7 @@ class RSIIndicator():
 
             self.SmoothUp = self.CalculatedCumAvg(sortedBars,self.BootstrapUpOpen,self.UpOpen,self.SmoothUp,MINUTES_RSI_LENGTH)
             self.SmoothDown = self.CalculatedCumAvg(sortedBars,self.BootstrapDownOpen,self.DownOpen,self.SmoothDown,MINUTES_RSI_LENGTH)
+            self.PrevRSI = self.RSI if self.RSI !=0 else None
             self.RSI= (100-(100/(1+(self.SmoothUp/self.SmoothDown)))) if self.SmoothDown>0 else 0
 
 

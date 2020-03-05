@@ -143,6 +143,14 @@ class ModelParametersHandler:
     def END_OF_DAY_LIMIT():
         return "END_OF_DAY_LIMIT"
 
+    @staticmethod
+    def NON_SMOOTHED_14_MIN_RSI_LONG_THRESHOLD():
+        return "NON_SMOOTHED_14_MIN_RSI_LONG_THRESHOLD"
+
+    @staticmethod
+    def NON_SMOOTHED_14_MIN_RSI_SHORT_THRESHOLD():
+        return "NON_SMOOTHED_14_MIN_RSI_SHORT_THRESHOLD"
+
     #endregion
 
     #region Public Methods

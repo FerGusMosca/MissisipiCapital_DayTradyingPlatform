@@ -23,7 +23,7 @@ class ExecutionSummary:
         self.CumQty = execReport.CumQty
         self.AvgPx = execReport.AvgPx
         self.Commission = execReport.Commission
-        self.Text = execReport.Text
+        self.Text = execReport.Text if execReport.Text is not None and execReport.Text!="" else self.Text
 
         self.Position.LeavesQty = execReport.LeavesQty
         self.Position.CumQty=execReport.CumQty

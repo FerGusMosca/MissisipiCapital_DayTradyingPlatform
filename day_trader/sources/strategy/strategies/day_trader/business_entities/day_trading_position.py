@@ -17,6 +17,7 @@ _EXIT_LONG_COND_2="EXIT_LONG_COND_2"
 _EXIT_LONG_COND_3="EXIT_LONG_COND_3"
 _EXIT_LONG_COND_4="EXIT_LONG_COND_4"
 _EXIT_LONG_COND_5="EXIT_LONG_COND_5"
+_EXIT_LONG_COND_6="EXIT_LONG_COND_6"
 _EXIT_LONG_COND_EOF="EXIT_LONG_COND_EOF"
 
 _EXIT_SHORT_COND_1="EXIT_SHORT_COND_1"
@@ -24,6 +25,7 @@ _EXIT_SHORT_COND_2="EXIT_SHORT_COND_2"
 _EXIT_SHORT_COND_3="EXIT_SHORT_COND_3"
 _EXIT_SHORT_COND_4="EXIT_SHORT_COND_4"
 _EXIT_SHORT_COND_5="EXIT_SHORT_COND_5"
+_EXIT_SHORT_COND_6="EXIT_SHORT_COND_6"
 _EXIT_SHORT_COND_EOF="EXIT_SHORT_COND_EOF"
 
 class DayTradingPosition():
@@ -345,7 +347,7 @@ class DayTradingPosition():
 
 
     def EvaluateShortTrade(self,dailyBiasModelParam,dailySlopeModelParam, posMaximShortChangeParam,
-                           posMaxShortDeltaParam,candlebarsArr):
+                           posMaxShortDeltaParam,nonSmoothed14MinRSIShortThreshold,candlebarsArr):
 
         if self.Open():
             #print ("Not opening because is opened:{}".format(self.Security.Symbol))
@@ -378,13 +380,19 @@ class DayTradingPosition():
             and statisticalParams.PctChangeLastThreeMinSlope > posMaximShortChangeParam.FloatValue
                 # Delta between current value and 50MMA
             and statisticalParams.DeltaCurrValueAndFiftyMMov > posMaxShortDeltaParam.FloatValue
+                #RSI 14 Minutes (NOT smoothed) --> IF crossing from above 70 to below 70
+            and  (
+                       self.MinuteRSIIndicator.RSI < nonSmoothed14MinRSIShortThreshold.FloatValue
+                  and (self.MinuteRSIIndicator.PrevRSI is not None and self.MinuteRSIIndicator.PrevRSI >= nonSmoothed14MinRSIShortThreshold.FloatValue)
+                 )
+
         ):
             return True
         else:
             return False
 
     def EvaluateLongTrade(self,dailyBiasModelParam,dailySlopeModelParam, posMaximChangeParam,
-                          posMaxLongDeltaParam,candlebarsArr):
+                          posMaxLongDeltaParam,nonSmoothed14MinRSILongThreshold,candlebarsArr):
 
         if self.Open():
             #print ("Not opening because is opened:{}".format(self.Security.Symbol))
@@ -414,7 +422,11 @@ class DayTradingPosition():
             and statisticalParams.PctChangeLastThreeMinSlope < posMaximChangeParam.FloatValue
                 # Delta between current value and 50MMA
             and statisticalParams.DeltaCurrValueAndFiftyMMov < posMaxLongDeltaParam.FloatValue
-        ):
+                # RSI 14 Minutes (NOT smoothed) --> IF crossing from below 30 to above 30
+            and (     self.MinuteRSIIndicator.RSI > nonSmoothed14MinRSILongThreshold.FloatValue
+                  and ( self.MinuteRSIIndicator.PrevRSI is not None and self.MinuteRSIIndicator.PrevRSI <= nonSmoothed14MinRSILongThreshold.FloatValue)
+                )
+            ):
             return True
         else:
             return False
@@ -424,7 +436,8 @@ class DayTradingPosition():
                                   maxLossForClosingModelParam,pctMaxLossForClosingModelParam,
                                   takeGainLimitModelParam,stopLossLimitModelParam,
                                   pctSlopeToCloseShortModelParam,
-                                  endOfdayLimitModelParam):
+                                  endOfdayLimitModelParam,
+                                  nonSmoothed14MinRSILongThreshold):
 
 
 
@@ -452,7 +465,14 @@ class DayTradingPosition():
         #Last 3 minute slope of 3 minute moving average exceeds a certain value AGAINST the Trade
         if(     statisticalParams.ThreeMinSkipSlope is not None
             and statisticalParams.ThreeMinSkipSlope >= pctSlopeToCloseShortModelParam.FloatValue):
-            return _EXIT_LONG_COND_5
+            return _EXIT_SHORT_COND_5
+
+        if (
+                self.MinuteRSIIndicator.RSI > nonSmoothed14MinRSILongThreshold.FloatValue
+                and self.MinuteRSIIndicator.PrevRSI is not None
+                and self.MinuteRSIIndicator.PrevRSI <= nonSmoothed14MinRSILongThreshold.FloatValue
+        ):
+            return _EXIT_SHORT_COND_6
 
         return None
 
@@ -513,7 +533,10 @@ class DayTradingPosition():
         if self.GetNetOpenShares() < 0: #Stop loss on short position
             openSummary = self.GetLastTradedSummary(Side.Sell)
 
-            if (openSummary is not None and openSummary.AvgPx is not None and openSummary.Position.StopLoss is not None \
+            if (openSummary is not None
+                and openSummary.AvgPx is not None
+                and openSummary.Position.StopLoss is not None
+                and candlebar.Close is not None
                 and candlebar.Close > (openSummary.AvgPx + openSummary.Position.StopLoss)#Short --> bigger than
                 ):
                 return True
@@ -526,6 +549,7 @@ class DayTradingPosition():
             if (openSummary is not None
                 and openSummary.Position.StopLoss is not None
                 and openSummary.AvgPx is not None
+                and candlebar.Close is not None
                 and  candlebar.Close < (openSummary.AvgPx - openSummary.Position.StopLoss)#Long --> lower than
                 ):
                 return True
@@ -545,6 +569,7 @@ class DayTradingPosition():
             if ( openSummary is not None
                 and openSummary.Position.TakeProfit is not None
                 and openSummary.AvgPx is not None
+                and candlebar.Close is not None
                 and  candlebar.Close < (openSummary.AvgPx - openSummary.Position.TakeProfit)
                 ):#Short position --> lower than AvgPx - take profit
                 return True
@@ -555,10 +580,11 @@ class DayTradingPosition():
             openSummary = self.GetLastTradedSummary(Side.Buy)
 
             if  (
-                    openSummary is not None
-                    and openSummary.AvgPx is not None
-                    and openSummary.Position.TakeProfit is not None
-                    and candlebar.Close > (openSummary.AvgPx + openSummary.Position.TakeProfit)
+                openSummary is not None
+                and openSummary.AvgPx is not None
+                and candlebar.Close is not None
+                and openSummary.Position.TakeProfit is not None
+                and candlebar.Close > (openSummary.AvgPx + openSummary.Position.TakeProfit)
                 ):
                 return True
             else:
@@ -571,7 +597,8 @@ class DayTradingPosition():
                                   maxLossForClosingModelParam,pctMaxLossForClosingModelParam,
                                   takeGainLimitModelParam,stopLossLimitModelParam,
                                   pctSlopeToCloseLongModelParam,
-                                  endOfdayLimitModelParam):
+                                  endOfdayLimitModelParam,
+                                  nonSmoothed14MinRSIShortThreshold):
 
 
 
@@ -596,6 +623,14 @@ class DayTradingPosition():
         if(     statisticalParams.ThreeMinSkipSlope is not None
             and statisticalParams.ThreeMinSkipSlope < pctSlopeToCloseLongModelParam.FloatValue):
             return _EXIT_LONG_COND_5
+
+        if (
+                self.MinuteRSIIndicator.RSI < nonSmoothed14MinRSIShortThreshold.FloatValue
+            and self.MinuteRSIIndicator.PrevRSI is not None
+            and self.MinuteRSIIndicator.PrevRSI>=nonSmoothed14MinRSIShortThreshold.FloatValue
+            ):
+            return _EXIT_LONG_COND_6
+
 
         return None
 

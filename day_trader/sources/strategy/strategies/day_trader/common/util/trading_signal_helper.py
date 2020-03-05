@@ -128,6 +128,15 @@ class TradingSignalHelper:
             self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "DeltaCurrValueAndFiftyMMov",
                                                                         statisticalParam.DeltaCurrValueAndFiftyMMov)
 
+            self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "NonSmoothed14MinRSI",
+                                                                        dayTradingPos.MinuteRSIIndicator.RSI)
+
+            self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "PrevNonSmoothed14MinRSI",
+                                                                        dayTradingPos.MinuteRSIIndicator.PrevRSI)
+
+            self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "Daily41DaysRSI",
+                                                                        dayTradingPos.DailyRSIIndicator.RSI)
+
             self.TradingSignalManager.Commit()
 
         except Exception as e:
