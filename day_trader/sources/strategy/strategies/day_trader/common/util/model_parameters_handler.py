@@ -100,8 +100,12 @@ class ModelParametersHandler:
         return "HISTORICAL_PRICES_PAST_DAYS_DAILY_RSI"
 
     @staticmethod
-    def CANDLE_BARS_MINUTES_RSI():
-        return "CANDLE_BARS_MINUTES_RSI"
+    def CANDLE_BARS_NON_SMOTHED_MINUTES_RSI():
+        return "CANDLE_BARS_NON_SMOTHED_MINUTES_RSI"
+
+    @staticmethod
+    def CANDLE_BARS_SMOOTHED_MINUTES_RSI():
+        return "CANDLE_BARS_SMOOTHED_MINUTES_RSI"
 
     @staticmethod
     def HISTORICAL_PRICES_CAL_DAYS_TO_REQ():

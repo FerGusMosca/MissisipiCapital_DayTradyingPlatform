@@ -55,7 +55,8 @@ class DayTradingPosition():
         self.LastNDaysStdDev = 0
         self.LastProfitCalculationDay = None
 
-        self.MinuteRSIIndicator = RSIIndicator()
+        self.MinuteNonSmoothedRSIIndicator = RSIIndicator()
+        self.MinuteSmoothedRSIIndicator = RSIIndicator()
         self.DailyRSIIndicator = RSIIndicator()
 
 
@@ -309,7 +310,8 @@ class DayTradingPosition():
         self.MaxProfit = 0
         self.LastProfitCalculationDay = datetime.now()
 
-        self.MinuteRSIIndicator.Reset()
+        self.MinuteNonSmoothedRSIIndicator.Reset()#14
+        self.MinuteSmoothedRSIIndicator.Reset()#30
 
     def CalculateCurrentDayProfits(self,marketData):
 
@@ -367,24 +369,22 @@ class DayTradingPosition():
             or statisticalParams.PctChangeLastThreeMinSlope is None or statisticalParams.DeltaCurrValueAndFiftyMMov is None):
             return False
 
-        if  (    dailyBiasModelParam.FloatValue<0 #Daily Bias
+        if  (   (dailyBiasModelParam.FloatValue is None or dailyBiasModelParam.FloatValue<0) #Daily Bias
                 # Last 10 minute slope of 50 minute moving average
-            and  statisticalParams.TenMinSkipSlope < dailySlopeModelParam.FloatValue
+            and (dailySlopeModelParam.FloatValue is None or statisticalParams.TenMinSkipSlope < dailySlopeModelParam.FloatValue)
                 # Last 3 minute slope of 3 minute moving average
-            and statisticalParams.ThreeMinSkipSlope < dailySlopeModelParam.FloatValue
+            and (dailySlopeModelParam.FloatValue is None or statisticalParams.ThreeMinSkipSlope < dailySlopeModelParam.FloatValue)
                 # Previous 3 to 6 minute slope of 3 minute moving average
-            and statisticalParams.ThreeToSixMinSkipSlope < dailySlopeModelParam.FloatValue
+            and (dailySlopeModelParam.FloatValue is None or statisticalParams.ThreeToSixMinSkipSlope < dailySlopeModelParam.FloatValue)
                 # Previous 6 to 9 minute slope of 3 minute moving average
-            and statisticalParams.SixToNineMinSkipSlope < dailySlopeModelParam.FloatValue
+            and (dailySlopeModelParam.FloatValue is None or statisticalParams.SixToNineMinSkipSlope < dailySlopeModelParam.FloatValue)
                 # Maximum change in last 3 minutes
-            and statisticalParams.PctChangeLastThreeMinSlope > posMaximShortChangeParam.FloatValue
+            and (posMaximShortChangeParam.FloatValue is None or statisticalParams.PctChangeLastThreeMinSlope > posMaximShortChangeParam.FloatValue)
                 # Delta between current value and 50MMA
-            and statisticalParams.DeltaCurrValueAndFiftyMMov > posMaxShortDeltaParam.FloatValue
+            and (posMaxShortDeltaParam.FloatValue is None or statisticalParams.DeltaCurrValueAndFiftyMMov > posMaxShortDeltaParam.FloatValue)
                 #RSI 14 Minutes (NOT smoothed) --> IF crossing from above 70 to below 70
-            and  (
-                       self.MinuteRSIIndicator.RSI < nonSmoothed14MinRSIShortThreshold.FloatValue
-                  and (self.MinuteRSIIndicator.PrevRSI is not None and self.MinuteRSIIndicator.PrevRSI >= nonSmoothed14MinRSIShortThreshold.FloatValue)
-                 )
+            #and
+            #   (nonSmoothed14MinRSIShortThreshold.FloatValue is None or self.MinuteNonSmoothedRSIIndicator.BearishSignal(nonSmoothed14MinRSIShortThreshold.FloatValue))
 
         ):
             return True
@@ -409,23 +409,21 @@ class DayTradingPosition():
             or statisticalParams.PctChangeLastThreeMinSlope is None or statisticalParams.DeltaCurrValueAndFiftyMMov is None):
             return False
 
-        if  (    dailyBiasModelParam.FloatValue>=0 #Daily Bias
+        if  (   (dailyBiasModelParam.FloatValue is None or dailyBiasModelParam.FloatValue>=0 ) #Daily Bias
                 # Last 10 minute slope of 50 minute moving average
-            and  statisticalParams.TenMinSkipSlope >= dailySlopeModelParam.FloatValue
+            and  (dailySlopeModelParam.FloatValue is None or  statisticalParams.TenMinSkipSlope >= dailySlopeModelParam.FloatValue)
                 # Last 3 minute slope of 3 minute moving average
-            and statisticalParams.ThreeMinSkipSlope >= dailySlopeModelParam.FloatValue
+            and (dailySlopeModelParam.FloatValue is None or statisticalParams.ThreeMinSkipSlope >= dailySlopeModelParam.FloatValue)
                 # Previous 3 to 6 minute slope of 3 minute moving average
-            and statisticalParams.ThreeToSixMinSkipSlope > dailySlopeModelParam.FloatValue
+            and (dailySlopeModelParam.FloatValue is None  or statisticalParams.ThreeToSixMinSkipSlope > dailySlopeModelParam.FloatValue)
                 # Previous 6 to 9 minute slope of 3 minute moving average
-            and statisticalParams.SixToNineMinSkipSlope > dailySlopeModelParam.FloatValue
+            and (dailySlopeModelParam.FloatValue is None or statisticalParams.SixToNineMinSkipSlope > dailySlopeModelParam.FloatValue)
                 # Maximum change in last 3 minutes
-            and statisticalParams.PctChangeLastThreeMinSlope < posMaximChangeParam.FloatValue
+            and (posMaximChangeParam.FloatValue is None or statisticalParams.PctChangeLastThreeMinSlope < posMaximChangeParam.FloatValue)
                 # Delta between current value and 50MMA
-            and statisticalParams.DeltaCurrValueAndFiftyMMov < posMaxLongDeltaParam.FloatValue
+            and (posMaximChangeParam.FloatValue is None or statisticalParams.DeltaCurrValueAndFiftyMMov < posMaxLongDeltaParam.FloatValue)
                 # RSI 14 Minutes (NOT smoothed) --> IF crossing from below 30 to above 30
-            and (     self.MinuteRSIIndicator.RSI > nonSmoothed14MinRSILongThreshold.FloatValue
-                  and ( self.MinuteRSIIndicator.PrevRSI is not None and self.MinuteRSIIndicator.PrevRSI <= nonSmoothed14MinRSILongThreshold.FloatValue)
-                )
+            #and  (nonSmoothed14MinRSILongThreshold.FloatValue is None or  self.MinuteNonSmoothedRSIIndicator.BullishSignal(nonSmoothed14MinRSILongThreshold.FloatValue))
             ):
             return True
         else:
@@ -464,15 +462,11 @@ class DayTradingPosition():
 
         #Last 3 minute slope of 3 minute moving average exceeds a certain value AGAINST the Trade
         if(     statisticalParams.ThreeMinSkipSlope is not None
-            and statisticalParams.ThreeMinSkipSlope >= pctSlopeToCloseShortModelParam.FloatValue):
+            and ( pctSlopeToCloseShortModelParam.FloatValue is not None and statisticalParams.ThreeMinSkipSlope >= pctSlopeToCloseShortModelParam.FloatValue)):
             return _EXIT_SHORT_COND_5
 
-        if (
-                self.MinuteRSIIndicator.RSI > nonSmoothed14MinRSILongThreshold.FloatValue
-                and self.MinuteRSIIndicator.PrevRSI is not None
-                and self.MinuteRSIIndicator.PrevRSI <= nonSmoothed14MinRSILongThreshold.FloatValue
-        ):
-            return _EXIT_SHORT_COND_6
+       # if ( self.MinuteNonSmoothedRSIIndicator.BullishSignal(nonSmoothed14MinRSILongThreshold.FloatValue)):
+       #     return _EXIT_SHORT_COND_6
 
         return None
 
@@ -481,20 +475,21 @@ class DayTradingPosition():
                                          maxLossForClosingModelParam,pctMaxLossForClosingModelParam,takeGainLimitModelParam,stopLossLimitModelParam):
 
         # EXIT any open trades at 2:59 PM central time
-        if self.EvaluateBiggerDate(endOfdayLimitModelParam):
+        if (endOfdayLimitModelParam.StringValue is not None and self.EvaluateBiggerDate(endOfdayLimitModelParam)):
             return _EXIT_LONG_COND_EOF
 
         # Maximum Gain during the trade exceeds a certain value and then drops to a percentage of that value
         if (self.MaxProfit is not None
                 and self.CurrentProfit is not None
-                and self.MaxProfit >= maxGainForClosingModelParam.FloatValue
-                and self.CurrentProfit < pctMaxGainForClosingModelParam.FloatValue * self.MaxProfit):
+                and (maxGainForClosingModelParam.FloatValue is not None and self.MaxProfit >= maxGainForClosingModelParam.FloatValue)
+                and (pctMaxGainForClosingModelParam.FloatValue is not None and ( self.CurrentProfit < pctMaxGainForClosingModelParam.FloatValue * self.MaxProfit))
+          ):
             return _EXIT_LONG_COND_1
 
         # Maximum Loss during the trade exceeds (worse than) a certain value and then drops to a percentage of that value
         if (self.CurrentProfit is not None
             and self.MaxLoss is not None
-            and self.MaxLoss <= maxLossForClosingModelParam.FloatValue
+            and (maxLossForClosingModelParam.FloatValue is not None and self.MaxLoss <= maxLossForClosingModelParam.FloatValue)
             and self.CurrentProfit < 0):
             absProfit = self.CurrentProfit if self.CurrentProfit > 0 else (-1 * self.CurrentProfit)
             absMaxLoss = self.MaxLoss if self.MaxLoss > 0 else (-1 * self.MaxLoss)
@@ -502,11 +497,11 @@ class DayTradingPosition():
                 return _EXIT_LONG_COND_2
 
         # CUMULATIVE Gain for the Day exceeds Take Gain Limit
-        if (self.CurrentProfit is not None and self.CurrentProfit > takeGainLimitModelParam.FloatValue):
+        if ( takeGainLimitModelParam.FloatValue is not None and (self.CurrentProfit is not None and self.CurrentProfit > takeGainLimitModelParam.FloatValue)):
             return _EXIT_LONG_COND_3
 
         # CUMULATIVE Loss for the Day exceeds (worse than) Stop Loss Limit
-        if (self.CurrentProfit is not None and self.CurrentProfit < stopLossLimitModelParam.FloatValue):
+        if (stopLossLimitModelParam.FloatValue is not None and (self.CurrentProfit is not None and self.CurrentProfit < stopLossLimitModelParam.FloatValue)):
             return _EXIT_LONG_COND_4
 
         return None
@@ -519,6 +514,7 @@ class DayTradingPosition():
 
         if ( openSummary is not None
             and openSummary.Position.CloseEndOfDay is not None
+            and openSummary.Position.CloseEndOfDay ==True
             and self.EvaluateBiggerDate( endOfdayLimitModelParam)
             and self.GetNetOpenShares()!=0):
             return True
@@ -621,16 +617,12 @@ class DayTradingPosition():
 
         #Last 3 minute slope of 3 minute moving average exceeds a certain value AGAINST the Trade
         if(     statisticalParams.ThreeMinSkipSlope is not None
-            and statisticalParams.ThreeMinSkipSlope < pctSlopeToCloseLongModelParam.FloatValue):
+            and (pctSlopeToCloseLongModelParam.FloatValue is not None and statisticalParams.ThreeMinSkipSlope < pctSlopeToCloseLongModelParam.FloatValue)
+          ):
             return _EXIT_LONG_COND_5
 
-        if (
-                self.MinuteRSIIndicator.RSI < nonSmoothed14MinRSIShortThreshold.FloatValue
-            and self.MinuteRSIIndicator.PrevRSI is not None
-            and self.MinuteRSIIndicator.PrevRSI>=nonSmoothed14MinRSIShortThreshold.FloatValue
-            ):
-            return _EXIT_LONG_COND_6
-
+        #if ( self.MinuteNonSmoothedRSIIndicator.BearishSignal(nonSmoothed14MinRSIShortThreshold.FloatValue)):
+        #    return _EXIT_LONG_COND_6
 
         return None
 
@@ -656,16 +648,23 @@ class DayTradingPosition():
 
         if(self.LastNDaysStdDev is not None):
 
-            if self.LastNDaysStdDev<lowVolEntryThresholdModelParam.FloatValue:
-                if (self.EvaluateTimeRange(lowVolFromTimeModelParam,lowVolToTimeModelParam)):
-                    return True
+            if (lowVolEntryThresholdModelParam.FloatValue is None or self.LastNDaysStdDev<lowVolEntryThresholdModelParam.FloatValue):
+                if ( lowVolFromTimeModelParam.StringValue is not None and lowVolToTimeModelParam.StringValue is not None):
+                    return  self.EvaluateTimeRange(lowVolFromTimeModelParam,lowVolToTimeModelParam)
+                else:
+                    return True #I am in a lowVol env , but no time prefferences
 
-            if self.LastNDaysStdDev >= highVolEntryThresholdModelParam.FloatValue:
-                if (self.EvaluateTimeRange(highVolFromTime1, highVolToTime1)):
-                    return True
 
-                if (self.EvaluateTimeRange(highVolFromTime2, highVolToTime2)):
-                    return True
+            if (highVolEntryThresholdModelParam.FloatValue is None or self.LastNDaysStdDev >= highVolEntryThresholdModelParam.FloatValue):
+                volEntry1 = False
+                volEntry2 = False
+                if (highVolFromTime1.StringValue is not None and highVolToTime1.StringValue is not None):
+                    volEntry1 =  self.EvaluateTimeRange(highVolFromTime1, highVolToTime1)
+
+                if (  highVolFromTime2.StringValue is not None and highVolToTime2.StringValue is not None):
+                    volEntry2 = self.EvaluateTimeRange(highVolFromTime2, highVolToTime2)
+
+                return volEntry1 or volEntry2
 
             return False
 

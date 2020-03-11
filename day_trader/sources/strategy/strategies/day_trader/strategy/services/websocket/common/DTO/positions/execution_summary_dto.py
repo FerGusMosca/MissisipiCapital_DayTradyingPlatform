@@ -19,6 +19,7 @@ class ExecutionSummaryDTO:
         self.OrderId = summary.Position.GetLastOrder().OrderId if summary.Position.GetLastOrder() is not None else ""
         self.AccountId= summary.Position.Account
         self.Timestamp = str( summary.Timestamp) if summary.Timestamp is not None else None
+        self.UTimestamp = int( summary.Timestamp.timestamp()) if summary.Timestamp is not None else None
         self.Text = summary.Text
 
 

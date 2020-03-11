@@ -42,7 +42,7 @@ class TradingSignalManager():
                       dayTradingPos.CurrentProfitLastTrade,dayTradingPos.CurrentProfitMonetary,
                       dayTradingPos.CurrentProfitMonetaryLastTrade,dayTradingPos.IncreaseDecrease,
                       dayTradingPos.MaxProfit,dayTradingPos.MaxLoss,dayTradingPos.LastNDaysStdDev,
-                      dayTradingPos.MinuteRSIIndicator.RSI,candlebar.Close)
+                      dayTradingPos.MinuteNonSmoothedRSIIndicator.RSI,candlebar.Close)
             cursor.execute("{CALL PersistTradingSignal (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)}", params)
             #self.connection.commit()
 

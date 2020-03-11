@@ -129,10 +129,16 @@ class TradingSignalHelper:
                                                                         statisticalParam.DeltaCurrValueAndFiftyMMov)
 
             self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "NonSmoothed14MinRSI",
-                                                                        dayTradingPos.MinuteRSIIndicator.RSI)
+                                                                        dayTradingPos.MinuteNonSmoothedRSIIndicator.RSI)
 
             self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "PrevNonSmoothed14MinRSI",
-                                                                        dayTradingPos.MinuteRSIIndicator.PrevRSI)
+                                                                        dayTradingPos.MinuteNonSmoothedRSIIndicator.PrevRSI)
+
+            self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "Smoothed14MinRSI",
+                                                                        dayTradingPos.MinuteSmoothedRSIIndicator.RSI)
+
+            self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "PrevSmoothed14MinRSI",
+                                                                        dayTradingPos.MinuteSmoothedRSIIndicator.PrevRSI)
 
             self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "Daily41DaysRSI",
                                                                         dayTradingPos.DailyRSIIndicator.RSI)

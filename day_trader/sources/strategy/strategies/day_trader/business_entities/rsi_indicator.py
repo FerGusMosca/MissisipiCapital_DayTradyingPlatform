@@ -82,3 +82,17 @@ class RSIIndicator():
 
         else:
             raise Exception("Could not calculate daily RSI as market data array length={} and RSI daily length ={}".format(len(sortedMDs),DAILY_RSI_LENGTH))
+
+
+    def BullishSignal(self,threshold):
+        if self.RSI is not None and self.PrevRSI is not None:
+            return self.RSI > threshold and self.PrevRSI <= threshold
+        else:
+            return False
+
+
+    def BearishSignal(self,threshold):
+        if self.RSI is not None and self.PrevRSI is not None:
+            return  self.RSI < threshold and self.PrevRSI >= threshold
+        else:
+            return False
