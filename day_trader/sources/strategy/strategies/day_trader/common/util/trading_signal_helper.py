@@ -134,13 +134,13 @@ class TradingSignalHelper:
             self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "PrevNonSmoothed14MinRSI",
                                                                         dayTradingPos.MinuteNonSmoothedRSIIndicator.PrevRSI)
 
-            self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "Smoothed14MinRSI",
+            self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "Smoothed30MinRSI",
                                                                         dayTradingPos.MinuteSmoothedRSIIndicator.RSI)
 
-            self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "PrevSmoothed14MinRSI",
+            self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "PrevSmoothed30MinRSI",
                                                                         dayTradingPos.MinuteSmoothedRSIIndicator.PrevRSI)
 
-            self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "Daily41DaysRSI",
+            self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "Daily14DaysRSI",
                                                                         dayTradingPos.DailyRSIIndicator.RSI)
 
             self.TradingSignalManager.Commit()

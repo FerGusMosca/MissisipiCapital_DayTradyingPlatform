@@ -18,6 +18,7 @@ class ExecutionSummary:
         self.LastUpdateTime =datetime.datetime.now()
         self.Timestamp = datetime.datetime.now()
         self.LastTradeTime = None
+        self.CreateTime= datetime.datetime.now()
 
     def UpdateStatus(self, execReport):
         self.CumQty = execReport.CumQty
@@ -63,8 +64,10 @@ class ExecutionSummary:
 
         orderId=None
 
-        if(self.Position.GetLastOrder()is None):
-            orderId="-"
+        if (self.Position.IsRejectedPosition()):
+            orderId= "R" + str( self.CreateTime.timestamp()) if self.CreateTime is not None else "R?"
+        elif(self.Position.GetLastOrder()is None):
+            orderId="nO" + str( self.CreateTime.timestamp()) if self.CreateTime is not None else "nO?"
         else:
             orderId=self.Position.GetLastOrder().OrderId
 

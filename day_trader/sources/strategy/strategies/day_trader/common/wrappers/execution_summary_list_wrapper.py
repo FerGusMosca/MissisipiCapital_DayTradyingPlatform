@@ -21,7 +21,8 @@ class ExecutionSummaryListWrapper(Wrapper):
         elif field == SummaryListFields.PositionId:
             return self.DatyTradingPosition.Id
         elif field == SummaryListFields.Summaries:
-            return self.DatyTradingPosition.ExecutionSummaries.values()
+            #return self.DatyTradingPosition.ExecutionSummaries.values()
+            return self.DatyTradingPosition.GetAceptedSummaries()
         elif field == SummaryListFields.Error:
             return self.Error
         else:

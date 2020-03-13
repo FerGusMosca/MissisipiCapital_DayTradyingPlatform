@@ -409,6 +409,7 @@ class DayTradingPosition():
             or statisticalParams.PctChangeLastThreeMinSlope is None or statisticalParams.DeltaCurrValueAndFiftyMMov is None):
             return False
 
+
         if  (   (dailyBiasModelParam.FloatValue is None or dailyBiasModelParam.FloatValue>=0 ) #Daily Bias
                 # Last 10 minute slope of 50 minute moving average
             and  (dailySlopeModelParam.FloatValue is None or  statisticalParams.TenMinSkipSlope >= dailySlopeModelParam.FloatValue)
@@ -671,6 +672,12 @@ class DayTradingPosition():
         else:
             return False
 
+
+    def GetAceptedSummaries(self):
+
+        return  sorted(list(filter(lambda x: x.Position.GetLastOrder() is not None or x.Position.IsRejectedPosition(),
+                                   self.ExecutionSummaries.values())),
+                                   key=lambda x: x.CreateTime,reverse=True)
 
     def CalculateStdDevForLastNDays(self,marketDataArr,nDaysModelParam):
 

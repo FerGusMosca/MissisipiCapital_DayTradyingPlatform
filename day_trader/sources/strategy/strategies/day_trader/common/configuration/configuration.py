@@ -14,8 +14,8 @@ class Configuration:
         self.DefaultExchange= config['DEFAULT']['DEFAULT_EXCHANGE']
         self.MarketDataSubscriptionResetTime = config['DEFAULT']['MARKET_DATA_SUBSCRIPTION_RESET_TIME']
         self.DefaultAccount = config['DEFAULT']['DEFAULT_ACCOUNT']
-        self.ImplementDetailedSides = bool(config['DEFAULT']['IMPLEMENT_DETAILED_SIDES'])
-        self.TestMode = bool(config['DEFAULT']['TEST_MODE'])
+        self.ImplementDetailedSides = config['DEFAULT']['IMPLEMENT_DETAILED_SIDES']=="True"
+        self.TestMode =config['DEFAULT']['TEST_MODE']=="True"
 
         self.DBConectionString = config['DB']['CONNECTION_STRING']
 

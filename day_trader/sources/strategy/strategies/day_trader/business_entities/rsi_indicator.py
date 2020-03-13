@@ -9,6 +9,7 @@ class RSIIndicator():
         self.SmoothDown = 0
         self.BootstrapUpOpen = 0
         self.BootstrapDownOpen = 0
+        self.LastProcessedDateTime = None
         self.RSI= 0
         self.PrevRSI = None
 
@@ -24,11 +25,13 @@ class RSIIndicator():
         self.RSI= 0
         self.PrevRSI = None
 
-    def CalculatedCumAvg(self,sortedBars,bootStrap, xOpen, prevValue,MINUTES_RSI_LENGTH):
+    def CalculatedCumAvg(self,sortedBars,bootStrap, xOpen, prevValue,MINUTES_RSI_LENGTH,direction):
 
         if len(sortedBars)==MINUTES_RSI_LENGTH:
             return bootStrap/MINUTES_RSI_LENGTH
         elif len(sortedBars)>MINUTES_RSI_LENGTH:
+            #if (sortedBars[0].Security.Symbol == "SPY"):
+            #    print("SPY-{}-(RSI{}-{} calc: prevRSI={},newOpen={}".format(sortedBars[0].DateTime,MINUTES_RSI_LENGTH,direction,prevValue,xOpen))
             return ( (prevValue*(MINUTES_RSI_LENGTH-2))  + xOpen)/((MINUTES_RSI_LENGTH-1))
         else:
             return 0
@@ -43,16 +46,22 @@ class RSIIndicator():
             if sortedBars[0].Close is None or sortedBars[1].Close is None:
                 return
 
+            if self.LastProcessedDateTime==sortedBars[0].DateTime:
+                return #Already Processed
+
             self.UpOpen= sortedBars[0].Close - sortedBars[1].Close  if (sortedBars[0].Close >= sortedBars[1].Close) else 0
             self.DownOpen = sortedBars[1].Close - sortedBars[0].Close if (sortedBars[0].Close < sortedBars[1].Close) else 0
 
             self.BootstrapUpOpen += self.UpOpen if len(sortedBars)<=(MINUTES_RSI_LENGTH) else 0
             self.BootstrapDownOpen += self.DownOpen if len(sortedBars)<=(MINUTES_RSI_LENGTH) else 0
 
-            self.SmoothUp = self.CalculatedCumAvg(sortedBars,self.BootstrapUpOpen,self.UpOpen,self.SmoothUp,MINUTES_RSI_LENGTH)
-            self.SmoothDown = self.CalculatedCumAvg(sortedBars,self.BootstrapDownOpen,self.DownOpen,self.SmoothDown,MINUTES_RSI_LENGTH)
+            self.SmoothUp = self.CalculatedCumAvg(sortedBars,self.BootstrapUpOpen,self.UpOpen,self.SmoothUp,MINUTES_RSI_LENGTH,"up")
+            self.SmoothDown = self.CalculatedCumAvg(sortedBars,self.BootstrapDownOpen,self.DownOpen,self.SmoothDown,MINUTES_RSI_LENGTH,"down")
             self.PrevRSI = self.RSI if self.RSI !=0 else None
             self.RSI= (100-(100/(1+(self.SmoothUp/self.SmoothDown)))) if self.SmoothDown>0 else 0
+            self.LastProcessedDateTime=sortedBars[0].DateTime
+            #if(sortedBars[0].Security.Symbol=="SPY"):
+            #    print("SPY-{}-final RSI{}:{} -- previous RSI{}:{}".format(self.LastProcessedDateTime,MINUTES_RSI_LENGTH,self.RSI,MINUTES_RSI_LENGTH,self.PrevRSI))
 
 
 

@@ -138,6 +138,9 @@ class Position:
         else:
             return  False
 
+    def IsRejectedPosition(self):
+        return self.PosStatus==PositionStatus.Rejected
+
     def IsTradedPosition(self):
 
         if (self.PosStatus == PositionStatus.Filled
