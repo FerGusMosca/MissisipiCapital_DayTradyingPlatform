@@ -5,6 +5,7 @@ from sources.framework.common.enums.PositionsStatus import PositionStatus
 from sources.strategy.common.dto.position_statistical_parameters import *
 from sources.strategy.common.dto.position_profits_and_losses import *
 from sources.strategy.strategies.day_trader.business_entities.rsi_indicator import *
+from sources.strategy.strategies.day_trader.business_entities.macd_indicator import *
 
 import json
 import statistics
@@ -58,6 +59,7 @@ class DayTradingPosition():
         self.MinuteNonSmoothedRSIIndicator = RSIIndicator()
         self.MinuteSmoothedRSIIndicator = RSIIndicator()
         self.DailyRSIIndicator = RSIIndicator()
+        self.MACDIndicator = MACDIndicator()
 
 
     #region Private Methods

@@ -557,6 +557,8 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
             dayTradingPos.MinuteSmoothedRSIIndicator.Update(candlebarDict.values(),
                                                     self.ModelParametersHandler.Get(ModelParametersHandler.CANDLE_BARS_SMOOTHED_MINUTES_RSI()).IntValue)
 
+            #dayTradingPos.MACDIndicator.update(candlebarDict.values())
+
     def EvaluateOpeningPositions(self, candlebar,cbDict):
 
         symbol = candlebar.Security.Symbol
