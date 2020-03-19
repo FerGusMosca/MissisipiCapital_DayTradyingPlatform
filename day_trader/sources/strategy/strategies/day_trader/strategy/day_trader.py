@@ -52,7 +52,7 @@ _ACTION_CLOSE="CLOSE"
 
 class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
-    def __init__(self):
+    def __init__(self):#test-develop
 
         self.LockCandlebar = threading.Lock()
         self.LockMarketData = threading.Lock()
