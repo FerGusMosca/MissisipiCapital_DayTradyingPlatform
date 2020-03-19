@@ -9,7 +9,7 @@ from sources.strategy.strategies.day_trader.strategy.day_trader import DayTrader
 
 class MainApp:
 
-    def __init__(self):
+    def __init__(self):#test
         self.processor = None
         self.logger = Logger()
         self.logger.use_timed_rotating_file_handler()
