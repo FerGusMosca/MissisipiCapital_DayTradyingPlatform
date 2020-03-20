@@ -557,7 +557,114 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
             dayTradingPos.MinuteSmoothedRSIIndicator.Update(candlebarDict.values(),
                                                     self.ModelParametersHandler.Get(ModelParametersHandler.CANDLE_BARS_SMOOTHED_MINUTES_RSI()).IntValue)
 
-            #dayTradingPos.MACDIndicator.update(candlebarDict.values())
+            dayTradingPos.MACDIndicator.Update(candlebarDict.values(),
+                                               self.ModelParametersHandler.Get(ModelParametersHandler.MACD_SLOW()),
+                                               self.ModelParametersHandler.Get(ModelParametersHandler.MACD_FAST()),
+                                               self.ModelParametersHandler.Get(ModelParametersHandler.MACD_SIGNAL())
+                                               )
+
+    def EvaluateOpeningGenericAutomaticTrading(self,dayTradingPos,symbol,cbDict,candlebar):
+        if (dayTradingPos.EvaluateValidTimeToEnterTrade(
+                self.ModelParametersHandler.Get(ModelParametersHandler.LOW_VOL_ENTRY_THRESHOLD(), symbol),
+                self.ModelParametersHandler.Get(ModelParametersHandler.HIGH_VOL_ENTRY_THRESHOLD(), symbol),
+                self.ModelParametersHandler.Get(ModelParametersHandler.LOW_VOL_FROM_TIME(), symbol),
+                self.ModelParametersHandler.Get(ModelParametersHandler.LOW_VOL_TO_TIME(), symbol),
+                self.ModelParametersHandler.Get(ModelParametersHandler.HIGH_VOL_FROM_TIME_1(), symbol),
+                self.ModelParametersHandler.Get(ModelParametersHandler.HIGH_VOL_TO_TIME_1(), symbol),
+                self.ModelParametersHandler.Get(ModelParametersHandler.HIGH_VOL_FROM_TIME_2(), symbol),
+                self.ModelParametersHandler.Get(ModelParametersHandler.HIGH_VOL_TO_TIME_2(), symbol),
+                )
+
+                and dayTradingPos.EvaluateClosingTerminalCondition(list(cbDict.values()),
+                                  self.ModelParametersHandler.Get(ModelParametersHandler.END_OF_DAY_LIMIT(),symbol),
+                                  self.ModelParametersHandler.Get(ModelParametersHandler.MAX_GAIN_FOR_DAY(),symbol),
+                                  self.ModelParametersHandler.Get(ModelParametersHandler.PCT_MAX_GAIN_CLOSING(),symbol),
+                                  self.ModelParametersHandler.Get(ModelParametersHandler.MAX_LOSS_FOR_DAY(),symbol),
+                                  self.ModelParametersHandler.Get(ModelParametersHandler.PCT_MAX_LOSS_CLOSING(),symbol),
+                                  self.ModelParametersHandler.Get(ModelParametersHandler.TAKE_GAIN_LIMIT(),symbol),
+                                  self.ModelParametersHandler.Get(ModelParametersHandler.STOP_LOSS_LIMIT(),symbol)) is None
+        ):
+
+            if dayTradingPos.EvaluateGenericLongTrade(
+                    self.ModelParametersHandler.Get(ModelParametersHandler.DAILY_BIAS(), symbol),
+                    self.ModelParametersHandler.Get(ModelParametersHandler.DAILY_SLOPE(), symbol),
+                    self.ModelParametersHandler.Get(ModelParametersHandler.MAXIM_PCT_CHANGE_3_MIN(), symbol),
+                    self.ModelParametersHandler.Get(ModelParametersHandler.POS_LONG_MAX_DELTA(), symbol),
+                    self.ModelParametersHandler.Get(ModelParametersHandler.NON_SMOOTHED_RSI_LONG_THRESHOLD(), symbol),
+                    list(cbDict.values())):
+
+                self.DoLog("Generic Automatic = Running long trade for symbol {}".format(dayTradingPos.Security.Symbol), MessageType.INFO)
+                self.TradingSignalHelper.PersistTradingSignal(dayTradingPos, TradingSignalHelper._ACTION_OPEN(),
+                                                              Side.Buy, dayTradingPos.GetStatisticalParameters(list(cbDict.values())), candlebar, self)
+                self.ProcessNewPositionReqManagedPos(dayTradingPos, Side.Buy, dayTradingPos.SharesQuantity,self.Configuration.DefaultAccount)
+                return True
+
+
+            if dayTradingPos.EvaluateGenericShortTrade(
+                    self.ModelParametersHandler.Get(ModelParametersHandler.DAILY_BIAS(), symbol),
+                    self.ModelParametersHandler.Get(ModelParametersHandler.DAILY_SLOPE(), symbol),
+                    self.ModelParametersHandler.Get(ModelParametersHandler.MAXIM_SHORT_PCT_CHANGE_3_MIN(), symbol),
+                    self.ModelParametersHandler.Get(ModelParametersHandler.POS_SHORT_MAX_DELTA(), symbol),
+                    self.ModelParametersHandler.Get(ModelParametersHandler.NON_SMOOTHED_RSI_SHORT_THRESHOLD(), symbol),
+                    list(cbDict.values())):
+                self.DoLog("Generic Automatic = Running short trade for symbol {}".format(dayTradingPos.Security.Symbol), MessageType.INFO)
+                self.TradingSignalHelper.PersistTradingSignal(dayTradingPos, TradingSignalHelper._ACTION_OPEN(),
+                                                              Side.SellShort, dayTradingPos.GetStatisticalParameters(list(cbDict.values())), candlebar, self)
+                self.ProcessNewPositionReqManagedPos(dayTradingPos, Side.Sell, dayTradingPos.SharesQuantity,self.Configuration.DefaultAccount)
+                return True
+
+            return False
+
+        else:
+            return False
+
+    def EvaluateOpeningMACDRSIAutomaticTrading(self,dayTradingPos,symbol,cbDict,candlebar):
+        if (dayTradingPos.EvaluateClosingTerminalCondition(list(cbDict.values()),
+                                  self.ModelParametersHandler.Get(ModelParametersHandler.END_OF_DAY_LIMIT(),symbol),
+                                  self.ModelParametersHandler.Get(ModelParametersHandler.MAX_GAIN_FOR_DAY(),symbol),
+                                  self.ModelParametersHandler.Get(ModelParametersHandler.PCT_MAX_GAIN_CLOSING(),symbol),
+                                  self.ModelParametersHandler.Get(ModelParametersHandler.MAX_LOSS_FOR_DAY(),symbol),
+                                  self.ModelParametersHandler.Get(ModelParametersHandler.PCT_MAX_LOSS_CLOSING(),symbol),
+                                  self.ModelParametersHandler.Get(ModelParametersHandler.TAKE_GAIN_LIMIT(),symbol),
+                                  self.ModelParametersHandler.Get(ModelParametersHandler.STOP_LOSS_LIMIT(),symbol)) is None
+            ):
+
+            if dayTradingPos.EvaluateMACDRSILongTrade(self.ModelParametersHandler.Get(ModelParametersHandler.M_S_NOW_A(),symbol),
+                                                      self.ModelParametersHandler.Get( ModelParametersHandler.M_S_MIN_B(), symbol),
+                                                      self.ModelParametersHandler.Get(ModelParametersHandler.RSI_30_SLOPE_SKIP_5_C(), symbol),
+                                                      self.ModelParametersHandler.Get(ModelParametersHandler.M_S_MAX_MIN_D(), symbol),
+                                                      self.ModelParametersHandler.Get(ModelParametersHandler.M_S_NOW_MAX_E(), symbol),
+                                                      self.ModelParametersHandler.Get( ModelParametersHandler.M_S_NOW_F(), symbol),
+                                                      self.ModelParametersHandler.Get(ModelParametersHandler.RSI_30_SLOPE_SKIP_10_G(), symbol),
+                                                      self.ModelParametersHandler.Get(ModelParametersHandler.ABS_M_S_MAX_MIN_LAST_5_H(), symbol),
+                                                      self.ModelParametersHandler.Get(ModelParametersHandler.SEC_5_MIN_SLOPE_I(), symbol),
+                                                      list(cbDict.values())):
+
+                self.DoLog("MACD/RSI = Running long trade for symbol {}".format(dayTradingPos.Security.Symbol), MessageType.INFO)
+                #self.TradingSignalHelper.PersistMACDRSITradingSignal(dayTradingPos, TradingSignalHelper._ACTION_OPEN(),Side.Buy, dayTradingPos.GetStatisticalParameters(list(cbDict.values())), candlebar, self)
+                self.ProcessNewPositionReqManagedPos(dayTradingPos, Side.Buy, dayTradingPos.SharesQuantity,self.Configuration.DefaultAccount)
+                return True
+
+
+            if dayTradingPos.EvaluateMACDRSIShortTrade(self.ModelParametersHandler.Get(ModelParametersHandler.M_S_NOW_A(),symbol),
+                                                      self.ModelParametersHandler.Get( ModelParametersHandler.M_S_MIN_B(), symbol),
+                                                      self.ModelParametersHandler.Get(ModelParametersHandler.RSI_30_SLOPE_SKIP_5_C(), symbol),
+                                                      self.ModelParametersHandler.Get(ModelParametersHandler.M_S_MAX_MIN_D(), symbol),
+                                                      self.ModelParametersHandler.Get(ModelParametersHandler.M_S_NOW_MAX_E(), symbol),
+                                                      self.ModelParametersHandler.Get( ModelParametersHandler.M_S_NOW_F(), symbol),
+                                                      self.ModelParametersHandler.Get(ModelParametersHandler.RSI_30_SLOPE_SKIP_10_G(), symbol),
+                                                      self.ModelParametersHandler.Get(ModelParametersHandler.ABS_M_S_MAX_MIN_LAST_5_H(), symbol),
+                                                      self.ModelParametersHandler.Get(ModelParametersHandler.SEC_5_MIN_SLOPE_I(), symbol),
+                                                      list(cbDict.values())):
+                self.DoLog("MACD/RSI = Running short trade for symbol {}".format(dayTradingPos.Security.Symbol), MessageType.INFO)
+                #self.TradingSignalHelper.PersistMACDRSITradingSignal(dayTradingPos, TradingSignalHelper._ACTION_OPEN(), Side.SellShort, dayTradingPos.GetStatisticalParameters(list(cbDict.values())), candlebar, self)
+                self.ProcessNewPositionReqManagedPos(dayTradingPos, Side.Sell, dayTradingPos.SharesQuantity,self.Configuration.DefaultAccount)
+                return True
+
+            return False
+
+        else:
+            return False
 
     def EvaluateOpeningPositions(self, candlebar,cbDict):
 
@@ -570,50 +677,59 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
             dayTradingPos =  next(iter(list(filter(lambda x: x.Security.Symbol == candlebar.Security.Symbol, self.DayTradingPositions))), None)
             if dayTradingPos is not None:
 
-                if (dayTradingPos.EvaluateValidTimeToEnterTrade(self.ModelParametersHandler.Get(ModelParametersHandler.LOW_VOL_ENTRY_THRESHOLD(),symbol),
-                                                               self.ModelParametersHandler.Get(ModelParametersHandler.HIGH_VOL_ENTRY_THRESHOLD(),symbol),
-                                                               self.ModelParametersHandler.Get(ModelParametersHandler.LOW_VOL_FROM_TIME(),symbol),
-                                                               self.ModelParametersHandler.Get(ModelParametersHandler.LOW_VOL_TO_TIME(),symbol),
-                                                               self.ModelParametersHandler.Get(ModelParametersHandler.HIGH_VOL_FROM_TIME_1(),symbol),
-                                                               self.ModelParametersHandler.Get(ModelParametersHandler.HIGH_VOL_TO_TIME_1(),symbol),
-                                                               self.ModelParametersHandler.Get(ModelParametersHandler.HIGH_VOL_FROM_TIME_2(),symbol),
-                                                               self.ModelParametersHandler.Get(ModelParametersHandler.HIGH_VOL_TO_TIME_2(), symbol),
-                                                               )
+                automTradingModeModelParam = self.ModelParametersHandler.Get(ModelParametersHandler.AUTOMATIC_TRADING_MODE(), symbol)
 
-                    and  dayTradingPos.EvaluateClosingTerminalCondition(list(cbDict.values()),
-                                                                        self.ModelParametersHandler.Get(ModelParametersHandler.END_OF_DAY_LIMIT(),symbol),
-                                                                        self.ModelParametersHandler.Get(ModelParametersHandler.MAX_GAIN_FOR_DAY(),symbol),
-                                                                        self.ModelParametersHandler.Get(ModelParametersHandler.PCT_MAX_GAIN_CLOSING(),symbol),
-                                                                        self.ModelParametersHandler.Get(ModelParametersHandler.MAX_LOSS_FOR_DAY(),symbol),
-                                                                        self.ModelParametersHandler.Get(ModelParametersHandler.PCT_MAX_LOSS_CLOSING(),symbol),
-                                                                        self.ModelParametersHandler.Get( ModelParametersHandler.TAKE_GAIN_LIMIT(),symbol),
-                                                                        self.ModelParametersHandler.Get(ModelParametersHandler.STOP_LOSS_LIMIT(),symbol)) is  None
-                ):
+                if automTradingModeModelParam is None or automTradingModeModelParam.IntValue is None:
+                    raise Exception("Critical error for automatic trading: You must specify parameter AUTOMATIC_TRADING_MODE")
 
-                    if dayTradingPos.EvaluateLongTrade(self.ModelParametersHandler.Get(ModelParametersHandler.DAILY_BIAS(),symbol),
-                                                        self.ModelParametersHandler.Get(ModelParametersHandler.DAILY_SLOPE(),symbol),
-                                                        self.ModelParametersHandler.Get(ModelParametersHandler.MAXIM_PCT_CHANGE_3_MIN(),symbol),
-                                                        self.ModelParametersHandler.Get(ModelParametersHandler.POS_LONG_MAX_DELTA(),symbol),
-                                                        self.ModelParametersHandler.Get( ModelParametersHandler.NON_SMOOTHED_RSI_LONG_THRESHOLD(), symbol),
-                                                        list(cbDict.values())):
-                        self.DoLog ("Running long trade for symbol {}".format(dayTradingPos.Security.Symbol), MessageType.INFO)
-                        self.TradingSignalHelper.PersistTradingSignal(dayTradingPos,TradingSignalHelper._ACTION_OPEN(),Side.Buy,dayTradingPos.GetStatisticalParameters(list(cbDict.values())),candlebar,self)
-                        self.ProcessNewPositionReqManagedPos(dayTradingPos, Side.Buy, dayTradingPos.SharesQuantity,self.Configuration.DefaultAccount)
-
-                    if dayTradingPos.EvaluateShortTrade(self.ModelParametersHandler.Get(ModelParametersHandler.DAILY_BIAS(),symbol),
-                                                        self.ModelParametersHandler.Get(ModelParametersHandler.DAILY_SLOPE(),symbol),
-                                                        self.ModelParametersHandler.Get(ModelParametersHandler.MAXIM_SHORT_PCT_CHANGE_3_MIN(),symbol),
-                                                        self.ModelParametersHandler.Get(ModelParametersHandler.POS_SHORT_MAX_DELTA(),symbol),
-                                                        self.ModelParametersHandler.Get(ModelParametersHandler.NON_SMOOTHED_RSI_SHORT_THRESHOLD(),symbol),
-                                                        list(cbDict.values())):
-                        self.DoLog ("Running short trade for symbol {}".format(dayTradingPos.Security.Symbol), MessageType.INFO)
-                        self.TradingSignalHelper.PersistTradingSignal(dayTradingPos, TradingSignalHelper._ACTION_OPEN(),Side.SellShort, dayTradingPos.GetStatisticalParameters(list(cbDict.values())), candlebar, self)
-                        self.ProcessNewPositionReqManagedPos(dayTradingPos, Side.Sell, dayTradingPos.SharesQuantity,self.Configuration.DefaultAccount)
+                if  automTradingModeModelParam.IntValue==1:#First version of the auomatic trading algo
+                    return self.EvaluateOpeningGenericAutomaticTrading(dayTradingPos,symbol,cbDict,candlebar)
+                elif  automTradingModeModelParam.IntValue==2:#Second version of the auomatic trading algo
+                    return self.EvaluateOpeningMACDRSIAutomaticTrading(dayTradingPos,symbol,cbDict,candlebar)
                 else:
-                    return False
+                    raise Exception("Unknown automatic trading mode {}".format(automTradingModeModelParam.IntValue))
+
+
             else:
-                msg = "Could not find Day Trading Position for candlebar symbol {}. Please Resync.".format(
-                    candlebar.Security.Symbol)
+                msg = "Could not find Day Trading Position for candlebar symbol {}. Please Resync.".format(candlebar.Security.Symbol)
+                self.SendToInvokingModule(ErrorWrapper(Exception(msg)))
+                self.DoLog(msg, MessageType.ERROR)
+                return False
+        else:
+            return False
+
+    def EvaluateClosingGenericAutomaticTrading(self,cbDict,candlebar):
+        self.EvaluateClosingGenericLongPositions(candlebar, cbDict)
+        self.EvaluateClosingGenericShortPositions(candlebar, cbDict)
+
+    def EvaluateClosingMACDRSIAutomaticTrading(self,cbDict,candlebar):
+        self.EvaluateClosingMACDRSILongPositions(candlebar,cbDict)
+        self.EvaluateClosingMACDRSIShortPositions(candlebar,cbDict)
+
+    def EvaluateClosingPositions(self, candlebar, cbDict):
+        symbol = candlebar.Security.Symbol
+
+        tradingMode = self.ModelParametersHandler.Get(ModelParametersHandler.TRADING_MODE(), symbol)
+
+        if tradingMode.StringValue == _TRADING_MODE_AUTOMATIC:
+
+            dayTradingPos = next(iter(list(filter(lambda x: x.Security.Symbol == candlebar.Security.Symbol, self.DayTradingPositions))),None)
+            if dayTradingPos is not None:
+
+                automTradingModeModelParam = self.ModelParametersHandler.Get(ModelParametersHandler.AUTOMATIC_TRADING_MODE(),symbol)
+
+                if automTradingModeModelParam is None or automTradingModeModelParam.IntValue is None:
+                    raise Exception("Critical error for automatic trading: You must specify parameter AUTOMATIC_TRADING_MODE")
+
+                if automTradingModeModelParam.IntValue == 1:  # First version of the auomatic trading algo
+                    return self.EvaluateClosingGenericAutomaticTrading(candlebar, cbDict )
+                elif automTradingModeModelParam.IntValue == 2:  # Second version of the auomatic trading algo
+                    return self.EvaluateClosingMACDRSIAutomaticTrading( cbDict, candlebar)
+                else:
+                    raise Exception("Unknown automatic trading mode {}".format(automTradingModeModelParam.IntValue))
+
+            else:
+                msg = "Could not find Day Trading Position for candlebar symbol {} @EvaluateClosingPositions. Please Resync.".format(candlebar.Security.Symbol)
                 self.SendToInvokingModule(ErrorWrapper(Exception(msg)))
                 self.DoLog(msg, MessageType.ERROR)
                 return False
@@ -678,7 +794,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                 self.SendToInvokingModule(ErrorWrapper(Exception(msg)))
                 self.DoLog(msg, MessageType.ERROR)
 
-    def EvaluateClosingLongPositions(self, candlebar,cbDict):
+    def EvaluateClosingGenericLongPositions(self, candlebar,cbDict):
 
         symbol = candlebar.Security.Symbol
 
@@ -690,7 +806,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
             if dayTradingPos is not None:
 
-                closingCond = dayTradingPos.EvaluateClosingLongTrade(list(cbDict.values()),
+                closingCond = dayTradingPos.EvaluateClosingGenericLongTrade(list(cbDict.values()),
                                                 self.ModelParametersHandler.Get(ModelParametersHandler.MAX_GAIN_FOR_DAY(),symbol),
                                                 self.ModelParametersHandler.Get(ModelParametersHandler.PCT_MAX_GAIN_CLOSING(),symbol),
                                                 self.ModelParametersHandler.Get(ModelParametersHandler.MAX_LOSS_FOR_DAY(),symbol),
@@ -708,11 +824,11 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                                   dayTradingPos.GetStatisticalParameters(list(cbDict.values())), candlebar)
 
             else:
-                msg = "Could not find Day Trading Position for candlebar symbol {}. Please Resync.".format(candlebar.Security.Symbol)
+                msg = "Could not find Day Trading Position for candlebar symbol {} @EvaluateClosingGenericLongPositions. Please Resync.".format(candlebar.Security.Symbol)
                 self.SendToInvokingModule(ErrorWrapper(Exception(msg)))
                 self.DoLog(msg, MessageType.ERROR)
 
-    def EvaluateClosingShortPositions(self, candlebar,cbDict):
+    def EvaluateClosingGenericShortPositions(self, candlebar,cbDict):
 
         symbol = candlebar.Security.Symbol
 
@@ -724,7 +840,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
             if dayTradingPos is not None:
 
-                closingCond = dayTradingPos.EvaluateClosingShortTrade(list(cbDict.values()),
+                closingCond = dayTradingPos.EvaluateClosingGenericShortTrade(list(cbDict.values()),
                                                 self.ModelParametersHandler.Get(ModelParametersHandler.MAX_GAIN_FOR_DAY(),symbol),
                                                 self.ModelParametersHandler.Get(ModelParametersHandler.PCT_MAX_GAIN_CLOSING(),symbol),
                                                 self.ModelParametersHandler.Get(ModelParametersHandler.MAX_LOSS_FOR_DAY(),symbol),
@@ -743,7 +859,74 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                                   dayTradingPos.GetStatisticalParameters(list(cbDict.values())), candlebar)
 
             else:
-                msg = "Could not find Day Trading Position for candlebar symbol {}. Please Resync.".format(candlebar.Security.Symbol)
+                msg = "Could not find Day Trading Position for candlebar symbol {} @EvaluateClosingGenericShortPositions. Please Resync.".format(candlebar.Security.Symbol)
+                self.SendToInvokingModule(ErrorWrapper(Exception(msg)))
+                self.DoLog(msg, MessageType.ERROR)
+
+    def EvaluateClosingMACDRSILongPositions(self, candlebar, cbDict):
+        symbol = candlebar.Security.Symbol
+
+        tradingMode = self.ModelParametersHandler.Get(ModelParametersHandler.TRADING_MODE(), symbol)
+
+        if tradingMode.StringValue == _TRADING_MODE_AUTOMATIC:
+
+            dayTradingPos = next(iter(list(filter(lambda x: x.Security.Symbol == candlebar.Security.Symbol, self.DayTradingPositions))),None)
+
+            if dayTradingPos is not None:
+
+                closingCond = dayTradingPos.EvaluateClosingMACDRSILongTrade(self.ModelParametersHandler.Get( ModelParametersHandler.M_S_NOW_A(), symbol),
+                                                                            self.ModelParametersHandler.Get(ModelParametersHandler.MACD_MAX_GAIN_J(),symbol),
+                                                                            self.ModelParametersHandler.Get(ModelParametersHandler.MACD_GAIN_NOW_MAX_K(),symbol),
+                                                                            self.ModelParametersHandler.Get(ModelParametersHandler.RSI_30_SLOPE_SKIP_5_EXIT_L(),symbol),
+                                                                            self.ModelParametersHandler.Get( ModelParametersHandler.M_S_NOW_EXIT_N(),symbol),
+                                                                            self.ModelParametersHandler.Get(ModelParametersHandler.M_S_MAX_MIN_EXIT_N_BIS(),symbol),
+                                                                            self.ModelParametersHandler.Get(ModelParametersHandler.M_S_NOW_MAX_MIN_EXIT_P(),symbol),
+                                                                            self.ModelParametersHandler.Get( ModelParametersHandler.M_S_NOW_EXIT_Q(),symbol),
+                                                                            self.ModelParametersHandler.Get(ModelParametersHandler.RSI_30_SLOPE_SKIP_10_EXIT_R(),symbol),
+                                                                            self.ModelParametersHandler.Get(ModelParametersHandler.M_S_MAX_MIN_EXIT_S(),symbol),
+                                                                            self.ModelParametersHandler.Get(ModelParametersHandler.SEC_5_MIN_SLOPE_EXIT_T(),symbol),
+                                                                            self.ModelParametersHandler.Get(ModelParametersHandler.GAIN_MIN_STOP_LOSS_EXIT_U(),symbol),
+                                                                            list(cbDict.values()))
+
+                if closingCond is not None:
+                    self.RunClose(dayTradingPos, Side.Sell if dayTradingPos.GetNetOpenShares() > 0 else Side.Buy,
+                                  dayTradingPos.GetStatisticalParameters(list(cbDict.values())), candlebar)
+
+            else:
+                msg = "Could not find Day Trading Position for candlebar symbol {} @EvaluateClosingMACDRSILongPositions. Please Resync.".format(candlebar.Security.Symbol)
+                self.SendToInvokingModule(ErrorWrapper(Exception(msg)))
+                self.DoLog(msg, MessageType.ERROR)
+
+    def EvaluateClosingMACDRSIShortPositions(self, candlebar, cbDict):
+        symbol = candlebar.Security.Symbol
+
+        tradingMode = self.ModelParametersHandler.Get(ModelParametersHandler.TRADING_MODE(), symbol)
+
+        if tradingMode.StringValue == _TRADING_MODE_AUTOMATIC:
+
+            dayTradingPos = next(iter(list(filter(lambda x: x.Security.Symbol == candlebar.Security.Symbol, self.DayTradingPositions))), None)
+
+            if dayTradingPos is not None:
+
+                closingCond = dayTradingPos.EvaluateClosingMACDRSIShortTrade(self.ModelParametersHandler.Get(ModelParametersHandler.M_S_NOW_A(),symbol),
+                                                                             self.ModelParametersHandler.Get( ModelParametersHandler.MACD_MAX_GAIN_J(), symbol),
+                                                                             self.ModelParametersHandler.Get(ModelParametersHandler.MACD_GAIN_NOW_MAX_K(),symbol),
+                                                                             self.ModelParametersHandler.Get(ModelParametersHandler.RSI_30_SLOPE_SKIP_5_EXIT_L(),symbol),
+                                                                             self.ModelParametersHandler.Get(ModelParametersHandler.M_S_NOW_EXIT_N(),symbol),
+                                                                             self.ModelParametersHandler.Get(ModelParametersHandler.M_S_MAX_MIN_EXIT_N_BIS(),symbol),
+                                                                             self.ModelParametersHandler.Get(ModelParametersHandler.M_S_NOW_MAX_MIN_EXIT_P(),symbol),
+                                                                             self.ModelParametersHandler.Get(ModelParametersHandler.M_S_NOW_EXIT_Q(),symbol),
+                                                                             self.ModelParametersHandler.Get(ModelParametersHandler.RSI_30_SLOPE_SKIP_10_EXIT_R(),symbol),
+                                                                             self.ModelParametersHandler.Get(ModelParametersHandler.M_S_MAX_MIN_EXIT_S(),symbol),
+                                                                             self.ModelParametersHandler.Get(ModelParametersHandler.SEC_5_MIN_SLOPE_EXIT_T(),symbol),
+                                                                             self.ModelParametersHandler.Get(ModelParametersHandler.GAIN_MIN_STOP_LOSS_EXIT_U(),symbol),
+                                                                             list(cbDict.values()))
+
+                if closingCond is not None:
+                    self.RunClose(dayTradingPos, Side.Sell if dayTradingPos.GetNetOpenShares() > 0 else Side.Buy,dayTradingPos.GetStatisticalParameters(list(cbDict.values())), candlebar)
+
+            else:
+                msg = "Could not find Day Trading Position for candlebar symbol {} @EvaluateClosingMACDRSIShortPositions. Please Resync.".format(candlebar.Security.Symbol)
                 self.SendToInvokingModule(ErrorWrapper(Exception(msg)))
                 self.DoLog(msg, MessageType.ERROR)
 
@@ -763,8 +946,8 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                 self.Candlebars[candlebar.Security.Symbol]=cbDict
                 self.UpdateTechnicalAnalysisParameters(candlebar,cbDict)
                 self.EvaluateOpeningPositions(candlebar,cbDict)
-                self.EvaluateClosingLongPositions(candlebar,cbDict)
-                self.EvaluateClosingShortPositions(candlebar, cbDict)
+                self.EvaluateClosingPositions(candlebar,cbDict)
+
                 self.EvaluateClosingForManualConditions(candlebar, cbDict)
 
                 self.DoLog("Candlebars successfully loaded for symbol {} ".format(candlebar.Security.Symbol),MessageType.DEBUG)

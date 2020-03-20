@@ -1,29 +1,42 @@
-import ta
-from ta.trend import MACD
-import pandas as pd
-import math
-from sources.strategy.strategies.day_trader.business_entities.macd_indicator_tester import *
+from sources.strategy.strategies.day_trader.business_entities.testers.macd_indicator_tester import *
 
 class MACDIndicator():
 
-        def __init__(self,slow=26, fast=12, sign=9):
+        def __init__(self,slow=26, fast=12, signal=9):
 
                 self.Slow = slow
                 self.Fast = fast
-                self.Sign = sign
+                self.Sign = signal
                 self.MACD = None
                 self.Signal = None
+                self.MS = None
+                self.MaxMS = None
+                self.MinMS = None
+                self.LastProcessedDateTime = None
+
+        def UpdateParameters(self,slow=26, fast=12, signal=9):
+                self.Slow = slow
+                self.Fast = fast
+                self.Sign = signal
+
+        def Reset(self):
+                self.MACD = None
+                self.Signal = None
+                self.MS = None
+                self.MaxMS = None
+                self.MinMS = None
                 self.LastProcessedDateTime = None
 
 
-
-        def update(self,CandleBarArr):
+        def Update(self,CandleBarArr,slow=26, fast=12, signal=9):
                 sortedBars = sorted(list(filter(lambda x: x is not None, CandleBarArr)), key=lambda x: x.DateTime,reverse=False)
 
                 lastBar = sortedBars[len(sortedBars)-1]
 
                 if (self.LastProcessedDateTime is not None and self.LastProcessedDateTime==lastBar.DateTime):
                         return
+
+                self.UpdateParameters(slow,fast,signal)
 
                 self.LastProcessedDateTime = lastBar.DateTime
 
@@ -46,5 +59,15 @@ class MACDIndicator():
                 if (len(signalSeries) > 0 and not math.isnan(signalSeries[len(signalSeries) - 1])):
                         self.Signal = signalSeries[len(signalSeries) - 1]
 
-                print("MACD @{}- MACD:{}, Signal:{}".format(self.LastProcessedDateTime,self.MACD,self.Signal))
+
+                if lastBar is not None and self.MACD is not None and self.Signal is not None:
+                        self.MS = (500* (self.MACD - self.Signal))/lastBar.Close
+
+                if self.MaxMS is None or self.MaxMS< self.MS:
+                        self.MaxMS= self.MS
+
+                if self.MinNS is None or self.MaxMS > self.MS:
+                        self.MinMS = self.MS
+
+                print("MACD @{}- MACD:{}, Signal:{} Price:{}".format(self.LastProcessedDateTime,self.MACD,self.Signal,lastBar.Close))
 

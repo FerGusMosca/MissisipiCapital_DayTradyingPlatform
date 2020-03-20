@@ -56,11 +56,10 @@ class DayTradingPosition():
         self.LastNDaysStdDev = 0
         self.LastProfitCalculationDay = None
 
-        self.MinuteNonSmoothedRSIIndicator = RSIIndicator()
-        self.MinuteSmoothedRSIIndicator = RSIIndicator()
-        self.DailyRSIIndicator = RSIIndicator()
+        self.MinuteNonSmoothedRSIIndicator = RSIIndicator(False)
+        self.MinuteSmoothedRSIIndicator = RSIIndicator(True)
+        self.DailyRSIIndicator = RSIIndicator(False)
         self.MACDIndicator = MACDIndicator()
-
 
     #region Private Methods
 
@@ -314,6 +313,7 @@ class DayTradingPosition():
 
         self.MinuteNonSmoothedRSIIndicator.Reset()#14
         self.MinuteSmoothedRSIIndicator.Reset()#30
+        self.MACDIndicator.Reset()
 
     def CalculateCurrentDayProfits(self,marketData):
 
@@ -350,7 +350,7 @@ class DayTradingPosition():
             self.IncreaseDecrease = 0
 
 
-    def EvaluateShortTrade(self,dailyBiasModelParam,dailySlopeModelParam, posMaximShortChangeParam,
+    def EvaluateGenericShortTrade(self,dailyBiasModelParam,dailySlopeModelParam, posMaximShortChangeParam,
                            posMaxShortDeltaParam,nonSmoothed14MinRSIShortThreshold,candlebarsArr):
 
         if self.Open():
@@ -393,7 +393,35 @@ class DayTradingPosition():
         else:
             return False
 
-    def EvaluateLongTrade(self,dailyBiasModelParam,dailySlopeModelParam, posMaximChangeParam,
+    def EvaluateMACDRSIShortTrade(self,msNowParamA,msMinParamB,rsi30SlopeSkip5ParamC,msMaxMinParamD,msNowMaxParamE,msNowParamF,
+                                 rsi30SlopeSkip10ParamG,absMSMaxMinLast5ParamH,sec5MinSlopeParamI,candlebarsArr):
+
+        if self.Open():
+            #print ("Not opening because is opened:{}".format(self.Security.Symbol))
+            return False #Position already opened
+
+        if self.Routing:
+            #print("Not opening because is routing:{}".format(self.Security.Symbol))
+            return False #cannot open positions that are being routed
+
+
+        return False
+
+    def EvaluateMACDRSILongTrade(self,msNowParamA,msMinParamB,rsi30SlopeSkip5ParamC,msMaxMinParamD,msNowMaxParamE,msNowParamF,
+                                 rsi30SlopeSkip10ParamG,absMSMaxMinLast5ParamH,sec5MinSlopeParamI, candlebarsArr):
+
+        if self.Open():
+            # print ("Not opening because is opened:{}".format(self.Security.Symbol))
+            return False  # Position already opened
+
+        if self.Routing:
+            # print("Not opening because is routing:{}".format(self.Security.Symbol))
+            return False  # cannot open positions that are being routed
+
+
+        return False
+
+    def EvaluateGenericLongTrade(self,dailyBiasModelParam,dailySlopeModelParam, posMaximChangeParam,
                           posMaxLongDeltaParam,nonSmoothed14MinRSILongThreshold,candlebarsArr):
 
         if self.Open():
@@ -432,7 +460,16 @@ class DayTradingPosition():
         else:
             return False
 
-    def EvaluateClosingShortTrade(self,candlebarsArr,
+    def EvaluateClosingMACDRSIShortTrade(self,candlebarsArr,msNowParamA,macdMaxGainParamJ,macdGainNowMaxParamK,rsi30SlopeSkip5ExitParamL,
+                                         msNowExitParamN,msMaxMinExitParamNBis,msNowMaxMinExitParamP,msNowExitParamQ,rsi30SlopeSkip10ExitParamR,
+                                         msMaxMinExitParamS,sec5MinSlopeExitParamT,gainMinStopLossExitParamU):
+        if not self.Open():
+            return None  # Position not opened
+
+        if self.GetNetOpenShares() < 0:
+            return None  # We are in a short position
+
+    def EvaluateClosingGenericShortTrade(self,candlebarsArr,
                                   maxGainForClosingModelParam,pctMaxGainForClosingModelParam,
                                   maxLossForClosingModelParam,pctMaxLossForClosingModelParam,
                                   takeGainLimitModelParam,stopLossLimitModelParam,
@@ -591,7 +628,16 @@ class DayTradingPosition():
         else:
             return False
 
-    def EvaluateClosingLongTrade(self,candlebarsArr,
+    def EvaluateClosingMACDRSILongTrade(self,candlebarsArr,msNowParamA,macdMaxGainParamJ,macdGainNowMaxParamK,rsi30SlopeSkip5ExitParamL,
+                                            msNowExitParamN,msMaxMinExitParamNBis,msNowMaxMinExitParamP,msNowExitParamQ,rsi30SlopeSkip10ExitParamR,
+                                            msMaxMinExitParamS,sec5MinSlopeExitParamT,gainMinStopLossExitParamU):
+        if not self.Open():
+            return None  # Position not opened
+
+        if self.GetNetOpenShares() < 0:
+            return None  # We are in a short position
+
+    def EvaluateClosingGenericLongTrade(self,candlebarsArr,
                                   maxGainForClosingModelParam,pctMaxGainForClosingModelParam,
                                   maxLossForClosingModelParam,pctMaxLossForClosingModelParam,
                                   takeGainLimitModelParam,stopLossLimitModelParam,

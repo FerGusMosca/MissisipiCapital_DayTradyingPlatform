@@ -11,4 +11,4 @@ echo Install all modules from requirements file
 call pip install -r requirements.txt
 
 echo Install Bloomberg lib
-call python -m pip install --index-url=https://bloomberg.bintray.com/pip/simple blpapi
+call python -m pip install --index-url=https://bloomberg.bintray.com/pip/simple blpapi==3.14.0

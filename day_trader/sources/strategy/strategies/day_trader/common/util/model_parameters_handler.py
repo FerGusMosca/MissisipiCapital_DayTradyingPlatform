@@ -155,6 +155,102 @@ class ModelParametersHandler:
     def NON_SMOOTHED_RSI_SHORT_THRESHOLD():
         return "NON_SMOOTHED_RSI_SHORT_THRESHOLD"
 
+    @staticmethod
+    def MACD_SLOW():
+        return "MACD_SLOW"
+
+    @staticmethod
+    def MACD_FAST():
+        return "MACD_FAST"
+
+    @staticmethod
+    def MACD_SIGNAL():
+        return "MACD_SIGNAL"
+
+    @staticmethod
+    def AUTOMATIC_TRADING_MODE():
+        return "AUTOMATIC_TRADING_MODE"
+
+    @staticmethod
+    def M_S_NOW_A():
+        return "M_S_NOW_A"
+
+    @staticmethod
+    def M_S_MIN_B():
+        return "M_S_MIN_B"
+
+    @staticmethod
+    def RSI_30_SLOPE_SKIP_5_C():
+        return "RSI_30_SLOPE_SKIP_5_C"
+
+    @staticmethod
+    def M_S_MAX_MIN_D():
+        return "M_S_MAX_MIN_D"
+
+    @staticmethod
+    def M_S_NOW_MAX_E():
+        return "M_S_NOW_MAX_E"
+
+    @staticmethod
+    def M_S_NOW_F():
+        return "M_S_NOW_F"
+
+    @staticmethod
+    def RSI_30_SLOPE_SKIP_10_G():
+        return "RSI_30_SLOPE_SKIP_10_G"
+
+    @staticmethod
+    def ABS_M_S_MAX_MIN_LAST_5_H():
+        return "ABS_M_S_MAX_MIN_LAST_5_H"
+
+    @staticmethod
+    def SEC_5_MIN_SLOPE_I():
+        return "SEC_5_MIN_SLOPE_I"
+
+    @staticmethod
+    def MACD_MAX_GAIN_J():
+        return "MACD_MAX_GAIN_J"
+
+    @staticmethod
+    def MACD_GAIN_NOW_MAX_K():
+        return "MACD_GAIN_NOW_MAX_K"
+
+    @staticmethod
+    def RSI_30_SLOPE_SKIP_5_EXIT_L():
+        return "RSI_30_SLOPE_SKIP_5_EXIT_L"
+
+    @staticmethod
+    def M_S_NOW_EXIT_N():
+        return "M_S_NOW_EXIT_N"
+
+    @staticmethod
+    def M_S_MAX_MIN_EXIT_N_BIS():
+        return "M_S_MAX_MIN_EXIT_N_BIS"
+
+    @staticmethod
+    def M_S_NOW_MAX_MIN_EXIT_P():
+        return "M_S_NOW_MAX_MIN_EXIT_P"
+
+    @staticmethod
+    def M_S_NOW_EXIT_Q():
+        return "M_S_NOW_EXIT_Q"
+
+    @staticmethod
+    def RSI_30_SLOPE_SKIP_10_EXIT_R():
+        return "RSI_30_SLOPE_SKIP_10_EXIT_R"
+
+    @staticmethod
+    def M_S_MAX_MIN_EXIT_S():
+        return "M_S_MAX_MIN_EXIT_S"
+
+    @staticmethod
+    def SEC_5_MIN_SLOPE_EXIT_T():
+        return "SEC_5_MIN_SLOPE_EXIT_T"
+
+    @staticmethod
+    def GAIN_MIN_STOP_LOSS_EXIT_U():
+        return "GAIN_MIN_STOP_LOSS_EXIT_U"
+
     #endregion
 
     #region Public Methods

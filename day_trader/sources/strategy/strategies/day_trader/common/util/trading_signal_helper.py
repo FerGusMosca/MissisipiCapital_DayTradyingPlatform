@@ -21,6 +21,85 @@ class TradingSignalHelper:
        self.TradingSignalManager = pTradingSignalManager
        self.PersistingLock = threading.Lock()
 
+    def PersistMACDRSITradingSignal(self, dayTradingPos, action, side,candlebar,logger):
+        try:
+
+            self.PersistingLock.acquire()
+
+            now=datetime.datetime.now()
+
+            self.TradingSignalManager.PersistTradingSignal(dayTradingPos,now,action, SideConverter.ConvertSideToString(side),candlebar)
+
+            tradingSignalId= self.TradingSignalManager.GetTradingSignal(now,dayTradingPos.Security.Symbol)
+
+            if tradingSignalId is None:
+                raise  Exception("Critical error saving RSI/MACD trading signal. Could not recover trading signal from DB. Symbol={} datetime={}".format(dayTradingPos.Security.Symbol,now))
+
+            symbol = dayTradingPos.Security.Symbol
+
+            if action == TradingSignalHelper._ACTION_OPEN():
+                self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
+                    ModelParametersHandler.N_S_NOW_A(), symbol))
+                self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
+                    ModelParametersHandler.N_S_MIN_B(), symbol))
+                self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
+                    ModelParametersHandler.RSI_30_SLOPE_SKIP_5_C(), symbol))
+                self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
+                    ModelParametersHandler.N_S_MAX_MIN_D(), symbol))
+                self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
+                    ModelParametersHandler.N_S_NOW_MAX_E(), symbol))
+                self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
+                    ModelParametersHandler.N_S_NOW_F(), symbol))
+                self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
+                    ModelParametersHandler.RSI_30_SLOPE_SKIP_10_G(), symbol))
+                self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
+                    ModelParametersHandler.ABS_N_S_MAX_MIN_LAST_5_H(), symbol))
+                self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
+                    ModelParametersHandler.SEC_5_MIN_SLOPE_I(), symbol))
+                self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
+                    ModelParametersHandler.MACD_MAX_GAIN_J(), symbol))
+                self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
+                    ModelParametersHandler.MACD_GAIN_NOW_MAX_K(), symbol))
+
+
+            elif action == TradingSignalHelper._ACTION_CLOSE():
+                self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
+                    ModelParametersHandler.N_S_NOW_A(), symbol))
+                self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
+                    ModelParametersHandler.MACD_MAX_GAIN_J(), symbol))
+                self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
+                    ModelParametersHandler.MACD_GAIN_NOW_MAX_K(), symbol))
+                self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
+                    ModelParametersHandler.RSI_30_SLOPE_SKIP_5_EXIT_L(), symbol))
+                self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
+                    ModelParametersHandler.N_S_NOW_EXIT_N(), symbol))
+                self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
+                    ModelParametersHandler.N_S_MAX_MIN_EXIT_N_BIS(), symbol))
+                self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
+                    ModelParametersHandler.N_S_NOW_MAX_MIN_EXIT_P(), symbol))
+                self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
+                    ModelParametersHandler.N_S_NOW_EXIT_Q(), symbol))
+                self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
+                    ModelParametersHandler.RSI_30_SLOPE_SKIP_10_EXIT_R(), symbol))
+                self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
+                    ModelParametersHandler.N_S_MAX_MIN_EXIT_S(), symbol))
+                self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
+                    ModelParametersHandler.SEC_5_MIN_SLOPE_EXIT_T(), symbol))
+                self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
+                    ModelParametersHandler.GAIN_MIN_STOP_LOSS_EXIT_U(), symbol))
+
+            #TODO: Save RSI/MACD and the REST
+
+            self.TradingSignalManager.Commit()
+
+        except Exception as e:
+            logger.DoLog("Critical error persisting trading signal for symbol {}:{}".format(
+                         dayTradingPos.Security.Symbol if (dayTradingPos is not None and dayTradingPos.Security is not None) else "?",str(e)),
+                         MessageType.ERROR)
+        finally:
+            if self.PersistingLock.locked():
+                self.PersistingLock.release()
+
 
     def PersistTradingSignal(self, dayTradingPos, action, side, statisticalParam,candlebar,logger):
 
