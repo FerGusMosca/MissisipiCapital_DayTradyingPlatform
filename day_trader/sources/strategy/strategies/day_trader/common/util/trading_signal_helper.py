@@ -61,6 +61,16 @@ class TradingSignalHelper:
                 self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
                     ModelParametersHandler.MACD_GAIN_NOW_MAX_K(), symbol))
 
+                self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "MSPrev",dayTradingPos.MACDIndicator.MSPrev)
+                self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "MSNow",dayTradingPos.MACDIndicator.MS)
+                self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "MaxMS",dayTradingPos.MACDIndicator.MaxMS)
+                self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "MinMS",dayTradingPos.MACDIndicator.MinMS)
+                self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "RSISmoothed5SL",dayTradingPos.MinuteSmoothedRSIIndicator.GetRSISlope(5))
+                self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "RSISmoothed10SL",dayTradingPos.MinuteSmoothedRSIIndicator.GetRSISlope(10))
+                self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "SmoothedRSI",dayTradingPos.MinuteSmoothedRSIIndicator.RSI)
+                self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "NonSmoothedRSI",dayTradingPos.MinuteNonSmoothedRSIIndicator.RSI)
+                self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "MACD",dayTradingPos.MACDIndicator.MACD)
+                self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "Signal",dayTradingPos.MACDIndicator.Signal)
 
             elif action == TradingSignalHelper._ACTION_CLOSE():
                 self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
@@ -88,7 +98,19 @@ class TradingSignalHelper:
                 self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
                     ModelParametersHandler.GAIN_MIN_STOP_LOSS_EXIT_U(), symbol))
 
-            #TODO: Save RSI/MACD and the REST
+                self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "MSPrev",dayTradingPos.MACDIndicator.MSPrev)
+                self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "MSNow",dayTradingPos.MACDIndicator.MS)
+                self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "MaxMS",dayTradingPos.MACDIndicator.MaxMS)
+                self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "MinMS",dayTradingPos.MACDIndicator.MinMS)
+                self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "RSISmoothed5SL",dayTradingPos.MinuteSmoothedRSIIndicator.GetRSISlope(5))
+                self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "RSISmoothed10SL",dayTradingPos.MinuteSmoothedRSIIndicator.GetRSISlope(10))
+                self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "CurrentProfitLastTrade", dayTradingPos.CurrentProfitLastTrade)
+                self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "MaxProfit",dayTradingPos.MaxProfit)
+                self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "MaxLoss",dayTradingPos.MaxLoss)
+                self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "SmoothedRSI",dayTradingPos.MinuteSmoothedRSIIndicator.RSI)
+                self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "NonSmoothedRSI",dayTradingPos.MinuteNonSmoothedRSIIndicator.RSI)
+                self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "MACD",dayTradingPos.MACDIndicator.MACD)
+                self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "Signal", dayTradingPos.MACDIndicator.Signal)
 
             self.TradingSignalManager.Commit()
 

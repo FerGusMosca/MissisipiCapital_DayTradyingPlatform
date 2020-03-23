@@ -1,0 +1,281 @@
+2020-03-18 23:31:57 [logger INFO] DayTrader  Initializing
+2020-03-18 23:31:57 [logger INFO] Loading 5 summaries for security SPY
+2020-03-18 23:31:58 [logger INFO] WebSocketModule  Initializing
+2020-03-18 23:31:58 [logger INFO] DayTrader Successfully initialized
+2020-03-18 23:31:58 [logger INFO] Websocket commands successfully opened on port 9192: 
+2020-03-18 23:31:58 [logger INFO] Initializing Bloomberg Order Router
+2020-03-18 23:31:58 [logger INFO] Connecting to localhost:8194
+2020-03-18 23:31:58 [logger INFO] Bloomberg Order Router Initialized
+2020-03-18 23:31:58 [logger INFO] SingletonModuleHandler Successfully initializer
+2020-03-18 23:31:58 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2020-03-18 23:31:58 [logger INFO] Bloomberg Session Connection is UP...
+2020-03-18 23:31:58 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2020-03-18 23:31:58 [logger INFO] Bloomberg Session started...
+2020-03-18 23:31:58 [logger INFO] Initializing Generic Market Order Router
+2020-03-18 23:31:58 [logger INFO] SingletonModuleHandler Successfully initializer
+2020-03-18 23:31:58 [logger INFO] Generic Market Order Router Initialized
+2020-03-18 23:31:59 [logger INFO] Processing SERVICE_STATUS event
+2020-03-18 23:31:59 [logger INFO] Service //blp/emapisvc opened...
+2020-03-18 23:32:00 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:SPY
+2020-03-18 23:32:00 [logger INFO] DayTrader Successfully initialized
+2020-03-18 23:32:01 [logger INFO] Requesting for open orders...
+2020-03-18 23:32:01 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-03-18 23:32:01 [logger INFO] Subscribing to order and route events
+2020-03-18 23:32:01 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:SPY
+2020-03-18 23:32:01 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:SPY
+2020-03-18 23:32:01 [logger INFO] Processing SERVICE_STATUS event
+2020-03-18 23:32:01 [logger INFO] Service //blp/mktdata opened...
+2020-03-18 23:32:01 [logger INFO] Order subscription started successfully
+2020-03-18 23:32:01 [logger INFO] Route subscription started successfully
+2020-03-18 23:32:01 [logger INFO] Processing SERVICE_STATUS event
+2020-03-18 23:32:01 [logger INFO] Service //blp/mktbar opened...
+2020-03-18 23:32:01 [logger INFO] Processing SERVICE_STATUS event
+2020-03-18 23:32:01 [logger INFO] Service //blp/refdata opened...
+2020-03-18 23:32:02 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-03-19 09:48:18 [logger INFO] DayTrader  Initializing
+2020-03-19 09:48:18 [logger INFO] Loading 5 summaries for security SPY
+2020-03-19 09:48:19 [logger INFO] WebSocketModule  Initializing
+2020-03-19 09:48:19 [logger INFO] DayTrader Successfully initialized
+2020-03-19 09:48:19 [logger INFO] Websocket commands successfully opened on port 9192: 
+2020-03-19 09:48:19 [logger INFO] Initializing Bloomberg Order Router
+2020-03-19 09:48:19 [logger INFO] Connecting to localhost:8194
+2020-03-19 09:48:21 [logger INFO] Bloomberg Order Router Initialized
+2020-03-19 09:48:21 [logger INFO] SingletonModuleHandler Successfully initializer
+2020-03-19 09:48:21 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2020-03-19 09:48:21 [logger INFO] Bloomberg Session Connection is UP...
+2020-03-19 09:48:21 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2020-03-19 09:48:21 [logger INFO] Bloomberg Session started...
+2020-03-19 09:48:21 [logger INFO] Initializing Generic Market Order Router
+2020-03-19 09:48:21 [logger INFO] SingletonModuleHandler Successfully initializer
+2020-03-19 09:48:21 [logger INFO] Generic Market Order Router Initialized
+2020-03-19 09:48:22 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:SPY
+2020-03-19 09:48:22 [logger INFO] DayTrader Successfully initialized
+2020-03-19 09:48:23 [logger INFO] Requesting for open orders...
+2020-03-19 09:48:23 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-03-19 09:48:23 [logger INFO] Subscribing to order and route events
+2020-03-19 09:48:23 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:SPY
+2020-03-19 09:48:23 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:SPY
+2020-03-19 09:48:24 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-03-19 09:48:24 [logger INFO] Processing SERVICE_STATUS event
+2020-03-19 09:48:24 [logger INFO] Service //blp/mktbar opened...
+2020-03-19 09:48:24 [logger INFO] Processing SERVICE_STATUS event
+2020-03-19 09:48:24 [logger INFO] Service //blp/emapisvc opened...
+2020-03-19 09:48:25 [logger INFO] Processing SERVICE_STATUS event
+2020-03-19 09:48:25 [logger INFO] Service //blp/refdata opened...
+2020-03-19 09:48:25 [logger INFO] Processing SERVICE_STATUS event
+2020-03-19 09:48:25 [logger INFO] Service //blp/mktdata opened...
+2020-03-19 09:48:25 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-03-19 09:48:25 [logger INFO] Historical prices successfully loaded for symbol SPY 
+2020-03-19 09:48:25 [logger INFO] Processing SERVICE_STATUS event
+2020-03-19 09:48:25 [logger INFO] Service //blp/emapisvc opened...
+2020-03-19 09:48:25 [logger INFO] Processing SERVICE_STATUS event
+2020-03-19 09:48:25 [logger INFO] Service //blp/emapisvc opened...
+2020-03-19 09:48:26 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-03-19 09:48:27 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-03-19 09:48:27 [logger INFO] Route subscription started successfully
+2020-03-19 09:48:27 [logger INFO] Order subscription started successfully
+2020-03-19 09:48:28 [logger INFO] Recovered 0 previously existing execution reports
+2020-03-19 09:48:28 [logger INFO] Received list of Open Positions: 0 positions
+2020-03-19 09:48:28 [logger INFO] Process ready to receive commands and trade
+2020-03-19 10:43:47 [logger INFO] DayTrader  Initializing
+2020-03-19 10:43:56 [logger INFO] Loading 5 summaries for security SPY
+2020-03-19 10:43:57 [logger INFO] WebSocketModule  Initializing
+2020-03-19 10:43:57 [logger INFO] DayTrader Successfully initialized
+2020-03-19 10:43:57 [logger INFO] Websocket commands successfully opened on port 9192: 
+2020-03-19 10:43:57 [logger INFO] Initializing Bloomberg Order Router
+2020-03-19 10:43:57 [logger INFO] Connecting to localhost:8194
+2020-03-19 10:43:59 [logger INFO] Bloomberg Order Router Initialized
+2020-03-19 10:43:59 [logger INFO] SingletonModuleHandler Successfully initializer
+2020-03-19 10:43:59 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2020-03-19 10:43:59 [logger INFO] Bloomberg Session Connection is UP...
+2020-03-19 10:43:59 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2020-03-19 10:43:59 [logger INFO] Bloomberg Session started...
+2020-03-19 10:43:59 [logger INFO] Initializing Generic Market Order Router
+2020-03-19 10:43:59 [logger INFO] SingletonModuleHandler Successfully initializer
+2020-03-19 10:43:59 [logger INFO] Generic Market Order Router Initialized
+2020-03-19 10:44:00 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:SPY
+2020-03-19 10:44:00 [logger INFO] DayTrader Successfully initialized
+2020-03-19 10:44:01 [logger INFO] Requesting for open orders...
+2020-03-19 10:44:01 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-03-19 10:44:01 [logger INFO] Subscribing to order and route events
+2020-03-19 10:44:01 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:SPY
+2020-03-19 10:44:01 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:SPY
+2020-03-19 10:44:02 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-03-19 10:44:03 [logger INFO] Processing SERVICE_STATUS event
+2020-03-19 10:44:03 [logger INFO] Service //blp/emapisvc opened...
+2020-03-19 10:44:03 [logger INFO] Processing SERVICE_STATUS event
+2020-03-19 10:44:03 [logger INFO] Service //blp/mktbar opened...
+2020-03-19 10:44:03 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-03-19 10:44:04 [logger INFO] Processing SERVICE_STATUS event
+2020-03-19 10:44:04 [logger INFO] Service //blp/mktdata opened...
+2020-03-19 10:44:04 [logger INFO] Processing SERVICE_STATUS event
+2020-03-19 10:44:04 [logger INFO] Service //blp/refdata opened...
+2020-03-19 10:44:04 [logger INFO] Processing SERVICE_STATUS event
+2020-03-19 10:44:04 [logger INFO] Service //blp/emapisvc opened...
+2020-03-19 10:44:04 [logger INFO] Historical prices successfully loaded for symbol SPY 
+2020-03-19 10:44:04 [logger INFO] Processing SERVICE_STATUS event
+2020-03-19 10:44:04 [logger INFO] Service //blp/emapisvc opened...
+2020-03-19 10:44:04 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-03-19 10:44:05 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-03-19 10:44:06 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-03-19 10:44:07 [logger INFO] Order subscription started successfully
+2020-03-19 10:44:07 [logger INFO] Route subscription started successfully
+2020-03-19 10:44:07 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-03-19 10:44:08 [logger INFO] Recovered 0 previously existing execution reports
+2020-03-19 10:44:08 [logger INFO] Received list of Open Positions: 0 positions
+2020-03-19 10:44:08 [logger INFO] Process ready to receive commands and trade
+2020-03-19 13:10:44 [logger INFO] DayTrader  Initializing
+2020-03-19 13:10:51 [logger INFO] Loading 5 summaries for security SPY
+2020-03-19 13:10:51 [logger INFO] WebSocketModule  Initializing
+2020-03-19 13:10:51 [logger INFO] DayTrader Successfully initialized
+2020-03-19 13:10:52 [logger INFO] Websocket commands successfully opened on port 9192: 
+2020-03-19 13:10:52 [logger INFO] Initializing Bloomberg Order Router
+2020-03-19 13:10:52 [logger INFO] Connecting to localhost:8194
+2020-03-19 13:10:52 [logger INFO] Bloomberg Order Router Initialized
+2020-03-19 13:10:52 [logger INFO] SingletonModuleHandler Successfully initializer
+2020-03-19 13:10:52 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2020-03-19 13:10:52 [logger INFO] Bloomberg Session Connection is UP...
+2020-03-19 13:10:52 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2020-03-19 13:10:52 [logger INFO] Bloomberg Session started...
+2020-03-19 13:10:52 [logger INFO] Initializing Generic Market Order Router
+2020-03-19 13:10:52 [logger INFO] SingletonModuleHandler Successfully initializer
+2020-03-19 13:10:52 [logger INFO] Generic Market Order Router Initialized
+2020-03-19 13:10:52 [logger INFO] Processing SERVICE_STATUS event
+2020-03-19 13:10:52 [logger INFO] Service //blp/emapisvc opened...
+2020-03-19 13:10:53 [logger INFO] DayTrader Successfully initialized
+2020-03-19 13:10:53 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:SPY
+2020-03-19 13:10:54 [logger INFO] Processing SERVICE_STATUS event
+2020-03-19 13:10:54 [logger INFO] Service //blp/mktdata opened...
+2020-03-19 13:10:54 [logger INFO] Requesting for open orders...
+2020-03-19 13:10:54 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-03-19 13:10:54 [logger INFO] Subscribing to order and route events
+2020-03-19 13:10:54 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:SPY
+2020-03-19 13:10:54 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:SPY
+2020-03-19 13:10:54 [logger INFO] Processing SERVICE_STATUS event
+2020-03-19 13:10:54 [logger INFO] Service //blp/mktbar opened...
+2020-03-19 13:18:54 [logger INFO] DayTrader  Initializing
+2020-03-19 13:18:54 [logger INFO] Loading 5 summaries for security SPY
+2020-03-19 13:18:55 [logger INFO] WebSocketModule  Initializing
+2020-03-19 13:18:55 [logger INFO] DayTrader Successfully initialized
+2020-03-19 13:18:55 [logger INFO] Websocket commands successfully opened on port 9192: 
+2020-03-19 13:18:55 [logger INFO] Initializing Bloomberg Order Router
+2020-03-19 13:18:55 [logger INFO] Connecting to localhost:8194
+2020-03-19 13:18:55 [logger INFO] Bloomberg Order Router Initialized
+2020-03-19 13:18:55 [logger INFO] SingletonModuleHandler Successfully initializer
+2020-03-19 13:18:55 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2020-03-19 13:18:55 [logger INFO] Bloomberg Session Connection is UP...
+2020-03-19 13:18:55 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2020-03-19 13:18:55 [logger INFO] Bloomberg Session started...
+2020-03-19 13:18:55 [logger INFO] Initializing Generic Market Order Router
+2020-03-19 13:18:55 [logger INFO] SingletonModuleHandler Successfully initializer
+2020-03-19 13:18:55 [logger INFO] Generic Market Order Router Initialized
+2020-03-19 13:18:55 [logger INFO] Processing SERVICE_STATUS event
+2020-03-19 13:18:55 [logger INFO] Service //blp/emapisvc opened...
+2020-03-19 13:18:56 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:SPY
+2020-03-19 13:18:56 [logger INFO] DayTrader Successfully initialized
+2020-03-19 13:18:57 [logger INFO] Processing SERVICE_STATUS event
+2020-03-19 13:18:57 [logger INFO] Service //blp/mktdata opened...
+2020-03-19 13:18:57 [logger INFO] Requesting for open orders...
+2020-03-19 13:18:57 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-03-19 13:18:57 [logger INFO] Subscribing to order and route events
+2020-03-19 13:18:57 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:SPY
+2020-03-19 13:18:57 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:SPY
+2020-03-19 13:18:58 [logger INFO] Order subscription started successfully
+2020-03-19 13:18:58 [logger INFO] Route subscription started successfully
+2020-03-19 13:18:58 [logger INFO] Processing SERVICE_STATUS event
+2020-03-19 13:18:58 [logger INFO] Service //blp/mktbar opened...
+2020-03-19 13:18:58 [logger INFO] Processing SERVICE_STATUS event
+2020-03-19 13:18:58 [logger INFO] Service //blp/refdata opened...
+2020-03-19 13:18:58 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-03-19 13:18:58 [logger INFO] Historical prices successfully loaded for symbol SPY 
+2020-03-19 13:18:59 [logger INFO] Recovered 0 previously existing execution reports
+2020-03-19 13:18:59 [logger INFO] Received list of Open Positions: 0 positions
+2020-03-19 13:18:59 [logger INFO] Process ready to receive commands and trade
+2020-03-19 20:26:13 [logger INFO] DayTrader  Initializing
+2020-03-19 20:26:14 [logger INFO] Loading 5 summaries for security SPY
+2020-03-19 20:26:15 [logger INFO] WebSocketModule  Initializing
+2020-03-19 20:26:15 [logger INFO] DayTrader Successfully initialized
+2020-03-19 20:26:15 [logger ERROR] Critical error opening websocket @OpenWebsocket: [WinError 10048] Solo se permite un uso de cada dirección de socket (protocolo/dirección de red/puerto)
+2020-03-19 20:26:15 [logger INFO] Initializing Bloomberg Order Router
+2020-03-19 20:26:15 [logger INFO] Connecting to localhost:8194
+2020-03-20 18:55:49 [logger INFO] DayTrader  Initializing
+2020-03-20 18:56:43 [logger INFO] DayTrader  Initializing
+2020-03-20 18:57:58 [logger INFO] DayTrader  Initializing
+2020-03-20 19:01:32 [logger INFO] DayTrader  Initializing
+2020-03-20 19:02:00 [logger INFO] DayTrader  Initializing
+2020-03-20 19:03:17 [logger INFO] DayTrader  Initializing
+2020-03-20 19:04:24 [logger INFO] DayTrader  Initializing
+2020-03-20 19:05:01 [logger INFO] DayTrader  Initializing
+2020-03-20 19:06:24 [logger INFO] DayTrader  Initializing
+2020-03-20 19:06:27 [logger INFO] Loading 5 summaries for security SPY
+2020-03-20 19:06:28 [logger INFO] WebSocketModule  Initializing
+2020-03-20 19:06:28 [logger INFO] DayTrader Successfully initialized
+2020-03-20 19:06:28 [logger INFO] Websocket commands successfully opened on port 9192: 
+2020-03-20 19:06:28 [logger INFO] Initializing Bloomberg Order Router
+2020-03-20 19:06:28 [logger INFO] Connecting to localhost:8194
+2020-03-20 19:06:28 [logger INFO] Bloomberg Order Router Initialized
+2020-03-20 19:06:28 [logger INFO] SingletonModuleHandler Successfully initializer
+2020-03-20 19:06:28 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2020-03-20 19:06:28 [logger INFO] Bloomberg Session Connection is UP...
+2020-03-20 19:06:28 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2020-03-20 19:06:28 [logger INFO] Bloomberg Session started...
+2020-03-20 19:06:28 [logger INFO] Initializing Generic Market Order Router
+2020-03-20 19:06:28 [logger INFO] SingletonModuleHandler Successfully initializer
+2020-03-20 19:06:28 [logger INFO] Generic Market Order Router Initialized
+2020-03-20 19:06:29 [logger INFO] Processing SERVICE_STATUS event
+2020-03-20 19:06:29 [logger INFO] Service //blp/emapisvc opened...
+2020-03-20 19:06:29 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:SPY
+2020-03-20 19:06:29 [logger INFO] DayTrader Successfully initialized
+2020-03-20 19:06:30 [logger INFO] Requesting for open orders...
+2020-03-20 19:06:30 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-03-20 19:06:30 [logger INFO] Subscribing to order and route events
+2020-03-20 19:06:30 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:SPY
+2020-03-20 19:06:30 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:SPY
+2020-03-20 19:06:31 [logger INFO] Processing SERVICE_STATUS event
+2020-03-20 19:06:31 [logger INFO] Service //blp/mktdata opened...
+2020-03-20 19:06:31 [logger INFO] Order subscription started successfully
+2020-03-20 19:06:31 [logger INFO] Route subscription started successfully
+2020-03-20 19:06:31 [logger INFO] Processing SERVICE_STATUS event
+2020-03-20 19:06:31 [logger INFO] Service //blp/mktbar opened...
+2020-03-20 19:06:31 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-03-20 19:08:30 [logger INFO] DayTrader  Initializing
+2020-03-20 19:08:31 [logger INFO] Loading 5 summaries for security SPY
+2020-03-20 19:08:31 [logger INFO] WebSocketModule  Initializing
+2020-03-20 19:08:31 [logger INFO] DayTrader Successfully initialized
+2020-03-20 19:08:31 [logger INFO] Websocket commands successfully opened on port 9192: 
+2020-03-20 19:08:31 [logger INFO] Initializing Bloomberg Order Router
+2020-03-20 19:08:31 [logger INFO] Connecting to localhost:8194
+2020-03-20 19:08:31 [logger INFO] Bloomberg Order Router Initialized
+2020-03-20 19:08:31 [logger INFO] SingletonModuleHandler Successfully initializer
+2020-03-20 19:08:31 [logger INFO] Initializing Generic Market Order Router
+2020-03-20 19:08:31 [logger INFO] SingletonModuleHandler Successfully initializer
+2020-03-20 19:08:31 [logger INFO] Generic Market Order Router Initialized
+2020-03-20 19:08:31 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2020-03-20 19:08:31 [logger INFO] Bloomberg Session Connection is UP...
+2020-03-20 19:08:31 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2020-03-20 19:08:31 [logger INFO] Bloomberg Session started...
+2020-03-20 19:08:32 [logger INFO] Processing SERVICE_STATUS event
+2020-03-20 19:08:32 [logger INFO] Service //blp/emapisvc opened...
+2020-03-20 19:08:32 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:SPY
+2020-03-20 19:08:32 [logger INFO] DayTrader Successfully initialized
+2020-03-20 19:08:33 [logger INFO] Requesting for open orders...
+2020-03-20 19:08:33 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-03-20 19:08:33 [logger INFO] Subscribing to order and route events
+2020-03-20 19:08:33 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:SPY
+2020-03-20 19:08:33 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:SPY
+2020-03-20 19:08:34 [logger INFO] Processing SERVICE_STATUS event
+2020-03-20 19:08:34 [logger INFO] Service //blp/mktdata opened...
+2020-03-20 19:08:34 [logger INFO] Route subscription started successfully
+2020-03-20 19:08:34 [logger INFO] Order subscription started successfully
+2020-03-20 19:08:34 [logger INFO] Processing SERVICE_STATUS event
+2020-03-20 19:08:34 [logger INFO] Service //blp/mktbar opened...
+2020-03-20 19:08:34 [logger INFO] Processing SERVICE_STATUS event
+2020-03-20 19:08:34 [logger INFO] Service //blp/refdata opened...
+2020-03-20 19:08:34 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-03-20 19:08:34 [logger ERROR] 'RSIIndicator' object has no attribute 'UpdateDaily'
+2020-03-20 19:08:34 [logger INFO] Historical prices successfully loaded for symbol SPY 
+2020-03-20 19:08:35 [logger INFO] Recovered 5 previously existing execution reports
+2020-03-20 19:08:35 [logger INFO] Received list of Open Positions: 0 positions
+2020-03-20 19:08:35 [logger INFO] External trading detected. It won't be considered for statistics. Symbol:SPY
+2020-03-20 19:08:35 [logger INFO] External trading detected. It won't be considered for statistics. Symbol:SPY
+2020-03-20 19:08:35 [logger INFO] Process ready to receive commands and trade

@@ -9,10 +9,13 @@ class MACDIndicator():
                 self.Sign = signal
                 self.MACD = None
                 self.Signal = None
+                self.MSPrev = None
                 self.MS = None
                 self.MaxMS = None
                 self.MinMS = None
                 self.LastProcessedDateTime = None
+
+    #region Private Methods
 
         def UpdateParameters(self,slow=26, fast=12, signal=9):
                 self.Slow = slow
@@ -23,9 +26,16 @@ class MACDIndicator():
                 self.MACD = None
                 self.Signal = None
                 self.MS = None
+                self.MSPrev = None
                 self.MaxMS = None
                 self.MinMS = None
                 self.LastProcessedDateTime = None
+
+
+
+     #endregion
+
+     #region Public Methods
 
 
         def Update(self,CandleBarArr,slow=26, fast=12, signal=9):
@@ -61,13 +71,15 @@ class MACDIndicator():
 
 
                 if lastBar is not None and self.MACD is not None and self.Signal is not None:
+                        self.MSPrev=self.MS
                         self.MS = (500* (self.MACD - self.Signal))/lastBar.Close
 
                 if self.MaxMS is None or self.MaxMS< self.MS:
                         self.MaxMS= self.MS
 
-                if self.MinNS is None or self.MaxMS > self.MS:
+                if self.MinMS is None or self.MaxMS > self.MS:
                         self.MinMS = self.MS
 
                 print("MACD @{}- MACD:{}, Signal:{} Price:{}".format(self.LastProcessedDateTime,self.MACD,self.Signal,lastBar.Close))
 
+     #endregion

@@ -7,6 +7,7 @@ class RSIIndicator():
         self.Reset()
         self.Smoothed = smoothed
 
+    #region Private Methods
 
     def Reset(self):
         self.UpOpen = []
@@ -18,6 +19,12 @@ class RSIIndicator():
         self.RSI = None
         self.PrevRSI = None
 
+    def GetSlope(self, currValue, prevValue):
+
+        if currValue is not None and prevValue is not None and prevValue != 0:
+            return (currValue - prevValue) / prevValue
+        else:
+            return None
 
     def CalculateAverage(self,array,length):
         sum=0
@@ -47,6 +54,15 @@ class RSIIndicator():
         else:
             return 0
 
+    #endregion
+
+    #region Public Methods
+
+    def GetRSISlope (self,index):
+
+        if len(self.RSIArray)>=index:
+            lastRSIIndex = self.RSIArray[-1*index]
+            return self.GetSlope(self.RSI,lastRSIIndex)
 
     def Update(self,candleBarArr,MINUTES_RSI_LENGTH):
 
@@ -78,4 +94,4 @@ class RSIIndicator():
 
 
 
-
+    #endregion

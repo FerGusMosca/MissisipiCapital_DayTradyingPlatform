@@ -537,8 +537,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                     datTradingPos.CalculateStdDevForLastNDays(security.MarketDataArr,
                                                               self.ModelParametersHandler.Get(ModelParametersHandler.HISTORICAL_PRICES_PAST_DAYS_STD_DEV()))
 
-                    datTradingPos.DailyRSIIndicator.UpdateDaily(security.MarketDataArr,
-                                                                self.ModelParametersHandler.Get(ModelParametersHandler.HISTORICAL_PRICES_PAST_DAYS_DAILY_RSI()).IntValue)
+                    #datTradingPos.DailyRSIIndicator.UpdateDaily(security.MarketDataArr,self.ModelParametersHandler.Get(ModelParametersHandler.HISTORICAL_PRICES_PAST_DAYS_DAILY_RSI()).IntValue)
                     #print("RSI calculated for symbol {}:{}".format(security.Symbol,datTradingPos.DailyRSIIndicator.RSI))
                 except Exception as e:
                     self.DoLog(str(e),MessageType.ERROR)
@@ -558,9 +557,9 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                                                     self.ModelParametersHandler.Get(ModelParametersHandler.CANDLE_BARS_SMOOTHED_MINUTES_RSI()).IntValue)
 
             dayTradingPos.MACDIndicator.Update(candlebarDict.values(),
-                                               self.ModelParametersHandler.Get(ModelParametersHandler.MACD_SLOW()),
-                                               self.ModelParametersHandler.Get(ModelParametersHandler.MACD_FAST()),
-                                               self.ModelParametersHandler.Get(ModelParametersHandler.MACD_SIGNAL())
+                                               self.ModelParametersHandler.Get(ModelParametersHandler.MACD_SLOW()).IntValue,
+                                               self.ModelParametersHandler.Get(ModelParametersHandler.MACD_FAST()).IntValue,
+                                               self.ModelParametersHandler.Get(ModelParametersHandler.MACD_SIGNAL()).IntValue
                                                )
 
     def EvaluateOpeningGenericAutomaticTrading(self,dayTradingPos,symbol,cbDict,candlebar):
@@ -641,7 +640,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                                                       list(cbDict.values())):
 
                 self.DoLog("MACD/RSI = Running long trade for symbol {}".format(dayTradingPos.Security.Symbol), MessageType.INFO)
-                #self.TradingSignalHelper.PersistMACDRSITradingSignal(dayTradingPos, TradingSignalHelper._ACTION_OPEN(),Side.Buy, dayTradingPos.GetStatisticalParameters(list(cbDict.values())), candlebar, self)
+                self.TradingSignalHelper.PersistMACDRSITradingSignal(dayTradingPos, TradingSignalHelper._ACTION_OPEN(),Side.Buy, dayTradingPos.GetStatisticalParameters(list(cbDict.values())), candlebar, self)
                 self.ProcessNewPositionReqManagedPos(dayTradingPos, Side.Buy, dayTradingPos.SharesQuantity,self.Configuration.DefaultAccount)
                 return True
 
