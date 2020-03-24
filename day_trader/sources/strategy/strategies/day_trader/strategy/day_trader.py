@@ -49,6 +49,8 @@ _TRADING_MODE_MANUAL = "MANUAL"
 
 _ACTION_OPEN="OPEN"
 _ACTION_CLOSE="CLOSE"
+_AUTOMATIC_TRADING_MODE_GENERIC=1
+_AUTOMATIC_TRADING_MODE_MACD_RSI=2
 
 class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
@@ -551,6 +553,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
     def UpdateTechnicalAnalysisParameters(self, candlebar,candlebarDict):
         dayTradingPos = next(iter(list(filter(lambda x: x.Security.Symbol == candlebar.Security.Symbol, self.DayTradingPositions))),None)
         if dayTradingPos is not None:
+            prevLastProcessedTime = dayTradingPos.MinuteSmoothedRSIIndicator.LastProcessedDateTime
             dayTradingPos.MinuteNonSmoothedRSIIndicator.Update(candlebarDict.values(),
                                                     self.ModelParametersHandler.Get(ModelParametersHandler.CANDLE_BARS_NON_SMOTHED_MINUTES_RSI()).IntValue)
             dayTradingPos.MinuteSmoothedRSIIndicator.Update(candlebarDict.values(),
@@ -561,6 +564,17 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                                                self.ModelParametersHandler.Get(ModelParametersHandler.MACD_FAST()).IntValue,
                                                self.ModelParametersHandler.Get(ModelParametersHandler.MACD_SIGNAL()).IntValue
                                                )
+            if(candlebar.DateTime != prevLastProcessedTime ):
+                print ("---------------{}---------------".format(candlebar.Security.Symbol))
+                print ("Smoothed RSI @{}:{}".format(candlebar.DateTime,dayTradingPos.MinuteSmoothedRSIIndicator.RSI))
+                print("Non Smoothed RSI @{}:{}".format(candlebar.DateTime, dayTradingPos.MinuteNonSmoothedRSIIndicator.RSI))
+                print ("RSI Slope Print ->{}-RSI Slope Smoothed 5 min:{}".format(candlebar.DateTime, dayTradingPos.MinuteSmoothedRSIIndicator.GetRSISlope(5)))
+                print ("RSI Slope Print ->{}-RSI Slope Smoothed 10 min:{}".format(candlebar.DateTime, dayTradingPos.MinuteSmoothedRSIIndicator.GetRSISlope(10)))
+                print("MACD MS @{}:{}".format(candlebar.DateTime, dayTradingPos.MACDIndicator.MS))
+                print("MACD Max MS @{}:{}".format(candlebar.DateTime, dayTradingPos.MACDIndicator.MaxMS))
+                print("MACD Min MS @{}:{}".format(candlebar.DateTime, dayTradingPos.MACDIndicator.MinMS))
+                print("------------------------------")
+
 
     def EvaluateOpeningGenericAutomaticTrading(self,dayTradingPos,symbol,cbDict,candlebar):
         if (dayTradingPos.EvaluateValidTimeToEnterTrade(
@@ -640,7 +654,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                                                       list(cbDict.values())):
 
                 self.DoLog("MACD/RSI = Running long trade for symbol {}".format(dayTradingPos.Security.Symbol), MessageType.INFO)
-                self.TradingSignalHelper.PersistMACDRSITradingSignal(dayTradingPos, TradingSignalHelper._ACTION_OPEN(),Side.Buy, dayTradingPos.GetStatisticalParameters(list(cbDict.values())), candlebar, self)
+                self.TradingSignalHelper.PersistMACDRSITradingSignal(dayTradingPos, TradingSignalHelper._ACTION_OPEN(),Side.Buy, candlebar, self)
                 self.ProcessNewPositionReqManagedPos(dayTradingPos, Side.Buy, dayTradingPos.SharesQuantity,self.Configuration.DefaultAccount)
                 return True
 
@@ -656,7 +670,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                                                       self.ModelParametersHandler.Get(ModelParametersHandler.SEC_5_MIN_SLOPE_I(), symbol),
                                                       list(cbDict.values())):
                 self.DoLog("MACD/RSI = Running short trade for symbol {}".format(dayTradingPos.Security.Symbol), MessageType.INFO)
-                #self.TradingSignalHelper.PersistMACDRSITradingSignal(dayTradingPos, TradingSignalHelper._ACTION_OPEN(), Side.SellShort, dayTradingPos.GetStatisticalParameters(list(cbDict.values())), candlebar, self)
+                self.TradingSignalHelper.PersistMACDRSITradingSignal(dayTradingPos, TradingSignalHelper._ACTION_OPEN(), Side.SellShort,  candlebar, self)
                 self.ProcessNewPositionReqManagedPos(dayTradingPos, Side.Sell, dayTradingPos.SharesQuantity,self.Configuration.DefaultAccount)
                 return True
 
@@ -681,9 +695,9 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                 if automTradingModeModelParam is None or automTradingModeModelParam.IntValue is None:
                     raise Exception("Critical error for automatic trading: You must specify parameter AUTOMATIC_TRADING_MODE")
 
-                if  automTradingModeModelParam.IntValue==1:#First version of the auomatic trading algo
+                if  automTradingModeModelParam.IntValue==_AUTOMATIC_TRADING_MODE_GENERIC:#First version of the auomatic trading algo
                     return self.EvaluateOpeningGenericAutomaticTrading(dayTradingPos,symbol,cbDict,candlebar)
-                elif  automTradingModeModelParam.IntValue==2:#Second version of the auomatic trading algo
+                elif  automTradingModeModelParam.IntValue==_AUTOMATIC_TRADING_MODE_MACD_RSI:#Second version of the auomatic trading algo
                     return self.EvaluateOpeningMACDRSIAutomaticTrading(dayTradingPos,symbol,cbDict,candlebar)
                 else:
                     raise Exception("Unknown automatic trading mode {}".format(automTradingModeModelParam.IntValue))
@@ -720,9 +734,9 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                 if automTradingModeModelParam is None or automTradingModeModelParam.IntValue is None:
                     raise Exception("Critical error for automatic trading: You must specify parameter AUTOMATIC_TRADING_MODE")
 
-                if automTradingModeModelParam.IntValue == 1:  # First version of the auomatic trading algo
-                    return self.EvaluateClosingGenericAutomaticTrading(candlebar, cbDict )
-                elif automTradingModeModelParam.IntValue == 2:  # Second version of the auomatic trading algo
+                if automTradingModeModelParam.IntValue == _AUTOMATIC_TRADING_MODE_GENERIC:  # First version of the auomatic trading algo
+                    return self.EvaluateClosingGenericAutomaticTrading( cbDict,candlebar )
+                elif automTradingModeModelParam.IntValue == _AUTOMATIC_TRADING_MODE_MACD_RSI:  # Second version of the auomatic trading algo
                     return self.EvaluateClosingMACDRSIAutomaticTrading( cbDict, candlebar)
                 else:
                     raise Exception("Unknown automatic trading mode {}".format(automTradingModeModelParam.IntValue))
@@ -735,7 +749,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
         else:
             return False
 
-    def RunClose(self,dayTradingPos,side,statisticalParam,candlebar, text=None):
+    def RunClose(self,dayTradingPos,side,statisticalParam,candlebar, text=None, generic = False):
 
         if dayTradingPos.Routing:
             for summary in dayTradingPos.GetOpenSummaries():
@@ -757,8 +771,12 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
             if netShares!=0: #if there is something to close
                 # print("Now we do close positions for security {} for net open shares {}".format(dayTradingPos.Security.Symbol, netShares))
 
-                self.TradingSignalHelper.PersistTradingSignal(dayTradingPos, TradingSignalHelper._ACTION_CLOSE(),
-                                                              self.TranslateSide(dayTradingPos,side), statisticalParam,candlebar, self)
+                if generic:
+                    self.TradingSignalHelper.PersistTradingSignal(dayTradingPos, TradingSignalHelper._ACTION_CLOSE(),
+                                                                  self.TranslateSide(dayTradingPos,side), statisticalParam,candlebar, self)
+                else:
+                    self.TradingSignalHelper.PersistMACDRSITradingSignal(dayTradingPos,TradingSignalHelper._ACTION_CLOSE(),
+                                                                         self.TranslateSide(dayTradingPos,side),candlebar, self)
 
                 self.ProcessNewPositionReqManagedPos(dayTradingPos,side,netShares if netShares > 0 else netShares * (-1),self.Configuration.DefaultAccount,text=text)
 
@@ -873,7 +891,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
             if dayTradingPos is not None:
 
-                closingCond = dayTradingPos.EvaluateClosingMACDRSILongTrade(self.ModelParametersHandler.Get( ModelParametersHandler.M_S_NOW_A(), symbol),
+                closingCond = dayTradingPos.EvaluateClosingMACDRSILongTrade(list(cbDict.values()),self.ModelParametersHandler.Get( ModelParametersHandler.M_S_NOW_A(), symbol),
                                                                             self.ModelParametersHandler.Get(ModelParametersHandler.MACD_MAX_GAIN_J(),symbol),
                                                                             self.ModelParametersHandler.Get(ModelParametersHandler.MACD_GAIN_NOW_MAX_K(),symbol),
                                                                             self.ModelParametersHandler.Get(ModelParametersHandler.RSI_30_SLOPE_SKIP_5_EXIT_L(),symbol),
@@ -884,12 +902,12 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                                                                             self.ModelParametersHandler.Get(ModelParametersHandler.RSI_30_SLOPE_SKIP_10_EXIT_R(),symbol),
                                                                             self.ModelParametersHandler.Get(ModelParametersHandler.M_S_MAX_MIN_EXIT_S(),symbol),
                                                                             self.ModelParametersHandler.Get(ModelParametersHandler.SEC_5_MIN_SLOPE_EXIT_T(),symbol),
-                                                                            self.ModelParametersHandler.Get(ModelParametersHandler.GAIN_MIN_STOP_LOSS_EXIT_U(),symbol),
-                                                                            list(cbDict.values()))
+                                                                            self.ModelParametersHandler.Get(ModelParametersHandler.GAIN_MIN_STOP_LOSS_EXIT_U(),symbol)
+                                                                            )
 
                 if closingCond is not None:
                     self.RunClose(dayTradingPos, Side.Sell if dayTradingPos.GetNetOpenShares() > 0 else Side.Buy,
-                                  dayTradingPos.GetStatisticalParameters(list(cbDict.values())), candlebar)
+                                  dayTradingPos.GetStatisticalParameters(list(cbDict.values())), candlebar,generic=False)
 
             else:
                 msg = "Could not find Day Trading Position for candlebar symbol {} @EvaluateClosingMACDRSILongPositions. Please Resync.".format(candlebar.Security.Symbol)
@@ -907,7 +925,8 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
             if dayTradingPos is not None:
 
-                closingCond = dayTradingPos.EvaluateClosingMACDRSIShortTrade(self.ModelParametersHandler.Get(ModelParametersHandler.M_S_NOW_A(),symbol),
+                closingCond = dayTradingPos.EvaluateClosingMACDRSIShortTrade(list(cbDict.values()),
+                                                                             self.ModelParametersHandler.Get(ModelParametersHandler.M_S_NOW_A(),symbol),
                                                                              self.ModelParametersHandler.Get( ModelParametersHandler.MACD_MAX_GAIN_J(), symbol),
                                                                              self.ModelParametersHandler.Get(ModelParametersHandler.MACD_GAIN_NOW_MAX_K(),symbol),
                                                                              self.ModelParametersHandler.Get(ModelParametersHandler.RSI_30_SLOPE_SKIP_5_EXIT_L(),symbol),
@@ -918,11 +937,12 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                                                                              self.ModelParametersHandler.Get(ModelParametersHandler.RSI_30_SLOPE_SKIP_10_EXIT_R(),symbol),
                                                                              self.ModelParametersHandler.Get(ModelParametersHandler.M_S_MAX_MIN_EXIT_S(),symbol),
                                                                              self.ModelParametersHandler.Get(ModelParametersHandler.SEC_5_MIN_SLOPE_EXIT_T(),symbol),
-                                                                             self.ModelParametersHandler.Get(ModelParametersHandler.GAIN_MIN_STOP_LOSS_EXIT_U(),symbol),
-                                                                             list(cbDict.values()))
+                                                                             self.ModelParametersHandler.Get(ModelParametersHandler.GAIN_MIN_STOP_LOSS_EXIT_U(),symbol)
+                                                                             )
 
                 if closingCond is not None:
-                    self.RunClose(dayTradingPos, Side.Sell if dayTradingPos.GetNetOpenShares() > 0 else Side.Buy,dayTradingPos.GetStatisticalParameters(list(cbDict.values())), candlebar)
+                    self.RunClose(dayTradingPos, Side.Sell if dayTradingPos.GetNetOpenShares() > 0 else Side.Buy,
+                                  dayTradingPos.GetStatisticalParameters(list(cbDict.values())), candlebar,generic=False)
 
             else:
                 msg = "Could not find Day Trading Position for candlebar symbol {} @EvaluateClosingMACDRSIShortPositions. Please Resync.".format(candlebar.Security.Symbol)

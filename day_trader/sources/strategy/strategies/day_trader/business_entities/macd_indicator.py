@@ -41,7 +41,7 @@ class MACDIndicator():
         def Update(self,CandleBarArr,slow=26, fast=12, signal=9):
                 sortedBars = sorted(list(filter(lambda x: x is not None, CandleBarArr)), key=lambda x: x.DateTime,reverse=False)
 
-                lastBar = sortedBars[len(sortedBars)-1]
+                lastBar = sortedBars[-1]
 
                 if (self.LastProcessedDateTime is not None and self.LastProcessedDateTime==lastBar.DateTime):
                         return
@@ -80,6 +80,6 @@ class MACDIndicator():
                 if self.MinMS is None or self.MaxMS > self.MS:
                         self.MinMS = self.MS
 
-                print("MACD @{}- MACD:{}, Signal:{} Price:{}".format(self.LastProcessedDateTime,self.MACD,self.Signal,lastBar.Close))
+                print("MACD print @{}- MACD:{}, Signal:{} Price:{}".format(self.LastProcessedDateTime,self.MACD,self.Signal,lastBar.Close))
 
      #endregion

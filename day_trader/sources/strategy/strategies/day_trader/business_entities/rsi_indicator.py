@@ -63,6 +63,8 @@ class RSIIndicator():
         if len(self.RSIArray)>=index:
             lastRSIIndex = self.RSIArray[-1*index]
             return self.GetSlope(self.RSI,lastRSIIndex)
+        else:
+            return None
 
     def Update(self,candleBarArr,MINUTES_RSI_LENGTH):
 

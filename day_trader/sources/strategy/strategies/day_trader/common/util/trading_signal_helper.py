@@ -71,6 +71,8 @@ class TradingSignalHelper:
                 self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "NonSmoothedRSI",dayTradingPos.MinuteNonSmoothedRSIIndicator.RSI)
                 self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "MACD",dayTradingPos.MACDIndicator.MACD)
                 self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "Signal",dayTradingPos.MACDIndicator.Signal)
+                self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "LastClose",candlebar.Close)
+                self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "LastDateTime",candlebar.DateTime)
 
             elif action == TradingSignalHelper._ACTION_CLOSE():
                 self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
@@ -111,6 +113,8 @@ class TradingSignalHelper:
                 self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "NonSmoothedRSI",dayTradingPos.MinuteNonSmoothedRSIIndicator.RSI)
                 self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "MACD",dayTradingPos.MACDIndicator.MACD)
                 self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "Signal", dayTradingPos.MACDIndicator.Signal)
+                self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "LastClose",candlebar.Close)
+                self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "LastDateTime",candlebar.DateTime)
 
             self.TradingSignalManager.Commit()
 

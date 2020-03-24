@@ -101,6 +101,7 @@ class DayTradingPosition():
     def Open(self):
         return self.GetNetOpenShares()!=0
 
+
     def GetSlope (self,currMovAvg,prevMovAvg):
 
         if currMovAvg is not None and prevMovAvg is not None and prevMovAvg!=0:
@@ -420,7 +421,7 @@ class DayTradingPosition():
 
         if (self.MACDIndicator.MSPrev is None or self.MACDIndicator.MS is None or self.MACDIndicator.MaxMS is None \
                 or self.MACDIndicator.MinMS is None or self.MinuteSmoothedRSIIndicator.GetRSISlope(5) is None
-                or self.MinuteSmoothedRSIIndicator.GetRSISlope(10) is None):
+                or self.MinuteSmoothedRSIIndicator.GetRSISlope(10) is None or len(candlebarsArr)<5):
             return False
 
         # NO TRADE ON --> SHORT ON
@@ -450,10 +451,10 @@ class DayTradingPosition():
           ):
             return True
 
-        # TODO IMPL ABS RULE + SPY5SL
+        # TODO IMPL ABS RULE
         # line 4
-        if (
-                self.MinuteSmoothedRSIIndicator.GetRSISlope(5) < (-1 *  rsi30SlopeSkip5ParamC.FloatValue)
+        if (        self.GetSlope(candlebarsArr[-1].Close,candlebarsArr[-5].Close) < (-1 * sec5MinSlopeParamI.FloatValue)
+                and self.MinuteSmoothedRSIIndicator.GetRSISlope(5) < (-1 *  rsi30SlopeSkip5ParamC.FloatValue)
                 and self.MinuteSmoothedRSIIndicator.GetRSISlope(10) < rsi30SlopeSkip10ParamG.FloatValue
             ):
             return True
@@ -475,7 +476,7 @@ class DayTradingPosition():
 
         if (self.MACDIndicator.MSPrev is None or self.MACDIndicator.MS is None or self.MACDIndicator.MaxMS is None\
             or self.MACDIndicator.MinMS is None or self.MinuteSmoothedRSIIndicator.GetRSISlope(5) is None
-            or self.MinuteSmoothedRSIIndicator.GetRSISlope(10) is None):
+            or self.MinuteSmoothedRSIIndicator.GetRSISlope(10) is None and len(candlebarsArr)<5):
             return False
 
         #NO TRADE ON --> LONG ON
@@ -502,10 +503,10 @@ class DayTradingPosition():
             ):
             return True
 
-        # TODO IMPL ABS RULE + SPY5SL
+        # TODO IMPL ABS RULE
         # line 4
-        if (
-                self.MinuteSmoothedRSIIndicator.GetRSISlope(5) > rsi30SlopeSkip5ParamC.FloatValue
+        if (    self.GetSlope(candlebarsArr[-1].Close,candlebarsArr[-5].Close) >= sec5MinSlopeParamI.FloatValue
+            and self.MinuteSmoothedRSIIndicator.GetRSISlope(5) > rsi30SlopeSkip5ParamC.FloatValue
             and self.MinuteSmoothedRSIIndicator.GetRSISlope(10) > (-1 * rsi30SlopeSkip10ParamG.FloatValue)
           ):
             return True
@@ -563,13 +564,13 @@ class DayTradingPosition():
 
         if (self.CurrentProfitLastTrade is None or self.MaxProfit is None or self.MinuteSmoothedRSIIndicator.GetRSISlope(5) is None
                 or self.MACDIndicator.MSPrev is None or self.MACDIndicator.MS is None or self.MACDIndicator.MaxMS is None
-                or self.MinuteSmoothedRSIIndicator.GetRSISlope(10) is None or self.MaxLoss is None
+                or self.MinuteSmoothedRSIIndicator.GetRSISlope(10) is None or self.MaxLoss is None or len(candlebarsArr)<5
             ):
             return None
 
         # SHORT ON --> NO TRADE ON
         # rule 1
-        if (    self.MaxProfit >= macdMaxGainParamJ.FloatValue
+        if (    self.MaxProfit >= macdMaxGainParamJ.FloatValue*100 #MaxProfix is calcualted as base 100 (ex: 72.23%)
             and (self.MaxProfit > 0 and ((self.CurrentProfitLastTrade / self.MaxProfit) < macdGainNowMaxParamK.FloatValue))
             and self.MinuteSmoothedRSIIndicator.GetRSISlope(5) > rsi30SlopeSkip5ExitParamL.FloatValue
             ):
@@ -602,15 +603,16 @@ class DayTradingPosition():
         ):
             return _EXIT_SHORT_MACD_RSI_COND_4
 
-        # TODO IMPL ABS RULE + SPY5SL
+        # TODO IMPL ABS RULE
         # line 5
-        if (    self.MinuteSmoothedRSIIndicator.GetRSISlope(5) >  rsi30SlopeSkip5ExitParamL.FloatValue
+        if (    self.GetSlope(candlebarsArr[-1].Close,candlebarsArr[-5].Close) >= sec5MinSlopeExitParamT.FloatValue
+            and self.MinuteSmoothedRSIIndicator.GetRSISlope(5) >  rsi30SlopeSkip5ExitParamL.FloatValue
             and self.MinuteSmoothedRSIIndicator.GetRSISlope(10) >= rsi30SlopeSkip10ExitParamR.FloatValue
         ):
             return _EXIT_SHORT_MACD_RSI_COND_5
 
         # line
-        if (self.MaxLoss < gainMinStopLossExitParamU.FloatValue):
+        if (self.MaxLoss < gainMinStopLossExitParamU.FloatValue*100): #MaxLoss is express in base 100 (ex: 71.23%)
             return _EXIT_SHORT_MACD_RSI_COND_6
 
     def EvaluateClosingGenericShortTrade(self,candlebarsArr,
@@ -665,7 +667,7 @@ class DayTradingPosition():
         # Maximum Gain during the trade exceeds a certain value and then drops to a percentage of that value
         if (self.MaxProfit is not None
                 and self.CurrentProfit is not None
-                and (maxGainForClosingModelParam.FloatValue is not None and self.MaxProfit >= maxGainForClosingModelParam.FloatValue)
+                and (maxGainForClosingModelParam.FloatValue is not None and self.MaxProfit >= maxGainForClosingModelParam.FloatValue*100)
                 and (pctMaxGainForClosingModelParam.FloatValue is not None and ( self.CurrentProfit < pctMaxGainForClosingModelParam.FloatValue * self.MaxProfit))
           ):
             return _EXIT_LONG_COND_1
@@ -673,7 +675,7 @@ class DayTradingPosition():
         # Maximum Loss during the trade exceeds (worse than) a certain value and then drops to a percentage of that value
         if (self.CurrentProfit is not None
             and self.MaxLoss is not None
-            and (maxLossForClosingModelParam.FloatValue is not None and self.MaxLoss <= maxLossForClosingModelParam.FloatValue)
+            and (maxLossForClosingModelParam.FloatValue is not None and self.MaxLoss <= maxLossForClosingModelParam.FloatValue*100)
             and self.CurrentProfit < 0):
             absProfit = self.CurrentProfit if self.CurrentProfit > 0 else (-1 * self.CurrentProfit)
             absMaxLoss = self.MaxLoss if self.MaxLoss > 0 else (-1 * self.MaxLoss)
@@ -681,11 +683,11 @@ class DayTradingPosition():
                 return _EXIT_LONG_COND_2
 
         # CUMULATIVE Gain for the Day exceeds Take Gain Limit
-        if ( takeGainLimitModelParam.FloatValue is not None and (self.CurrentProfit is not None and self.CurrentProfit > takeGainLimitModelParam.FloatValue)):
+        if ( takeGainLimitModelParam.FloatValue is not None and (self.CurrentProfit is not None and self.CurrentProfit > takeGainLimitModelParam.FloatValue*100)):
             return _EXIT_LONG_COND_3
 
         # CUMULATIVE Loss for the Day exceeds (worse than) Stop Loss Limit
-        if (stopLossLimitModelParam.FloatValue is not None and (self.CurrentProfit is not None and self.CurrentProfit < stopLossLimitModelParam.FloatValue)):
+        if (stopLossLimitModelParam.FloatValue is not None and (self.CurrentProfit is not None and self.CurrentProfit < stopLossLimitModelParam.FloatValue*100)):
             return _EXIT_LONG_COND_4
 
         return None
@@ -785,14 +787,14 @@ class DayTradingPosition():
         if (
                 self.CurrentProfitLastTrade is None or self.MaxProfit is None or self.MinuteSmoothedRSIIndicator.GetRSISlope(5) is None
                 or self.MACDIndicator.MSPrev is None or self.MACDIndicator.MS is None or self.MACDIndicator.MaxMS is None
-                or self.MinuteSmoothedRSIIndicator.GetRSISlope(10) is None or self.MaxLoss is None
+                or self.MinuteSmoothedRSIIndicator.GetRSISlope(10) is None or self.MaxLoss is None or len(candlebarsArr)<5
            ):
             return None
 
         # LONG ON --> NO TRADE ON
         # rule 1
         if (
-                self.MaxProfit >=macdMaxGainParamJ.FloatValue
+                self.MaxProfit >=macdMaxGainParamJ.FloatValue*100 #MaxProfixs is calculated in base 100 (ex: 73.22%)
             and (self.MaxProfit> 0  and ((self.CurrentProfitLastTrade/self.MaxProfit)<macdGainNowMaxParamK.FloatValue))
             and self.MinuteSmoothedRSIIndicator.GetRSISlope(5) < (-1*rsi30SlopeSkip5ExitParamL.FloatValue)
            ):
@@ -827,14 +829,15 @@ class DayTradingPosition():
             return _EXIT_LONG_MACD_RSI_COND_4
 
         #rule 5
-        # TODO IMPL CLOSE ABS RULE + SPY5SL
-        if (        self.MinuteSmoothedRSIIndicator.GetRSISlope(5) < (-1 * rsi30SlopeSkip5ExitParamL.FloatValue)
-                and self.MinuteSmoothedRSIIndicator.GetRSISlope(10) < rsi30SlopeSkip10ExitParamR.FloatValue
+        # TODO IMPL CLOSE ABS RULE
+        if (      self.GetSlope(candlebarsArr[-1].Close,candlebarsArr[-5].Close) < (-1 * sec5MinSlopeExitParamT.FloatValue)
+              and self.MinuteSmoothedRSIIndicator.GetRSISlope(5) < (-1 * rsi30SlopeSkip5ExitParamL.FloatValue)
+              and self.MinuteSmoothedRSIIndicator.GetRSISlope(10) < rsi30SlopeSkip10ExitParamR.FloatValue
            ):
             return _EXIT_LONG_MACD_RSI_COND_5
 
         # rule 6
-        if (self.MaxLoss < gainMinStopLossExitParamU.FloatValue):
+        if (self.MaxLoss < gainMinStopLossExitParamU.FloatValue*100): #MaxLoss is calculated in base 100 (ex: 73.22%)
             return  _EXIT_LONG_MACD_RSI_COND_6
 
 
