@@ -51,6 +51,7 @@ class MarketOrderRouter(BaseCommunicationModule, ICommunicationModule):
                 else:
                     self.DoLog("Could not find order for pre existing position on execution report initial load. PosId = {}".format(pos.PosId), MessageType.ERROR)
             self.PositionsLock.release()
+
             pos_list_wrapper = PositionListWrapper(positions)
             self.InvokingModule.ProcessOutgoing(pos_list_wrapper)
             return CMState.BuildSuccess(self)

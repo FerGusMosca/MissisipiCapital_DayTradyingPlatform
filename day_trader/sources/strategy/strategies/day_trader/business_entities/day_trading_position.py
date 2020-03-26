@@ -421,7 +421,9 @@ class DayTradingPosition():
 
         if (self.MACDIndicator.MSPrev is None or self.MACDIndicator.MS is None or self.MACDIndicator.MaxMS is None \
                 or self.MACDIndicator.MinMS is None or self.MinuteSmoothedRSIIndicator.GetRSISlope(5) is None
-                or self.MinuteSmoothedRSIIndicator.GetRSISlope(10) is None or len(candlebarsArr)<5):
+                or self.MinuteSmoothedRSIIndicator.GetRSISlope(10) is None or len(candlebarsArr)<5
+                #or self.MACDIndicator.GetMaxABSMaxMinMS(5) is None
+            ):
             return False
 
         # NO TRADE ON --> SHORT ON
@@ -476,7 +478,9 @@ class DayTradingPosition():
 
         if (self.MACDIndicator.MSPrev is None or self.MACDIndicator.MS is None or self.MACDIndicator.MaxMS is None\
             or self.MACDIndicator.MinMS is None or self.MinuteSmoothedRSIIndicator.GetRSISlope(5) is None
-            or self.MinuteSmoothedRSIIndicator.GetRSISlope(10) is None and len(candlebarsArr)<5):
+            or self.MinuteSmoothedRSIIndicator.GetRSISlope(10) is None or len(candlebarsArr)<5
+            #or self.MACDIndicator.GetMaxABSMaxMinMS(5) is None
+            ):
             return False
 
         #NO TRADE ON --> LONG ON
@@ -555,16 +559,30 @@ class DayTradingPosition():
 
     def EvaluateClosingMACDRSIShortTrade(self,candlebarsArr,msNowParamA,macdMaxGainParamJ,macdGainNowMaxParamK,rsi30SlopeSkip5ExitParamL,
                                          msNowExitParamN,msMaxMinExitParamNBis,msNowMaxMinExitParamP,msNowExitParamQ,rsi30SlopeSkip10ExitParamR,
-                                         msMaxMinExitParamS,sec5MinSlopeExitParamT,gainMinStopLossExitParamU):
+                                         msMaxMinExitParamS,sec5MinSlopeExitParamT,gainMinStopLossExitParamU,
+                                         endOfdayLimitModelParam,maxGainForDayModelParam,pctMaxGainForClosingModelParam,
+                                         maxLossForClosingModelParam,pctMaxLossForClosingModelParam,
+                                         takeGainLimitModelParam,stopLossLimitModelParam):
         if not self.Open():
             return None  # Position not opened
 
         if self.GetNetOpenShares() < 0:
             return None  # We are in a short position
 
+        terminalCond = self.EvaluateClosingTerminalCondition(candlebarsArr, endOfdayLimitModelParam,
+                                                             maxGainForDayModelParam,
+                                                             pctMaxGainForClosingModelParam,
+                                                             maxLossForClosingModelParam,
+                                                             pctMaxLossForClosingModelParam, takeGainLimitModelParam,
+                                                             stopLossLimitModelParam)
+
+        if terminalCond is not None:
+            return terminalCond
+
         if (self.CurrentProfitLastTrade is None or self.MaxProfit is None or self.MinuteSmoothedRSIIndicator.GetRSISlope(5) is None
                 or self.MACDIndicator.MSPrev is None or self.MACDIndicator.MS is None or self.MACDIndicator.MaxMS is None
                 or self.MinuteSmoothedRSIIndicator.GetRSISlope(10) is None or self.MaxLoss is None or len(candlebarsArr)<5
+                #or self.MACDIndicator.GetMaxABSMaxMinMS(5) is None
             ):
             return None
 
@@ -776,18 +794,30 @@ class DayTradingPosition():
 
     def EvaluateClosingMACDRSILongTrade(self,candlebarsArr,msNowParamA,macdMaxGainParamJ,macdGainNowMaxParamK,rsi30SlopeSkip5ExitParamL,
                                             msNowExitParamN,msMaxMinExitParamNBis,msNowMaxMinExitParamP,msNowExitParamQ,rsi30SlopeSkip10ExitParamR,
-                                            msMaxMinExitParamS,sec5MinSlopeExitParamT,gainMinStopLossExitParamU):
+                                            msMaxMinExitParamS,sec5MinSlopeExitParamT,gainMinStopLossExitParamU,
+                                            endOfdayLimitModelParam,maxGainForDayModelParam,pctMaxGainForClosingModelParam,
+                                            maxLossForClosingModelParam,pctMaxLossForClosingModelParam,takeGainLimitModelParam,
+                                            stopLossLimitModelParam):
         if not self.Open():
             return None  # Position not opened
 
         if self.GetNetOpenShares() < 0:
             return None  # We are in a short position
 
+        terminalCond = self.EvaluateClosingTerminalCondition(candlebarsArr,endOfdayLimitModelParam, maxGainForDayModelParam,
+                                                             pctMaxGainForClosingModelParam,maxLossForClosingModelParam,
+                                                             pctMaxLossForClosingModelParam,takeGainLimitModelParam,
+                                                             stopLossLimitModelParam)
+
+        if terminalCond is not None:
+            return terminalCond
+
 
         if (
                 self.CurrentProfitLastTrade is None or self.MaxProfit is None or self.MinuteSmoothedRSIIndicator.GetRSISlope(5) is None
                 or self.MACDIndicator.MSPrev is None or self.MACDIndicator.MS is None or self.MACDIndicator.MaxMS is None
                 or self.MinuteSmoothedRSIIndicator.GetRSISlope(10) is None or self.MaxLoss is None or len(candlebarsArr)<5
+                #or self.MACDIndicato.GetMaxABSMaxMinMS(5) is None
            ):
             return None
 
@@ -839,6 +869,8 @@ class DayTradingPosition():
         # rule 6
         if (self.MaxLoss < gainMinStopLossExitParamU.FloatValue*100): #MaxLoss is calculated in base 100 (ex: 73.22%)
             return  _EXIT_LONG_MACD_RSI_COND_6
+
+        return None #No condition to exit
 
 
 

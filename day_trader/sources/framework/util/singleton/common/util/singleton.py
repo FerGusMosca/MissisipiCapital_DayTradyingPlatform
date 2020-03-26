@@ -13,7 +13,6 @@ class Singleton:
     to use `__call__` will result in a `TypeError` being raised.
 
     """
-
     def __init__(self, decorated):
         self._decorated = decorated
 

@@ -39,21 +39,21 @@ class TradingSignalHelper:
 
             if action == TradingSignalHelper._ACTION_OPEN():
                 self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
-                    ModelParametersHandler.N_S_NOW_A(), symbol))
+                    ModelParametersHandler.M_S_NOW_A(), symbol))
                 self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
-                    ModelParametersHandler.N_S_MIN_B(), symbol))
+                    ModelParametersHandler.M_S_MIN_B(), symbol))
                 self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
                     ModelParametersHandler.RSI_30_SLOPE_SKIP_5_C(), symbol))
                 self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
-                    ModelParametersHandler.N_S_MAX_MIN_D(), symbol))
+                    ModelParametersHandler.M_S_MAX_MIN_D(), symbol))
                 self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
-                    ModelParametersHandler.N_S_NOW_MAX_E(), symbol))
+                    ModelParametersHandler.M_S_NOW_MAX_E(), symbol))
                 self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
-                    ModelParametersHandler.N_S_NOW_F(), symbol))
+                    ModelParametersHandler.M_S_NOW_F(), symbol))
                 self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
                     ModelParametersHandler.RSI_30_SLOPE_SKIP_10_G(), symbol))
                 self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
-                    ModelParametersHandler.ABS_N_S_MAX_MIN_LAST_5_H(), symbol))
+                    ModelParametersHandler.ABS_M_S_MAX_MIN_LAST_5_H(), symbol))
                 self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
                     ModelParametersHandler.SEC_5_MIN_SLOPE_I(), symbol))
                 self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
@@ -76,7 +76,7 @@ class TradingSignalHelper:
 
             elif action == TradingSignalHelper._ACTION_CLOSE():
                 self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
-                    ModelParametersHandler.N_S_NOW_A(), symbol))
+                    ModelParametersHandler.M_S_NOW_A(), symbol))
                 self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
                     ModelParametersHandler.MACD_MAX_GAIN_J(), symbol))
                 self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
@@ -84,21 +84,36 @@ class TradingSignalHelper:
                 self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
                     ModelParametersHandler.RSI_30_SLOPE_SKIP_5_EXIT_L(), symbol))
                 self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
-                    ModelParametersHandler.N_S_NOW_EXIT_N(), symbol))
+                    ModelParametersHandler.M_S_NOW_EXIT_N(), symbol))
                 self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
-                    ModelParametersHandler.N_S_MAX_MIN_EXIT_N_BIS(), symbol))
+                    ModelParametersHandler.M_S_MAX_MIN_EXIT_N_BIS(), symbol))
                 self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
-                    ModelParametersHandler.N_S_NOW_MAX_MIN_EXIT_P(), symbol))
+                    ModelParametersHandler.M_S_NOW_MAX_MIN_EXIT_P(), symbol))
                 self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
-                    ModelParametersHandler.N_S_NOW_EXIT_Q(), symbol))
+                    ModelParametersHandler.M_S_NOW_EXIT_Q(), symbol))
                 self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
                     ModelParametersHandler.RSI_30_SLOPE_SKIP_10_EXIT_R(), symbol))
                 self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
-                    ModelParametersHandler.N_S_MAX_MIN_EXIT_S(), symbol))
+                    ModelParametersHandler.M_S_MAX_MIN_EXIT_S(), symbol))
                 self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
                     ModelParametersHandler.SEC_5_MIN_SLOPE_EXIT_T(), symbol))
                 self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
                     ModelParametersHandler.GAIN_MIN_STOP_LOSS_EXIT_U(), symbol))
+
+                self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
+                    ModelParametersHandler.STOP_LOSS_LIMIT(), symbol))
+                self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
+                    ModelParametersHandler.MAX_GAIN_FOR_DAY(), symbol))
+                self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
+                    ModelParametersHandler.PCT_MAX_GAIN_CLOSING(), symbol))
+                self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
+                    ModelParametersHandler.MAX_LOSS_FOR_DAY(), symbol))
+                self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
+                    ModelParametersHandler.PCT_MAX_LOSS_CLOSING(), symbol))
+                self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
+                    ModelParametersHandler.TAKE_GAIN_LIMIT(), symbol))
+                self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
+                    ModelParametersHandler.STOP_LOSS_LIMIT(), symbol))
 
                 self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "MSPrev",dayTradingPos.MACDIndicator.MSPrev)
                 self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "MSNow",dayTradingPos.MACDIndicator.MS)

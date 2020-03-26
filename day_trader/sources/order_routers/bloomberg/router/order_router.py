@@ -13,6 +13,8 @@ from sources.order_routers.bloomberg.common.wrappers.candle_bar_data_wrapper imp
 from sources.order_routers.bloomberg.common.converter.market_data_request_converter import *
 from sources.order_routers.bloomberg.common.configuration.configuration import Configuration
 from sources.order_routers.bloomberg.common.wrappers.rejected_execution_report_wrapper import *
+from sources.order_routers.bloomberg.common.wrappers.new_execution_report_wrapper import *
+from sources.order_routers.bloomberg.common.wrappers.filled_execution_report_wrapper import *
 from sources.order_routers.bloomberg.common.wrappers.execution_report_wrapper import *
 from sources.order_routers.bloomberg.common.util.subscription_helper import *
 from sources.framework.common.dto.cm_state import *
@@ -208,8 +210,9 @@ class OrderRouter( BaseCommunicationModule, ICommunicationModule):
                 if activeOrder is not None:
                     activeOrder.OrdStatus = BloombergTranslationHelper.GetOrdStatus(self,msg)
 
-                self.DoLog("Bloomberg Order Router: Sending message with SeqNum {} for OrderId{}"
-                           .format(msgSeqNum,activeOrder.OrderId if activeOrder is not None else ""), MessageType.DEBUG)
+                self.DoLog("Bloomberg Order Router: Sending message with SeqNum {} for OrderId{} AvgPx={}"
+                           .format(msgSeqNum,activeOrder.OrderId if activeOrder is not None else "",
+                                   BloombergTranslationHelper.GetSafeFloat(self,msg, "EMSX_AVG_PRICE",0)), MessageType.DEBUG)
                 execReport = ExecutionReportWrapper(activeOrder,msg,pParent=self)
                 #if(execReport.GetExecType()==ExecType.Canceled):
                     #print("Received canceled exec report for security {}".format(execReport.GetField(ExecutionReportField.Symbol)))
@@ -587,10 +590,10 @@ class OrderRouter( BaseCommunicationModule, ICommunicationModule):
         self.OnExecutionReport.ProcessOutgoing(errorWrapper)
         return CMState.BuildSuccess(self)
 
-    def CreateRequest(self, newOrder):
+    def CreateRequest(self, newOrder,svc):
         service = self.Session.getService(self.Configuration.EMSX_Environment)
 
-        request = service.createRequest("CreateOrderAndRouteEx")
+        request = service.createRequest(svc)
 
         # The fields below are mandatory
         request.set("EMSX_TICKER", "{} {} {}".format(newOrder.Security.Symbol,
@@ -700,6 +703,47 @@ class OrderRouter( BaseCommunicationModule, ICommunicationModule):
 
         self.ActiveOrdersLock.release()
 
+    def SendMockFilledExecutionReportsThread(self,newOrder):
+
+        newOrder.OrderId = int(time.time())
+        newOrder.MarketArrivalTime = datetime.now()
+        self.ActiveOrders[newOrder.OrderId] = newOrder
+
+        newWrapper = NewExecutionReportWrapper(newOrder)
+
+        self.DoSendExecutionReportThread(newWrapper)
+        time.sleep(2)
+
+        lastCandlebar = None
+        fullSymbol = "{} {} {}".format(newOrder.Security.Symbol,
+                                       newOrder.Security.Exchange if newOrder.Security.Exchange is not None else self.Configuration.Exchange,
+                                       BloombergTranslationHelper.GetBloombergSecType(newOrder.Security.SecurityType) if newOrder.Security.SecurityType is not None else self.Configuration.SecurityType)
+
+        if fullSymbol in  self.CandleBarSubscriptions:
+           lastCandlebar = self.CandleBarSubscriptions[fullSymbol]
+
+        filledWrapper = FilledExecutionReportWrapper(newOrder,lastCandlebar.Close if lastCandlebar is not None else None)
+        self.DoSendExecutionReportThread(filledWrapper)
+
+
+    def ProcessNewOrderMock(self,wrapper):
+        if not self.Connected:
+            return self.ProcessRejectedExecutionReport(wrapper, "Not Connected to Bloomberg")
+
+        newOrder = OrderConverter.ConvertNewOrder(self, wrapper)
+
+        request = self.CreateRequest(newOrder,"CreateOrder")
+
+        LogHelper.LogNewOrder(self, newOrder)
+
+        requestID = blpapi.CorrelationId(newOrder.ClOrdId)
+
+        self.ClOrdIdsTranslators[requestID.value()] = newOrder.ClOrdId
+        self.PendingNewOrders[requestID.value()] = newOrder
+
+        self.Session.sendRequest(request, correlationId=requestID)
+
+        threading.Thread(target=self.SendMockFilledExecutionReportsThread, args=(newOrder,)).start()
 
     def ProcessNewOrder(self, wrapper):
 
@@ -711,7 +755,7 @@ class OrderRouter( BaseCommunicationModule, ICommunicationModule):
 
         newOrder = OrderConverter.ConvertNewOrder(self, wrapper)
 
-        request = self.CreateRequest(newOrder)
+        request = self.CreateRequest(newOrder,"CreateOrderAndRouteEx")
 
         LogHelper.LogNewOrder(self,newOrder)
 
@@ -743,6 +787,7 @@ class OrderRouter( BaseCommunicationModule, ICommunicationModule):
 
                 if order is not None:
                     execReportWrapper = GenericExecutionReportWrapper(order,execReport)
+                    #self.DoLog("Initial Load for Exec Report for OrderId={} AvgPx={}".format(order.OrderId,execReport.AvgPx),MessageType.INFO)
                 else:
                     tempOrder = Order()
                     tempOrder.OrderId=execReport.Order.OrderId if execReport.Order is not None else None
@@ -900,7 +945,10 @@ class OrderRouter( BaseCommunicationModule, ICommunicationModule):
         try:
 
             if wrapper.GetAction() == Actions.NEW_ORDER:
-                self.ProcessNewOrder(wrapper)
+                if(self.Configuration.ImplementMock):
+                    self.ProcessNewOrderMock(wrapper)
+                else:
+                    self.ProcessNewOrder(wrapper)
             elif wrapper.GetAction() == Actions.UPDATE_ORDER:
                 raise Exception("Update Order not implemented @Bloomberg order router")
             elif wrapper.GetAction() == Actions.CANCEL_ORDER:

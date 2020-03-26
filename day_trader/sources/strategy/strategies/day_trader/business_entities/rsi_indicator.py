@@ -96,4 +96,37 @@ class RSIIndicator():
 
 
 
+    def UpdateDaily(self,marketDataArr, DAILY_RSI_LENGTH):
+
+        sortedMDs = sorted(list(filter(lambda x: x is not None, list(marketDataArr.values()))), key=lambda x: x.MDEntryDate, reverse=False)
+
+        if len(sortedMDs)>=DAILY_RSI_LENGTH:
+
+            prevDailyMD = None
+            i = 0
+
+            bootstrapUpOpen=0
+            bootstrapDownOpen=0
+
+            for dailyMD in sortedMDs:
+
+
+                #If I have more market data in marketDataArr than values needed in DAILY_RSI_LENGTH, I skip the first (len(marketDataArr)- DAILY_RSI_LENGTH)
+                if prevDailyMD is not None and ( (len(sortedMDs)-i)<=DAILY_RSI_LENGTH):
+                    bootstrapUpOpen+= dailyMD.ClosingPrice - prevDailyMD.ClosingPrice  if (dailyMD.ClosingPrice >= prevDailyMD.ClosingPrice) else 0
+                    bootstrapDownOpen += prevDailyMD.ClosingPrice - dailyMD.ClosingPrice if (dailyMD.ClosingPrice < prevDailyMD.ClosingPrice) else 0
+
+                prevDailyMD=dailyMD
+                i+=1
+
+
+            self.SmoothUp = bootstrapUpOpen / DAILY_RSI_LENGTH
+            self.SmoothDown = bootstrapDownOpen / DAILY_RSI_LENGTH
+            self.RSI= (100-(100/(1+(self.SmoothUp/self.SmoothDown)))) if self.SmoothDown>0 else 0
+
+        else:
+            raise Exception("Could not calculate daily RSI as market data array length={} and RSI daily length ={}".format(len(sortedMDs),DAILY_RSI_LENGTH))
+
+
+
     #endregion

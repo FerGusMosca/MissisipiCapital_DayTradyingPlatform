@@ -14,6 +14,8 @@ class MACDIndicator():
                 self.MaxMS = None
                 self.MinMS = None
                 self.LastProcessedDateTime = None
+                self.MSMaxMinArray = []
+                self.ContextSign = None
 
     #region Private Methods
 
@@ -30,13 +32,48 @@ class MACDIndicator():
                 self.MaxMS = None
                 self.MinMS = None
                 self.LastProcessedDateTime = None
+                self.MSMaxMinArray = []
+                self.ContextSign = None
 
+
+        def UpdateMSMaxMin(self):
+
+                currentContext = 1 if self.MACD>self.Signal else -1
+
+                if currentContext != self.ContextSign and self.ContextSign is not None:
+                        self.MSMaxMinArray.append(self.MaxMS if self.ContextSign==1 else self.MinMS)
+                        self.MinMS = self.MS
+                        self.MaxMS = self.MS
+
+                if self.MaxMS is None or self.MaxMS < self.MS:
+                        self.MaxMS = self.MS
+
+                if self.MinMS is None or self.MaxMS > self.MS:
+                        self.MinMS = self.MS
+
+                self.ContextSign=1 if self.MACD>self.Signal else -1
 
 
      #endregion
 
      #region Public Methods
 
+        def GetMaxABSMaxMinMS(self, count):
+
+                if len(self.MSMaxMinArray)<count:
+                   return None
+
+                arrayToConsider = self.MSMaxMinArray[-1*count:] #Last count elements
+
+                max = None
+
+                for msMinMax in arrayToConsider:
+                        msMinMax=msMinMax if msMinMax>0 else -1*msMinMax
+
+                        if max is None or max < msMinMax:
+                                max=msMinMax
+
+                return max
 
         def Update(self,CandleBarArr,slow=26, fast=12, signal=9):
                 sortedBars = sorted(list(filter(lambda x: x is not None, CandleBarArr)), key=lambda x: x.DateTime,reverse=False)
@@ -73,12 +110,7 @@ class MACDIndicator():
                 if lastBar is not None and self.MACD is not None and self.Signal is not None:
                         self.MSPrev=self.MS
                         self.MS = (500* (self.MACD - self.Signal))/lastBar.Close
-
-                if self.MaxMS is None or self.MaxMS< self.MS:
-                        self.MaxMS= self.MS
-
-                if self.MinMS is None or self.MaxMS > self.MS:
-                        self.MinMS = self.MS
+                        self.UpdateMSMaxMin()
 
                 print("MACD print @{}- MACD:{}, Signal:{} Price:{}".format(self.LastProcessedDateTime,self.MACD,self.Signal,lastBar.Close))
 
