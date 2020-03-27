@@ -722,7 +722,9 @@ class OrderRouter( BaseCommunicationModule, ICommunicationModule):
         if fullSymbol in  self.CandleBarSubscriptions:
            lastCandlebar = self.CandleBarSubscriptions[fullSymbol]
 
-        filledWrapper = FilledExecutionReportWrapper(newOrder,lastCandlebar.Close if lastCandlebar is not None else None)
+        executionPrice = newOrder.Price if newOrder.Price is not None else (lastCandlebar.Close if lastCandlebar is not None else None)
+
+        filledWrapper = FilledExecutionReportWrapper(newOrder,executionPrice)
         self.DoSendExecutionReportThread(filledWrapper)
 
 

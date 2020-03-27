@@ -21,7 +21,7 @@ class TradingSignalHelper:
        self.TradingSignalManager = pTradingSignalManager
        self.PersistingLock = threading.Lock()
 
-    def PersistMACDRSITradingSignal(self, dayTradingPos, action, side,candlebar,logger):
+    def PersistMACDRSITradingSignal(self, dayTradingPos, action, side,candlebar,logger,condition=None):
         try:
 
             self.PersistingLock.acquire()
@@ -72,7 +72,7 @@ class TradingSignalHelper:
                 self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "MACD",dayTradingPos.MACDIndicator.MACD)
                 self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "Signal",dayTradingPos.MACDIndicator.Signal)
                 self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "LastClose",candlebar.Close)
-                self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "LastDateTime",candlebar.DateTime)
+                self.TradingSignalManager.PersistSignalOtherParameter(tradingSignalId, "LastDateTime",str(candlebar.DateTime))
 
             elif action == TradingSignalHelper._ACTION_CLOSE():
                 self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
@@ -115,6 +115,7 @@ class TradingSignalHelper:
                 self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
                     ModelParametersHandler.STOP_LOSS_LIMIT(), symbol))
 
+
                 self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "MSPrev",dayTradingPos.MACDIndicator.MSPrev)
                 self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "MSNow",dayTradingPos.MACDIndicator.MS)
                 self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "MaxMS",dayTradingPos.MACDIndicator.MaxMS)
@@ -129,7 +130,9 @@ class TradingSignalHelper:
                 self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "MACD",dayTradingPos.MACDIndicator.MACD)
                 self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "Signal", dayTradingPos.MACDIndicator.Signal)
                 self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "LastClose",candlebar.Close)
-                self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "LastDateTime",candlebar.DateTime)
+                self.TradingSignalManager.PersistSignalOtherParameter(tradingSignalId, "CloseCondition",condition if condition is not None else "unk")
+                self.TradingSignalManager.PersistSignalOtherParameter(tradingSignalId, "LastDateTime",str(candlebar.DateTime))
+
 
             self.TradingSignalManager.Commit()
 
@@ -142,7 +145,7 @@ class TradingSignalHelper:
                 self.PersistingLock.release()
 
 
-    def PersistTradingSignal(self, dayTradingPos, action, side, statisticalParam,candlebar,logger):
+    def PersistTradingSignal(self, dayTradingPos, action, side, statisticalParam,candlebar,logger,condition=None):
 
 
         try:
@@ -262,6 +265,9 @@ class TradingSignalHelper:
 
             self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "Daily14DaysRSI",
                                                                         dayTradingPos.DailyRSIIndicator.RSI)
+
+            self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "CloseCondition",
+                                                                        condition if condition is None else "??")
 
             self.TradingSignalManager.Commit()
 

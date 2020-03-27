@@ -59,6 +59,12 @@ class TradingSignalManager():
             cursor.execute("{CALL PersistSignalStatisticalParameter (?,?,?)}", params)
             #self.connection.commit()
 
+    def PersistSignalOtherParameter(self, tradingSignalId ,param,value):
+        with self.connection.cursor() as cursor:
+            params = (tradingSignalId,param,value)
+            cursor.execute("{CALL PersistSignalOtherParameter (?,?,?)}", params)
+            #self.connection.commit()
+
     def Commit(self):
         self.connection.commit()
 
