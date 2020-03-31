@@ -28,3 +28,6 @@ class PositionField(Enum):
 
     TradingMode= 99
     Depurate = 100
+    CleanStopLoss=101
+    CleanTakeProfit=102
+    CleanEndOfDay = 103

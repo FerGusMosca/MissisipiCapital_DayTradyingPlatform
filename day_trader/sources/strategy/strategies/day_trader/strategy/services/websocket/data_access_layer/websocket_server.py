@@ -481,7 +481,8 @@ class WSHandler(tornado.websocket.WebSocketHandler):
       elif "Msg" in fieldsDict and fieldsDict["Msg"]=="CancelAllPositionReq":
         cancelAllPos = CancelPositionReq(**json.loads(message))
         self.ProcessCancelAllPositionReq(cancelAllPos)
-      elif "Msg" in fieldsDict and fieldsDict["Msg"]=="UpdateModelParamReq":
+
+      elif "Msg" in fieldsDict and fieldsDict["Msg"] == "UpdateModelParamReq":
         updModelParamReq = UpdateModelParamReq(**json.loads(message))
         self.ProcessUpdateModelParamReq(updModelParamReq)
       elif "Msg" in fieldsDict and fieldsDict["Msg"] == "CreateModelParamReq":

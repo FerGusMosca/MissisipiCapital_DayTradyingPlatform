@@ -43,6 +43,18 @@ _EXIT_SHORT_MACD_RSI_COND_4 = "EXIT_SHORT_MACD_RSI_COND_4"
 _EXIT_SHORT_MACD_RSI_COND_5 = "EXIT_SHORT_MACD_RSI_COND_5"
 _EXIT_SHORT_MACD_RSI_COND_6 = "EXIT_SHORT_MACD_RSI_COND_6"
 
+_LONG_MACD_RSI_RULE_1="LONG_MACD_RSI_RULE_1"
+_LONG_MACD_RSI_RULE_2="LONG_MACD_RSI_RULE_2"
+_LONG_MACD_RSI_RULE_3="LONG_MACD_RSI_RULE_3"
+_LONG_MACD_RSI_RULE_4="LONG_MACD_RSI_RULE_4"
+_LONG_MACD_RSI_RULE_5="LONG_MACD_RSI_RULE_5"
+
+_SHORT_MACD_RSI_RULE_1="SHORT_MACD_RSI_RULE_1"
+_SHORT_MACD_RSI_RULE_2="SHORT_MACD_RSI_RULE_2"
+_SHORT_MACD_RSI_RULE_3="SHORT_MACD_RSI_RULE_3"
+_SHORT_MACD_RSI_RULE_4="SHORT_MACD_RSI_RULE_4"
+_SHORT_MACD_RSI_RULE_5="SHORT_MACD_RSI_RULE_5"
+
 class DayTradingPosition():
 
     def __init__(self,id ,security,shares,active,routing,open,longSignal,shortSignal,signalType=None,signalDesc=None):
@@ -413,18 +425,18 @@ class DayTradingPosition():
 
         if self.Open():
             #print ("Not opening because is opened:{}".format(self.Security.Symbol))
-            return False #Position already opened
+            return None #Position already opened
 
         if self.Routing:
             #print("Not opening because is routing:{}".format(self.Security.Symbol))
-            return False #cannot open positions that are being routed
+            return None #cannot open positions that are being routed
 
         if (self.MACDIndicator.MSPrev is None or self.MACDIndicator.MS is None or self.MACDIndicator.MaxMS is None \
                 or self.MACDIndicator.MinMS is None or self.MinuteSmoothedRSIIndicator.GetRSISlope(5) is None
                 or self.MinuteSmoothedRSIIndicator.GetRSISlope(10) is None or len(candlebarsArr)<5
                 #or self.MACDIndicator.GetMaxABSMaxMinMS(5) is None
             ):
-            return False
+            return None
 
         # NO TRADE ON --> SHORT ON
         # line 1
@@ -432,7 +444,7 @@ class DayTradingPosition():
                 and self.MACDIndicator.MS < msNowParamA.FloatValue
                 and self.MACDIndicator.MinMS < (-1 * msMinParamB.FloatValue)
                 and self.MinuteSmoothedRSIIndicator.GetRSISlope(5) < (-1* rsi30SlopeSkip5ParamC.FloatValue)):
-            return True
+            return _SHORT_MACD_RSI_RULE_1
 
         # line 2
         if (        self.MACDIndicator.MSPrev >= msNowParamA.FloatValue
@@ -440,7 +452,7 @@ class DayTradingPosition():
                 and self.MACDIndicator.MinMS < (-1* msMinParamB.FloatValue)
                 and self.MinuteSmoothedRSIIndicator.GetRSISlope(5) < (-1* rsi30SlopeSkip5ParamC.FloatValue)
             ):
-            return True
+            return _SHORT_MACD_RSI_RULE_2
 
         # line 3
         if (        self.MACDIndicator.MSPrev >= msNowParamA.FloatValue
@@ -451,7 +463,7 @@ class DayTradingPosition():
                 and self.MinuteSmoothedRSIIndicator.GetRSISlope(5) < (-1 * rsi30SlopeSkip5ParamC.FloatValue)
                 and self.MinuteSmoothedRSIIndicator.GetRSISlope(10) < rsi30SlopeSkip10ParamG.FloatValue
           ):
-            return True
+            return _SHORT_MACD_RSI_RULE_3
 
         # TODO IMPL ABS RULE
         # line 4
@@ -459,21 +471,21 @@ class DayTradingPosition():
                 and self.MinuteSmoothedRSIIndicator.GetRSISlope(5) < (-1 *  rsi30SlopeSkip5ParamC.FloatValue)
                 and self.MinuteSmoothedRSIIndicator.GetRSISlope(10) < rsi30SlopeSkip10ParamG.FloatValue
             ):
-            return True
+            return _SHORT_MACD_RSI_RULE_4
 
 
-        return False
+        return None
 
     def EvaluateMACDRSILongTrade(self,msNowParamA,msMinParamB,rsi30SlopeSkip5ParamC,msMaxMinParamD,msNowMaxParamE,msNowParamF,
                                  rsi30SlopeSkip10ParamG,absMSMaxMinLast5ParamH,sec5MinSlopeParamI, candlebarsArr):
 
         if self.Open():
             # print ("Not opening because is opened:{}".format(self.Security.Symbol))
-            return False  # Position already opened
+            return None  # Position already opened
 
         if self.Routing:
             # print("Not opening because is routing:{}".format(self.Security.Symbol))
-            return False  # cannot open positions that are being routed
+            return None  # cannot open positions that are being routed
 
 
         if (self.MACDIndicator.MSPrev is None or self.MACDIndicator.MS is None or self.MACDIndicator.MaxMS is None\
@@ -481,20 +493,20 @@ class DayTradingPosition():
             or self.MinuteSmoothedRSIIndicator.GetRSISlope(10) is None or len(candlebarsArr)<5
             #or self.MACDIndicator.GetMaxABSMaxMinMS(5) is None
             ):
-            return False
+            return None
 
         #NO TRADE ON --> LONG ON
         #line 1
         if (self.MACDIndicator.MSPrev >=msNowParamA.FloatValue and self.MACDIndicator.MS >=msNowParamA.FloatValue
             and self.MACDIndicator.MaxMS >= msMinParamB.FloatValue
             and self.MinuteSmoothedRSIIndicator.GetRSISlope(5)>rsi30SlopeSkip5ParamC.FloatValue):
-            return True
+            return _LONG_MACD_RSI_RULE_1
 
         # line 2
         if (self.MACDIndicator.MSPrev < msNowParamA.FloatValue and self.MACDIndicator.MS >=msNowParamA.FloatValue
             and self.MACDIndicator.MaxMS >= msMinParamB.FloatValue
             and self.MinuteSmoothedRSIIndicator.GetRSISlope(5)>rsi30SlopeSkip5ParamC.FloatValue):
-            return True
+            return _LONG_MACD_RSI_RULE_2
 
         # line 3
         if (self.MACDIndicator.MSPrev < msNowParamA.FloatValue
@@ -505,7 +517,7 @@ class DayTradingPosition():
             and self.MinuteSmoothedRSIIndicator.GetRSISlope(5) > rsi30SlopeSkip5ParamC.FloatValue
             and self.MinuteSmoothedRSIIndicator.GetRSISlope(10) >= (-1 * rsi30SlopeSkip10ParamG.FloatValue)
             ):
-            return True
+            return _LONG_MACD_RSI_RULE_3
 
         # TODO IMPL ABS RULE
         # line 4
@@ -513,10 +525,10 @@ class DayTradingPosition():
             and self.MinuteSmoothedRSIIndicator.GetRSISlope(5) > rsi30SlopeSkip5ParamC.FloatValue
             and self.MinuteSmoothedRSIIndicator.GetRSISlope(10) > (-1 * rsi30SlopeSkip10ParamG.FloatValue)
           ):
-            return True
+            return _LONG_MACD_RSI_RULE_4
 
 
-        return False
+        return None
 
     def EvaluateGenericLongTrade(self,dailyBiasModelParam,dailySlopeModelParam, posMaximChangeParam,
                           posMaxLongDeltaParam,nonSmoothed14MinRSILongThreshold,candlebarsArr):
@@ -566,8 +578,8 @@ class DayTradingPosition():
         if not self.Open():
             return None  # Position not opened
 
-        if self.GetNetOpenShares() < 0:
-            return None  # We are in a short position
+        if self.GetNetOpenShares() > 0:
+            return None  # We are in a long position
 
         terminalCond = self.EvaluateClosingTerminalCondition(candlebarsArr, endOfdayLimitModelParam,
                                                              maxGainForDayModelParam,

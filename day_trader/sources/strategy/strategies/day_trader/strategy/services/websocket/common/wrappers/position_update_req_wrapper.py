@@ -36,6 +36,12 @@ class PositionUpdateReqWrapper(Wrapper):
             return self.PosUpdateReq.TradingMode
         elif field == PositionField.Depurate:
             return self.PosUpdateReq.Depurate
+        elif field == PositionField.CleanStopLoss:
+            return self.PosUpdateReq.CleanStopLoss
+        elif field == PositionField.CleanTakeProfit:
+            return self.PosUpdateReq.CleanTakeProfit
+        elif field == PositionField.CleanEndOfDay:
+            return self.PosUpdateReq.CleanEndOfDay
         else:
             return None
 

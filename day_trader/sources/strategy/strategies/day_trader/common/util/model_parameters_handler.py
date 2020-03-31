@@ -164,6 +164,10 @@ class ModelParametersHandler:
         return "MACD_FAST"
 
     @staticmethod
+    def MS_MAX_MIN_MINUTES():
+        return "MS_MAX_MIN_MINUTES"
+
+    @staticmethod
     def MACD_SIGNAL():
         return "MACD_SIGNAL"
 

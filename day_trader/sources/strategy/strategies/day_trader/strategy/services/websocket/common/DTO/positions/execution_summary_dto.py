@@ -20,6 +20,9 @@ class ExecutionSummaryDTO:
         self.AccountId= summary.Position.Account
         self.Timestamp = str( summary.Timestamp) if summary.Timestamp is not None else None
         self.UTimestamp = int( summary.Timestamp.timestamp()) if summary.Timestamp is not None else None
+        self.StopLoss = summary.Position.StopLoss
+        self.TakeProfit = summary.Position.TakeProfit
+        self.CloseEndOfDay = summary.Position.CloseEndOfDay
         self.Text = summary.Text
 
 

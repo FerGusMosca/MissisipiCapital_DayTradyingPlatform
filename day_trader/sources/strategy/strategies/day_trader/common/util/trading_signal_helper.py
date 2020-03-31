@@ -72,6 +72,7 @@ class TradingSignalHelper:
                 self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "MACD",dayTradingPos.MACDIndicator.MACD)
                 self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "Signal",dayTradingPos.MACDIndicator.Signal)
                 self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "LastClose",candlebar.Close)
+                self.TradingSignalManager.PersistSignalOtherParameter(tradingSignalId, "OpenCondition",condition if condition is not None else "unk")
                 self.TradingSignalManager.PersistSignalOtherParameter(tradingSignalId, "LastDateTime",str(candlebar.DateTime))
 
             elif action == TradingSignalHelper._ACTION_CLOSE():

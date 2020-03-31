@@ -56,7 +56,7 @@ class ExecutionSummaryManager():
         newPos.AvgPx= float(row[_average_price]) if row[_average_price] is not None else None
         newPos.StopLoss= float(row[_stop_loss]) if row[_stop_loss] is not None else None
         newPos.TakeProfit = float(row[_take_profit]) if row[_take_profit] is not None else None
-        newPos.CloseEndOfDay = float(row[_close_end_of_day]) if row[_close_end_of_day] is not None else None
+        newPos.CloseEndOfDay = bool(row[_close_end_of_day]) if row[_close_end_of_day] is not None else None
 
         order = Order()
         order.OrderId=str(row[_order_id]) if row[_order_id] is not None else None
