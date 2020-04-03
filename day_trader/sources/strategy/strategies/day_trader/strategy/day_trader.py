@@ -270,6 +270,40 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
         except Exception as e:
             self.DoLog("Critical error @DayTrader.ProcessOrderCancelReject: " + str(e), MessageType.ERROR)
 
+    def ProcessExternalTrading(self,posId,exec_report):
+
+        try:
+
+            proceExtTradParam = self.ModelParametersHandler.Get(ModelParametersHandler.PROCESS_EXTERNAL_TRADING(),exec_report.Security.Symbol)
+
+            dayTradingPos = next(iter(list(filter(lambda x: x.Security.Symbol == exec_report.Security.Symbol, self.DayTradingPositions))), None)
+
+            if dayTradingPos is not None and (proceExtTradParam is not None and proceExtTradParam.IntValue>0):
+
+                if dayTradingPos.Routing:
+                    raise Exception("External trading detected for security {}. It will be ignored as the security has other orders in progress!".format(exec_report.Security.Symbol))
+
+                extPos = Position(PosId=posId,Security=exec_report.Security,Side=exec_report.Side,
+                                  PriceType=exec_report.Order.PriceType, Qty=exec_report.OrderQty,
+                                  QuantityType=exec_report.Order.QuantityType,Account= exec_report.Order.Account,
+                                  Broker=exec_report.Order.Broker, Strategy=exec_report.Order.Strategy,
+                                  OrderType=exec_report.Order.OrdType,OrderPrice=exec_report.Order.Price)
+
+                summary = ExecutionSummary(exec_report.TransactTime, extPos)
+                self.PositionSecurities[posId]=dayTradingPos
+
+                dayTradingPos.ExecutionSummaries[posId] = summary
+                dayTradingPos.UpdateRouting()
+
+                threading.Thread(target=self.PublishPortfolioPositionThread, args=(dayTradingPos,)).start()
+                threading.Thread(target=self.PublishSummaryThread, args=(summary, dayTradingPos.Id)).start()
+
+                self.SummariesQueue.put(summary)
+            else:
+                self.DoLog("Ignoring external trading for security: {}".format(exec_report.Security.Symbol) , MessageType.INFO)
+        except Exception as e:
+            self.SendToInvokingModule(ErrorWrapper(e))
+
     def ProcessExecutionReport(self, wrapper):
         try:
 
@@ -294,8 +328,6 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                         self.ProcessOrder(summary, False)
                         threading.Thread(target=self.PublishPortfolioPositionThread, args=(dayTradingPos,)).start()
                         threading.Thread(target=self.PublishSummaryThread, args=(summary, dayTradingPos.Id)).start()
-                        if self.RoutingLock.locked():
-                            self.RoutingLock.release()
                         return CMState.BuildSuccess(self)
                     else:
                         self.DoLog("Received execution report for a managed position, but we cannot find its execution summary",MessageType.ERROR)
@@ -306,11 +338,10 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                     self.UpdateSinglePosExecutionSummary(summary, exec_report)
                     self.ProcessOrder(summary, False)
                     threading.Thread(target=self.PublishSummaryThread, args=(summary, None)).start()
-                    if self.RoutingLock.locked():
-                        self.RoutingLock.release()
                     return CMState.BuildSuccess(self)
                 else:
-                    self.DoLog("Received execution report for unknown PosId {}".format(pos_id), MessageType.INFO)
+                    self.ProcessExternalTrading(pos_id,exec_report)
+                    #self.DoLog("Received execution report for unknown PosId {}".format(pos_id), MessageType.INFO)
             else:
                 raise Exception("Received execution report without PosId")
         except Exception as e:
@@ -401,11 +432,9 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                 dayTradingPos.ExecutionSummaries[summary.Position.PosId]=summary
                 self.PositionSecurities[summary.Position.PosId]=dayTradingPos
                 execReport=routePos.GetLastExecutionReport()
-                print ("ExecReport Vs Pos: POs.AvgPx={} execReport.AvgPx={}".format(routePos.AvgPx,execReport.AvgPx))
 
                 self.DoLog("Final AvgPx on initial load for order id {}:Prev={} ".format(execReport.Order.OrderId,summary.AvgPx),MessageType.INFO)
                 if self.Configuration.TestMode :
-                    print("entro!")
                     execReport.AvgPx=summary.AvgPx
 
                 summary.UpdateStatus(execReport)
@@ -689,8 +718,8 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                                   self.ModelParametersHandler.Get(ModelParametersHandler.SEC_5_MIN_SLOPE_I(), symbol),list(cbDict.values()))
                if longCondition is not None:
                    self.DoLog("MACD/RSI = Running long trade for symbol {}".format(dayTradingPos.Security.Symbol),MessageType.INFO)
-                   self.TradingSignalHelper.PersistMACDRSITradingSignal(dayTradingPos,TradingSignalHelper._ACTION_OPEN(), Side.Buy,candlebar, self)
-                   self.ProcessNewPositionReqManagedPos(dayTradingPos, Side.Buy, dayTradingPos.SharesQuantity,self.Configuration.DefaultAccount, condition=longCondition)
+                   self.TradingSignalHelper.PersistMACDRSITradingSignal(dayTradingPos,TradingSignalHelper._ACTION_OPEN(), Side.Buy,candlebar, self,condition=longCondition)
+                   self.ProcessNewPositionReqManagedPos(dayTradingPos, Side.Buy, dayTradingPos.SharesQuantity,self.Configuration.DefaultAccount)
                    dayTradingPos.Routing = True
                    return True
 
@@ -1080,6 +1109,18 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
             self.ProcessCriticalError(e,msg)
             self.ProcessError(ErrorWrapper(Exception(msg)))
 
+    def ValidateSideAndQty(self,dayTradingPos,side,qty):
+
+        if self.Configuration.ImplementDetailedSides and dayTradingPos is not None:
+            if (side==Side.Sell and dayTradingPos.GetNetOpenShares()>0):
+                if qty > dayTradingPos.GetNetOpenShares():
+                    raise Exception("You are net long {} shares and you are trying to sell {} shares. First sell your {} net long shares!".format(dayTradingPos.GetNetOpenShares(),qty,dayTradingPos.GetNetOpenShares()))
+
+            if (side == Side.Buy and dayTradingPos.GetNetOpenShares() < 0):
+                if qty > (-1 * dayTradingPos.GetNetOpenShares()):
+                    raise Exception("You are net short {} shares and you are trying to cover {} shares. First cover your {} net short shares!".format( -1* dayTradingPos.GetNetOpenShares(), qty, -1* dayTradingPos.GetNetOpenShares()))
+
+
     def TranslateSide(self, dayTradingPos,side):
         if self.Configuration.ImplementDetailedSides:
 
@@ -1204,6 +1245,8 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                 stopLoss = wrapper.GetField(PositionField.StopLoss)
                 takeProfit = wrapper.GetField(PositionField.TakeProfit)
                 closeEndOfDay = wrapper.GetField(PositionField.CloseEndOfDay)
+
+                self.ValidateSideAndQty(dayTradingPos,side,qty)
 
                 self.ProcessNewPositionReqManagedPos(dayTradingPos,side,qty,account,price,stopLoss,takeProfit,closeEndOfDay)
             else:
@@ -1336,6 +1379,19 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                 raise Exception("Position created for symbol {} could not be recovered from database!".format(symbol))
 
             self.DayTradingPositions.append(persistedDayTradingPos)
+
+            #1- We request historical prices
+            histLength=self.ModelParametersHandler.Get(ModelParametersHandler.HISTORICAL_PRICES_CAL_DAYS_TO_REQ(),None).IntValue
+            hpReqWrapper = HistoricalPricesRequestWrapper(dayTradingPos.Security,histLength,TimeUnit.Day, SubscriptionRequestType.Snapshot)
+            self.MarketDataModule.ProcessMessage(hpReqWrapper)
+
+            #2- We request candle bars
+            cbReqWrapper = CandleBarRequestWrapper(dayTradingPos.Security, time, TimeUnit.Minute,SubscriptionRequestType.SnapshotAndUpdates)
+            self.MarketDataModule.ProcessMessage(cbReqWrapper)
+
+            #3- We request the market data
+            mdReqWrapper = MarketDataRequestWrapper(dayTradingPos.Security, SubscriptionRequestType.SnapshotAndUpdates)
+            self.MarketDataModule.ProcessMessage(mdReqWrapper)
 
             threading.Thread(target=self.PublishPortfolioPositionThread, args=(persistedDayTradingPos,)).start()
 

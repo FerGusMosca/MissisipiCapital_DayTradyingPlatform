@@ -255,6 +255,10 @@ class ModelParametersHandler:
     def GAIN_MIN_STOP_LOSS_EXIT_U():
         return "GAIN_MIN_STOP_LOSS_EXIT_U"
 
+    @staticmethod
+    def PROCESS_EXTERNAL_TRADING():
+        return "PROCESS_EXTERNAL_TRADING"
+
     #endregion
 
     #region Public Methods

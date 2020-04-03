@@ -81,7 +81,13 @@ class MarketOrderRouter(BaseCommunicationModule, ICommunicationModule):
                 processed_exec_report = GenericERWrapper(pos.PosId, wrapper)
                 self.InvokingModule.ProcessOutgoing(processed_exec_report)
             else:
-                self.DoLog( "Received ExecutionReport for unknown ClOrdId ={} OrderId= {}".format(cl_ord_id, order_id),MessageType.WARNING)
+                #Execution report for unknown position. We create it and it will be the strategy that will decide what to do
+                newPos = ExecutionReportListConverter.CreatePositionFromExecutionReport(self,wrapper)
+                self.Positions[newPos.PosId]=newPos
+                self.PositionsLock.release()
+                newExecReport = GenericERWrapper(newPos.PosId, wrapper)
+                self.InvokingModule.ProcessOutgoing(newExecReport)
+                self.DoLog( "Received ExecutionReport for unknown ClOrdId ={} OrderId= {}. Sending as External trading".format(cl_ord_id, order_id),MessageType.INFO)
         except Exception as e:
             self.DoLog("Error processing execution report:{}".format(e), MessageType.ERROR)
         finally:

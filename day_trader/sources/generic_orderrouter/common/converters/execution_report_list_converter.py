@@ -25,6 +25,39 @@ class ExecutionReportListConverter:
             raise Exception("Missing parameter {} for execution report ".format("Order.Security"))
 
     @staticmethod
+    def CreatePositionFromExecutionReport(self,execReportWrapper):
+
+        exec_report = ExecutionReportConverter.ConvertExecutionReport(execReportWrapper)
+
+        ExecutionReportListConverter.ValidateExecutionReport(self, exec_report)
+
+        pos = Position(
+            PosId=uuid.uuid4(),
+            Security=Security(Symbol=exec_report.Order.Security.Symbol,
+                              Currency=exec_report.Order.Security.Currency),
+            Side=exec_report.Order.Side,
+            PriceType=PriceType.FixedAmount,
+            Qty=exec_report.Order.OrderQty,
+            QuantityType=QuantityType.SHARES,
+            Account=exec_report.Order.Account,
+            Broker=exec_report.Order.Broker,
+            Strategy=exec_report.Order.Strategy,
+            OrderType=exec_report.Order.OrdType,
+            OrderPrice=exec_report.Order.Price,
+            CumQty=exec_report.CumQty,
+            LeavesQty=exec_report.LeavesQty,
+            AvgPx=exec_report.AvgPx,
+            LastQty=exec_report.LastQty,
+            LastPx=exec_report.LastPx,
+            LastMkt=exec_report.LastMkt
+        )
+
+        pos.SetPositionStatusFromExecution(exec_report)
+        pos.ExecutionReports.append(exec_report)
+        pos.AppendOrder(exec_report.Order)
+        return pos
+
+    @staticmethod
     def GetPositionsFromExecutionReportList(self, wrapper):
 
         ExecutionReportListConverter.ValidateExecutionReportList(self, wrapper)
@@ -35,34 +68,7 @@ class ExecutionReportListConverter:
 
         positions = []
         for execReportWrapper in exec_reports_wrappers:
-            exec_report = ExecutionReportConverter.ConvertExecutionReport(execReportWrapper)
-
-            ExecutionReportListConverter.ValidateExecutionReport(self, exec_report)
-
-            pos = Position(
-                PosId=uuid.uuid4(),
-                Security=Security(Symbol=exec_report.Order.Security.Symbol,
-                                  Currency=exec_report.Order.Security.Currency),
-                Side=exec_report.Order.Side,
-                PriceType=PriceType.FixedAmount,
-                Qty=exec_report.Order.OrderQty,
-                QuantityType=QuantityType.SHARES,
-                Account=exec_report.Order.Account,
-                Broker=exec_report.Order.Broker,
-                Strategy=exec_report.Order.Strategy,
-                OrderType=exec_report.Order.OrdType,
-                OrderPrice=exec_report.Order.Price,
-                CumQty=exec_report.CumQty,
-                LeavesQty=exec_report.LeavesQty,
-                AvgPx=exec_report.AvgPx,
-                LastQty=exec_report.LastQty,
-                LastPx=exec_report.LastPx,
-                LastMkt=exec_report.LastMkt
-            )
-
-            pos.SetPositionStatusFromExecution(exec_report)
-            pos.ExecutionReports.append(exec_report)
-            pos.AppendOrder(exec_report.Order)
+            pos= ExecutionReportListConverter.CreatePositionFromExecutionReport(self,execReportWrapper)
             positions.append(pos)
 
         return positions
