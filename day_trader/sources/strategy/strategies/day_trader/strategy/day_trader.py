@@ -270,7 +270,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
         except Exception as e:
             self.DoLog("Critical error @DayTrader.ProcessOrderCancelReject: " + str(e), MessageType.ERROR)
 
-    def ProcessExternalTrading(self,posId,exec_report):
+    def ProcessExternalTrading(self,posId,exec_report, evalRouting = True):
 
         try:
 
@@ -280,7 +280,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
             if dayTradingPos is not None and (proceExtTradParam is not None and proceExtTradParam.IntValue>0):
 
-                if dayTradingPos.Routing:
+                if dayTradingPos.Routing and evalRouting:
                     raise Exception("External trading detected for security {}. It will be ignored as the security has other orders in progress!".format(exec_report.Security.Symbol))
 
                 extPos = Position(PosId=posId,Security=exec_report.Security,Side=exec_report.Side,
@@ -293,6 +293,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                 self.PositionSecurities[posId]=dayTradingPos
 
                 dayTradingPos.ExecutionSummaries[posId] = summary
+                summary.UpdateStatus(exec_report)
                 dayTradingPos.UpdateRouting()
 
                 threading.Thread(target=self.PublishPortfolioPositionThread, args=(dayTradingPos,)).start()
@@ -446,14 +447,15 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                 #self.ExecutionSummaryManager.PersistExecutionSummary(summary, dayTradingPos.Id)
                 threading.Thread(target=self.PublishSummaryThread, args=(summary, dayTradingPos.Id)).start()
                 threading.Thread(target=self.PublishPortfolioPositionThread, args=(dayTradingPos,)).start()
+                return True
             else:
-                self.DoLog("External trading detected. It won't be considered for statistics. Symbol:{}".format(dayTradingPos.Security.Symbol),MessageType.INFO)
+                self.DoLog("External trading detected for Symbol:{}".format(dayTradingPos.Security.Symbol),MessageType.INFO)
+                return False
 
         except Exception as e:
             msg = "Critical error @DayTrader.UpdateManagedPositionOnInitialLoad for symbol {} :{}".format(dayTradingPos.Security.Symbol,e)
             self.ProcessCriticalError(e,msg )
             self.SendToInvokingModule(ErrorWrapper(Exception(msg)))
-        finally:
             return True
 
 
@@ -494,8 +496,12 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                     if pos.GetLastExecutionReport() is not None:
 
                         if not self.UpdateManagedPositionOnInitialLoad(pos):
-                            self.UpdateSinglePosExecutionSummary(summary, pos.GetLastExecutionReport(),recovered=True)  # we will persist only if we have an existing position
-                            self.ProcessOrder(summary,True)
+                            processExtTradParam = self.ModelParametersHandler.Get(ModelParametersHandler.PROCESS_EXTERNAL_TRADING(), pos.Security.Symbol)
+                            if processExtTradParam.IntValue == 1:
+                                self.ProcessExternalTrading(pos.PosId,pos.GetLastExecutionReport(),evalRouting=False)
+                            else:
+                                self.UpdateSinglePosExecutionSummary(summary, pos.GetLastExecutionReport(),recovered=True)  # we will persist only if we have an existing position
+                                self.ProcessOrder(summary,True)
                     else:
                         self.DoLog("Could not find execution report for position id {}".format(pos.PosId),MessageType.ERROR)
                 self.ClosedUnknownStatusSummaries(positions)
@@ -834,8 +840,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                 # we just cancel summaries whose side is different than the closing side. We don't want to cancel the close
                 if  (
                     summary.Position.PosId not in self.PendingCancels  and
-                    (dayTradingPos.GetNetOpenShares() ==0 or summary.Position.Side !=side)
-                    ):
+                    (dayTradingPos.GetNetOpenShares() ==0 or summary.Position.Side !=side)):
                     self.DoLog("Cancelling order previously to closing position for symbol {}".format(dayTradingPos.Security.Symbol),MessageType.INFO)
                     self.PendingCancels[summary.Position.PosId] = summary
                     cxlWrapper = CancelPositionWrapper(summary.Position.PosId)
@@ -1060,6 +1065,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                     cbDict = {}
 
                 cbDict[candlebar.DateTime] = candlebar
+
                 self.Candlebars[candlebar.Security.Symbol]=cbDict
                 self.UpdateTechnicalAnalysisParameters(candlebar,cbDict)
                 self.EvaluateOpeningPositions(candlebar,cbDict)

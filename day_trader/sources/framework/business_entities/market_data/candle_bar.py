@@ -10,4 +10,5 @@ class CandleBar:
         self.Value=None
         self.Volume=None
         self.Security=pSecurity
+        self.Timestamp = None
 

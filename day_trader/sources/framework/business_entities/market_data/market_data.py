@@ -42,4 +42,5 @@ class MarketData:
         self.Security = None
         self.Change = None
         self.StdDev= None
+        self.Timestamp = None
 

@@ -9,6 +9,7 @@ orderSubscriptionID=blpapi.CorrelationId(98)
 routeSubscriptionID=blpapi.CorrelationId(99)
 
 
+
 class SubscriptionHelper:
 
 
@@ -51,6 +52,8 @@ class SubscriptionHelper:
 
         if (BloombergTranslationHelper.GetSafeFloat(logger, msg, "PERCENT_CHANGE_ON_DAY_TODAY_RT", None) is not None):
             md.Change = BloombergTranslationHelper.GetSafeFloat(logger, msg, "PERCENT_CHANGE_ON_DAY_TODAY_RT", None)
+
+        md.Timestamp = datetime.datetime.now()
 
     @staticmethod
     def ExtractSecurity(logger, msg):
@@ -124,6 +127,8 @@ class SubscriptionHelper:
 
         if (BloombergTranslationHelper.GetSafeDateTime(logger,msg,"DATE_TIME",None) is not None):
             cb.DateTime = BloombergTranslationHelper.GetSafeDateTime(logger,msg,"DATE_TIME",None)
+
+        cb.Timestamp = datetime.datetime.now()
 
 
     @staticmethod

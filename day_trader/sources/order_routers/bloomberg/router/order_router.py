@@ -110,11 +110,22 @@ class OrderRouter( BaseCommunicationModule, ICommunicationModule):
 
     # region Private Methods
 
+    def ValidateMarketDataPacing(self,marketdata):
+
+        if marketdata.Timestamp is not None:
+
+            secElapsed = int( abs((datetime.now()- marketdata.Timestamp).seconds))
+
+            return secElapsed >= self.Configuration.MarketDataUpdateFreqSeconds or  self.Configuration.MarketDataUpdateFreqSeconds is None
+        else:
+            return True
+
     def UpdateAndSendCandlebar(self,msg,candlebar):
-        SubscriptionHelper.UpdateCandleBar(self, msg, candlebar)
-        LogHelper.LogPublishCandleBarOnSecurity(self, candlebar.Security.Symbol, candlebar)
-        cbWrapper = CandleBarDataWrapper(self, candlebar)
-        self.OnMarketData.ProcessIncoming(cbWrapper)
+        if self.ValidateMarketDataPacing(candlebar):
+            SubscriptionHelper.UpdateCandleBar(self, msg, candlebar)
+            LogHelper.LogPublishCandleBarOnSecurity(self, candlebar.Security.Symbol, candlebar)
+            cbWrapper = CandleBarDataWrapper(self, candlebar)
+            self.OnMarketData.ProcessIncoming(cbWrapper)
 
     def ValidateMaxOrdersPerSecondLimit(self):
         now = datetime.now()  # current date and time
@@ -465,10 +476,11 @@ class OrderRouter( BaseCommunicationModule, ICommunicationModule):
         if msg.correlationIds()[0].value() in self.MarketDataSubscriptions:
             symbol = msg.correlationIds()[0].value()
             sec = self.MarketDataSubscriptions[msg.correlationIds()[0].value()]
-            SubscriptionHelper.UpdateMarketData(self, msg, sec.MarketData)
-            LogHelper.LogPublishMarketDataOnSecurity(self, symbol, sec)
-            mdWrapper = MarketDataWrapper(sec.MarketData)
-            self.OnMarketData.ProcessIncoming(mdWrapper)
+            if self.ValidateMarketDataPacing(sec.MarketData):
+                SubscriptionHelper.UpdateMarketData(self, msg, sec.MarketData)
+                LogHelper.LogPublishMarketDataOnSecurity(self, symbol, sec)
+                mdWrapper = MarketDataWrapper(sec.MarketData)
+                self.OnMarketData.ProcessIncoming(mdWrapper)
         else:
             self.DoLog( "Received market data for unknown subscription. Symbol= {}".format(msg.correlationIds()[0].value()),MessageType.ERROR)
 

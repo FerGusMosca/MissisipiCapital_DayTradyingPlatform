@@ -578,8 +578,8 @@ class DayTradingPosition():
         if not self.Open():
             return None  # Position not opened
 
-        if self.GetNetOpenShares() > 0:
-            return None  # We are in a long position
+        if self.GetNetOpenShares() < 0:
+            return None  # We are in a short position
 
         terminalCond = self.EvaluateClosingTerminalCondition(candlebarsArr, endOfdayLimitModelParam,
                                                              maxGainForDayModelParam,
@@ -813,8 +813,8 @@ class DayTradingPosition():
         if not self.Open():
             return None  # Position not opened
 
-        if self.GetNetOpenShares() < 0:
-            return None  # We are in a short position
+        if self.GetNetOpenShares() > 0:
+            return None  # We are in a long position
 
         terminalCond = self.EvaluateClosingTerminalCondition(candlebarsArr,endOfdayLimitModelParam, maxGainForDayModelParam,
                                                              pctMaxGainForClosingModelParam,maxLossForClosingModelParam,
