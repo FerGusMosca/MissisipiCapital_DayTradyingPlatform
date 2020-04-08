@@ -256,8 +256,30 @@ class ModelParametersHandler:
         return "GAIN_MIN_STOP_LOSS_EXIT_U"
 
     @staticmethod
+    def RSI_14_SLOPE_SKIP_3_V():
+        return "RSI_14_SLOPE_SKIP_3_V"
+
+    @staticmethod
+    def M_S_3_SLOPE_X():
+        return "M_S_3_SLOPE_X"
+
+    @staticmethod
+    def GAIN_MIN_STOP_LOSS_EXIT_W():
+        return "GAIN_MIN_STOP_LOSS_EXIT_W"
+
+    @staticmethod
+    def GAIN_STOP_LOSS_EXIT_Y():
+        return "GAIN_STOP_LOSS_EXIT_Y"
+
+    @staticmethod
+    def GAIN_MIN_STOP_LOSS_EXIT_Z():
+        return "GAIN_MIN_STOP_LOSS_EXIT_Z"
+
+    @staticmethod
     def PROCESS_EXTERNAL_TRADING():
         return "PROCESS_EXTERNAL_TRADING"
+
+
 
     #endregion
 

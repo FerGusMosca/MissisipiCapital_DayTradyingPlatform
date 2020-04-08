@@ -1,18 +1,21 @@
 from sources.strategy.strategies.day_trader.business_entities.testers.macd_indicator_tester import *
+from datetime import *
 
 class MACDIndicator():
 
-        def __init__(self,slow=26, fast=12, signal=9,MSMaxMinMinutes = 30):
-                self.UpdateParameters(slow,fast,signal,MSMaxMinMinutes)
+        def __init__(self,slow=26, fast=12, signal=9):
+                self.UpdateParameters(slow,fast,signal)
                 self.Reset()
 
     #region Private Methods
 
-        def UpdateParameters(self,slow=26, fast=12, signal=9,MSMaxMinMinutes = 30):
+        def UpdateParameters(self,slow=26, fast=12, signal=9):
                 self.Slow = slow
                 self.Fast = fast
                 self.Sign = signal
-                self.MSMaxMinMinutes = MSMaxMinMinutes
+
+        def UpdateLastTradeTimestamp(self):
+                self.LastTradeTimestamp= datetime.now()
 
         def Reset(self):
                 self.MACD = None
@@ -20,89 +23,73 @@ class MACDIndicator():
                 self.MS = None
                 self.MSPrev = None
 
-                #A)MS Max Min since last MS going from - to + or viceversa
-                self.MaxMSLastCrossover = None
-                self.MinMSLastCrossover = None
-
-                #B) Max Min Last N minutes
+                #B) Max Min <Last CrossOver or Last Trade Timestamp>
                 self.MaxMS = None
                 self.MinMS = None
 
                 self.LastProcessedDateTime = None
                 self.MSArray = []
                 self.ContextSign = None
+                self.LastTradeTimestamp = None
 
+        def GetMaxAbsMS(self,length):
 
-        def UpdateMSMaxMinOnLastCrossover(self):
-                currentContext = 1 if self.MACD > self.Signal else -1
+            max = 0
+            lastNminArray =  self.MSArray[(-1*length):]
 
-                if currentContext != self.ContextSign and self.ContextSign is not None:
-                        self.MaxMSLastCrossover = self.MS
-                        self.MinMSLastCrossover = self.MS
+            for ms in lastNminArray:
+                if max< abs(ms):
+                    max=abs(ms)
 
-                if self.MinMSLastCrossover is None or self.MinMSLastCrossover < self.MS:
-                        self.MinMSLastCrossover = self.MS
-
-                if self.MinMSLastCrossover is None or self.MinMSLastCrossover > self.MS:
-                        self.MinMSLastCrossover = self.MS
-
-                self.ContextSign = currentContext
-
-        def UpdateMSMaxMinOnLastNMinutes(self):
-
-
-                maxAbsMS = None
-                minAbsMS = None
-                if len(self.MSArray)>=self.MSMaxMinMinutes:
-                        lastNMinutesMSArray = self.MSArray[-1 * self.MSMaxMinMinutes:]
-
-                        for MS in lastNMinutesMSArray:
-                                absMS = MS if MS>0 else MS*-1
-                                if maxAbsMS is None or maxAbsMS<absMS:
-                                        maxAbsMS=absMS
-
-                                if  minAbsMS is None or minAbsMS> absMS:
-                                        minAbsMS = absMS
-
-                        self.MaxMS=maxAbsMS
-                        self.MinMS=minAbsMS
-
-
+            return max
 
 
         def UpdateMSMaxMin(self):
 
                 self.MSArray.append(self.MS)
 
-                #A - Update MS Max Min since last MS going from - to + or viceversa
-                self.UpdateMSMaxMinOnLastCrossover()
+                currentContext = 1 if self.MACD > self.Signal else -1
 
-                #B - Update Max Min Last N minutes
-                self.UpdateMSMaxMinOnLastNMinutes()
+                if currentContext != self.ContextSign and self.ContextSign is not None:
+                        self.MaxMS = self.MS
+                        self.MinMS = self.MS
+
+                if self.LastTradeTimestamp is not None:
+                        self.MaxMS = self.MS
+                        self.MinMS = self.MS
+                        self.LastTradeTimestamp=None
+
+                if self.MaxMS is None or self.MaxMS < self.MS:
+                        self.MaxMS = self.MS
+
+                if self.MinMS is None or self.MinMS > self.MS:
+                        self.MinMS = self.MS
+
+                self.ContextSign = currentContext
+
+
+        def GetSlope(self, currValue, prevValue):
+
+                if currValue is not None and prevValue is not None and prevValue != 0:
+                        return (currValue - prevValue) / prevValue
+                else:
+                        return None
 
 
      #endregion
 
      #region Public Methods
 
-        def GetMaxABSMaxMinMS(self, count):
+        def GetMSSlope(self, index):
 
-                if len(self.MSMaxMinArray)<count:
-                   return None
+                if len(self.MSArray) >= index:
+                        lastMSndex = self.MSArray[-1 * index]
+                        return self.GetSlope(self.MS, lastMSndex)
+                else:
+                        return None
 
-                arrayToConsider = self.MSMaxMinArray[-1*count:] #Last count elements
 
-                max = None
-
-                for msMinMax in arrayToConsider:
-                        msMinMax=msMinMax if msMinMax>0 else -1*msMinMax
-
-                        if max is None or max < msMinMax:
-                                max=msMinMax
-
-                return max
-
-        def Update(self,CandleBarArr,slow=26, fast=12, signal=9,MSMaxMinMinutes = 30):
+        def Update(self,CandleBarArr,slow=26, fast=12, signal=9):
                 sortedBars = sorted(list(filter(lambda x: x is not None, CandleBarArr)), key=lambda x: x.DateTime,reverse=False)
 
                 lastBar = sortedBars[-1]
@@ -110,7 +97,7 @@ class MACDIndicator():
                 if (self.LastProcessedDateTime is not None and self.LastProcessedDateTime==lastBar.DateTime):
                         return
 
-                self.UpdateParameters(slow,fast,signal,MSMaxMinMinutes)
+                self.UpdateParameters(slow,fast,signal)
 
                 self.LastProcessedDateTime = lastBar.DateTime
 
