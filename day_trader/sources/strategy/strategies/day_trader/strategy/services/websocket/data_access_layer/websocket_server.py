@@ -31,6 +31,7 @@ from sources.framework.common.wrappers.portfolio_position_list_request_wrapper i
 from sources.strategy.strategies.day_trader.strategy.services.websocket.common.DTO.error_message import *
 from sources.strategy.strategies.day_trader.strategy.services.websocket.common.DTO.positions.position_dto import *
 from sources.strategy.strategies.day_trader.strategy.services.websocket.common.DTO.market_data.market_data_dto import *
+from sources.strategy.strategies.day_trader.strategy.services.websocket.common.DTO.positions.trading_signal_dto import *
 from sources.strategy.strategies.day_trader.strategy.services.websocket.common.DTO.positions.position_update_req import *
 from sources.strategy.strategies.day_trader.strategy.services.websocket.common.DTO.positions.position_update_ack import *
 from sources.strategy.strategies.day_trader.strategy.services.websocket.common.DTO.positions.position_new_req import *
@@ -49,9 +50,13 @@ from sources.framework.common.wrappers.portfolio_position_trade_list_request_wra
 from sources.strategy.strategies.day_trader.strategy.services.websocket.common.wrappers.historical_prices_req_wrapper import *
 from sources.strategy.strategies.day_trader.strategy.services.websocket.common.wrappers.model_parameter_req_wrapper import *
 from sources.strategy.strategies.day_trader.strategy.services.websocket.common.wrappers.market_data_req_wrapper import *
+from sources.strategy.strategies.day_trader.strategy.services.websocket.common.wrappers.position_trading_signal_subscription_wrapper import *
+
+
 
 _OPEN_POSITIONS_SERVICE = "OP"
 _POSITION_EXECUTIONS_SERVICE="PE"
+_POSITION_TRADING_SIGNALS="PTS"
 
 
 class WSHandler(tornado.websocket.WebSocketHandler):
@@ -78,6 +83,10 @@ class WSHandler(tornado.websocket.WebSocketHandler):
   def PublishMarketData(self,md):
     mdDTO = MarketDataDTO(md)
     self.DoSendAsync(mdDTO)
+
+  def PublishTradingSignal(self,symbol,signal,intRecomendation):
+    tsDTO = TradingSignalDTO(symbol,signal,intRecomendation)
+    self.DoSendAsync(tsDTO)
 
   def PublishOpenPositions(self,positions):
     if self.IsSubscribed(_OPEN_POSITIONS_SERVICE,None):
@@ -167,6 +176,16 @@ class WSHandler(tornado.websocket.WebSocketHandler):
                .format(subscrMsg.UUID,ReqId,subscrMsg.Service,subscrMsg.ServiceKey,resp.Success), MessageType.INFO)
     self.DoSendResponse(resp)
 
+  def ProcessPositionsTradingSignals(self,subscrMsg,subscribe=True):
+    self.SubscribeService(subscrMsg)
+
+    wrapper = PositionTradingSignalSubscriptionWrapper(subscrMsg.ServiceKey,pSubscribe=subscribe)
+
+    state = self.InvokingModule.ProcessIncoming(wrapper)
+
+    self.ProcessSubscriptionResponse(subscrMsg, state.Success,
+                                     str(state.Exception) if state.Exception is not None else None, subscrMsg.ReqId)
+
   def ProcessPositionsExecutions(self,subscrMsg):
     self.SubscribeService(subscrMsg)
 
@@ -190,6 +209,9 @@ class WSHandler(tornado.websocket.WebSocketHandler):
     #Unsubscription don't have confirmation messages
     if subscrMsg.Service not in self.SubscribedServices:
       del self.SubscribedServices[subscrMsg.Service]
+
+    if subscrMsg.Service == _POSITION_TRADING_SIGNALS:
+      self.ProcessPositionsTradingSignals(subscrMsg,subscribe=False)
 
 
   def ProcessNewPositionReq(self,posNewReq):
@@ -428,6 +450,8 @@ class WSHandler(tornado.websocket.WebSocketHandler):
         self.ProcessOpenPositions(subscrMsg)
       elif subscrMsg.Service == _POSITION_EXECUTIONS_SERVICE:
         self.ProcessPositionsExecutions(subscrMsg)
+      elif subscrMsg.Service == _POSITION_TRADING_SIGNALS:
+        self.ProcessPositionsTradingSignals(subscrMsg)
       else:
         self.DoLog("Not processed service {} for subscription".format(subscrMsg.Service),MessageType.ERROR)
 

@@ -9,6 +9,7 @@ from sources.framework.common.enums.fields.portfolio_positions_list_field import
 from sources.framework.common.enums.fields.portfolio_position_field import *
 from sources.framework.common.enums.fields.summary_field import *
 from sources.framework.common.enums.fields.summary_list_fields import *
+from sources.framework.common.enums.fields.trading_signal_field import *
 from sources.framework.common.enums.fields.error_field import *
 from sources.strategy.strategies.day_trader.strategy.services.websocket.common.DTO.config.model_param_dto import *
 from sources.strategy.strategies.day_trader.common.converters.market_data_converter import *
@@ -100,6 +101,25 @@ class WebSocketModule(BaseCommunicationModule, ICommunicationModule):
 
         except Exception as e:
             self.DoLog("Exception @WebsocketModule.ProcessExecutionSummaryList:{}".format(str(e)), MessageType.ERROR)
+            return CMState.BuildFailure(self, Exception=e)
+        finally:
+            if self.LockConnections.locked():
+                self.LockConnections.release()
+
+    def ProcessTradingSignal(self,wrapper):
+        try:
+            symbol = wrapper.GetField(TradingSignalField.Symbol)
+            signal = wrapper.GetField(TradingSignalField.Signal)
+            intRecom = wrapper.GetField(TradingSignalField.Recommendation)
+
+
+            self.LockConnections.acquire()
+            for conn in self.Connections:
+                conn.PublishTradingSignal(symbol,signal,intRecom)
+
+            return CMState.BuildSuccess(self)
+        except Exception as e:
+            self.DoLog("Exception @WebsocketModule.ProcessMarketData:{}".format(str(e)), MessageType.ERROR)
             return CMState.BuildFailure(self, Exception=e)
         finally:
             if self.LockConnections.locked():
@@ -247,6 +267,8 @@ class WebSocketModule(BaseCommunicationModule, ICommunicationModule):
                 return self.ProcessModelParam(wrapper)
             elif wrapper.GetAction() == Actions.MARKET_DATA:
                 return self.ProcessMarketData(wrapper)
+            elif wrapper.GetAction() == Actions.TRADING_SIGNAL:
+                return self.ProcessTradingSignal(wrapper)
             else:
                 raise Exception("ProcessMessage: Not prepared to process message {}".format(wrapper.GetAction()))
         except Exception as e:
@@ -282,6 +304,8 @@ class WebSocketModule(BaseCommunicationModule, ICommunicationModule):
             elif wrapper.GetAction() == Actions.DAY_TRADING_POSITION_NEW_REQUEST:
                 return self.InvokingModule.ProcessMessage(wrapper)
             elif wrapper.GetAction() == Actions.MARKET_DATA_REQUEST:
+                return self.InvokingModule.ProcessMessage(wrapper)
+            elif wrapper.GetAction() == Actions.POSITION_TRADING_SIGNAL_SUBSCRIPTION:
                 return self.InvokingModule.ProcessMessage(wrapper)
             else:
                 raise Exception("ProcessIncoming: Not prepared to process message {}".format(wrapper.GetAction()))

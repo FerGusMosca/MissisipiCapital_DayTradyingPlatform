@@ -27,6 +27,7 @@ import time
 import uuid
 from datetime import datetime
 import traceback
+import queue
 
 
 ORDER_FIELDS      = blpapi.Name("OrderFields")
@@ -91,6 +92,7 @@ class OrderRouter( BaseCommunicationModule, ICommunicationModule):
         self.PendingCancels = {}
         self.ActiveOrders = {}
         self.ExternalOrders = {}
+        self.ExternalExecutionReports = {}
 
         self.PreExitingOrders=[]
         self.PreExistingExecutionReports=[]
@@ -111,7 +113,8 @@ class OrderRouter( BaseCommunicationModule, ICommunicationModule):
     # region Private Methods
 
     def ValidateMarketDataPacing(self,marketdata):
-
+        return True
+        '''
         if marketdata.Timestamp is not None:
 
             secElapsed = int( abs((datetime.now()- marketdata.Timestamp).seconds))
@@ -119,6 +122,7 @@ class OrderRouter( BaseCommunicationModule, ICommunicationModule):
             return secElapsed >= self.Configuration.MarketDataUpdateFreqSeconds or  self.Configuration.MarketDataUpdateFreqSeconds is None
         else:
             return True
+        '''
 
     def UpdateAndSendCandlebar(self,msg,candlebar):
         if self.ValidateMarketDataPacing(candlebar):
@@ -235,6 +239,25 @@ class OrderRouter( BaseCommunicationModule, ICommunicationModule):
 
         except Exception as e:
             self.DoLog("Error sending execution report:{}".format(str(e)), MessageType.ERROR)
+
+    def DoSendExternalExecutionReport(self,extOrder,execReport):
+        try:
+            extExecReportWr = GenericExecutionReportWrapper(pOrder= extOrder,pExecutionReport=execReport)
+
+            if extOrder.OrderId not in self.ExternalExecutionReports:
+                self.ExternalExecutionReports[extOrder.OrderId]= queue.Queue(maxsize=1000000)
+
+            self.ExternalExecutionReports[extOrder.OrderId].put(extExecReportWr)
+            time.sleep(self.Configuration.ExternalOrdersPacingSeconds)
+            if extOrder.OrderId in self.ExternalExecutionReports:
+                while not self.ExternalExecutionReports[extOrder.OrderId].empty():
+                    self.DoLog("Sending ExecReport for external order. OrderId={} Symbol={}".format(extOrder.OrderId,extOrder.Security.Symbol),
+                               MessageType.INFO)
+                    execReportWr = self.ExternalExecutionReports[extOrder.OrderId].get()
+                    self.DoSendExecutionReportThread(execReportWr)
+
+        except Exception as e:
+            self.DoLog("ERROR sending external execution report:{}".format(str(e)), MessageType.ERROR)
 
     def DoSendExecutionReport(self,activeOrder,msg):
         try:
@@ -389,6 +412,12 @@ class OrderRouter( BaseCommunicationModule, ICommunicationModule):
                         activeOrder.OrdStatus = OrdStatus.PendingNew
                         activeOrder.MarketArrivalTime = datetime.now()
                         self.ActiveOrders[emsxSequence]=activeOrder
+
+                        if emsxSequence in self.ExternalExecutionReports:
+                            del self.ExternalExecutionReports[emsxSequence]
+
+                        if emsxSequence in self.ExternalOrders:
+                            del self.ExternalOrders[emsxSequence]
                         self.DoLog("EMSX_Sequence assigned for Order {}:{} - Message={}".format(activeOrder.ClOrdId,
                                                                                                 emsxSequence, message), MessageType.INFO)
                         # this is not a New message- This just means that the order was sent to the exchange
@@ -416,7 +445,7 @@ class OrderRouter( BaseCommunicationModule, ICommunicationModule):
             elif msg.messageType() == HISTORICAL_DATA_REPONSE:
                 self.ProcessHistoricalPrice(msg)
             else:
-                self.DoLog("Received response for unknown CorrelationId {}".format(msg.correlationIds()[0].value()),MessageType.DEBUG)
+                self.DoLog("Received response for unknown CorrelationId {}".format(msg.correlationIds()[0].value()),MessageType.INFO)
 
     def ProcessInitialPaint(self,msg):
         if msg.correlationIds()[0].value() == orderSubscriptionID.value():
@@ -439,13 +468,11 @@ class OrderRouter( BaseCommunicationModule, ICommunicationModule):
                 and BloombergTranslationHelper.GetSafeString(self, msg, "EMSX_SEQUENCE", None) is not None
                 and BloombergTranslationHelper.GetSafeString(self, msg,"EMSX_TICKER",None) is not None):
 
-
             unkOrder = SubscriptionHelper.BuildOrder(self, msg)
             unkOrder.ClOrdId=uuid.uuid4()
             self.ExternalOrders[unkOrder.OrderId]=unkOrder
 
-            self.DoLog("Received unknown order {} subscription event. ".format(BloombergTranslationHelper.GetSafeString(self, msg, "EMSX_SEQUENCE", None)), MessageType.INFO)
-            self.DoLog("Saving order for external trading analysis", MessageType.INFO)
+
 
     def ProcessExecutionReports(self,msg):
         eventStatus = msg.getElementAsInteger("EVENT_STATUS")
@@ -462,13 +489,15 @@ class OrderRouter( BaseCommunicationModule, ICommunicationModule):
             elif self.FetchExternalOrders(msg) is not None:
                 if (eventStatus == _EVENT_STATUS_NEW_ORDER or eventStatus == _EVENT_STATUS_UPD_ORDER or eventStatus == _EVENT_STATUS_DELETE_ORDER):
                     extOrder =self.FetchExternalOrders(msg)
-                    self.DoLog("Received execution report for external order -> EMSX_SEQUENCE= {}".format(extOrder.OrderId),MessageType.INFO)
-                    self.DoSendExecutionReport(extOrder, msg)
+                    self.DoLog("Received execution report for potential external order -> EMSX_SEQUENCE= {}".format(extOrder.OrderId),MessageType.DEBUG)
+                    extExecReport= SubscriptionHelper.BuildExecutionReport(self,msg)
+                    threading.Thread(target=self.DoSendExternalExecutionReport, args=(extOrder,extExecReport)).start()
             else:
                 self.DoLog("Received response for unknown order:{}.".format(msg), MessageType.DEBUG)
         elif msg.correlationIds()[0].value() == orderSubscriptionID.value():
-
             self.ProcessOrdersFromExchange(msg)
+            self.DoLog("Saving order for potential external trading analysis", MessageType.DEBUG)
+
         else:
             self.DoLog( "Received Subscription Event for unknown correlationId= {}".format(msg.correlationIds()[0].value()),MessageType.DEBUG)
 

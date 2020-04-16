@@ -24,7 +24,8 @@ class Configuration:
         self.InitialRecoveryTimeoutInSeconds = int(config['DEFAULT']['INITIAL_RECOVERY_TIMEOUT_IN_SECONDS'])
         self.ImplementMock = config['DEFAULT']['IMPLEMENT_MOCK'] == "True"
 
-        self.MarketDataUpdateFreqSeconds = int( config['DEFAULT']['MARKET_UPDATA_UPDATE_FREQ_SECONDS'])
+        self.ExternalOrdersPacingSeconds = int(config['DEFAULT']['EXTERNAL_ORDERS_PACING_SECONDS'])
+
 
 
 

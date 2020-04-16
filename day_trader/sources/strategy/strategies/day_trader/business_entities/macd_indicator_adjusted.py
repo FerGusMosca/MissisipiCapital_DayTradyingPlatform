@@ -63,7 +63,8 @@ class MACDIndicatorAdjusted(MACDIndicator):
         prices = []
 
         for bar in sortedBars:
-            prices.append(bar.Close)
+            if bar.Close is not None:
+                prices.append(bar.Close)
 
         index= 10
 

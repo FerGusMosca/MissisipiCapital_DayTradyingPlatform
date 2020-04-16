@@ -62,6 +62,17 @@ _SHORT_MACD_RSI_RULE_3="SHORT_MACD_RSI_RULE_3"
 _SHORT_MACD_RSI_RULE_4="SHORT_MACD_RSI_RULE_4"
 _SHORT_MACD_RSI_RULE_5="SHORT_MACD_RSI_RULE_5"
 
+_TERMINALLY_CLOSED ="TERMINALLY_CLOSED"
+
+_REC_UNDEFINED = -1
+_REC_GO_LONG_NOW = 0
+_REC_GO_SHORT_NOW = 1
+_REC_STAY_LONG = 2
+_REC_STAY_SHORT = 3
+_REC_EXIT_LONG_NOW = 4
+_REC_EXIT_SHORT_NOW = 5
+_REC_STAY_OUT= 5
+
 class DayTradingPosition():
 
     def __init__(self,id ,security,shares,active,routing,open,longSignal,shortSignal,signalType=None,signalDesc=None):
@@ -86,15 +97,56 @@ class DayTradingPosition():
 
         self.MaxProfit = 0
         self.MaxLoss=0
+        self.MaxProfitCurrentTrade = 0
+        self.MaxLossCurrentTrade = 0
         self.LastNDaysStdDev = 0
         self.LastProfitCalculationDay = None
         self.TerminalClose = False
+        self.Recomendation = _REC_UNDEFINED
+        self.ShowTradingRecommndations = False
 
         self.MinuteNonSmoothedRSIIndicator = RSIIndicator(False)
         self.MinuteSmoothedRSIIndicator = RSIIndicator(True)
         self.DailyRSIIndicator = RSIIndicator(False)
         #self.MACDIndicator = MACDIndicator()
         self.MACDIndicator = MACDIndicatorAdjusted()
+
+
+    #region Static Methods
+
+    @staticmethod
+    def _TERMINALLY_CLOSED():
+        return _TERMINALLY_CLOSED
+
+    @staticmethod
+    def _REC_GO_LONG_NOW():
+        return _REC_GO_LONG_NOW
+
+    @staticmethod
+    def _REC_GO_SHORT_NOW():
+        return _REC_GO_SHORT_NOW
+
+    @staticmethod
+    def _REC_STAY_OUT():
+        return _REC_STAY_OUT
+
+    @staticmethod
+    def _REC_EXIT_LONG_NOW():
+        return _REC_EXIT_LONG_NOW
+
+    @staticmethod
+    def _REC_STAY_LONG():
+        return _REC_STAY_LONG
+
+    @staticmethod
+    def _REC_EXIT_SHORT_NOW():
+        return _REC_EXIT_SHORT_NOW
+
+    @staticmethod
+    def _REC_STAY_SHORT():
+        return _REC_STAY_SHORT
+
+    #endregion
 
 
     #region Private Methods
@@ -346,12 +398,16 @@ class DayTradingPosition():
 
         self.MaxLoss = 0
         self.MaxProfit = 0
+        self.MaxProfitCurrentTrade = 0
+        self.MaxLossCurrentTrade = 0
         self.LastProfitCalculationDay = datetime.now()
 
         self.MinuteNonSmoothedRSIIndicator.Reset()#14
         self.MinuteSmoothedRSIIndicator.Reset()#30
         self.MACDIndicator.Reset()
         self.TerminalClose = False
+        self.Recomendation=_REC_UNDEFINED
+        self.ShowTradingRecommndations=False
 
     def CalculateCurrentDayProfits(self,marketData):
 
@@ -374,6 +430,12 @@ class DayTradingPosition():
             if(profitsAndLosses.Profits<self.MaxLoss):
                 self.MaxLoss=profitsAndLosses.Profits
 
+            if (profitsAndLosses.ProfitLastTrade > self.MaxProfitCurrentTrade):
+                self.MaxProfitCurrentTrade = profitsAndLosses.ProfitLastTrade
+
+            if (profitsAndLosses.ProfitLastTrade < self.MaxLossCurrentTrade):
+                self.MaxLossCurrentTrade = profitsAndLosses.ProfitLastTrade
+
             self.CurrentProfit=profitsAndLosses.Profits
             self.CurrentProfitMonetary = profitsAndLosses.MonetaryProfits
             self.CurrentProfitLastTrade = profitsAndLosses.ProfitLastTrade
@@ -386,6 +448,8 @@ class DayTradingPosition():
             self.CurrentProfitMonetary = profitsAndLosses.MonetaryProfits
             self.LastProfitCalculationDay = datetime.now()
             self.IncreaseDecrease = 0
+            self.MaxLossCurrentTrade=0
+            self.MaxProfitCurrentTrade=0
 
 
     def EvaluateGenericShortTrade(self,dailyBiasModelParam,dailySlopeModelParam, posMaximShortChangeParam,
@@ -608,17 +672,17 @@ class DayTradingPosition():
             self.TerminalClose =True
             return terminalCond
 
-        if (self.CurrentProfitLastTrade is None or self.MaxProfit is None or self.MinuteSmoothedRSIIndicator.GetRSISlope(5) is None
+        if (self.CurrentProfitLastTrade is None or self.MaxProfitCurrentTrade is None or self.MinuteSmoothedRSIIndicator.GetRSISlope(5) is None
                 or self.MACDIndicator.MSPrev is None or self.MACDIndicator.MS is None or self.MACDIndicator.MaxMS is None
-                or self.MinuteSmoothedRSIIndicator.GetRSISlope(10) is None or self.MaxLoss is None or len(candlebarsArr)<5
+                or self.MinuteSmoothedRSIIndicator.GetRSISlope(10) is None or self.MaxLossCurrentTrade is None or len(candlebarsArr)<5
                 #or self.MACDIndicator.GetMaxABSMaxMinMS(5) is None
             ):
             return None
 
         # SHORT ON --> NO TRADE ON
         # rule 1
-        if (    self.MaxProfit >= macdMaxGainParamJ.FloatValue*100 #MaxProfix is calcualted as base 100 (ex: 72.23%)
-            and (self.MaxProfit > 0 and ((self.CurrentProfitLastTrade / self.MaxProfit) < macdGainNowMaxParamK.FloatValue))
+        if (    self.MaxProfitCurrentTrade >= macdMaxGainParamJ.FloatValue*100 #MaxProfix is calcualted as base 100 (ex: 72.23%)
+            and (self.MaxProfitCurrentTrade > 0 and ((self.CurrentProfitLastTrade / self.MaxProfitCurrentTrade) < macdGainNowMaxParamK.FloatValue))
             and self.MinuteSmoothedRSIIndicator.GetRSISlope(5) > rsi30SlopeSkip5ExitParamL.FloatValue
             ):
             return _EXIT_SHORT_MACD_RSI_COND_1
@@ -634,7 +698,7 @@ class DayTradingPosition():
         # rule 3
         if (    self.MACDIndicator.MSPrev >= msNowParamA.FloatValue
             and self.MACDIndicator.MS >= msNowParamA.FloatValue
-            and self.MaxLoss < (gainMinStopLossExitParamW.FloatValue*100)
+            and self.MaxLossCurrentTrade < (gainMinStopLossExitParamW.FloatValue*100)
         ):
             return _EXIT_SHORT_MACD_RSI_COND_3
 
@@ -649,7 +713,7 @@ class DayTradingPosition():
         # rule 5
         if (    self.MACDIndicator.MSPrev < msNowParamA.FloatValue
             and self.MACDIndicator.MS >= msNowParamA.FloatValue
-            and self.MaxLoss < (gainMinStopLossExitParamW.FloatValue*100)
+            and self.MaxLossCurrentTrade < (gainMinStopLossExitParamW.FloatValue*100)
         ):
             return _EXIT_SHORT_MACD_RSI_COND_5
 
@@ -676,12 +740,12 @@ class DayTradingPosition():
 
         #rule 8
         if (    self.MACDIndicator.GetMaxAbsMS(15) < msMaxMinExitParamS.FloatValue
-            and self.MaxLoss < (gainMinStopLossExitParamZ.FloatValue*100)
+            and self.MaxLossCurrentTrade < (gainMinStopLossExitParamZ.FloatValue*100)
             ):  # MaxLoss is express in base 100 (ex: 71.23%)
             return _EXIT_SHORT_MACD_RSI_COND_8
 
         # rule 9
-        if (    self.MaxLoss < (gainMinStopLossExitParamU.FloatValue*100)): #MaxLoss is express in base 100 (ex: 71.23%)
+        if (    self.MaxLossCurrentTrade < (gainMinStopLossExitParamU.FloatValue*100)): #MaxLoss is express in base 100 (ex: 71.23%)
             return _EXIT_SHORT_MACD_RSI_COND_9
             
 
@@ -738,20 +802,20 @@ class DayTradingPosition():
             return _EXIT_TERM_COND_EOF
 
         # Maximum Gain during the trade exceeds a certain value and then drops to a percentage of that value
-        if (self.MaxProfit is not None
-                and self.CurrentProfit is not None
-                and (maxGainForClosingModelParam.FloatValue is not None and self.MaxProfit >= maxGainForClosingModelParam.FloatValue*100)
-                and (pctMaxGainForClosingModelParam.FloatValue is not None and ( self.CurrentProfit < pctMaxGainForClosingModelParam.FloatValue * self.MaxProfit))
+        if (self.MaxProfitCurrentTrade is not None
+                and self.CurrentProfitLastTrade is not None
+                and (maxGainForClosingModelParam.FloatValue is not None and self.MaxProfitCurrentTrade >= maxGainForClosingModelParam.FloatValue*100)
+                and (pctMaxGainForClosingModelParam.FloatValue is not None and ( self.CurrentProfitLastTrade < pctMaxGainForClosingModelParam.FloatValue * self.MaxProfit))
           ):
             return _EXIT_TERM_COND_1
 
         # Maximum Loss during the trade exceeds (worse than) a certain value and then drops to a percentage of that value
-        if (self.CurrentProfit is not None
-            and self.MaxLoss is not None
-            and (maxLossForClosingModelParam.FloatValue is not None and self.MaxLoss <= (maxLossForClosingModelParam.FloatValue*100))
+        if (self.CurrentProfitLastTrade is not None
+            and self.MaxLossCurrentTrade is not None
+            and (maxLossForClosingModelParam.FloatValue is not None and self.MaxLossCurrentTrade <= (maxLossForClosingModelParam.FloatValue*100))
             and self.CurrentProfit < 0):
-            absProfit = self.CurrentProfit if self.CurrentProfit > 0 else (-1 * self.CurrentProfit)
-            absMaxLoss = self.MaxLoss if self.MaxLoss > 0 else (-1 * self.MaxLoss)
+            absProfit = self.CurrentProfitLastTrade if self.CurrentProfitLastTrade > 0 else (-1 * self.CurrentProfit)
+            absMaxLoss = self.MaxLossCurrentTrade if self.MaxLossCurrentTrade > 0 else (-1 * self.MaxLossCurrentTrade)
             if (absProfit < (pctMaxLossForClosingModelParam.FloatValue * absMaxLoss)):
                 return _EXIT_TERM_COND_2
 
@@ -871,9 +935,10 @@ class DayTradingPosition():
 
 
         if (
-                self.CurrentProfitLastTrade is None or self.MaxProfit is None or self.MinuteSmoothedRSIIndicator.GetRSISlope(5) is None
+                self.CurrentProfitLastTrade is None or self.MaxProfitCurrentTrade is None or self.MinuteSmoothedRSIIndicator.GetRSISlope(5) is None
                 or self.MACDIndicator.MSPrev is None or self.MACDIndicator.MS is None or self.MACDIndicator.MaxMS is None
-                or self.MinuteSmoothedRSIIndicator.GetRSISlope(10) is None or self.MaxLoss is None or len(candlebarsArr)<5
+                or self.MinuteSmoothedRSIIndicator.GetRSISlope(10) is None or self.MaxLossCurrentTrade is None
+                or len(candlebarsArr)<5
                 #or self.MACDIndicato.GetMaxABSMaxMinMS(5) is None
            ):
             return None
@@ -881,8 +946,8 @@ class DayTradingPosition():
         # LONG ON --> NO TRADE ON
         # rule 1
         if (
-                    self.MaxProfit >=macdMaxGainParamJ.FloatValue*100 #MaxProfixs is calculated in base 100 (ex: 73.22%)
-                and (self.MaxProfit> 0  and ((self.CurrentProfitLastTrade/self.MaxProfit)<macdGainNowMaxParamK.FloatValue))
+                    self.MaxProfitCurrentTrade >=macdMaxGainParamJ.FloatValue*100 #MaxProfixs is calculated in base 100 (ex: 73.22%)
+                and (self.MaxProfitCurrentTrade> 0  and ((self.CurrentProfitLastTrade/self.MaxProfitCurrentTrade)<macdGainNowMaxParamK.FloatValue))
                 and self.MinuteSmoothedRSIIndicator.GetRSISlope(5) < (-1*rsi30SlopeSkip5ExitParamL.FloatValue)
            ):
             return _EXIT_LONG_MACD_RSI_COND_1
@@ -899,7 +964,7 @@ class DayTradingPosition():
         # rule 3
         if (self.MACDIndicator.MSPrev < msNowParamA.FloatValue
                 and self.MACDIndicator.MS < msNowParamA.FloatValue
-                and self.MaxLoss < (gainMinStopLossExitParamW*100)
+                and self.MaxLossCurrentTrade < (gainMinStopLossExitParamW.FloatValue*100)
 
         ):
             return _EXIT_LONG_MACD_RSI_COND_3
@@ -916,7 +981,7 @@ class DayTradingPosition():
         # rule 5
         if (        self.MACDIndicator.MSPrev >= msNowParamA.FloatValue
                 and self.MACDIndicator.MS < msNowParamA.FloatValue
-                and self.MaxLoss < (gainMinStopLossExitParamW*100)
+                and self.MaxLossCurrentTrade < (gainMinStopLossExitParamW.FloatValue*100)
 
         ):
             return _EXIT_LONG_MACD_RSI_COND_5
@@ -943,14 +1008,14 @@ class DayTradingPosition():
 
         # rule 8
         if (        self.MACDIndicator.GetMaxAbsMS(15) < msMaxMinExitParamS.FloatValue
-                and self.MaxLoss < (gainMinStopLossExitParamZ.FloatValue*100)
+                and self.MaxLossCurrentTrade < (gainMinStopLossExitParamZ.FloatValue*100)
             ):
             return _EXIT_LONG_MACD_RSI_COND_8
 
         # rule 9
-        if (        self.MaxLoss < (gainMinStopLossExitParamU.FloatValue*100)): #MaxLoss is calculated in base 100 (ex: 73.22%)
+        if (        self.MaxLossCurrentTrade < (gainMinStopLossExitParamU.FloatValue*100)): #MaxLoss is calculated in base 100 (ex: 73.22%)
             return  _EXIT_LONG_MACD_RSI_COND_9
-        
+
 
         return None #No condition to exit
 

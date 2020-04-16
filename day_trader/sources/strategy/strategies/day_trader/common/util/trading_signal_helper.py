@@ -125,6 +125,8 @@ class TradingSignalHelper:
                     ModelParametersHandler.TAKE_GAIN_LIMIT(), symbol))
                 self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
                     ModelParametersHandler.STOP_LOSS_LIMIT(), symbol))
+                self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
+                    ModelParametersHandler.END_OF_DAY_LIMIT(), symbol))
 
 
                 self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "MSPrev",dayTradingPos.MACDIndicator.MSPrev)
@@ -133,9 +135,12 @@ class TradingSignalHelper:
                 self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "MinMS",dayTradingPos.MACDIndicator.MinMS)
                 self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "RSISmoothed5SL",dayTradingPos.MinuteSmoothedRSIIndicator.GetRSISlope(5))
                 self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "RSISmoothed10SL",dayTradingPos.MinuteSmoothedRSIIndicator.GetRSISlope(10))
+                self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "CurrentProfit",dayTradingPos.CurrentProfit)
                 self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "CurrentProfitLastTrade", dayTradingPos.CurrentProfitLastTrade)
                 self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "MaxProfit",dayTradingPos.MaxProfit)
+                self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "MaxProfitCurrentTrade",dayTradingPos.MaxProfitCurrentTrade)
                 self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "MaxLoss",dayTradingPos.MaxLoss)
+                self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "MaxLossCurrentTrade",dayTradingPos.MaxLossCurrentTrade)
                 self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "SmoothedRSI",dayTradingPos.MinuteSmoothedRSIIndicator.RSI)
                 self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "NonSmoothedRSI",dayTradingPos.MinuteNonSmoothedRSIIndicator.RSI)
                 self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "MACD",dayTradingPos.MACDIndicator.MACD)
@@ -279,6 +284,19 @@ class TradingSignalHelper:
 
             self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "CloseCondition",
                                                                         condition if condition is None else "??")
+
+            self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "CurrentProfit",
+                                                                        dayTradingPos.CurrentProfit)
+            self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "CurrentProfitLastTrade",
+                                                                        dayTradingPos.CurrentProfitLastTrade)
+            self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "MaxProfit",
+                                                                        dayTradingPos.MaxProfit)
+            self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "MaxProfitCurrentTrade",
+                                                                        dayTradingPos.MaxProfitCurrentTrade)
+            self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "MaxLoss",
+                                                                        dayTradingPos.MaxLoss)
+            self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "MaxLossCurrentTrade",
+                                                                        dayTradingPos.MaxLossCurrentTrade)
 
             self.TradingSignalManager.Commit()
 
