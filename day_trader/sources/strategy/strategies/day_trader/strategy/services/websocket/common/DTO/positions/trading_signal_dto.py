@@ -12,21 +12,21 @@ class TradingSignalDTO:
 
 
     def TranslateRecomendation(self,recomendation):
-        if recomendation == DayTradingPosition._TERMINALLY_CLOSED:
+        if recomendation == DayTradingPosition._TERMINALLY_CLOSED():
             return "Terminally Closed"
-        elif recomendation == DayTradingPosition._REC_GO_LONG_NOW:
+        elif recomendation == DayTradingPosition._REC_GO_LONG_NOW():
             return "Go Long Now!"
-        elif recomendation == DayTradingPosition._REC_GO_SHORT_NOW:
+        elif recomendation == DayTradingPosition._REC_GO_SHORT_NOW():
             return "Go Short Now!"
-        elif recomendation == DayTradingPosition._REC_STAY_OUT:
+        elif recomendation == DayTradingPosition._REC_STAY_OUT():
             return "Stay Out"
-        elif recomendation == DayTradingPosition._REC_EXIT_LONG_NOW:
+        elif recomendation == DayTradingPosition._REC_EXIT_LONG_NOW():
             return "Exit Long Now!"
-        elif recomendation == DayTradingPosition._REC_STAY_LONG:
+        elif recomendation == DayTradingPosition._REC_STAY_LONG():
             return "Stay Long"
-        elif recomendation == DayTradingPosition._REC_EXIT_SHORT_NOW:
+        elif recomendation == DayTradingPosition._REC_EXIT_SHORT_NOW():
             return "Exit Short Now!"
-        elif recomendation == DayTradingPosition._REC_STAY_SHORT:
+        elif recomendation == DayTradingPosition._REC_STAY_SHORT():
             return "Stay Short"
         else:
             return "Unknown recomendation id {}".format(recomendation)

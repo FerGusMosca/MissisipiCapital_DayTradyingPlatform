@@ -39,6 +39,7 @@ from sources.strategy.strategies.day_trader.common.wrappers.portfolio_position_w
 from sources.strategy.strategies.day_trader.common.util.model_parameters_handler import *
 from sources.strategy.strategies.day_trader.common.util.trading_signal_helper import *
 from sources.strategy.strategies.day_trader.business_entities.trading_signal import *
+from sources.framework.util.log_helper import *
 from dateutil.parser import parse
 import threading
 import time
@@ -119,7 +120,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
     def PublishTradingSignalThread(self,tradingSignal):
         try:
-            self.DayTradi
+
             tradingSignalWrapper = TradingSignalWrapper(tradingSignal)
             self.SendToInvokingModule(tradingSignalWrapper)
         except Exception as e:
@@ -538,8 +539,10 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
         try:
             self.LockMarketData.acquire()
             md = MarketDataConverter.ConvertMarketData(wrapper)
+
+            LogHelper.LogPublishMarketDataOnSecurity("DayTrader Recv MarketData", self, md.Security.Symbol,md)
             self.MarketData[md.Security.Symbol]=md
-            self.DoLog("Marktet Data successfully loaded for symbol {} ".format(md.Security.Symbol),MessageType.DEBUG)
+
             dayTradingPositions = list(filter(lambda x: x.Security.Symbol == md.Security.Symbol, self.DayTradingPositions))
 
             for dayTradingPos in dayTradingPositions:
@@ -550,6 +553,8 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                 else:
                     dayTradingPos.MarketData=md
                 dayTradingPos.CalculateCurrentDayProfits(md)
+
+            LogHelper.LogPublishMarketDataOnSecurity("DayTrader Proc MarketData", self, md.Security.Symbol, md)
 
         except Exception as e:
             self.ProcessErrorInMethod("@DayTrader.ProcessMarketData", e,md.Security.Symbol is md if not None else None)
@@ -612,6 +617,15 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
             if dayTradingPos is not None and dayTradingPos.ShowTradingRecommndations:
 
+
+                if dayTradingPos.TerminalClose:
+                    # Publish Terminal Close
+                    threading.Thread(target=self.PublishTradingSignalThread,
+                                     args=(TradingSignal(security=dayTradingPos.Security,
+                                                         signal=dayTradingPos.TerminalCloseCond,
+                                                         recommendation=dayTradingPos._TERMINALLY_CLOSED()),)).start()
+                    return 
+
                 if not dayTradingPos.Open():
 
                     openLong =  self.EvaluateMACDRSILongTrade(dayTradingPos, dayTradingPos.Security.Symbol , cbDict, candlebar)
@@ -622,48 +636,48 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                         threading.Thread(target=self.PublishTradingSignalThread,
                                          args=(TradingSignal(security=dayTradingPos.Security,
                                                              signal=openLong,
-                                                             recommendation=dayTradingPos._REC_GO_LONG_NOW),)).start()
+                                                             recommendation=dayTradingPos._REC_GO_LONG_NOW()),)).start()
                     elif openShort is not None:
                         # Publish TradingSignal GO SHORT NOW
                         threading.Thread(target=self.PublishTradingSignalThread,
                                          args=(TradingSignal(security=dayTradingPos.Security,
                                                              signal=openShort,
-                                                             recommendation=dayTradingPos._REC_GO_SHORT_NOW),)).start()
+                                                             recommendation=dayTradingPos._REC_GO_SHORT_NOW()),)).start()
                     else:
                         #Publish STAY OUT
                         threading.Thread(target=self.PublishTradingSignalThread,
                                          args=(TradingSignal(security=dayTradingPos.Security,
                                                              signal="",
-                                                             recommendation=dayTradingPos._REC_STAY_OUT),)).start()
+                                                             recommendation=dayTradingPos._REC_STAY_OUT()),)).start()
                 else:
-                    if dayTradingPos.NetShares>0:
+                    if dayTradingPos.GetNetOpenShares()>0:
                         closeLong = self.EvaluateClosingMACDRSILongPositions(candlebar,cbDict,runClose=False)
                         if closeLong is not None:
                             #Publish Trading Signal EXIT LONG NOW
                             threading.Thread(target=self.PublishTradingSignalThread,
                                              args=(TradingSignal(security=dayTradingPos.Security,
                                                                  signal=closeLong,
-                                                                 recommendation=dayTradingPos._REC_EXIT_LONG_NOW),)).start()
+                                                                 recommendation=dayTradingPos._REC_EXIT_LONG_NOW()),)).start()
                         else:
                             #Publish Trading Signal STAY LONG
                             threading.Thread(target=self.PublishTradingSignalThread,
                                              args=(TradingSignal(security=dayTradingPos.Security,
                                                                  signal="",
-                                                                 recommendation=dayTradingPos._REC_STAY_LONG),)).start()
-                    elif dayTradingPos.NetShares<0:
+                                                                 recommendation=dayTradingPos._REC_STAY_LONG()),)).start()
+                    elif dayTradingPos.GetNetOpenShares()<0:
                         closeShort = self.EvaluateClosingMACDRSIShortPositions(candlebar,cbDict,runClose=False)
                         if closeShort is not None:
                             #Publish Trading Signal EXIT SHORT NOW
                             threading.Thread(target=self.PublishTradingSignalThread,
                                              args=(TradingSignal(security=dayTradingPos.Security,
                                                                  signal=closeShort,
-                                                                 recommendation=dayTradingPos._REC_EXIT_SHORT_NOW),)).start()
+                                                                 recommendation=dayTradingPos._REC_EXIT_SHORT_NOW()),)).start()
                         else:
                             #Publish Trading Signal STAY SHORT
                             threading.Thread(target=self.PublishTradingSignalThread,
                                              args=(TradingSignal(security=dayTradingPos.Security,
                                                                  signal="",
-                                                                 recommendation=dayTradingPos._REC_STAY_SHORT),)).start()
+                                                                 recommendation=dayTradingPos._REC_STAY_SHORT()),)).start()
         except Exception as e:
             msg = "Critical error @DayTrader.UpdateTradingSignals.:{}".format(str(e))
             self.ProcessError(ErrorWrapper(Exception(msg)))
@@ -805,15 +819,21 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
                longCondition =  dayTradingPos.EvaluateMACDRSILongTrade(self.ModelParametersHandler.Get(ModelParametersHandler.M_S_NOW_A(),symbol),
                                   self.ModelParametersHandler.Get( ModelParametersHandler.M_S_MIN_B(), symbol),
+                                  self.ModelParametersHandler.Get(ModelParametersHandler.M_S_MIN_B_B(), symbol),
                                   self.ModelParametersHandler.Get(ModelParametersHandler.RSI_30_SLOPE_SKIP_5_C(), symbol),
                                   self.ModelParametersHandler.Get(ModelParametersHandler.M_S_MAX_MIN_D(), symbol),
+                                  self.ModelParametersHandler.Get(ModelParametersHandler.M_S_MAX_MIN_D_D(),symbol),
                                   self.ModelParametersHandler.Get(ModelParametersHandler.M_S_NOW_MAX_E(), symbol),
-                                  self.ModelParametersHandler.Get( ModelParametersHandler.M_S_NOW_F(), symbol),
+                                  self.ModelParametersHandler.Get(ModelParametersHandler.M_S_NOW_F(), symbol),
+                                  self.ModelParametersHandler.Get(ModelParametersHandler.M_S_NOW_F_F(), symbol),
                                   self.ModelParametersHandler.Get(ModelParametersHandler.RSI_30_SLOPE_SKIP_10_G(), symbol),
                                   self.ModelParametersHandler.Get(ModelParametersHandler.ABS_M_S_MAX_MIN_LAST_5_H(), symbol),
+                                  self.ModelParametersHandler.Get(ModelParametersHandler.ABS_M_S_MAX_MIN_LAST_5_H_H(),symbol),
                                   self.ModelParametersHandler.Get(ModelParametersHandler.SEC_5_MIN_SLOPE_I(), symbol),
                                   self.ModelParametersHandler.Get(ModelParametersHandler.RSI_14_SLOPE_SKIP_3_V(),symbol),
                                   self.ModelParametersHandler.Get(ModelParametersHandler.M_S_3_SLOPE_X(),symbol),
+                                  self.ModelParametersHandler.Get(ModelParametersHandler.M_S_3_SLOPE_X_X(),symbol),
+                                  self.ModelParametersHandler.Get(ModelParametersHandler.MACD_RSI_SMOOTHED_MODE(),symbol),
                                    list(cbDict.values()))
                if longCondition is not None:
                    self.DoLog("MACD/RSI = Running long trade for symbol {}".format(dayTradingPos.Security.Symbol),MessageType.INFO)
@@ -845,15 +865,21 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
             shortCondition = dayTradingPos.EvaluateMACDRSIShortTrade(
                                                                     self.ModelParametersHandler.Get(ModelParametersHandler.M_S_NOW_A(), symbol),
                                                                     self.ModelParametersHandler.Get(ModelParametersHandler.M_S_MIN_B(), symbol),
+                                                                    self.ModelParametersHandler.Get(ModelParametersHandler.M_S_MIN_B_B(), symbol),
                                                                     self.ModelParametersHandler.Get(ModelParametersHandler.RSI_30_SLOPE_SKIP_5_C(), symbol),
                                                                     self.ModelParametersHandler.Get(ModelParametersHandler.M_S_MAX_MIN_D(), symbol),
+                                                                    self.ModelParametersHandler.Get(ModelParametersHandler.M_S_MAX_MIN_D_D(), symbol),
                                                                     self.ModelParametersHandler.Get(ModelParametersHandler.M_S_NOW_MAX_E(), symbol),
                                                                     self.ModelParametersHandler.Get(ModelParametersHandler.M_S_NOW_F(), symbol),
+                                                                    self.ModelParametersHandler.Get(ModelParametersHandler.M_S_NOW_F_F(), symbol),
                                                                     self.ModelParametersHandler.Get(ModelParametersHandler.RSI_30_SLOPE_SKIP_10_G(), symbol),
                                                                     self.ModelParametersHandler.Get(ModelParametersHandler.ABS_M_S_MAX_MIN_LAST_5_H(), symbol),
+                                                                    self.ModelParametersHandler.Get(ModelParametersHandler.ABS_M_S_MAX_MIN_LAST_5_H_H(), symbol),
                                                                     self.ModelParametersHandler.Get(ModelParametersHandler.SEC_5_MIN_SLOPE_I(), symbol),
                                                                     self.ModelParametersHandler.Get(ModelParametersHandler.RSI_14_SLOPE_SKIP_3_V(), symbol),
                                                                     self.ModelParametersHandler.Get(ModelParametersHandler.M_S_3_SLOPE_X(), symbol),
+                                                                    self.ModelParametersHandler.Get(ModelParametersHandler.M_S_3_SLOPE_X_X(), symbol),
+                                                                    self.ModelParametersHandler.Get(ModelParametersHandler.MACD_RSI_SMOOTHED_MODE(), symbol),
                                                                     list(cbDict.values()))
 
             if shortCondition is not None:
@@ -1090,19 +1116,27 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
             closingCond = dayTradingPos.EvaluateClosingMACDRSILongTrade(list(cbDict.values()),self.ModelParametersHandler.Get( ModelParametersHandler.M_S_NOW_A(), symbol),
                                                                         self.ModelParametersHandler.Get(ModelParametersHandler.MACD_MAX_GAIN_J(),symbol),
+                                                                        self.ModelParametersHandler.Get(ModelParametersHandler.MACD_MAX_GAIN_J_J(),symbol),
                                                                         self.ModelParametersHandler.Get(ModelParametersHandler.MACD_GAIN_NOW_MAX_K(),symbol),
                                                                         self.ModelParametersHandler.Get(ModelParametersHandler.RSI_30_SLOPE_SKIP_5_EXIT_L(),symbol),
                                                                         self.ModelParametersHandler.Get( ModelParametersHandler.M_S_NOW_EXIT_N(),symbol),
+                                                                        self.ModelParametersHandler.Get(ModelParametersHandler.M_S_NOW_EXIT_N_N(),symbol),
                                                                         self.ModelParametersHandler.Get(ModelParametersHandler.M_S_MAX_MIN_EXIT_N_BIS(),symbol),
+                                                                        self.ModelParametersHandler.Get(ModelParametersHandler.M_S_MAX_MIN_EXIT_N_N_BIS(),symbol),
                                                                         self.ModelParametersHandler.Get(ModelParametersHandler.M_S_NOW_MAX_MIN_EXIT_P(),symbol),
                                                                         self.ModelParametersHandler.Get( ModelParametersHandler.M_S_NOW_EXIT_Q(),symbol),
+                                                                        self.ModelParametersHandler.Get(ModelParametersHandler.M_S_NOW_EXIT_Q_Q(),symbol),
                                                                         self.ModelParametersHandler.Get(ModelParametersHandler.RSI_30_SLOPE_SKIP_10_EXIT_R(),symbol),
                                                                         self.ModelParametersHandler.Get(ModelParametersHandler.M_S_MAX_MIN_EXIT_S(),symbol),
+                                                                        self.ModelParametersHandler.Get(ModelParametersHandler.M_S_MAX_MIN_EXIT_S_S(),symbol),
                                                                         self.ModelParametersHandler.Get(ModelParametersHandler.SEC_5_MIN_SLOPE_EXIT_T(),symbol),
                                                                         self.ModelParametersHandler.Get(ModelParametersHandler.GAIN_MIN_STOP_LOSS_EXIT_U(),symbol),
+                                                                        self.ModelParametersHandler.Get(ModelParametersHandler.GAIN_MIN_STOP_LOSS_EXIT_U_U(),symbol),
                                                                         self.ModelParametersHandler.Get(ModelParametersHandler.GAIN_MIN_STOP_LOSS_EXIT_W(),symbol),
+                                                                        self.ModelParametersHandler.Get(ModelParametersHandler.GAIN_MIN_STOP_LOSS_EXIT_W_W(),symbol),
                                                                         self.ModelParametersHandler.Get(ModelParametersHandler.GAIN_STOP_LOSS_EXIT_Y(),symbol),
                                                                         self.ModelParametersHandler.Get(ModelParametersHandler.GAIN_MIN_STOP_LOSS_EXIT_Z(),symbol),
+                                                                        self.ModelParametersHandler.Get(ModelParametersHandler.GAIN_MIN_STOP_LOSS_EXIT_Z_Z(),symbol),
                                                                         self.ModelParametersHandler.Get(ModelParametersHandler.END_OF_DAY_LIMIT(),symbol),
                                                                         self.ModelParametersHandler.Get(ModelParametersHandler.MAX_GAIN_FOR_DAY(),symbol),
                                                                         self.ModelParametersHandler.Get(ModelParametersHandler.PCT_MAX_GAIN_CLOSING(),symbol),
@@ -1110,6 +1144,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                                                                         self.ModelParametersHandler.Get(ModelParametersHandler.PCT_MAX_LOSS_CLOSING(),symbol),
                                                                         self.ModelParametersHandler.Get(ModelParametersHandler.TAKE_GAIN_LIMIT(),symbol),
                                                                         self.ModelParametersHandler.Get(ModelParametersHandler.STOP_LOSS_LIMIT(),symbol),
+                                                                        self.ModelParametersHandler.Get(ModelParametersHandler.MACD_RSI_SMOOTHED_MODE(),symbol)
                                                                         )
 
             if closingCond is not None and runClose:
@@ -1134,26 +1169,35 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
             closingCond = dayTradingPos.EvaluateClosingMACDRSIShortTrade(list(cbDict.values()),
                                                                          self.ModelParametersHandler.Get(ModelParametersHandler.M_S_NOW_A(),symbol),
                                                                          self.ModelParametersHandler.Get( ModelParametersHandler.MACD_MAX_GAIN_J(), symbol),
+                                                                         self.ModelParametersHandler.Get(ModelParametersHandler.MACD_MAX_GAIN_J_J(),symbol),
                                                                          self.ModelParametersHandler.Get(ModelParametersHandler.MACD_GAIN_NOW_MAX_K(),symbol),
                                                                          self.ModelParametersHandler.Get(ModelParametersHandler.RSI_30_SLOPE_SKIP_5_EXIT_L(),symbol),
                                                                          self.ModelParametersHandler.Get(ModelParametersHandler.M_S_NOW_EXIT_N(),symbol),
+                                                                         self.ModelParametersHandler.Get(ModelParametersHandler.M_S_NOW_EXIT_N_N(),symbol),
                                                                          self.ModelParametersHandler.Get(ModelParametersHandler.M_S_MAX_MIN_EXIT_N_BIS(),symbol),
+                                                                         self.ModelParametersHandler.Get( ModelParametersHandler.M_S_MAX_MIN_EXIT_N_N_BIS(),symbol),
                                                                          self.ModelParametersHandler.Get(ModelParametersHandler.M_S_NOW_MAX_MIN_EXIT_P(),symbol),
                                                                          self.ModelParametersHandler.Get(ModelParametersHandler.M_S_NOW_EXIT_Q(),symbol),
+                                                                         self.ModelParametersHandler.Get(ModelParametersHandler.M_S_NOW_EXIT_Q_Q(),symbol),
                                                                          self.ModelParametersHandler.Get(ModelParametersHandler.RSI_30_SLOPE_SKIP_10_EXIT_R(),symbol),
                                                                          self.ModelParametersHandler.Get(ModelParametersHandler.M_S_MAX_MIN_EXIT_S(),symbol),
+                                                                         self.ModelParametersHandler.Get(ModelParametersHandler.M_S_MAX_MIN_EXIT_S_S(),symbol),
                                                                          self.ModelParametersHandler.Get(ModelParametersHandler.SEC_5_MIN_SLOPE_EXIT_T(),symbol),
                                                                          self.ModelParametersHandler.Get(ModelParametersHandler.GAIN_MIN_STOP_LOSS_EXIT_U(),symbol),
+                                                                         self.ModelParametersHandler.Get(ModelParametersHandler.GAIN_MIN_STOP_LOSS_EXIT_U_U(),symbol),
                                                                          self.ModelParametersHandler.Get(ModelParametersHandler.GAIN_MIN_STOP_LOSS_EXIT_W(),symbol),
+                                                                         self.ModelParametersHandler.Get(ModelParametersHandler.GAIN_MIN_STOP_LOSS_EXIT_W_W(),symbol),
                                                                          self.ModelParametersHandler.Get(ModelParametersHandler.GAIN_STOP_LOSS_EXIT_Y(),symbol),
                                                                          self.ModelParametersHandler.Get(ModelParametersHandler.GAIN_MIN_STOP_LOSS_EXIT_Z(),symbol),
+                                                                         self.ModelParametersHandler.Get(ModelParametersHandler.GAIN_MIN_STOP_LOSS_EXIT_Z_Z(),symbol),
                                                                          self.ModelParametersHandler.Get(ModelParametersHandler.END_OF_DAY_LIMIT(),symbol),
                                                                          self.ModelParametersHandler.Get(ModelParametersHandler.MAX_GAIN_FOR_DAY(),symbol),
                                                                          self.ModelParametersHandler.Get(ModelParametersHandler.PCT_MAX_GAIN_CLOSING(),symbol),
                                                                          self.ModelParametersHandler.Get(ModelParametersHandler.MAX_LOSS_FOR_DAY(),symbol),
                                                                          self.ModelParametersHandler.Get(ModelParametersHandler.PCT_MAX_LOSS_CLOSING(),symbol),
                                                                          self.ModelParametersHandler.Get(ModelParametersHandler.TAKE_GAIN_LIMIT(),symbol),
-                                                                         self.ModelParametersHandler.Get(ModelParametersHandler.STOP_LOSS_LIMIT(),symbol)
+                                                                         self.ModelParametersHandler.Get(ModelParametersHandler.STOP_LOSS_LIMIT(),symbol),
+                                                                         self.ModelParametersHandler.Get(ModelParametersHandler.MACD_RSI_SMOOTHED_MODE(),symbol)
                                                                          )
 
             if closingCond is not None and runClose:
@@ -1173,6 +1217,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
         candlebar = MarketDataConverter.ConvertCandlebar(wrapper)
 
         try:
+            LogHelper.LogPublishCandleBarOnSecurity("DayTrader Recv Candlebar", self, candlebar.Security.Symbol,candlebar)
             self.LockCandlebar.acquire()
 
             if candlebar is not None:
@@ -1186,13 +1231,15 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                 self.UpdateTechnicalAnalysisParameters(candlebar,cbDict)
                 self.EvaluateOpeningPositions(candlebar,cbDict)
                 self.EvaluateClosingPositions(candlebar,cbDict)
-                self.UpdateTradingSignals(CandleBar,cbDict)
+                self.UpdateTradingSignals(candlebar,cbDict)
 
                 self.EvaluateClosingForManualConditions(candlebar, cbDict)
 
-                self.DoLog("Candlebars successfully loaded for symbol {} ".format(candlebar.Security.Symbol),MessageType.DEBUG)
+                #self.DoLog("Candlebars successfully loaded for symbol {} ".format(candlebar.Security.Symbol),MessageType.DEBUG)
             else:
                 self.DoLog("Received unknown null candlebar",MessageType.DEBUG)
+
+            LogHelper.LogPublishCandleBarOnSecurity("DayTrader Processed Candlebar", self, candlebar.Security.Symbol,candlebar)
 
         except Exception as e:
             traceback.print_exc()

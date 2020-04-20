@@ -27,6 +27,8 @@ class MACDIndicator():
                 self.MaxMS = None
                 self.MinMS = None
 
+                self.AbsMaxMS = None
+
                 self.LastProcessedDateTime = None
                 self.MSArray = []
                 self.ContextSign = None
@@ -64,6 +66,9 @@ class MACDIndicator():
 
                 if self.MinMS is None or self.MinMS > self.MS:
                         self.MinMS = self.MS
+
+                if self.AbsMaxMS is None or self.AbsMaxMS < abs(self.MS):
+                        self.AbsMaxMS=abs(self.MS)
 
                 self.ContextSign = currentContext
 

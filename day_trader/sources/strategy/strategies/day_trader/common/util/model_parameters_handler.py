@@ -279,6 +279,65 @@ class ModelParametersHandler:
     def PROCESS_EXTERNAL_TRADING():
         return "PROCESS_EXTERNAL_TRADING"
 
+    @staticmethod
+    def M_S_MIN_B_B():
+        return "M_S_MIN_B_B"
+
+    @staticmethod
+    def M_S_MAX_MIN_D_D():
+        return "M_S_MAX_MIN_D_D"
+
+    @staticmethod
+    def M_S_NOW_F_F():
+        return "M_S_NOW_F_F"
+
+    @staticmethod
+    def ABS_M_S_MAX_MIN_LAST_5_H_H():
+        return "ABS_M_S_MAX_MIN_LAST_5_H_H"
+
+    @staticmethod
+    def MACD_MAX_GAIN_J_J():
+        return "MACD_MAX_GAIN_J_J"
+
+    @staticmethod
+    def M_S_NOW_EXIT_N_N():
+        return "M_S_NOW_EXIT_N_N"
+
+    @staticmethod
+    def M_S_MAX_MIN_EXIT_N_N_BIS():
+        return "M_S_MAX_MIN_EXIT_N_N_BIS"
+
+    @staticmethod
+    def M_S_NOW_EXIT_Q_Q():
+        return "M_S_NOW_EXIT_Q_Q"
+
+    @staticmethod
+    def M_S_MAX_MIN_EXIT_S_S():
+        return "M_S_MAX_MIN_EXIT_S_S"
+
+    @staticmethod
+    def M_S_3_SLOPE_X_X():
+        return "M_S_3_SLOPE_X_X"
+
+    @staticmethod
+    def GAIN_MIN_STOP_LOSS_EXIT_U_U():
+        return "GAIN_MIN_STOP_LOSS_EXIT_U_U"
+
+    @staticmethod
+    def GAIN_MIN_STOP_LOSS_EXIT_W_W():
+        return "GAIN_MIN_STOP_LOSS_EXIT_W_W"
+
+    @staticmethod
+    def GAIN_MIN_STOP_LOSS_EXIT_Z_Z():
+        return "GAIN_MIN_STOP_LOSS_EXIT_Z_Z"
+
+    @staticmethod
+    def PROCESS_EXTERNAL_TRADING():
+        return "PROCESS_EXTERNAL_TRADING"
+
+    @staticmethod
+    def MACD_RSI_SMOOTHED_MODE():
+        return "MACD_RSI_SMOOTHED_MODE"
 
 
     #endregion

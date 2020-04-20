@@ -21,7 +21,7 @@ from sources.framework.common.dto.cm_state import *
 from sources.order_routers.bloomberg.common.converter.order_converter import *
 from sources.framework.common.wrappers.order_cancel_reject_wrapper import *
 from sources.framework.common.enums.TimeUnit import *
-from sources.order_routers.bloomberg.common.util.log_helper import *
+from sources.framework.util.log_helper import *
 import threading
 import time
 import uuid
@@ -127,7 +127,7 @@ class OrderRouter( BaseCommunicationModule, ICommunicationModule):
     def UpdateAndSendCandlebar(self,msg,candlebar):
         if self.ValidateMarketDataPacing(candlebar):
             SubscriptionHelper.UpdateCandleBar(self, msg, candlebar)
-            LogHelper.LogPublishCandleBarOnSecurity(self, candlebar.Security.Symbol, candlebar)
+            LogHelper.LogPublishCandleBarOnSecurity("Bloomberg Order Router",self, candlebar.Security.Symbol, candlebar)
             cbWrapper = CandleBarDataWrapper(self, candlebar)
             self.OnMarketData.ProcessIncoming(cbWrapper)
 
@@ -507,7 +507,7 @@ class OrderRouter( BaseCommunicationModule, ICommunicationModule):
             sec = self.MarketDataSubscriptions[msg.correlationIds()[0].value()]
             if self.ValidateMarketDataPacing(sec.MarketData):
                 SubscriptionHelper.UpdateMarketData(self, msg, sec.MarketData)
-                LogHelper.LogPublishMarketDataOnSecurity(self, symbol, sec)
+                LogHelper.LogPublishMarketDataOnSecurity("Bloomberg Order Router",self, symbol, sec)
                 mdWrapper = MarketDataWrapper(sec.MarketData)
                 self.OnMarketData.ProcessIncoming(mdWrapper)
         else:
