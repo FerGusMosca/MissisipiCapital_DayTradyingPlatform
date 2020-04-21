@@ -507,7 +507,7 @@ class OrderRouter( BaseCommunicationModule, ICommunicationModule):
             sec = self.MarketDataSubscriptions[msg.correlationIds()[0].value()]
             if self.ValidateMarketDataPacing(sec.MarketData):
                 SubscriptionHelper.UpdateMarketData(self, msg, sec.MarketData)
-                LogHelper.LogPublishMarketDataOnSecurity("Bloomberg Order Router",self, symbol, sec)
+                LogHelper.LogPublishMarketDataOnSecurity("Bloomberg Order Router",self, symbol, sec.MarketData)
                 mdWrapper = MarketDataWrapper(sec.MarketData)
                 self.OnMarketData.ProcessIncoming(mdWrapper)
         else:

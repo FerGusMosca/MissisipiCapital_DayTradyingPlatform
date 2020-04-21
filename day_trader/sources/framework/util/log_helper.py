@@ -3,17 +3,34 @@ import datetime
 class LogHelper:
 
     @staticmethod
-    def LogPublishMarketDataOnSecurity(sender,logger,symbol,sec):
+    def LogPositionUpdate(logger, status, summary, execReport):
+        logger.DoLog(
+            "{}: TradeId={} PosId={} Symbol={} Side={} Final Status={} OrdQty={} CumQty={} LvsQty={} "
+            "AvgPx={} Text={} "
+                .format(status,
+                        summary.GetTradeId(),
+                        summary.Position.PosId,
+                        summary.Position.Security.Symbol,
+                        summary.Position.Side,
+                        summary.Position.PosStatus,
+                        summary.Position.Qty if summary.Position.Qty is not None else summary.Position.CashQty,
+                        summary.CumQty,
+                        summary.LeavesQty,
+                        summary.AvgPx,
+                        execReport.Text), MessageType.INFO)
+
+    @staticmethod
+    def LogPublishMarketDataOnSecurity(sender,logger,symbol,md):
         logger.DoLog("At {}: {}-Publishing market data for symbol {}: MDEntryDate={} Timestamp={} Last={} Bid={} Ask={} Mid={}".format(
             sender,
             datetime.datetime.now(),
             symbol,
-            sec.MarketData.MDEntryDate if sec.MarketData.MDEntryDate is not None else "?",
-            sec.MarketData.Timestamp if sec.MarketData.Timestamp is not None else "?",
-            sec.MarketData.Trade if sec.MarketData.Trade is not None else "-",
-            sec.MarketData.BestBidPrice if sec.MarketData.BestBidPrice is not None else "-",
-            sec.MarketData.BestAskPrice if sec.MarketData.BestAskPrice is not None else "-",
-            sec.MarketData.MidPrice if sec.MarketData.MidPrice is not None else "-"),
+            md.MDEntryDate if md.MDEntryDate is not None else "?",
+            md.Timestamp if md.Timestamp is not None else "?",
+            md.Trade if md.Trade is not None else "-",
+            md.BestBidPrice if md.BestBidPrice is not None else "-",
+            md.BestAskPrice if md.BestAskPrice is not None else "-",
+            md.MidPrice if md.MidPrice is not None else "-"),
             MessageType.DEBUG)
 
     @staticmethod

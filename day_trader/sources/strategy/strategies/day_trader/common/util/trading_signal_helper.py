@@ -77,6 +77,7 @@ class TradingSignalHelper:
                 self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "MSNow",dayTradingPos.MACDIndicator.MS)
                 self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "MaxMS",dayTradingPos.MACDIndicator.MaxMS)
                 self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "MinMS",dayTradingPos.MACDIndicator.MinMS)
+                self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "AbsMaxMS",dayTradingPos.MACDIndicator.AbsMaxMS)
                 self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "RSISmoothed5SL",dayTradingPos.MinuteSmoothedRSIIndicator.GetRSISlope(5))
                 self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "RSISmoothed10SL",dayTradingPos.MinuteSmoothedRSIIndicator.GetRSISlope(10))
                 self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "SmoothedRSI",dayTradingPos.MinuteSmoothedRSIIndicator.RSI)
