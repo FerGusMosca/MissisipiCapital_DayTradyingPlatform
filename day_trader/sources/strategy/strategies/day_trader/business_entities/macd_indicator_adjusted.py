@@ -75,6 +75,7 @@ class MACDIndicatorAdjusted(MACDIndicator):
             self.MSPrev = self.MS
             self.MS = (500 * (self.MACD - self.Signal)) / lastBar.Close
             self.UpdateMSMaxMin()
+            self.UpdatePricesIndicators(lastBar)
         '''
         print("MACD print @{}- MACD:{}, Signal:{} Price:{}".format(self.LastProcessedDateTime, self.MACD, self.Signal,
                                                                    lastBar.Close))

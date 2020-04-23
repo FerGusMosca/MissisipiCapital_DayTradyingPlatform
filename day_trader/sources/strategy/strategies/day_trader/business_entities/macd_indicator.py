@@ -28,6 +28,7 @@ class MACDIndicator():
                 self.MinMS = None
 
                 self.AbsMaxMS = None
+                self.PriceHMinusL = None
 
                 self.LastProcessedDateTime = None
                 self.MSArray = []
@@ -44,6 +45,11 @@ class MACDIndicator():
                     max=abs(ms)
 
             return max
+
+        def UpdatePricesIndicators(self,lastBar):
+
+                if(lastBar.High is not None and lastBar.Low is not None):
+                        self.PriceHMinusL=lastBar.High - lastBar.Low
 
 
         def UpdateMSMaxMin(self):
