@@ -26,9 +26,6 @@ namespace DayTraderTestClient
 
         #endregion
 
-       
-
-
         #region Protected Methods
 
         private static void DoLog(string message)
@@ -82,6 +79,7 @@ namespace DayTraderTestClient
             Console.WriteLine("DepuratePosition <posId>");
             Console.WriteLine("UpdateModelParamReq <key> <symbol> <intValue> <stringValue> <floatValue>");
             Console.WriteLine("CreateModelParamReq <key> <symbol> <intValue> <stringValue> <floatValue>");
+            Console.WriteLine("PositionCleanTriggers <posId> <includeEoD>");
             Console.WriteLine("Unsubscribe <Service> <ServiceKey>");
             Console.WriteLine("-CLEAR");
             Console.WriteLine();
@@ -112,6 +110,28 @@ namespace DayTraderTestClient
             else
                 DoLog(string.Format("Missing mandatory parameters for subscription message"));
 
+        }
+
+        private static void ProcessPositionCleanTriggers(string[] param)
+        {
+            if (param.Length == 3)
+            {
+                PositionUpdateReq posUpdReq = new PositionUpdateReq()
+                {
+                    Msg = "PositionUpdateReq",
+                    PosId = Convert.ToInt32(param[1]),
+                    CleanStopLoss = true,
+                    CleanTakeProfit = true,
+                    CleanEndOfDay = Convert.ToBoolean(param[2]),
+                    UUID = UUID,
+                    ReqId = Guid.NewGuid().ToString(),
+                };
+
+                DoSend<PositionUpdateReq>(posUpdReq);
+            }
+            else
+                DoLog(string.Format("Missing mandatory parameters for ProcessPositionCleanTriggers message"));
+        
         }
 
         private static void ProcessDepuratePosition(string[] param)
@@ -504,6 +524,10 @@ namespace DayTraderTestClient
             else if (mainCmd == "DepuratePosition")
             {
                 ProcessDepuratePosition(param);
+            }
+            else if (mainCmd == "PositionCleanTriggers")//
+            {
+                ProcessPositionCleanTriggers(param);
             }
             else if (mainCmd == "Unsubscribe")
             {

@@ -24,6 +24,12 @@ namespace DayTraderTestClient.Common.DTO.Positions
 
         public string TradingMode { get; set; }
 
+        public bool? CleanStopLoss { get; set; }
+
+        public bool? CleanTakeProfit { get; set; }
+
+        public bool? CleanEndOfDay { get; set; }
+
         #endregion
     }
 }

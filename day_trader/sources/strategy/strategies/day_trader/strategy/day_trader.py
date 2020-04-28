@@ -33,7 +33,6 @@ from sources.strategy.data_access_layer.day_trading_position_manager import *
 from sources.strategy.data_access_layer.model_parameters_manager import *
 from sources.strategy.data_access_layer.execution_summary_manager import *
 from sources.strategy.data_access_layer.trading_signal_manager import *
-from sources.strategy.strategies.day_trader.common.util.log_helper import *
 from sources.strategy.strategies.day_trader.common.wrappers.portfolio_position_list_wrapper import *
 from sources.strategy.strategies.day_trader.common.wrappers.portfolio_position_wrapper import *
 from sources.strategy.strategies.day_trader.common.util.model_parameters_handler import *

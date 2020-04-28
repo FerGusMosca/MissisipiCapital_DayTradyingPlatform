@@ -7,6 +7,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DayTraderTestClient.DataAcc
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DayTraderTestClient.Common", "DayTraderTestClient.Common\DayTraderTestClient.Common.csproj", "{87F8C60D-C5E3-47B9-98B7-907C7E082A44}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Testers", "Testers", "{0CCA9120-7906-431E-BCA2-9344EDE9C14B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Performance", "Performance", "{16E2610D-4C2B-401B-AF49-62BD61AAC8DF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarketDataPerformanceTester", "MarketDataPerformanceTester\MarketDataPerformanceTester.csproj", "{407DBD96-141F-4065-B35A-423BF2F725B1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarketDataPerformanceTester.Common", "MarketDataPerformanceTester.Common\MarketDataPerformanceTester.Common.csproj", "{EA85C331-B932-4B8D-997F-BE088B41B129}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -25,8 +33,21 @@ Global
 		{87F8C60D-C5E3-47B9-98B7-907C7E082A44}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{87F8C60D-C5E3-47B9-98B7-907C7E082A44}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{87F8C60D-C5E3-47B9-98B7-907C7E082A44}.Release|Any CPU.Build.0 = Release|Any CPU
+		{407DBD96-141F-4065-B35A-423BF2F725B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{407DBD96-141F-4065-B35A-423BF2F725B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{407DBD96-141F-4065-B35A-423BF2F725B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{407DBD96-141F-4065-B35A-423BF2F725B1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EA85C331-B932-4B8D-997F-BE088B41B129}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EA85C331-B932-4B8D-997F-BE088B41B129}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EA85C331-B932-4B8D-997F-BE088B41B129}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EA85C331-B932-4B8D-997F-BE088B41B129}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{16E2610D-4C2B-401B-AF49-62BD61AAC8DF} = {0CCA9120-7906-431E-BCA2-9344EDE9C14B}
+		{407DBD96-141F-4065-B35A-423BF2F725B1} = {16E2610D-4C2B-401B-AF49-62BD61AAC8DF}
+		{EA85C331-B932-4B8D-997F-BE088B41B129} = {16E2610D-4C2B-401B-AF49-62BD61AAC8DF}
 	EndGlobalSection
 EndGlobal

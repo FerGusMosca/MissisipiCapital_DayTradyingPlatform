@@ -1,0 +1,47 @@
+2020-04-19 20:04:45 [logger INFO] DayTrader  Initializing
+2020-04-19 20:04:47 [logger INFO] Loading 20 summaries for security SPY
+2020-04-19 20:04:48 [logger INFO] WebSocketModule  Initializing
+2020-04-19 20:04:48 [logger INFO] DayTrader Successfully initialized
+2020-04-19 20:04:48 [logger INFO] Websocket commands successfully opened on port 7172: 
+2020-04-19 20:04:48 [logger INFO] Initializing Bloomberg Order Router
+2020-04-19 20:04:48 [logger INFO] Connecting to localhost:8194
+2020-04-19 20:05:05 [logger INFO] Bloomberg Order Router Initialized
+2020-04-19 20:05:05 [logger INFO] SingletonModuleHandler Successfully initializer
+2020-04-19 20:05:06 [logger INFO] Initializing Generic Market Order Router
+2020-04-19 20:05:06 [logger INFO] SingletonModuleHandler Successfully initializer
+2020-04-19 20:05:06 [logger INFO] Generic Market Order Router Initialized
+2020-04-19 20:05:07 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2020-04-19 20:05:07 [logger ERROR] Bloomberg Session failed to start...
+2020-04-19 20:05:07 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:SPY
+2020-04-19 20:05:07 [logger INFO] DayTrader Successfully initialized
+2020-04-19 20:05:07 [logger ERROR] Critical error subscribing for Market Data for symbol SPY:Session Not Started (0x00010009)
+2020-04-19 20:05:08 [logger INFO] Requesting for open orders...
+2020-04-19 20:05:08 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-04-19 20:05:08 [logger INFO] Subscribing to order and route events
+2020-04-19 20:05:08 [logger ERROR] Error running ProcessMessage @OrderRouter.Bloomberg module:Session Not Started (0x00010009)
+2020-04-19 20:05:08 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:SPY
+2020-04-19 20:05:08 [logger ERROR] Critical error subscribing for candlebars for symbol SPY:Session Not Started (0x00010009)
+2020-04-19 20:05:08 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:SPY
+2020-04-19 20:05:08 [logger ERROR] Critical error subscribing for historical prices for symbol SPY:Null service handle (0x00020002)
+2020-04-19 20:05:09 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-04-19 20:05:10 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-04-19 20:05:11 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-04-19 20:05:12 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-04-19 20:05:13 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-04-19 20:05:14 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-04-19 20:05:15 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-04-19 20:05:16 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-04-19 20:05:17 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-04-19 20:05:18 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-04-19 20:05:19 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-04-19 20:05:20 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-04-19 20:05:21 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-04-19 20:05:22 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-04-19 20:05:23 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-04-19 20:05:24 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-04-19 20:05:25 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-04-19 20:05:26 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-04-19 20:05:27 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-04-19 20:05:28 [logger ERROR] Critical Error running ProcessExecutionReportListThread @OrderRouter.Bloomberg module:Timeout waiting for the previous orders
+2020-04-19 20:05:28 [logger INFO] Received list of Open Positions: 0 positions
+2020-04-19 20:05:28 [logger INFO] Process ready to receive commands and trade

@@ -4,6 +4,7 @@ using DayTraderTestClient.Common.DTO.Subscription;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net.WebSockets;
 using System.Text;
@@ -17,6 +18,8 @@ namespace DayTraderTestClient.DataAccessLayer
     public class WebSocketClient
     {
         #region Protected Attributes
+
+        protected  StreamWriter Writer { get; set; }
 
         protected string WebSocketURL { get; set; }
 
@@ -32,8 +35,24 @@ namespace DayTraderTestClient.DataAccessLayer
         {
             WebSocketURL = pWebSocketURL;
             OnEvent = pOnEvent;
+            Writer = new StreamWriter("log.txt");
+            DoLog("Starting DayTraderTestClient...");
+        
         }
 
+
+        #endregion
+
+        #region Protected Methods
+
+        private  void DoLog(string txt)
+        {
+            if (Writer != null)
+            {
+                Writer.WriteLine(txt);
+                Writer.Flush();
+            }
+        }
 
         #endregion
 
@@ -67,6 +86,10 @@ namespace DayTraderTestClient.DataAccessLayer
                             resp += Encoding.ASCII.GetString(bytesReceived.Array, 0, webSocketResp.Count);
                         }
                         while (!webSocketResp.EndOfMessage);
+
+                        DoLog(string.Format("@{0}:{1}", DateTime.Now, resp));
+                        DoLog("");
+
 
                         if (resp != "")
                         {

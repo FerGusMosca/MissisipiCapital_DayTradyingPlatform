@@ -28,6 +28,8 @@ class MACDIndicator():
                 self.MinMS = None
 
                 self.AbsMaxMS = None
+                self.MaxPrice = None
+                self.MinPrice = None
                 self.PriceHMinusL = None
 
                 self.LastProcessedDateTime = None
@@ -48,8 +50,14 @@ class MACDIndicator():
 
         def UpdatePricesIndicators(self,lastBar):
 
-                if(lastBar.High is not None and lastBar.Low is not None):
-                        self.PriceHMinusL=lastBar.High - lastBar.Low
+                if self.MaxPrice is None or self.MaxPrice < lastBar.Close:
+                        self.MaxPrice=lastBar.Close
+
+                if self.MinPrice is None or self.MinPrice> lastBar.Close:
+                        self.MinPrice = lastBar.Close
+
+                if (self.MaxPrice is not None and self.MinPrice is not None):
+                        self.PriceHMinusL=self.MaxPrice - self.MinPrice
 
 
         def UpdateMSMaxMin(self):

@@ -1,0 +1,9 @@
+C:\Users\zimzum\Desktop\Projects\Tradehelm\Missisipi\python\v1.0.0.1 - release\test_clients\C#\day_trader_testclient\DayTraderTestClient\DayTraderTestClient.Common\bin\Debug\DayTraderTestClient.Common.dll
+C:\Users\zimzum\Desktop\Projects\Tradehelm\Missisipi\python\v1.0.0.1 - release\test_clients\C#\day_trader_testclient\DayTraderTestClient\DayTraderTestClient.Common\bin\Debug\DayTraderTestClient.Common.pdb
+C:\Users\zimzum\Desktop\Projects\Tradehelm\Missisipi\python\v1.0.0.1 - release\test_clients\C#\day_trader_testclient\DayTraderTestClient\DayTraderTestClient.Common\obj\Debug\DayTraderTestClient.Common.dll
+C:\Users\zimzum\Desktop\Projects\Tradehelm\Missisipi\python\v1.0.0.1 - release\test_clients\C#\day_trader_testclient\DayTraderTestClient\DayTraderTestClient.Common\obj\Debug\DayTraderTestClient.Common.pdb
+C:\Users\Compumar\Desktop\Projects\Tradehelm\Mississipi\DayTrader\DayTraderTestClient\DayTraderTestClient.Common\bin\Debug\DayTraderTestClient.Common.dll
+C:\Users\Compumar\Desktop\Projects\Tradehelm\Mississipi\DayTrader\DayTraderTestClient\DayTraderTestClient.Common\bin\Debug\DayTraderTestClient.Common.pdb
+C:\Users\Compumar\Desktop\Projects\Tradehelm\Mississipi\DayTrader\DayTraderTestClient\DayTraderTestClient.Common\obj\Debug\DayTraderTestClient.Common.csprojResolveAssemblyReference.cache
+C:\Users\Compumar\Desktop\Projects\Tradehelm\Mississipi\DayTrader\DayTraderTestClient\DayTraderTestClient.Common\obj\Debug\DayTraderTestClient.Common.dll
+C:\Users\Compumar\Desktop\Projects\Tradehelm\Mississipi\DayTrader\DayTraderTestClient\DayTraderTestClient.Common\obj\Debug\DayTraderTestClient.Common.pdb
