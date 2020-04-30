@@ -339,6 +339,9 @@ class ModelParametersHandler:
     def MACD_RSI_SMOOTHED_MODE():
         return "MACD_RSI_SMOOTHED_MODE"
 
+    @staticmethod
+    def MACD_RSI_ABS_MAX_MS_PERIOD():
+        return "MACD_RSI_ABS_MAX_MS_PERIOD"
 
     #endregion
 

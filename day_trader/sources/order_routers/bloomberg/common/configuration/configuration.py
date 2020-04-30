@@ -25,6 +25,7 @@ class Configuration:
         self.ImplementMock = config['DEFAULT']['IMPLEMENT_MOCK'] == "True"
 
         self.ExternalOrdersPacingSeconds = int(config['DEFAULT']['EXTERNAL_ORDERS_PACING_SECONDS'])
+        self.MarketDataUpdateFreqSeconds = float(config['DEFAULT']['MARKET_DATA_UPDATE_FREQ_SECONDS'])
 
 
 

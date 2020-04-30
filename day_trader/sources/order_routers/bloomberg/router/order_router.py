@@ -113,8 +113,8 @@ class OrderRouter( BaseCommunicationModule, ICommunicationModule):
     # region Private Methods
 
     def ValidateMarketDataPacing(self,marketdata):
-        return True
-        '''
+
+
         if marketdata.Timestamp is not None:
 
             secElapsed = int( abs((datetime.now()- marketdata.Timestamp).seconds))
@@ -122,7 +122,7 @@ class OrderRouter( BaseCommunicationModule, ICommunicationModule):
             return secElapsed >= self.Configuration.MarketDataUpdateFreqSeconds or  self.Configuration.MarketDataUpdateFreqSeconds is None
         else:
             return True
-        '''
+
 
     def UpdateAndSendCandlebar(self,msg,candlebar):
         if self.ValidateMarketDataPacing(candlebar):

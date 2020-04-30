@@ -46,7 +46,7 @@ class MACDIndicatorAdjusted(MACDIndicator):
             self.Signal = self.UpdateAverage(self.MACDArray[-1], self.Sign, self.Signal)
 
 
-    def Update(self, CandleBarArr, slow=26, fast=12, signal=9):
+    def Update(self, CandleBarArr, slow=26, fast=12, signal=9, absMaxMSPeriod =0):
         sortedBars = sorted(list(filter(lambda x: x is not None, CandleBarArr)), key=lambda x: x.DateTime,
                             reverse=False)
 
@@ -74,7 +74,7 @@ class MACDIndicatorAdjusted(MACDIndicator):
         if lastBar is not None and self.MACD is not None and self.Signal is not None:
             self.MSPrev = self.MS
             self.MS = (500 * (self.MACD - self.Signal)) / lastBar.Close
-            self.UpdateMSMaxMin()
+            self.UpdateMSMaxMin(absMaxMSPeriod)
             self.UpdatePricesIndicators(lastBar)
         '''
         print("MACD print @{}- MACD:{}, Signal:{} Price:{}".format(self.LastProcessedDateTime, self.MACD, self.Signal,

@@ -60,7 +60,7 @@ class MACDIndicator():
                         self.PriceHMinusL=self.MaxPrice - self.MinPrice
 
 
-        def UpdateMSMaxMin(self):
+        def UpdateMSMaxMin(self,absMaxMSPeriod =0):
 
                 self.MSArray.append(self.MS)
 
@@ -81,7 +81,9 @@ class MACDIndicator():
                 if self.MinMS is None or self.MinMS > self.MS:
                         self.MinMS = self.MS
 
-                if self.AbsMaxMS is None or self.AbsMaxMS < abs(self.MS):
+                if absMaxMSPeriod>0:
+                        self.AbsMaxMS = self.GetMaxAbsMS(absMaxMSPeriod)
+                elif self.AbsMaxMS is None or self.AbsMaxMS < abs(self.MS):
                         self.AbsMaxMS=abs(self.MS)
 
                 self.ContextSign = currentContext
@@ -108,7 +110,7 @@ class MACDIndicator():
                         return None
 
 
-        def Update(self,CandleBarArr,slow=26, fast=12, signal=9):
+        def Update(self,CandleBarArr,slow=26, fast=12, signal=9, absMaxMSPeriod =0):
                 sortedBars = sorted(list(filter(lambda x: x is not None, CandleBarArr)), key=lambda x: x.DateTime,reverse=False)
 
                 lastBar = sortedBars[-1]
@@ -143,7 +145,7 @@ class MACDIndicator():
                 if lastBar is not None and self.MACD is not None and self.Signal is not None:
                         self.MSPrev=self.MS
                         self.MS = (500* (self.MACD - self.Signal))/lastBar.Close
-                        self.UpdateMSMaxMin()
+                        self.UpdateMSMaxMin(absMaxMSPeriod)
 
                 print("MACD print @{}- MACD:{}, Signal:{} Price:{}".format(self.LastProcessedDateTime,self.MACD,self.Signal,lastBar.Close))
 
