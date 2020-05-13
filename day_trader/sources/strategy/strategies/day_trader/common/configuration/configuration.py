@@ -21,3 +21,6 @@ class Configuration:
 
         self.WebsocketModule = config['DEFAULT']['WEBSOCKET_MODULE']
         self.WebsocketConfigFile = config['DEFAULT']['WEBSOCKET_CONFIG_FILE']
+
+        self.FileHandlerModule = config['DEFAULT']['FILE_HANDLER_MODULE']
+        self.FileHandlerConfigFile = config['DEFAULT']['FILE_HANDLER_CONFIG_FILE']

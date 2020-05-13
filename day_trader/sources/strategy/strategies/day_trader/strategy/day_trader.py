@@ -6,6 +6,7 @@ from sources.strategy.strategies.day_trader.common.configuration.configuration i
 from sources.framework.common.converters.execution_report_converter import *
 from sources.framework.common.enums.fields.execution_report_field import *
 from sources.framework.common.enums.fields.position_list_field import *
+from sources.framework.common.enums.fields.strategy_backtest_field import *
 from sources.framework.common.enums.fields.portfolio_positions_trade_list_request_field import *
 from sources.strategy.strategies.day_trader.common.enums.fields.model_param_field import *
 from sources.framework.common.enums.fields.portfolio_positions_trade_list_request_field import *
@@ -619,6 +620,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
                 if dayTradingPos.TerminalClose:
                     # Publish Terminal Close
+                    self.DoLog("dayTradingPos.TerminalClose: cond={}".format(dayTradingPos.TerminalCloseCond), MessageType.INFO)
                     threading.Thread(target=self.PublishTradingSignalThread,
                                      args=(TradingSignal(security=dayTradingPos.Security,
                                                          signal=dayTradingPos.TerminalCloseCond,
@@ -1493,6 +1495,118 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
             if self.RoutingLock.locked():
                 self.RoutingLock.release()
 
+
+    def UpdateModelParamters(self,dayTradingPos,modelParamDict):
+
+        modelParamsBackup = []
+
+        for modelKey in modelParamDict:
+
+            modelParamInMem = self.ModelParametersHandler.Get(ModelParametersHandler.TRADING_MODE(), dayTradingPos.Security.Symbol)
+
+
+            backtestModelParam = ModelParameter(key=modelKey,symbol=dayTradingPos.Security.Symbol,stringValue=None,intValue=None,floatValue=None)
+            backtestModelParam.IntValue = int(modelParamDict[modelKey]) if modelParamInMem.IntValue is not None else None
+            backtestModelParam.FloatValue = float(modelParamDict[modelKey]) if modelParamInMem.FloatValue is not None else None
+            backtestModelParam.StringValue = str(modelParamDict[modelKey]) if modelParamInMem.StringValue is not None else None
+            backtestModelParam.Symbol=modelParamInMem.Symbol
+
+            self.ModelParametersHandler.Set(modelKey, backtestModelParam.Symbol, backtestModelParam)
+
+            modelParamsBackup.append(modelParamInMem)
+
+        return modelParamsBackup
+
+
+    def RunBacktest(self,dayTradingPos,candelBarDict,marketDataDict):
+        for date in candelBarDict:
+            candleBarsArray = candelBarDict[date]
+            marketDataArray = None
+
+            if date in marketDataDict:
+                marketDataArray = marketDataDict[date]
+            else:
+                raise Exception("Could not find market data for date {}. There is some inconsistency in the input data".format(date))
+
+            if len(candleBarsArray) != len(marketDataArray):
+                raise Exception(
+                    "Market Data length and Candlebar length present inconsistent values: Market Data Length={} CandleBar Length={}".format(
+                        len(candleBarsArray), len(marketDataArray)))
+
+            i = 0
+
+            for candlebar in candleBarsArray:
+
+                md = marketDataArray[i]
+
+                cbDict = self.Candlebars[candlebar.Security.Symbol]
+                if cbDict is None:
+                    cbDict = {}
+                cbDict[candlebar.DateTime] = candlebar
+                self.Candlebars[candlebar.Security.Symbol] = cbDict
+                self.UpdateTechnicalAnalysisParameters(candlebar, cbDict)
+                self.EvaluateOpeningPositions(candlebar, cbDict)
+                self.EvaluateClosingPositions(candlebar, cbDict)
+                self.UpdateTradingSignals(candlebar, cbDict)
+                dayTradingPos.MarketData = md
+                dayTradingPos.CalculateCurrentDayProfits(md)
+                self.EvaluateClosingForManualConditions(candlebar, cbDict)
+
+    def ProcessStrategyBacktestThread(self,dayTradingPos,wrapper):
+        try:
+
+            tradingMode = self.ModelParametersHandler.Get(ModelParametersHandler.TRADING_MODE(), dayTradingPos.Security.Symbol)
+
+            if tradingMode.StringValue == _TRADING_MODE_MANUAL:
+
+                candelBarDict = wrapper.GetField(StrategyBacktestField.CandleBarDict)
+                marketDataDict = wrapper.GetField(StrategyBacktestField.MarketDataDict)
+                modelParamDict = wrapper.GetField(StrategyBacktestField.ModelParametersDict)
+
+                #TODO: Validar que no se esté corriendo OTRO backtest
+
+                # 1- We update the model parameters in memotry with the ones that will use the backtest
+                modelParamsBackup = self.UpdateModelParamters(dayTradingPos,modelParamDict)
+
+                #2- Reset Statistics!
+                dayTradingPos.ResetProfitCounters(datetime.datetime.now())
+
+                #3-We execute the backtest
+                self.RunBacktest(dayTradingPos,candelBarDict,marketDataDict)
+
+                #4-We restore model parameters previous values
+
+
+            else:
+                raise Exception("Security {} is in automatic mode. It's unsafe to run a backtest while the security it's in this state. Please turn it to manual mode".format(dayTradingPos.Security.Symbol))
+
+        except Exception as e:
+            msg = "Critical Error processing strategy backtest (@thread): {}!".format(str(e))
+            self.ProcessError(ErrorWrapper(Exception(msg)))
+            self.DoLog(msg, MessageType.ERROR)
+
+
+    def ProcessStrategyBacktest(self,wrapper):
+        try:
+            symbol = wrapper.GetField(StrategyBacktestField.Symbol)
+
+            #we look for the daytrading position
+            dayTradingPos = next(iter(list(filter(lambda x: x.Security.Symbol == symbol, self.DayTradingPositions))), None)
+
+            if dayTradingPos is not None:
+
+                threading.Thread(target=self.ProcessStrategyBacktestThread, args=(wrapper,dayTradingPos)).start()
+
+                return CMState.BuildSuccess(self)
+            else:
+                raise Exception( "Could not find day trading position for symbol {}".format(symbol if symbol is not None else "-"))
+
+        except Exception as e:
+            msg = "Critical Error processing strategy backtest: {}!".format(str(e))
+            self.ProcessError(ErrorWrapper(Exception(msg)))
+            self.DoLog(msg, MessageType.ERROR)
+            return CMState.BuildFailure(self, Exception=e)
+
     def ProcessPositionTradingSignalSubscription(self,wrapper):
         try:
             posId =  wrapper.GetField(PositionTradingSignalSubscriptionField.PositionId)
@@ -1963,6 +2077,8 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                 return self.ProcessMarketDataReq(wrapper)
             elif wrapper.GetAction() == Actions.POSITION_TRADING_SIGNAL_SUBSCRIPTION:
                 return self.ProcessPositionTradingSignalSubscription(wrapper)
+            elif wrapper.GetAction() == Actions.STRATEGY_BACKTEST:
+                return self.ProcessStrategyBacktest(wrapper)
             else:
                 raise Exception("DayTrader.ProcessMessage: Not prepared for routing message {}".format(wrapper.GetAction()))
         except Exception as e:
@@ -2024,6 +2140,8 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
             self.LoadManagers()
 
             self.CommandsModule = self.InitializeModule(self.Configuration.WebsocketModule, self.Configuration.WebsocketConfigFile)
+
+            self.FileHandlerModule = self.InitializeModule(self.Configuration.FileHandlerModule,self.Configuration.FileHandlerConfigFile)
 
             self.MarketDataModule =  self.InitializeModule(self.Configuration.IncomingModule,self.Configuration.IncomingConfigFile)
 

@@ -488,9 +488,6 @@ class DayTradingPosition():
             and (posMaximShortChangeParam.FloatValue is None or statisticalParams.PctChangeLastThreeMinSlope > posMaximShortChangeParam.FloatValue)
                 # Delta between current value and 50MMA
             and (posMaxShortDeltaParam.FloatValue is None or statisticalParams.DeltaCurrValueAndFiftyMMov > posMaxShortDeltaParam.FloatValue)
-                #RSI 14 Minutes (NOT smoothed) --> IF crossing from above 70 to below 70
-            #and
-            #   (nonSmoothed14MinRSIShortThreshold.FloatValue is None or self.MinuteNonSmoothedRSIIndicator.BearishSignal(nonSmoothed14MinRSIShortThreshold.FloatValue))
 
         ):
             return True
@@ -651,8 +648,7 @@ class DayTradingPosition():
             and (posMaximChangeParam.FloatValue is None or statisticalParams.PctChangeLastThreeMinSlope < posMaximChangeParam.FloatValue)
                 # Delta between current value and 50MMA
             and (posMaximChangeParam.FloatValue is None or statisticalParams.DeltaCurrValueAndFiftyMMov < posMaxLongDeltaParam.FloatValue)
-                # RSI 14 Minutes (NOT smoothed) --> IF crossing from below 30 to above 30
-            #and  (nonSmoothed14MinRSILongThreshold.FloatValue is None or  self.MinuteNonSmoothedRSIIndicator.BullishSignal(nonSmoothed14MinRSILongThreshold.FloatValue))
+
             ):
             return True
         else:
@@ -801,7 +797,7 @@ class DayTradingPosition():
         if (    self.MaxProfitCurrentTrade is not None
             and self.CurrentProfitLastTrade is not None
             and (maxGainForClosingModelParam.FloatValue is not None and self.MaxProfitCurrentTrade >= maxGainForClosingModelParam.FloatValue * 100)
-            and (pctMaxGainForClosingModelParam.FloatValue is not None and (self.CurrentProfitLastTrade < pctMaxGainForClosingModelParam.FloatValue * self.MaxProfit))
+            and (pctMaxGainForClosingModelParam.FloatValue is not None and (self.CurrentProfitLastTrade < pctMaxGainForClosingModelParam.FloatValue * self.MaxProfitCurrentTrade))
         ):
             return _EXIT_SHORT_COND_3
 
@@ -821,8 +817,6 @@ class DayTradingPosition():
             and ( pctSlopeToCloseShortModelParam.FloatValue is not None and statisticalParams.ThreeMinSkipSlope >= pctSlopeToCloseShortModelParam.FloatValue)):
             return _EXIT_SHORT_COND_5
 
-       # if ( self.MinuteNonSmoothedRSIIndicator.BullishSignal(nonSmoothed14MinRSILongThreshold.FloatValue)):
-       #     return _EXIT_SHORT_COND_6
 
         return None
 
@@ -1074,7 +1068,7 @@ class DayTradingPosition():
         if (    self.MaxProfitCurrentTrade is not None
             and self.CurrentProfitLastTrade is not None
             and (maxGainForClosingModelParam.FloatValue is not None and self.MaxProfitCurrentTrade >= maxGainForClosingModelParam.FloatValue * 100)
-            and (pctMaxGainForClosingModelParam.FloatValue is not None and (self.CurrentProfitLastTrade < pctMaxGainForClosingModelParam.FloatValue * self.MaxProfit))
+            and (pctMaxGainForClosingModelParam.FloatValue is not None and (self.CurrentProfitLastTrade < pctMaxGainForClosingModelParam.FloatValue * self.MaxProfitCurrentTrade))
         ):
             return _EXIT_LONG_COND_3
 
@@ -1095,8 +1089,6 @@ class DayTradingPosition():
           ):
             return _EXIT_LONG_COND_5
 
-        #if ( self.MinuteNonSmoothedRSIIndicator.BearishSignal(nonSmoothed14MinRSIShortThreshold.FloatValue)):
-        #    return _EXIT_LONG_COND_6
 
         return None
 
