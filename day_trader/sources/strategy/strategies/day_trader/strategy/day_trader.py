@@ -230,7 +230,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
         self.ProcessExecutionPrices(dayTradingPos,execReport)
 
-        summary.UpdateStatus(execReport)
+        summary.UpdateStatus(execReport, marketDataToUse=dayTradingPos.MarketData if dayTradingPos.RunningBacktest else None)
         dayTradingPos.UpdateRouting() #order is important!
         if summary.Position.IsFinishedPosition():
             LogHelper.LogPositionUpdate(self, "Managed Position Finished", summary, execReport)
@@ -557,6 +557,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
             LogHelper.LogPublishMarketDataOnSecurity("DayTrader Proc MarketData", self, md.Security.Symbol, md)
 
         except Exception as e:
+            traceback.print_exc()
             self.ProcessErrorInMethod("@DayTrader.ProcessMarketData", e,md.Security.Symbol is md if not None else None)
         finally:
             self.LockMarketData.release()
@@ -716,7 +717,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
 
     def EvaluateGenericLongTrade(self,dayTradingPos,symbol,cbDict,candlebar):
-        if (dayTradingPos.EvaluateValidTimeToEnterTrade(
+        if (dayTradingPos.EvaluateValidTimeToEnterTrade(candlebar,
                 self.ModelParametersHandler.Get(ModelParametersHandler.LOW_VOL_ENTRY_THRESHOLD(), symbol),
                 self.ModelParametersHandler.Get(ModelParametersHandler.HIGH_VOL_ENTRY_THRESHOLD(), symbol),
                 self.ModelParametersHandler.Get(ModelParametersHandler.LOW_VOL_FROM_TIME(), symbol),
@@ -758,7 +759,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
     def EvaluateGenericShortTrade(self, dayTradingPos, symbol, cbDict, candlebar):
 
-        if (dayTradingPos.EvaluateValidTimeToEnterTrade(
+        if (dayTradingPos.EvaluateValidTimeToEnterTrade(candlebar,
                 self.ModelParametersHandler.Get(ModelParametersHandler.LOW_VOL_ENTRY_THRESHOLD(), symbol),
                 self.ModelParametersHandler.Get(ModelParametersHandler.HIGH_VOL_ENTRY_THRESHOLD(), symbol),
                 self.ModelParametersHandler.Get(ModelParametersHandler.LOW_VOL_FROM_TIME(), symbol),
@@ -839,6 +840,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                                   self.ModelParametersHandler.Get(ModelParametersHandler.MACD_RSI_ABS_MAX_MS_PERIOD(),symbol),
                                    list(cbDict.values()))
                if longCondition is not None:
+
                    self.DoLog("MACD/RSI = Running long trade for symbol {}".format(dayTradingPos.Security.Symbol),MessageType.INFO)
                    self.TradingSignalHelper.PersistMACDRSITradingSignal(dayTradingPos,TradingSignalHelper._ACTION_OPEN(), Side.Buy,candlebar, self,condition=longCondition)
                    self.ProcessNewPositionReqManagedPos(dayTradingPos, Side.Buy, dayTradingPos.SharesQuantity,self.Configuration.DefaultAccount)
@@ -887,6 +889,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                                                                     list(cbDict.values()))
 
             if shortCondition is not None:
+
                 self.DoLog("MACD/RSI = Running short trade for symbol {}".format(dayTradingPos.Security.Symbol),MessageType.INFO)
                 self.TradingSignalHelper.PersistMACDRSITradingSignal(dayTradingPos, TradingSignalHelper._ACTION_OPEN(),Side.SellShort, candlebar,
                                                                      self,condition=shortCondition)
@@ -911,10 +914,10 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
         symbol = candlebar.Security.Symbol
 
         tradingMode = self.ModelParametersHandler.Get(ModelParametersHandler.TRADING_MODE(),symbol)
+        dayTradingPos = next(iter(list(filter(lambda x: x.Security.Symbol == candlebar.Security.Symbol, self.DayTradingPositions))),None)
 
-        if tradingMode.StringValue == _TRADING_MODE_AUTOMATIC:
+        if tradingMode.StringValue == _TRADING_MODE_AUTOMATIC or dayTradingPos.RunningBacktest:
 
-            dayTradingPos =  next(iter(list(filter(lambda x: x.Security.Symbol == candlebar.Security.Symbol, self.DayTradingPositions))), None)
             if dayTradingPos is not None:
 
                 automTradingModeModelParam = self.ModelParametersHandler.Get(ModelParametersHandler.AUTOMATIC_TRADING_MODE(), symbol)
@@ -951,9 +954,10 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
         tradingMode = self.ModelParametersHandler.Get(ModelParametersHandler.TRADING_MODE(), symbol)
 
-        if tradingMode.StringValue == _TRADING_MODE_AUTOMATIC:
+        dayTradingPos = next(iter(list(filter(lambda x: x.Security.Symbol == candlebar.Security.Symbol, self.DayTradingPositions))),None)
 
-            dayTradingPos = next(iter(list(filter(lambda x: x.Security.Symbol == candlebar.Security.Symbol, self.DayTradingPositions))),None)
+        if tradingMode.StringValue == _TRADING_MODE_AUTOMATIC or dayTradingPos.RunningBacktest:
+
             if dayTradingPos is not None:
 
                 automTradingModeModelParam = self.ModelParametersHandler.Get(ModelParametersHandler.AUTOMATIC_TRADING_MODE(),symbol)
@@ -1153,6 +1157,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                                                                         )
 
             if closingCond is not None and runClose:
+
                 self.RunClose(dayTradingPos, Side.Sell if dayTradingPos.GetNetOpenShares() > 0 else Side.Buy,
                               dayTradingPos.GetStatisticalParameters(list(cbDict.values())), candlebar,generic=False,
                               closingCond=closingCond)
@@ -1207,6 +1212,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                                                                          )
 
             if closingCond is not None and runClose:
+
                 self.RunClose(dayTradingPos, Side.Sell if dayTradingPos.GetNetOpenShares() > 0 else Side.Buy,
                               dayTradingPos.GetStatisticalParameters(list(cbDict.values())), candlebar,generic=False,
                               closingCond=closingCond)
@@ -1233,13 +1239,18 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
                 cbDict[candlebar.DateTime] = candlebar
 
-                self.Candlebars[candlebar.Security.Symbol]=cbDict
-                self.UpdateTechnicalAnalysisParameters(candlebar,cbDict)
-                self.EvaluateOpeningPositions(candlebar,cbDict)
-                self.EvaluateClosingPositions(candlebar,cbDict)
-                self.UpdateTradingSignals(candlebar,cbDict)
+                dayTradingPos = next(iter( list(filter(lambda x: x.Security.Symbol == candlebar.Security.Symbol, self.DayTradingPositions))),None)
 
-                self.EvaluateClosingForManualConditions(candlebar, cbDict)
+                self.Candlebars[candlebar.Security.Symbol] = cbDict
+
+                if not dayTradingPos.RunningBacktest:
+
+                    self.UpdateTechnicalAnalysisParameters(candlebar,cbDict)
+                    self.EvaluateOpeningPositions(candlebar,cbDict)
+                    self.EvaluateClosingPositions(candlebar,cbDict)
+                    self.UpdateTradingSignals(candlebar,cbDict)
+
+                    self.EvaluateClosingForManualConditions(candlebar, cbDict)
 
                 #self.DoLog("Candlebars successfully loaded for symbol {} ".format(candlebar.Security.Symbol),MessageType.DEBUG)
             else:
@@ -1248,7 +1259,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
             LogHelper.LogPublishCandleBarOnSecurity("DayTrader Processed Candlebar", self, candlebar.Security.Symbol,candlebar)
 
         except Exception as e:
-            traceback.print_exc()
+
             self.ProcessErrorInMethod("@DayTrader.ProcessCandleBar", e,candlebar.Security.Symbol if candlebar is not None else None)
         finally:
             if self.LockCandlebar.locked():
@@ -1502,8 +1513,10 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
         for modelKey in modelParamDict:
 
-            modelParamInMem = self.ModelParametersHandler.Get(ModelParametersHandler.TRADING_MODE(), dayTradingPos.Security.Symbol)
+            modelParamInMem = self.ModelParametersHandler.Get(modelKey, dayTradingPos.Security.Symbol)
 
+            if modelParamInMem is None:
+                raise Exception("Could not find a model parameter for the key {}. Please validate that you are using the correct key".format(key))
 
             backtestModelParam = ModelParameter(key=modelKey,symbol=dayTradingPos.Security.Symbol,stringValue=None,intValue=None,floatValue=None)
             backtestModelParam.IntValue = int(modelParamDict[modelKey]) if modelParamInMem.IntValue is not None else None
@@ -1519,6 +1532,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
 
     def RunBacktest(self,dayTradingPos,candelBarDict,marketDataDict):
+
         for date in candelBarDict:
             candleBarsArray = candelBarDict[date]
             marketDataArray = None
@@ -1547,43 +1561,60 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                 self.UpdateTechnicalAnalysisParameters(candlebar, cbDict)
                 self.EvaluateOpeningPositions(candlebar, cbDict)
                 self.EvaluateClosingPositions(candlebar, cbDict)
-                self.UpdateTradingSignals(candlebar, cbDict)
+
                 dayTradingPos.MarketData = md
                 dayTradingPos.CalculateCurrentDayProfits(md)
-                self.EvaluateClosingForManualConditions(candlebar, cbDict)
+
+                time.sleep(int(0.01))
+
+                i+=1
+
 
     def ProcessStrategyBacktestThread(self,dayTradingPos,wrapper):
         try:
 
             tradingMode = self.ModelParametersHandler.Get(ModelParametersHandler.TRADING_MODE(), dayTradingPos.Security.Symbol)
 
+            if dayTradingPos.RunningBacktest:
+                raise Exception("Another backtest is already running for symbol {}. You have to wait for the preious backtest to finish".format(dayTradingPos.Security.Symbol))
+
+            if dayTradingPos.Routing:
+                raise Exception("The position for security {} is routing (open orders in the exchange). Cancel the open orders or depurate the position".format(dayTradingPos.Security.Symbol))
+
             if tradingMode.StringValue == _TRADING_MODE_MANUAL:
 
                 candelBarDict = wrapper.GetField(StrategyBacktestField.CandleBarDict)
                 marketDataDict = wrapper.GetField(StrategyBacktestField.MarketDataDict)
                 modelParamDict = wrapper.GetField(StrategyBacktestField.ModelParametersDict)
-
-                #TODO: Validar que no se esté corriendo OTRO backtest
+                refDate = wrapper.GetField(StrategyBacktestField.ReferenceDate)
 
                 # 1- We update the model parameters in memotry with the ones that will use the backtest
                 modelParamsBackup = self.UpdateModelParamters(dayTradingPos,modelParamDict)
 
                 #2- Reset Statistics!
-                dayTradingPos.ResetProfitCounters(datetime.datetime.now())
+                dayTradingPos.ResetProfitCounters(refDate)
+                dayTradingPos.RunningBacktest = True
+                dayTradingPos.ResetExecutionSummaries()
+                self.Candlebars[dayTradingPos.Security.Symbol]={}
+                self.MarketData[dayTradingPos.Security.Symbol]={}
 
                 #3-We execute the backtest
                 self.RunBacktest(dayTradingPos,candelBarDict,marketDataDict)
 
                 #4-We restore model parameters previous values
-
+                for originalModelParam in modelParamsBackup:
+                    self.ModelParametersHandler.Set(originalModelParam.Key, originalModelParam.Symbol, originalModelParam)
 
             else:
                 raise Exception("Security {} is in automatic mode. It's unsafe to run a backtest while the security it's in this state. Please turn it to manual mode".format(dayTradingPos.Security.Symbol))
 
         except Exception as e:
+            traceback.print_exc()
             msg = "Critical Error processing strategy backtest (@thread): {}!".format(str(e))
             self.ProcessError(ErrorWrapper(Exception(msg)))
             self.DoLog(msg, MessageType.ERROR)
+        finally:
+            dayTradingPos.RunningBacktest = False
 
 
     def ProcessStrategyBacktest(self,wrapper):
@@ -1595,13 +1626,14 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
             if dayTradingPos is not None:
 
-                threading.Thread(target=self.ProcessStrategyBacktestThread, args=(wrapper,dayTradingPos)).start()
+                threading.Thread(target=self.ProcessStrategyBacktestThread, args=(dayTradingPos,wrapper,)).start()
 
                 return CMState.BuildSuccess(self)
             else:
                 raise Exception( "Could not find day trading position for symbol {}".format(symbol if symbol is not None else "-"))
 
         except Exception as e:
+
             msg = "Critical Error processing strategy backtest: {}!".format(str(e))
             self.ProcessError(ErrorWrapper(Exception(msg)))
             self.DoLog(msg, MessageType.ERROR)

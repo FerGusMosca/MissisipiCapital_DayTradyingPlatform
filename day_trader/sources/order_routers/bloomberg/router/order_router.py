@@ -799,7 +799,7 @@ class OrderRouter( BaseCommunicationModule, ICommunicationModule):
         newWrapper = NewExecutionReportWrapper(newOrder)
 
         self.DoSendExecutionReportThread(newWrapper)
-        time.sleep(2)
+        time.sleep(int(self.Configuration.SecondsToSleepOnTradeForMock))
 
         lastCandlebar = None
         fullSymbol = "{} {} {}".format(newOrder.Security.Symbol,

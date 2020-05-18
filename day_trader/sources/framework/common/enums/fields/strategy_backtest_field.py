@@ -1,6 +1,7 @@
 from enum import Enum
 class StrategyBacktestField(Enum):
     Symbol=1
-    CandleBarDict=2
-    MarketDataDict = 3
-    ModelParametersDict=4
+    ReferenceDate =2
+    CandleBarDict=3
+    MarketDataDict = 4
+    ModelParametersDict=5

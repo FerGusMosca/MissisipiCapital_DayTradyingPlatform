@@ -1,4 +1,5 @@
 from sources.framework.business_entities.market_data.candle_bar import *
+from sources.framework.business_entities.market_data.market_data import *
 from sources.framework.business_entities.securities.security import *
 from sources.strategy.strategies.day_trader.strategy.services.file_handler.common.dto.strategy_backtest_dto import *
 import csv
@@ -17,6 +18,14 @@ class InputFileConverter:
         return "Date"
 
     @staticmethod
+    def SYMBOL_FIELD():
+        return "Symbol"
+
+    @staticmethod
+    def DEFAULT_SYMBOL():
+        return "SPY"
+
+    @staticmethod
     def DAILY_BIAS_FIELD():
         return "DAILY_BIAS"
 
@@ -27,6 +36,9 @@ class InputFileConverter:
     @staticmethod
     def DATE_FORMAT():
         return "%m/%d/%y"
+
+    def DAILY_BIAS_FIELD():
+        return "DAILY_BIAS"
 
     #endregion
 
@@ -52,8 +64,11 @@ class InputFileConverter:
         modelParamDict={}
 
         for x in range (startIndex,len(columns)):
-            if columns[x]!="":
+            if columns[x]!="" :
                 modelParamDict[columns[x]]=0
+
+        #No we append custom keys
+
 
         return modelParamDict
 
@@ -61,9 +76,16 @@ class InputFileConverter:
     def ExtractModelParametersValues(cls,columns,startIndex,modelParamDict):
 
         i=startIndex
+        toDel=[]
         for key in modelParamDict:
-            modelParamDict[key]=columns[i]
+            if key!=InputFileConverter.SYMBOL_FIELD():
+                modelParamDict[key]=columns[i]
+            else:
+                toDel.append(key)
             i+=1
+
+        for key in toDel:
+            del modelParamDict[key]
 
     @staticmethod
     def ExtractPrices(cls,columns,timeDict):
@@ -102,8 +124,15 @@ class InputFileConverter:
         return now.replace(year=date.tm_year,month=date.tm_mon,day=date.tm_mday,hour=time.tm_hour, minute=time.tm_min, second=time.tm_sec, microsecond=0)
 
     @staticmethod
-    def BuildCandlebar(cls,datetime,date,time,price):
-        sec = Security(Symbol="")
+    def GetSymbol(modelParamDict):
+        if InputFileConverter.SYMBOL_FIELD() in modelParamDict:
+            return modelParamDict[InputFileConverter.SYMBOL_FIELD()]
+        else:
+            return InputFileConverter.DEFAULT_SYMBOL()
+
+    @staticmethod
+    def BuildCandlebar(symbol,datetime,date,time,price):
+        sec = Security(Symbol=symbol)
 
         candlebar = CandleBar(pSecurity=sec)
         candlebar.Time=time
@@ -117,11 +146,33 @@ class InputFileConverter:
         return candlebar
 
     @staticmethod
+    def BuildMarketData(symbol,datetime,date,time,price):
+        sec = Security(Symbol=symbol)
+
+        md = MarketData()
+        md.Security=sec
+        md.OpeningPrice=price
+        md.ClosingPrice = price
+        md.TradingSessionHighPrice=price
+        md.TradingSessionLowPrice=price
+        md.Trade=price
+        md.MDEntryDate=datetime
+        md.MDLocalEntryDate=datetime
+        md.Timestamp=datetime
+        md.StdDev=0
+
+        return md
+
+
+    @staticmethod
     def ExtractMarketDataStructure(cls,file):
 
         candleBarDict = {}
-
+        marketDataDict = {}
         modelParamDict = {}
+
+        symbol = InputFileConverter.DEFAULT_SYMBOL()
+        referenceDate = None
 
         with open(file, newline='') as f:
             reader = csv.reader(f)
@@ -134,22 +185,35 @@ class InputFileConverter:
                     modelParamDict=InputFileConverter.ExtractModelParametersKeys(cls,row,len(timeDict)+1)
 
                 else:
+
+                    if i==1:
+                        InputFileConverter.ExtractModelParametersValues(cls,row,len(timeDict)+1,modelParamDict)
+                        symbol=InputFileConverter.GetSymbol(modelParamDict)
+
                     pricesDict = InputFileConverter.ExtractPrices(cls,row, timeDict)
                     date = InputFileConverter.ExtractDate(cls,row)
 
                     for index in timeDict:
                         dateTime = InputFileConverter.ConcatDateTime(cls,date,timeDict[index])
-                        candlebar = InputFileConverter.BuildCandlebar(cls,dateTime,date,time,pricesDict[index])
+                        referenceDate = dateTime if referenceDate is None else referenceDate
+
+                        candlebar = InputFileConverter.BuildCandlebar(symbol,dateTime,date,time,pricesDict[index])
+                        md = InputFileConverter.BuildMarketData(symbol, dateTime, date, time, pricesDict[index])
 
                         if date not in candleBarDict:
                             candleBarDict[date]=[]
+
+                        if date not in marketDataDict:
+                            marketDataDict[date]=[]
+
                         candleBarDict[date].append(candlebar)
+                        marketDataDict[date].append(md)
 
 
-                    if i==1:
-                        InputFileConverter.ExtractModelParametersValues(cls,row,len(timeDict)+1,modelParamDict)
+
                 i+=1
 
-        respDto = StrategyBacktestDto(pSecurity=Security(Symbol=file),pCandleBarDict=candleBarDict,pParamDict=modelParamDict)
+        respDto = StrategyBacktestDto(pReferenceDate=referenceDate,pSecurity=Security(Symbol=symbol),pCandleBarDict=candleBarDict,
+                                      pMarketDataDict=marketDataDict,pParamDict=modelParamDict)
 
         return respDto

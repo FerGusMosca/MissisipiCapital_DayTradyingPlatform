@@ -20,9 +20,10 @@ class ExecutionSummary:
         self.LastTradeTime = None
         self.CreateTime= datetime.datetime.now()
 
-    def UpdateStatus(self, execReport):
+    def UpdateStatus(self, execReport,marketDataToUse=None):
+
         self.CumQty = execReport.CumQty
-        self.AvgPx = execReport.AvgPx
+        self.AvgPx = execReport.AvgPx if marketDataToUse is None else marketDataToUse.Trade
         self.Commission = execReport.Commission
         self.Text = execReport.Text if execReport.Text is not None and execReport.Text!="" else self.Text
 

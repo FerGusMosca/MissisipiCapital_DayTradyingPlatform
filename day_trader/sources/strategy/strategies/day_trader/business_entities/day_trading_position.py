@@ -100,8 +100,9 @@ class DayTradingPosition():
         self.MaxProfitCurrentTrade = 0
         self.MaxLossCurrentTrade = 0
         self.LastNDaysStdDev = 0
-        self.LastProfitCalculationDay = None
+        self.PosUpdTimestamp = None
         self.TerminalClose = False
+        self.RunningBacktest = False
         self.TerminalCloseCond = None
         self.Recomendation = _REC_UNDEFINED
         self.ShowTradingRecommndations = False
@@ -297,9 +298,11 @@ class DayTradingPosition():
         return posMTM
 
     def GetNetOpenShares(self):
-        todaySummaries = sorted(list(filter(lambda x: x.Timestamp.date() == datetime.now().date() and x.CumQty >= 0,
+        todaySummaries = sorted(list(filter(lambda x: x.CumQty >= 0
+                                            and (self.RunningBacktest or x.Timestamp.date() == self.PosUpdTimestamp.date()),
                                             self.ExecutionSummaries.values())),
-                                key=lambda x: x.Timestamp, reverse=False)
+                                            key=lambda x: x.Timestamp, reverse=False)
+
         netShares = 0
         for summary in todaySummaries:
             # first we calculate the traded positions
@@ -309,11 +312,12 @@ class DayTradingPosition():
                 else:
                     netShares -= summary.GetNetShares()
 
+
         return netShares
 
     def CalculateLastTradeProfit(self, profitsAndLosses, marketData):
 
-        lastTradedSummaries = sorted(list(filter(lambda x: x.Timestamp.date() == datetime.now().date() and x.GetNetShares() != 0
+        lastTradedSummaries = sorted(list(filter(lambda x: x.Timestamp.date() == self.PosUpdTimestamp.date() and x.GetNetShares() != 0
                                                  and (x.Position.LongPositionOpened() if self.GetNetOpenShares()>0 else x.Position.ShortPositionOpened()),
                            self.ExecutionSummaries.values())),key=lambda x: x.Timestamp, reverse=True)
 
@@ -336,7 +340,7 @@ class DayTradingPosition():
 
 
     def CalculatePositionsProfit(self,profitsAndLosses):
-        todaySummaries = sorted(list(filter(lambda x: x.Timestamp.date() == datetime.now().date() and x.CumQty >= 0, self.ExecutionSummaries.values())),
+        todaySummaries = sorted(list(filter(lambda x: x.Timestamp.date() == self.PosUpdTimestamp.date() and x.CumQty >= 0, self.ExecutionSummaries.values())),
                                             key=lambda x: x.Timestamp, reverse=False)
         foundOpenPositions = False
 
@@ -390,6 +394,8 @@ class DayTradingPosition():
 
         return lastTradedSummaries[0] if (len(lastTradedSummaries) > 0) else None
 
+    def ResetExecutionSummaries(self):
+        self.ExecutionSummaries = {}
 
     def ResetProfitCounters(self,now):
         self.CurrentProfit = 0
@@ -401,17 +407,33 @@ class DayTradingPosition():
         self.MaxProfit = 0
         self.MaxProfitCurrentTrade = 0
         self.MaxLossCurrentTrade = 0
-        self.LastProfitCalculationDay = datetime.now()
+        self.PosUpdTimestamp = now
 
         self.MinuteNonSmoothedRSIIndicator.Reset()#14
         self.MinuteSmoothedRSIIndicator.Reset()#30
         self.MACDIndicator.Reset()
         self.TerminalClose = False
+        self.RunningBacktest= False
         self.TerminalCloseCond = None
         self.Recomendation=_REC_UNDEFINED
         self.ShowTradingRecommndations=False
 
+    def UpdateTimestap(self,marketData):
+        if(marketData.MDEntryDate is not None):
+            self.PosUpdTimestamp=self.PosUpdTimestamp.replace(hour=marketData.MDEntryDate.hour,
+                                                              minute=marketData.MDEntryDate.minute,
+                                                              second=marketData.MDEntryDate.second,
+                                                              microsecond=0)
+        else:
+            self.PosUpdTimestamp = self.PosUpdTimestamp.replace(hour=datetime.now().hour,
+                                                                minute=datetime.now().minute,
+                                                                second=datetime.now().second,
+                                                                microsecond=0)
+
+
     def CalculateCurrentDayProfits(self,marketData):
+
+        self.UpdateTimestap(marketData)
 
         profitsAndLosses = PositionsProfitsAndLosses()
 
@@ -442,13 +464,11 @@ class DayTradingPosition():
             self.CurrentProfitMonetary = profitsAndLosses.MonetaryProfits
             self.CurrentProfitLastTrade = profitsAndLosses.ProfitLastTrade
             self.CurrentProfitMonetaryLastTrade = profitsAndLosses.MonetaryProfitLastTrade
-            self.LastProfitCalculationDay=datetime.now()
             self.IncreaseDecrease=profitsAndLosses.IncreaseDecrease
         else:
             #Last Trade remains as the last estimation while was opened
             self.CurrentProfit = profitsAndLosses.Profits
             self.CurrentProfitMonetary = profitsAndLosses.MonetaryProfits
-            self.LastProfitCalculationDay = datetime.now()
             self.IncreaseDecrease = 0
             self.MaxLossCurrentTrade=0
             self.MaxProfitCurrentTrade=0
@@ -824,8 +844,10 @@ class DayTradingPosition():
     def EvaluateClosingTerminalCondition(self,candlebarsArr,endOfdayLimitModelParam,maxGainForClosingModelParam	,pctMaxGainForClosingModelParam,
                                          maxLossForClosingModelParam,pctMaxLossForClosingModelParam,takeGainLimitModelParam,stopLossLimitModelParam):
 
+        lastCandlebar = candlebarsArr[-1]
+
         # EXIT any open trades at 2:59 PM central time
-        if (endOfdayLimitModelParam.StringValue is not None and self.EvaluateBiggerDate(endOfdayLimitModelParam)):
+        if (endOfdayLimitModelParam.StringValue is not None and self.EvaluateBiggerDate(lastCandlebar,endOfdayLimitModelParam)):
             return _EXIT_TERM_COND_EOF
 
 
@@ -848,7 +870,7 @@ class DayTradingPosition():
         if ( openSummary is not None
             and openSummary.Position.CloseEndOfDay is not None
             and openSummary.Position.CloseEndOfDay ==True
-            and self.EvaluateBiggerDate( endOfdayLimitModelParam)
+            and self.EvaluateBiggerDate( candlebar,endOfdayLimitModelParam)
             and self.GetNetOpenShares()!=0):
             return True
         else:
@@ -1093,8 +1115,8 @@ class DayTradingPosition():
         return None
 
 
-    def EvaluateTimeRange(self,timeFromModelParam,timeToModelParam):
-        now = datetime.now()
+    def EvaluateTimeRange(self,candlebar,timeFromModelParam,timeToModelParam):
+        now = candlebar.DateTime
         fromTimeLowVol = time.strptime(timeFromModelParam.StringValue, "%I:%M %p")
         toTimeLowVol = time.strptime(timeToModelParam.StringValue, "%I:%M %p")
         todayStart = now.replace(hour=fromTimeLowVol.tm_hour, minute=fromTimeLowVol.tm_min, second=0, microsecond=0)
@@ -1102,13 +1124,13 @@ class DayTradingPosition():
                                second=0, microsecond=0)
         return todayStart < now and now <todayEnd
 
-    def EvaluateBiggerDate(self, timeFromModelParam):
-        now = datetime.now()
+    def EvaluateBiggerDate(self,candlebar ,timeFromModelParam):
+        now = candlebar.DateTime
         fromTime = time.strptime(timeFromModelParam.StringValue, "%I:%M %p")
         todayStart = now.replace(hour=fromTime.tm_hour, minute=fromTime.tm_min, second=0, microsecond=0)
         return todayStart<now
 
-    def EvaluateValidTimeToEnterTrade(self,lowVolEntryThresholdModelParam,highVolEntryThresholdModelParam,
+    def EvaluateValidTimeToEnterTrade(self,candlebar,lowVolEntryThresholdModelParam,highVolEntryThresholdModelParam,
                                       lowVolFromTimeModelParam,lowVolToTimeModelParam,
                                       highVolFromTime1,highVolToTime1,highVolFromTime2,highVolToTime2):
 
@@ -1116,7 +1138,7 @@ class DayTradingPosition():
 
             if (lowVolEntryThresholdModelParam.FloatValue is None or self.LastNDaysStdDev<lowVolEntryThresholdModelParam.FloatValue):
                 if ( lowVolFromTimeModelParam.StringValue is not None and lowVolToTimeModelParam.StringValue is not None):
-                    return  self.EvaluateTimeRange(lowVolFromTimeModelParam,lowVolToTimeModelParam)
+                    return  self.EvaluateTimeRange(candlebar,lowVolFromTimeModelParam,lowVolToTimeModelParam)
                 else:
                     return True #I am in a lowVol env , but no time prefferences
 
@@ -1125,10 +1147,10 @@ class DayTradingPosition():
                 volEntry1 = False
                 volEntry2 = False
                 if (highVolFromTime1.StringValue is not None and highVolToTime1.StringValue is not None):
-                    volEntry1 =  self.EvaluateTimeRange(highVolFromTime1, highVolToTime1)
+                    volEntry1 =  self.EvaluateTimeRange(candlebar,highVolFromTime1, highVolToTime1)
 
                 if (  highVolFromTime2.StringValue is not None and highVolToTime2.StringValue is not None):
-                    volEntry2 = self.EvaluateTimeRange(highVolFromTime2, highVolToTime2)
+                    volEntry2 = self.EvaluateTimeRange(candlebar,highVolFromTime2, highVolToTime2)
 
                 return volEntry1 or volEntry2
 

@@ -17,8 +17,12 @@ class StrategyBacktestWrapper(Wrapper):
     def GetField(self, field):
         if field == StrategyBacktestField.Symbol:
             return self.StrategyBacktestDTO.Security.Symbol
+        elif field == StrategyBacktestField.ReferenceDate:
+            return self.StrategyBacktestDTO.ReferenceDate
         elif field == StrategyBacktestField.CandleBarDict:
             return self.StrategyBacktestDTO.CandleBarDict
+        elif field == StrategyBacktestField.MarketDataDict:
+            return self.StrategyBacktestDTO.MarketDataDict
         elif field == StrategyBacktestField.ModelParametersDict:
             return self.StrategyBacktestDTO.ParmDict
         else:
