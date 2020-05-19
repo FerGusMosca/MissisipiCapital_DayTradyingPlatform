@@ -546,15 +546,16 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
             dayTradingPositions = list(filter(lambda x: x.Security.Symbol == md.Security.Symbol, self.DayTradingPositions))
 
             for dayTradingPos in dayTradingPositions:
-                if(dayTradingPos.MarketData is not None and dayTradingPos.MarketData.Trade!=md.Trade):
-                    dayTradingPos.MarketData=md
-                    threading.Thread(target=self.PublishPortfolioPositionThread, args=(dayTradingPos,)).start()
+                if not dayTradingPos.RunningBacktest:
+                    if(dayTradingPos.MarketData is not None and dayTradingPos.MarketData.Trade!=md.Trade):
+                        dayTradingPos.MarketData=md
+                        threading.Thread(target=self.PublishPortfolioPositionThread, args=(dayTradingPos,)).start()
 
-                else:
-                    dayTradingPos.MarketData=md
-                dayTradingPos.CalculateCurrentDayProfits(md)
+                    else:
+                        dayTradingPos.MarketData=md
+                    dayTradingPos.CalculateCurrentDayProfits(md)
 
-            LogHelper.LogPublishMarketDataOnSecurity("DayTrader Proc MarketData", self, md.Security.Symbol, md)
+                    LogHelper.LogPublishMarketDataOnSecurity("DayTrader Proc MarketData", self, md.Security.Symbol, md)
 
         except Exception as e:
             traceback.print_exc()
@@ -1241,9 +1242,8 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
                 dayTradingPos = next(iter( list(filter(lambda x: x.Security.Symbol == candlebar.Security.Symbol, self.DayTradingPositions))),None)
 
-                self.Candlebars[candlebar.Security.Symbol] = cbDict
-
                 if not dayTradingPos.RunningBacktest:
+                    self.Candlebars[candlebar.Security.Symbol] = cbDict
 
                     self.UpdateTechnicalAnalysisParameters(candlebar,cbDict)
                     self.EvaluateOpeningPositions(candlebar,cbDict)
@@ -1564,6 +1564,13 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
                 dayTradingPos.MarketData = md
                 dayTradingPos.CalculateCurrentDayProfits(md)
+
+                print("prnt#1- DateTime={} Gain/Loss$={} Gain/Loss$(Cum)={} Increase/Decrease={} NetShares={}"
+                      .format(candlebar.DateTime,dayTradingPos.CurrentProfitMonetaryLastTrade,
+                              dayTradingPos.CurrentProfitMonetary,dayTradingPos.IncreaseDecrease,
+                              dayTradingPos.GetNetOpenShares()))
+
+                threading.Thread(target=self.PublishPortfolioPositionThread, args=(dayTradingPos,)).start()
 
                 time.sleep(int(0.01))
 

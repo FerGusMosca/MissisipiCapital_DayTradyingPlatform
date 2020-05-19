@@ -317,8 +317,9 @@ class DayTradingPosition():
 
     def CalculateLastTradeProfit(self, profitsAndLosses, marketData):
 
-        lastTradedSummaries = sorted(list(filter(lambda x: x.Timestamp.date() == self.PosUpdTimestamp.date() and x.GetNetShares() != 0
-                                                 and (x.Position.LongPositionOpened() if self.GetNetOpenShares()>0 else x.Position.ShortPositionOpened()),
+        lastTradedSummaries = sorted(list(filter(lambda x:  x.GetNetShares() != 0
+                            and (self.RunningBacktest or x.Timestamp.date() == self.PosUpdTimestamp.date())
+                            and (x.Position.LongPositionOpened() if self.GetNetOpenShares()>0 else x.Position.ShortPositionOpened()),
                            self.ExecutionSummaries.values())),key=lambda x: x.Timestamp, reverse=True)
 
         lastTradedSummary=None
@@ -340,7 +341,9 @@ class DayTradingPosition():
 
 
     def CalculatePositionsProfit(self,profitsAndLosses):
-        todaySummaries = sorted(list(filter(lambda x: x.Timestamp.date() == self.PosUpdTimestamp.date() and x.CumQty >= 0, self.ExecutionSummaries.values())),
+        todaySummaries = sorted(list(filter(lambda x:  x.CumQty >= 0
+                                                     and (self.RunningBacktest or x.Timestamp.date() == self.PosUpdTimestamp.date()) ,
+                                            self.ExecutionSummaries.values())),
                                             key=lambda x: x.Timestamp, reverse=False)
         foundOpenPositions = False
 
