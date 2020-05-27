@@ -36,13 +36,16 @@ from sources.strategy.data_access_layer.execution_summary_manager import *
 from sources.strategy.data_access_layer.trading_signal_manager import *
 from sources.strategy.strategies.day_trader.common.wrappers.portfolio_position_list_wrapper import *
 from sources.strategy.strategies.day_trader.common.wrappers.portfolio_position_wrapper import *
+from sources.strategy.strategies.day_trader.common.wrappers.strategy_backtest_result_wrapper import *
 from sources.strategy.strategies.day_trader.common.util.model_parameters_handler import *
 from sources.strategy.strategies.day_trader.common.util.trading_signal_helper import *
 from sources.strategy.strategies.day_trader.business_entities.trading_signal import *
+from sources.strategy.strategies.day_trader.common.dto.backtest_dto import *
 from sources.framework.util.log_helper import *
 from dateutil.parser import parse
 import threading
 import time
+from time import mktime
 import datetime
 import uuid
 import queue
@@ -802,8 +805,8 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
 
     def EvaluateOpeningGenericAutomaticTrading(self,dayTradingPos,symbol,cbDict,candlebar):
-        return  self.EvaluateGenericLongTrade(self, dayTradingPos, symbol, cbDict, candlebar) or \
-                self.EvaluateGenericShortTrade(self, dayTradingPos, symbol, cbDict, candlebar)
+        return  self.EvaluateGenericLongTrade(dayTradingPos, symbol, cbDict, candlebar) or \
+                self.EvaluateGenericShortTrade(dayTradingPos, symbol, cbDict, candlebar)
 
     def EvaluateMACDRSILongTrade(self,dayTradingPos,symbol,cbDict,candlebar):
 
@@ -1531,9 +1534,19 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
         return modelParamsBackup
 
 
-    def RunBacktest(self,dayTradingPos,candelBarDict,marketDataDict):
+    def RunBacktest(self,dayTradingPos,refDate,candelBarDict,marketDataDict):
+
+        backtestDTOArr = []
+
+        currDate = refDate
+        self.ResetForNewDayOnBackTest(dayTradingPos, currDate)
 
         for date in candelBarDict:
+
+            if datetime.datetime.fromtimestamp(mktime(date)).date() !=currDate.date():
+                currDate=datetime.datetime.fromtimestamp(mktime(date))
+                self.ResetForNewDayOnBackTest(dayTradingPos, currDate)
+
             candleBarsArray = candelBarDict[date]
             marketDataArray = None
 
@@ -1564,17 +1577,32 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
                 dayTradingPos.MarketData = md
                 dayTradingPos.CalculateCurrentDayProfits(md)
+                backtestDto = BacktestDTO(pSymbol=dayTradingPos.Security.Symbol,
+                                          pDate=candlebar.DateTime.date(),
+                                          pTime=candlebar.DateTime.time(),
+                                          pShares=dayTradingPos.GetNetOpenShares())
 
+                backtestDTOArr.append(backtestDto)
+                '''
                 print("prnt#1- DateTime={} Gain/Loss$={} Gain/Loss$(Cum)={} Increase/Decrease={} NetShares={}"
                       .format(candlebar.DateTime,dayTradingPos.CurrentProfitMonetaryLastTrade,
                               dayTradingPos.CurrentProfitMonetary,dayTradingPos.IncreaseDecrease,
                               dayTradingPos.GetNetOpenShares()))
-
+                '''
                 threading.Thread(target=self.PublishPortfolioPositionThread, args=(dayTradingPos,)).start()
 
                 time.sleep(int(0.01))
 
                 i+=1
+
+        return backtestDTOArr
+
+    def ResetForNewDayOnBackTest(self,dayTradingPos,refDate):
+        dayTradingPos.ResetProfitCounters(refDate)
+        dayTradingPos.RunningBacktest = True
+        dayTradingPos.ResetExecutionSummaries()
+        self.Candlebars[dayTradingPos.Security.Symbol] = {}
+        self.MarketData[dayTradingPos.Security.Symbol] = {}
 
 
     def ProcessStrategyBacktestThread(self,dayTradingPos,wrapper):
@@ -1599,18 +1627,22 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                 modelParamsBackup = self.UpdateModelParamters(dayTradingPos,modelParamDict)
 
                 #2- Reset Statistics!
-                dayTradingPos.ResetProfitCounters(refDate)
-                dayTradingPos.RunningBacktest = True
-                dayTradingPos.ResetExecutionSummaries()
-                self.Candlebars[dayTradingPos.Security.Symbol]={}
-                self.MarketData[dayTradingPos.Security.Symbol]={}
+                #self.ResetForNewDayOnBackTest(dayTradingPos,refDate)
 
                 #3-We execute the backtest
-                self.RunBacktest(dayTradingPos,candelBarDict,marketDataDict)
+                backtestDtoArr = self.RunBacktest(dayTradingPos,refDate,candelBarDict,marketDataDict)
 
                 #4-We restore model parameters previous values
                 for originalModelParam in modelParamsBackup:
                     self.ModelParametersHandler.Set(originalModelParam.Key, originalModelParam.Symbol, originalModelParam)
+
+                self.SendToInvokingModule(ErrorWrapper(Exception("Process successfully completed...")))
+
+                #5-We publish the response
+                wrapper = StrategyBacktestResultWrapper(pSymbol=dayTradingPos.Security.Symbol,pBacktestResultDtoArr=backtestDtoArr)
+                self.FileHandlerModule.ProcessMessage(wrapper)
+
+                self.DoLog("Backtest successfully completed...",MessageType.INFO)
 
             else:
                 raise Exception("Security {} is in automatic mode. It's unsafe to run a backtest while the security it's in this state. Please turn it to manual mode".format(dayTradingPos.Security.Symbol))

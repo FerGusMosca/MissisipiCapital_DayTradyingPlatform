@@ -6,5 +6,6 @@ class Configuration:
         config.read(configFile)
 
         self.InputPath = config['DEFAULT']['INPUT_PATH']
+        self.OutputPath = config['DEFAULT']['OUTPUT_PATH']
         self.FailedPath = config['DEFAULT']['FAILED_PATH']
         self.ProcessedPath = config['DEFAULT']['PROCESSED_PATH']

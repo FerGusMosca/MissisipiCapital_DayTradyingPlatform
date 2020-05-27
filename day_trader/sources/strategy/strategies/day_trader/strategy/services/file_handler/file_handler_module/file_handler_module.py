@@ -6,6 +6,7 @@ from sources.strategy.strategies.day_trader.strategy.services.file_handler.commo
 from sources.framework.common.enums.Actions import *
 from sources.framework.common.logger.message_type import *
 from sources.framework.common.dto.cm_state import *
+from sources.framework.common.enums.fields.strategy_backtest_result_field import *
 import threading
 import os
 import time
@@ -47,6 +48,15 @@ class FileHandlerModule(BaseCommunicationModule, ICommunicationModule):
         except Exception as e:
             self.DoLog("Critical error @FileHandlerModule.FetchInputFileThread: " + str(e), MessageType.ERROR)
 
+    def ProcessBacktestResult(self,wrapper):
+        try:
+
+            symbol = wrapper.GetField(StrategyBacktestResultField.Symbol)
+            backtestDtoArr = wrapper.GetField(StrategyBacktestResultField.Results)
+            FileHandler.WriteOutputFile(self,self.Configuration.OutputPath,symbol,backtestDtoArr)
+
+        except Exception as e:
+            self.DoLog("Critical error @FileHandlerModule.ProcessBacktestResult: " + str(e), MessageType.ERROR)
 
     #endregion
 
@@ -56,6 +66,9 @@ class FileHandlerModule(BaseCommunicationModule, ICommunicationModule):
         try:
             if wrapper.GetAction() == Actions.ERROR:
                 return self.ProcessError(wrapper)
+            elif wrapper.GetAction() == Actions.STRATEGY_BACKTEST_RESULT:
+                threading.Thread(target=self.ProcessBacktestResult, args=(wrapper,)).start()
+                return CMState.BuildSuccess(self)
             else:
                 raise Exception("ProcessMessage: Not prepared to process message {}".format(wrapper.GetAction()))
         except Exception as e:

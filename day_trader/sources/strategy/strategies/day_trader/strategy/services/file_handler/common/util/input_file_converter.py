@@ -37,6 +37,7 @@ class InputFileConverter:
     def DATE_FORMAT():
         return "%m/%d/%y"
 
+    @staticmethod
     def DAILY_BIAS_FIELD():
         return "DAILY_BIAS"
 

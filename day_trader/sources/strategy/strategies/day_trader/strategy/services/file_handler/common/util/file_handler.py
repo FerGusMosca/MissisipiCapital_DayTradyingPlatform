@@ -1,8 +1,10 @@
 from sources.strategy.strategies.day_trader.strategy.services.file_handler.common.util.input_file_converter import *
+from sources.strategy.strategies.day_trader.strategy.services.file_handler.common.util.output_file_converter import *
 from sources.framework.common.logger.message_type import *
 import shutil
 import os
 import threading
+import csv
 
 class FileHandler:
 
@@ -19,6 +21,19 @@ class FileHandler:
 
         """
         shutil.move(input, output)
+
+    @staticmethod
+    def WriteOutputFile(logger,outputPath,symbol,backtestDtoArr):
+
+        csvRows= OutputFileConverter.CreateOuputRows(backtestDtoArr)
+
+        fileName = outputPath+symbol+"_"+datetime.datetime.now().strftime("%d-%b-%Y_%H_%M_%S_%f")+".csv"
+
+        with open(fileName, mode='w') as output_file:
+
+            for row in csvRows:
+                output_file.write(row+'\n')
+
 
     @staticmethod
     def FetchInputFile(logger, inputPath, processedPath,failedPath):
