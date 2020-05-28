@@ -23,16 +23,31 @@ class FileHandler:
         shutil.move(input, output)
 
     @staticmethod
-    def WriteOutputFile(logger,outputPath,symbol,backtestDtoArr):
+    def WriteOutputSharesFile(logger,outputPath,symbol,backtestDtoArr):
+        csvRows = OutputFileConverter.CreateSharesRows(backtestDtoArr)
 
-        csvRows= OutputFileConverter.CreateOuputRows(backtestDtoArr)
-
-        fileName = outputPath+symbol+"_"+datetime.datetime.now().strftime("%d-%b-%Y_%H_%M_%S_%f")+".csv"
+        fileName = outputPath + symbol + "_shares_" + datetime.datetime.now().strftime("%d-%b-%Y_%H_%M_%S_%f") + ".csv"
 
         with open(fileName, mode='w') as output_file:
-
             for row in csvRows:
-                output_file.write(row+'\n')
+                output_file.write(row + '\n')
+
+    @staticmethod
+    def WriteOutputProfitsFile(logger, outputPath, symbol, backtestDtoArr):
+        csvRows = OutputFileConverter.CreateProfitsRows(backtestDtoArr)
+
+        fileName = outputPath + symbol + "_profits_" + datetime.datetime.now().strftime("%d-%b-%Y_%H_%M_%S_%f") + ".csv"
+
+        with open(fileName, mode='w') as output_file:
+            for row in csvRows:
+                output_file.write(row + '\n')
+
+    @staticmethod
+    def WriteOutputFile(logger,outputPath,symbol,backtestDtoArr):
+
+        FileHandler.WriteOutputSharesFile(logger,outputPath,symbol,backtestDtoArr)
+
+        FileHandler.WriteOutputProfitsFile(logger, outputPath, symbol, backtestDtoArr)
 
 
     @staticmethod

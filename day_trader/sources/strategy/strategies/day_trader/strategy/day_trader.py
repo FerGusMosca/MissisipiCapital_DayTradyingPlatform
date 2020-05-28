@@ -1580,7 +1580,8 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                 backtestDto = BacktestDTO(pSymbol=dayTradingPos.Security.Symbol,
                                           pDate=candlebar.DateTime.date(),
                                           pTime=candlebar.DateTime.time(),
-                                          pShares=dayTradingPos.GetNetOpenShares())
+                                          pShares=dayTradingPos.GetNetOpenShares(),
+                                          pCurrentProfit=dayTradingPos.CurrentProfit)
 
                 backtestDTOArr.append(backtestDto)
                 '''

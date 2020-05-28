@@ -4,11 +4,7 @@ class OutputFileConverter:
         pass
 
     @staticmethod
-    def CreateOuputRows(backtestDtoArr):
-
-        dictTimes = {}
-        dictDates = {}
-        arrRows = []
+    def CreateTimeRows(backtestDtoArr,dictTimes,dictDates,arrRows):
 
         for dto in backtestDtoArr:
             dictTimes[dto.Time] = dto.Time
@@ -24,11 +20,39 @@ class OutputFileConverter:
 
         arrRows.append(rowTimes)
 
+    @staticmethod
+    def CreateSharesRows(backtestDtoArr):
+
+        dictTimes = {}
+        dictDates = {}
+        arrRows = []
+
+        OutputFileConverter.CreateTimeRows(backtestDtoArr,dictTimes,dictDates,arrRows)
+
         for date in dictDates.keys():
             row = date.strftime("%m/%d/%y") + ","
 
             for dto in dictDates[date]:
                 row += str( dto.Shares ) + ","
+
+            arrRows.append(row)
+
+        return arrRows
+
+    @staticmethod
+    def CreateProfitsRows(backtestDtoArr):
+
+        dictTimes = {}
+        dictDates = {}
+        arrRows = []
+
+        OutputFileConverter.CreateTimeRows(backtestDtoArr, dictTimes, dictDates, arrRows)
+
+        for date in dictDates.keys():
+            row = date.strftime("%m/%d/%y") + ","
+
+            for dto in dictDates[date]:
+                row += str(dto.CurrentProfit) + ","
 
             arrRows.append(row)
 
