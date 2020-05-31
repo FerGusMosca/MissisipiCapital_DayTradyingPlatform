@@ -232,7 +232,6 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
     def UpdateManagedPosExecutionSummary(self,dayTradingPos, summary, execReport):
 
         self.ProcessExecutionPrices(dayTradingPos,execReport)
-
         summary.UpdateStatus(execReport, marketDataToUse=dayTradingPos.MarketData if dayTradingPos.RunningBacktest else None)
         dayTradingPos.UpdateRouting() #order is important!
         if summary.Position.IsFinishedPosition():
@@ -946,12 +945,16 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
             return False
 
     def EvaluateClosingGenericAutomaticTrading(self,cbDict,candlebar):
-        self.EvaluateClosingGenericLongPositions(candlebar, cbDict)
-        self.EvaluateClosingGenericShortPositions(candlebar, cbDict)
+        closingLong = self.EvaluateClosingGenericLongPositions(candlebar, cbDict)
+        closingShort = self.EvaluateClosingGenericShortPositions(candlebar, cbDict)
+
+        return closingLong is not None or closingShort is not None
 
     def EvaluateClosingMACDRSIAutomaticTrading(self,cbDict,candlebar):
-        self.EvaluateClosingMACDRSILongPositions(candlebar,cbDict)
-        self.EvaluateClosingMACDRSIShortPositions(candlebar,cbDict)
+        closingLong = self.EvaluateClosingMACDRSILongPositions(candlebar,cbDict)
+        closingShort = self.EvaluateClosingMACDRSIShortPositions(candlebar,cbDict)
+
+        return closingLong is not None or closingShort is not None
 
     def EvaluateClosingPositions(self, candlebar, cbDict):
         symbol = candlebar.Security.Symbol
@@ -1573,7 +1576,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                 self.Candlebars[candlebar.Security.Symbol] = cbDict
                 self.UpdateTechnicalAnalysisParameters(candlebar, cbDict)
                 self.EvaluateOpeningPositions(candlebar, cbDict)
-                self.EvaluateClosingPositions(candlebar, cbDict)
+                closing = self.EvaluateClosingPositions(candlebar, cbDict)
 
                 dayTradingPos.MarketData = md
                 dayTradingPos.CalculateCurrentDayProfits(md)
@@ -1581,7 +1584,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                                           pDate=candlebar.DateTime.date(),
                                           pTime=candlebar.DateTime.time(),
                                           pShares=dayTradingPos.GetNetOpenShares(),
-                                          pCurrentProfit=dayTradingPos.CurrentProfit)
+                                          pCurrentProfit=dayTradingPos.CurrentProfitMonetaryLastTrade if closing else "")
 
                 backtestDTOArr.append(backtestDto)
                 '''
@@ -1592,7 +1595,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                 '''
                 threading.Thread(target=self.PublishPortfolioPositionThread, args=(dayTradingPos,)).start()
 
-                time.sleep(int(0.01))
+                time.sleep(0.05)
 
                 i+=1
 
@@ -2179,6 +2182,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
     def ProcessOutgoing(self, wrapper):
         try:
             if wrapper.GetAction() == Actions.EXECUTION_REPORT:
+
                 threading.Thread(target=self.ProcessExecutionReport, args=(wrapper,)).start()
                 return CMState.BuildSuccess(self)
             elif wrapper.GetAction() == Actions.POSITION_LIST:

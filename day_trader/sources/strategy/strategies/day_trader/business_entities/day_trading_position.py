@@ -447,6 +447,8 @@ class DayTradingPosition():
         profitsAndLosses.Profits = self.CalculatePercentageProfits(profitsAndLosses)
         profitsAndLosses.MonetaryProfits = self.CalculateMonetaryProfits(profitsAndLosses)
 
+
+
         if self.Open():
 
             self.CalculateLastTradeProfit(profitsAndLosses,marketData)
@@ -463,12 +465,14 @@ class DayTradingPosition():
             if (profitsAndLosses.ProfitLastTrade < self.MaxLossCurrentTrade):
                 self.MaxLossCurrentTrade = profitsAndLosses.ProfitLastTrade
 
+
             self.CurrentProfit=profitsAndLosses.Profits
             self.CurrentProfitMonetary = profitsAndLosses.MonetaryProfits
             self.CurrentProfitLastTrade = profitsAndLosses.ProfitLastTrade
             self.CurrentProfitMonetaryLastTrade = profitsAndLosses.MonetaryProfitLastTrade
             self.IncreaseDecrease=profitsAndLosses.IncreaseDecrease
         else:
+
             #Last Trade remains as the last estimation while was opened
             self.CurrentProfit = profitsAndLosses.Profits
             self.CurrentProfitMonetary = profitsAndLosses.MonetaryProfits
