@@ -543,12 +543,12 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
             md = MarketDataConverter.ConvertMarketData(wrapper)
 
             LogHelper.LogPublishMarketDataOnSecurity("DayTrader Recv MarketData", self, md.Security.Symbol,md)
-            self.MarketData[md.Security.Symbol]=md
 
             dayTradingPositions = list(filter(lambda x: x.Security.Symbol == md.Security.Symbol, self.DayTradingPositions))
 
             for dayTradingPos in dayTradingPositions:
                 if not dayTradingPos.RunningBacktest:
+                    self.MarketData[md.Security.Symbol] = md
                     if(dayTradingPos.MarketData is not None and dayTradingPos.MarketData.Trade!=md.Trade):
                         dayTradingPos.MarketData=md
                         threading.Thread(target=self.PublishPortfolioPositionThread, args=(dayTradingPos,)).start()
@@ -735,10 +735,6 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
                 and dayTradingPos.EvaluateClosingTerminalCondition(list(cbDict.values()),
                    self.ModelParametersHandler.Get(ModelParametersHandler.END_OF_DAY_LIMIT(),symbol),
-                   self.ModelParametersHandler.Get(ModelParametersHandler.MAX_GAIN_FOR_DAY(),symbol),
-                   self.ModelParametersHandler.Get(ModelParametersHandler.PCT_MAX_GAIN_CLOSING(),symbol),
-                   self.ModelParametersHandler.Get(ModelParametersHandler.MAX_LOSS_FOR_DAY(),symbol),
-                   self.ModelParametersHandler.Get(ModelParametersHandler.PCT_MAX_LOSS_CLOSING(),symbol),
                    self.ModelParametersHandler.Get(ModelParametersHandler.TAKE_GAIN_LIMIT(),symbol),
                    self.ModelParametersHandler.Get(ModelParametersHandler.STOP_LOSS_LIMIT(),symbol)) is None
 
@@ -775,10 +771,6 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                 and not dayTradingPos.TerminalClose
                 and dayTradingPos.EvaluateClosingTerminalCondition(list(cbDict.values()),
                    self.ModelParametersHandler.Get(ModelParametersHandler.END_OF_DAY_LIMIT(),symbol),
-                   self.ModelParametersHandler.Get(ModelParametersHandler.MAX_GAIN_FOR_DAY(),symbol),
-                   self.ModelParametersHandler.Get(ModelParametersHandler.PCT_MAX_GAIN_CLOSING(),symbol),
-                   self.ModelParametersHandler.Get(ModelParametersHandler.MAX_LOSS_FOR_DAY(),symbol),
-                   self.ModelParametersHandler.Get(ModelParametersHandler.PCT_MAX_LOSS_CLOSING(),symbol),
                    self.ModelParametersHandler.Get( ModelParametersHandler.TAKE_GAIN_LIMIT(),symbol),
                    self.ModelParametersHandler.Get(ModelParametersHandler.STOP_LOSS_LIMIT(),symbol)) is None
             ):
@@ -812,10 +804,6 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
         terminallyClosed = dayTradingPos.TerminalClose
         terminalCond = dayTradingPos.EvaluateClosingTerminalCondition(list(cbDict.values()),
                      self.ModelParametersHandler.Get(ModelParametersHandler.END_OF_DAY_LIMIT(),symbol),
-                     self.ModelParametersHandler.Get(ModelParametersHandler.MAX_GAIN_FOR_DAY(),symbol),
-                     self.ModelParametersHandler.Get(ModelParametersHandler.PCT_MAX_GAIN_CLOSING(),symbol),
-                     self.ModelParametersHandler.Get(ModelParametersHandler.MAX_LOSS_FOR_DAY(),symbol),
-                     self.ModelParametersHandler.Get(ModelParametersHandler.PCT_MAX_LOSS_CLOSING(),symbol),
                      self.ModelParametersHandler.Get(ModelParametersHandler.TAKE_GAIN_LIMIT(),symbol),
                      self.ModelParametersHandler.Get(ModelParametersHandler.STOP_LOSS_LIMIT(),symbol))
 
@@ -861,10 +849,6 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
         terminallyClosed = dayTradingPos.TerminalClose
         terminalCond = dayTradingPos.EvaluateClosingTerminalCondition(list(cbDict.values()),
                             self.ModelParametersHandler.Get(ModelParametersHandler.END_OF_DAY_LIMIT(),symbol),
-                            self.ModelParametersHandler.Get(ModelParametersHandler.MAX_GAIN_FOR_DAY(),symbol),
-                            self.ModelParametersHandler.Get(ModelParametersHandler.PCT_MAX_GAIN_CLOSING(),symbol),
-                            self.ModelParametersHandler.Get(ModelParametersHandler.MAX_LOSS_FOR_DAY(),symbol),
-                            self.ModelParametersHandler.Get(ModelParametersHandler.PCT_MAX_LOSS_CLOSING(),symbol),
                             self.ModelParametersHandler.Get(ModelParametersHandler.TAKE_GAIN_LIMIT(),symbol),
                             self.ModelParametersHandler.Get(ModelParametersHandler.STOP_LOSS_LIMIT(),symbol))
 
@@ -1153,10 +1137,6 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                                                                         self.ModelParametersHandler.Get(ModelParametersHandler.GAIN_MIN_STOP_LOSS_EXIT_Z(),symbol),
                                                                         self.ModelParametersHandler.Get(ModelParametersHandler.GAIN_MIN_STOP_LOSS_EXIT_Z_Z(),symbol),
                                                                         self.ModelParametersHandler.Get(ModelParametersHandler.END_OF_DAY_LIMIT(),symbol),
-                                                                        self.ModelParametersHandler.Get(ModelParametersHandler.MAX_GAIN_FOR_DAY(),symbol),
-                                                                        self.ModelParametersHandler.Get(ModelParametersHandler.PCT_MAX_GAIN_CLOSING(),symbol),
-                                                                        self.ModelParametersHandler.Get(ModelParametersHandler.MAX_LOSS_FOR_DAY(),symbol),
-                                                                        self.ModelParametersHandler.Get(ModelParametersHandler.PCT_MAX_LOSS_CLOSING(),symbol),
                                                                         self.ModelParametersHandler.Get(ModelParametersHandler.TAKE_GAIN_LIMIT(),symbol),
                                                                         self.ModelParametersHandler.Get(ModelParametersHandler.STOP_LOSS_LIMIT(),symbol),
                                                                         self.ModelParametersHandler.Get(ModelParametersHandler.MACD_RSI_SMOOTHED_MODE(),symbol),
@@ -1208,10 +1188,6 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                                                                          self.ModelParametersHandler.Get(ModelParametersHandler.GAIN_MIN_STOP_LOSS_EXIT_Z(),symbol),
                                                                          self.ModelParametersHandler.Get(ModelParametersHandler.GAIN_MIN_STOP_LOSS_EXIT_Z_Z(),symbol),
                                                                          self.ModelParametersHandler.Get(ModelParametersHandler.END_OF_DAY_LIMIT(),symbol),
-                                                                         self.ModelParametersHandler.Get(ModelParametersHandler.MAX_GAIN_FOR_DAY(),symbol),
-                                                                         self.ModelParametersHandler.Get(ModelParametersHandler.PCT_MAX_GAIN_CLOSING(),symbol),
-                                                                         self.ModelParametersHandler.Get(ModelParametersHandler.MAX_LOSS_FOR_DAY(),symbol),
-                                                                         self.ModelParametersHandler.Get(ModelParametersHandler.PCT_MAX_LOSS_CLOSING(),symbol),
                                                                          self.ModelParametersHandler.Get(ModelParametersHandler.TAKE_GAIN_LIMIT(),symbol),
                                                                          self.ModelParametersHandler.Get(ModelParametersHandler.STOP_LOSS_LIMIT(),symbol),
                                                                          self.ModelParametersHandler.Get(ModelParametersHandler.MACD_RSI_SMOOTHED_MODE(),symbol),
@@ -1236,27 +1212,29 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
         candlebar = MarketDataConverter.ConvertCandlebar(wrapper)
 
         try:
+            if(candlebar is None):
+                raise Exception("Invalid candlebar received")
             LogHelper.LogPublishCandleBarOnSecurity("DayTrader Recv Candlebar", self, candlebar.Security.Symbol,candlebar)
             self.LockCandlebar.acquire()
 
-            if candlebar is not None:
+            dayTradingPos = next(iter(list(filter(lambda x: x.Security.Symbol == candlebar.Security.Symbol, self.DayTradingPositions))),
+                            None)
+
+            if  not dayTradingPos.RunningBacktest:
                 cbDict = self.Candlebars[candlebar.Security.Symbol]
                 if cbDict is  None:
                     cbDict = {}
 
                 cbDict[candlebar.DateTime] = candlebar
 
-                dayTradingPos = next(iter( list(filter(lambda x: x.Security.Symbol == candlebar.Security.Symbol, self.DayTradingPositions))),None)
+                self.Candlebars[candlebar.Security.Symbol] = cbDict
 
-                if not dayTradingPos.RunningBacktest:
-                    self.Candlebars[candlebar.Security.Symbol] = cbDict
+                self.UpdateTechnicalAnalysisParameters(candlebar,cbDict)
+                self.EvaluateOpeningPositions(candlebar,cbDict)
+                self.EvaluateClosingPositions(candlebar,cbDict)
+                self.UpdateTradingSignals(candlebar,cbDict)
 
-                    self.UpdateTechnicalAnalysisParameters(candlebar,cbDict)
-                    self.EvaluateOpeningPositions(candlebar,cbDict)
-                    self.EvaluateClosingPositions(candlebar,cbDict)
-                    self.UpdateTradingSignals(candlebar,cbDict)
-
-                    self.EvaluateClosingForManualConditions(candlebar, cbDict)
+                self.EvaluateClosingForManualConditions(candlebar, cbDict)
 
                 #self.DoLog("Candlebars successfully loaded for symbol {} ".format(candlebar.Security.Symbol),MessageType.DEBUG)
             else:
@@ -1601,12 +1579,17 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
         return backtestDTOArr
 
-    def ResetForNewDayOnBackTest(self,dayTradingPos,refDate):
+    def ResetForNewDayOnBackTest(self,dayTradingPos,refDate, running=True):
         dayTradingPos.ResetProfitCounters(refDate)
-        dayTradingPos.RunningBacktest = True
+        dayTradingPos.RunningBacktest = running
         dayTradingPos.ResetExecutionSummaries()
-        self.Candlebars[dayTradingPos.Security.Symbol] = {}
-        self.MarketData[dayTradingPos.Security.Symbol] = {}
+        if self.Candlebars[dayTradingPos.Security.Symbol] is not None:
+            self.Candlebars[dayTradingPos.Security.Symbol].clear()
+        else:
+            self.Candlebars[dayTradingPos.Security.Symbol]={}
+
+        self.MarketData[dayTradingPos.Security.Symbol]=MarketData()
+
 
 
     def ProcessStrategyBacktestThread(self,dayTradingPos,wrapper):
@@ -1657,7 +1640,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
             self.ProcessError(ErrorWrapper(Exception(msg)))
             self.DoLog(msg, MessageType.ERROR)
         finally:
-            dayTradingPos.RunningBacktest = False
+            self.ResetForNewDayOnBackTest(dayTradingPos,datetime.datetime.now(),running=False)
 
 
     def ProcessStrategyBacktest(self,wrapper):

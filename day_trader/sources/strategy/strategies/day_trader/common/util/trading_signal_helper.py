@@ -144,17 +144,7 @@ class TradingSignalHelper:
                 self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
                     ModelParametersHandler.STOP_LOSS_LIMIT(), symbol))
                 self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
-                    ModelParametersHandler.MAX_GAIN_FOR_DAY(), symbol))
-                self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
-                    ModelParametersHandler.PCT_MAX_GAIN_CLOSING(), symbol))
-                self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
-                    ModelParametersHandler.MAX_LOSS_FOR_DAY(), symbol))
-                self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
-                    ModelParametersHandler.PCT_MAX_LOSS_CLOSING(), symbol))
-                self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
                     ModelParametersHandler.TAKE_GAIN_LIMIT(), symbol))
-                self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
-                    ModelParametersHandler.STOP_LOSS_LIMIT(), symbol))
                 self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
                     ModelParametersHandler.END_OF_DAY_LIMIT(), symbol))
 

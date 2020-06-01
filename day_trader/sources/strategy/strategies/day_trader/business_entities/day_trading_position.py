@@ -687,21 +687,15 @@ class DayTradingPosition():
                                          rsi30SlopeSkip10ExitParamR,msMaxMinExitParamS,msMaxMinExitParamSS,sec5MinSlopeExitParamT,
                                          gainMinStopLossExitParamU,gainMinStopLossExitParamUU,gainMinStopLossExitParamW,
                                          gainMinStopLossExitParamWW,gainStopLossExitParamY, gainMinStopLossExitParamZ,
-                                         gainMinStopLossExitParamZZ,endOfdayLimitModelParam,maxGainForDayModelParam,
-                                         pctMaxGainForClosingModelParam,maxLossForClosingModelParam,pctMaxLossForClosingModelParam,
-                                         takeGainLimitModelParam,stopLossLimitModelParam,macdRSISmoothedMode,absMaxMSPeriodParam):
+                                         gainMinStopLossExitParamZZ,endOfdayLimitModelParam,takeGainLimitModelParam,
+                                         stopLossLimitModelParam,macdRSISmoothedMode,absMaxMSPeriodParam):
         if not self.Open():
             return None  # Position not opened
 
         if self.GetNetOpenShares() >0 :
             return None  # We are in a LONG position
 
-        terminalCond = self.EvaluateClosingTerminalCondition(candlebarsArr, endOfdayLimitModelParam,
-                                                             maxGainForDayModelParam,
-                                                             pctMaxGainForClosingModelParam,
-                                                             maxLossForClosingModelParam,
-                                                             pctMaxLossForClosingModelParam, takeGainLimitModelParam,
-                                                             stopLossLimitModelParam)
+        terminalCond = self.EvaluateClosingTerminalCondition(candlebarsArr, endOfdayLimitModelParam,takeGainLimitModelParam,stopLossLimitModelParam)
 
         if terminalCond is not None:
             self.TerminalClose =True
@@ -802,12 +796,7 @@ class DayTradingPosition():
         #if statisticalParams.TenMinSkipSlope is not None:
             #print( "Close Short Trade - Ten Min Skip Slope {} for security {}".format(statisticalParams.TenMinSkipSlope, self.Security.Symbol))
 
-        terminalCond = self.EvaluateClosingTerminalCondition(candlebarsArr, endOfdayLimitModelParam,
-                                                             maxGainForClosingModelParam,
-                                                             pctMaxGainForClosingModelParam,
-                                                             maxLossForClosingModelParam,
-                                                             pctMaxGainForClosingModelParam, takeGainLimitModelParam,
-                                                             stopLossLimitModelParam)
+        terminalCond = self.EvaluateClosingTerminalCondition(candlebarsArr, endOfdayLimitModelParam,takeGainLimitModelParam,stopLossLimitModelParam)
 
         if not self.Open():
             return None #Position not opened
@@ -848,8 +837,7 @@ class DayTradingPosition():
         return None
 
     #Defines if the condition for closing the day, will imply not opening another position during the day
-    def EvaluateClosingTerminalCondition(self,candlebarsArr,endOfdayLimitModelParam,maxGainForClosingModelParam	,pctMaxGainForClosingModelParam,
-                                         maxLossForClosingModelParam,pctMaxLossForClosingModelParam,takeGainLimitModelParam,stopLossLimitModelParam):
+    def EvaluateClosingTerminalCondition(self,candlebarsArr,endOfdayLimitModelParam,takeGainLimitModelParam,stopLossLimitModelParam):
 
         lastCandlebar = candlebarsArr[-1]
 
@@ -957,19 +945,14 @@ class DayTradingPosition():
                                             sec5MinSlopeExitParamT,gainMinStopLossExitParamU,gainMinStopLossExitParamUU,
                                             gainMinStopLossExitParamW,gainMinStopLossExitParamWW,gainStopLossExitParamY,
                                             gainMinStopLossExitParamZ,gainMinStopLossExitParamZZ,endOfdayLimitModelParam,
-                                            maxGainForDayModelParam,pctMaxGainForClosingModelParam,maxLossForClosingModelParam,
-                                            pctMaxLossForClosingModelParam,takeGainLimitModelParam,stopLossLimitModelParam,
-                                            macdRSISmoothedMode,absMaxMSPeriodParam):
+                                            takeGainLimitModelParam,stopLossLimitModelParam,macdRSISmoothedMode,absMaxMSPeriodParam):
         if not self.Open():
             return None  # Position not opened
 
         if self.GetNetOpenShares() < 0:
             return None  # We are in a SHORT position
 
-        terminalCond = self.EvaluateClosingTerminalCondition(candlebarsArr,endOfdayLimitModelParam, maxGainForDayModelParam,
-                                                             pctMaxGainForClosingModelParam,maxLossForClosingModelParam,
-                                                             pctMaxLossForClosingModelParam,takeGainLimitModelParam,
-                                                             stopLossLimitModelParam)
+        terminalCond = self.EvaluateClosingTerminalCondition(candlebarsArr,endOfdayLimitModelParam,takeGainLimitModelParam,stopLossLimitModelParam)
 
         if terminalCond is not None:
             self.TerminalClose=True
@@ -1079,8 +1062,7 @@ class DayTradingPosition():
         #if statisticalParams.TenMinSkipSlope is not None:
             #print( "Close Long Trade - Ten Min Skip Slope {} for security {}".format(statisticalParams.TenMinSkipSlope,self.Security.Symbol))
 
-        terminalCond = self.EvaluateClosingTerminalCondition(candlebarsArr,endOfdayLimitModelParam,maxGainForClosingModelParam,pctMaxGainForClosingModelParam,
-                                                             maxLossForClosingModelParam,pctMaxLossForClosingModelParam,takeGainLimitModelParam,stopLossLimitModelParam)
+        terminalCond = self.EvaluateClosingTerminalCondition(candlebarsArr,endOfdayLimitModelParam,takeGainLimitModelParam,stopLossLimitModelParam)
 
         if terminalCond is not None:
             self.TerminalClose=True
