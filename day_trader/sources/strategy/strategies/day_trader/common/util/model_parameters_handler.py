@@ -343,6 +343,111 @@ class ModelParametersHandler:
     def MACD_RSI_ABS_MAX_MS_PERIOD():
         return "MACD_RSI_ABS_MAX_MS_PERIOD"
 
+    @staticmethod
+    def MACD_RSI_OPEN_LONG_RULE_1():
+        return "MACD_RSI_OPEN_LONG_RULE_1"
+
+    @staticmethod
+    def MACD_RSI_OPEN_LONG_RULE_2():
+        return "MACD_RSI_OPEN_LONG_RULE_2"
+
+    @staticmethod
+    def MACD_RSI_OPEN_LONG_RULE_3():
+        return "MACD_RSI_OPEN_LONG_RULE_3"
+
+    @staticmethod
+    def MACD_RSI_OPEN_LONG_RULE_4():
+        return "MACD_RSI_OPEN_LONG_RULE_4"
+
+    @staticmethod
+    def MACD_RSI_OPEN_SHORT_RULE_1():
+        return "MACD_RSI_OPEN_SHORT_RULE_1"
+
+    @staticmethod
+    def MACD_RSI_OPEN_SHORT_RULE_2():
+        return "MACD_RSI_OPEN_SHORT_RULE_2"
+
+    @staticmethod
+    def MACD_RSI_OPEN_SHORT_RULE_3():
+        return "MACD_RSI_OPEN_SHORT_RULE_3"
+
+    @staticmethod
+    def MACD_RSI_OPEN_SHORT_RULE_4():
+        return "MACD_RSI_OPEN_SHORT_RULE_4"
+
+    @staticmethod
+    def MACD_RSI_CLOSE_LONG_RULE_1():
+        return "MACD_RSI_CLOSE_LONG_RULE_1"
+
+    @staticmethod
+    def MACD_RSI_CLOSE_LONG_RULE_2():
+        return "MACD_RSI_CLOSE_LONG_RULE_2"
+
+    @staticmethod
+    def MACD_RSI_CLOSE_LONG_RULE_3():
+        return "MACD_RSI_CLOSE_LONG_RULE_3"
+
+    @staticmethod
+    def MACD_RSI_CLOSE_LONG_RULE_4():
+        return "MACD_RSI_CLOSE_LONG_RULE_4"
+
+    @staticmethod
+    def MACD_RSI_CLOSE_LONG_RULE_5():
+        return "MACD_RSI_CLOSE_LONG_RULE_5"
+
+    @staticmethod
+    def MACD_RSI_CLOSE_LONG_RULE_6():
+        return "MACD_RSI_CLOSE_LONG_RULE_6"
+
+    @staticmethod
+    def MACD_RSI_CLOSE_LONG_RULE_7():
+        return "MACD_RSI_CLOSE_LONG_RULE_7"
+
+    @staticmethod
+    def MACD_RSI_CLOSE_LONG_RULE_8():
+        return "MACD_RSI_CLOSE_LONG_RULE_8"
+
+    @staticmethod
+    def MACD_RSI_CLOSE_LONG_RULE_9():
+        return "MACD_RSI_CLOSE_LONG_RULE_9"
+
+    @staticmethod
+    def MACD_RSI_CLOSE_SHORT_RULE_1():
+        return "MACD_RSI_CLOSE_SHORT_RULE_1"
+
+    @staticmethod
+    def MACD_RSI_CLOSE_SHORT_RULE_2():
+        return "MACD_RSI_CLOSE_SHORT_RULE_2"
+
+    @staticmethod
+    def MACD_RSI_CLOSE_SHORT_RULE_3():
+        return "MACD_RSI_CLOSE_SHORT_RULE_3"
+
+    @staticmethod
+    def MACD_RSI_CLOSE_SHORT_RULE_4():
+        return "MACD_RSI_CLOSE_SHORT_RULE_4"
+
+    @staticmethod
+    def MACD_RSI_CLOSE_SHORT_RULE_5():
+        return "MACD_RSI_CLOSE_SHORT_RULE_5"
+
+    @staticmethod
+    def MACD_RSI_CLOSE_SHORT_RULE_6():
+        return "MACD_RSI_CLOSE_SHORT_RULE_6"
+
+    @staticmethod
+    def MACD_RSI_CLOSE_SHORT_RULE_7():
+        return "MACD_RSI_CLOSE_SHORT_RULE_7"
+
+    @staticmethod
+    def MACD_RSI_CLOSE_SHORT_RULE_8():
+        return "MACD_RSI_CLOSE_SHORT_RULE_8"
+
+    @staticmethod
+    def MACD_RSI_CLOSE_SHORT_RULE_9():
+        return "MACD_RSI_CLOSE_SHORT_RULE_9"
+
+
     #endregion
 
     #region Public Methods

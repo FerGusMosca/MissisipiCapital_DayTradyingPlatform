@@ -3,17 +3,7 @@ class RSIIndicatorSmoothed():
 
 
     def __init__(self):
-        self.UpOpen=0
-        self.DownOpen = 0
-        self.SmoothUp=0
-        self.SmoothDown = 0
-        self.BootstrapUpOpen = 0
-        self.BootstrapDownOpen = 0
-        self.LastProcessedDateTime = None
-        self.RSI= 0
-        self.PrevRSI = None
-
-
+        self.Reset()
 
     def Reset(self):
         self.UpOpen=0
@@ -24,6 +14,8 @@ class RSIIndicatorSmoothed():
         self.BootstrapDownOpen = 0
         self.RSI= 0
         self.PrevRSI = None
+        self.RSIArray = []
+        self.LastProcessedDateTime=None
 
     def CalculatedCumAvg(self,sortedBars,bootStrap, xOpen, prevValue,MINUTES_RSI_LENGTH,direction):
 
@@ -35,6 +27,21 @@ class RSIIndicatorSmoothed():
             return ( (prevValue*(MINUTES_RSI_LENGTH-2))  + xOpen)/((MINUTES_RSI_LENGTH-1))
         else:
             return 0
+
+    def GetSlope(self, currValue, prevValue):
+
+        if currValue is not None and prevValue is not None and prevValue != 0:
+            return (currValue - prevValue) / prevValue
+        else:
+            return None
+
+    def GetRSISlope (self,index):
+
+        if len(self.RSIArray)>=index:
+            lastRSIIndex = self.RSIArray[-1*index]
+            return self.GetSlope(self.RSI,lastRSIIndex)
+        else:
+            return None
 
 
     def Update(self,candleBarArr,MINUTES_RSI_LENGTH):
@@ -52,14 +59,16 @@ class RSIIndicatorSmoothed():
             self.UpOpen= sortedBars[0].Close - sortedBars[1].Close  if (sortedBars[0].Close >= sortedBars[1].Close) else 0
             self.DownOpen = sortedBars[1].Close - sortedBars[0].Close if (sortedBars[0].Close < sortedBars[1].Close) else 0
 
-            self.BootstrapUpOpen += self.UpOpen if len(sortedBars)<=(MINUTES_RSI_LENGTH) else 0
-            self.BootstrapDownOpen += self.DownOpen if len(sortedBars)<=(MINUTES_RSI_LENGTH) else 0
+            self.BootstrapUpOpen += self.UpOpen if len(sortedBars)<=(MINUTES_RSI_LENGTH +1) else 0
+            self.BootstrapDownOpen += self.DownOpen if len(sortedBars)<=(MINUTES_RSI_LENGTH +1) else 0
 
-            self.SmoothUp = self.CalculatedCumAvg(sortedBars,self.BootstrapUpOpen,self.UpOpen,self.SmoothUp,MINUTES_RSI_LENGTH,"up")
-            self.SmoothDown = self.CalculatedCumAvg(sortedBars,self.BootstrapDownOpen,self.DownOpen,self.SmoothDown,MINUTES_RSI_LENGTH,"down")
+            self.SmoothUp = self.CalculatedCumAvg(sortedBars,self.BootstrapUpOpen,self.UpOpen,self.SmoothUp,MINUTES_RSI_LENGTH +1,"up")
+            self.SmoothDown = self.CalculatedCumAvg(sortedBars,self.BootstrapDownOpen,self.DownOpen,self.SmoothDown,MINUTES_RSI_LENGTH +1 ,"down")
             self.PrevRSI = self.RSI if self.RSI !=0 else None
             self.RSI= (100-(100/(1+(self.SmoothUp/self.SmoothDown)))) if self.SmoothDown>0 else 0
             self.LastProcessedDateTime=sortedBars[0].DateTime
+
+            self.RSIArray.append(self.RSI)
             #if(sortedBars[0].Security.Symbol=="SPY"):
             #    print("SPY-{}-final RSI{}:{} -- previous RSI{}:{}".format(self.LastProcessedDateTime,MINUTES_RSI_LENGTH,self.RSI,MINUTES_RSI_LENGTH,self.PrevRSI))
 

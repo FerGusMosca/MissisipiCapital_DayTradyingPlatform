@@ -82,8 +82,8 @@ class RSIIndicator():
             self.DownOpen.append( sortedBars[1].Close - sortedBars[0].Close if (sortedBars[0].Close < sortedBars[1].Close) else 0)
 
             #If RSI=14 --> MINUTES_RSI_LENGTH=15 --> So we have to send n-1
-            self.SmoothUp.append(self.CalculatedUpDown(MINUTES_RSI_LENGTH-1,self.UpOpen,self.SmoothUp,self.Smoothed,"up"))
-            self.SmoothDown.append(self.CalculatedUpDown(MINUTES_RSI_LENGTH - 1, self.DownOpen, self.SmoothDown, self.Smoothed, "down"))
+            self.SmoothUp.append(self.CalculatedUpDown(MINUTES_RSI_LENGTH,self.UpOpen,self.SmoothUp,self.Smoothed,"up"))
+            self.SmoothDown.append(self.CalculatedUpDown(MINUTES_RSI_LENGTH, self.DownOpen, self.SmoothDown, self.Smoothed, "down"))
 
 
             self.PrevRSI = self.RSI if self.RSI !=0 else None

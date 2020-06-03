@@ -75,6 +75,24 @@ class TradingSignalHelper:
                 self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
                     ModelParametersHandler.M_S_3_SLOPE_X_X(), symbol))
 
+                self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
+                    ModelParametersHandler.MACD_RSI_OPEN_LONG_RULE_1(), symbol))
+                self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
+                    ModelParametersHandler.MACD_RSI_OPEN_LONG_RULE_2(), symbol))
+                self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
+                    ModelParametersHandler.MACD_RSI_OPEN_LONG_RULE_3(), symbol))
+                self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
+                    ModelParametersHandler.MACD_RSI_OPEN_LONG_RULE_4(), symbol))
+
+                self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
+                    ModelParametersHandler.MACD_RSI_OPEN_SHORT_RULE_1(), symbol))
+                self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
+                    ModelParametersHandler.MACD_RSI_OPEN_SHORT_RULE_2(), symbol))
+                self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
+                    ModelParametersHandler.MACD_RSI_OPEN_SHORT_RULE_3(), symbol))
+                self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
+                    ModelParametersHandler.MACD_RSI_OPEN_SHORT_RULE_4(), symbol))
+
                 self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "MSPrev",dayTradingPos.MACDIndicator.MSPrev)
                 self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "MSNow",dayTradingPos.MACDIndicator.MS)
                 self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "MaxMS",dayTradingPos.MACDIndicator.MaxMS)
@@ -148,6 +166,43 @@ class TradingSignalHelper:
                 self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
                     ModelParametersHandler.END_OF_DAY_LIMIT(), symbol))
 
+                self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
+                    ModelParametersHandler.MACD_RSI_CLOSE_LONG_RULE_1(), symbol))
+                self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
+                    ModelParametersHandler.MACD_RSI_CLOSE_LONG_RULE_2(), symbol))
+                self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
+                    ModelParametersHandler.MACD_RSI_CLOSE_LONG_RULE_3(), symbol))
+                self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
+                    ModelParametersHandler.MACD_RSI_CLOSE_LONG_RULE_4(), symbol))
+                self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
+                    ModelParametersHandler.MACD_RSI_CLOSE_LONG_RULE_5(), symbol))
+                self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
+                    ModelParametersHandler.MACD_RSI_CLOSE_LONG_RULE_6(), symbol))
+                self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
+                    ModelParametersHandler.MACD_RSI_CLOSE_LONG_RULE_7(), symbol))
+                self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
+                    ModelParametersHandler.MACD_RSI_CLOSE_LONG_RULE_8(), symbol))
+                self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
+                    ModelParametersHandler.MACD_RSI_CLOSE_LONG_RULE_9(), symbol))
+
+                self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
+                    ModelParametersHandler.MACD_RSI_CLOSE_SHORT_RULE_1(), symbol))
+                self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
+                    ModelParametersHandler.MACD_RSI_CLOSE_SHORT_RULE_2(), symbol))
+                self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
+                    ModelParametersHandler.MACD_RSI_CLOSE_SHORT_RULE_3(), symbol))
+                self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
+                    ModelParametersHandler.MACD_RSI_CLOSE_SHORT_RULE_4(), symbol))
+                self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
+                    ModelParametersHandler.MACD_RSI_CLOSE_SHORT_RULE_5(), symbol))
+                self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
+                    ModelParametersHandler.MACD_RSI_CLOSE_SHORT_RULE_6(), symbol))
+                self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
+                    ModelParametersHandler.MACD_RSI_CLOSE_SHORT_RULE_7(), symbol))
+                self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
+                    ModelParametersHandler.MACD_RSI_CLOSE_SHORT_RULE_8(), symbol))
+                self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
+                    ModelParametersHandler.MACD_RSI_CLOSE_SHORT_RULE_9(), symbol))
 
                 self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "MSPrev",dayTradingPos.MACDIndicator.MSPrev)
                 self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "MSNow",dayTradingPos.MACDIndicator.MS)

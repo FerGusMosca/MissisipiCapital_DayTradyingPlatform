@@ -829,7 +829,11 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                                   self.ModelParametersHandler.Get(ModelParametersHandler.M_S_3_SLOPE_X_X(),symbol),
                                   self.ModelParametersHandler.Get(ModelParametersHandler.MACD_RSI_SMOOTHED_MODE(),symbol),
                                   self.ModelParametersHandler.Get(ModelParametersHandler.MACD_RSI_ABS_MAX_MS_PERIOD(),symbol),
-                                   list(cbDict.values()))
+                                  self.ModelParametersHandler.Get(ModelParametersHandler.MACD_RSI_OPEN_LONG_RULE_1(),symbol),
+                                  self.ModelParametersHandler.Get(ModelParametersHandler.MACD_RSI_OPEN_LONG_RULE_2(),symbol),
+                                  self.ModelParametersHandler.Get(ModelParametersHandler.MACD_RSI_OPEN_LONG_RULE_3(),symbol),
+                                  self.ModelParametersHandler.Get(ModelParametersHandler.MACD_RSI_OPEN_LONG_RULE_4(),symbol),
+                                  list(cbDict.values()))
                if longCondition is not None:
 
                    self.DoLog("MACD/RSI = Running long trade for symbol {}".format(dayTradingPos.Security.Symbol),MessageType.INFO)
@@ -873,6 +877,10 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                                                                     self.ModelParametersHandler.Get(ModelParametersHandler.M_S_3_SLOPE_X_X(), symbol),
                                                                     self.ModelParametersHandler.Get(ModelParametersHandler.MACD_RSI_SMOOTHED_MODE(), symbol),
                                                                     self.ModelParametersHandler.Get(ModelParametersHandler.MACD_RSI_ABS_MAX_MS_PERIOD(), symbol),
+                                                                    self.ModelParametersHandler.Get(ModelParametersHandler.MACD_RSI_OPEN_SHORT_RULE_1(), symbol),
+                                                                    self.ModelParametersHandler.Get(ModelParametersHandler.MACD_RSI_OPEN_SHORT_RULE_2(), symbol),
+                                                                    self.ModelParametersHandler.Get(ModelParametersHandler.MACD_RSI_OPEN_SHORT_RULE_3(), symbol),
+                                                                    self.ModelParametersHandler.Get(ModelParametersHandler.MACD_RSI_OPEN_SHORT_RULE_4(), symbol),
                                                                     list(cbDict.values()))
 
             if shortCondition is not None:
@@ -1140,7 +1148,16 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                                                                         self.ModelParametersHandler.Get(ModelParametersHandler.TAKE_GAIN_LIMIT(),symbol),
                                                                         self.ModelParametersHandler.Get(ModelParametersHandler.STOP_LOSS_LIMIT(),symbol),
                                                                         self.ModelParametersHandler.Get(ModelParametersHandler.MACD_RSI_SMOOTHED_MODE(),symbol),
-                                                                        self.ModelParametersHandler.Get(ModelParametersHandler.MACD_RSI_ABS_MAX_MS_PERIOD(), symbol)
+                                                                        self.ModelParametersHandler.Get(ModelParametersHandler.MACD_RSI_ABS_MAX_MS_PERIOD(), symbol),
+                                                                        self.ModelParametersHandler.Get(ModelParametersHandler.MACD_RSI_CLOSE_LONG_RULE_1(),symbol),
+                                                                        self.ModelParametersHandler.Get(ModelParametersHandler.MACD_RSI_CLOSE_LONG_RULE_2(),symbol),
+                                                                        self.ModelParametersHandler.Get(ModelParametersHandler.MACD_RSI_CLOSE_LONG_RULE_3(),symbol),
+                                                                        self.ModelParametersHandler.Get(ModelParametersHandler.MACD_RSI_CLOSE_LONG_RULE_4(),symbol),
+                                                                        self.ModelParametersHandler.Get(ModelParametersHandler.MACD_RSI_CLOSE_LONG_RULE_5(),symbol),
+                                                                        self.ModelParametersHandler.Get(ModelParametersHandler.MACD_RSI_CLOSE_LONG_RULE_6(),symbol),
+                                                                        self.ModelParametersHandler.Get(ModelParametersHandler.MACD_RSI_CLOSE_LONG_RULE_7(),symbol),
+                                                                        self.ModelParametersHandler.Get(ModelParametersHandler.MACD_RSI_CLOSE_LONG_RULE_8(),symbol),
+                                                                        self.ModelParametersHandler.Get(ModelParametersHandler.MACD_RSI_CLOSE_LONG_RULE_9(),symbol)
                                                                         )
 
             if closingCond is not None and runClose:
@@ -1191,7 +1208,16 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                                                                          self.ModelParametersHandler.Get(ModelParametersHandler.TAKE_GAIN_LIMIT(),symbol),
                                                                          self.ModelParametersHandler.Get(ModelParametersHandler.STOP_LOSS_LIMIT(),symbol),
                                                                          self.ModelParametersHandler.Get(ModelParametersHandler.MACD_RSI_SMOOTHED_MODE(),symbol),
-                                                                         self.ModelParametersHandler.Get(ModelParametersHandler.MACD_RSI_ABS_MAX_MS_PERIOD(),symbol)
+                                                                         self.ModelParametersHandler.Get(ModelParametersHandler.MACD_RSI_ABS_MAX_MS_PERIOD(),symbol),
+                                                                         self.ModelParametersHandler.Get(ModelParametersHandler.MACD_RSI_CLOSE_SHORT_RULE_1(),symbol),
+                                                                         self.ModelParametersHandler.Get(ModelParametersHandler.MACD_RSI_CLOSE_SHORT_RULE_2(),symbol),
+                                                                         self.ModelParametersHandler.Get(ModelParametersHandler.MACD_RSI_CLOSE_SHORT_RULE_3(),symbol),
+                                                                         self.ModelParametersHandler.Get(ModelParametersHandler.MACD_RSI_CLOSE_SHORT_RULE_4(),symbol),
+                                                                         self.ModelParametersHandler.Get( ModelParametersHandler.MACD_RSI_CLOSE_SHORT_RULE_5(),symbol),
+                                                                         self.ModelParametersHandler.Get( ModelParametersHandler.MACD_RSI_CLOSE_SHORT_RULE_6(),symbol),
+                                                                         self.ModelParametersHandler.Get(ModelParametersHandler.MACD_RSI_CLOSE_SHORT_RULE_7(),symbol),
+                                                                         self.ModelParametersHandler.Get(ModelParametersHandler.MACD_RSI_CLOSE_SHORT_RULE_8(),symbol),
+                                                                         self.ModelParametersHandler.Get(ModelParametersHandler.MACD_RSI_CLOSE_SHORT_RULE_9(),symbol)
                                                                          )
 
             if closingCond is not None and runClose:

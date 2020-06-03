@@ -17,6 +17,7 @@ class MACDIndicatorTester():
 
 
     def GetPrices(self):
+        # Original Example
         return [2978.43
                 ,2979.39
                 ,3000.93
