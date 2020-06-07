@@ -1,4 +1,5 @@
 from sources.framework.business_entities.market_data.candle_bar import *
+from scipy import stats
 class RSIIndicatorSmoothed():
 
 
@@ -43,6 +44,19 @@ class RSIIndicatorSmoothed():
         else:
             return None
 
+
+    def GetRSIReggr(self,index):
+        arrayRSIToUse = []
+        arrayIndex = []
+
+        i = index
+        for rsi in self.RSIArray[-1 * index:]:
+            arrayRSIToUse.append(rsi)
+            arrayIndex.append(len(self.RSIArray) - i)
+            i -= 1
+
+        reggr = stats.linregress(arrayIndex, arrayRSIToUse)
+        return reggr.slope
 
     def Update(self,candleBarArr,MINUTES_RSI_LENGTH):
 

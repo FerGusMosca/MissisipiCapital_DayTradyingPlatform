@@ -9,7 +9,7 @@ from sources.strategy.strategies.day_trader.business_entities.testers.rsi_indica
 from sources.strategy.strategies.day_trader.business_entities.macd_indicator import *
 from sources.strategy.strategies.day_trader.business_entities.macd_indicator_adjusted import *
 from sources.strategy.strategies.day_trader.business_entities.testers.macd_indicator_adjusted_tester import *
-
+from scipy import stats
 import json
 import statistics
 import time
@@ -184,6 +184,24 @@ class DayTradingPosition():
 
     def Open(self):
         return self.GetNetOpenShares()!=0
+
+
+    def GetReggrSlope (self,candleBarArr,length):
+
+        arrayPrices = []
+        arrayIndex = []
+
+        i=length
+        for candle in candleBarArr[-1*length:]:
+            arrayPrices.append(candle.Close)
+            arrayIndex.append(len(candleBarArr)-i)
+            i-=1
+
+        reggr= stats.linregress(arrayIndex,arrayPrices)
+        #reggr = linregress(arrayPrices, arrayIndex)
+
+        slope = (reggr.slope*100)/arrayPrices[-1]
+        return slope
 
 
     def GetSlope (self,currMovAvg,prevMovAvg):
@@ -549,9 +567,9 @@ class DayTradingPosition():
             return None #cannot open positions that are being routed
 
         if (self.MACDIndicator.MSPrev is None or self.MACDIndicator.MS is None or self.MACDIndicator.MaxMS is None \
-                or self.MACDIndicator.MinMS is None or self.MinuteSmoothedRSIIndicator.GetRSISlope(5) is None
-                or self.MinuteSmoothedRSIIndicator.GetRSISlope(10) is None or len(candlebarsArr)<5
-                or self.MinuteNonSmoothedRSIIndicator.GetRSISlope(3) is None or self.MACDIndicator.GetMSSlope(3) is None
+                or self.MACDIndicator.MinMS is None or self.MinuteSmoothedRSIIndicator.GetRSIReggr(5) is None
+                or self.MinuteSmoothedRSIIndicator.GetRSIReggr(10) is None or len(candlebarsArr)<5
+                or self.MinuteNonSmoothedRSIIndicator.GetRSIReggr(3) is None or self.MACDIndicator.GetMSReggr(3) is None
             ):
             return None
 
@@ -560,7 +578,7 @@ class DayTradingPosition():
         if (        self.MACDIndicator.MSPrev < msNowParamA.FloatValue
                 and self.MACDIndicator.MS < msNowParamA.FloatValue
                 and self.MACDIndicator.MinMS < (-1 * self.SmoothMACDRSIParam(macdRSISmoothedMode,self.MACDIndicator.AbsMaxMS,msMinParamB,msMinParamBB))
-                and self.MinuteSmoothedRSIIndicator.GetRSISlope(5) < (-1* rsi30SlopeSkip5ParamC.FloatValue)
+                and self.MinuteSmoothedRSIIndicator.GetRSIReggr(5) < (-1* rsi30SlopeSkip5ParamC.FloatValue)
                 and macdRsiOpenShortRule1ModelParam.IntValue>=1):
             return _SHORT_MACD_RSI_RULE_1
 
@@ -568,7 +586,7 @@ class DayTradingPosition():
         if (        self.MACDIndicator.MSPrev >= msNowParamA.FloatValue
                 and self.MACDIndicator.MS < msNowParamA.FloatValue
                 and self.MACDIndicator.MinMS <  (-1 * self.SmoothMACDRSIParam(macdRSISmoothedMode,self.MACDIndicator.AbsMaxMS,msMinParamB,msMinParamBB))
-                and self.MinuteSmoothedRSIIndicator.GetRSISlope(5) < (-1* rsi30SlopeSkip5ParamC.FloatValue)
+                and self.MinuteSmoothedRSIIndicator.GetRSIReggr(5) < (-1* rsi30SlopeSkip5ParamC.FloatValue)
                 and macdRsiOpenShortRule2ModelParam.IntValue>=1
             ):
             return _SHORT_MACD_RSI_RULE_2
@@ -579,19 +597,19 @@ class DayTradingPosition():
                 and self.MACDIndicator.MaxMS >= self.SmoothMACDRSIParam(macdRSISmoothedMode,self.MACDIndicator.AbsMaxMS,msMaxMinParamD,msMaxMinParamDD)
                 and (self.MACDIndicator.MaxMS > 0 and (self.MACDIndicator.MS / self.MACDIndicator.MaxMS) < msNowMaxParamE.FloatValue)
                 and self.MACDIndicator.MS < self.SmoothMACDRSIParam(macdRSISmoothedMode,self.MACDIndicator.AbsMaxMS,msNowParamF,msNowParamFF)
-                and self.MinuteSmoothedRSIIndicator.GetRSISlope(5) < (-1 * rsi30SlopeSkip5ParamC.FloatValue)
-                and self.MinuteSmoothedRSIIndicator.GetRSISlope(10) < rsi30SlopeSkip10ParamG.FloatValue
-                and self.MinuteNonSmoothedRSIIndicator.GetRSISlope(3) < (-1*rsi14SlopeSkip3ExitParamV.FloatValue)
-                and self.MACDIndicator.GetMSSlope(3) < (-1* self.SmoothMACDRSIParam(macdRSISmoothedMode,self.MACDIndicator.AbsMaxMS,ms3SlopeParamX,ms3SlopeParamXX) )
+                and self.MinuteSmoothedRSIIndicator.GetRSIReggr(5) < (-1 * rsi30SlopeSkip5ParamC.FloatValue)
+                and self.MinuteSmoothedRSIIndicator.GetRSIReggr(10) < rsi30SlopeSkip10ParamG.FloatValue
+                and self.MinuteNonSmoothedRSIIndicator.GetRSIReggr(3) < (-1*rsi14SlopeSkip3ExitParamV.FloatValue)
+                and self.MACDIndicator.GetMSReggr(3) < (-1* self.SmoothMACDRSIParam(macdRSISmoothedMode,self.MACDIndicator.AbsMaxMS,ms3SlopeParamX,ms3SlopeParamXX) )
                 and macdRsiOpenShortRule3ModelParam.IntValue>=1
           ):
             return _SHORT_MACD_RSI_RULE_3
 
         # line 4
-        if (    self.MACDIndicator.GetMaxAbsMS(absMaxMSPeriodParam.IntValue) < self.SmoothMACDRSIParam(macdRSISmoothedMode,self.MACDIndicator.AbsMaxMS,absMSMaxMinLast5ParamH,absMSMaxMinLast5ParamHH)
-                and self.GetSlope(candlebarsArr[-1].Close,candlebarsArr[-5].Close) < (-1 * sec5MinSlopeParamI.FloatValue)
-                and self.MinuteSmoothedRSIIndicator.GetRSISlope(5) < (-1 *  rsi30SlopeSkip5ParamC.FloatValue)
-                and self.MinuteSmoothedRSIIndicator.GetRSISlope(10) < rsi30SlopeSkip10ParamG.FloatValue
+        if (    self.MACDIndicator.GetMaxAbsMSCrossover(absMaxMSPeriodParam.IntValue) < self.SmoothMACDRSIParam(macdRSISmoothedMode, self.MACDIndicator.AbsMaxMS, absMSMaxMinLast5ParamH, absMSMaxMinLast5ParamHH)
+                and self.GetReggrSlope(candlebarsArr,5) < (-1 * sec5MinSlopeParamI.FloatValue)
+                and self.MinuteSmoothedRSIIndicator.GetRSIReggr(5) < (-1 *  rsi30SlopeSkip5ParamC.FloatValue)
+                and self.MinuteSmoothedRSIIndicator.GetRSIReggr(10) < rsi30SlopeSkip10ParamG.FloatValue
                 and macdRsiOpenShortRule4ModelParam.IntValue >= 1
             ):
             return _SHORT_MACD_RSI_RULE_4
@@ -614,9 +632,9 @@ class DayTradingPosition():
 
 
         if (self.MACDIndicator.MSPrev is None or self.MACDIndicator.MS is None or self.MACDIndicator.MaxMS is None\
-            or self.MACDIndicator.MinMS is None or self.MinuteSmoothedRSIIndicator.GetRSISlope(5) is None
-            or self.MinuteSmoothedRSIIndicator.GetRSISlope(10) is None or len(candlebarsArr)<5
-            or self.MinuteNonSmoothedRSIIndicator.GetRSISlope(3) is None or self.MACDIndicator.GetMSSlope(3) is None
+            or self.MACDIndicator.MinMS is None or self.MinuteSmoothedRSIIndicator.GetRSIReggr(5) is None
+            or self.MinuteSmoothedRSIIndicator.GetRSIReggr(10) is None or len(candlebarsArr)<5
+            or self.MinuteNonSmoothedRSIIndicator.GetRSIReggr(3) is None or self.MACDIndicator.GetMSReggr(3) is None
             ):
             return None
 
@@ -624,7 +642,7 @@ class DayTradingPosition():
         #line 1
         if (self.MACDIndicator.MSPrev >=msNowParamA.FloatValue and self.MACDIndicator.MS >=msNowParamA.FloatValue
             and self.MACDIndicator.MaxMS >= self.SmoothMACDRSIParam(macdRSISmoothedMode,self.MACDIndicator.AbsMaxMS,msMinParamB,msMinParamBB)
-            and self.MinuteSmoothedRSIIndicator.GetRSISlope(5)>rsi30SlopeSkip5ParamC.FloatValue
+            and self.MinuteSmoothedRSIIndicator.GetRSIReggr(5)>rsi30SlopeSkip5ParamC.FloatValue
             and macdRsiOpenLongRule1ModelParam.IntValue>=1
             ):
             return _LONG_MACD_RSI_RULE_1
@@ -633,7 +651,7 @@ class DayTradingPosition():
         if (self.MACDIndicator.MSPrev < msNowParamA.FloatValue
             and self.MACDIndicator.MS >=msNowParamA.FloatValue
             and self.MACDIndicator.MaxMS >= self.SmoothMACDRSIParam(macdRSISmoothedMode,self.MACDIndicator.AbsMaxMS,msMinParamB,msMinParamBB)
-            and self.MinuteSmoothedRSIIndicator.GetRSISlope(5)>rsi30SlopeSkip5ParamC.FloatValue
+            and self.MinuteSmoothedRSIIndicator.GetRSIReggr(5)>rsi30SlopeSkip5ParamC.FloatValue
             and macdRsiOpenLongRule2ModelParam.IntValue>=1
             ):
             return _LONG_MACD_RSI_RULE_2
@@ -644,20 +662,24 @@ class DayTradingPosition():
             and self.MACDIndicator.MinMS < (-1* self.SmoothMACDRSIParam(macdRSISmoothedMode,self.MACDIndicator.AbsMaxMS,msMaxMinParamD,msMaxMinParamDD))
             and (self.MACDIndicator.MinMS>0 and (self.MACDIndicator.MS / self.MACDIndicator.MinMS ) < msNowMaxParamE.FloatValue)
             and self.MACDIndicator.MS >=(-1*  self.SmoothMACDRSIParam(macdRSISmoothedMode,self.MACDIndicator.AbsMaxMS,msNowParamF,msNowParamFF))
-            and self.MinuteSmoothedRSIIndicator.GetRSISlope(5) > rsi30SlopeSkip5ParamC.FloatValue
-            and self.MinuteSmoothedRSIIndicator.GetRSISlope(10) >= (-1 * rsi30SlopeSkip10ParamG.FloatValue)
-            and self.MinuteNonSmoothedRSIIndicator.GetRSISlope(3) >= rsi14SlopeSkip3ExitParamV.FloatValue
-            and self.MACDIndicator.GetMSSlope(3) >= self.SmoothMACDRSIParam(macdRSISmoothedMode,self.MACDIndicator.AbsMaxMS,ms3SlopeParamX,ms3SlopeParamXX)
+            and self.MinuteSmoothedRSIIndicator.GetRSIReggr(5) > rsi30SlopeSkip5ParamC.FloatValue
+            and self.MinuteSmoothedRSIIndicator.GetRSIReggr(10) >= (-1 * rsi30SlopeSkip10ParamG.FloatValue)
+            and self.MinuteNonSmoothedRSIIndicator.GetRSIReggr(3) >= rsi14SlopeSkip3ExitParamV.FloatValue
+            and self.MACDIndicator.GetMSReggr(3) >= self.SmoothMACDRSIParam(macdRSISmoothedMode,self.MACDIndicator.AbsMaxMS,ms3SlopeParamX,ms3SlopeParamXX)
             and macdRsiOpenLongRule3ModelParam.IntValue>=1
             ):
             return _LONG_MACD_RSI_RULE_3
 
 
+        candlebar= candlebarsArr[-1]
+        if(candlebar.DateTime.hour==9 and candlebar.DateTime.minute==27):
+            print(candlebar.DateTime)
+
         # line 4
-        if (    self.MACDIndicator.GetMaxAbsMS(absMaxMSPeriodParam.IntValue) < self.SmoothMACDRSIParam(macdRSISmoothedMode,self.MACDIndicator.AbsMaxMS,absMSMaxMinLast5ParamH,absMSMaxMinLast5ParamHH)
-            and self.GetSlope(candlebarsArr[-1].Close,candlebarsArr[-5].Close) >= sec5MinSlopeParamI.FloatValue
-            and self.MinuteSmoothedRSIIndicator.GetRSISlope(5) > rsi30SlopeSkip5ParamC.FloatValue
-            and self.MinuteSmoothedRSIIndicator.GetRSISlope(10) >= (-1 * rsi30SlopeSkip10ParamG.FloatValue)
+        if (    self.MACDIndicator.GetMaxAbsMSCrossover(absMaxMSPeriodParam.IntValue) < self.SmoothMACDRSIParam(macdRSISmoothedMode, self.MACDIndicator.AbsMaxMS, absMSMaxMinLast5ParamH, absMSMaxMinLast5ParamHH)
+            and self.GetReggrSlope(candlebarsArr,5) >= sec5MinSlopeParamI.FloatValue
+            and self.MinuteSmoothedRSIIndicator.GetRSIReggr(5) > rsi30SlopeSkip5ParamC.FloatValue
+            and self.MinuteSmoothedRSIIndicator.GetRSIReggr(10) >= (-1 * rsi30SlopeSkip10ParamG.FloatValue)
             and macdRsiOpenLongRule4ModelParam.IntValue >= 1
           ):
             return _LONG_MACD_RSI_RULE_4
@@ -727,9 +749,9 @@ class DayTradingPosition():
             self.TerminalCloseCond = terminalCond
             return terminalCond
 
-        if (self.CurrentProfitLastTrade is None or self.MaxProfitCurrentTrade is None or self.MinuteSmoothedRSIIndicator.GetRSISlope(5) is None
+        if (self.CurrentProfitLastTrade is None or self.MaxProfitCurrentTrade is None or self.MinuteSmoothedRSIIndicator.GetRSIReggr(5) is None
                 or self.MACDIndicator.MSPrev is None or self.MACDIndicator.MS is None or self.MACDIndicator.MaxMS is None
-                or self.MinuteSmoothedRSIIndicator.GetRSISlope(10) is None or self.MaxLossCurrentTrade is None or len(candlebarsArr)<5
+                or self.MinuteSmoothedRSIIndicator.GetRSIReggr(10) is None or self.MaxLossCurrentTrade is None or len(candlebarsArr)<5
                 #or self.MACDIndicator.GetMaxABSMaxMinMS(5) is None
             ):
             return None
@@ -738,7 +760,7 @@ class DayTradingPosition():
         # rule 1
         if (    self.MaxProfitCurrentTrade >= self.SmoothMACDRSIParam(macdRSISmoothedMode,self.MACDIndicator.PriceHMinusL,macdMaxGainParamJ,macdMaxGainParamJJ)*100 #MaxProfix is calcualted as base 100 (ex: 72.23%)
             and (self.MaxProfitCurrentTrade > 0 and ((self.CurrentProfitLastTrade / self.MaxProfitCurrentTrade) < macdGainNowMaxParamK.FloatValue))
-            and self.MinuteSmoothedRSIIndicator.GetRSISlope(5) > rsi30SlopeSkip5ExitParamL.FloatValue
+            and self.MinuteSmoothedRSIIndicator.GetRSIReggr(5) > rsi30SlopeSkip5ExitParamL.FloatValue
             and macdRsiCloseShortRule1ModelParam.IntValue>=1
             ):
             return _EXIT_SHORT_MACD_RSI_COND_1
@@ -747,7 +769,7 @@ class DayTradingPosition():
         if (    self.MACDIndicator.MSPrev >= msNowParamA.FloatValue
             and self.MACDIndicator.MS >= msNowParamA.FloatValue
             and self.MACDIndicator.MS >= self.SmoothMACDRSIParam(macdRSISmoothedMode,self.MACDIndicator.AbsMaxMS,msNowExitParamN,msNowExitParamNN)
-            and self.MinuteSmoothedRSIIndicator.GetRSISlope(5) > rsi30SlopeSkip5ExitParamL.FloatValue
+            and self.MinuteSmoothedRSIIndicator.GetRSIReggr(5) > rsi30SlopeSkip5ExitParamL.FloatValue
             and macdRsiCloseShortRule2ModelParam.IntValue>=1
         ):
             return _EXIT_SHORT_MACD_RSI_COND_2
@@ -764,7 +786,7 @@ class DayTradingPosition():
         if (    self.MACDIndicator.MSPrev < msNowParamA.FloatValue
             and self.MACDIndicator.MS >= msNowParamA.FloatValue
             and self.MACDIndicator.MS >= msNowExitParamN.FloatValue
-            and self.MinuteSmoothedRSIIndicator.GetRSISlope(5) > rsi30SlopeSkip5ExitParamL.FloatValue
+            and self.MinuteSmoothedRSIIndicator.GetRSIReggr(5) > rsi30SlopeSkip5ExitParamL.FloatValue
             and macdRsiCloseShortRule4ModelParam.IntValue>=1
         ):
             return _EXIT_SHORT_MACD_RSI_COND_4
@@ -783,8 +805,8 @@ class DayTradingPosition():
             and self.MACDIndicator.MinMS < (-1* self.SmoothMACDRSIParam(macdRSISmoothedMode,self.MACDIndicator.AbsMaxMS,msMaxMinExitParamNBis,msMaxMinExitParamNNBis))
             and (self.MACDIndicator.MinMS >0 and ((self.MACDIndicator.MS/self.MACDIndicator.MinMS)<msNowMaxMinExitParamP.FloatValue))
             and self.MACDIndicator.MS >= (-1 * self.SmoothMACDRSIParam(macdRSISmoothedMode,self.MACDIndicator.AbsMaxMS,msNowExitParamQ,msNowExitParamQQ))
-            and self.MinuteSmoothedRSIIndicator.GetRSISlope(5) > rsi30SlopeSkip5ExitParamL.FloatValue
-            and self.MinuteSmoothedRSIIndicator.GetRSISlope(10) >= (-1*rsi30SlopeSkip10ExitParamR.FloatValue)
+            and self.MinuteSmoothedRSIIndicator.GetRSIReggr(5) > rsi30SlopeSkip5ExitParamL.FloatValue
+            and self.MinuteSmoothedRSIIndicator.GetRSIReggr(10) >= (-1*rsi30SlopeSkip10ExitParamR.FloatValue)
             and macdRsiCloseShortRule6ModelParam.IntValue>=1
         ):
             return _EXIT_SHORT_MACD_RSI_COND_6
@@ -792,16 +814,16 @@ class DayTradingPosition():
 
         # rule 7
         if (
-                self.MACDIndicator.GetMaxAbsMS(absMaxMSPeriodParam.IntValue) < self.SmoothMACDRSIParam(macdRSISmoothedMode,self.MACDIndicator.AbsMaxMS,msMaxMinExitParamS,msMaxMinExitParamSS)
-            and self.GetSlope(candlebarsArr[-1].Close,candlebarsArr[-5].Close) >= sec5MinSlopeExitParamT.FloatValue
-            and self.MinuteSmoothedRSIIndicator.GetRSISlope(5) >  rsi30SlopeSkip5ExitParamL.FloatValue
-            and self.MinuteSmoothedRSIIndicator.GetRSISlope(10) >= (-1* rsi30SlopeSkip10ExitParamR.FloatValue)
+                self.MACDIndicator.GetMaxAbsMSCrossover(absMaxMSPeriodParam.IntValue) < self.SmoothMACDRSIParam(macdRSISmoothedMode, self.MACDIndicator.AbsMaxMS, msMaxMinExitParamS, msMaxMinExitParamSS)
+            and self.GetReggrSlope(candlebarsArr,5) >= sec5MinSlopeExitParamT.FloatValue
+            and self.MinuteSmoothedRSIIndicator.GetRSIReggr(5) >  rsi30SlopeSkip5ExitParamL.FloatValue
+            and self.MinuteSmoothedRSIIndicator.GetRSIReggr(10) >= (-1* rsi30SlopeSkip10ExitParamR.FloatValue)
             and macdRsiCloseShortRule7ModelParam.IntValue>=1
         ):
             return _EXIT_SHORT_MACD_RSI_COND_7
 
         #rule 8
-        if (    self.MACDIndicator.GetMaxAbsMS(absMaxMSPeriodParam.IntValue) < msMaxMinExitParamS.FloatValue
+        if (    self.MACDIndicator.GetMaxAbsMSCrossover(absMaxMSPeriodParam.IntValue) < msMaxMinExitParamS.FloatValue
             and self.MaxLossCurrentTrade < ( self.SmoothMACDRSIParam(macdRSISmoothedMode,self.MACDIndicator.PriceHMinusL,gainMinStopLossExitParamZ,gainMinStopLossExitParamZZ)*100)
             and macdRsiCloseShortRule8ModelParam.IntValue>=1
             ):  # MaxLoss is express in base 100 (ex: 71.23%)
@@ -999,9 +1021,9 @@ class DayTradingPosition():
 
 
         if (
-                self.CurrentProfitLastTrade is None or self.MaxProfitCurrentTrade is None or self.MinuteSmoothedRSIIndicator.GetRSISlope(5) is None
+                self.CurrentProfitLastTrade is None or self.MaxProfitCurrentTrade is None or self.MinuteSmoothedRSIIndicator.GetRSIReggr(5) is None
                 or self.MACDIndicator.MSPrev is None or self.MACDIndicator.MS is None or self.MACDIndicator.MaxMS is None
-                or self.MinuteSmoothedRSIIndicator.GetRSISlope(10) is None or self.MaxLossCurrentTrade is None
+                or self.MinuteSmoothedRSIIndicator.GetRSIReggr(10) is None or self.MaxLossCurrentTrade is None
                 or len(candlebarsArr)<5 or self.MACDIndicator.PriceHMinusL is None
                 #or self.MACDIndicato.GetMaxABSMaxMinMS(5) is None
            ):
@@ -1012,7 +1034,7 @@ class DayTradingPosition():
         if (
                     self.MaxProfitCurrentTrade >= self.SmoothMACDRSIParam(macdRSISmoothedMode,self.MACDIndicator.PriceHMinusL,macdMaxGainParamJ,macdMaxGainParamJJ)*100 #MaxProfixs is calculated in base 100 (ex: 73.22%)
                 and (self.MaxProfitCurrentTrade> 0  and ((self.CurrentProfitLastTrade/self.MaxProfitCurrentTrade)<macdGainNowMaxParamK.FloatValue))
-                and self.MinuteSmoothedRSIIndicator.GetRSISlope(5) < (-1*rsi30SlopeSkip5ExitParamL.FloatValue)
+                and self.MinuteSmoothedRSIIndicator.GetRSIReggr(5) < (-1*rsi30SlopeSkip5ExitParamL.FloatValue)
                 and macdRsiCloseLongRule1ModelParam.IntValue>=1
            ):
             return _EXIT_LONG_MACD_RSI_COND_1
@@ -1021,7 +1043,7 @@ class DayTradingPosition():
         if (        self.MACDIndicator.MSPrev < msNowParamA.FloatValue
                 and self.MACDIndicator.MS < msNowParamA.FloatValue
                 and self.MACDIndicator.MS < (-1 * self.SmoothMACDRSIParam(macdRSISmoothedMode,self.MACDIndicator.AbsMaxMS,msNowExitParamN,msNowExitParamNN))
-                and self.MinuteSmoothedRSIIndicator.GetRSISlope(5) < (-1*rsi30SlopeSkip5ExitParamL.FloatValue)
+                and self.MinuteSmoothedRSIIndicator.GetRSIReggr(5) < (-1*rsi30SlopeSkip5ExitParamL.FloatValue)
                 and macdRsiCloseLongRule2ModelParam.IntValue>=1
 
         ):
@@ -1040,7 +1062,7 @@ class DayTradingPosition():
         if (        self.MACDIndicator.MSPrev >= msNowParamA.FloatValue
                 and self.MACDIndicator.MS < msNowParamA.FloatValue
                 and self.MACDIndicator.MS < (-1 * self.SmoothMACDRSIParam(macdRSISmoothedMode,self.MACDIndicator.AbsMaxMS,msNowExitParamN,msNowExitParamNN))
-                and self.MinuteSmoothedRSIIndicator.GetRSISlope(5) < (-1 * rsi30SlopeSkip5ExitParamL.FloatValue)
+                and self.MinuteSmoothedRSIIndicator.GetRSIReggr(5) < (-1 * rsi30SlopeSkip5ExitParamL.FloatValue)
                 and macdRsiCloseLongRule4ModelParam.IntValue>=1
 
         ):
@@ -1061,24 +1083,24 @@ class DayTradingPosition():
                 and self.MACDIndicator.MaxMS >= self.SmoothMACDRSIParam(macdRSISmoothedMode,self.MACDIndicator.AbsMaxMS,msMaxMinExitParamNBis,msMaxMinExitParamNNBis)
                 and (self.MACDIndicator.MaxMS > 0 and ((self.MACDIndicator.MS / self.MACDIndicator.MaxMS) < msNowMaxMinExitParamP.FloatValue))
                 and self.MACDIndicator.MS < self.SmoothMACDRSIParam(macdRSISmoothedMode,self.MACDIndicator.AbsMaxMS,msNowExitParamQ,msNowExitParamQQ)
-                and self.MinuteSmoothedRSIIndicator.GetRSISlope(5) < (-1 * rsi30SlopeSkip5ExitParamL.FloatValue)
-                and self.MinuteSmoothedRSIIndicator.GetRSISlope(10) < rsi30SlopeSkip10ExitParamR.FloatValue
+                and self.MinuteSmoothedRSIIndicator.GetRSIReggr(5) < (-1 * rsi30SlopeSkip5ExitParamL.FloatValue)
+                and self.MinuteSmoothedRSIIndicator.GetRSIReggr(10) < rsi30SlopeSkip10ExitParamR.FloatValue
                 and macdRsiCloseLongRule6ModelParam.IntValue >=1
             ):
                 return _EXIT_LONG_MACD_RSI_COND_6
 
         # rule 7
-        if (        self.MACDIndicator.GetMaxAbsMS(absMaxMSPeriodParam.IntValue) < self.SmoothMACDRSIParam(macdRSISmoothedMode,self.MACDIndicator.AbsMaxMS,msMaxMinExitParamS,msMaxMinExitParamSS)
-                and self.GetSlope(candlebarsArr[-1].Close, candlebarsArr[-5].Close) < ( -1 * sec5MinSlopeExitParamT.FloatValue)
-                and self.MinuteSmoothedRSIIndicator.GetRSISlope(5) < (-1 * rsi30SlopeSkip5ExitParamL.FloatValue)
-                and self.MinuteSmoothedRSIIndicator.GetRSISlope(10) < rsi30SlopeSkip10ExitParamR.FloatValue
+        if (        self.MACDIndicator.GetMaxAbsMSCrossover(absMaxMSPeriodParam.IntValue) < self.SmoothMACDRSIParam(macdRSISmoothedMode, self.MACDIndicator.AbsMaxMS, msMaxMinExitParamS, msMaxMinExitParamSS)
+                and self.GetReggrSlope(candlebarsArr,5) < ( -1 * sec5MinSlopeExitParamT.FloatValue)
+                and self.MinuteSmoothedRSIIndicator.GetRSIReggr(5) < (-1 * rsi30SlopeSkip5ExitParamL.FloatValue)
+                and self.MinuteSmoothedRSIIndicator.GetRSIReggr(10) < rsi30SlopeSkip10ExitParamR.FloatValue
                 and macdRsiCloseLongRule7ModelParam.IntValue>=1
             ):
             return _EXIT_LONG_MACD_RSI_COND_7
 
 
         # rule 8
-        if (        self.MACDIndicator.GetMaxAbsMS(absMaxMSPeriodParam.IntValue) < self.SmoothMACDRSIParam(macdRSISmoothedMode,self.MACDIndicator.AbsMaxMS,msMaxMinExitParamS,msMaxMinExitParamSS)
+        if (        self.MACDIndicator.GetMaxAbsMSCrossover(absMaxMSPeriodParam.IntValue) < self.SmoothMACDRSIParam(macdRSISmoothedMode, self.MACDIndicator.AbsMaxMS, msMaxMinExitParamS, msMaxMinExitParamSS)
                 and self.MaxLossCurrentTrade < ( self.SmoothMACDRSIParam(macdRSISmoothedMode,self.MACDIndicator.PriceHMinusL,gainMinStopLossExitParamZ,gainMinStopLossExitParamZZ)*100)
                 and macdRsiCloseLongRule8ModelParam.IntValue >=1
             ):

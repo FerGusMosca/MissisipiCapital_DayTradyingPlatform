@@ -3,14 +3,27 @@
   <component name="BookmarkManager">
     <bookmark url="file://$PROJECT_DIR$/sources/order_routers/bloomberg/router/order_router.py" />
     <bookmark url="file://$PROJECT_DIR$/sources/order_routers/bloomberg/router/order_router.py" line="849" />
-    <bookmark url="file://$PROJECT_DIR$/sources/strategy/strategies/day_trader/strategy/day_trader.py" line="1829" />
-    <bookmark url="file://$PROJECT_DIR$/sources/strategy/strategies/day_trader/strategy/day_trader.py" line="1833" />
+    <bookmark url="file://$PROJECT_DIR$/sources/strategy/strategies/day_trader/strategy/day_trader.py" line="1831" />
+    <bookmark url="file://$PROJECT_DIR$/sources/strategy/strategies/day_trader/strategy/day_trader.py" line="1835" />
     <bookmark url="file://$PROJECT_DIR$/main.py" description="from sources.framework.common.enums.fields.executi..." line="4" />
     <bookmark url="file://$PROJECT_DIR$/sources/strategy/strategies/day_trader/strategy/day_trader.py" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e8dcb44a-98f3-452c-abc0-45825b180530" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/output/SPY_profits_03-Jun-2020_18_21_53_281002.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/output/SPY_profits_03-Jun-2020_18_23_04_262029.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/output/SPY_profits_03-Jun-2020_18_24_23_969892.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/output/SPY_profits_03-Jun-2020_19_21_22_360253.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/output/SPY_shares_03-Jun-2020_18_21_53_276015.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/output/SPY_shares_03-Jun-2020_18_23_04_257043.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/output/SPY_shares_03-Jun-2020_18_24_23_964939.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/output/SPY_shares_03-Jun-2020_19_21_22_356267.csv" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/emsxapi.log.2020-03-09" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/logs/emsxapi.log.2020-03-13" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sources/strategy/strategies/day_trader/business_entities/testers/macd_indicator_adjusted_tester.py" beforeDir="false" afterPath="$PROJECT_DIR$/sources/strategy/strategies/day_trader/business_entities/testers/macd_indicator_adjusted_tester.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sources/strategy/strategies/day_trader/business_entities/testers/macd_indicator_tester.py" beforeDir="false" afterPath="$PROJECT_DIR$/sources/strategy/strategies/day_trader/business_entities/testers/macd_indicator_tester.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sources/strategy/strategies/day_trader/business_entities/testers/rsi_indicator_tester.py" beforeDir="false" afterPath="$PROJECT_DIR$/sources/strategy/strategies/day_trader/business_entities/testers/rsi_indicator_tester.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -22,7 +35,7 @@
     <SUITE FILE_PATH="coverage/day_trader$day_trader.coverage" NAME="day_trader Coverage Results" MODIFIED="1583890481958" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/sources/strategy/strategies/day_trader/strategy" />
     <SUITE FILE_PATH="coverage/day_trader$candle_bar_data_wrapper.coverage" NAME="candle_bar_data_wrapper Coverage Results" MODIFIED="1573140790433" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/sources/order_routers/bloomberg/common/wrappers" />
     <SUITE FILE_PATH="coverage/emsxapi$main.coverage" NAME="main Coverage Results" MODIFIED="1572717625086" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/" />
-    <SUITE FILE_PATH="coverage/day_trader$main.coverage" NAME="main Coverage Results" MODIFIED="1591223996124" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/" />
+    <SUITE FILE_PATH="coverage/day_trader$main.coverage" NAME="main Coverage Results" MODIFIED="1591551345336" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/" />
     <SUITE FILE_PATH="coverage/emsxapi$order_router.coverage" NAME="main Coverage Results" MODIFIED="1567618440959" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/" />
   </component>
   <component name="DatabaseView">
@@ -47,8 +60,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/sources/strategy/strategies/day_trader/strategy/day_trader.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="71">
-              <caret line="697" column="57" selection-start-line="697" selection-start-column="57" selection-end-line="697" selection-end-column="57" />
+            <state relative-caret-position="178">
+              <caret line="1596" column="59" lean-forward="true" selection-start-line="1596" selection-start-column="59" selection-end-line="1596" selection-end-column="59" />
               <folding>
                 <element signature="e#0#90#0" expanded="true" />
               </folding>
@@ -59,8 +72,23 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/sources/strategy/strategies/day_trader/business_entities/rsi_indicator_smoothed.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="17" column="39" selection-start-line="17" selection-start-column="39" selection-end-line="17" selection-end-column="39" />
+            <state relative-caret-position="136">
+              <caret line="47" column="19" selection-start-line="47" selection-start-column="8" selection-end-line="47" selection-end-column="19" />
+              <folding>
+                <element signature="e#0#72#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/sources/strategy/strategies/day_trader/business_entities/rsi_indicator.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="225">
+              <caret line="70" column="8" selection-start-line="70" selection-start-column="8" selection-end-line="80" selection-end-column="26" />
+              <folding>
+                <element signature="e#0#72#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -68,8 +96,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/sources/strategy/strategies/day_trader/business_entities/testers/macd_indicator_tester.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="68">
-              <caret line="19" column="8" selection-start-line="19" selection-start-column="8" selection-end-line="19" selection-end-column="8" />
+            <state relative-caret-position="529">
+              <caret line="154" column="11" selection-start-line="154" selection-start-column="11" selection-end-line="154" selection-end-column="11" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
@@ -78,10 +106,19 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/env/Lib/site-packages/ta/trend.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1428">
+              <caret line="87" column="8" selection-start-line="87" selection-start-column="8" selection-end-line="87" selection-end-column="8" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/sources/strategy/strategies/day_trader/business_entities/testers/macd_indicator_adjusted_tester.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="178">
-              <caret line="32" column="28" lean-forward="true" selection-start-line="32" selection-start-column="28" selection-end-line="32" selection-end-column="28" />
+            <state relative-caret-position="782">
+              <caret line="48" column="90" selection-start-line="48" selection-start-column="90" selection-end-line="48" selection-end-column="90" />
               <folding>
                 <element signature="e#0#94#0" expanded="true" />
               </folding>
@@ -92,22 +129,10 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/sources/strategy/strategies/day_trader/business_entities/macd_indicator_adjusted.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="257">
-              <caret line="82" lean-forward="true" selection-start-line="82" selection-end-line="82" />
+            <state relative-caret-position="-148">
+              <caret line="3" column="37" selection-start-line="3" selection-start-column="37" selection-end-line="3" selection-end-column="37" />
               <folding>
                 <element signature="e#0#100#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/sources/strategy/strategies/day_trader/common/util/trading_signal_helper.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="91">
-              <caret line="204" column="63" selection-start-line="204" selection-start-column="63" selection-end-line="204" selection-end-column="63" />
-              <folding>
-                <element signature="e#0#89#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -116,22 +141,10 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/sources/strategy/strategies/day_trader/business_entities/macd_indicator.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="316">
-              <caret line="112" column="12" selection-start-line="112" selection-start-column="12" selection-end-line="112" selection-end-column="12" />
+            <state relative-caret-position="17">
+              <caret line="112" column="22" selection-start-line="112" selection-start-column="12" selection-end-line="112" selection-end-column="22" />
               <folding>
                 <element signature="e#0#100#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/sources/strategy/strategies/day_trader/business_entities/day_trading_position.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="121" column="9" selection-start-line="121" selection-start-column="9" selection-end-line="121" selection-end-column="9" />
-              <folding>
-                <element signature="e#0#69#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -140,8 +153,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/sources/strategy/strategies/day_trader/business_entities/testers/rsi_indicator_tester.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="18" lean-forward="true" selection-start-line="16" selection-start-column="8" selection-end-line="18" />
+            <state relative-caret-position="272">
+              <caret line="19" column="35" selection-start-line="19" selection-start-column="35" selection-end-line="19" selection-end-column="35" />
               <folding>
                 <element signature="e#0#84#0" expanded="true" />
               </folding>
@@ -149,11 +162,14 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/sources/strategy/strategies/day_trader/business_entities/rsi_indicator.py">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/sources/strategy/strategies/day_trader/business_entities/day_trading_position.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="585">
-              <caret line="90" column="12" lean-forward="true" selection-start-line="90" selection-start-column="12" selection-end-line="90" selection-end-column="42" />
+            <state relative-caret-position="46">
+              <caret line="636" column="105" selection-start-line="636" selection-start-column="105" selection-end-line="636" selection-end-column="105" />
+              <folding>
+                <element signature="e#0#69#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -169,29 +185,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>stopLossLimitModelParam</find>
-      <find>EvaluateClosingMACDRSIShortTrade</find>
-      <find>max_gain</find>
-      <find>stoplosslimit</find>
-      <find>EvaluateClosingTerminalCondition</find>
-      <find>evaluatemacdrsilong</find>
-      <find>EvaluateClosing</find>
-      <find>EvaluateClosingMACDRSISHORT</find>
-      <find>Evaluatemacdrsilong</find>
-      <find>EvaluateMACDRSILongTrade</find>
-      <find>dayTradingPos.EvaluateMACDRSILongTrade</find>
-      <find>EvaluateMACDRSISHORT</find>
-      <find>daytradingpos.EvaluateMACDRSIShortTrade</find>
-      <find>dayTradingPos.EvaluateMACDRSIShortTrade</find>
-      <find>evaluateclosingmacdrsilong</find>
-      <find>dayTradingPos.EvaluateClosingMACDRSILongTrade</find>
-      <find>daytradingPos.EvaluateClosingMACDRSILongTrade</find>
-      <find>EvaluateClosingMACDRSIsHORTTrade</find>
-      <find>EvaluateClosingMACDRSILongTrade</find>
-      <find>Evaluatemacdrsilongtrade</find>
-      <find>RSIIndicatorTester</find>
-      <find>tester</find>
-      <find>Smoothed</find>
       <find>updatetech</find>
       <find>rule 4</find>
       <find>MINUTES_RSI_LENGTH</find>
@@ -199,6 +192,29 @@
       <find>GetSlope</find>
       <find>RSIArray</find>
       <find>MinuteNonSmoothedRSIIndicator</find>
+      <find>UpdateMSMaxMin</find>
+      <find>updatetechnc</find>
+      <find>.Update</find>
+      <find>absMaxMSPeriodParam</find>
+      <find>EvaluateMACDRSILONGTRADE</find>
+      <find>.UPDATETECHNICAL</find>
+      <find>EvaluateMACDRSILO</find>
+      <find>GetMaxAbsMSAllTime</find>
+      <find>AbsMaxMS</find>
+      <find>evaluateclosing</find>
+      <find>27</find>
+      <find>Evaluatemacdrsilong</find>
+      <find>getsimle</find>
+      <find>GetSimpleReggrSlope</find>
+      <find>evaluatemacdrsilong</find>
+      <find>GetRSISLOP</find>
+      <find>Runba</find>
+      <find>evaluateclosingmacdrsilong</find>
+      <find>evaluateclosingmacdrsishort</find>
+      <find>GetRSISlope</find>
+      <find>reggr</find>
+      <find>MSMaxMinCrossover</find>
+      <find>GetMSSlope</find>
     </findStrings>
     <replaceStrings>
       <replace />
@@ -234,7 +250,6 @@
         <option value="$PROJECT_DIR$/sources/order_routers/bloomberg/common/util/log_helper.py" />
         <option value="$PROJECT_DIR$/sources/framework/util/log_helper.py" />
         <option value="$PROJECT_DIR$/sources/strategy/strategies/day_trader/business_entities/macd_indicator_adjusted.py" />
-        <option value="$PROJECT_DIR$/sources/strategy/strategies/day_trader/business_entities/macd_indicator.py" />
         <option value="$PROJECT_DIR$/configs/day_trader.file_handler.py" />
         <option value="$PROJECT_DIR$/sources/strategy/strategies/day_trader/common/configuration/configuration.py" />
         <option value="$PROJECT_DIR$/sources/strategy/strategies/day_trader/strategy/services/websocket/websocket_module/websocket_module.py" />
@@ -257,13 +272,14 @@
         <option value="$PROJECT_DIR$/sources/strategy/strategies/day_trader/strategy/services/file_handler/common/util/file_handler.py" />
         <option value="$PROJECT_DIR$/sources/strategy/strategies/day_trader/strategy/services/file_handler/common/util/output_file_converter.py" />
         <option value="$PROJECT_DIR$/sources/strategy/strategies/day_trader/common/util/model_parameters_handler.py" />
-        <option value="$PROJECT_DIR$/sources/strategy/strategies/day_trader/strategy/day_trader.py" />
         <option value="$PROJECT_DIR$/sources/strategy/strategies/day_trader/common/util/trading_signal_helper.py" />
-        <option value="$PROJECT_DIR$/sources/strategy/strategies/day_trader/business_entities/rsi_indicator.py" />
-        <option value="$PROJECT_DIR$/sources/strategy/strategies/day_trader/business_entities/testers/rsi_indicator_tester.py" />
-        <option value="$PROJECT_DIR$/sources/strategy/strategies/day_trader/business_entities/rsi_indicator_smoothed.py" />
         <option value="$PROJECT_DIR$/sources/strategy/strategies/day_trader/business_entities/testers/macd_indicator_tester.py" />
         <option value="$PROJECT_DIR$/sources/strategy/strategies/day_trader/business_entities/testers/macd_indicator_adjusted_tester.py" />
+        <option value="$PROJECT_DIR$/sources/strategy/strategies/day_trader/business_entities/testers/rsi_indicator_tester.py" />
+        <option value="$PROJECT_DIR$/sources/strategy/strategies/day_trader/business_entities/rsi_indicator.py" />
+        <option value="$PROJECT_DIR$/sources/strategy/strategies/day_trader/business_entities/rsi_indicator_smoothed.py" />
+        <option value="$PROJECT_DIR$/sources/strategy/strategies/day_trader/strategy/day_trader.py" />
+        <option value="$PROJECT_DIR$/sources/strategy/strategies/day_trader/business_entities/macd_indicator.py" />
         <option value="$PROJECT_DIR$/sources/strategy/strategies/day_trader/business_entities/day_trading_position.py" />
       </list>
     </option>
@@ -391,7 +407,7 @@
     <property name="ToolWindowRun.ShowToolbar" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="configurable.group.project" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -682,12 +698,16 @@
       <workItem from="1591021021776" duration="29000" />
       <workItem from="1591034273344" duration="8140000" />
       <workItem from="1591054267314" duration="318000" />
-      <workItem from="1591130561811" duration="11945000" />
+      <workItem from="1591130561811" duration="12546000" />
+      <workItem from="1591227386875" duration="15000" />
+      <workItem from="1591302555401" duration="5317000" />
+      <workItem from="1591391591419" duration="5912000" />
+      <workItem from="1591542108473" duration="8882000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1683886000" />
+    <option name="totallyTimeSpent" value="1704613000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -700,23 +720,22 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.3161876" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2246596" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.43862522" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.29623568" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.049099836" />
-      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49924356" visible="true" weight="0.39443535" />
+      <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.49924356" visible="true" weight="0.6628478" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.3289689" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
-      <window_info anchor="bottom" id="Terminal" order="10" weight="0.6549414" />
-      <window_info anchor="bottom" id="Python Console" order="11" weight="0.3289689" />
+      <window_info anchor="bottom" id="Terminal" order="10" weight="0.65302783" />
+      <window_info anchor="bottom" id="Python Console" order="11" weight="0.81996727" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -798,63 +817,58 @@
   <component name="debuggerHistoryManager">
     <expressions id="evaluateCodeFragment">
       <expression>
-        <expression-string>macdRsiOpenLongRule4ModelParam.IntValue &gt;= 1</expression-string>
+        <expression-string>reggr.slope</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>candlebarDict.values()</expression-string>
+        <expression-string>self.MinuteSmoothedRSIIndicator.GetRSISlope(10)</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>candlebarDict.values()[1]</expression-string>
+        <expression-string>self.MinuteSmoothedRSIIndicator.GetRSISlope(5)</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>candlebarDict.values()[0]</expression-string>
+        <expression-string>self.MACDIndicator.GetMaxAbsMSCrossover(absMaxMSPeriodParam.IntValue)</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>candleBarArr</expression-string>
+        <expression-string>self.MACDIndicator</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>len(candleBarArr)</expression-string>
+        <expression-string>self.GetSlope(candlebarsArr[-1].Close,candlebarsArr[-5].Close)</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>datetime.datetime.fromtimestamp(mktime(date)).date()</expression-string>
+        <expression-string>self.SmoothMACDRSIParam(macdRSISmoothedMode,self.MACDIndicator.AbsMaxMS,absMSMaxMinLast5ParamH,absMSMaxMinLast5ParamHH)</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>datetime.fromtimestamp(mktime(date)).date()</expression-string>
+        <expression-string>self.MACDIndicator.GetMaxAbsMS(absMaxMSPeriodParam.IntValue)</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
       <expression>
-        <expression-string>dictDates</expression-string>
+        <expression-string>self.MACDIndicator.GetMaxAbsMS(5)</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>candlebarsArr[-1].DateTime</expression-string>
         <language-id>Python</language-id>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
     </expressions>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/sources/framework/util/log_helper.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="22" column="8" selection-start-line="22" selection-start-column="8" selection-end-line="22" selection-end-column="8" />
-          <folding>
-            <element signature="e#0#58#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/configs/day_trader.file_handler.py" />
     <entry file="file://$PROJECT_DIR$/configs/day_trader.websocket.ini">
       <provider selected="true" editor-type-id="text-editor">
@@ -1146,16 +1160,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/sources/strategy/strategies/day_trader/common/util/model_parameters_handler.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="478">
-          <caret line="449" lean-forward="true" selection-start-line="449" selection-end-line="449" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/sources/strategy/strategies/day_trader/common/util/trading_signal_helper.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="91">
+        <state relative-caret-position="3383">
           <caret line="204" column="63" selection-start-line="204" selection-start-column="63" selection-end-line="204" selection-end-column="63" />
           <folding>
             <element signature="e#0#89#0" expanded="true" />
@@ -1163,44 +1170,34 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/sources/strategy/strategies/day_trader/business_entities/macd_indicator.py">
+    <entry file="file://$PROJECT_DIR$/sources/strategy/strategies/day_trader/common/util/model_parameters_handler.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="316">
-          <caret line="112" column="12" selection-start-line="112" selection-start-column="12" selection-end-line="112" selection-end-column="12" />
+        <state relative-caret-position="2754">
+          <caret line="162" column="8" selection-start-line="162" selection-start-column="8" selection-end-line="162" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/env/Lib/site-packages/ta/trend.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1428">
+          <caret line="87" column="8" selection-start-line="87" selection-start-column="8" selection-end-line="87" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sources/strategy/strategies/day_trader/business_entities/testers/macd_indicator_adjusted_tester.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="782">
+          <caret line="48" column="90" selection-start-line="48" selection-start-column="90" selection-end-line="48" selection-end-column="90" />
           <folding>
-            <element signature="e#0#100#0" expanded="true" />
+            <element signature="e#0#94#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sources/strategy/strategies/day_trader/strategy/day_trader.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="71">
-          <caret line="697" column="57" selection-start-line="697" selection-start-column="57" selection-end-line="697" selection-end-column="57" />
-          <folding>
-            <element signature="e#0#90#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sources/strategy/strategies/day_trader/business_entities/rsi_indicator.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="585">
-          <caret line="90" column="12" lean-forward="true" selection-start-line="90" selection-start-column="12" selection-end-line="90" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sources/strategy/strategies/day_trader/business_entities/rsi_indicator_smoothed.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="17" column="39" selection-start-line="17" selection-start-column="39" selection-end-line="17" selection-end-column="39" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/sources/strategy/strategies/day_trader/business_entities/testers/rsi_indicator_tester.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="18" lean-forward="true" selection-start-line="16" selection-start-column="8" selection-end-line="18" />
+        <state relative-caret-position="272">
+          <caret line="19" column="35" selection-start-line="19" selection-start-column="35" selection-end-line="19" selection-end-column="35" />
           <folding>
             <element signature="e#0#84#0" expanded="true" />
           </folding>
@@ -1209,28 +1206,58 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/sources/strategy/strategies/day_trader/business_entities/testers/macd_indicator_tester.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="19" column="8" selection-start-line="19" selection-start-column="8" selection-end-line="19" selection-end-column="8" />
+        <state relative-caret-position="529">
+          <caret line="154" column="11" selection-start-line="154" selection-start-column="11" selection-end-line="154" selection-end-column="11" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/sources/strategy/strategies/day_trader/business_entities/testers/macd_indicator_adjusted_tester.py">
+    <entry file="file://$PROJECT_DIR$/sources/strategy/strategies/day_trader/business_entities/rsi_indicator_smoothed.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="47" column="19" selection-start-line="47" selection-start-column="8" selection-end-line="47" selection-end-column="19" />
+          <folding>
+            <element signature="e#0#72#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sources/strategy/strategies/day_trader/strategy/day_trader.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="178">
-          <caret line="32" column="28" lean-forward="true" selection-start-line="32" selection-start-column="28" selection-end-line="32" selection-end-column="28" />
+          <caret line="1596" column="59" lean-forward="true" selection-start-line="1596" selection-start-column="59" selection-end-line="1596" selection-end-column="59" />
           <folding>
-            <element signature="e#0#94#0" expanded="true" />
+            <element signature="e#0#90#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sources/strategy/strategies/day_trader/business_entities/rsi_indicator.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="225">
+          <caret line="70" column="8" selection-start-line="70" selection-start-column="8" selection-end-line="80" selection-end-column="26" />
+          <folding>
+            <element signature="e#0#72#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/sources/strategy/strategies/day_trader/business_entities/macd_indicator_adjusted.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="257">
-          <caret line="82" lean-forward="true" selection-start-line="82" selection-end-line="82" />
+        <state relative-caret-position="-148">
+          <caret line="3" column="37" selection-start-line="3" selection-start-column="37" selection-end-line="3" selection-end-column="37" />
+          <folding>
+            <element signature="e#0#100#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sources/strategy/strategies/day_trader/business_entities/macd_indicator.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="112" column="22" selection-start-line="112" selection-start-column="12" selection-end-line="112" selection-end-column="22" />
           <folding>
             <element signature="e#0#100#0" expanded="true" />
           </folding>
@@ -1239,8 +1266,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/sources/strategy/strategies/day_trader/business_entities/day_trading_position.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="121" column="9" selection-start-line="121" selection-start-column="9" selection-end-line="121" selection-end-column="9" />
+        <state relative-caret-position="46">
+          <caret line="636" column="105" selection-start-line="636" selection-start-column="105" selection-end-line="636" selection-end-column="105" />
           <folding>
             <element signature="e#0#69#0" expanded="true" />
           </folding>

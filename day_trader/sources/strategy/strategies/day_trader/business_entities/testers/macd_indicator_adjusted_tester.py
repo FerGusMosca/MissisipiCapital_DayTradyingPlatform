@@ -28,10 +28,13 @@ class MACDIndicatorAdjustedTester():
         print("Starting to process MACDAdjusted tests ")
 
         prices=self.GetPrices()
+        fast=10
+        slow=50
+        signal=50
 
         candleBarArr = []
-        macdAdjInd = MACDIndicatorAdjusted(slow=26,fast=12,signal=9)
-        date = datetime.strptime('10 Mar 2020', '%d %b %Y')
+        macdAdjInd = MACDIndicatorAdjusted(slow=slow,fast=fast,signal=signal)
+        date = datetime.strptime('23 Mar 2020', '%d %b %Y')
 
         hour=8
         minute=30
@@ -43,12 +46,13 @@ class MACDIndicatorAdjustedTester():
 
             candleBarArr.append(candlebar)
 
-            macdAdjInd.Update(CandleBarArr= candleBarArr)
+            macdAdjInd.Update(CandleBarArr= candleBarArr,slow=slow,fast=fast,signal=signal)
 
-            print("MACDAdj  DateTime={} MACD={} Signal={} MS={} MSPrev={}".format(
+            print("MACDAdj  DateTime={} MACD={} Signal={} MS={} MSPrev={} Close={}".format(
                                                             candlebar.DateTime,
                                                             macdAdjInd.MACD,macdAdjInd.Signal,
-                                                            macdAdjInd.MS,macdAdjInd.MSPrev))
+                                                            macdAdjInd.MS,macdAdjInd.MSPrev,
+                                                            price))
 
             if minute==59:
                 minute=0

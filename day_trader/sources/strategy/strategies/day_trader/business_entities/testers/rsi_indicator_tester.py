@@ -26,7 +26,7 @@ class RSIIndicatorTester():
         candleBarArr = []
         rsiSmoothed = RSIIndicatorSmoothed()
         #rsiSmoothed = RSIIndicator()
-        date = datetime.strptime('10 Mar 2020', '%d %b %Y')
+        date = datetime.strptime('23 Mar 2020', '%d %b %Y')
 
         hour=8
         minute=30

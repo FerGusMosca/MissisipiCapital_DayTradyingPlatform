@@ -1,5 +1,6 @@
 from sources.strategy.strategies.day_trader.business_entities.testers.macd_indicator_tester import *
 from datetime import *
+from scipy import stats
 
 class MACDIndicator():
 
@@ -34,19 +35,25 @@ class MACDIndicator():
 
                 self.LastProcessedDateTime = None
                 self.MSArray = []
+                self.MSArrayContext =[]
+                self.MSMaxMinCrossover=[]
                 self.ContextSign = None
                 self.LastTradeTimestamp = None
 
-        def GetMaxAbsMS(self,length):
+        def GetMaxAbsInArray(self,array):
+                maxToReturn=0
+                for val in array:
+                        maxToReturn = abs(val) if maxToReturn < abs(val) else maxToReturn
+                return maxToReturn
 
-            max = 0
-            lastNminArray =  self.MSArray[(-1*length):]
+        def GetMaxAbsMSCrossover(self, length):
+            #Then I take the absolute value of the M-S Max/Min  -->Calculate the last N minutes MAX of this value - row 26
+            return self.GetMaxAbsInArray(self.MSMaxMinCrossover[(-1 * length):] if len(self.MSMaxMinCrossover) >= length
+                                         else self.MSMaxMinCrossover)
 
-            for ms in lastNminArray:
-                if max< abs(ms):
-                    max=abs(ms)
+        def GetMaxAbsMSAllDay(self):
+            return self.GetMaxAbsInArray(self.MSArray)
 
-            return max
 
         def UpdatePricesIndicators(self,lastBar):
 
@@ -62,13 +69,14 @@ class MACDIndicator():
 
         def UpdateMSMaxMin(self,absMaxMSPeriod =0):
 
-                self.MSArray.append(self.MS)
+
 
                 currentContext = 1 if self.MACD > self.Signal else -1
 
                 if currentContext != self.ContextSign and self.ContextSign is not None:
                         self.MaxMS = self.MS
                         self.MinMS = self.MS
+                        self.MSArrayContext.clear()
 
                 if self.LastTradeTimestamp is not None:
                         self.MaxMS = self.MS
@@ -81,11 +89,12 @@ class MACDIndicator():
                 if self.MinMS is None or self.MinMS > self.MS:
                         self.MinMS = self.MS
 
-                if absMaxMSPeriod>0:
-                        self.AbsMaxMS = self.GetMaxAbsMS(absMaxMSPeriod)
-                elif self.AbsMaxMS is None or self.AbsMaxMS < abs(self.MS):
-                        self.AbsMaxMS=abs(self.MS)
 
+                self.AbsMaxMS = self.GetMaxAbsMSAllDay()
+
+                self.MSArray.append(self.MS)
+                self.MSArrayContext.append(self.MS)
+                self.MSMaxMinCrossover.append(self.GetMaxAbsInArray(self.MSArrayContext))
                 self.ContextSign = currentContext
 
 
@@ -109,6 +118,19 @@ class MACDIndicator():
                 else:
                         return None
 
+        def GetMSReggr(self, index):
+
+                arrayMSToUse = []
+                arrayIndex = []
+
+                i = index
+                for rsi in self.MSArray[-1 * index:]:
+                        arrayMSToUse.append(rsi)
+                        arrayIndex.append(len(self.MSArray) - i)
+                        i -= 1
+
+                reggr = stats.linregress(arrayIndex, arrayMSToUse)
+                return reggr.slope
 
         def Update(self,CandleBarArr,slow=26, fast=12, signal=9, absMaxMSPeriod =0):
                 sortedBars = sorted(list(filter(lambda x: x is not None, CandleBarArr)), key=lambda x: x.DateTime,reverse=False)

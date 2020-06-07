@@ -699,10 +699,11 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                                                     self.ModelParametersHandler.Get(ModelParametersHandler.CANDLE_BARS_SMOOTHED_MINUTES_RSI()).IntValue)
 
             dayTradingPos.MACDIndicator.Update(candlebarDict.values(),
-                                               self.ModelParametersHandler.Get(ModelParametersHandler.MACD_SLOW()).IntValue,
-                                               self.ModelParametersHandler.Get(ModelParametersHandler.MACD_FAST()).IntValue,
-                                               self.ModelParametersHandler.Get(ModelParametersHandler.MACD_SIGNAL()).IntValue,
-                                               self.ModelParametersHandler.Get(ModelParametersHandler.MACD_RSI_ABS_MAX_MS_PERIOD()).IntValue
+                                               slow=self.ModelParametersHandler.Get(ModelParametersHandler.MACD_SLOW()).IntValue,
+                                               fast=self.ModelParametersHandler.Get(ModelParametersHandler.MACD_FAST()).IntValue,
+                                               signal=self.ModelParametersHandler.Get(ModelParametersHandler.MACD_SIGNAL()).IntValue,
+                                               #absMaxMSPeriod= self.ModelParametersHandler.Get(ModelParametersHandler.MACD_RSI_ABS_MAX_MS_PERIOD()).IntValue
+                                               absMaxMSPeriod=0
                                                )
 
             '''
@@ -1579,14 +1580,15 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                 cbDict[candlebar.DateTime] = candlebar
                 self.Candlebars[candlebar.Security.Symbol] = cbDict
                 self.UpdateTechnicalAnalysisParameters(candlebar, cbDict)
+                dayTradingPos.MarketData = md
+                dayTradingPos.CalculateCurrentDayProfits(md)
+
                 self.EvaluateOpeningPositions(candlebar, cbDict)
                 closing = self.EvaluateClosingPositions(candlebar, cbDict)
 
-                dayTradingPos.MarketData = md
-                dayTradingPos.CalculateCurrentDayProfits(md)
                 backtestDto = BacktestDTO(pSymbol=dayTradingPos.Security.Symbol,
                                           pDate=candlebar.DateTime.date(),
-                                          pTime=candlebar.DateTime.time(),
+                                          pTime=candlebar.DateTime.time() ,
                                           pShares=dayTradingPos.GetNetOpenShares(),
                                           pCurrentProfit=dayTradingPos.CurrentProfitMonetaryLastTrade if closing else "")
 
