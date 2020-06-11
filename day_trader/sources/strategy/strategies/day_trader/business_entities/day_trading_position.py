@@ -671,9 +671,7 @@ class DayTradingPosition():
             return _LONG_MACD_RSI_RULE_3
 
 
-        candlebar= candlebarsArr[-1]
-        if(candlebar.DateTime.hour==9 and candlebar.DateTime.minute==27):
-            print(candlebar.DateTime)
+
 
         # line 4
         if (    self.MACDIndicator.GetMaxAbsMSCrossover(absMaxMSPeriodParam.IntValue) < self.SmoothMACDRSIParam(macdRSISmoothedMode, self.MACDIndicator.AbsMaxMS, absMSMaxMinLast5ParamH, absMSMaxMinLast5ParamHH)
@@ -756,6 +754,8 @@ class DayTradingPosition():
             ):
             return None
 
+
+
         # SHORT ON --> NO TRADE ON
         # rule 1
         if (    self.MaxProfitCurrentTrade >= self.SmoothMACDRSIParam(macdRSISmoothedMode,self.MACDIndicator.PriceHMinusL,macdMaxGainParamJ,macdMaxGainParamJJ)*100 #MaxProfix is calcualted as base 100 (ex: 72.23%)
@@ -785,7 +785,7 @@ class DayTradingPosition():
         # rule 4
         if (    self.MACDIndicator.MSPrev < msNowParamA.FloatValue
             and self.MACDIndicator.MS >= msNowParamA.FloatValue
-            and self.MACDIndicator.MS >= msNowExitParamN.FloatValue
+            and self.MACDIndicator.MS >=  ( self.SmoothMACDRSIParam(macdRSISmoothedMode,self.MACDIndicator.AbsMaxMS,msMaxMinExitParamNBis,msMaxMinExitParamNNBis))
             and self.MinuteSmoothedRSIIndicator.GetRSIReggr(5) > rsi30SlopeSkip5ExitParamL.FloatValue
             and macdRsiCloseShortRule4ModelParam.IntValue>=1
         ):
@@ -1018,6 +1018,10 @@ class DayTradingPosition():
             self.TerminalClose=True
             self.TerminalCloseCond = terminalCond
             return terminalCond
+
+        candlebar = candlebarsArr[-1]
+        if (candlebar.DateTime.hour == 14 and candlebar.DateTime.minute == 1):
+            print("aca")
 
 
         if (

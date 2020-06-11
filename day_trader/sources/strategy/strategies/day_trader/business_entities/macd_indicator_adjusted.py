@@ -70,12 +70,13 @@ class MACDIndicatorAdjusted(MACDIndicator):
 
         self.UpdateMACD(prices,index)
         self.UpdateSignal(index)
+        self.UpdatePricesIndicators(lastBar)
 
         if lastBar is not None and self.MACD is not None and self.Signal is not None:
             self.MSPrev = self.MS
             self.MS = (500 * (self.MACD - self.Signal)) / lastBar.Close
             self.UpdateMSMaxMin(absMaxMSPeriod)
-            self.UpdatePricesIndicators(lastBar)
+
         '''
         print("MACD print @{}- MACD:{}, Signal:{} Price:{}".format(self.LastProcessedDateTime, self.MACD, self.Signal,
                                                                    lastBar.Close))
