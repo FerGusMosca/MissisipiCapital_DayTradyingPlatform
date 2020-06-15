@@ -447,6 +447,10 @@ class ModelParametersHandler:
     def MACD_RSI_CLOSE_SHORT_RULE_9():
         return "MACD_RSI_CLOSE_SHORT_RULE_9"
 
+    @staticmethod
+    def PACING_ON_BACKTEST_MILISEC():
+        return "PACING_ON_BACKTEST_MILISEC"
+
 
     #endregion
 

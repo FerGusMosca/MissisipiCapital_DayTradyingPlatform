@@ -1,7 +1,8 @@
 from sources.framework.business_entities.market_data.candle_bar import *
+from sources.strategy.strategies.day_trader.business_entities.rsi_base import *
 from scipy import stats
 
-class RSIIndicator():
+class RSIIndicator(RSIBase):
 
 
     def __init__(self,smoothed=False):
@@ -15,24 +16,7 @@ class RSIIndicator():
         self.DownOpen = []
         self.SmoothUp = []
         self.SmoothDown = []
-        self.LastProcessedDateTime = None
-        self.RSIArray = []
-        self.RSI = None
-        self.PrevRSI = None
-
-    def GetSlope(self, currValue, prevValue):
-
-        if currValue is not None and prevValue is not None and prevValue != 0:
-            return (currValue - prevValue) / prevValue
-        else:
-            return None
-
-    def CalculateAverage(self,array,length):
-        sum=0
-        # Just the average
-        for value in array:
-            sum += value
-        return sum / length
+        super().Reset()
 
     def CalculatedUpDown(self,MINUTES_RSI_LENGTH,xOpenArr,xSmoothOpenArr,smoothed,direction):
         
@@ -59,13 +43,6 @@ class RSIIndicator():
 
     #region Public Methods
 
-    def GetRSISlope (self,index):
-
-        if len(self.RSIArray)>=index:
-            lastRSIIndex = self.RSIArray[-1*index]
-            return self.GetSlope(self.RSI,lastRSIIndex)
-        else:
-            return None
 
     def GetRSIReggr(self,index):
         arrayRSIToUse = []
@@ -107,8 +84,6 @@ class RSIIndicator():
             self.LastProcessedDateTime=sortedBars[0].DateTime
             #if(sortedBars[0].Security.Symbol=="SPY"):
             #    print("SPY-{}-final RSI{}:{} -- previous RSI{}:{}".format(self.LastProcessedDateTime,MINUTES_RSI_LENGTH,self.RSI,MINUTES_RSI_LENGTH,self.PrevRSI))
-
-
 
     def UpdateDaily(self,marketDataArr, DAILY_RSI_LENGTH):
 

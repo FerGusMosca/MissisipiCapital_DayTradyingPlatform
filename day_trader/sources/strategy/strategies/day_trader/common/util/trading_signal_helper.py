@@ -26,7 +26,7 @@ class TradingSignalHelper:
 
             self.PersistingLock.acquire()
 
-            now=datetime.datetime.now()
+            now=candlebar.DateTime
 
             self.TradingSignalManager.PersistTradingSignal(dayTradingPos,now,action, SideConverter.ConvertSideToString(side),candlebar)
 
@@ -247,7 +247,7 @@ class TradingSignalHelper:
 
             self.PersistingLock.acquire()
 
-            now=datetime.datetime.now()
+            now=candlebar.DateTime
 
             self.TradingSignalManager.PersistTradingSignal(dayTradingPos,now,action, SideConverter.ConvertSideToString(side),
                                                            candlebar)

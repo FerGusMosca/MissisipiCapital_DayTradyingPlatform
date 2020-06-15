@@ -821,16 +821,18 @@ class OrderRouter( BaseCommunicationModule, ICommunicationModule):
 
         newOrder = OrderConverter.ConvertNewOrder(self, wrapper)
 
-        request = self.CreateRequest(newOrder,"CreateOrder")
+        if self.Configuration.MockSendsToBloomberg:
 
-        LogHelper.LogNewOrder(self, newOrder)
+            request = self.CreateRequest(newOrder,"CreateOrder")
 
-        requestID = blpapi.CorrelationId(newOrder.ClOrdId)
+            LogHelper.LogNewOrder(self, newOrder)
 
-        self.ClOrdIdsTranslators[requestID.value()] = newOrder.ClOrdId
-        self.PendingNewOrders[requestID.value()] = newOrder
+            requestID = blpapi.CorrelationId(newOrder.ClOrdId)
 
-        self.Session.sendRequest(request, correlationId=requestID)
+            self.ClOrdIdsTranslators[requestID.value()] = newOrder.ClOrdId
+            self.PendingNewOrders[requestID.value()] = newOrder
+
+            self.Session.sendRequest(request, correlationId=requestID)
 
         threading.Thread(target=self.SendMockFilledExecutionReportsThread, args=(newOrder,)).start()
 

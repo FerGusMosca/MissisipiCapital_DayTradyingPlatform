@@ -24,6 +24,7 @@ class Configuration:
         self.InitialRecoveryTimeoutInSeconds = int(config['DEFAULT']['INITIAL_RECOVERY_TIMEOUT_IN_SECONDS'])
         self.ImplementMock = config['DEFAULT']['IMPLEMENT_MOCK'] == "True"
         self.SecondsToSleepOnTradeForMock = float(config['DEFAULT']['SECONDS_TO_SLEEP_ON_TRADE_FOR_MOCK'])
+        self.MockSendsToBloomberg = config['DEFAULT']['MOCK_SENDS_TO_BLOOMBERG'] == "True"
 
         self.ExternalOrdersPacingSeconds = int(config['DEFAULT']['EXTERNAL_ORDERS_PACING_SECONDS'])
         self.MarketDataUpdateFreqSeconds = float(config['DEFAULT']['MARKET_DATA_UPDATE_FREQ_SECONDS'])

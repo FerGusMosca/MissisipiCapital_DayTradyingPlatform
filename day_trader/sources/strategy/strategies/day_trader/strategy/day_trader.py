@@ -1601,7 +1601,8 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                 '''
                 threading.Thread(target=self.PublishPortfolioPositionThread, args=(dayTradingPos,)).start()
 
-                time.sleep(0.05)
+                sleepMilisec =self.ModelParametersHandler.Get(ModelParametersHandler.PACING_ON_BACKTEST_MILISEC(),dayTradingPos.Security.Symbol)
+                time.sleep(sleepMilisec.IntValue/1000)
 
                 i+=1
 

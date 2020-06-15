@@ -1,6 +1,7 @@
 from sources.framework.business_entities.market_data.candle_bar import *
+from sources.strategy.strategies.day_trader.business_entities.rsi_base import *
 from scipy import stats
-class RSIIndicatorSmoothed():
+class RSIIndicatorSmoothed(RSIBase):
 
 
     def __init__(self):
@@ -13,10 +14,7 @@ class RSIIndicatorSmoothed():
         self.SmoothDown = 0
         self.BootstrapUpOpen = 0
         self.BootstrapDownOpen = 0
-        self.RSI= 0
-        self.PrevRSI = None
-        self.RSIArray = []
-        self.LastProcessedDateTime=None
+        super().Reset()
 
     def CalculatedCumAvg(self,sortedBars,bootStrap, xOpen, prevValue,MINUTES_RSI_LENGTH,direction):
 
@@ -28,22 +26,6 @@ class RSIIndicatorSmoothed():
             return ( (prevValue*(MINUTES_RSI_LENGTH-2))  + xOpen)/((MINUTES_RSI_LENGTH-1))
         else:
             return 0
-
-    def GetSlope(self, currValue, prevValue):
-
-        if currValue is not None and prevValue is not None and prevValue != 0:
-            return (currValue - prevValue) / prevValue
-        else:
-            return None
-
-    def GetRSISlope (self,index):
-
-        if len(self.RSIArray)>=index:
-            lastRSIIndex = self.RSIArray[-1*index]
-            return self.GetSlope(self.RSI,lastRSIIndex)
-        else:
-            return None
-
 
     def GetRSIReggr(self,index):
         arrayRSIToUse = []
