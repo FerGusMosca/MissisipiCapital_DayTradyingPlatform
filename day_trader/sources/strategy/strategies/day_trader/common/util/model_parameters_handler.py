@@ -451,6 +451,10 @@ class ModelParametersHandler:
     def PACING_ON_BACKTEST_MILISEC():
         return "PACING_ON_BACKTEST_MILISEC"
 
+    @staticmethod
+    def MACD_RSI_START_TRADING():
+        return "MACD_RSI_START_TRADING"
+
 
     #endregion
 

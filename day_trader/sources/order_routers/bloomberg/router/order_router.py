@@ -797,9 +797,8 @@ class OrderRouter( BaseCommunicationModule, ICommunicationModule):
         self.ActiveOrders[newOrder.OrderId] = newOrder
 
         newWrapper = NewExecutionReportWrapper(newOrder)
-
         self.DoSendExecutionReportThread(newWrapper)
-        time.sleep(int(self.Configuration.SecondsToSleepOnTradeForMock))
+        time.sleep(self.Configuration.SecondsToSleepOnTradeForMock)
 
         lastCandlebar = None
         fullSymbol = "{} {} {}".format(newOrder.Security.Symbol,
@@ -816,12 +815,13 @@ class OrderRouter( BaseCommunicationModule, ICommunicationModule):
 
 
     def ProcessNewOrderMock(self,wrapper):
-        if not self.Connected:
-            return self.ProcessRejectedExecutionReport(wrapper, "Not Connected to Bloomberg")
 
         newOrder = OrderConverter.ConvertNewOrder(self, wrapper)
 
         if self.Configuration.MockSendsToBloomberg:
+
+            if not self.Connected:
+                return self.ProcessRejectedExecutionReport(wrapper, "Not Connected to Bloomberg")
 
             request = self.CreateRequest(newOrder,"CreateOrder")
 

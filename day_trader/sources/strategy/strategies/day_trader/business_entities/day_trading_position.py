@@ -340,7 +340,6 @@ class DayTradingPosition():
                 else:
                     netShares -= summary.GetNetShares()
 
-
         return netShares
 
     def CalculateLastTradeProfit(self, profitsAndLosses, marketData):
@@ -409,8 +408,8 @@ class DayTradingPosition():
 
     def UpdateRouting(self):
         nextOpenPos = next(iter(list(filter(lambda x: x.Position.IsOpenPosition(), self.ExecutionSummaries.values()))), None)
-
         self.Routing= nextOpenPos is not None
+
 
     def GetOpenSummaries(self):
         return list(filter(lambda x: x.Position.IsOpenPosition(), self.ExecutionSummaries.values()))
@@ -570,7 +569,7 @@ class DayTradingPosition():
                                   absMSMaxMinLast5ParamHH,sec5MinSlopeParamI,rsi14SlopeSkip3ExitParamV,ms3SlopeParamX,
                                   ms3SlopeParamXX,macdRSISmoothedMode,absMaxMSPeriodParam,
                                   macdRsiOpenShortRule1ModelParam,macdRsiOpenShortRule2ModelParam,macdRsiOpenShortRule3ModelParam,
-                                  macdRsiOpenShortRule4ModelParam,candlebarsArr):
+                                  macdRsiOpenShortRule4ModelParam,macdRsiStartTradingModelParam,candlebarsArr):
 
         if self.Open():
             return None #Position already opened
@@ -582,6 +581,7 @@ class DayTradingPosition():
                 or self.MACDIndicator.MinMS is None or self.MinuteSmoothedRSIIndicator.GetRSIReggr(5) is None
                 or self.MinuteSmoothedRSIIndicator.GetRSIReggr(10) is None or len(candlebarsArr)<5
                 or self.MinuteNonSmoothedRSIIndicator.GetRSIReggr(3) is None or self.MACDIndicator.GetMSReggr(3) is None
+                or not self.EvaluateBiggerDate(candlebarsArr[-1], macdRsiStartTradingModelParam)
             ):
             return None
 
@@ -634,7 +634,7 @@ class DayTradingPosition():
                                  absMSMaxMinLast5ParamHH,sec5MinSlopeParamI, rsi14SlopeSkip3ExitParamV,ms3SlopeParamX,
                                  ms3SlopeParamXX,macdRSISmoothedMode,absMaxMSPeriodParam,
                                  macdRsiOpenLongRule1ModelParam,macdRsiOpenLongRule2ModelParam,macdRsiOpenLongRule3ModelParam,
-                                 macdRsiOpenLongRule4ModelParam,candlebarsArr):
+                                 macdRsiOpenLongRule4ModelParam,macdRsiStartTradingModelParam,candlebarsArr):
 
         if self.Open():
             return None  # Position already opened
@@ -647,6 +647,7 @@ class DayTradingPosition():
             or self.MACDIndicator.MinMS is None or self.MinuteSmoothedRSIIndicator.GetRSIReggr(5) is None
             or self.MinuteSmoothedRSIIndicator.GetRSIReggr(10) is None or len(candlebarsArr)<5
             or self.MinuteNonSmoothedRSIIndicator.GetRSIReggr(3) is None or self.MACDIndicator.GetMSReggr(3) is None
+            or not self.EvaluateBiggerDate(candlebarsArr[-1],macdRsiStartTradingModelParam)
             ):
             return None
 
@@ -746,11 +747,16 @@ class DayTradingPosition():
                                          macdRsiCloseShortRule2ModelParam,macdRsiCloseShortRule3ModelParam,macdRsiCloseShortRule4ModelParam,
                                          macdRsiCloseShortRule5ModelParam,macdRsiCloseShortRule6ModelParam,macdRsiCloseShortRule7ModelParam,
                                          macdRsiCloseShortRule8ModelParam,macdRsiCloseShortRule9ModelParam):
+
+
+        openQty=1
         if not self.Open():
             return None  # Position not opened
 
         if self.GetNetOpenShares() >0 :
             return None  # We are in a LONG position
+        else:
+            openQty= abs(self.GetNetOpenShares()) if self.GetNetOpenShares()!=0 else 1
 
         terminalCond = self.EvaluateClosingTerminalCondition(candlebarsArr, endOfdayLimitModelParam,takeGainLimitModelParam,stopLossLimitModelParam)
 
@@ -773,7 +779,7 @@ class DayTradingPosition():
 
         # SHORT ON --> NO TRADE ON
         # rule 1
-        if (    self.MaxMonetaryProfitCurrentTrade >= self.SmoothMACDRSIParam(macdRSISmoothedMode,self.MACDIndicator.PriceHMinusL,macdMaxGainParamJ,macdMaxGainParamJJ)
+        if (    (self.MaxMonetaryProfitCurrentTrade/openQty) >= self.SmoothMACDRSIParam(macdRSISmoothedMode,self.MACDIndicator.PriceHMinusL,macdMaxGainParamJ,macdMaxGainParamJJ)
             and (self.MaxMonetaryProfitCurrentTrade > 0 and ((self.CurrentProfitMonetaryLastTrade / self.MaxMonetaryProfitCurrentTrade) < macdGainNowMaxParamK.FloatValue))
             and self.MinuteSmoothedRSIIndicator.GetRSIReggr(5) > rsi30SlopeSkip5ExitParamL.FloatValue
             and macdRsiCloseShortRule1ModelParam.IntValue>=1
@@ -792,7 +798,7 @@ class DayTradingPosition():
         # rule 3
         if (    self.MACDIndicator.MSPrev >= msNowParamA.FloatValue
             and self.MACDIndicator.MS >= msNowParamA.FloatValue
-            and self.MaxMonetaryLossCurrentTrade < ( self.SmoothMACDRSIParam(macdRSISmoothedMode,self.MACDIndicator.PriceHMinusL,gainMinStopLossExitParamW,gainMinStopLossExitParamWW))
+            and (self.MaxMonetaryLossCurrentTrade/openQty) < ( self.SmoothMACDRSIParam(macdRSISmoothedMode,self.MACDIndicator.PriceHMinusL,gainMinStopLossExitParamW,gainMinStopLossExitParamWW))
             and macdRsiCloseShortRule3ModelParam.IntValue>=1
         ):
             return _EXIT_SHORT_MACD_RSI_COND_3
@@ -809,7 +815,7 @@ class DayTradingPosition():
         # rule 5
         if (    self.MACDIndicator.MSPrev < msNowParamA.FloatValue
             and self.MACDIndicator.MS >= msNowParamA.FloatValue
-            and self.MaxMonetaryLossCurrentTrade < gainMinStopLossExitParamW.FloatValue
+            and (self.MaxMonetaryLossCurrentTrade/openQty) < gainMinStopLossExitParamW.FloatValue
             and macdRsiCloseShortRule5ModelParam.IntValue>=1
         ):
             return _EXIT_SHORT_MACD_RSI_COND_5
@@ -839,13 +845,13 @@ class DayTradingPosition():
 
         #rule 8
         if (    self.MACDIndicator.GetMaxAbsMSCrossover(absMaxMSPeriodParam.IntValue) < msMaxMinExitParamS.FloatValue
-            and self.MaxMonetaryLossCurrentTrade < ( self.SmoothMACDRSIParam(macdRSISmoothedMode,self.MACDIndicator.PriceHMinusL,gainMinStopLossExitParamZ,gainMinStopLossExitParamZZ))
+            and (self.MaxMonetaryLossCurrentTrade/openQty) < ( self.SmoothMACDRSIParam(macdRSISmoothedMode,self.MACDIndicator.PriceHMinusL,gainMinStopLossExitParamZ,gainMinStopLossExitParamZZ))
             and macdRsiCloseShortRule8ModelParam.IntValue>=1
             ):
             return _EXIT_SHORT_MACD_RSI_COND_8
 
         # rule 9
-        if (    self.MaxMonetaryLossCurrentTrade < ( self.SmoothMACDRSIParam(macdRSISmoothedMode,self.MACDIndicator.PriceHMinusL,gainMinStopLossExitParamU,gainMinStopLossExitParamUU))
+        if (        (self.MaxMonetaryLossCurrentTrade/openQty) < ( self.SmoothMACDRSIParam(macdRSISmoothedMode,self.MACDIndicator.PriceHMinusL,gainMinStopLossExitParamU,gainMinStopLossExitParamUU))
                 and macdRsiCloseShortRule9ModelParam.IntValue>=1
             ):
             return _EXIT_SHORT_MACD_RSI_COND_9
@@ -1021,11 +1027,16 @@ class DayTradingPosition():
                                             macdRsiCloseLongRule1ModelParam,macdRsiCloseLongRule2ModelParam,macdRsiCloseLongRule3ModelParam,
                                             macdRsiCloseLongRule4ModelParam,macdRsiCloseLongRule5ModelParam,macdRsiCloseLongRule6ModelParam,
                                             macdRsiCloseLongRule7ModelParam,macdRsiCloseLongRule8ModelParam,macdRsiCloseLongRule9ModelParam):
+
+
+        openQty = 1
         if not self.Open():
             return None  # Position not opened
 
         if self.GetNetOpenShares() < 0:
             return None  # We are in a SHORT position
+        else:
+            openQty=abs(self.GetNetOpenShares()) if self.GetNetOpenShares()!=0 else 1
 
         terminalCond = self.EvaluateClosingTerminalCondition(candlebarsArr,endOfdayLimitModelParam,takeGainLimitModelParam,stopLossLimitModelParam)
 
@@ -1047,7 +1058,7 @@ class DayTradingPosition():
         # LONG ON --> NO TRADE ON
         # rule 1
         if (
-                    self.MaxProfitCurrentTrade >= self.SmoothMACDRSIParam(macdRSISmoothedMode,self.MACDIndicator.PriceHMinusL,macdMaxGainParamJ,macdMaxGainParamJJ)*100 #MaxProfixs is calculated in base 100 (ex: 73.22%)
+                    (self.MaxMonetaryProfitCurrentTrade/openQty) >= self.SmoothMACDRSIParam(macdRSISmoothedMode,self.MACDIndicator.PriceHMinusL,macdMaxGainParamJ,macdMaxGainParamJJ)
                 and (self.MaxMonetaryProfitCurrentTrade> 0  and ((self.CurrentProfitMonetaryLastTrade/self.MaxMonetaryProfitCurrentTrade)<macdGainNowMaxParamK.FloatValue))
                 and self.MinuteSmoothedRSIIndicator.GetRSIReggr(5) < (-1*rsi30SlopeSkip5ExitParamL.FloatValue)
                 and macdRsiCloseLongRule1ModelParam.IntValue>=1
@@ -1067,7 +1078,7 @@ class DayTradingPosition():
         # rule 3
         if (self.MACDIndicator.MSPrev < msNowParamA.FloatValue
                 and self.MACDIndicator.MS < msNowParamA.FloatValue
-                and self.MaxMonetaryLossCurrentTrade < self.SmoothMACDRSIParam(macdRSISmoothedMode,self.MACDIndicator.PriceHMinusL,gainMinStopLossExitParamW,gainMinStopLossExitParamWW)
+                and (self.MaxMonetaryLossCurrentTrade/openQty) < self.SmoothMACDRSIParam(macdRSISmoothedMode,self.MACDIndicator.PriceHMinusL,gainMinStopLossExitParamW,gainMinStopLossExitParamWW)
                 and macdRsiCloseLongRule3ModelParam.IntValue>=1
 
         ):
@@ -1086,7 +1097,7 @@ class DayTradingPosition():
         # rule 5
         if (        self.MACDIndicator.MSPrev >= msNowParamA.FloatValue
                 and self.MACDIndicator.MS < msNowParamA.FloatValue
-                and self.MaxMonetaryLossCurrentTrade < gainMinStopLossExitParamW.FloatValue
+                and (self.MaxMonetaryLossCurrentTrade/openQty) < gainMinStopLossExitParamW.FloatValue
                 and macdRsiCloseLongRule5ModelParam.IntValue>=1
 
         ):
@@ -1116,14 +1127,14 @@ class DayTradingPosition():
 
         # rule 8
         if (        self.MACDIndicator.GetMaxAbsMSCrossover(absMaxMSPeriodParam.IntValue) < self.SmoothMACDRSIParam(macdRSISmoothedMode, self.MACDIndicator.AbsMaxMS, msMaxMinExitParamS, msMaxMinExitParamSS)
-                and self.MaxMonetaryLossCurrentTrade < ( self.SmoothMACDRSIParam(macdRSISmoothedMode,self.MACDIndicator.PriceHMinusL,gainMinStopLossExitParamZ,gainMinStopLossExitParamZZ))
+                and (self.MaxMonetaryLossCurrentTrade/openQty) < ( self.SmoothMACDRSIParam(macdRSISmoothedMode,self.MACDIndicator.PriceHMinusL,gainMinStopLossExitParamZ,gainMinStopLossExitParamZZ))
                 and macdRsiCloseLongRule8ModelParam.IntValue >=1
             ):
             return _EXIT_LONG_MACD_RSI_COND_8
 
 
         # rule 9
-        if (        self.MaxMonetaryLossCurrentTrade < ( self.SmoothMACDRSIParam(macdRSISmoothedMode,self.MACDIndicator.PriceHMinusL,gainMinStopLossExitParamU,gainMinStopLossExitParamUU))
+        if (        (self.MaxMonetaryLossCurrentTrade/openQty) < ( self.SmoothMACDRSIParam(macdRSISmoothedMode,self.MACDIndicator.PriceHMinusL,gainMinStopLossExitParamU,gainMinStopLossExitParamUU))
                 and macdRsiCloseLongRule9ModelParam.IntValue>=1
             ):
             return  _EXIT_LONG_MACD_RSI_COND_9

@@ -236,6 +236,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
         dayTradingPos.UpdateRouting() #order is important!
         if summary.Position.IsFinishedPosition():
             LogHelper.LogPositionUpdate(self, "Managed Position Finished", summary, execReport)
+            #print("Position Status={} Routing={}".format(summary.Position.PosStatus,dayTradingPos.Routing))
             if summary.Position.PosId in self.PendingCancels:
                 #print("removing pending cancel for posId {} for security {}".format(summary.Position.PosId,summary.Position.Security.Symbol))
                 del self.PendingCancels[summary.Position.PosId]
@@ -834,6 +835,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                                   self.ModelParametersHandler.Get(ModelParametersHandler.MACD_RSI_OPEN_LONG_RULE_2(),symbol),
                                   self.ModelParametersHandler.Get(ModelParametersHandler.MACD_RSI_OPEN_LONG_RULE_3(),symbol),
                                   self.ModelParametersHandler.Get(ModelParametersHandler.MACD_RSI_OPEN_LONG_RULE_4(),symbol),
+                                  self.ModelParametersHandler.Get(ModelParametersHandler.MACD_RSI_START_TRADING(),symbol),
                                   list(cbDict.values()))
                if longCondition is not None:
 
@@ -841,6 +843,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                    self.TradingSignalHelper.PersistMACDRSITradingSignal(dayTradingPos,TradingSignalHelper._ACTION_OPEN(), Side.Buy,candlebar, self,condition=longCondition)
                    self.ProcessNewPositionReqManagedPos(dayTradingPos, Side.Buy, dayTradingPos.SharesQuantity,self.Configuration.DefaultAccount)
                    dayTradingPos.Routing = True
+                   #print("Open Pos Long --> Routing=True")
                    dayTradingPos.MACDIndicator.UpdateLastTradeTimestamp()
                    return longCondition
                else:
@@ -858,6 +861,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                             self.ModelParametersHandler.Get(ModelParametersHandler.STOP_LOSS_LIMIT(),symbol))
 
         if (not terminallyClosed  and terminalCond is None):
+
 
             shortCondition = dayTradingPos.EvaluateMACDRSIShortTrade(
                                                                     self.ModelParametersHandler.Get(ModelParametersHandler.M_S_NOW_A(), symbol),
@@ -882,6 +886,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                                                                     self.ModelParametersHandler.Get(ModelParametersHandler.MACD_RSI_OPEN_SHORT_RULE_2(), symbol),
                                                                     self.ModelParametersHandler.Get(ModelParametersHandler.MACD_RSI_OPEN_SHORT_RULE_3(), symbol),
                                                                     self.ModelParametersHandler.Get(ModelParametersHandler.MACD_RSI_OPEN_SHORT_RULE_4(), symbol),
+                                                                    self.ModelParametersHandler.Get(ModelParametersHandler.MACD_RSI_START_TRADING(), symbol),
                                                                     list(cbDict.values()))
 
             if shortCondition is not None:
@@ -892,6 +897,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                 self.ProcessNewPositionReqManagedPos(dayTradingPos, Side.Sell, dayTradingPos.SharesQuantity,
                                                      self.Configuration.DefaultAccount)
                 dayTradingPos.Routing = True
+                #print("Open Pos Short --> Routing=True")
                 dayTradingPos.MACDIndicator.UpdateLastTradeTimestamp()
                 return shortCondition
             else:
@@ -1571,34 +1577,45 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
             i = 0
 
             for candlebar in candleBarsArray:
+                self.RoutingLock.acquire()
 
-                md = marketDataArray[i]
+                try:
+                    md = marketDataArray[i]
 
-                cbDict = self.Candlebars[candlebar.Security.Symbol]
-                if cbDict is None:
-                    cbDict = {}
-                cbDict[candlebar.DateTime] = candlebar
-                self.Candlebars[candlebar.Security.Symbol] = cbDict
-                self.UpdateTechnicalAnalysisParameters(candlebar, cbDict)
-                dayTradingPos.MarketData = md
-                dayTradingPos.CalculateCurrentDayProfits(md)
+                    cbDict = self.Candlebars[candlebar.Security.Symbol]
+                    if cbDict is None:
+                        cbDict = {}
+                    cbDict[candlebar.DateTime] = candlebar
+                    self.Candlebars[candlebar.Security.Symbol] = cbDict
+                    self.UpdateTechnicalAnalysisParameters(candlebar, cbDict)
+                    dayTradingPos.MarketData = md
+                    dayTradingPos.CalculateCurrentDayProfits(md)
 
-                self.EvaluateOpeningPositions(candlebar, cbDict)
-                closing = self.EvaluateClosingPositions(candlebar, cbDict)
+                    self.EvaluateOpeningPositions(candlebar, cbDict)
+                    closing = self.EvaluateClosingPositions(candlebar, cbDict)
 
-                backtestDto = BacktestDTO(pSymbol=dayTradingPos.Security.Symbol,
-                                          pDate=candlebar.DateTime.date(),
-                                          pTime=candlebar.DateTime.time() ,
-                                          pShares=dayTradingPos.GetNetOpenShares(),
-                                          pCurrentProfit=dayTradingPos.CurrentProfitMonetaryLastTrade if closing else "")
+                    backtestDto = BacktestDTO(pSymbol=dayTradingPos.Security.Symbol,
+                                              pDate=candlebar.DateTime.date(),
+                                              pTime=candlebar.DateTime.time() ,
+                                              pShares=dayTradingPos.GetNetOpenShares(),
+                                              pCurrentProfit=dayTradingPos.CurrentProfitMonetaryLastTrade if closing else "")
 
-                backtestDTOArr.append(backtestDto)
-                '''
-                print("prnt#1- DateTime={} Gain/Loss$={} Gain/Loss$(Cum)={} Increase/Decrease={} NetShares={}"
-                      .format(candlebar.DateTime,dayTradingPos.CurrentProfitMonetaryLastTrade,
-                              dayTradingPos.CurrentProfitMonetary,dayTradingPos.IncreaseDecrease,
-                              dayTradingPos.GetNetOpenShares()))
-                '''
+                    backtestDTOArr.append(backtestDto)
+                    '''
+                    print("prnt#1- DateTime={} Gain/Loss$={} Gain/Loss$(Cum)={} Increase/Decrease={} NetShares={}"
+                          .format(candlebar.DateTime,dayTradingPos.CurrentProfitMonetaryLastTrade,
+                                  dayTradingPos.CurrentProfitMonetary,dayTradingPos.IncreaseDecrease,
+                                  dayTradingPos.GetNetOpenShares()))
+                    '''
+                except Exception as e:
+                    #traceback.print_exc()
+                    msg = "Error processing strategy backtest for date {} : {}!".format(candlebar.DateTime,str(e))
+                    self.ProcessError(ErrorWrapper(Exception(msg)))
+                    self.DoLog(msg, MessageType.ERROR)
+                finally:
+                    if self.RoutingLock.locked():
+                        self.RoutingLock.release()
+
                 threading.Thread(target=self.PublishPortfolioPositionThread, args=(dayTradingPos,)).start()
 
                 sleepMilisec =self.ModelParametersHandler.Get(ModelParametersHandler.PACING_ON_BACKTEST_MILISEC(),dayTradingPos.Security.Symbol)
