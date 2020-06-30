@@ -84,7 +84,7 @@ class OrderRouter( BaseCommunicationModule, ICommunicationModule):
 
         self.ApiSeqNum = 0
 
-        self.ExecutionReportsPendinToBeSent = {}
+        self.ExecutionReportsPendinToBeSent = []
 
         self.MarketDataSubscriptions = {}
         self.CandleBarSubscriptions = {}
@@ -231,6 +231,10 @@ class OrderRouter( BaseCommunicationModule, ICommunicationModule):
     def DoSendExecutionReportThread(self,execReport):
 
         try:
+
+            if(self.Configuration.ImplementMock):
+                self.OnExecutionReport.ProcessOutgoing(execReport)
+            else:
                 if self.InitialPaintExecutionReports and self.InitialPaintOrder:
                     self.OnExecutionReport.ProcessOutgoing(execReport)
                 else:#the initial paint is still in progress

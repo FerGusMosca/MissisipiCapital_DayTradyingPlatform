@@ -37,4 +37,23 @@ class RSIBase():
             return None
 
 
+    def GetMaxInArray(self,array):
+
+        max=None
+        for val in array:
+            if max is None or val > max:
+                max = val
+
+        return max
+
+    def GetMinInArray(self, array):
+
+        min=None
+        for val in array:
+            if min is None or val < max:
+                min = val
+
+        return min
+
+
     #endregion

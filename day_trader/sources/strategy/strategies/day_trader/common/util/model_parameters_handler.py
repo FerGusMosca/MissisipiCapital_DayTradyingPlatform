@@ -455,6 +455,138 @@ class ModelParametersHandler:
     def MACD_RSI_START_TRADING():
         return "MACD_RSI_START_TRADING"
 
+    @staticmethod
+    def BROOMS_TPMA_A():
+        return "BROOMS_TPMA_A"
+
+    @staticmethod
+    def BROOMS_TPSD_B():
+        return "BROOMS_TPSD_B"
+
+    @staticmethod
+    def BROOMS_TPSD_B():
+        return "BROOMS_TPSD_B"
+
+    @staticmethod
+    def BROOMS_BOLLUP_C():
+        return "BROOMS_BOLLUP_C"
+
+    @staticmethod
+    def BROOMS_BOLLDN_D():
+        return "BROOMS_BOLLDN_D"
+
+    @staticmethod
+    def BROOMS_BOLLINGER_K():
+        return "BROOMS_BOLLINGER_K"
+
+    @staticmethod
+    def BROOMS_BOLLINGER_L():
+        return "BROOMS_BOLLINGER_L"
+
+    @staticmethod
+    def BROOMS_MS_STRENGTH_M():
+        return "BROOMS_MS_STRENGTH_M"
+
+    @staticmethod
+    def BROOMS_MS_STRENGTH_N():
+        return "BROOMS_MS_STRENGTH_N"
+
+    @staticmethod
+    def BROOMS_MS_STRENGTH_P():
+        return "BROOMS_MS_STRENGTH_P"
+
+    @staticmethod
+    def BROOMS_MS_STRENGTH_Q():
+        return "BROOMS_MS_STRENGTH_Q"
+
+    @staticmethod
+    def BROOMS_R():
+        return "BROOMS_R"
+
+    @staticmethod
+    def BROOMS_S():
+        return "BROOMS_S"
+
+    @staticmethod
+    def BROOMS_S():
+        return "BROOMS_S"
+
+    @staticmethod
+    def BROOMS_T():
+        return "BROOMS_T"
+
+    @staticmethod
+    def BROOMS_U():
+        return "BROOMS_U"
+
+    @staticmethod
+    def BROOMS_V():
+        return "BROOMS_V"
+
+    @staticmethod
+    def BROOMS_W():
+        return "BROOMS_W"
+
+    @staticmethod
+    def BROOMS_X():
+        return "BROOMS_X"
+
+    @staticmethod
+    def BROOMS_Y():
+        return "BROOMS_Y"
+
+    @staticmethod
+    def BROOMS_Z():
+        return "BROOMS_Z"
+
+    @staticmethod
+    def BROOMS_CC():
+        return "BROOMS_CC"
+
+    @staticmethod
+    def BROOMS_DD():
+        return "BROOMS_DD"
+
+    @staticmethod
+    def BROOMS_EE():
+        return "BROOMS_EE"
+
+    @staticmethod
+    def BROOMS_NN():
+        return "BROOMS_NN"
+
+    @staticmethod
+    def BROOMS_PP():
+        return "BROOMS_PP"
+
+    @staticmethod
+    def BROOMS_QQ():
+        return "BROOMS_QQ"
+
+    @staticmethod
+    def BROOMS_RR():
+        return "BROOMS_RR"
+
+    @staticmethod
+    def BROOMS_SSS():
+        return "BROOMS_SS"
+
+    @staticmethod
+    def BROOMS_UU():
+        return "BROOMS_UU"
+
+    @staticmethod
+    def BROOMS_VV():
+        return "BROOMS_VV"
+
+    @staticmethod
+    def BROOMS_WW():
+        return "BROOMS_WW"
+
+    @staticmethod
+    def BROOMS_XX():
+        return "BROOMS_XX"
+
 
     #endregion
 

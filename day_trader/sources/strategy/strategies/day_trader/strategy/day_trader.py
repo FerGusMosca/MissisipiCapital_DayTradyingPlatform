@@ -348,7 +348,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                         threading.Thread(target=self.PublishSummaryThread, args=(summary, dayTradingPos.Id)).start()
                         return CMState.BuildSuccess(self)
                     else:
-                        self.DoLog("Received execution report for a managed position, but we cannot find its execution summary",MessageType.ERROR)
+                        self.DoLog("Received execution report for a managed position {},, but we cannot find its execution summary".format(pos_id),MessageType.ERROR)
 
                 elif pos_id in self.SingleExecutionSummaries:
                     #we have a single position
@@ -707,18 +707,24 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                                                absMaxMSPeriod=0
                                                )
 
-            '''
-            if(candlebar.DateTime != prevLastProcessedTime ):
-                print ("---------------{}---------------".format(candlebar.Security.Symbol))
-                print ("Smoothed RSI @{}:{}".format(candlebar.DateTime,dayTradingPos.MinuteSmoothedRSIIndicator.RSI))
-                print("Non Smoothed RSI @{}:{}".format(candlebar.DateTime, dayTradingPos.MinuteNonSmoothedRSIIndicator.RSI))
-                print ("RSI Slope Print ->{}-RSI Slope Smoothed 5 min:{}".format(candlebar.DateTime, dayTradingPos.MinuteSmoothedRSIIndicator.GetRSISlope(5)))
-                print ("RSI Slope Print ->{}-RSI Slope Smoothed 10 min:{}".format(candlebar.DateTime, dayTradingPos.MinuteSmoothedRSIIndicator.GetRSISlope(10)))
-                print("MACD MS @{}:{}".format(candlebar.DateTime, dayTradingPos.MACDIndicator.MS))
-                print("MACD Max MS @{}:{}".format(candlebar.DateTime, dayTradingPos.MACDIndicator.MaxMS))
-                print("MACD Min MS @{}:{}".format(candlebar.DateTime, dayTradingPos.MACDIndicator.MinMS))
-                print("------------------------------")
-            '''
+
+            dayTradingPos.BollingerIndicator.Update(candlebarDict.values(),
+                                                    self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_TPMA_A()),
+                                                    self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_TPSD_B()),
+                                                    self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_BOLLUP_C()),
+                                                    self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_BOLLDN_D()),
+                                                    self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_BOLLINGER_K()),
+                                                    self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_BOLLINGER_L())
+                                                    )
+
+
+            dayTradingPos.MSStrengthIndicator.Update(candlebarDict.values(),dayTradingPos.MACDIndicator.MS,
+                                                     self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_TPSD_B()),
+                                                     self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_MS_STRENGTH_M()),
+                                                     self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_MS_STRENGTH_N()),
+                                                     self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_MS_STRENGTH_P()),
+                                                     self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_MS_STRENGTH_Q()),
+                                                     )
 
 
     def EvaluateGenericLongTrade(self,dayTradingPos,symbol,cbDict,candlebar):
@@ -1368,7 +1374,9 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
             self.SingleExecutionSummaries[self.NextPostId] = ExecutionSummary(datetime.datetime.now(), newPos)
             self.NextPostId = uuid.uuid4()
-            self.RoutingLock.release()
+
+            if self.RoutingLock.locked():
+                self.RoutingLock.release()
 
             posWrapper = PositionWrapper(newPos)
             self.OrderRoutingModule.ProcessMessage(posWrapper)
@@ -1556,7 +1564,9 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
         self.ResetForNewDayOnBackTest(dayTradingPos, currDate)
 
         for date in candelBarDict:
-
+            time.sleep(1)#This has to be here so the ExecutinSummaries are not cleared @ResetForNewDayOnBackTest
+                         #when swithing between trading days
+            self.DoLog("Starting to process for date:{}".format(currDate.date()), MessageType.INFO)
             if datetime.datetime.fromtimestamp(mktime(date)).date() !=currDate.date():
                 currDate=datetime.datetime.fromtimestamp(mktime(date))
                 self.ResetForNewDayOnBackTest(dayTradingPos, currDate)
@@ -1601,12 +1611,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                                               pCurrentProfit=dayTradingPos.CurrentProfitMonetaryLastTrade if closing else "")
 
                     backtestDTOArr.append(backtestDto)
-                    '''
-                    print("prnt#1- DateTime={} Gain/Loss$={} Gain/Loss$(Cum)={} Increase/Decrease={} NetShares={}"
-                          .format(candlebar.DateTime,dayTradingPos.CurrentProfitMonetaryLastTrade,
-                                  dayTradingPos.CurrentProfitMonetary,dayTradingPos.IncreaseDecrease,
-                                  dayTradingPos.GetNetOpenShares()))
-                    '''
+
                 except Exception as e:
                     #traceback.print_exc()
                     msg = "Error processing strategy backtest for date {} : {}!".format(candlebar.DateTime,str(e))

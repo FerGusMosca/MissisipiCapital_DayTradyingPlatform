@@ -9,6 +9,8 @@ from sources.strategy.strategies.day_trader.business_entities.testers.rsi_indica
 from sources.strategy.strategies.day_trader.business_entities.macd_indicator import *
 from sources.strategy.strategies.day_trader.business_entities.macd_indicator_adjusted import *
 from sources.strategy.strategies.day_trader.business_entities.testers.macd_indicator_adjusted_tester import *
+from sources.strategy.strategies.day_trader.business_entities.bollinger_indicator import *
+from sources.strategy.strategies.day_trader.business_entities.MS_strength_indicator import *
 from scipy import stats
 import json
 import statistics
@@ -116,6 +118,8 @@ class DayTradingPosition():
         self.DailyRSIIndicator = RSIIndicator(False)
         #self.MACDIndicator = MACDIndicator()
         self.MACDIndicator = MACDIndicatorAdjusted()
+        self.BollingerIndicator = BollingerIndicator()
+        self.MSStrengthIndicator = MSStrengthIndicator()
 
         #tester= RSIIndicatorTester()
         #tester.DoTest()
@@ -444,6 +448,8 @@ class DayTradingPosition():
         self.MinuteNonSmoothedRSIIndicator.Reset()#14
         self.MinuteSmoothedRSIIndicator.Reset()#30
         self.MACDIndicator.Reset()
+        self.BollingerIndicator.Reset()
+        self.MSStrengthIndicator.Reset()
         self.TerminalClose = False
         self.RunningBacktest= False
         self.TerminalCloseCond = None
