@@ -348,7 +348,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                         threading.Thread(target=self.PublishSummaryThread, args=(summary, dayTradingPos.Id)).start()
                         return CMState.BuildSuccess(self)
                     else:
-                        self.DoLog("Received execution report for a managed position, but we cannot find its execution summary",MessageType.ERROR)
+                        self.DoLog("Received execution report for a managed position {}, but we cannot find its execution summary".format(pos_id),MessageType.ERROR)
 
                 elif pos_id in self.SingleExecutionSummaries:
                     #we have a single position
@@ -1367,8 +1367,11 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
             newPos.ValidateNewPosition()
 
             self.SingleExecutionSummaries[self.NextPostId] = ExecutionSummary(datetime.datetime.now(), newPos)
+
             self.NextPostId = uuid.uuid4()
-            self.RoutingLock.release()
+
+            if self.RoutingLock.locked():
+                self.RoutingLock.release()
 
             posWrapper = PositionWrapper(newPos)
             self.OrderRoutingModule.ProcessMessage(posWrapper)
@@ -1556,7 +1559,9 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
         self.ResetForNewDayOnBackTest(dayTradingPos, currDate)
 
         for date in candelBarDict:
-
+            time.sleep(1)#This has to be here so the ExecutinSummaries are not cleared @ResetForNewDayOnBackTest
+                         #when swithing between trading days
+            self.DoLog("Starting to process new date:{}".format(currDate.date()),MessageType.INFO)
             if datetime.datetime.fromtimestamp(mktime(date)).date() !=currDate.date():
                 currDate=datetime.datetime.fromtimestamp(mktime(date))
                 self.ResetForNewDayOnBackTest(dayTradingPos, currDate)

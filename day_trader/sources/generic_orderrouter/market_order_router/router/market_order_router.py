@@ -50,7 +50,9 @@ class MarketOrderRouter(BaseCommunicationModule, ICommunicationModule):
                     self.Positions[pos.PosId] = pos
                 else:
                     self.DoLog("Could not find order for pre existing position on execution report initial load. PosId = {}".format(pos.PosId), MessageType.ERROR)
-            self.PositionsLock.release()
+
+            if self.PositionsLock.locked():
+                self.PositionsLock.release()
 
             pos_list_wrapper = PositionListWrapper(positions)
             self.InvokingModule.ProcessOutgoing(pos_list_wrapper)
@@ -73,18 +75,21 @@ class MarketOrderRouter(BaseCommunicationModule, ICommunicationModule):
 
             if pos is not None:
                 processed_exec_report = GenericERWrapper(pos.PosId, wrapper)
-                self.PositionsLock.release()
+                if (self.PositionsLock.locked()):
+                    self.PositionsLock.release()
                 self.InvokingModule.ProcessOutgoing(processed_exec_report)
             elif next(iter(list(filter(lambda x: x.GetLastOrder() is not None and x.GetLastOrder().OrderId == order_id, self.Positions.values()))), None) is not None:
                 pos = next(iter(list(filter(lambda x: x.GetLastOrder() is not None and x.GetLastOrder().OrderId == order_id, self.Positions.values()))), None)
-                self.PositionsLock.release()
+                if (self.PositionsLock.locked()):
+                    self.PositionsLock.release()
                 processed_exec_report = GenericERWrapper(pos.PosId, wrapper)
                 self.InvokingModule.ProcessOutgoing(processed_exec_report)
             else:
                 #Execution report for unknown position. We create it and it will be the strategy that will decide what to do
                 newPos = ExecutionReportListConverter.CreatePositionFromExecutionReport(self,wrapper)
                 self.Positions[newPos.PosId]=newPos
-                self.PositionsLock.release()
+                if (self.PositionsLock.locked()):
+                    self.PositionsLock.release()
                 newExecReport = GenericERWrapper(newPos.PosId, wrapper)
                 self.InvokingModule.ProcessOutgoing(newExecReport)
                 self.DoLog( "Received ExecutionReport for unknown ClOrdId ={} OrderId= {}. Sending as External trading".format(cl_ord_id, order_id),MessageType.INFO)
@@ -159,7 +164,8 @@ class MarketOrderRouter(BaseCommunicationModule, ICommunicationModule):
                                         Price=None,StopPx=None,Currency=new_pos.Security.Currency,
                                         TimeInForce=TimeInForce.Day,Account=new_pos.Account,
                                         OrdStatus=OrdStatus.PendingNew,Broker=new_pos.Broker,Strategy=new_pos.Strategy))
-            self.PositionsLock.release()
+            if self.PositionsLock.locked():
+                self.PositionsLock.release()
             return self.OutgoingModule.ProcessMessage(order_wrapper)
         except Exception as e:
             raise e
