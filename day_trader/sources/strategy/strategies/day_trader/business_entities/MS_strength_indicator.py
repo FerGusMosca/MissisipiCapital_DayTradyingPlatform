@@ -46,7 +46,7 @@ class MSStrengthIndicator():
         if BROOMS_MS_STRENGTH_Q.FloatValue is None:
             raise Exception("Missing value for BROOMS_MS_STRENGTH_Q parameter")
 
-        if MS is None:
+        if MS is None or self.TPSD is None:
             return
 
         M=BROOMS_MS_STRENGTH_M.FloatValue

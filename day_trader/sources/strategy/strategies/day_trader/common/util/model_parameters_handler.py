@@ -360,6 +360,10 @@ class ModelParametersHandler:
         return "MACD_RSI_OPEN_LONG_RULE_4"
 
     @staticmethod
+    def MACD_RSI_OPEN_LONG_RULE_BROOMS():
+        return "MACD_RSI_OPEN_LONG_RULE_BROOMS"
+
+    @staticmethod
     def MACD_RSI_OPEN_SHORT_RULE_1():
         return "MACD_RSI_OPEN_SHORT_RULE_1"
 
@@ -374,6 +378,10 @@ class ModelParametersHandler:
     @staticmethod
     def MACD_RSI_OPEN_SHORT_RULE_4():
         return "MACD_RSI_OPEN_SHORT_RULE_4"
+
+    @staticmethod
+    def MACD_RSI_OPEN_SHORT_RULE_BROOMS():
+        return "MACD_RSI_OPEN_SHORT_RULE_BROOMS"
 
     @staticmethod
     def MACD_RSI_CLOSE_LONG_RULE_1():
@@ -568,8 +576,12 @@ class ModelParametersHandler:
         return "BROOMS_RR"
 
     @staticmethod
-    def BROOMS_SSS():
+    def BROOMS_SS():
         return "BROOMS_SS"
+
+    @staticmethod
+    def BROOMS_TT():
+        return "BROOMS_TT"
 
     @staticmethod
     def BROOMS_UU():
@@ -586,6 +598,10 @@ class ModelParametersHandler:
     @staticmethod
     def BROOMS_XX():
         return "BROOMS_XX"
+
+    @staticmethod
+    def BROOMS_BIAS():
+        return "BROOMS_BIAS"
 
 
     #endregion

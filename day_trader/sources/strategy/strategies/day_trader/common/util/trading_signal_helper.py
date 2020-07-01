@@ -21,6 +21,159 @@ class TradingSignalHelper:
        self.TradingSignalManager = pTradingSignalManager
        self.PersistingLock = threading.Lock()
 
+
+    #region Private Methods
+
+    def PersistBroomsParamters(self,tradingSignalId,symbol):
+
+        self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
+            ModelParametersHandler.BROOMS_TPMA_A(), symbol))
+
+        self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
+            ModelParametersHandler.BROOMS_TPSD_B(), symbol))
+
+        self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
+            ModelParametersHandler.BROOMS_BOLLUP_C(), symbol))
+
+        self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
+            ModelParametersHandler.BROOMS_BOLLDN_D(), symbol))
+
+        self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
+            ModelParametersHandler.BROOMS_BOLLINGER_K(), symbol))
+
+        self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
+            ModelParametersHandler.BROOMS_BOLLINGER_L(), symbol))
+
+        self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
+            ModelParametersHandler.BROOMS_MS_STRENGTH_M(), symbol))
+
+        self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
+            ModelParametersHandler.BROOMS_MS_STRENGTH_N(), symbol))
+
+        self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
+            ModelParametersHandler.BROOMS_MS_STRENGTH_P(), symbol))
+
+        self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
+            ModelParametersHandler.BROOMS_MS_STRENGTH_Q(), symbol))
+
+        self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
+            ModelParametersHandler.BROOMS_R(), symbol))
+
+        self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
+            ModelParametersHandler.BROOMS_S(), symbol))
+
+        self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
+            ModelParametersHandler.BROOMS_T(), symbol))
+
+        self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
+            ModelParametersHandler.BROOMS_U(), symbol))
+
+        self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
+            ModelParametersHandler.BROOMS_V(), symbol))
+
+        self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
+            ModelParametersHandler.BROOMS_W(), symbol))
+
+        self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
+            ModelParametersHandler.BROOMS_X(), symbol))
+
+        self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
+            ModelParametersHandler.BROOMS_Y(), symbol))
+
+        self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
+            ModelParametersHandler.BROOMS_Z(), symbol))
+
+        self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
+            ModelParametersHandler.BROOMS_CC(), symbol))
+
+        self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
+            ModelParametersHandler.BROOMS_DD(), symbol))
+
+        self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
+            ModelParametersHandler.BROOMS_EE(), symbol))
+
+        self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
+            ModelParametersHandler.BROOMS_NN(), symbol))
+
+        self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
+            ModelParametersHandler.BROOMS_PP(), symbol))
+
+        self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
+            ModelParametersHandler.BROOMS_QQ(), symbol))
+
+        self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
+            ModelParametersHandler.BROOMS_RR(), symbol))
+
+        self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
+            ModelParametersHandler.BROOMS_SS(), symbol))
+
+        self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
+            ModelParametersHandler.BROOMS_TT(), symbol))
+
+        self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
+            ModelParametersHandler.BROOMS_UU(), symbol))
+
+        self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
+            ModelParametersHandler.BROOMS_VV(), symbol))
+
+        self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
+            ModelParametersHandler.BROOMS_WW(), symbol))
+
+        self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
+            ModelParametersHandler.BROOMS_XX(), symbol))
+
+        self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
+            ModelParametersHandler.BROOMS_BIAS(), symbol))
+
+
+    def PersistBollingerIndicators(self,dayTradingPos,tradingSignalId):
+        self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "Boollinger.TP",
+                                                                    dayTradingPos.BollingerIndicator.TP)
+        self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "Boollinger.TPMA",
+                                                                    dayTradingPos.BollingerIndicator.TPMA)
+        self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "Boollinger.TPSD",
+                                                                    dayTradingPos.BollingerIndicator.TPSD)
+        self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "Boollinger.BollUp",
+                                                                    dayTradingPos.BollingerIndicator.BollUp)
+        self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "Boollinger.BollDn",
+                                                                    dayTradingPos.BollingerIndicator.BollDn)
+        self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "Boollinger.BSI",
+                                                                    dayTradingPos.BollingerIndicator.BSI)
+
+    def PersistMSStrengthIndicators(self,dayTradingPos,tradingSignalId):
+        self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "MSStrength.TPSD",
+                                                                    dayTradingPos.MSStrengthIndicator.TPSD)
+
+        self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "MSStrength.MSI",
+                                                                    dayTradingPos.MSStrengthIndicator.MSI)
+
+    def PersistBroomsIndicators(self,dayTradingPos,tradingSignalId):
+        self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "Brooms.TPSL",
+                                                                    dayTradingPos.BroomsIndicator.TPSL)
+
+        self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "Brooms.BSIMax",
+                                                                    dayTradingPos.BroomsIndicator.BSIMax)
+
+        self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "Brooms.BSIMin",
+                                                                    dayTradingPos.BroomsIndicator.BSIMin)
+
+        self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "Brooms.MSIMax",
+                                                                    dayTradingPos.BroomsIndicator.MSIMax)
+
+        self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "Brooms.MSIMin",
+                                                                    dayTradingPos.BroomsIndicator.MSIMin)
+
+        self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "Brooms.MSSlope",
+                                                                    dayTradingPos.BroomsIndicator.MSSlope)
+
+        self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "Brooms.BROOMS",
+                                                                    dayTradingPos.BroomsIndicator.BROOMS)
+
+    #endregion
+
+
+    #region Public Methods
+
     def PersistMACDRSITradingSignal(self, dayTradingPos, action, side,candlebar,logger,condition=None):
         try:
 
@@ -93,6 +246,8 @@ class TradingSignalHelper:
                 self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
                     ModelParametersHandler.MACD_RSI_OPEN_SHORT_RULE_4(), symbol))
 
+                self.PersistBroomsParamters(tradingSignalId,symbol)
+
                 self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "MSPrev",dayTradingPos.MACDIndicator.MSPrev)
                 self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "MSNow",dayTradingPos.MACDIndicator.MS)
                 self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "MaxMS",dayTradingPos.MACDIndicator.MaxMS)
@@ -110,6 +265,9 @@ class TradingSignalHelper:
                 self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "LastClose",candlebar.Close)
                 self.TradingSignalManager.PersistSignalOtherParameter(tradingSignalId, "OpenCondition",condition if condition is not None else "unk")
                 self.TradingSignalManager.PersistSignalOtherParameter(tradingSignalId, "LastDateTime",str(candlebar.DateTime))
+                self.PersistBollingerIndicators(dayTradingPos,tradingSignalId)
+                self.PersistMSStrengthIndicators(dayTradingPos,tradingSignalId)
+                self.PersistBroomsIndicators(dayTradingPos,tradingSignalId)
 
             elif action == TradingSignalHelper._ACTION_CLOSE():
                 self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
@@ -387,3 +545,4 @@ class TradingSignalHelper:
             if self.PersistingLock.locked():
                 self.PersistingLock.release()
 
+    #endregion

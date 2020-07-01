@@ -727,6 +727,38 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                                                      )
 
 
+            dayTradingPos.BroomsIndicator.Update(candlebarDict.values(),
+                                                 dayTradingPos.BollingerIndicator.TP,
+                                                 dayTradingPos.BollingerIndicator.BSI,
+                                                 dayTradingPos.MSStrengthIndicator.MSI,
+                                                 dayTradingPos.MinuteNonSmoothedRSIIndicator.RSI,
+                                                 dayTradingPos.MACDIndicator.MS,
+                                                 dayTradingPos.MinuteSmoothedRSIIndicator.GetRSIReggr(30),#RSI30smSL
+                                                 self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_NN()),
+                                                 self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_PP()),
+                                                 self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_QQ()),
+                                                 self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_RR()),
+                                                 self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_SS()),
+                                                 self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_R()),
+                                                 self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_S()),
+                                                 self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_T()),
+                                                 self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_U()),
+                                                 self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_V()),
+                                                 self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_W()),
+                                                 self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_X()),
+                                                 self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_Y()),
+                                                 self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_Z()),
+                                                 self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_CC()),
+                                                 self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_DD()),
+                                                 self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_EE()),
+                                                 self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_TT()),
+                                                 self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_UU()),
+                                                 self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_VV()),
+                                                 self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_WW()),
+                                                 self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_XX())
+                                                 )
+
+
     def EvaluateGenericLongTrade(self,dayTradingPos,symbol,cbDict,candlebar):
         if (dayTradingPos.EvaluateValidTimeToEnterTrade(candlebar,
                 self.ModelParametersHandler.Get(ModelParametersHandler.LOW_VOL_ENTRY_THRESHOLD(), symbol),
@@ -823,6 +855,8 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                                   self.ModelParametersHandler.Get( ModelParametersHandler.M_S_MIN_B(), symbol),
                                   self.ModelParametersHandler.Get(ModelParametersHandler.M_S_MIN_B_B(), symbol),
                                   self.ModelParametersHandler.Get(ModelParametersHandler.RSI_30_SLOPE_SKIP_5_C(), symbol),
+                                  self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_CC(),symbol),
+                                  self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_BIAS(), symbol),
                                   self.ModelParametersHandler.Get(ModelParametersHandler.M_S_MAX_MIN_D(), symbol),
                                   self.ModelParametersHandler.Get(ModelParametersHandler.M_S_MAX_MIN_D_D(),symbol),
                                   self.ModelParametersHandler.Get(ModelParametersHandler.M_S_NOW_MAX_E(), symbol),
@@ -841,6 +875,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                                   self.ModelParametersHandler.Get(ModelParametersHandler.MACD_RSI_OPEN_LONG_RULE_2(),symbol),
                                   self.ModelParametersHandler.Get(ModelParametersHandler.MACD_RSI_OPEN_LONG_RULE_3(),symbol),
                                   self.ModelParametersHandler.Get(ModelParametersHandler.MACD_RSI_OPEN_LONG_RULE_4(),symbol),
+                                  self.ModelParametersHandler.Get(ModelParametersHandler.MACD_RSI_OPEN_LONG_RULE_BROOMS(),symbol),
                                   self.ModelParametersHandler.Get(ModelParametersHandler.MACD_RSI_START_TRADING(),symbol),
                                   list(cbDict.values()))
                if longCondition is not None:
@@ -886,12 +921,15 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                                                                     self.ModelParametersHandler.Get(ModelParametersHandler.RSI_14_SLOPE_SKIP_3_V(), symbol),
                                                                     self.ModelParametersHandler.Get(ModelParametersHandler.M_S_3_SLOPE_X(), symbol),
                                                                     self.ModelParametersHandler.Get(ModelParametersHandler.M_S_3_SLOPE_X_X(), symbol),
+                                                                    self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_Z(), symbol),
+                                                                    self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_BIAS(), symbol),
                                                                     self.ModelParametersHandler.Get(ModelParametersHandler.MACD_RSI_SMOOTHED_MODE(), symbol),
                                                                     self.ModelParametersHandler.Get(ModelParametersHandler.MACD_RSI_ABS_MAX_MS_PERIOD(), symbol),
                                                                     self.ModelParametersHandler.Get(ModelParametersHandler.MACD_RSI_OPEN_SHORT_RULE_1(), symbol),
                                                                     self.ModelParametersHandler.Get(ModelParametersHandler.MACD_RSI_OPEN_SHORT_RULE_2(), symbol),
                                                                     self.ModelParametersHandler.Get(ModelParametersHandler.MACD_RSI_OPEN_SHORT_RULE_3(), symbol),
                                                                     self.ModelParametersHandler.Get(ModelParametersHandler.MACD_RSI_OPEN_SHORT_RULE_4(), symbol),
+                                                                    self.ModelParametersHandler.Get(ModelParametersHandler.MACD_RSI_OPEN_SHORT_RULE_BROOMS(), symbol),
                                                                     self.ModelParametersHandler.Get(ModelParametersHandler.MACD_RSI_START_TRADING(), symbol),
                                                                     list(cbDict.values()))
 
@@ -1613,7 +1651,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                     backtestDTOArr.append(backtestDto)
 
                 except Exception as e:
-                    #traceback.print_exc()
+                    traceback.print_exc()
                     msg = "Error processing strategy backtest for date {} : {}!".format(candlebar.DateTime,str(e))
                     self.ProcessError(ErrorWrapper(Exception(msg)))
                     self.DoLog(msg, MessageType.ERROR)

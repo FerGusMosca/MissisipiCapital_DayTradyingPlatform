@@ -50,7 +50,7 @@ class RSIBase():
 
         min=None
         for val in array:
-            if min is None or val < max:
+            if min is None or val < min:
                 min = val
 
         return min

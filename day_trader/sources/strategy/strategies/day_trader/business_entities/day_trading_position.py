@@ -11,6 +11,7 @@ from sources.strategy.strategies.day_trader.business_entities.macd_indicator_adj
 from sources.strategy.strategies.day_trader.business_entities.testers.macd_indicator_adjusted_tester import *
 from sources.strategy.strategies.day_trader.business_entities.bollinger_indicator import *
 from sources.strategy.strategies.day_trader.business_entities.MS_strength_indicator import *
+from sources.strategy.strategies.day_trader.business_entities.brooms_indicator import *
 from scipy import stats
 import json
 import statistics
@@ -59,12 +60,14 @@ _LONG_MACD_RSI_RULE_2="LONG_MACD_RSI_RULE_2"
 _LONG_MACD_RSI_RULE_3="LONG_MACD_RSI_RULE_3"
 _LONG_MACD_RSI_RULE_4="LONG_MACD_RSI_RULE_4"
 _LONG_MACD_RSI_RULE_5="LONG_MACD_RSI_RULE_5"
+_LONG_MACD_RSI_RULE_BROOMS="LONG_MACD_RSI_RULE_BROOMS"
 
 _SHORT_MACD_RSI_RULE_1="SHORT_MACD_RSI_RULE_1"
 _SHORT_MACD_RSI_RULE_2="SHORT_MACD_RSI_RULE_2"
 _SHORT_MACD_RSI_RULE_3="SHORT_MACD_RSI_RULE_3"
 _SHORT_MACD_RSI_RULE_4="SHORT_MACD_RSI_RULE_4"
 _SHORT_MACD_RSI_RULE_5="SHORT_MACD_RSI_RULE_5"
+_SHORT_MACD_RSI_RULE_BROOMS="SHORT_MACD_RSI_RULE_BROOMS"
 
 _TERMINALLY_CLOSED ="TERMINALLY_CLOSED"
 
@@ -120,6 +123,7 @@ class DayTradingPosition():
         self.MACDIndicator = MACDIndicatorAdjusted()
         self.BollingerIndicator = BollingerIndicator()
         self.MSStrengthIndicator = MSStrengthIndicator()
+        self.BroomsIndicator = BroomsIndicator()
 
         #tester= RSIIndicatorTester()
         #tester.DoTest()
@@ -573,9 +577,10 @@ class DayTradingPosition():
     def EvaluateMACDRSIShortTrade(self,msNowParamA,msMinParamB,msMinParamBB,rsi30SlopeSkip5ParamC,msMaxMinParamD,msMaxMinParamDD,
                                   msNowMaxParamE,msNowParamF,msNowParamFF,rsi30SlopeSkip10ParamG,absMSMaxMinLast5ParamH,
                                   absMSMaxMinLast5ParamHH,sec5MinSlopeParamI,rsi14SlopeSkip3ExitParamV,ms3SlopeParamX,
-                                  ms3SlopeParamXX,macdRSISmoothedMode,absMaxMSPeriodParam,
+                                  ms3SlopeParamXX,broomsParamZ,broomsParamBias,macdRSISmoothedMode,absMaxMSPeriodParam,
                                   macdRsiOpenShortRule1ModelParam,macdRsiOpenShortRule2ModelParam,macdRsiOpenShortRule3ModelParam,
-                                  macdRsiOpenShortRule4ModelParam,macdRsiStartTradingModelParam,candlebarsArr):
+                                  macdRsiOpenShortRule4ModelParam,macdRsiOpenShortRuleBroomsModelParam,macdRsiStartTradingModelParam,
+                                  candlebarsArr):
 
         if self.Open():
             return None #Position already opened
@@ -587,6 +592,7 @@ class DayTradingPosition():
                 or self.MACDIndicator.MinMS is None or self.MinuteSmoothedRSIIndicator.GetRSIReggr(5) is None
                 or self.MinuteSmoothedRSIIndicator.GetRSIReggr(10) is None or len(candlebarsArr)<5
                 or self.MinuteNonSmoothedRSIIndicator.GetRSIReggr(3) is None or self.MACDIndicator.GetMSReggr(3) is None
+                or (self.BroomsIndicator.BROOMS is None and macdRsiOpenShortRuleBroomsModelParam.IntValue>=1 )
                 or not self.EvaluateBiggerDate(candlebarsArr[-1], macdRsiStartTradingModelParam)
             ):
             return None
@@ -632,15 +638,25 @@ class DayTradingPosition():
             ):
             return _SHORT_MACD_RSI_RULE_4
 
+        # line Brooms
+        if (
+                self.BroomsIndicator.BROOMS == broomsParamZ.FloatValue
+            and broomsParamBias.FloatValue <=0
+            and macdRsiOpenShortRuleBroomsModelParam.IntValue>=1
+        ):
+            return _SHORT_MACD_RSI_RULE_BROOMS
+
+
 
         return None
 
-    def EvaluateMACDRSILongTrade(self,msNowParamA,msMinParamB,msMinParamBB,rsi30SlopeSkip5ParamC,msMaxMinParamD,msMaxMinParamDD,
-                                 msNowMaxParamE,msNowParamF,msNowParamFF, rsi30SlopeSkip10ParamG,absMSMaxMinLast5ParamH,
-                                 absMSMaxMinLast5ParamHH,sec5MinSlopeParamI, rsi14SlopeSkip3ExitParamV,ms3SlopeParamX,
-                                 ms3SlopeParamXX,macdRSISmoothedMode,absMaxMSPeriodParam,
+    def EvaluateMACDRSILongTrade(self,msNowParamA,msMinParamB,msMinParamBB,rsi30SlopeSkip5ParamC,broomsParamCC,broomsParamBias,
+                                 msMaxMinParamD,msMaxMinParamDD,msNowMaxParamE,msNowParamF,msNowParamFF, rsi30SlopeSkip10ParamG,
+                                 absMSMaxMinLast5ParamH,absMSMaxMinLast5ParamHH,sec5MinSlopeParamI, rsi14SlopeSkip3ExitParamV,
+                                 ms3SlopeParamX,ms3SlopeParamXX,macdRSISmoothedMode,absMaxMSPeriodParam,
                                  macdRsiOpenLongRule1ModelParam,macdRsiOpenLongRule2ModelParam,macdRsiOpenLongRule3ModelParam,
-                                 macdRsiOpenLongRule4ModelParam,macdRsiStartTradingModelParam,candlebarsArr):
+                                 macdRsiOpenLongRule4ModelParam,macdRsiOpenLongRuleBroomsModelParam,macdRsiStartTradingModelParam,
+                                 candlebarsArr):
 
         if self.Open():
             return None  # Position already opened
@@ -654,6 +670,7 @@ class DayTradingPosition():
             or self.MinuteSmoothedRSIIndicator.GetRSIReggr(10) is None or len(candlebarsArr)<5
             or self.MinuteNonSmoothedRSIIndicator.GetRSIReggr(3) is None or self.MACDIndicator.GetMSReggr(3) is None
             or not self.EvaluateBiggerDate(candlebarsArr[-1],macdRsiStartTradingModelParam)
+            or (self.BroomsIndicator.BROOMS is None and macdRsiOpenLongRuleBroomsModelParam.IntValue>=1)
             ):
             return None
 
@@ -700,6 +717,15 @@ class DayTradingPosition():
             and macdRsiOpenLongRule4ModelParam.IntValue >= 1
           ):
             return _LONG_MACD_RSI_RULE_4
+
+        # line BROOMS
+        if(
+                self.BroomsIndicator.BROOMS ==broomsParamCC.FloatValue
+            and broomsParamBias.FloatValue >=0
+            and macdRsiOpenLongRuleBroomsModelParam.IntValue>=1
+
+        ):
+            return _LONG_MACD_RSI_RULE_BROOMS
 
 
         return None

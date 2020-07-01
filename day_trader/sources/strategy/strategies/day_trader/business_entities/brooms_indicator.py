@@ -14,14 +14,18 @@ class BroomsIndicator(RSIBase):
         self.TPArray = []
         self.BSIArray = []
         self.MSIArray = []
+        self.MSArray = []
 
         self.TPSL = None
         self.BSIMax = None
         self.BSIMin = None
         self.MSIMax = None
         self.MSIMin = None
+        self.MSSlope = None
 
         self.BROOMS = None
+
+        self.LastProcessedDateTime =None
 
 
     def CalculateTPSL(self,TP,BROOMS_NN):
@@ -37,57 +41,86 @@ class BroomsIndicator(RSIBase):
 
             self.TPSL = (slope * 100)/TP
 
-    def CalculateBSIMax(self,BSI,BROOMS_PP):
+    def CalculateBSIMaxMin(self,BSI,BROOMS_PP,BROOMS_QQ):
 
         if BROOMS_PP.IntValue is None:
             raise Exception("Missing value for BROOMS_PP parameter")
-
-        self.BSIArray.append(BSI)
-        self.BSIMax=self.GetMaxInArray(self.BSIArray[-1*BROOMS_PP.IntValue])
-
-
-    def CalculateBSIMin(self,BSI,BROOMS_QQ):
 
         if BROOMS_QQ.IntValue is None:
             raise Exception("Missing value for BROOMS_QQ parameter")
 
         self.BSIArray.append(BSI)
-        self.BSIMin=self.GetMinInArray(self.BSIArray[-1*BROOMS_QQ.IntValue])
 
+        if len(self.BSIArray)>=BROOMS_PP.IntValue:
+            self.BSIMax = self.GetMaxInArray(self.BSIArray[-1 * BROOMS_PP.IntValue:])
 
-    def CalculateMSIMax(self,MSI,BROOMS_RR):
+        if len(self.BSIArray)>=BROOMS_QQ.IntValue:
+            self.BSIMin = self.GetMinInArray(self.BSIArray[-1 * BROOMS_QQ.IntValue:])
+
+    def CalculateMSIMinMax(self,MSI,BROOMS_RR,BROOMS_SS):
 
         if BROOMS_RR.IntValue is None:
             raise Exception("Missing value for BROOMS_RR parameter")
-
-        self.MSIArray.append(MSI)
-        self.MSIMax=self.GetMaxInArray(self.MSIArray[-1*BROOMS_RR.IntValue])
-
-    def CalculateMSIMin(self, MSI, BROOMS_SS):
 
         if BROOMS_SS.IntValue is None:
             raise Exception("Missing value for BROOMS_SS parameter")
 
         self.MSIArray.append(MSI)
-        self.MSIMin = self.GetMinInArray(self.MSIArray[-1 * BROOMS_SS.IntValue])
 
+        if len( self.MSIArray)>=BROOMS_RR.IntValue:
+            self.MSIMax=self.GetMaxInArray(self.MSIArray[-1*BROOMS_RR.IntValue:])
 
-    def CalculateBROOMS(self,RSI,RSI30smSL,BROOMS_R,BROOMS_S,BROOMS_T,BROOMS_U,BROOMS_V,BROOMS_W,BROOMS_X,BROOMS_Y,BROOMS_Z,
+        if len( self.MSIArray)>=BROOMS_SS.IntValue:
+            self.MSIMin=self.GetMaxInArray(self.MSIArray[-1*BROOMS_SS.IntValue:])
+
+    def CalculateMSSlope(self,MS,BROOMS_TT):
+
+        if BROOMS_TT.IntValue is None:
+            raise Exception("Missing value for BROOMS_TT parameter")
+
+        self.MSArray.append(MS)
+
+        if len(self.MSArray)>=BROOMS_TT.IntValue:
+            self.MSSlope =  self.GetSlope(MS,self.MSArray[-1*BROOMS_TT.IntValue])
+
+    def CalculateBROOMS(self,RSI,BSI,RSI30smSL,BROOMS_R,BROOMS_S,BROOMS_T,BROOMS_U,BROOMS_V,BROOMS_W,BROOMS_X,BROOMS_Y,BROOMS_Z,
                         BROOMS_CC,BROOMS_DD,BROOMS_EE,BROOMS_UU,BROOMS_VV,BROOMS_WW,BROOMS_XX):
 
-        if self.BSIMax is None or RSI is None or RSI30smSL is None or self.TPSL is None:
+        if (self.BSIMax is None or self.BSIMin is None or RSI is None or RSI30smSL is None or self.TPSL is None \
+            or self.MSSlope is None or self.MSIMax is None or self.MSIMin is None ):
             return
 
 
         if self.BSIMax>BROOMS_DD.FloatValue:
-            if (      self.BSIMax>BROOMS_R.FloatVaue
+            if (      self.BSIMax>BROOMS_R.FloatValue
                  and  self.MSIMax>BROOMS_T.FloatValue
                  and  RSI < BROOMS_V.FloatValue
                  and  RSI30smSL < BROOMS_X.FloatValue
                  and  self.TPSL < BROOMS_UU.FloatValue
+                 and self.MSSlope < BROOMS_WW.FloatValue
 
                 ):
-                pass
+                self.BROOMS = BROOMS_Z.FloatValue
+            elif self.BSIMax > BROOMS_DD.FloatValue:
+                self.BROOMS=BROOMS_DD.FloatValue
+            else:
+                self.BROOMS=BSI
+        elif (self.BSIMin < BROOMS_EE.FloatValue):
+            if (        self.BSIMin < BROOMS_S.FloatValue
+                    and self.MSIMin < BROOMS_U.FloatValue
+                    and RSI > BROOMS_W.FloatValue
+                    and RSI30smSL > BROOMS_Y.FloatValue
+                    and self.TPSL > BROOMS_VV.FloatValue
+                    and self.MSSlope > BROOMS_XX.FloatValue
+
+            ):
+                self.BROOMS = BROOMS_CC.FloatValue
+            elif self.BSIMin < BROOMS_EE.FloatValue:
+                self.BROOMS = BROOMS_EE.FloatValue
+            else:
+                self.BROOMS = BSI
+        else:
+            self.BROOMS= BSI
 
     #endregion
 
@@ -96,9 +129,10 @@ class BroomsIndicator(RSIBase):
 
 
 
-    def Update(self, candleBarArr,TP,BSI,MSI,RSI,RSI30smSL,BROOMS_NN,BROOMS_PP,BROOMS_QQ,BROOMS_RR,BROOMS_SS,BROOMS_R,BROOMS_S,
-               BROOMS_T,BROOMS_U,BROOMS_V,BROOMS_W,BROOMS_X,BROOMS_Y,BROOMS_Z,BROOMS_CC,BROOMS_DD,BROOMS_EE,
+    def Update(self, candleBarArr,TP,BSI,MSI,RSI,MS,RSI30smSL,BROOMS_NN,BROOMS_PP,BROOMS_QQ,BROOMS_RR,BROOMS_SS,BROOMS_R,BROOMS_S,
+               BROOMS_T,BROOMS_U,BROOMS_V,BROOMS_W,BROOMS_X,BROOMS_Y,BROOMS_Z,BROOMS_CC,BROOMS_DD,BROOMS_EE,BROOMS_TT,
                BROOMS_UU,BROOMS_VV,BROOMS_WW,BROOMS_XX):
+
         sortedBars = sorted(list(filter(lambda x: x is not None, candleBarArr)), key=lambda x: x.DateTime,
                             reverse=False)
 
@@ -112,15 +146,13 @@ class BroomsIndicator(RSIBase):
 
         self.CalculateTPSL(TP,BROOMS_NN)
 
-        self.CalculateBSIMax(BSI,BROOMS_PP)
+        self.CalculateBSIMaxMin(BSI,BROOMS_PP,BROOMS_QQ)
 
-        self.CalculateBSIMin(BSI, BROOMS_QQ)
+        self.CalculateMSIMinMax(MSI,BROOMS_RR,BROOMS_SS)
 
-        self.CalculateMSIMax(MSI,BROOMS_RR)
+        self.CalculateMSSlope(MS,BROOMS_TT)
 
-        self.CalculateMSIMin(MSI,BROOMS_SS)
-
-        self.CalculateBROOMS(RSI,RSI30smSL,BROOMS_R,BROOMS_S,BROOMS_T,BROOMS_U,BROOMS_V,BROOMS_W,BROOMS_X,BROOMS_Y,
+        self.CalculateBROOMS(RSI,BSI,RSI30smSL,BROOMS_R,BROOMS_S,BROOMS_T,BROOMS_U,BROOMS_V,BROOMS_W,BROOMS_X,BROOMS_Y,
                              BROOMS_Z,BROOMS_CC,BROOMS_DD,BROOMS_EE,BROOMS_UU,BROOMS_VV,BROOMS_WW,BROOMS_XX)
 
         self.LastProcessedDateTime = candlebar.DateTime
