@@ -41,6 +41,7 @@ from sources.strategy.strategies.day_trader.common.util.model_parameters_handler
 from sources.strategy.strategies.day_trader.common.util.trading_signal_helper import *
 from sources.strategy.strategies.day_trader.business_entities.trading_signal import *
 from sources.strategy.strategies.day_trader.common.dto.backtest_dto import *
+from sources.strategy.strategies.day_trader.business_entities.testers.brooms_tester import *
 from sources.framework.util.log_helper import *
 from dateutil.parser import parse
 import threading
@@ -2286,6 +2287,9 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
             threading.Thread(target=self.DayTradingPersistanceThread, args=()).start()
 
             self.LoadManagers()
+
+            broomsTester = BroomsTester(self.ModelParametersHandler)
+            broomsTester.DoTest()
 
             self.CommandsModule = self.InitializeModule(self.Configuration.WebsocketModule, self.Configuration.WebsocketConfigFile)
 

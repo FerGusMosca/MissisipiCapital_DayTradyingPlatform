@@ -37,7 +37,8 @@ class BroomsIndicator(RSIBase):
 
         if(len(self.TPArray)>=BROOMS_NN.IntValue):
 
-            slope = self.GetSlope(self.TPArray[-1],self.TPArray[-1*BROOMS_NN.IntValue])
+            #slope = self.GetSlope(self.TPArray[-1],self.TPArray[-1*BROOMS_NN.IntValue])
+            slope=self.GetReggr(BROOMS_NN.IntValue,self.TPArray)
 
             self.TPSL = (slope * 100)/TP
 
@@ -71,17 +72,21 @@ class BroomsIndicator(RSIBase):
             self.MSIMax=self.GetMaxInArray(self.MSIArray[-1*BROOMS_RR.IntValue:])
 
         if len( self.MSIArray)>=BROOMS_SS.IntValue:
-            self.MSIMin=self.GetMaxInArray(self.MSIArray[-1*BROOMS_SS.IntValue:])
+            self.MSIMin=self.GetMinInArray(self.MSIArray[-1*BROOMS_SS.IntValue:])
 
     def CalculateMSSlope(self,MS,BROOMS_TT):
 
         if BROOMS_TT.IntValue is None:
             raise Exception("Missing value for BROOMS_TT parameter")
 
+        if MS is None:
+            return
+
         self.MSArray.append(MS)
 
         if len(self.MSArray)>=BROOMS_TT.IntValue:
-            self.MSSlope =  self.GetSlope(MS,self.MSArray[-1*BROOMS_TT.IntValue])
+            self.MSSlope = self.GetReggr(BROOMS_TT.IntValue,self.MSArray)
+
 
     def CalculateBROOMS(self,RSI,BSI,RSI30smSL,BROOMS_R,BROOMS_S,BROOMS_T,BROOMS_U,BROOMS_V,BROOMS_W,BROOMS_X,BROOMS_Y,BROOMS_Z,
                         BROOMS_CC,BROOMS_DD,BROOMS_EE,BROOMS_UU,BROOMS_VV,BROOMS_WW,BROOMS_XX):

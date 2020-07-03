@@ -1,4 +1,4 @@
-
+from scipy import stats
 class RSIBase():
 
 
@@ -54,6 +54,22 @@ class RSIBase():
                 min = val
 
         return min
+
+    def GetReggr(self,index,array):
+        arrayIndex = []
+        arrayToUse= []
+
+        if len(array)<index:
+            return None
+
+        i = index
+        for val in array[-1 * index:]:
+            arrayToUse.append(val)
+            arrayIndex.append(len(array) - i)
+            i -= 1
+
+        reggr = stats.linregress(arrayIndex, arrayToUse)
+        return reggr.slope
 
 
     #endregion

@@ -12,6 +12,7 @@ from sources.strategy.strategies.day_trader.business_entities.testers.macd_indic
 from sources.strategy.strategies.day_trader.business_entities.bollinger_indicator import *
 from sources.strategy.strategies.day_trader.business_entities.MS_strength_indicator import *
 from sources.strategy.strategies.day_trader.business_entities.brooms_indicator import *
+
 from scipy import stats
 import json
 import statistics
@@ -130,6 +131,8 @@ class DayTradingPosition():
 
         #macdTester = MACDIndicatorAdjustedTester()
         #macdTester.DoTest()
+
+
 
 
     #region Static Methods

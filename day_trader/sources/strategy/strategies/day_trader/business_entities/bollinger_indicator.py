@@ -91,8 +91,8 @@ class BollingerIndicator():
         if self.BollUp == self.BollDn :
             return
 
-        K=BROOMS_BOLLINGER_K.FloatValue
-        L=BROOMS_BOLLINGER_L.FloatValue
+        K=float( BROOMS_BOLLINGER_K.FloatValue)
+        L=float( BROOMS_BOLLINGER_L.FloatValue)
 
 
         self.BSI = ((K - L ) / (self.BollUp - self.BollDn) * (self.TP-self.BollUp) ) + K
