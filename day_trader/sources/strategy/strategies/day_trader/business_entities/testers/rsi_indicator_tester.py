@@ -40,10 +40,11 @@ class RSIIndicatorTester():
 
             rsiSmoothed.Update(candleBarArr,minSpan)
 
-            print("RSI {} {}- DateTime={} RSI={} ".format(minSpan,
+            print("RSI {} {}- DateTime={} RSI={} RSI30sm={} ".format(minSpan,
                                                            "Smoothed" if smoothed else "Non Smoothed",
                                                             candlebar.DateTime,
-                                                            rsiSmoothed.RSI))
+                                                            rsiSmoothed.RSI,
+                                                            rsiSmoothed.GetRSIReggr(3)))
 
             if minute==59:
                 minute=0

@@ -42,6 +42,7 @@ from sources.strategy.strategies.day_trader.common.util.trading_signal_helper im
 from sources.strategy.strategies.day_trader.business_entities.trading_signal import *
 from sources.strategy.strategies.day_trader.common.dto.backtest_dto import *
 from sources.strategy.strategies.day_trader.business_entities.testers.brooms_tester import *
+from sources.strategy.strategies.day_trader.business_entities.testers.rsi_indicator_tester import *
 from sources.framework.util.log_helper import *
 from dateutil.parser import parse
 import threading
@@ -1601,6 +1602,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
         currDate = refDate
         self.ResetForNewDayOnBackTest(dayTradingPos, currDate)
+        routingCounter = 0
 
         for date in candelBarDict:
             time.sleep(1)#This has to be here so the ExecutinSummaries are not cleared @ResetForNewDayOnBackTest
@@ -1640,8 +1642,16 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                     dayTradingPos.MarketData = md
                     dayTradingPos.CalculateCurrentDayProfits(md)
 
-                    self.EvaluateOpeningPositions(candlebar, cbDict)
-                    closing = self.EvaluateClosingPositions(candlebar, cbDict)
+                    if not dayTradingPos.Routing:
+                        self.EvaluateOpeningPositions(candlebar, cbDict)
+                        closing = self.EvaluateClosingPositions(candlebar, cbDict)
+                        routingCounter = 0
+                    else:
+                        closing=None
+                        routingCounter = routingCounter + 1
+
+                    if routingCounter>=3:
+                        raise Exception("The backtested position has been in a routing state for more than 3 candles. This means that some Filled Execution Report was lost. The backtest has to be finished!")
 
                     backtestDto = BacktestDTO(pSymbol=dayTradingPos.Security.Symbol,
                                               pDate=candlebar.DateTime.date(),
@@ -2288,8 +2298,11 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
             self.LoadManagers()
 
-            broomsTester = BroomsTester(self.ModelParametersHandler)
-            broomsTester.DoTest()
+            #broomsTester = BroomsTester(self.ModelParametersHandler)
+            #broomsTester.DoTest()
+
+            rsiTester= RSIIndicatorTester()
+            rsiTester.DoTest()
 
             self.CommandsModule = self.InitializeModule(self.Configuration.WebsocketModule, self.Configuration.WebsocketConfigFile)
 

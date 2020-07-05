@@ -92,7 +92,7 @@ class BroomsIndicator(RSIBase):
                         BROOMS_CC,BROOMS_DD,BROOMS_EE,BROOMS_UU,BROOMS_VV,BROOMS_WW,BROOMS_XX):
 
         if (self.BSIMax is None or self.BSIMin is None or RSI is None or RSI30smSL is None or self.TPSL is None \
-            or self.MSSlope is None or self.MSIMax is None or self.MSIMin is None ):
+            or self.MSSlope is None or self.MSIMax is None or self.MSIMin is None or BSI is None ):
             return
 
 
@@ -106,7 +106,7 @@ class BroomsIndicator(RSIBase):
 
                 ):
                 self.BROOMS = BROOMS_Z.FloatValue
-            elif self.BSIMax > BROOMS_DD.FloatValue:
+            elif BSI > BROOMS_DD.FloatValue:
                 self.BROOMS=BROOMS_DD.FloatValue
             else:
                 self.BROOMS=BSI
@@ -120,7 +120,7 @@ class BroomsIndicator(RSIBase):
 
             ):
                 self.BROOMS = BROOMS_CC.FloatValue
-            elif self.BSIMin < BROOMS_EE.FloatValue:
+            elif BSI < BROOMS_EE.FloatValue:
                 self.BROOMS = BROOMS_EE.FloatValue
             else:
                 self.BROOMS = BSI

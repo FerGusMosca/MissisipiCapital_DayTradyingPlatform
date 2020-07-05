@@ -60,8 +60,11 @@ class BroomsTester():
 
     def UpdateRSI(self,rsiSmoothed,rsiNonSmoothed,candleBarArr):
 
+        candlebar= candleBarArr[-1]
+
         rsiSmoothed.Update(candleBarArr, 30)
         rsiNonSmoothed.Update(candleBarArr,14)
+        print("DateTime={} - RSI={} - RSI Smoothed 30 SL={}".format(candlebar.DateTime,rsiSmoothed.RSI,rsiSmoothed.GetRSISlope(30)))
 
     def UpdateBrooms(self,broomsInd,macdAdjInd,rsiSmoothed,rsiNonSmoothed,bollingerInd,msStrengthInd,candleBarArr):
 
