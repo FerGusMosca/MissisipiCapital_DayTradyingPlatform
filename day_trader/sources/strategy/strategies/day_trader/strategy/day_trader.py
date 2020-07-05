@@ -1557,11 +1557,12 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
         currDate = refDate
         self.ResetForNewDayOnBackTest(dayTradingPos, currDate)
+        routingCounter = 0
 
         for date in candelBarDict:
             time.sleep(1)#This has to be here so the ExecutinSummaries are not cleared @ResetForNewDayOnBackTest
                          #when swithing between trading days
-            self.DoLog("Starting to process new date:{}".format(currDate.date()),MessageType.INFO)
+            self.DoLog("Starting to process for date:{}".format(currDate.date()), MessageType.INFO)
             if datetime.datetime.fromtimestamp(mktime(date)).date() !=currDate.date():
                 currDate=datetime.datetime.fromtimestamp(mktime(date))
                 self.ResetForNewDayOnBackTest(dayTradingPos, currDate)
@@ -1596,8 +1597,16 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                     dayTradingPos.MarketData = md
                     dayTradingPos.CalculateCurrentDayProfits(md)
 
-                    self.EvaluateOpeningPositions(candlebar, cbDict)
-                    closing = self.EvaluateClosingPositions(candlebar, cbDict)
+                    if not dayTradingPos.Routing:
+                        self.EvaluateOpeningPositions(candlebar, cbDict)
+                        closing = self.EvaluateClosingPositions(candlebar, cbDict)
+                        routingCounter = 0
+                    else:
+                        closing=None
+                        routingCounter = routingCounter + 1
+
+                    if routingCounter>=3:
+                        raise Exception("The backtested position has been in a routing state for more than 3 candles. This means that some Filled Execution Report was lost. The backtest has to be finished!")
 
                     backtestDto = BacktestDTO(pSymbol=dayTradingPos.Security.Symbol,
                                               pDate=candlebar.DateTime.date(),
@@ -1606,14 +1615,9 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                                               pCurrentProfit=dayTradingPos.CurrentProfitMonetaryLastTrade if closing else "")
 
                     backtestDTOArr.append(backtestDto)
-                    '''
-                    print("prnt#1- DateTime={} Gain/Loss$={} Gain/Loss$(Cum)={} Increase/Decrease={} NetShares={}"
-                          .format(candlebar.DateTime,dayTradingPos.CurrentProfitMonetaryLastTrade,
-                                  dayTradingPos.CurrentProfitMonetary,dayTradingPos.IncreaseDecrease,
-                                  dayTradingPos.GetNetOpenShares()))
-                    '''
+
                 except Exception as e:
-                    #traceback.print_exc()
+                    traceback.print_exc()
                     msg = "Error processing strategy backtest for date {} : {}!".format(candlebar.DateTime,str(e))
                     self.ProcessError(ErrorWrapper(Exception(msg)))
                     self.DoLog(msg, MessageType.ERROR)
