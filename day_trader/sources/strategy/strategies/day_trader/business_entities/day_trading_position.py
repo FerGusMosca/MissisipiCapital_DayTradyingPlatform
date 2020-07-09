@@ -949,6 +949,11 @@ class DayTradingPosition():
 
         return None
 
+
+    def IsTermianlCondition(self,condition):
+        return (condition==_EXIT_TERM_COND_EOF or condition==_EXIT_TERM_COND_1 or condition==_EXIT_TERM_COND_2
+                or condition == _TERMINALLY_CLOSED)
+
     #Defines if the condition for closing the day, will imply not opening another position during the day
     def EvaluateClosingTerminalCondition(self,candlebarsArr,endOfdayLimitModelParam,takeGainLimitModelParam,stopLossLimitModelParam):
 

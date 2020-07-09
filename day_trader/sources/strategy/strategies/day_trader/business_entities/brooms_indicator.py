@@ -50,6 +50,9 @@ class BroomsIndicator(RSIBase):
         if BROOMS_QQ.IntValue is None:
             raise Exception("Missing value for BROOMS_QQ parameter")
 
+        if BSI is None:
+            return
+
         self.BSIArray.append(BSI)
 
         if len(self.BSIArray)>=BROOMS_PP.IntValue:
@@ -65,6 +68,9 @@ class BroomsIndicator(RSIBase):
 
         if BROOMS_SS.IntValue is None:
             raise Exception("Missing value for BROOMS_SS parameter")
+
+        if MSI is None:
+            return
 
         self.MSIArray.append(MSI)
 

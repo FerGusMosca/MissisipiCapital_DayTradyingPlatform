@@ -508,6 +508,10 @@ class ModelParametersHandler:
         return "BROOMS_MS_STRENGTH_Q"
 
     @staticmethod
+    def BROOMS_J():
+        return "BROOMS_J"
+
+    @staticmethod
     def BROOMS_R():
         return "BROOMS_R"
 

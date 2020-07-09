@@ -1,7 +1,0 @@
-2020-04-23 18:56:06 [logger INFO] DayTrader  Initializing
-2020-04-23 18:56:06 [logger INFO] Loading 0 summaries for security SPY
-2020-04-23 18:56:07 [logger INFO] WebSocketModule  Initializing
-2020-04-23 18:56:07 [logger INFO] DayTrader Successfully initialized
-2020-04-23 18:56:07 [logger INFO] Websocket commands successfully opened on port 7172: 
-2020-04-23 18:56:07 [logger INFO] Initializing Bloomberg Order Router
-2020-04-23 18:56:07 [logger INFO] Connecting to localhost:8194

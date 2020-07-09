@@ -5,9 +5,10 @@ class LogHelper:
     @staticmethod
     def LogPositionUpdate(logger, status, summary, execReport):
         logger.DoLog(
-            "{}: TradeId={} PosId={} Symbol={} Side={} Final Status={} OrdQty={} CumQty={} LvsQty={} "
+            "{}: Arrival={} TradeId={} PosId={} Symbol={} Side={} Final Status={} OrdQty={} CumQty={} LvsQty={} "
             "AvgPx={} Text={} "
                 .format(status,
+                        datetime.datetime.now(),
                         summary.GetTradeId(),
                         summary.Position.PosId,
                         summary.Position.Security.Symbol,

@@ -64,7 +64,8 @@ class BroomsTester():
 
         rsiSmoothed.Update(candleBarArr, 30)
         rsiNonSmoothed.Update(candleBarArr,14)
-        print("DateTime={} - RSI={} - RSI Smoothed 30 SL={}".format(candlebar.DateTime,rsiSmoothed.RSI,rsiSmoothed.GetRSISlope(30)))
+        print("DateTime={} - RSI={} - RSI Smoothed 30 SL={}".format(candlebar.DateTime,rsiSmoothed.RSI,
+                                                                    rsiSmoothed.GetRSISlope(self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_J()).IntValue)))
 
     def UpdateBrooms(self,broomsInd,macdAdjInd,rsiSmoothed,rsiNonSmoothed,bollingerInd,msStrengthInd,candleBarArr):
 
@@ -74,7 +75,7 @@ class BroomsTester():
                          msStrengthInd.MSI,
                          rsiNonSmoothed.RSI,
                          macdAdjInd.MS,
-                         rsiSmoothed.GetRSIReggr(30),  # RSI30smSL
+                         rsiSmoothed.GetRSIReggr(3),  # RSI30smSL
                          self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_NN()),
                          self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_PP()),
                          self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_QQ()),

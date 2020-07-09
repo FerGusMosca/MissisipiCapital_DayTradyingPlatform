@@ -101,6 +101,8 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
         self.LastSubscriptionDateTime = None
 
+        self.WaitForFilledToArrive = False
+
 
     def ProcessCriticalError(self, exception,msg):
         self.FailureException=exception
@@ -237,6 +239,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
         summary.UpdateStatus(execReport, marketDataToUse=dayTradingPos.MarketData if dayTradingPos.RunningBacktest else None)
         dayTradingPos.UpdateRouting() #order is important!
         if summary.Position.IsFinishedPosition():
+            self.WaitForFilledToArrive = False
             LogHelper.LogPositionUpdate(self, "Managed Position Finished", summary, execReport)
             #print("Position Status={} Routing={}".format(summary.Position.PosStatus,dayTradingPos.Routing))
             if summary.Position.PosId in self.PendingCancels:
@@ -735,7 +738,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                                                  dayTradingPos.MSStrengthIndicator.MSI,
                                                  dayTradingPos.MinuteNonSmoothedRSIIndicator.RSI,
                                                  dayTradingPos.MACDIndicator.MS,
-                                                 dayTradingPos.MinuteSmoothedRSIIndicator.GetRSIReggr(30),#RSI30smSL
+                                                 dayTradingPos.MinuteSmoothedRSIIndicator.GetRSIReggr(self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_J()).IntValue),#RSI30smSL
                                                  self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_NN()),
                                                  self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_PP()),
                                                  self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_QQ()),
@@ -790,7 +793,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                     self.ModelParametersHandler.Get(ModelParametersHandler.NON_SMOOTHED_RSI_LONG_THRESHOLD(), symbol),
                     list(cbDict.values())):
 
-                self.DoLog("Generic Automatic = Running long trade for symbol {}".format(dayTradingPos.Security.Symbol), MessageType.INFO)
+                self.DoLog("Generic Automatic = Running long trade for symbol {} at {}".format(dayTradingPos.Security.Symbol,candlebar.DateTime), MessageType.INFO)
                 self.TradingSignalHelper.PersistTradingSignal(dayTradingPos, TradingSignalHelper._ACTION_OPEN(),
                                                               Side.Buy, dayTradingPos.GetStatisticalParameters(list(cbDict.values())), candlebar, self)
                 self.ProcessNewPositionReqManagedPos(dayTradingPos, Side.Buy, dayTradingPos.SharesQuantity,self.Configuration.DefaultAccount)
@@ -824,7 +827,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                     self.ModelParametersHandler.Get(ModelParametersHandler.POS_SHORT_MAX_DELTA(), symbol),
                     self.ModelParametersHandler.Get(ModelParametersHandler.NON_SMOOTHED_RSI_SHORT_THRESHOLD(), symbol),
                     list(cbDict.values())):
-                self.DoLog("Generic Automatic = Running short trade for symbol {}".format(dayTradingPos.Security.Symbol), MessageType.INFO)
+                self.DoLog("Generic Automatic = Running short trade for symbol {} at {}".format(dayTradingPos.Security.Symbol,candlebar.DateTime), MessageType.INFO)
                 self.TradingSignalHelper.PersistTradingSignal(dayTradingPos, TradingSignalHelper._ACTION_OPEN(),
                                                               Side.SellShort, dayTradingPos.GetStatisticalParameters(list(cbDict.values())), candlebar, self)
                 self.ProcessNewPositionReqManagedPos(dayTradingPos, Side.Sell, dayTradingPos.SharesQuantity,self.Configuration.DefaultAccount)
@@ -882,7 +885,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                                   list(cbDict.values()))
                if longCondition is not None:
 
-                   self.DoLog("MACD/RSI = Running long trade for symbol {}".format(dayTradingPos.Security.Symbol),MessageType.INFO)
+                   self.DoLog("MACD/RSI = Running long trade for symbol {} at {}".format(dayTradingPos.Security.Symbol,candlebar.DateTime),MessageType.INFO)
                    self.TradingSignalHelper.PersistMACDRSITradingSignal(dayTradingPos,TradingSignalHelper._ACTION_OPEN(), Side.Buy,candlebar, self,condition=longCondition)
                    self.ProcessNewPositionReqManagedPos(dayTradingPos, Side.Buy, dayTradingPos.SharesQuantity,self.Configuration.DefaultAccount)
                    dayTradingPos.Routing = True
@@ -937,7 +940,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
             if shortCondition is not None:
 
-                self.DoLog("MACD/RSI = Running short trade for symbol {}".format(dayTradingPos.Security.Symbol),MessageType.INFO)
+                self.DoLog("MACD/RSI = Running short trade for symbol {} at {}".format(dayTradingPos.Security.Symbol, candlebar.DateTime),MessageType.INFO)
                 self.TradingSignalHelper.PersistMACDRSITradingSignal(dayTradingPos, TradingSignalHelper._ACTION_OPEN(),Side.SellShort, candlebar,
                                                                      self,condition=shortCondition)
                 self.ProcessNewPositionReqManagedPos(dayTradingPos, Side.Sell, dayTradingPos.SharesQuantity,
@@ -953,9 +956,13 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
     def EvaluateOpeningMACDRSIAutomaticTrading(self,dayTradingPos,symbol,cbDict,candlebar):
 
-        return self.EvaluateMACDRSILongTrade(dayTradingPos,symbol,cbDict,candlebar) or \
-               self.EvaluateMACDRSIShorTrade(dayTradingPos,symbol,cbDict,candlebar)
+        longCond = self.EvaluateMACDRSILongTrade(dayTradingPos,symbol,cbDict,candlebar)
+        shortCond = self.EvaluateMACDRSIShorTrade(dayTradingPos,symbol,cbDict,candlebar)
 
+        if dayTradingPos.IsTermianlCondition(longCond) or dayTradingPos.IsTermianlCondition(shortCond):
+            return False
+        else:
+            return longCond is not None or shortCond is not None
 
     def EvaluateOpeningPositions(self, candlebar,cbDict):
 
@@ -1121,7 +1128,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                                                 )
 
                 if closingCond is not None:
-
+                    self.DoLog("Generic - Closing long position for symbol {} at {} ".format(dayTradingPos.Security.Symbol,candlebar.DateTime),MessageType.INFO)
                     self.RunClose(dayTradingPos,Side.Sell if dayTradingPos.GetNetOpenShares() > 0 else Side.Buy,
                                   dayTradingPos.GetStatisticalParameters(list(cbDict.values())), candlebar,
                                   closingCond=closingCond)
@@ -1157,9 +1164,8 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
                 if closingCond is not None:
                     #print("closing short position for security {}".format(dayTradingPos.Security.Symbol))
-
-                    self.RunClose(dayTradingPos,Side.Sell if dayTradingPos.GetNetOpenShares() > 0 else Side.Buy,
-                                  dayTradingPos.GetStatisticalParameters(list(cbDict.values())), candlebar,
+                    self.DoLog( "Generic - Closing short position for symbol {} at {} ".format(dayTradingPos.Security.Symbol, candlebar.DateTime),MessageType.INFO)
+                    self.RunClose(dayTradingPos,Side.Sell if dayTradingPos.GetNetOpenShares() > 0 else Side.Buy,dayTradingPos.GetStatisticalParameters(list(cbDict.values())), candlebar,
                                   closingCond=closingCond)
 
             else:
@@ -1214,7 +1220,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                                                                         )
 
             if closingCond is not None and runClose:
-
+                self.DoLog("MACD-RSI - Closing long position for symbol {} at {} ".format(dayTradingPos.Security.Symbol,candlebar.DateTime),MessageType.INFO)
                 self.RunClose(dayTradingPos, Side.Sell if dayTradingPos.GetNetOpenShares() > 0 else Side.Buy,
                               dayTradingPos.GetStatisticalParameters(list(cbDict.values())), candlebar,generic=False,
                               closingCond=closingCond)
@@ -1274,7 +1280,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                                                                          )
 
             if closingCond is not None and runClose:
-
+                self.DoLog("MACD-RSI - Closing short position for symbol {} at {} ".format(dayTradingPos.Security.Symbol,candlebar.DateTime),MessageType.INFO)
                 self.RunClose(dayTradingPos, Side.Sell if dayTradingPos.GetNetOpenShares() > 0 else Side.Buy,
                               dayTradingPos.GetStatisticalParameters(list(cbDict.values())), candlebar,generic=False,
                               closingCond=closingCond)
@@ -1595,6 +1601,21 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
         return modelParamsBackup
 
+    def WaitToSyncBacktest(self,opening,closing,sleepMilisec):
+
+        if (opening or closing):
+            countWaiting = 0
+
+            while  self.WaitForFilledToArrive:
+                #print("{}-WaitForFilledToArrive-{} @WaitToSyncBacktest:{}".format(datetime.datetime.now(),countWaiting,self.WaitForFilledToArrive))
+                time.sleep(sleepMilisec)
+                countWaiting += 1
+                if countWaiting >= 10:
+                    raise Exception(
+                        "The backtested position has waited for a filled ER to arrive for more than {} seconds. ".format(countWaiting * sleepMilisec)
+                        +"This means that some Filled Execution Report was lost or arrived too late. The backtest has to "
+                        +"be finished!"
+                        )
 
     def RunBacktest(self,dayTradingPos,refDate,candelBarDict,marketDataDict):
 
@@ -1602,7 +1623,9 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
         currDate = refDate
         self.ResetForNewDayOnBackTest(dayTradingPos, currDate)
-        routingCounter = 0
+        sleepMilisec = self.ModelParametersHandler.Get(ModelParametersHandler.PACING_ON_BACKTEST_MILISEC(),dayTradingPos.Security.Symbol).IntValue/1000
+        opening = False
+        closing = False
 
         for date in candelBarDict:
             time.sleep(1)#This has to be here so the ExecutinSummaries are not cleared @ResetForNewDayOnBackTest
@@ -1630,6 +1653,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
             for candlebar in candleBarsArray:
                 self.RoutingLock.acquire()
 
+
                 try:
                     md = marketDataArray[i]
 
@@ -1642,16 +1666,10 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                     dayTradingPos.MarketData = md
                     dayTradingPos.CalculateCurrentDayProfits(md)
 
-                    if not dayTradingPos.Routing:
-                        self.EvaluateOpeningPositions(candlebar, cbDict)
-                        closing = self.EvaluateClosingPositions(candlebar, cbDict)
-                        routingCounter = 0
-                    else:
-                        closing=None
-                        routingCounter = routingCounter + 1
+                    opening = self.EvaluateOpeningPositions(candlebar, cbDict) if not dayTradingPos.Open() else False
+                    closing = self.EvaluateClosingPositions(candlebar, cbDict) if dayTradingPos.Open() else False
 
-                    if routingCounter>=3:
-                        raise Exception("The backtested position has been in a routing state for more than 3 candles. This means that some Filled Execution Report was lost. The backtest has to be finished!")
+                    self.WaitForFilledToArrive = opening or closing
 
                     backtestDto = BacktestDTO(pSymbol=dayTradingPos.Security.Symbol,
                                               pDate=candlebar.DateTime.date(),
@@ -1672,11 +1690,11 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
                 threading.Thread(target=self.PublishPortfolioPositionThread, args=(dayTradingPos,)).start()
 
-                sleepMilisec =self.ModelParametersHandler.Get(ModelParametersHandler.PACING_ON_BACKTEST_MILISEC(),dayTradingPos.Security.Symbol)
-                time.sleep(sleepMilisec.IntValue/1000)
+                self.WaitToSyncBacktest(opening,closing,sleepMilisec)
 
                 i+=1
 
+        dayTradingPos.Routing = 0
         return backtestDTOArr
 
     def ResetForNewDayOnBackTest(self,dayTradingPos,refDate, running=True):
@@ -2301,8 +2319,8 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
             #broomsTester = BroomsTester(self.ModelParametersHandler)
             #broomsTester.DoTest()
 
-            rsiTester= RSIIndicatorTester()
-            rsiTester.DoTest()
+            #rsiTester= RSIIndicatorTester()
+            #rsiTester.DoTest()
 
             self.CommandsModule = self.InitializeModule(self.Configuration.WebsocketModule, self.Configuration.WebsocketConfigFile)
 
