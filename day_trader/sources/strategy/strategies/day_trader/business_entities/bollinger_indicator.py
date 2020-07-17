@@ -17,6 +17,8 @@ class BollingerIndicator():
         self.BollDn=None
         self.BSI= None
 
+        self.TPSDStartOfTrade = None
+
         self.LastProcessedDateTime =None
 
     def CalculateTP(self,candlebar):
@@ -123,6 +125,9 @@ class BollingerIndicator():
         self.CalculateBSI(BROOMS_BOLLINGER_K,BROOMS_BOLLINGER_L)
 
         self.LastProcessedDateTime=candlebar
+
+    def OnTradeSignal(self):
+        self.TPSDStartOfTrade=self.TPSD
 
 
     #endregion

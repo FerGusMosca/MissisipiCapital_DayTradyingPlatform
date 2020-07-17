@@ -96,6 +96,14 @@ class ModelParametersHandler:
         return "HISTORICAL_PRICES_PAST_DAYS_STD_DEV"
 
     @staticmethod
+    def HISTORICAL_PRICES_SDD_OPEN_STD_DEV():
+        return "HISTORICAL_PRICES_SDD_OPEN_STD_DEV"
+
+    @staticmethod
+    def PRELOAD_PREFIX():
+        return "PRELOAD_PREFIX"
+
+    @staticmethod
     def HISTORICAL_PRICES_PAST_DAYS_DAILY_RSI():
         return "HISTORICAL_PRICES_PAST_DAYS_DAILY_RSI"
 
@@ -106,10 +114,6 @@ class ModelParametersHandler:
     @staticmethod
     def CANDLE_BARS_SMOOTHED_MINUTES_RSI():
         return "CANDLE_BARS_SMOOTHED_MINUTES_RSI"
-
-    @staticmethod
-    def HISTORICAL_PRICES_CAL_DAYS_TO_REQ():
-        return "HISTORICAL_PRICES_CAL_DAYS_TO_REQ"
 
     @staticmethod
     def LOW_VOL_ENTRY_THRESHOLD():
@@ -330,6 +334,34 @@ class ModelParametersHandler:
     @staticmethod
     def GAIN_MIN_STOP_LOSS_EXIT_Z_Z():
         return "GAIN_MIN_STOP_LOSS_EXIT_Z_Z"
+
+    @staticmethod
+    def DELTAUP_YYY():
+        return "DELTAUP_YYY"
+
+    @staticmethod
+    def DELTADN_XXX():
+        return "DELTADN_XXX"
+
+    @staticmethod
+    def GAIN_MAX_TRADE_JJJ():
+        return "GAIN_MAX_TRADE_JJJ"
+
+    @staticmethod
+    def GAIN_MAX_TRADE_SDMULT():
+        return "GAIN_MAX_TRADE_SDMULT"
+
+    @staticmethod
+    def GAIN_MAX_TRADE_FIXEDGAIN():
+        return "GAIN_MAX_TRADE_FIXEDGAIN"
+
+    @staticmethod
+    def GAIN_MIN_TRADE_UUU():
+        return "GAIN_MIN_TRADE_UUU"
+
+    @staticmethod
+    def GAIN_MIN_TRADE_FIXEDLOSS():
+        return "GAIN_MIN_TRADE_FIXEDLOSS"
 
     @staticmethod
     def PROCESS_EXTERNAL_TRADING():

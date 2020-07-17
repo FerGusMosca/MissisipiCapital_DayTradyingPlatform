@@ -608,6 +608,9 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                     datTradingPos.CalculateStdDevForLastNDays(security.MarketDataArr,
                                                               self.ModelParametersHandler.Get(ModelParametersHandler.HISTORICAL_PRICES_PAST_DAYS_STD_DEV()))
 
+                    datTradingPos.LastSDDDaysOpenStdDevIndicator.CalculateLastSDDDaysOpenStdDev(security.MarketDataArr,
+                                                              self.ModelParametersHandler.Get(ModelParametersHandler.HISTORICAL_PRICES_SDD_OPEN_STD_DEV()))
+
                     datTradingPos.DailyRSIIndicator.UpdateDaily(security.MarketDataArr,self.ModelParametersHandler.Get(ModelParametersHandler.HISTORICAL_PRICES_PAST_DAYS_DAILY_RSI()).IntValue)
                     #print("RSI calculated for symbol {}:{}".format(security.Symbol,datTradingPos.DailyRSIIndicator.RSI))
                 except Exception as e:
@@ -874,6 +877,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                                   self.ModelParametersHandler.Get(ModelParametersHandler.RSI_14_SLOPE_SKIP_3_V(),symbol),
                                   self.ModelParametersHandler.Get(ModelParametersHandler.M_S_3_SLOPE_X(),symbol),
                                   self.ModelParametersHandler.Get(ModelParametersHandler.M_S_3_SLOPE_X_X(),symbol),
+                                  self.ModelParametersHandler.Get(ModelParametersHandler.DELTAUP_YYY(),symbol),
                                   self.ModelParametersHandler.Get(ModelParametersHandler.MACD_RSI_SMOOTHED_MODE(),symbol),
                                   self.ModelParametersHandler.Get(ModelParametersHandler.MACD_RSI_ABS_MAX_MS_PERIOD(),symbol),
                                   self.ModelParametersHandler.Get(ModelParametersHandler.MACD_RSI_OPEN_LONG_RULE_1(),symbol),
@@ -926,6 +930,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                                                                     self.ModelParametersHandler.Get(ModelParametersHandler.RSI_14_SLOPE_SKIP_3_V(), symbol),
                                                                     self.ModelParametersHandler.Get(ModelParametersHandler.M_S_3_SLOPE_X(), symbol),
                                                                     self.ModelParametersHandler.Get(ModelParametersHandler.M_S_3_SLOPE_X_X(), symbol),
+                                                                    self.ModelParametersHandler.Get(ModelParametersHandler.DELTADN_XXX(), symbol),
                                                                     self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_Z(), symbol),
                                                                     self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_BIAS(), symbol),
                                                                     self.ModelParametersHandler.Get(ModelParametersHandler.MACD_RSI_SMOOTHED_MODE(), symbol),
@@ -1183,6 +1188,9 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
             closingCond = dayTradingPos.EvaluateClosingMACDRSILongTrade(list(cbDict.values()),self.ModelParametersHandler.Get( ModelParametersHandler.M_S_NOW_A(), symbol),
                                                                         self.ModelParametersHandler.Get(ModelParametersHandler.MACD_MAX_GAIN_J(),symbol),
                                                                         self.ModelParametersHandler.Get(ModelParametersHandler.MACD_MAX_GAIN_J_J(),symbol),
+                                                                        self.ModelParametersHandler.Get(ModelParametersHandler.GAIN_MAX_TRADE_JJJ(),symbol),
+                                                                        self.ModelParametersHandler.Get(ModelParametersHandler.GAIN_MAX_TRADE_SDMULT(),symbol),
+                                                                        self.ModelParametersHandler.Get(ModelParametersHandler.GAIN_MAX_TRADE_FIXEDGAIN(),symbol),
                                                                         self.ModelParametersHandler.Get(ModelParametersHandler.MACD_GAIN_NOW_MAX_K(),symbol),
                                                                         self.ModelParametersHandler.Get(ModelParametersHandler.RSI_30_SLOPE_SKIP_5_EXIT_L(),symbol),
                                                                         self.ModelParametersHandler.Get( ModelParametersHandler.M_S_NOW_EXIT_N(),symbol),
@@ -1198,6 +1206,8 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                                                                         self.ModelParametersHandler.Get(ModelParametersHandler.SEC_5_MIN_SLOPE_EXIT_T(),symbol),
                                                                         self.ModelParametersHandler.Get(ModelParametersHandler.GAIN_MIN_STOP_LOSS_EXIT_U(),symbol),
                                                                         self.ModelParametersHandler.Get(ModelParametersHandler.GAIN_MIN_STOP_LOSS_EXIT_U_U(),symbol),
+                                                                        self.ModelParametersHandler.Get(ModelParametersHandler.GAIN_MIN_TRADE_UUU(),symbol),
+                                                                        self.ModelParametersHandler.Get(ModelParametersHandler.GAIN_MIN_TRADE_FIXEDLOSS(),symbol),
                                                                         self.ModelParametersHandler.Get(ModelParametersHandler.GAIN_MIN_STOP_LOSS_EXIT_W(),symbol),
                                                                         self.ModelParametersHandler.Get(ModelParametersHandler.GAIN_MIN_STOP_LOSS_EXIT_W_W(),symbol),
                                                                         self.ModelParametersHandler.Get(ModelParametersHandler.GAIN_STOP_LOSS_EXIT_Y(),symbol),
@@ -1243,6 +1253,9 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                                                                          self.ModelParametersHandler.Get(ModelParametersHandler.M_S_NOW_A(),symbol),
                                                                          self.ModelParametersHandler.Get( ModelParametersHandler.MACD_MAX_GAIN_J(), symbol),
                                                                          self.ModelParametersHandler.Get(ModelParametersHandler.MACD_MAX_GAIN_J_J(),symbol),
+                                                                         self.ModelParametersHandler.Get(ModelParametersHandler.GAIN_MAX_TRADE_JJJ(),symbol),
+                                                                         self.ModelParametersHandler.Get(ModelParametersHandler.GAIN_MAX_TRADE_SDMULT(),symbol),
+                                                                         self.ModelParametersHandler.Get(ModelParametersHandler.GAIN_MAX_TRADE_FIXEDGAIN(),symbol),
                                                                          self.ModelParametersHandler.Get(ModelParametersHandler.MACD_GAIN_NOW_MAX_K(),symbol),
                                                                          self.ModelParametersHandler.Get(ModelParametersHandler.RSI_30_SLOPE_SKIP_5_EXIT_L(),symbol),
                                                                          self.ModelParametersHandler.Get(ModelParametersHandler.M_S_NOW_EXIT_N(),symbol),
@@ -1258,6 +1271,8 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                                                                          self.ModelParametersHandler.Get(ModelParametersHandler.SEC_5_MIN_SLOPE_EXIT_T(),symbol),
                                                                          self.ModelParametersHandler.Get(ModelParametersHandler.GAIN_MIN_STOP_LOSS_EXIT_U(),symbol),
                                                                          self.ModelParametersHandler.Get(ModelParametersHandler.GAIN_MIN_STOP_LOSS_EXIT_U_U(),symbol),
+                                                                         self.ModelParametersHandler.Get(ModelParametersHandler.GAIN_MIN_TRADE_UUU(),symbol),
+                                                                         self.ModelParametersHandler.Get(ModelParametersHandler.GAIN_MIN_TRADE_FIXEDLOSS(),symbol),
                                                                          self.ModelParametersHandler.Get(ModelParametersHandler.GAIN_MIN_STOP_LOSS_EXIT_W(),symbol),
                                                                          self.ModelParametersHandler.Get(ModelParametersHandler.GAIN_MIN_STOP_LOSS_EXIT_W_W(),symbol),
                                                                          self.ModelParametersHandler.Get(ModelParametersHandler.GAIN_STOP_LOSS_EXIT_Y(),symbol),
@@ -1578,26 +1593,66 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                 self.RoutingLock.release()
 
 
+    def PopulatePreloadDict(self,modelParamDict,paramKey):
+
+        preLoadDict={}
+
+        prefixParam = self.ModelParametersHandler.Get(self.ModelParametersHandler.PRELOAD_PREFIX(), None)
+
+        if prefixParam is None or prefixParam.StringValue is None:
+            raise Exception("You must specificy a PRELOAD_PREFIX model parameter for the backtester to properly operate")
+
+        finalPrefix = prefixParam.StringValue + paramKey
+
+        for key in modelParamDict:
+
+            try:
+
+                if key.startswith(finalPrefix):
+                    index = key.split("_")[-1]
+                    value=modelParamDict[key]
+                    preLoadDict[int(index)]=value
+            except Exception as e:
+                raise Exception("Critical error recovering SDD Open Price preloaded for key {}:{}".format(key,str(e)))
+
+        return preLoadDict
+
+    def GetPreloadedParameters(self,modelParamDict):
+
+        preloadedParamDict = {}
+
+        #1 - Preload SDD OPEN STD
+        sddKey = self.ModelParametersHandler.HISTORICAL_PRICES_SDD_OPEN_STD_DEV()
+        preloadedParamDict[sddKey]  = self.PopulatePreloadDict(modelParamDict,sddKey)
+
+        return preloadedParamDict
+
     def UpdateModelParamters(self,dayTradingPos,modelParamDict):
+
+        preloadedPrefix =self.ModelParametersHandler.Get(self.ModelParametersHandler.PRELOAD_PREFIX(), None)
+
+        if preloadedPrefix is None or preloadedPrefix.StringValue is None:
+            raise Exception("You must specificy a PRELOAD_PREFIX model parameter for the backtester to properly operate")
 
         modelParamsBackup = []
 
         for modelKey in modelParamDict:
 
-            modelParamInMem = self.ModelParametersHandler.Get(modelKey, dayTradingPos.Security.Symbol)
+            if not modelKey.startswith(preloadedPrefix.StringValue):
+                modelParamInMem = self.ModelParametersHandler.Get(modelKey, dayTradingPos.Security.Symbol)
 
-            if modelParamInMem is None:
-                raise Exception("Could not find a model parameter for the key {}. Please validate that you are using the correct key".format(key))
+                if modelParamInMem is None :
+                    raise Exception("Could not find a model parameter for the key {}. Please validate that you are using the correct key".format(modelKey))
 
-            backtestModelParam = ModelParameter(key=modelKey,symbol=dayTradingPos.Security.Symbol,stringValue=None,intValue=None,floatValue=None)
-            backtestModelParam.IntValue = int(modelParamDict[modelKey]) if modelParamInMem.IntValue is not None else None
-            backtestModelParam.FloatValue = float(modelParamDict[modelKey]) if modelParamInMem.FloatValue is not None else None
-            backtestModelParam.StringValue = str(modelParamDict[modelKey]) if modelParamInMem.StringValue is not None else None
-            backtestModelParam.Symbol=modelParamInMem.Symbol
+                backtestModelParam = ModelParameter(key=modelKey,symbol=dayTradingPos.Security.Symbol,stringValue=None,intValue=None,floatValue=None)
+                backtestModelParam.IntValue = int(modelParamDict[modelKey]) if modelParamInMem.IntValue is not None else None
+                backtestModelParam.FloatValue = float(modelParamDict[modelKey]) if modelParamInMem.FloatValue is not None else None
+                backtestModelParam.StringValue = str(modelParamDict[modelKey]) if modelParamInMem.StringValue is not None else None
+                backtestModelParam.Symbol=modelParamInMem.Symbol
 
-            self.ModelParametersHandler.Set(modelKey, backtestModelParam.Symbol, backtestModelParam)
+                self.ModelParametersHandler.Set(modelKey, backtestModelParam.Symbol, backtestModelParam)
 
-            modelParamsBackup.append(modelParamInMem)
+                modelParamsBackup.append(modelParamInMem)
 
         return modelParamsBackup
 
@@ -1617,7 +1672,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                         +"be finished!"
                         )
 
-    def RunBacktest(self,dayTradingPos,refDate,candelBarDict,marketDataDict):
+    def RunBacktest(self,dayTradingPos,refDate,candelBarDict,marketDataDict,preloadedParamDict):
 
         backtestDTOArr = []
 
@@ -1627,6 +1682,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
         opening = False
         closing = False
 
+        days=1
         for date in candelBarDict:
             time.sleep(1)#This has to be here so the ExecutinSummaries are not cleared @ResetForNewDayOnBackTest
                          #when swithing between trading days
@@ -1637,6 +1693,10 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
             candleBarsArray = candelBarDict[date]
             marketDataArray = None
+            dayTradingPos.LastSDDDaysOpenStdDevIndicator.PreloadForBacktest(preloadedParamDict[self.ModelParametersHandler.HISTORICAL_PRICES_SDD_OPEN_STD_DEV()],
+                                                                            self.ModelParametersHandler.Get(ModelParametersHandler.HISTORICAL_PRICES_SDD_OPEN_STD_DEV(),dayTradingPos.Security.Symbol),
+                                                                            candelBarDict,
+                                                                            date,days)
 
             if date in marketDataDict:
                 marketDataArray = marketDataDict[date]
@@ -1644,9 +1704,8 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                 raise Exception("Could not find market data for date {}. There is some inconsistency in the input data".format(date))
 
             if len(candleBarsArray) != len(marketDataArray):
-                raise Exception(
-                    "Market Data length and Candlebar length present inconsistent values: Market Data Length={} CandleBar Length={}".format(
-                        len(candleBarsArray), len(marketDataArray)))
+                raise Exception("Market Data length and Candlebar length present inconsistent values: Market Data Length={} CandleBar Length={}".format(
+                                len(candleBarsArray), len(marketDataArray)))
 
             i = 0
 
@@ -1693,6 +1752,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                 self.WaitToSyncBacktest(opening,closing,sleepMilisec)
 
                 i+=1
+            days+=1
 
         dayTradingPos.Routing = 0
         return backtestDTOArr
@@ -1731,11 +1791,11 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                 # 1- We update the model parameters in memotry with the ones that will use the backtest
                 modelParamsBackup = self.UpdateModelParamters(dayTradingPos,modelParamDict)
 
-                #2- Reset Statistics!
-                #self.ResetForNewDayOnBackTest(dayTradingPos,refDate)
+                #2- We load preloaded parameters!
+                preloadedParamDict = self.GetPreloadedParameters(modelParamDict)
 
                 #3-We execute the backtest
-                backtestDtoArr = self.RunBacktest(dayTradingPos,refDate,candelBarDict,marketDataDict)
+                backtestDtoArr = self.RunBacktest(dayTradingPos,refDate,candelBarDict,marketDataDict,preloadedParamDict)
 
                 #4-We restore model parameters previous values
                 for originalModelParam in modelParamsBackup:
@@ -1862,8 +1922,10 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
             self.DayTradingPositions.append(persistedDayTradingPos)
 
+
+
             #1- We request historical prices
-            histLength=self.ModelParametersHandler.Get(ModelParametersHandler.HISTORICAL_PRICES_CAL_DAYS_TO_REQ(),None).IntValue
+            histLength=self.GetHistoricalPricesToReq(symbol)
             hpReqWrapper = HistoricalPricesRequestWrapper(dayTradingPos.Security,histLength,TimeUnit.Day, SubscriptionRequestType.Snapshot)
             self.MarketDataModule.ProcessMessage(hpReqWrapper)
 
@@ -2216,12 +2278,25 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
             self.MarketDataModule.ProcessMessage(mdReqWrapper)
 
 
+    def GetHistoricalPricesToReq(self,symbol):
+        closingStd = self.ModelParametersHandler.Get(ModelParametersHandler.HISTORICAL_PRICES_PAST_DAYS_STD_DEV(),
+                                                     symbol).IntValue
+        openingStd = self.ModelParametersHandler.Get(ModelParametersHandler.HISTORICAL_PRICES_SDD_OPEN_STD_DEV(),
+                                                     symbol).IntValue
+
+        # we just request the double of needed days
+        daysToReq = closingStd * 2 if closingStd > openingStd else openingStd * 2
+
+        return daysToReq
+
     def RequestHistoricalPrices(self):
         for secIn in self.DayTradingPositions:
             self.HistoricalPrices[secIn.Security.Symbol]=None
-            hpReqWrapper = HistoricalPricesRequestWrapper(secIn.Security,
-                                                          self.ModelParametersHandler.Get(ModelParametersHandler.HISTORICAL_PRICES_CAL_DAYS_TO_REQ(),secIn.Security.Symbol).IntValue,
-                                                          TimeUnit.Day, SubscriptionRequestType.Snapshot)
+
+            #we just request the double of needed days
+            daysToReq = self.GetHistoricalPricesToReq(secIn.Security.Symbo)
+
+            hpReqWrapper = HistoricalPricesRequestWrapper(secIn.Security,daysToReq,TimeUnit.Day, SubscriptionRequestType.Snapshot)
             self.MarketDataModule.ProcessMessage(hpReqWrapper)
 
 
