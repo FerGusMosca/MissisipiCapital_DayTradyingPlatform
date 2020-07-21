@@ -608,8 +608,9 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                     datTradingPos.CalculateStdDevForLastNDays(security.MarketDataArr,
                                                               self.ModelParametersHandler.Get(ModelParametersHandler.HISTORICAL_PRICES_PAST_DAYS_STD_DEV()))
 
-                    datTradingPos.LastSDDDaysOpenStdDevIndicator.CalculateLastSDDDaysOpenStdDev(security.MarketDataArr,
-                                                              self.ModelParametersHandler.Get(ModelParametersHandler.HISTORICAL_PRICES_SDD_OPEN_STD_DEV()))
+                    datTradingPos.PriceVolatilityIndicators.UpdateOnHistoricalData(security.MarketDataArr,
+                                                              self.ModelParametersHandler.Get(ModelParametersHandler.HISTORICAL_PRICES_SDD_OPEN_STD_DEV()),
+                                                              self.ModelParametersHandler.Get(ModelParametersHandler.FLEXIBLE_STOP_LOSS_L1()))
 
                     datTradingPos.DailyRSIIndicator.UpdateDaily(security.MarketDataArr,self.ModelParametersHandler.Get(ModelParametersHandler.HISTORICAL_PRICES_PAST_DAYS_DAILY_RSI()).IntValue)
                     #print("RSI calculated for symbol {}:{}".format(security.Symbol,datTradingPos.DailyRSIIndicator.RSI))
@@ -1695,6 +1696,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
             marketDataArray = None
             dayTradingPos.LastSDDDaysOpenStdDevIndicator.PreloadForBacktest(preloadedParamDict[self.ModelParametersHandler.HISTORICAL_PRICES_SDD_OPEN_STD_DEV()],
                                                                             self.ModelParametersHandler.Get(ModelParametersHandler.HISTORICAL_PRICES_SDD_OPEN_STD_DEV(),dayTradingPos.Security.Symbol),
+                                                                            self.ModelParametersHandler.Get(ModelParametersHandler.FLEXIBLE_STOP_LOSS_L1(),dayTradingPos.Security.Symbol),
                                                                             candelBarDict,
                                                                             date,days)
 

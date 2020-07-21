@@ -1,7 +1,7 @@
 from sources.framework.business_entities.market_data.candle_bar import *
 import statistics
 
-class LastSDDDaysOpenStdDevIndicator():
+class PriceVolatilityIndicators():
 
 
     def __init__(self):
@@ -11,17 +11,30 @@ class LastSDDDaysOpenStdDevIndicator():
 
     def Reset(self):
         self.LastSDDDaysOpenStdDev=None
+        self.FlexibleStopLoss = None
 
 
     #endregion
 
 
+    #region Private Methods
+
+    def CalcualteFlexibleStopLoss(self,flexibleStopLossL1ModelParam,lastOpening):
+        if self.LastSDDDaysOpenStdDev is not None and lastOpening is not None:
+            sddAsPricePercentage = self.LastSDDDaysOpenStdDev/lastOpening
+
+            self.FlexibleStopLoss = flexibleStopLossL1ModelParam.FloatValue / sddAsPricePercentage
+        else:
+            self.FlexibleStopLoss= None
+
+    #endregion
+
 
     #region Public Methods
 
-    def UpdateOnHistoricalData(self,marketDataArr,sddDaysModelParam):
+    def UpdateOnHistoricalData(self,marketDataArr,sddDaysModelParam,flexibleStopLossL1ModelParam):
 
-        if sddDaysModelParam is not None:
+        if sddDaysModelParam is not None and flexibleStopLossL1ModelParam is not None and flexibleStopLossL1ModelParam.FloatValue is not None:
 
             sortedMDArr = sorted(list(filter(lambda x: x.OpeningPrice is not None, marketDataArr.values())),
                                  key=lambda x: x.MDEntryDate,
@@ -33,12 +46,13 @@ class LastSDDDaysOpenStdDevIndicator():
                 openingPrices.append(md.OpeningPrice)
 
             self.LastSDDDaysOpenStdDev = statistics.stdev(openingPrices)
+            self.CalcualteFlexibleStopLoss(flexibleStopLossL1ModelParam,sortedMDArr[-1].OpeningPrice if len(sortedMDArr)>0 else None)
 
         else:
             self.LastSDDDaysOpenStdDev = None
+            self.CalcualteFlexibleStopLoss(flexibleStopLossL1ModelParam,None)
 
-
-    def PreloadForBacktest(self,preloadedParamDict,histPricesSDDOpenStdDevParam,candelBarDict,date,index):
+    def PreloadForBacktest(self,preloadedParamDict,histPricesSDDOpenStdDevParam,flexibleStopLossL1ModelParam,candelBarDict,date,index):
 
 
         if histPricesSDDOpenStdDevParam.IntValue is None:
@@ -50,8 +64,10 @@ class LastSDDDaysOpenStdDevIndicator():
         if index<=histPricesSDDOpenStdDevCount:
             if index in preloadedParamDict:
                 self.LastSDDDaysOpenStdDev=preloadedParamDict[index]
+                self.CalcualteFlexibleStopLoss(flexibleStopLossL1ModelParam, candelBarDict[0].Open if len(candelBarDict)>0 else None)
             else:
                 self.LastSDDDaysOpenStdDev=0
+                self.CalcualteFlexibleStopLoss(flexibleStopLossL1ModelParam, None)
         else:
             #B - <Calculation> - We calculate the standard deveiation from the last <SDDOpenStdDevCount> opening candles
             #we have to calculate this from the previous opening prices
@@ -74,6 +90,7 @@ class LastSDDDaysOpenStdDevIndicator():
 
 
             self.LastSDDDaysOpenStdDev = statistics.stdev(openingPrices)
+            self.CalcualteFlexibleStopLoss(flexibleStopLossL1ModelParam,candelBarDict[0].Open if len(candelBarDict) > 0 else None)
 
 
     #endregion

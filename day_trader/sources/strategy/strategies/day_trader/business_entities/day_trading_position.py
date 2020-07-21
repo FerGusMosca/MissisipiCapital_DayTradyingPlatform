@@ -11,7 +11,7 @@ from sources.strategy.strategies.day_trader.business_entities.macd_indicator_adj
 from sources.strategy.strategies.day_trader.business_entities.testers.macd_indicator_adjusted_tester import *
 from sources.strategy.strategies.day_trader.business_entities.bollinger_indicator import *
 from sources.strategy.strategies.day_trader.business_entities.MS_strength_indicator import *
-from sources.strategy.strategies.day_trader.business_entities.last_sdd_days_std_dev_indicator import *
+from sources.strategy.strategies.day_trader.business_entities.price_volatility_indicators import *
 from sources.strategy.strategies.day_trader.business_entities.brooms_indicator import *
 
 from scipy import stats
@@ -126,7 +126,7 @@ class DayTradingPosition():
         self.BollingerIndicator = BollingerIndicator()
         self.MSStrengthIndicator = MSStrengthIndicator()
         self.BroomsIndicator = BroomsIndicator()
-        self.LastSDDDaysOpenStdDevIndicator=LastSDDDaysOpenStdDevIndicator()
+        self.PriceVolatilityIndicators=PriceVolatilityIndicators()
 
         #tester= RSIIndicatorTester()
         #tester.DoTest()
@@ -459,7 +459,7 @@ class DayTradingPosition():
         self.MACDIndicator.Reset()
         self.BollingerIndicator.Reset()
         self.MSStrengthIndicator.Reset()
-        self.LastSDDDaysOpenStdDevIndicator.Reset()
+        self.PriceVolatilityIndicators.Reset()
         self.TerminalClose = False
         self.RunningBacktest= False
         self.TerminalCloseCond = None
@@ -824,7 +824,7 @@ class DayTradingPosition():
                 or self.MinuteSmoothedRSIIndicator.GetRSIReggr(10) is None
                 or self.MaxMonetaryLossCurrentTrade is None or self.MaxMonetaryProfitCurrentTrade is None
                 or self.CurrentProfitMonetaryLastTrade is None or self.BollingerIndicator.TPSDStartOfTrade is None
-                or self.LastSDDDaysOpenStdDevIndicator.LastSDDDaysOpenStdDev is None
+                or self.PriceVolatilityIndicators.LastSDDDaysOpenStdDev is None
                 or len(candlebarsArr)<5
                 #or self.MACDIndicator.GetMaxABSMaxMinMS(5) is None
             ):
@@ -838,7 +838,7 @@ class DayTradingPosition():
             and (self.MaxMonetaryProfitCurrentTrade > 0 and ((self.CurrentProfitMonetaryLastTrade / self.MaxMonetaryProfitCurrentTrade) < macdGainNowMaxParamK.FloatValue))
             and self.MinuteSmoothedRSIIndicator.GetRSIReggr(5) > rsi30SlopeSkip5ExitParamL.FloatValue
             and (self.MaxMonetaryProfitCurrentTrade/openQty) >= (self.BollingerIndicator.TPSDStartOfTrade*gainMaxTradeParamJJJ.FloatValue)
-            and (self.MaxMonetaryProfitCurrentTrade / openQty) >= gainMaxTradeParamSDMult.FloatValue * self.LastSDDDaysOpenStdDevIndicator.LastSDDDaysOpenStdDev
+            and (self.MaxMonetaryProfitCurrentTrade / openQty) >= gainMaxTradeParamSDMult.FloatValue * self.PriceVolatilityIndicators.LastSDDDaysOpenStdDev
             and (self.MaxMonetaryProfitCurrentTrade / openQty) >= gainMaxTradeParamFixedGain.FloatValue
             and macdRsiCloseShortRule1ModelParam.IntValue>=1
             ):
@@ -1130,7 +1130,7 @@ class DayTradingPosition():
                 and (self.MaxMonetaryProfitCurrentTrade> 0  and ((self.CurrentProfitMonetaryLastTrade/self.MaxMonetaryProfitCurrentTrade)<macdGainNowMaxParamK.FloatValue))
                 and self.MinuteSmoothedRSIIndicator.GetRSIReggr(5) < (-1*rsi30SlopeSkip5ExitParamL.FloatValue)
                 and (self.MaxMonetaryProfitCurrentTrade / openQty) >= (self.BollingerIndicator.TPSDStartOfTrade * gainMaxTradeParamJJJ.FloatValue)
-                and (self.MaxMonetaryProfitCurrentTrade / openQty) >= gainMaxTradeParamSDMult.FloatValue * self.LastSDDDaysOpenStdDevIndicator.LastSDDDaysOpenStdDev
+                and (self.MaxMonetaryProfitCurrentTrade / openQty) >= gainMaxTradeParamSDMult.FloatValue * self.PriceVolatilityIndicators.LastSDDDaysOpenStdDev
                 and (self.MaxMonetaryProfitCurrentTrade / openQty) >= gainMaxTradeParamFixedGain.FloatValue
                 and macdRsiCloseLongRule1ModelParam.IntValue>=1
            ):

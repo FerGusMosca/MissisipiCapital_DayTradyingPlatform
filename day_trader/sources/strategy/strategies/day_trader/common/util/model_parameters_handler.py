@@ -639,6 +639,10 @@ class ModelParametersHandler:
     def BROOMS_BIAS():
         return "BROOMS_BIAS"
 
+    @staticmethod
+    def FLEXIBLE_STOP_LOSS_L1():
+        return "FLEXIBLE_STOP_LOSS_L1"
+
 
     #endregion
 
