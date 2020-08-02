@@ -5,6 +5,7 @@ import shutil
 import os
 import threading
 import csv
+import traceback
 
 class FileHandler:
 
@@ -69,5 +70,6 @@ class FileHandler:
 
                 time.sleep(3)
             except Exception as e:
+                traceback.print_exc()
                 logger.DoLog("Critical error fetching for input files @FileHandlerModule.FetchInputFileThread: " + str(e), MessageType.ERROR)
                 FileHandler.MoveFile(inputPath + file, failedPath + file)

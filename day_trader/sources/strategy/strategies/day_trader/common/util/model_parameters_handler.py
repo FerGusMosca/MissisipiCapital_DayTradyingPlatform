@@ -643,6 +643,45 @@ class ModelParametersHandler:
     def FLEXIBLE_STOP_LOSS_L1():
         return "FLEXIBLE_STOP_LOSS_L1"
 
+    @staticmethod
+    def IMPL_FLEXIBLE_STOP_LOSSES():
+        return "IMPL_FLEXIBLE_STOP_LOSSES"
+
+    @staticmethod
+    def TG_INDICATOR_KK():
+        return "TG_INDICATOR_KK"
+
+    @staticmethod
+    def TG_INDICATOR_KX():
+        return "TG_INDICATOR_KX"
+
+    @staticmethod
+    def TG_INDICATOR_KY():
+        return "TG_INDICATOR_KY"
+
+    @staticmethod
+    def VOLUME_INDICATOR_T1():
+        return "VOLUME_INDICATOR_T1"
+
+    @staticmethod
+    def VOLUME_INDICATOR_T2():
+        return "VOLUME_INDICATOR_T2"
+
+    @staticmethod
+    def VOLUME_INDICATOR_T3():
+        return "VOLUME_INDICATOR_T3"
+
+    @staticmethod
+    def VOLUME_INDICATOR_T3():
+        return "VOLUME_INDICATOR_T3"
+
+    @staticmethod
+    def VOLUME_INDICATOR_RULE_4():
+        return "VOLUME_INDICATOR_RULE_4"
+
+    @staticmethod
+    def VOLUME_INDICATOR_RULE_BROOMS():
+        return "VOLUME_INDICATOR_RULE_BROOMS"
 
     #endregion
 

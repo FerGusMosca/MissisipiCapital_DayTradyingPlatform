@@ -38,6 +38,10 @@ class InputFileConverter:
         return "%m/%d/%y"
 
     @staticmethod
+    def LONG_DATE_FORMAT():
+        return "%m/%d/%Y"
+
+    @staticmethod
     def DAILY_BIAS_FIELD():
         return "DAILY_BIAS"
 
@@ -89,20 +93,38 @@ class InputFileConverter:
             del modelParamDict[key]
 
     @staticmethod
-    def ExtractPrices(cls,columns,timeDict):
+    def ExtractField(cls,columns,timeDict,field=0):
         j = 0
-        pricesDict = {}
+        fieldsDict = {}
         for col in columns:
             if j== 0 :
                 pass #we just ignore the date
             else:
 
                 if len(timeDict)>=j and timeDict[j] is not None:
-                    pricesDict[j]=float(col)
+
+                    if col.startswith("(") and col.endswith(")"):
+                        fields = col[1:(len(col)-2)]
+
+                        if "-" in fields:
+                            try:
+                                if len(fields.split("-")[field])>0:
+                                    fieldsDict[j] = float(fields.split("-")[field])
+                                else:
+                                    fieldsDict[j]=0
+                            except Exception as e:
+                                raise Exception("Critical error converting complex price-volume format to decimal value for field {} (value={}):{}".format(field,fields,str(e)))
+                        else:
+                            raise Exception("You mas enter values (prices/volume) in fields format when you have (...) in the input file")
+                    else:
+                        if field==0:
+                            fieldsDict[j]=float(col)
+                        else:
+                            fieldsDict[j] = 0
 
             j += 1
 
-        return pricesDict
+        return fieldsDict
 
     @staticmethod
     def ExtractDate(cls,columns):
@@ -111,7 +133,10 @@ class InputFileConverter:
         date=None
         for col in columns:
             if j == 0:
-                date=time.strptime(col, InputFileConverter.DATE_FORMAT())
+                if len(col.split("/")[2])==2:
+                    date=time.strptime(col, InputFileConverter.DATE_FORMAT())
+                else:
+                    date = time.strptime(col, InputFileConverter.LONG_DATE_FORMAT())
             else:
                 break
 
@@ -132,7 +157,7 @@ class InputFileConverter:
             return InputFileConverter.DEFAULT_SYMBOL()
 
     @staticmethod
-    def BuildCandlebar(symbol,datetime,date,time,price):
+    def BuildCandlebar(symbol,datetime,date,time,price,volume):
         sec = Security(Symbol=symbol)
 
         candlebar = CandleBar(pSecurity=sec)
@@ -143,11 +168,12 @@ class InputFileConverter:
         candlebar.Open=price
         candlebar.Low=price
         candlebar.Close=price
+        candlebar.Volume=volume
 
         return candlebar
 
     @staticmethod
-    def BuildMarketData(symbol,datetime,date,time,price):
+    def BuildMarketData(symbol,datetime,date,time,price,volume):
         sec = Security(Symbol=symbol)
 
         md = MarketData()
@@ -160,6 +186,7 @@ class InputFileConverter:
         md.MDEntryDate=datetime
         md.MDLocalEntryDate=datetime
         md.Timestamp=datetime
+        md.NominalVolume=volume
         md.StdDev=0
 
         return md
@@ -191,15 +218,16 @@ class InputFileConverter:
                         InputFileConverter.ExtractModelParametersValues(cls,row,len(timeDict)+1,modelParamDict)
                         symbol=InputFileConverter.GetSymbol(modelParamDict)
 
-                    pricesDict = InputFileConverter.ExtractPrices(cls,row, timeDict)
+                    pricesDict = InputFileConverter.ExtractField(cls,row, timeDict,field=0)
+                    volumeDict = InputFileConverter.ExtractField(cls, row, timeDict,field=1)
                     date = InputFileConverter.ExtractDate(cls,row)
 
                     for index in timeDict:
                         dateTime = InputFileConverter.ConcatDateTime(cls,date,timeDict[index])
                         referenceDate = dateTime if referenceDate is None else referenceDate
 
-                        candlebar = InputFileConverter.BuildCandlebar(symbol,dateTime,date,time,pricesDict[index])
-                        md = InputFileConverter.BuildMarketData(symbol, dateTime, date, time, pricesDict[index])
+                        candlebar = InputFileConverter.BuildCandlebar(symbol,dateTime,date,time,pricesDict[index],volumeDict[index])
+                        md = InputFileConverter.BuildMarketData(symbol, dateTime, date, time, pricesDict[index],volumeDict[index])
 
                         if date not in candleBarDict:
                             candleBarDict[date]=[]

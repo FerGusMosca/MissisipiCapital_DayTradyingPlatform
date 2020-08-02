@@ -13,6 +13,8 @@ from sources.strategy.strategies.day_trader.business_entities.bollinger_indicato
 from sources.strategy.strategies.day_trader.business_entities.MS_strength_indicator import *
 from sources.strategy.strategies.day_trader.business_entities.price_volatility_indicators import *
 from sources.strategy.strategies.day_trader.business_entities.brooms_indicator import *
+from sources.strategy.strategies.day_trader.business_entities.TG_indicator import *
+from sources.strategy.strategies.day_trader.business_entities.volume_avg_indicator import *
 
 from scipy import stats
 import json
@@ -23,6 +25,8 @@ from json import JSONEncoder
 
 _EXIT_TERM_COND_1="EXIT_TERM_COND_1"
 _EXIT_TERM_COND_2="EXIT_TERM_COND_2"
+_EXIT_TERM_COND_FLEX_STOP_LOSS="EXIT_TERM_COND_FLEX_STOP_LOSS"
+
 _EXIT_LONG_COND_3="_EXIT_LONG_COND_3"
 _EXIT_LONG_COND_4="_EXIT_LONG_COND_4"
 _EXIT_LONG_COND_5="EXIT_LONG_COND_5"
@@ -127,6 +131,8 @@ class DayTradingPosition():
         self.MSStrengthIndicator = MSStrengthIndicator()
         self.BroomsIndicator = BroomsIndicator()
         self.PriceVolatilityIndicators=PriceVolatilityIndicators()
+        self.TGIndicator = TGIndicator()
+        self.VolumeAvgIndicator=VolumeAvgIndicator()
 
         #tester= RSIIndicatorTester()
         #tester.DoTest()
@@ -460,6 +466,8 @@ class DayTradingPosition():
         self.BollingerIndicator.Reset()
         self.MSStrengthIndicator.Reset()
         self.PriceVolatilityIndicators.Reset()
+        self.TGIndicator.Reset()
+        self.VolumeAvgIndicator.Reset()
         self.TerminalClose = False
         self.RunningBacktest= False
         self.TerminalCloseCond = None
@@ -645,15 +653,20 @@ class DayTradingPosition():
                 and self.MinuteSmoothedRSIIndicator.GetRSIReggr(5) < (-1 *  rsi30SlopeSkip5ParamC.FloatValue)
                 and self.MinuteSmoothedRSIIndicator.GetRSIReggr(10) < rsi30SlopeSkip10ParamG.FloatValue
                 and self.BollingerIndicator.BollDn < deltaDnParamXXX.FloatValue
+                and self.VolumeAvgIndicator.ValidateRule4()
                 and macdRsiOpenShortRule4ModelParam.IntValue >= 1
             ):
             self.BollingerIndicator.OnTradeSignal()
             return _SHORT_MACD_RSI_RULE_4
 
+        if (candlebarsArr[-1].DateTime.hour == 9 and candlebarsArr[-1].DateTime.min == 17):
+            print("aca")
+
         # line Brooms
         if (
                 self.BroomsIndicator.BROOMS == broomsParamZ.FloatValue
             and broomsParamBias.FloatValue <=0
+            and self.VolumeAvgIndicator.ValidateBroomsRule()
             and macdRsiOpenShortRuleBroomsModelParam.IntValue>=1
         ):
             self.BollingerIndicator.OnTradeSignal()
@@ -687,6 +700,8 @@ class DayTradingPosition():
             or self.BollingerIndicator.BollUp is None
             ):
             return None
+
+
 
         #NO TRADE ON --> LONG ON
         #line 1
@@ -732,6 +747,7 @@ class DayTradingPosition():
             and self.MinuteSmoothedRSIIndicator.GetRSIReggr(5) > rsi30SlopeSkip5ParamC.FloatValue
             and self.MinuteSmoothedRSIIndicator.GetRSIReggr(10) >= (-1 * rsi30SlopeSkip10ParamG.FloatValue)
             and self.BollingerIndicator.BollUp > deltaUpParamYYY.FloatValue
+            and self.VolumeAvgIndicator.ValidateRule4()
             and macdRsiOpenLongRule4ModelParam.IntValue >= 1
           ):
             self.BollingerIndicator.OnTradeSignal()
@@ -741,6 +757,7 @@ class DayTradingPosition():
         if(
                 self.BroomsIndicator.BROOMS ==broomsParamCC.FloatValue
             and broomsParamBias.FloatValue >=0
+            and self.VolumeAvgIndicator.ValidateBroomsRule()
             and macdRsiOpenLongRuleBroomsModelParam.IntValue>=1
 
         ):
@@ -797,9 +814,11 @@ class DayTradingPosition():
                                          gainMinTradeParamFixedLoss,gainMinStopLossExitParamW,
                                          gainMinStopLossExitParamWW,gainStopLossExitParamY, gainMinStopLossExitParamZ,
                                          gainMinStopLossExitParamZZ,endOfdayLimitModelParam,takeGainLimitModelParam,
-                                         stopLossLimitModelParam,macdRSISmoothedMode,absMaxMSPeriodParam,macdRsiCloseShortRule1ModelParam,
-                                         macdRsiCloseShortRule2ModelParam,macdRsiCloseShortRule3ModelParam,macdRsiCloseShortRule4ModelParam,
-                                         macdRsiCloseShortRule5ModelParam,macdRsiCloseShortRule6ModelParam,macdRsiCloseShortRule7ModelParam,
+                                         stopLossLimitModelParam,implFlexibeStopLoss,flexibleStopLossL1ModelParam,
+                                         macdRSISmoothedMode,absMaxMSPeriodParam,macdRsiCloseShortRule1ModelParam,
+                                         macdRsiCloseShortRule2ModelParam,macdRsiCloseShortRule3ModelParam,
+                                         macdRsiCloseShortRule4ModelParam,macdRsiCloseShortRule5ModelParam,
+                                         macdRsiCloseShortRule6ModelParam,macdRsiCloseShortRule7ModelParam,
                                          macdRsiCloseShortRule8ModelParam,macdRsiCloseShortRule9ModelParam):
 
 
@@ -812,12 +831,22 @@ class DayTradingPosition():
         else:
             openQty= abs(self.GetNetOpenShares()) if self.GetNetOpenShares()!=0 else 1
 
-        terminalCond = self.EvaluateClosingTerminalCondition(candlebarsArr, endOfdayLimitModelParam,takeGainLimitModelParam,stopLossLimitModelParam)
+        #Rule TERMINAL --> Positions are not closed. They won't just be opened again
+        terminalCond = self.EvaluateClosingTerminalCondition(candlebarsArr,takeGainLimitModelParam,stopLossLimitModelParam,
+                                                             implFlexibeStopLoss, flexibleStopLossL1ModelParam)
 
         if terminalCond is not None:
             self.TerminalClose =True
-            self.TerminalCloseCond = terminalCond
-            return terminalCond
+            self.TerminalCloseCond = terminalCond #This won't be closed. It won't just open another position again
+            #return terminalCond
+
+        # Rule STRONG TERMINAL --> Positions are closed and They won't just be opened again
+        eodCond = self.EvaluateStrongTerminal(candlebarsArr, endOfdayLimitModelParam)
+
+        if eodCond is not None:
+            self.TerminalClose = True
+            self.TerminalCloseCond = eodCond  # This WILL be closed
+            return eodCond
 
         if (self.CurrentProfitLastTrade is None or self.MaxMonetaryLossCurrentTrade is None or self.MinuteSmoothedRSIIndicator.GetRSIReggr(5) is None
                 or self.MACDIndicator.MSPrev is None or self.MACDIndicator.MS is None or self.MACDIndicator.MaxMS is None
@@ -830,12 +859,11 @@ class DayTradingPosition():
             ):
             return None
 
-
-
+        #=================== NOW WE START WITH THE ALGO NON TERMINAL RULES =============================
         # SHORT ON --> NO TRADE ON
         # rule 1
         if (    (self.MaxMonetaryProfitCurrentTrade/openQty) >= self.SmoothMACDRSIParam(macdRSISmoothedMode,self.MACDIndicator.PriceHMinusL,macdMaxGainParamJ,macdMaxGainParamJJ)
-            and (self.MaxMonetaryProfitCurrentTrade > 0 and ((self.CurrentProfitMonetaryLastTrade / self.MaxMonetaryProfitCurrentTrade) < macdGainNowMaxParamK.FloatValue))
+            and (self.MaxMonetaryProfitCurrentTrade > 0 and self.TGIndicator.HasValidValue() and ((self.CurrentProfitMonetaryLastTrade / self.MaxMonetaryProfitCurrentTrade) < self.TGIndicator.K))
             and self.MinuteSmoothedRSIIndicator.GetRSIReggr(5) > rsi30SlopeSkip5ExitParamL.FloatValue
             and (self.MaxMonetaryProfitCurrentTrade/openQty) >= (self.BollingerIndicator.TPSDStartOfTrade*gainMaxTradeParamJJJ.FloatValue)
             and (self.MaxMonetaryProfitCurrentTrade / openQty) >= gainMaxTradeParamSDMult.FloatValue * self.PriceVolatilityIndicators.LastSDDDaysOpenStdDev
@@ -857,6 +885,7 @@ class DayTradingPosition():
         if (    self.MACDIndicator.MSPrev >= msNowParamA.FloatValue
             and self.MACDIndicator.MS >= msNowParamA.FloatValue
             and (self.MaxMonetaryLossCurrentTrade/openQty) < ( self.SmoothMACDRSIParam(macdRSISmoothedMode,self.MACDIndicator.PriceHMinusL,gainMinStopLossExitParamW,gainMinStopLossExitParamWW))
+            and self.VolumeAvgIndicator.ValidateIfEnoughData()
             and macdRsiCloseShortRule3ModelParam.IntValue>=1
         ):
             return _EXIT_SHORT_MACD_RSI_COND_3
@@ -866,6 +895,7 @@ class DayTradingPosition():
             and self.MACDIndicator.MS >= msNowParamA.FloatValue
             and self.MACDIndicator.MS >=  ( self.SmoothMACDRSIParam(macdRSISmoothedMode,self.MACDIndicator.AbsMaxMS,msMaxMinExitParamNBis,msMaxMinExitParamNNBis))
             and self.MinuteSmoothedRSIIndicator.GetRSIReggr(5) > rsi30SlopeSkip5ExitParamL.FloatValue
+            and self.VolumeAvgIndicator.ValidateIfEnoughData()
             and macdRsiCloseShortRule4ModelParam.IntValue>=1
         ):
             return _EXIT_SHORT_MACD_RSI_COND_4
@@ -874,6 +904,7 @@ class DayTradingPosition():
         if (    self.MACDIndicator.MSPrev < msNowParamA.FloatValue
             and self.MACDIndicator.MS >= msNowParamA.FloatValue
             and (self.MaxMonetaryLossCurrentTrade/openQty) < gainMinStopLossExitParamW.FloatValue
+            and self.VolumeAvgIndicator.ValidateIfEnoughData()
             and macdRsiCloseShortRule5ModelParam.IntValue>=1
         ):
             return _EXIT_SHORT_MACD_RSI_COND_5
@@ -886,6 +917,7 @@ class DayTradingPosition():
             and self.MACDIndicator.MS >= (-1 * self.SmoothMACDRSIParam(macdRSISmoothedMode,self.MACDIndicator.AbsMaxMS,msNowExitParamQ,msNowExitParamQQ))
             and self.MinuteSmoothedRSIIndicator.GetRSIReggr(5) > rsi30SlopeSkip5ExitParamL.FloatValue
             and self.MinuteSmoothedRSIIndicator.GetRSIReggr(10) >= (-1*rsi30SlopeSkip10ExitParamR.FloatValue)
+            and self.VolumeAvgIndicator.ValidateIfEnoughData()
             and macdRsiCloseShortRule6ModelParam.IntValue>=1
         ):
             return _EXIT_SHORT_MACD_RSI_COND_6
@@ -897,6 +929,7 @@ class DayTradingPosition():
             and self.GetReggrSlope(candlebarsArr,5) >= sec5MinSlopeExitParamT.FloatValue
             and self.MinuteSmoothedRSIIndicator.GetRSIReggr(5) >  rsi30SlopeSkip5ExitParamL.FloatValue
             and self.MinuteSmoothedRSIIndicator.GetRSIReggr(10) >= (-1* rsi30SlopeSkip10ExitParamR.FloatValue)
+            and self.VolumeAvgIndicator.ValidateIfEnoughData()
             and macdRsiCloseShortRule7ModelParam.IntValue>=1
         ):
             return _EXIT_SHORT_MACD_RSI_COND_7
@@ -904,6 +937,7 @@ class DayTradingPosition():
         #rule 8
         if (    self.MACDIndicator.GetMaxAbsMSCrossover(absMaxMSPeriodParam.IntValue) < msMaxMinExitParamS.FloatValue
             and (self.MaxMonetaryLossCurrentTrade/openQty) < ( self.SmoothMACDRSIParam(macdRSISmoothedMode,self.MACDIndicator.PriceHMinusL,gainMinStopLossExitParamZ,gainMinStopLossExitParamZZ))
+            and self.VolumeAvgIndicator.ValidateIfEnoughData()
             and macdRsiCloseShortRule8ModelParam.IntValue>=1
             ):
             return _EXIT_SHORT_MACD_RSI_COND_8
@@ -924,6 +958,7 @@ class DayTradingPosition():
                                   maxGainForClosingModelParam,pctMaxGainForClosingModelParam,
                                   maxLossForClosingModelParam,pctMaxLossForClosingModelParam,
                                   takeGainLimitModelParam,stopLossLimitModelParam,
+                                  implFlexibeStopLoss, flexibleStopLossL1ModelParam,
                                   pctSlopeToCloseShortModelParam,
                                   endOfdayLimitModelParam,
                                   nonSmoothed14MinRSILongThreshold):
@@ -935,7 +970,6 @@ class DayTradingPosition():
         #if statisticalParams.TenMinSkipSlope is not None:
             #print( "Close Short Trade - Ten Min Skip Slope {} for security {}".format(statisticalParams.TenMinSkipSlope, self.Security.Symbol))
 
-        terminalCond = self.EvaluateClosingTerminalCondition(candlebarsArr, endOfdayLimitModelParam,takeGainLimitModelParam,stopLossLimitModelParam)
 
         if not self.Open():
             return None #Position not opened
@@ -943,12 +977,25 @@ class DayTradingPosition():
         if self.GetNetOpenShares()>0:
             return None#We are in a long position
 
+        # Rule TERMINAL --> Positions are not closed. They won't just be opened again
+        terminalCond = self.EvaluateClosingTerminalCondition(candlebarsArr, takeGainLimitModelParam,stopLossLimitModelParam,
+                                                             implFlexibeStopLoss, flexibleStopLossL1ModelParam)
+
         if terminalCond is not None:
-            self.TerminalClose=True
-            self.TerminalCloseCond=terminalCond
-            return terminalCond
+            self.TerminalClose = True
+            self.TerminalCloseCond = terminalCond  # This won't be closed. It won't just open another position again
+            # return terminalCond
+
+        # Rule STRONG TERMINAL --> Positions are closed and They won't just be opened again
+        eodCond = self.EvaluateStrongTerminal(candlebarsArr, endOfdayLimitModelParam)
+
+        if eodCond is not None:
+            self.TerminalClose = True
+            self.TerminalCloseCond = eodCond  # This WILL be closed
+            return eodCond
 
         # Maximum Gain during the trade exceeds a certain value and then drops to a percentage of that value
+        #rule 3
         if (    self.MaxProfitCurrentTrade is not None
             and self.CurrentProfitLastTrade is not None
             and (maxGainForClosingModelParam.FloatValue is not None and self.MaxProfitCurrentTrade >= maxGainForClosingModelParam.FloatValue * 100)
@@ -957,6 +1004,7 @@ class DayTradingPosition():
             return _EXIT_SHORT_COND_3
 
         # Maximum Loss during the trade exceeds (worse than) a certain value and then drops to a percentage of that value
+        #rule 4
         if (    self.CurrentProfitLastTrade is not None
             and self.MaxLossCurrentTrade is not None
             and (maxLossForClosingModelParam.FloatValue is not None and self.MaxLossCurrentTrade <= (maxLossForClosingModelParam.FloatValue * 100))
@@ -968,6 +1016,7 @@ class DayTradingPosition():
                 return _EXIT_SHORT_COND_4
 
         #Last 3 minute slope of 3 minute moving average exceeds a certain value AGAINST the Trade
+        #rule 5
         if(     statisticalParams.ThreeMinSkipSlope is not None
             and ( pctSlopeToCloseShortModelParam.FloatValue is not None and statisticalParams.ThreeMinSkipSlope >= pctSlopeToCloseShortModelParam.FloatValue)):
             return _EXIT_SHORT_COND_5
@@ -976,19 +1025,28 @@ class DayTradingPosition():
         return None
 
 
+    #Strong and simple Terminal
     def IsTermianlCondition(self,condition):
         return (condition==_EXIT_TERM_COND_EOF or condition==_EXIT_TERM_COND_1 or condition==_EXIT_TERM_COND_2
-                or condition == _TERMINALLY_CLOSED)
+                or condition == _TERMINALLY_CLOSED or condition==_EXIT_TERM_COND_FLEX_STOP_LOSS)
+
+        # Defines if the condition for closing the day, will imply not opening another position during the day
+    def EvaluateStrongTerminal(self, candlebarsArr, endOfdayLimitModelParam):
+
+            lastCandlebar = candlebarsArr[-1]
+
+            # EXIT any open trades at 2:59 PM central time
+            if (endOfdayLimitModelParam.StringValue is not None and self.EvaluateBiggerDate(lastCandlebar,
+                                                                                            endOfdayLimitModelParam)):
+                return _EXIT_TERM_COND_EOF
+
+            return None
 
     #Defines if the condition for closing the day, will imply not opening another position during the day
-    def EvaluateClosingTerminalCondition(self,candlebarsArr,endOfdayLimitModelParam,takeGainLimitModelParam,stopLossLimitModelParam):
+    def EvaluateClosingTerminalCondition(self,candlebarsArr,takeGainLimitModelParam,stopLossLimitModelParam,
+                                         implFlexibeStopLoss, flexibleStopLossL1ModelParam):
 
         lastCandlebar = candlebarsArr[-1]
-
-        # EXIT any open trades at 2:59 PM central time
-        if (endOfdayLimitModelParam.StringValue is not None and self.EvaluateBiggerDate(lastCandlebar,endOfdayLimitModelParam)):
-            return _EXIT_TERM_COND_EOF
-
 
         # CUMULATIVE Gain for the Day exceeds Take Gain Limit
         if ( takeGainLimitModelParam.FloatValue is not None and (self.CurrentProfit is not None and self.CurrentProfit > takeGainLimitModelParam.FloatValue*100)):
@@ -998,89 +1056,14 @@ class DayTradingPosition():
         if (stopLossLimitModelParam.FloatValue is not None and (self.CurrentProfit is not None and self.CurrentProfit < stopLossLimitModelParam.FloatValue*100)):
             return _EXIT_TERM_COND_2
 
+        # L1- Flexible Stop Loss
+        if (    implFlexibeStopLoss.IntValue >=1 and self.PriceVolatilityIndicators.FlexibleStopLoss is not None
+            and self.PriceVolatilityIndicators.FlexibleStopLoss!=0):
+            openQty = abs(self.GetNetOpenShares()) if self.GetNetOpenShares() != 0 else 1
+            if (self.MaxMonetaryLossCurrentTrade/openQty) < self.PriceVolatilityIndicators.FlexibleStopLoss:
+                return _EXIT_TERM_COND_FLEX_STOP_LOSS
+
         return None
-
-    def EvaluateClosingOnEndOfDay(self,candlebar,endOfdayLimitModelParam):
-        if not self.Open():
-            return False  # Position not opened
-
-        openSummary = self.GetLastTradedSummary(Side.Buy if self.GetNetOpenShares()>0 else Side.Sell)
-
-        if ( openSummary is not None
-            and openSummary.Position.CloseEndOfDay is not None
-            and openSummary.Position.CloseEndOfDay ==True
-            and self.EvaluateBiggerDate( candlebar,endOfdayLimitModelParam)
-            and self.GetNetOpenShares()!=0):
-            return True
-        else:
-            return False
-
-    def EvaluateClosingOnStopLoss(self, candlebar):
-
-        if not self.Open():
-            return False  # Position not opened
-
-        if self.GetNetOpenShares() < 0: #Stop loss on short position
-            openSummary = self.GetLastTradedSummary(Side.Sell)
-
-            if (openSummary is not None
-                and openSummary.AvgPx is not None
-                and openSummary.Position.StopLoss is not None
-                and candlebar.Close is not None
-                and candlebar.Close > (openSummary.AvgPx + openSummary.Position.StopLoss)#Short --> bigger than
-                ):
-                return True
-            else:
-                return False
-
-        elif self.GetNetOpenShares() > 0: #Stop loss on long position
-            openSummary = self.GetLastTradedSummary(Side.Buy)
-
-            if (openSummary is not None
-                and openSummary.Position.StopLoss is not None
-                and openSummary.AvgPx is not None
-                and candlebar.Close is not None
-                and  candlebar.Close < (openSummary.AvgPx - openSummary.Position.StopLoss)#Long --> lower than
-                ):
-                return True
-            else:
-                return False
-        else:
-            return False
-
-    def EvaluateClosingOnTakeProfit(self, candlebar):
-
-        if not self.Open():
-            return False  # Position not opened
-
-        if self.GetNetOpenShares() < 0: #take profit on short position
-            openSummary = self.GetLastTradedSummary(Side.Sell)
-
-            if ( openSummary is not None
-                and openSummary.Position.TakeProfit is not None
-                and openSummary.AvgPx is not None
-                and candlebar.Close is not None
-                and  candlebar.Close < (openSummary.AvgPx - openSummary.Position.TakeProfit)
-                ):#Short position --> lower than AvgPx - take profit
-                return True
-            else:
-                return False
-        elif self.GetNetOpenShares() > 0: #Stop loss on long position
-
-            openSummary = self.GetLastTradedSummary(Side.Buy)
-
-            if  (
-                openSummary is not None
-                and openSummary.AvgPx is not None
-                and candlebar.Close is not None
-                and openSummary.Position.TakeProfit is not None
-                and candlebar.Close > (openSummary.AvgPx + openSummary.Position.TakeProfit)
-                ):
-                return True
-            else:
-                return False
-        else:
-            return False
 
     def EvaluateClosingMACDRSILongTrade(self,candlebarsArr,msNowParamA,macdMaxGainParamJ,macdMaxGainParamJJ,gainMaxTradeParamJJJ,
                                             gainMaxTradeParamSDMult,gainMaxTradeParamFixedGain,macdGainNowMaxParamK,
@@ -1091,7 +1074,9 @@ class DayTradingPosition():
                                             gainMinTradeParamUUU, gainMinTradeParamFixedLoss,
                                             gainMinStopLossExitParamW,gainMinStopLossExitParamWW,gainStopLossExitParamY,
                                             gainMinStopLossExitParamZ,gainMinStopLossExitParamZZ,endOfdayLimitModelParam,
-                                            takeGainLimitModelParam,stopLossLimitModelParam,macdRSISmoothedMode,absMaxMSPeriodParam,
+                                            takeGainLimitModelParam,stopLossLimitModelParam,
+                                            implFlexibeStopLoss, flexibleStopLossL1ModelParam,
+                                            macdRSISmoothedMode,absMaxMSPeriodParam,
                                             macdRsiCloseLongRule1ModelParam,macdRsiCloseLongRule2ModelParam,macdRsiCloseLongRule3ModelParam,
                                             macdRsiCloseLongRule4ModelParam,macdRsiCloseLongRule5ModelParam,macdRsiCloseLongRule6ModelParam,
                                             macdRsiCloseLongRule7ModelParam,macdRsiCloseLongRule8ModelParam,macdRsiCloseLongRule9ModelParam):
@@ -1106,12 +1091,22 @@ class DayTradingPosition():
         else:
             openQty=abs(self.GetNetOpenShares()) if self.GetNetOpenShares()!=0 else 1
 
-        terminalCond = self.EvaluateClosingTerminalCondition(candlebarsArr,endOfdayLimitModelParam,takeGainLimitModelParam,stopLossLimitModelParam)
+        # Rule TERMINAL --> Positions are not closed. They won't just be opened again
+        terminalCond = self.EvaluateClosingTerminalCondition(candlebarsArr,takeGainLimitModelParam,stopLossLimitModelParam,
+                                                             implFlexibeStopLoss, flexibleStopLossL1ModelParam)
 
         if terminalCond is not None:
             self.TerminalClose=True
-            self.TerminalCloseCond = terminalCond
-            return terminalCond
+            self.TerminalCloseCond = terminalCond #This won't be closed. It won't just open another position again
+            #return terminalCond
+
+        # Rule STRONG TERMINAL --> Positions are closed and They won't just be opened again
+        eodCond = self.EvaluateStrongTerminal(candlebarsArr, endOfdayLimitModelParam)
+
+        if eodCond is not None:
+            self.TerminalClose = True
+            self.TerminalCloseCond = eodCond  # This WILL be closed
+            return eodCond
 
         if (
                 self.CurrentProfitLastTrade is None or self.MaxProfitCurrentTrade is None or self.MinuteSmoothedRSIIndicator.GetRSIReggr(5) is None
@@ -1123,11 +1118,13 @@ class DayTradingPosition():
            ):
             return None
 
+        # =================== NOW WE START WITH THE ALGO NON TERMINAL RULES =============================
+
         # LONG ON --> NO TRADE ON
         # rule 1
         if (
                     (self.MaxMonetaryProfitCurrentTrade/openQty) >= self.SmoothMACDRSIParam(macdRSISmoothedMode,self.MACDIndicator.PriceHMinusL,macdMaxGainParamJ,macdMaxGainParamJJ)
-                and (self.MaxMonetaryProfitCurrentTrade> 0  and ((self.CurrentProfitMonetaryLastTrade/self.MaxMonetaryProfitCurrentTrade)<macdGainNowMaxParamK.FloatValue))
+                and (self.MaxMonetaryProfitCurrentTrade> 0 and self.TGIndicator.HasValidValue()  and ((self.CurrentProfitMonetaryLastTrade/self.MaxMonetaryProfitCurrentTrade)<self.TGIndicator.K))
                 and self.MinuteSmoothedRSIIndicator.GetRSIReggr(5) < (-1*rsi30SlopeSkip5ExitParamL.FloatValue)
                 and (self.MaxMonetaryProfitCurrentTrade / openQty) >= (self.BollingerIndicator.TPSDStartOfTrade * gainMaxTradeParamJJJ.FloatValue)
                 and (self.MaxMonetaryProfitCurrentTrade / openQty) >= gainMaxTradeParamSDMult.FloatValue * self.PriceVolatilityIndicators.LastSDDDaysOpenStdDev
@@ -1141,6 +1138,7 @@ class DayTradingPosition():
                 and self.MACDIndicator.MS < msNowParamA.FloatValue
                 and self.MACDIndicator.MS < (-1 * self.SmoothMACDRSIParam(macdRSISmoothedMode,self.MACDIndicator.AbsMaxMS,msNowExitParamN,msNowExitParamNN))
                 and self.MinuteSmoothedRSIIndicator.GetRSIReggr(5) < (-1*rsi30SlopeSkip5ExitParamL.FloatValue)
+                and self.VolumeAvgIndicator.ValidateIfEnoughData()
                 and macdRsiCloseLongRule2ModelParam.IntValue>=1
 
         ):
@@ -1150,6 +1148,7 @@ class DayTradingPosition():
         if (self.MACDIndicator.MSPrev < msNowParamA.FloatValue
                 and self.MACDIndicator.MS < msNowParamA.FloatValue
                 and (self.MaxMonetaryLossCurrentTrade/openQty) < self.SmoothMACDRSIParam(macdRSISmoothedMode,self.MACDIndicator.PriceHMinusL,gainMinStopLossExitParamW,gainMinStopLossExitParamWW)
+                and self.VolumeAvgIndicator.ValidateIfEnoughData()
                 and macdRsiCloseLongRule3ModelParam.IntValue>=1
 
         ):
@@ -1160,6 +1159,7 @@ class DayTradingPosition():
                 and self.MACDIndicator.MS < msNowParamA.FloatValue
                 and self.MACDIndicator.MS < (-1 * self.SmoothMACDRSIParam(macdRSISmoothedMode,self.MACDIndicator.AbsMaxMS,msNowExitParamN,msNowExitParamNN))
                 and self.MinuteSmoothedRSIIndicator.GetRSIReggr(5) < (-1 * rsi30SlopeSkip5ExitParamL.FloatValue)
+                and self.VolumeAvgIndicator.ValidateIfEnoughData()
                 and macdRsiCloseLongRule4ModelParam.IntValue>=1
 
         ):
@@ -1182,6 +1182,7 @@ class DayTradingPosition():
                 and self.MACDIndicator.MS < self.SmoothMACDRSIParam(macdRSISmoothedMode,self.MACDIndicator.AbsMaxMS,msNowExitParamQ,msNowExitParamQQ)
                 and self.MinuteSmoothedRSIIndicator.GetRSIReggr(5) < (-1 * rsi30SlopeSkip5ExitParamL.FloatValue)
                 and self.MinuteSmoothedRSIIndicator.GetRSIReggr(10) < rsi30SlopeSkip10ExitParamR.FloatValue
+                and self.VolumeAvgIndicator.ValidateIfEnoughData()
                 and macdRsiCloseLongRule6ModelParam.IntValue >=1
             ):
                 return _EXIT_LONG_MACD_RSI_COND_6
@@ -1191,6 +1192,7 @@ class DayTradingPosition():
                 and self.GetReggrSlope(candlebarsArr,5) < ( -1 * sec5MinSlopeExitParamT.FloatValue)
                 and self.MinuteSmoothedRSIIndicator.GetRSIReggr(5) < (-1 * rsi30SlopeSkip5ExitParamL.FloatValue)
                 and self.MinuteSmoothedRSIIndicator.GetRSIReggr(10) < rsi30SlopeSkip10ExitParamR.FloatValue
+                and self.VolumeAvgIndicator.ValidateIfEnoughData()
                 and macdRsiCloseLongRule7ModelParam.IntValue>=1
             ):
             return _EXIT_LONG_MACD_RSI_COND_7
@@ -1199,6 +1201,7 @@ class DayTradingPosition():
         # rule 8
         if (        self.MACDIndicator.GetMaxAbsMSCrossover(absMaxMSPeriodParam.IntValue) < self.SmoothMACDRSIParam(macdRSISmoothedMode, self.MACDIndicator.AbsMaxMS, msMaxMinExitParamS, msMaxMinExitParamSS)
                 and (self.MaxMonetaryLossCurrentTrade/openQty) < ( self.SmoothMACDRSIParam(macdRSISmoothedMode,self.MACDIndicator.PriceHMinusL,gainMinStopLossExitParamZ,gainMinStopLossExitParamZZ))
+                and self.VolumeAvgIndicator.ValidateIfEnoughData()
                 and macdRsiCloseLongRule8ModelParam.IntValue >=1
             ):
             return _EXIT_LONG_MACD_RSI_COND_8
@@ -1221,6 +1224,7 @@ class DayTradingPosition():
                                   maxGainForClosingModelParam,pctMaxGainForClosingModelParam,
                                   maxLossForClosingModelParam,pctMaxLossForClosingModelParam,
                                   takeGainLimitModelParam,stopLossLimitModelParam,
+                                  implFlexibeStopLoss, flexibleStopLossL1ModelParam,
                                   pctSlopeToCloseLongModelParam,
                                   endOfdayLimitModelParam,
                                   nonSmoothed14MinRSIShortThreshold):
@@ -1229,23 +1233,31 @@ class DayTradingPosition():
 
         statisticalParams = self.GetStatisticalParameters(candlebarsArr)
 
-        #if statisticalParams.TenMinSkipSlope is not None:
-            #print( "Close Long Trade - Ten Min Skip Slope {} for security {}".format(statisticalParams.TenMinSkipSlope,self.Security.Symbol))
-
-        terminalCond = self.EvaluateClosingTerminalCondition(candlebarsArr,endOfdayLimitModelParam,takeGainLimitModelParam,stopLossLimitModelParam)
-
-        if terminalCond is not None:
-            self.TerminalClose=True
-            self.TerminalCloseCond=terminalCond
-            return terminalCond
-
         if not self.Open():
             return None  # Position not opened
 
         if self.GetNetOpenShares() < 0:
             return None  # We are in a short position
 
+        # Rule TERMINAL --> Positions are not closed. They won't just be opened again
+        terminalCond = self.EvaluateClosingTerminalCondition(candlebarsArr, takeGainLimitModelParam,stopLossLimitModelParam,
+                                                             implFlexibeStopLoss, flexibleStopLossL1ModelParam)
+
+        if terminalCond is not None:
+            self.TerminalClose = True
+            self.TerminalCloseCond = terminalCond  # This won't be closed. It won't just open another position again
+            # return terminalCond
+
+        # Rule STRONG TERMINAL --> Positions are closed and They won't just be opened again
+        eodCond = self.EvaluateStrongTerminal(candlebarsArr, endOfdayLimitModelParam)
+
+        if eodCond is not None:
+            self.TerminalClose = True
+            self.TerminalCloseCond = eodCond  # This WILL be closed
+            return eodCond
+
         # Maximum Gain during the trade exceeds a certain value and then drops to a percentage of that value
+        #rule 3
         if (    self.MaxProfitCurrentTrade is not None
             and self.CurrentProfitLastTrade is not None
             and (maxGainForClosingModelParam.FloatValue is not None and self.MaxProfitCurrentTrade >= maxGainForClosingModelParam.FloatValue * 100)
@@ -1254,6 +1266,7 @@ class DayTradingPosition():
             return _EXIT_LONG_COND_3
 
         # Maximum Loss during the trade exceeds (worse than) a certain value and then drops to a percentage of that value
+        #rule 4
         if (    self.CurrentProfitLastTrade is not None
             and self.MaxLossCurrentTrade is not None
             and (maxLossForClosingModelParam.FloatValue is not None and self.MaxLossCurrentTrade <= (maxLossForClosingModelParam.FloatValue * 100))
@@ -1265,6 +1278,7 @@ class DayTradingPosition():
                 return _EXIT_LONG_COND_4
 
         #Last 3 minute slope of 3 minute moving average exceeds a certain value AGAINST the Trade
+        #rule 5
         if(     statisticalParams.ThreeMinSkipSlope is not None
             and (pctSlopeToCloseLongModelParam.FloatValue is not None and statisticalParams.ThreeMinSkipSlope < pctSlopeToCloseLongModelParam.FloatValue)
           ):
@@ -1324,27 +1338,6 @@ class DayTradingPosition():
         return  sorted(list(filter(lambda x: x.Position.GetLastOrder() is not None or x.Position.IsRejectedPosition(),
                                    self.ExecutionSummaries.values())),
                                    key=lambda x: x.CreateTime,reverse=True)
-
-    def CalculateStdDevForLastNDays(self,marketDataArr,nDaysModelParam):
-
-        if nDaysModelParam is not None:
-
-            sortedMDArr= sorted(list(filter(lambda x: x.ClosingPrice is not None, marketDataArr.values())), key=lambda x: x.MDEntryDate,
-                                reverse=True)[:nDaysModelParam.IntValue]
-
-            closingPrices = []
-
-            for md in sortedMDArr:
-                closingPrices.append(md.ClosingPrice)
-
-            self.LastNDaysStdDev = statistics.stdev(closingPrices)
-
-        else:
-            self.LastNDaysStdDev = None
-
-
-
-
 
 
     #endregion

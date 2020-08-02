@@ -124,7 +124,7 @@ class BollingerIndicator():
         self.CalculateBollDn(BROOMS_BOLLDN_D)
         self.CalculateBSI(BROOMS_BOLLINGER_K,BROOMS_BOLLINGER_L)
 
-        self.LastProcessedDateTime=candlebar
+        self.LastProcessedDateTime=candlebar.DateTime
 
     def OnTradeSignal(self):
         self.TPSDStartOfTrade=self.TPSD

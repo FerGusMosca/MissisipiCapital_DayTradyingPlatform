@@ -188,8 +188,6 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                 if (self.LastSubscriptionDateTime is None or
                     (self.LastSubscriptionDateTime.day != todayResetTime.day and now> todayResetTime)):
 
-                    self.RoutingLock.acquire()
-
                     for dayTradingPos in self.DayTradingPositions:
                         dayTradingPos.ResetProfitCounters(now)
 
@@ -203,12 +201,10 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
                     self.RequestHistoricalPrices()
 
-                    if self.RoutingLock.locked():
-                        self.RoutingLock.release()
-
                 time.sleep(1)
 
             except Exception as e:
+                #traceback.print_exc()
                 msg = "Critical error @DayTrader.MarketSubscriptionsThread:{}".format(str(e))
                 self.ProcessCriticalError(e, msg)
                 self.SendToInvokingModule(ErrorWrapper(Exception(msg)))
@@ -240,6 +236,8 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
         dayTradingPos.UpdateRouting() #order is important!
         if summary.Position.IsFinishedPosition():
             self.WaitForFilledToArrive = False
+            #print("{}-<Reset>-WaitForFilledToArriv:{}".format(datetime.datetime.now(),self.WaitForFilledToArrive))
+
             LogHelper.LogPositionUpdate(self, "Managed Position Finished", summary, execReport)
             #print("Position Status={} Routing={}".format(summary.Position.PosStatus,dayTradingPos.Routing))
             if summary.Position.PosId in self.PendingCancels:
@@ -767,6 +765,24 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                                                  self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_XX())
                                                  )
 
+            dayTradingPos.TGIndicator.Update(self.ModelParametersHandler.Get(ModelParametersHandler.TG_INDICATOR_KK()),
+                                             self.ModelParametersHandler.Get(ModelParametersHandler.TG_INDICATOR_KX()),
+                                             self.ModelParametersHandler.Get(ModelParametersHandler.TG_INDICATOR_KY()),
+                                             dayTradingPos.MaxMonetaryProfitCurrentTrade,
+                                             dayTradingPos.BollingerIndicator.TPSDStartOfTrade,
+                                             self.ModelParametersHandler.Get(ModelParametersHandler.MACD_RSI_CLOSE_LONG_RULE_1()),
+                                             self.ModelParametersHandler.Get(ModelParametersHandler.MACD_RSI_CLOSE_SHORT_RULE_1())
+                                             )
+
+
+            dayTradingPos.VolumeAvgIndicator.Update(candlebarDict.values(),
+                                                    self.ModelParametersHandler.Get(ModelParametersHandler.VOLUME_INDICATOR_T1()),
+                                                    self.ModelParametersHandler.Get(ModelParametersHandler.VOLUME_INDICATOR_T2()),
+                                                    self.ModelParametersHandler.Get(ModelParametersHandler.VOLUME_INDICATOR_T3()),
+                                                    self.ModelParametersHandler.Get(ModelParametersHandler.VOLUME_INDICATOR_RULE_4()),
+                                                    self.ModelParametersHandler.Get(ModelParametersHandler.VOLUME_INDICATOR_RULE_BROOMS())
+                                                    )
+
 
     def EvaluateGenericLongTrade(self,dayTradingPos,symbol,cbDict,candlebar):
         if (dayTradingPos.EvaluateValidTimeToEnterTrade(candlebar,
@@ -785,7 +801,12 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                 and dayTradingPos.EvaluateClosingTerminalCondition(list(cbDict.values()),
                    self.ModelParametersHandler.Get(ModelParametersHandler.END_OF_DAY_LIMIT(),symbol),
                    self.ModelParametersHandler.Get(ModelParametersHandler.TAKE_GAIN_LIMIT(),symbol),
-                   self.ModelParametersHandler.Get(ModelParametersHandler.STOP_LOSS_LIMIT(),symbol)) is None
+                   self.ModelParametersHandler.Get(ModelParametersHandler.STOP_LOSS_LIMIT(),symbol),
+                   self.ModelParametersHandler.Get(ModelParametersHandler.IMPL_FLEXIBLE_STOP_LOSSES(),symbol),
+                   self.ModelParametersHandler.Get(ModelParametersHandler.FLEXIBLE_STOP_LOSS_L1(),symbol)) is None
+
+                and dayTradingPos.EvaluateStrongTerminal(list(cbDict.values()),
+                   self.ModelParametersHandler.Get(ModelParametersHandler.END_OF_DAY_LIMIT(),symbol)) is None
 
         ):
 
@@ -821,7 +842,12 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                 and dayTradingPos.EvaluateClosingTerminalCondition(list(cbDict.values()),
                    self.ModelParametersHandler.Get(ModelParametersHandler.END_OF_DAY_LIMIT(),symbol),
                    self.ModelParametersHandler.Get( ModelParametersHandler.TAKE_GAIN_LIMIT(),symbol),
-                   self.ModelParametersHandler.Get(ModelParametersHandler.STOP_LOSS_LIMIT(),symbol)) is None
+                   self.ModelParametersHandler.Get(ModelParametersHandler.STOP_LOSS_LIMIT(),symbol),
+                   self.ModelParametersHandler.Get(ModelParametersHandler.IMPL_FLEXIBLE_STOP_LOSSES(),symbol),
+                   self.ModelParametersHandler.Get(ModelParametersHandler.FLEXIBLE_STOP_LOSS_L1(),symbol)) is None
+            
+                and dayTradingPos.EvaluateStrongTerminal(list(cbDict.values()),
+                   self.ModelParametersHandler.Get(ModelParametersHandler.END_OF_DAY_LIMIT(),symbol)) is None
             ):
 
             if dayTradingPos.EvaluateGenericShortTrade(
@@ -845,20 +871,29 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
 
     def EvaluateOpeningGenericAutomaticTrading(self,dayTradingPos,symbol,cbDict,candlebar):
-        return  self.EvaluateGenericLongTrade(dayTradingPos, symbol, cbDict, candlebar) or \
-                self.EvaluateGenericShortTrade(dayTradingPos, symbol, cbDict, candlebar)
+        longCond =  self.EvaluateGenericLongTrade(dayTradingPos, symbol, cbDict, candlebar)
+        shortCond = self.EvaluateGenericShortTrade(dayTradingPos, symbol, cbDict, candlebar)
+
+        if dayTradingPos.IsTermianlCondition(longCond) or dayTradingPos.IsTermianlCondition(shortCond):
+            return False
+        else:
+            return longCond is not None or shortCond is not None
 
     def EvaluateMACDRSILongTrade(self,dayTradingPos,symbol,cbDict,candlebar):
 
         terminallyClosed = dayTradingPos.TerminalClose
-        terminalCond = dayTradingPos.EvaluateClosingTerminalCondition(list(cbDict.values()),
-                     self.ModelParametersHandler.Get(ModelParametersHandler.END_OF_DAY_LIMIT(),symbol),
-                     self.ModelParametersHandler.Get(ModelParametersHandler.TAKE_GAIN_LIMIT(),symbol),
-                     self.ModelParametersHandler.Get(ModelParametersHandler.STOP_LOSS_LIMIT(),symbol))
+        terminalCond = dayTradingPos.EvaluateClosingTerminalCondition\
+                         (list(cbDict.values()),
+                         self.ModelParametersHandler.Get(ModelParametersHandler.TAKE_GAIN_LIMIT(),symbol),
+                         self.ModelParametersHandler.Get(ModelParametersHandler.STOP_LOSS_LIMIT(),symbol),
+                         self.ModelParametersHandler.Get(ModelParametersHandler.IMPL_FLEXIBLE_STOP_LOSSES(),symbol),
+                         self.ModelParametersHandler.Get(ModelParametersHandler.FLEXIBLE_STOP_LOSS_L1(),symbol)
+                         )
+        strongTerminalCond =  dayTradingPos.EvaluateStrongTerminal(list(cbDict.values()),
+                         self.ModelParametersHandler.Get(ModelParametersHandler.END_OF_DAY_LIMIT(),symbol))
 
 
-
-        if (not terminallyClosed  and  terminalCond is  None):
+        if (not terminallyClosed  and  terminalCond is  None and strongTerminalCond is None):
 
                longCondition =  dayTradingPos.EvaluateMACDRSILongTrade(self.ModelParametersHandler.Get(ModelParametersHandler.M_S_NOW_A(),symbol),
                                   self.ModelParametersHandler.Get( ModelParametersHandler.M_S_MIN_B(), symbol),
@@ -901,17 +936,22 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                    return None
 
         else:
-            return terminalCond if not terminallyClosed else dayTradingPos._TERMINALLY_CLOSED
+            return terminalCond if not terminallyClosed else dayTradingPos._TERMINALLY_CLOSED()
 
     def EvaluateMACDRSIShorTrade(self,  dayTradingPos, symbol, cbDict, candlebar):
 
         terminallyClosed = dayTradingPos.TerminalClose
-        terminalCond = dayTradingPos.EvaluateClosingTerminalCondition(list(cbDict.values()),
-                            self.ModelParametersHandler.Get(ModelParametersHandler.END_OF_DAY_LIMIT(),symbol),
-                            self.ModelParametersHandler.Get(ModelParametersHandler.TAKE_GAIN_LIMIT(),symbol),
-                            self.ModelParametersHandler.Get(ModelParametersHandler.STOP_LOSS_LIMIT(),symbol))
+        terminalCond = dayTradingPos.EvaluateClosingTerminalCondition \
+                                    (list(cbDict.values()),
+                                     self.ModelParametersHandler.Get(ModelParametersHandler.TAKE_GAIN_LIMIT(), symbol),
+                                     self.ModelParametersHandler.Get(ModelParametersHandler.STOP_LOSS_LIMIT(), symbol),
+                                     self.ModelParametersHandler.Get(ModelParametersHandler.IMPL_FLEXIBLE_STOP_LOSSES(), symbol),
+                                     self.ModelParametersHandler.Get(ModelParametersHandler.FLEXIBLE_STOP_LOSS_L1(), symbol)
+                                     )
+        strongTerminalCond = dayTradingPos.EvaluateStrongTerminal(list(cbDict.values()),
+                                     self.ModelParametersHandler.Get(ModelParametersHandler.END_OF_DAY_LIMIT(), symbol))
 
-        if (not terminallyClosed  and terminalCond is None):
+        if (not terminallyClosed  and terminalCond is None and strongTerminalCond is None):
 
 
             shortCondition = dayTradingPos.EvaluateMACDRSIShortTrade(
@@ -958,13 +998,14 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
             else:
                 return None
         else:
-            return terminalCond if not terminallyClosed else dayTradingPos._TERMINALLY_CLOSED
+            return terminalCond if not terminallyClosed else dayTradingPos._TERMINALLY_CLOSED()
 
     def EvaluateOpeningMACDRSIAutomaticTrading(self,dayTradingPos,symbol,cbDict,candlebar):
 
         longCond = self.EvaluateMACDRSILongTrade(dayTradingPos,symbol,cbDict,candlebar)
         shortCond = self.EvaluateMACDRSIShorTrade(dayTradingPos,symbol,cbDict,candlebar)
 
+        #print("WaitForFilledToArrive--> OpenLong={} OpenShort={}".format(longCond,shortCond))
         if dayTradingPos.IsTermianlCondition(longCond) or dayTradingPos.IsTermianlCondition(shortCond):
             return False
         else:
@@ -1128,6 +1169,8 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                                                 self.ModelParametersHandler.Get(ModelParametersHandler.PCT_MAX_LOSS_CLOSING(),symbol),
                                                 self.ModelParametersHandler.Get(ModelParametersHandler.TAKE_GAIN_LIMIT(),symbol),
                                                 self.ModelParametersHandler.Get(ModelParametersHandler.STOP_LOSS_LIMIT(),symbol),
+                                                self.ModelParametersHandler.Get(ModelParametersHandler.IMPL_FLEXIBLE_STOP_LOSSES(),symbol),
+                                                self.ModelParametersHandler.Get(ModelParametersHandler.FLEXIBLE_STOP_LOSS_L1(),symbol),
                                                 self.ModelParametersHandler.Get(ModelParametersHandler.PCT_SLOPE_TO_CLOSE_LONG(),symbol),
                                                 self.ModelParametersHandler.Get(ModelParametersHandler.END_OF_DAY_LIMIT(),symbol),
                                                 self.ModelParametersHandler.Get(ModelParametersHandler.NON_SMOOTHED_RSI_SHORT_THRESHOLD(),symbol),
@@ -1163,6 +1206,8 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                                                 self.ModelParametersHandler.Get(ModelParametersHandler.PCT_MAX_LOSS_CLOSING(),symbol),
                                                 self.ModelParametersHandler.Get(ModelParametersHandler.TAKE_GAIN_LIMIT(),symbol),
                                                 self.ModelParametersHandler.Get(ModelParametersHandler.STOP_LOSS_LIMIT(),symbol),
+                                                self.ModelParametersHandler.Get(ModelParametersHandler.IMPL_FLEXIBLE_STOP_LOSSES(),symbol),
+                                                self.ModelParametersHandler.Get(ModelParametersHandler.FLEXIBLE_STOP_LOSS_L1(),symbol),
                                                 self.ModelParametersHandler.Get(ModelParametersHandler.PCT_SLOPE_TO_CLOSE_SHORT(),symbol),
                                                 self.ModelParametersHandler.Get(ModelParametersHandler.END_OF_DAY_LIMIT(),symbol),
                                                 self.ModelParametersHandler.Get(ModelParametersHandler.NON_SMOOTHED_RSI_LONG_THRESHOLD(),symbol)
@@ -1217,6 +1262,8 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                                                                         self.ModelParametersHandler.Get(ModelParametersHandler.END_OF_DAY_LIMIT(),symbol),
                                                                         self.ModelParametersHandler.Get(ModelParametersHandler.TAKE_GAIN_LIMIT(),symbol),
                                                                         self.ModelParametersHandler.Get(ModelParametersHandler.STOP_LOSS_LIMIT(),symbol),
+                                                                        self.ModelParametersHandler.Get(ModelParametersHandler.IMPL_FLEXIBLE_STOP_LOSSES(),symbol),
+                                                                        self.ModelParametersHandler.Get(ModelParametersHandler.FLEXIBLE_STOP_LOSS_L1(),symbol),
                                                                         self.ModelParametersHandler.Get(ModelParametersHandler.MACD_RSI_SMOOTHED_MODE(),symbol),
                                                                         self.ModelParametersHandler.Get(ModelParametersHandler.MACD_RSI_ABS_MAX_MS_PERIOD(), symbol),
                                                                         self.ModelParametersHandler.Get(ModelParametersHandler.MACD_RSI_CLOSE_LONG_RULE_1(),symbol),
@@ -1282,6 +1329,8 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                                                                          self.ModelParametersHandler.Get(ModelParametersHandler.END_OF_DAY_LIMIT(),symbol),
                                                                          self.ModelParametersHandler.Get(ModelParametersHandler.TAKE_GAIN_LIMIT(),symbol),
                                                                          self.ModelParametersHandler.Get(ModelParametersHandler.STOP_LOSS_LIMIT(),symbol),
+                                                                         self.ModelParametersHandler.Get(ModelParametersHandler.IMPL_FLEXIBLE_STOP_LOSSES(),symbol),
+                                                                         self.ModelParametersHandler.Get(ModelParametersHandler.FLEXIBLE_STOP_LOSS_L1(),symbol),
                                                                          self.ModelParametersHandler.Get(ModelParametersHandler.MACD_RSI_SMOOTHED_MODE(),symbol),
                                                                          self.ModelParametersHandler.Get(ModelParametersHandler.MACD_RSI_ABS_MAX_MS_PERIOD(),symbol),
                                                                          self.ModelParametersHandler.Get(ModelParametersHandler.MACD_RSI_CLOSE_SHORT_RULE_1(),symbol),
@@ -1355,7 +1404,9 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
             self.RoutingLock.acquire()
             dayTradingPosId = int( wrapper.GetField(PortfolioPositionTradeListRequestFields.PositionId))
             dayTradingPos = next(iter(list(filter(lambda x: x.Id == dayTradingPosId, self.DayTradingPositions))), None)
-            self.RoutingLock.release()
+
+            if self.RoutingLock.locked():
+                self.RoutingLock.release()
 
             if dayTradingPos is not None:
                 wrapper = ExecutionSummaryListWrapper(dayTradingPos)
@@ -1694,7 +1745,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
             candleBarsArray = candelBarDict[date]
             marketDataArray = None
-            dayTradingPos.LastSDDDaysOpenStdDevIndicator.PreloadForBacktest(preloadedParamDict[self.ModelParametersHandler.HISTORICAL_PRICES_SDD_OPEN_STD_DEV()],
+            dayTradingPos.PriceVolatilityIndicators.PreloadForBacktest(preloadedParamDict[self.ModelParametersHandler.HISTORICAL_PRICES_SDD_OPEN_STD_DEV()],
                                                                             self.ModelParametersHandler.Get(ModelParametersHandler.HISTORICAL_PRICES_SDD_OPEN_STD_DEV(),dayTradingPos.Security.Symbol),
                                                                             self.ModelParametersHandler.Get(ModelParametersHandler.FLEXIBLE_STOP_LOSS_L1(),dayTradingPos.Security.Symbol),
                                                                             candelBarDict,
@@ -1712,8 +1763,6 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
             i = 0
 
             for candlebar in candleBarsArray:
-                self.RoutingLock.acquire()
-
 
                 try:
                     md = marketDataArray[i]
@@ -1745,9 +1794,6 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                     msg = "Error processing strategy backtest for date {} : {}!".format(candlebar.DateTime,str(e))
                     self.ProcessError(ErrorWrapper(Exception(msg)))
                     self.DoLog(msg, MessageType.ERROR)
-                finally:
-                    if self.RoutingLock.locked():
-                        self.RoutingLock.release()
 
                 threading.Thread(target=self.PublishPortfolioPositionThread, args=(dayTradingPos,)).start()
 
@@ -2264,7 +2310,8 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                 mdReqWrapper = MarketDataRequestWrapper(secIn.Security,SubscriptionRequestType.SnapshotAndUpdates)
                 self.MarketDataModule.ProcessMessage(mdReqWrapper)
             finally:
-                self.LockMarketData.release()
+                if self.LockMarketData.locked():
+                    self.LockMarketData.release()
 
 
     def RequestBars(self):
@@ -2296,7 +2343,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
             self.HistoricalPrices[secIn.Security.Symbol]=None
 
             #we just request the double of needed days
-            daysToReq = self.GetHistoricalPricesToReq(secIn.Security.Symbo)
+            daysToReq = self.GetHistoricalPricesToReq(secIn.Security.Symbol)
 
             hpReqWrapper = HistoricalPricesRequestWrapper(secIn.Security,daysToReq,TimeUnit.Day, SubscriptionRequestType.Snapshot)
             self.MarketDataModule.ProcessMessage(hpReqWrapper)

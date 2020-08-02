@@ -20,8 +20,9 @@ class PriceVolatilityIndicators():
     #region Private Methods
 
     def CalcualteFlexibleStopLoss(self,flexibleStopLossL1ModelParam,lastOpening):
-        if self.LastSDDDaysOpenStdDev is not None and lastOpening is not None:
-            sddAsPricePercentage = self.LastSDDDaysOpenStdDev/lastOpening
+        if self.LastSDDDaysOpenStdDev is not None and lastOpening is not None and lastOpening!=0 \
+            and self.LastSDDDaysOpenStdDev!=0:
+            sddAsPricePercentage = float(self.LastSDDDaysOpenStdDev)/lastOpening
 
             self.FlexibleStopLoss = flexibleStopLossL1ModelParam.FloatValue / sddAsPricePercentage
         else:
@@ -63,8 +64,8 @@ class PriceVolatilityIndicators():
         #A- <Preload> - The first <DDOpenStdDevCount> we have to load the parameters from the preloadedParamDict
         if index<=histPricesSDDOpenStdDevCount:
             if index in preloadedParamDict:
-                self.LastSDDDaysOpenStdDev=preloadedParamDict[index]
-                self.CalcualteFlexibleStopLoss(flexibleStopLossL1ModelParam, candelBarDict[0].Open if len(candelBarDict)>0 else None)
+                self.LastSDDDaysOpenStdDev=float(preloadedParamDict[index])
+                self.CalcualteFlexibleStopLoss(flexibleStopLossL1ModelParam, candelBarDict[date][0].Open if len(candelBarDict[date])>0 else None)
             else:
                 self.LastSDDDaysOpenStdDev=0
                 self.CalcualteFlexibleStopLoss(flexibleStopLossL1ModelParam, None)
@@ -90,7 +91,7 @@ class PriceVolatilityIndicators():
 
 
             self.LastSDDDaysOpenStdDev = statistics.stdev(openingPrices)
-            self.CalcualteFlexibleStopLoss(flexibleStopLossL1ModelParam,candelBarDict[0].Open if len(candelBarDict) > 0 else None)
+            self.CalcualteFlexibleStopLoss(flexibleStopLossL1ModelParam,candelBarDict[date][0].Open if len(candelBarDict[date]) > 0 else None)
 
 
     #endregion
