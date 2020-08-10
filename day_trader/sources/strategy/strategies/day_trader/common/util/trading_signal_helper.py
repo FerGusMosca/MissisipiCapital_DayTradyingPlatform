@@ -46,6 +46,12 @@ class TradingSignalHelper:
             ModelParametersHandler.BROOMS_BOLLDN_D(), symbol))
 
         self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
+            ModelParametersHandler.BROOMS_BOLLUP_CvHALF(), symbol))
+
+        self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
+            ModelParametersHandler.BROOMS_BOLLDN_DvHALF(), symbol))
+
+        self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
             ModelParametersHandler.BROOMS_BOLLINGER_K(), symbol))
 
         self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
@@ -184,6 +190,14 @@ class TradingSignalHelper:
                                                                     dayTradingPos.BollingerIndicator.BollUp)
         self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "Boollinger.BollDn",
                                                                     dayTradingPos.BollingerIndicator.BollDn)
+        self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "Boollinger.HalfBollUp",
+                                                                    dayTradingPos.BollingerIndicator.HalfBollUp)
+        self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "Boollinger.HalfBollDn",
+                                                                    dayTradingPos.BollingerIndicator.HalfBollDn)
+        self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "Boollinger.DeltaUP",
+                                                                    dayTradingPos.BollingerIndicator.DeltaUP())
+        self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "Boollinger.DeltaDN",
+                                                                    dayTradingPos.BollingerIndicator.DeltaDN())
         self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "Boollinger.BSI",
                                                                     dayTradingPos.BollingerIndicator.BSI)
 

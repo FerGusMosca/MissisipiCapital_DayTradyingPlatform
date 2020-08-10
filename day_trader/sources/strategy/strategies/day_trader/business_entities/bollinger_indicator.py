@@ -17,6 +17,10 @@ class BollingerIndicator():
         self.BollDn=None
         self.BSI= None
 
+        self.HalfBollUp = None #for MACD
+        self.HalfBollDn = None #for MACD
+
+
         self.TPSDStartOfTrade = None
 
         self.LastProcessedDateTime =None
@@ -79,6 +83,21 @@ class BollingerIndicator():
 
         self.BollDn= self.TPMA - (BROOMS_BOLLDN_D.FloatValue*self.TPSD)
 
+
+    def CalculateDeltas(self,BROOMS_BOLLUP_CvHALF,BROOMS_BOLLDN_DvHALF):
+
+        if BROOMS_BOLLUP_CvHALF.FloatValue is None:
+            raise Exception("Missing value for BROOMS_BOLLUP_CvHALF parameter")
+
+        if BROOMS_BOLLDN_DvHALF.FloatValue is None:
+            raise Exception("Missing value for BROOMS_BOLLDN_DvHALF parameter")
+
+        if self.TPMA is None or self.TPSD is None:
+            return
+
+        self.HalfBollUp= self.TPMA + (BROOMS_BOLLUP_CvHALF.FloatValue*self.TPSD)
+        self.HalfBollDn=self.TPMA - (BROOMS_BOLLDN_DvHALF.FloatValue*self.TPSD)
+
     def CalculateBSI(self,BROOMS_BOLLINGER_K,BROOMS_BOLLINGER_L):
 
         if BROOMS_BOLLINGER_K.FloatValue is None:
@@ -104,7 +123,7 @@ class BollingerIndicator():
     #region Public Methods
 
     def Update(self, candleBarArr, BROOMS_TPMA_A,BROOMS_TPSD_B,BROOMS_BOLLUP_C,BROOMS_BOLLDN_D,BROOMS_BOLLINGER_K,
-               BROOMS_BOLLINGER_L):
+               BROOMS_BOLLINGER_L,BROOMS_BOLLUP_CvHALF,BROOMS_BOLLDN_DvHALF):
 
         sortedBars = sorted(list(filter(lambda x: x is not None, candleBarArr)), key=lambda x: x.DateTime,
                             reverse=False)
@@ -124,10 +143,27 @@ class BollingerIndicator():
         self.CalculateBollDn(BROOMS_BOLLDN_D)
         self.CalculateBSI(BROOMS_BOLLINGER_K,BROOMS_BOLLINGER_L)
 
+        self.CalculateDeltas(BROOMS_BOLLUP_CvHALF,BROOMS_BOLLDN_DvHALF)
+
         self.LastProcessedDateTime=candlebar.DateTime
 
     def OnTradeSignal(self):
         self.TPSDStartOfTrade=self.TPSD
+
+
+    def DeltaDN(self):
+
+        if self.TP is not None and self.HalfBollDn is not None:
+            return self.TP - self.HalfBollDn
+        else:
+            return None
+
+    def DeltaUP(self):
+
+        if self.TP is not None and self.HalfBollUp is not None:
+            return self.TP - self.HalfBollUp
+        else:
+            return None
 
 
     #endregion

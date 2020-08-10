@@ -516,6 +516,14 @@ class ModelParametersHandler:
         return "BROOMS_BOLLDN_D"
 
     @staticmethod
+    def BROOMS_BOLLUP_CvHALF():
+        return "BROOMS_BOLLUP_CvHALF"
+
+    @staticmethod
+    def BROOMS_BOLLDN_DvHALF():
+        return "BROOMS_BOLLDN_DvHALF"
+
+    @staticmethod
     def BROOMS_BOLLINGER_K():
         return "BROOMS_BOLLINGER_K"
 

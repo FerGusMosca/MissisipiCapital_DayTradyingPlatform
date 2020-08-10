@@ -94,13 +94,14 @@ class VolumeAvgIndicator():
         sortedBars = sorted(list(filter(lambda x: x is not None, candleBarArr)), key=lambda x: x.DateTime,
                             reverse=False)
 
-        if (len(sortedBars) == 0):
+        if (len(sortedBars) <= 0):
             return
 
         candlebar = sortedBars[-1]
 
-        if self.LastProcessedDateTime == candlebar.DateTime:
-            return  # Already Processed
+        #In the volume indicator, we need to process the volume during the whole candle
+        #if self.LastProcessedDateTime == candlebar.DateTime:
+        #    return  # Already Processed
 
         self.UpdateConfigParamters(VOLUME_INDICATOR_T1,VOLUME_INDICATOR_T2,VOLUME_INDICATOR_T3,VOLUME_INDICATOR_RULE_4,
                                    VOLUME_INDICATOR_RULE_BROOMS)
@@ -118,6 +119,8 @@ class VolumeAvgIndicator():
                     return self.ConditionActivated()
                 else:
                     return True
+           else:
+               return True
 
     def ValidateRule4(self):
 
@@ -126,7 +129,8 @@ class VolumeAvgIndicator():
                     return self.ConditionActivated()
                 else:
                     return True
-
+           else:
+               return True
 
     def ValidateIfEnoughData(self):
 
@@ -134,7 +138,5 @@ class VolumeAvgIndicator():
             return self.ConditionActivated()
         else:
             return True #if we don't have enough data, we just validate everything
-
-
 
     #endregion

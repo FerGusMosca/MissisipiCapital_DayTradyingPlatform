@@ -603,14 +603,18 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
             if(datTradingPos is not None):
                 try:
-                    datTradingPos.CalculateStdDevForLastNDays(security.MarketDataArr,
-                                                              self.ModelParametersHandler.Get(ModelParametersHandler.HISTORICAL_PRICES_PAST_DAYS_STD_DEV()))
 
                     datTradingPos.PriceVolatilityIndicators.UpdateOnHistoricalData(security.MarketDataArr,
                                                               self.ModelParametersHandler.Get(ModelParametersHandler.HISTORICAL_PRICES_SDD_OPEN_STD_DEV()),
                                                               self.ModelParametersHandler.Get(ModelParametersHandler.FLEXIBLE_STOP_LOSS_L1()))
 
                     datTradingPos.DailyRSIIndicator.UpdateDaily(security.MarketDataArr,self.ModelParametersHandler.Get(ModelParametersHandler.HISTORICAL_PRICES_PAST_DAYS_DAILY_RSI()).IntValue)
+
+                    '''
+                    datTradingPos.CalculateStdDevForLastNDays(security.MarketDataArr,
+                                                              self.ModelParametersHandler.Get(
+                                                                  ModelParametersHandler.HISTORICAL_PRICES_PAST_DAYS_STD_DEV()))
+                    '''
                     #print("RSI calculated for symbol {}:{}".format(security.Symbol,datTradingPos.DailyRSIIndicator.RSI))
                 except Exception as e:
                     self.DoLog(str(e),MessageType.ERROR)
@@ -721,7 +725,9 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                                                     self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_BOLLUP_C()),
                                                     self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_BOLLDN_D()),
                                                     self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_BOLLINGER_K()),
-                                                    self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_BOLLINGER_L())
+                                                    self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_BOLLINGER_L()),
+                                                    self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_BOLLUP_CvHALF()),
+                                                    self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_BOLLDN_DvHALF()),
                                                     )
 
 
@@ -1775,6 +1781,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                     self.UpdateTechnicalAnalysisParameters(candlebar, cbDict)
                     dayTradingPos.MarketData = md
                     dayTradingPos.CalculateCurrentDayProfits(md)
+
 
                     opening = self.EvaluateOpeningPositions(candlebar, cbDict) if not dayTradingPos.Open() else False
                     closing = self.EvaluateClosingPositions(candlebar, cbDict) if dayTradingPos.Open() else False

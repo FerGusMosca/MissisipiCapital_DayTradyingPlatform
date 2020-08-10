@@ -23,6 +23,8 @@ import time
 from datetime import datetime, timedelta
 from json import JSONEncoder
 
+#region Consts
+
 _EXIT_TERM_COND_1="EXIT_TERM_COND_1"
 _EXIT_TERM_COND_2="EXIT_TERM_COND_2"
 _EXIT_TERM_COND_FLEX_STOP_LOSS="EXIT_TERM_COND_FLEX_STOP_LOSS"
@@ -86,7 +88,12 @@ _REC_EXIT_LONG_NOW = 4
 _REC_EXIT_SHORT_NOW = 5
 _REC_STAY_OUT= 5
 
+
+#endregion
+
 class DayTradingPosition():
+
+    #region Constructor
 
     def __init__(self,id ,security,shares,active,routing,open,longSignal,shortSignal,signalType=None,signalDesc=None):
         self.Id=id
@@ -140,8 +147,38 @@ class DayTradingPosition():
         #macdTester = MACDIndicatorAdjustedTester()
         #macdTester.DoTest()
 
+    def ResetExecutionSummaries(self):
+        self.ExecutionSummaries = {}
 
+    def ResetProfitCounters(self,now):
+        self.CurrentProfit = 0
+        self.CurrentProfitLastTrade= 0
+        self.CurrentProfitMonetary = 0
+        self.CurrentProfitMonetaryLastTrade= 0
 
+        self.MaxLoss = 0
+        self.MaxProfit = 0
+        self.MaxProfitCurrentTrade = 0
+        self.MaxMonetaryProfitCurrentTrade=0
+        self.MaxLossCurrentTrade = 0
+        self.MaxMonetaryLossCurrentTrade=0
+        self.PosUpdTimestamp = now
+
+        self.MinuteNonSmoothedRSIIndicator.Reset()#14
+        self.MinuteSmoothedRSIIndicator.Reset()#30
+        self.MACDIndicator.Reset()
+        self.BollingerIndicator.Reset()
+        self.MSStrengthIndicator.Reset()
+        self.PriceVolatilityIndicators.Reset()
+        self.TGIndicator.Reset()
+        self.VolumeAvgIndicator.Reset()
+        self.TerminalClose = False
+        self.RunningBacktest= False
+        self.TerminalCloseCond = None
+        self.Recomendation=_REC_UNDEFINED
+        self.ShowTradingRecommndations=False
+
+    #endregion
 
     #region Static Methods
 
@@ -179,8 +216,9 @@ class DayTradingPosition():
 
     #endregion
 
-
     #region Private Methods
+
+    #region Private Util/Aux
 
     def GetMov(self, candleBarArr, skip, length):
         sortedBars = sorted(list(filter(lambda x: x is not None, candleBarArr)),key=lambda x:x.DateTime,reverse = True)
@@ -203,10 +241,6 @@ class DayTradingPosition():
 
         return sum/length
 
-    def Open(self):
-        return self.GetNetOpenShares()!=0
-
-
     def GetReggrSlope (self,candleBarArr,length):
 
         arrayPrices = []
@@ -224,7 +258,6 @@ class DayTradingPosition():
         slope = (reggr.slope*100)/arrayPrices[-1]
         return slope
 
-
     def GetSlope (self,currMovAvg,prevMovAvg):
 
         if currMovAvg is not None and prevMovAvg is not None and prevMovAvg!=0:
@@ -232,117 +265,8 @@ class DayTradingPosition():
         else:
             return None
 
-    def GetSpecificBar(self,candleBarArr, index):
-        sortedBars = sorted(list(filter(lambda x: x is not None, candleBarArr)),key=lambda x: x.DateTime, reverse=True)
-
-        if(sortedBars is not None and len(sortedBars)>=index):
-            return sortedBars[index-1]
-        else:
-            return None
-
-    def GetMovOnData(self,candlebarsArr, skip, length):
-        if len(candlebarsArr)> (length+skip):
-            return self.GetMov(candlebarsArr,skip,length)
-        elif len(candlebarsArr)> skip:
-            return self.GetMov(candlebarsArr, skip, len(candlebarsArr)-skip)
-        else:
-            return 0
-
-    def GetStatisticalParameters(self,candlebarsArr):
-        fiftyMinNoSkipMovAvg = self.GetMovOnData(candlebarsArr, 0, 50)
-
-        FiftyMinSkipTenMovAvg = self.GetMovOnData(candlebarsArr, 10, 50)
-
-        threeMinNoSkipMovAvg = self.GetMovOnData(candlebarsArr, 0, 3)
-
-        threeMinSkipTrheeMovAvg = self.GetMovOnData(candlebarsArr, 3, 3)
-
-        threeMinSkipSixMovAvg = self.GetMovOnData(candlebarsArr, 6, 3)
-
-        threeMinSkipNineMovAvg = self.GetMovOnData(candlebarsArr, 9, 3)
-
-        barPosNow = self.GetSpecificBar(candlebarsArr, 1)
-        barPosMinusThree = self.GetSpecificBar(candlebarsArr, 3)
-
-        # Last 10 minute slope of 50 minute moving average
-        tenMinSkipSlope = self.GetSlope(fiftyMinNoSkipMovAvg, FiftyMinSkipTenMovAvg)
-
-        # Last 3 minute slope of 3 minute moving average
-        threeMinSkipSlope = self.GetSlope(threeMinNoSkipMovAvg, threeMinSkipTrheeMovAvg)
-
-        # Previous 3 to 6 minute slope of 3 minute moving average
-        threeToSixMinSkipSlope = self.GetSlope(threeMinSkipTrheeMovAvg, threeMinSkipSixMovAvg)
-
-        # Previous 6 to 9 minute slope of 3 minute moving average
-        sixToNineMinSkipSlope = self.GetSlope(threeMinSkipSixMovAvg, threeMinSkipNineMovAvg)
-
-        # Maximum change in last 3 minutes
-        pctChangeLastThreeMinSlope = self.GetSlope(barPosNow.Close if barPosNow is not None else None, barPosMinusThree.Close if barPosMinusThree is not None else None)
-
-        # Delta between current value and 50MMA
-        deltaCurrValueAndFiftyMMov = self.GetSlope(barPosNow.Close if barPosNow is not None else None, fiftyMinNoSkipMovAvg)
-
-        return PositionStatisticalParameters( tenMinSkipSlope=tenMinSkipSlope,
-                                              threeMinSkipSlope=threeMinSkipSlope,
-                                              threeToSixMinSkipSlope=threeToSixMinSkipSlope,
-                                              sixToNineMinSkipSlope=sixToNineMinSkipSlope,
-                                              pctChangeLastThreeMinSlope=pctChangeLastThreeMinSlope,
-                                              deltaCurrValueAndFiftyMMov=deltaCurrValueAndFiftyMMov)
-
-    def CalculateMonetaryProfits(self, profitsAndLosses):
-
-        monProfits = 0  #USD
-
-        if profitsAndLosses.NetShares > 0:
-            monProfits = (profitsAndLosses.MoneyIncome + profitsAndLosses.PosMTM - profitsAndLosses.MoneyOutflow)
-        elif profitsAndLosses.NetShares < 0: #in short positions, the PosMTM is negative
-            monProfits=profitsAndLosses.MoneyIncome + profitsAndLosses.PosMTM - profitsAndLosses.MoneyOutflow
-        else:
-            monProfits = profitsAndLosses.MoneyIncome - profitsAndLosses.MoneyOutflow
-
-        return monProfits
-
-
-    def CalculatePercentageProfits(self,profitsAndLosses):
-
-        profits = 0 #as a percentaje
-
-        if profitsAndLosses.NetShares > 0:
-            if (profitsAndLosses.MoneyOutflow > 0):
-                profits = ((profitsAndLosses.MoneyIncome + profitsAndLosses.PosMTM) / profitsAndLosses.MoneyOutflow) - 1
-            else:
-                raise Exception("Could not calculate profit for a LONG position (+ {} shares) and not money outflow for symbol {}"
-                                .format(profitsAndLosses.NetShares, self.Security.Symbol))
-        elif profitsAndLosses.NetShares < 0:
-            netToCover = profitsAndLosses.MoneyOutflow + (profitsAndLosses.PosMTM * (-1))#if short PosMTM should be negative
-
-            if netToCover > 0:
-                profits = (profitsAndLosses.MoneyIncome / netToCover)-1
-            else:
-                raise Exception("Could not calculate profit for a SHORT position where the money outflow is {} USD and the net ammount to cover is {} USD for symbol {}"
-                                .format(profitsAndLosses.MoneyOutflow, profitsAndLosses.PosMTM, self.Security.Symbol))
-        else: #all liquid
-            if profitsAndLosses.MoneyOutflow > 0:
-                profits = (profitsAndLosses.MoneyIncome / profitsAndLosses.MoneyOutflow)-1
-            elif profitsAndLosses.MoneyIncome ==0:
-                profits = 0
-            else:
-                raise Exception( "Could not calculate profit for closed position where money outflow is 0, for symbol {}" .format(self.Security.Symbol))
-        return profits*100 #as a percentage
-
-    def CalculateMarkToMarket(self,marketData,profitsAndLosses,foundOpenPositions):
-
-        posMTM=0
-
-        if(marketData.Trade is not None):
-            posMTM= marketData.Trade*profitsAndLosses.NetShares
-        elif(marketData.ClosingPrice is not None):
-            posMTM= marketData.ClosingPrice*profitsAndLosses.NetShares
-        elif foundOpenPositions:
-            raise Exception("Could not calculate profits as there are not last trade nor closing price for symbol "
-                            .format(self.Security.Symbol))
-
-        return posMTM
+    def Open(self):
+        return self.GetNetOpenShares()!=0
 
     def GetNetOpenShares(self):
         todaySummaries = sorted(list(filter(lambda x: x.CumQty >= 0
@@ -361,78 +285,8 @@ class DayTradingPosition():
 
         return netShares
 
-    def CalculateLastTradeProfit(self, profitsAndLosses, marketData):
-
-        lastTradedSummaries = sorted(list(filter(lambda x:  x.GetNetShares() != 0
-                            and (self.RunningBacktest or x.Timestamp.date() == self.PosUpdTimestamp.date())
-                            and (x.Position.LongPositionOpened() if self.GetNetOpenShares()>0 else x.Position.ShortPositionOpened()),
-                           self.ExecutionSummaries.values())),key=lambda x: x.Timestamp, reverse=True)
-
-        lastTradedSummary=None
-        if(len(lastTradedSummaries)>0):
-            lastTradedSummary=lastTradedSummaries[0]
-
-        if lastTradedSummary is not None and marketData.Trade is not None and lastTradedSummary.AvgPx is not None:
-            profitsAndLosses.IncreaseDecrease = marketData.Trade-  lastTradedSummary.AvgPx
-            if lastTradedSummary.SharesAcquired():#LONG
-                profitsAndLosses.MonetaryProfitLastTrade=( marketData.Trade-lastTradedSummary.AvgPx)*lastTradedSummary.GetNetShares()
-                profitsAndLosses.ProfitLastTrade = ((marketData.Trade/lastTradedSummary.AvgPx)-1)*100 if lastTradedSummary.AvgPx >0 else 0
-            else:#SHORT
-                profitsAndLosses.MonetaryProfitLastTrade = ( lastTradedSummary.AvgPx - marketData.Trade)*lastTradedSummary.GetNetShares()
-                profitsAndLosses.ProfitLastTrade = ((lastTradedSummary.AvgPx/marketData.Trade)-1)*100 if marketData.Trade >0 else 0
-        else:
-            profitsAndLosses.MonetaryProfitLastTrade = 0
-            profitsAndLosses.ProfitLastTrade = 0
-            profitsAndLosses.IncreaseDecrease = 0
-
-
-    def CalculatePositionsProfit(self,profitsAndLosses):
-        todaySummaries = sorted(list(filter(lambda x:  x.CumQty >= 0
-                                                     and (self.RunningBacktest or x.Timestamp.date() == self.PosUpdTimestamp.date()) ,
-                                            self.ExecutionSummaries.values())),
-                                            key=lambda x: x.Timestamp, reverse=False)
-        foundOpenPositions = False
-
-        for summary in todaySummaries:
-            # first we calculate the traded positions
-            if summary.GetTradedSummary()>0:
-                if summary.SharesAcquired():
-                    profitsAndLosses.MoneyOutflow += summary.GetTradedSummary()
-                    profitsAndLosses.NetShares += summary.GetNetShares()
-                else:
-                    profitsAndLosses.MoneyIncome += summary.GetTradedSummary()
-                    profitsAndLosses.NetShares -= summary.GetNetShares()
-
-            if summary.Position.IsOpenPosition():
-                foundOpenPositions = True
-
-        return foundOpenPositions
-
-    #endregion
-
-    #region Public Methods
-    def toJSON(self):
-        return json.dumps(self, default=lambda o: o.__dict__,sort_keys=True, indent=4)
-
-    def DepurateSummaries(self):
-        openSummaries = list(filter(lambda x: x.Position.IsOpenPosition(), self.ExecutionSummaries.values()))
-
-        for openSummary in openSummaries:
-            openSummary.PosStatus = PositionStatus.Unknown
-            openSummary.Position.PosStatus = PositionStatus.Unknown
-
-        self.UpdateRouting()
-
-        return openSummaries
-
-    def UpdateRouting(self):
-        nextOpenPos = next(iter(list(filter(lambda x: x.Position.IsOpenPosition(), self.ExecutionSummaries.values()))), None)
-        self.Routing= nextOpenPos is not None
-
-
     def GetOpenSummaries(self):
         return list(filter(lambda x: x.Position.IsOpenPosition(), self.ExecutionSummaries.values()))
-
 
     def GetLastTradedSummary(self,side):
 
@@ -443,36 +297,27 @@ class DayTradingPosition():
 
         return lastTradedSummaries[0] if (len(lastTradedSummaries) > 0) else None
 
-    def ResetExecutionSummaries(self):
-        self.ExecutionSummaries = {}
+    def GetAceptedSummaries(self):
 
-    def ResetProfitCounters(self,now):
-        self.CurrentProfit = 0
-        self.CurrentProfitLastTrade= 0
-        self.CurrentProfitMonetary = 0
-        self.CurrentProfitMonetaryLastTrade= 0
+        return  sorted(list(filter(lambda x: x.Position.GetLastOrder() is not None or x.Position.IsRejectedPosition(),
+                                   self.ExecutionSummaries.values())),
+                                   key=lambda x: x.CreateTime,reverse=True)
 
-        self.MaxLoss = 0
-        self.MaxProfit = 0
-        self.MaxProfitCurrentTrade = 0
-        self.MaxMonetaryProfitCurrentTrade=0
-        self.MaxLossCurrentTrade = 0
-        self.MaxMonetaryLossCurrentTrade=0
-        self.PosUpdTimestamp = now
+    def GetSpecificBar(self,candleBarArr, index):
+        sortedBars = sorted(list(filter(lambda x: x is not None, candleBarArr)),key=lambda x: x.DateTime, reverse=True)
 
-        self.MinuteNonSmoothedRSIIndicator.Reset()#14
-        self.MinuteSmoothedRSIIndicator.Reset()#30
-        self.MACDIndicator.Reset()
-        self.BollingerIndicator.Reset()
-        self.MSStrengthIndicator.Reset()
-        self.PriceVolatilityIndicators.Reset()
-        self.TGIndicator.Reset()
-        self.VolumeAvgIndicator.Reset()
-        self.TerminalClose = False
-        self.RunningBacktest= False
-        self.TerminalCloseCond = None
-        self.Recomendation=_REC_UNDEFINED
-        self.ShowTradingRecommndations=False
+        if(sortedBars is not None and len(sortedBars)>=index):
+            return sortedBars[index-1]
+        else:
+            return None
+
+    def GetMovOnData(self,candlebarsArr, skip, length):
+        if len(candlebarsArr)> (length+skip):
+            return self.GetMov(candlebarsArr,skip,length)
+        elif len(candlebarsArr)> skip:
+            return self.GetMov(candlebarsArr, skip, len(candlebarsArr)-skip)
+        else:
+            return 0
 
     def UpdateTimestap(self,marketData):
         if(marketData.MDEntryDate is not None):
@@ -486,6 +331,59 @@ class DayTradingPosition():
                                                                 second=datetime.now().second,
                                                                 microsecond=0)
 
+    def SmoothMACDRSIParam(self,macdRSISmoothedMode,paramToComp,modelParamToSmooth,modelParamToSmoothIndex):
+        if macdRSISmoothedMode.IntValue==0:
+            return modelParamToSmooth.FloatValue
+        else:
+            return paramToComp / modelParamToSmoothIndex.FloatValue if paramToComp  is not None else 0
+
+    def EvaluateTimeRange(self,candlebar,timeFromModelParam,timeToModelParam):
+        now = candlebar.DateTime
+        fromTimeLowVol = time.strptime(timeFromModelParam.StringValue, "%I:%M %p")
+        toTimeLowVol = time.strptime(timeToModelParam.StringValue, "%I:%M %p")
+        todayStart = now.replace(hour=fromTimeLowVol.tm_hour, minute=fromTimeLowVol.tm_min, second=0, microsecond=0)
+        todayEnd = now.replace(hour=toTimeLowVol.tm_hour, minute=toTimeLowVol.tm_min,
+                               second=0, microsecond=0)
+        return todayStart < now and now <todayEnd
+
+    def EvaluateBiggerDate(self,candlebar ,timeFromModelParam):
+        now = candlebar.DateTime
+        fromTime = time.strptime(timeFromModelParam.StringValue, "%I:%M %p")
+        todayStart = now.replace(hour=fromTime.tm_hour, minute=fromTime.tm_min, second=0, microsecond=0)
+        return todayStart<now
+
+    def EvaluateValidTimeToEnterTrade(self,candlebar,lowVolEntryThresholdModelParam,highVolEntryThresholdModelParam,
+                                      lowVolFromTimeModelParam,lowVolToTimeModelParam,
+                                      highVolFromTime1,highVolToTime1,highVolFromTime2,highVolToTime2):
+
+        if(self.LastNDaysStdDev is not None):
+
+            if (lowVolEntryThresholdModelParam.FloatValue is None or self.LastNDaysStdDev<lowVolEntryThresholdModelParam.FloatValue):
+                if ( lowVolFromTimeModelParam.StringValue is not None and lowVolToTimeModelParam.StringValue is not None):
+                    return  self.EvaluateTimeRange(candlebar,lowVolFromTimeModelParam,lowVolToTimeModelParam)
+                else:
+                    return True #I am in a lowVol env , but no time prefferences
+
+
+            if (highVolEntryThresholdModelParam.FloatValue is None or self.LastNDaysStdDev >= highVolEntryThresholdModelParam.FloatValue):
+                volEntry1 = False
+                volEntry2 = False
+                if (highVolFromTime1.StringValue is not None and highVolToTime1.StringValue is not None):
+                    volEntry1 =  self.EvaluateTimeRange(candlebar,highVolFromTime1, highVolToTime1)
+
+                if (  highVolFromTime2.StringValue is not None and highVolToTime2.StringValue is not None):
+                    volEntry2 = self.EvaluateTimeRange(candlebar,highVolFromTime2, highVolToTime2)
+
+                return volEntry1 or volEntry2
+
+            return False
+
+        else:
+            return False
+
+    #endregion
+
+    #region Profits/Losses Statistics
 
     def CalculateCurrentDayProfits(self,marketData):
 
@@ -541,6 +439,176 @@ class DayTradingPosition():
             self.MaxMonetaryLossCurrentTrade = 0
             self.MaxMonetaryProfitCurrentTrade = 0
 
+    def GetStatisticalParameters(self,candlebarsArr):
+        fiftyMinNoSkipMovAvg = self.GetMovOnData(candlebarsArr, 0, 50)
+
+        FiftyMinSkipTenMovAvg = self.GetMovOnData(candlebarsArr, 10, 50)
+
+        threeMinNoSkipMovAvg = self.GetMovOnData(candlebarsArr, 0, 3)
+
+        threeMinSkipTrheeMovAvg = self.GetMovOnData(candlebarsArr, 3, 3)
+
+        threeMinSkipSixMovAvg = self.GetMovOnData(candlebarsArr, 6, 3)
+
+        threeMinSkipNineMovAvg = self.GetMovOnData(candlebarsArr, 9, 3)
+
+        barPosNow = self.GetSpecificBar(candlebarsArr, 1)
+        barPosMinusThree = self.GetSpecificBar(candlebarsArr, 3)
+
+        # Last 10 minute slope of 50 minute moving average
+        tenMinSkipSlope = self.GetSlope(fiftyMinNoSkipMovAvg, FiftyMinSkipTenMovAvg)
+
+        # Last 3 minute slope of 3 minute moving average
+        threeMinSkipSlope = self.GetSlope(threeMinNoSkipMovAvg, threeMinSkipTrheeMovAvg)
+
+        # Previous 3 to 6 minute slope of 3 minute moving average
+        threeToSixMinSkipSlope = self.GetSlope(threeMinSkipTrheeMovAvg, threeMinSkipSixMovAvg)
+
+        # Previous 6 to 9 minute slope of 3 minute moving average
+        sixToNineMinSkipSlope = self.GetSlope(threeMinSkipSixMovAvg, threeMinSkipNineMovAvg)
+
+        # Maximum change in last 3 minutes
+        pctChangeLastThreeMinSlope = self.GetSlope(barPosNow.Close if barPosNow is not None else None, barPosMinusThree.Close if barPosMinusThree is not None else None)
+
+        # Delta between current value and 50MMA
+        deltaCurrValueAndFiftyMMov = self.GetSlope(barPosNow.Close if barPosNow is not None else None, fiftyMinNoSkipMovAvg)
+
+        return PositionStatisticalParameters( tenMinSkipSlope=tenMinSkipSlope,
+                                              threeMinSkipSlope=threeMinSkipSlope,
+                                              threeToSixMinSkipSlope=threeToSixMinSkipSlope,
+                                              sixToNineMinSkipSlope=sixToNineMinSkipSlope,
+                                              pctChangeLastThreeMinSlope=pctChangeLastThreeMinSlope,
+                                              deltaCurrValueAndFiftyMMov=deltaCurrValueAndFiftyMMov)
+
+    def CalculateMonetaryProfits(self, profitsAndLosses):
+
+        monProfits = 0  #USD
+
+        if profitsAndLosses.NetShares > 0:
+            monProfits = (profitsAndLosses.MoneyIncome + profitsAndLosses.PosMTM - profitsAndLosses.MoneyOutflow)
+        elif profitsAndLosses.NetShares < 0: #in short positions, the PosMTM is negative
+            monProfits=profitsAndLosses.MoneyIncome + profitsAndLosses.PosMTM - profitsAndLosses.MoneyOutflow
+        else:
+            monProfits = profitsAndLosses.MoneyIncome - profitsAndLosses.MoneyOutflow
+
+        return monProfits
+
+    def CalculatePercentageProfits(self,profitsAndLosses):
+
+        profits = 0 #as a percentaje
+
+        if profitsAndLosses.NetShares > 0:
+            if (profitsAndLosses.MoneyOutflow > 0):
+                profits = ((profitsAndLosses.MoneyIncome + profitsAndLosses.PosMTM) / profitsAndLosses.MoneyOutflow) - 1
+            else:
+                raise Exception("Could not calculate profit for a LONG position (+ {} shares) and not money outflow for symbol {}"
+                                .format(profitsAndLosses.NetShares, self.Security.Symbol))
+        elif profitsAndLosses.NetShares < 0:
+            netToCover = profitsAndLosses.MoneyOutflow + (profitsAndLosses.PosMTM * (-1))#if short PosMTM should be negative
+
+            if netToCover > 0:
+                profits = (profitsAndLosses.MoneyIncome / netToCover)-1
+            else:
+                raise Exception("Could not calculate profit for a SHORT position where the money outflow is {} USD and the net ammount to cover is {} USD for symbol {}"
+                                .format(profitsAndLosses.MoneyOutflow, profitsAndLosses.PosMTM, self.Security.Symbol))
+        else: #all liquid
+            if profitsAndLosses.MoneyOutflow > 0:
+                profits = (profitsAndLosses.MoneyIncome / profitsAndLosses.MoneyOutflow)-1
+            elif profitsAndLosses.MoneyIncome ==0:
+                profits = 0
+            else:
+                raise Exception( "Could not calculate profit for closed position where money outflow is 0, for symbol {}" .format(self.Security.Symbol))
+        return profits*100 #as a percentage
+
+    def CalculateMarkToMarket(self,marketData,profitsAndLosses,foundOpenPositions):
+
+        posMTM=0
+
+        if(marketData.Trade is not None):
+            posMTM= marketData.Trade*profitsAndLosses.NetShares
+        elif(marketData.ClosingPrice is not None):
+            posMTM= marketData.ClosingPrice*profitsAndLosses.NetShares
+        elif foundOpenPositions:
+            raise Exception("Could not calculate profits as there are not last trade nor closing price for symbol "
+                            .format(self.Security.Symbol))
+
+        return posMTM
+
+    def CalculateLastTradeProfit(self, profitsAndLosses, marketData):
+
+        lastTradedSummaries = sorted(list(filter(lambda x:  x.GetNetShares() != 0
+                            and (self.RunningBacktest or x.Timestamp.date() == self.PosUpdTimestamp.date())
+                            and (x.Position.LongPositionOpened() if self.GetNetOpenShares()>0 else x.Position.ShortPositionOpened()),
+                           self.ExecutionSummaries.values())),key=lambda x: x.Timestamp, reverse=True)
+
+        lastTradedSummary=None
+        if(len(lastTradedSummaries)>0):
+            lastTradedSummary=lastTradedSummaries[0]
+
+        if lastTradedSummary is not None and marketData.Trade is not None and lastTradedSummary.AvgPx is not None:
+            profitsAndLosses.IncreaseDecrease = marketData.Trade-  lastTradedSummary.AvgPx
+            if lastTradedSummary.SharesAcquired():#LONG
+                profitsAndLosses.MonetaryProfitLastTrade=( marketData.Trade-lastTradedSummary.AvgPx)*lastTradedSummary.GetNetShares()
+                profitsAndLosses.ProfitLastTrade = ((marketData.Trade/lastTradedSummary.AvgPx)-1)*100 if lastTradedSummary.AvgPx >0 else 0
+            else:#SHORT
+                profitsAndLosses.MonetaryProfitLastTrade = ( lastTradedSummary.AvgPx - marketData.Trade)*lastTradedSummary.GetNetShares()
+                profitsAndLosses.ProfitLastTrade = ((lastTradedSummary.AvgPx/marketData.Trade)-1)*100 if marketData.Trade >0 else 0
+        else:
+            profitsAndLosses.MonetaryProfitLastTrade = 0
+            profitsAndLosses.ProfitLastTrade = 0
+            profitsAndLosses.IncreaseDecrease = 0
+
+    def CalculatePositionsProfit(self,profitsAndLosses):
+        todaySummaries = sorted(list(filter(lambda x:  x.CumQty >= 0
+                                                     and (self.RunningBacktest or x.Timestamp.date() == self.PosUpdTimestamp.date()) ,
+                                            self.ExecutionSummaries.values())),
+                                            key=lambda x: x.Timestamp, reverse=False)
+        foundOpenPositions = False
+
+        for summary in todaySummaries:
+            # first we calculate the traded positions
+            if summary.GetTradedSummary()>0:
+                if summary.SharesAcquired():
+                    profitsAndLosses.MoneyOutflow += summary.GetTradedSummary()
+                    profitsAndLosses.NetShares += summary.GetNetShares()
+                else:
+                    profitsAndLosses.MoneyIncome += summary.GetTradedSummary()
+                    profitsAndLosses.NetShares -= summary.GetNetShares()
+
+            if summary.Position.IsOpenPosition():
+                foundOpenPositions = True
+
+        return foundOpenPositions
+
+    #endregion
+
+    #endregion
+
+    #region Public Methods
+
+    #region Public Util/Aux
+
+    def toJSON(self):
+        return json.dumps(self, default=lambda o: o.__dict__,sort_keys=True, indent=4)
+
+    def DepurateSummaries(self):
+        openSummaries = list(filter(lambda x: x.Position.IsOpenPosition(), self.ExecutionSummaries.values()))
+
+        for openSummary in openSummaries:
+            openSummary.PosStatus = PositionStatus.Unknown
+            openSummary.Position.PosStatus = PositionStatus.Unknown
+
+        self.UpdateRouting()
+
+        return openSummaries
+
+    def UpdateRouting(self):
+        nextOpenPos = next(iter(list(filter(lambda x: x.Position.IsOpenPosition(), self.ExecutionSummaries.values()))), None)
+        self.Routing= nextOpenPos is not None
+
+    #endregion
+
+    #region Automatic Trading Rules
 
     def EvaluateGenericShortTrade(self,dailyBiasModelParam,dailySlopeModelParam, posMaximShortChangeParam,
                            posMaxShortDeltaParam,nonSmoothed14MinRSIShortThreshold,candlebarsArr):
@@ -582,11 +650,7 @@ class DayTradingPosition():
         else:
             return False
 
-    def SmoothMACDRSIParam(self,macdRSISmoothedMode,paramToComp,modelParamToSmooth,modelParamToSmoothIndex):
-        if macdRSISmoothedMode.IntValue==0:
-            return modelParamToSmooth.FloatValue
-        else:
-            return paramToComp / modelParamToSmoothIndex.FloatValue if paramToComp  is not None else 0
+
 
     def EvaluateMACDRSIShortTrade(self,msNowParamA,msMinParamB,msMinParamBB,rsi30SlopeSkip5ParamC,msMaxMinParamD,msMaxMinParamDD,
                                   msNowMaxParamE,msNowParamF,msNowParamFF,rsi30SlopeSkip10ParamG,absMSMaxMinLast5ParamH,
@@ -608,7 +672,7 @@ class DayTradingPosition():
                 or self.MinuteNonSmoothedRSIIndicator.GetRSIReggr(3) is None or self.MACDIndicator.GetMSReggr(3) is None
                 or (self.BroomsIndicator.BROOMS is None and macdRsiOpenShortRuleBroomsModelParam.IntValue>=1 )
                 or not self.EvaluateBiggerDate(candlebarsArr[-1], macdRsiStartTradingModelParam)
-                or self.BollingerIndicator.BollDn is None
+                or self.BollingerIndicator.DeltaDN() is None
             ):
             return None
 
@@ -652,15 +716,13 @@ class DayTradingPosition():
                 and self.GetReggrSlope(candlebarsArr,5) < (-1 * sec5MinSlopeParamI.FloatValue)
                 and self.MinuteSmoothedRSIIndicator.GetRSIReggr(5) < (-1 *  rsi30SlopeSkip5ParamC.FloatValue)
                 and self.MinuteSmoothedRSIIndicator.GetRSIReggr(10) < rsi30SlopeSkip10ParamG.FloatValue
-                and self.BollingerIndicator.BollDn < deltaDnParamXXX.FloatValue
+                and self.BollingerIndicator.DeltaDN() < deltaDnParamXXX.FloatValue
                 and self.VolumeAvgIndicator.ValidateRule4()
                 and macdRsiOpenShortRule4ModelParam.IntValue >= 1
             ):
             self.BollingerIndicator.OnTradeSignal()
             return _SHORT_MACD_RSI_RULE_4
 
-        if (candlebarsArr[-1].DateTime.hour == 9 and candlebarsArr[-1].DateTime.min == 17):
-            print("aca")
 
         # line Brooms
         if (
@@ -697,7 +759,7 @@ class DayTradingPosition():
             or self.MinuteNonSmoothedRSIIndicator.GetRSIReggr(3) is None or self.MACDIndicator.GetMSReggr(3) is None
             or not self.EvaluateBiggerDate(candlebarsArr[-1],macdRsiStartTradingModelParam)
             or (self.BroomsIndicator.BROOMS is None and macdRsiOpenLongRuleBroomsModelParam.IntValue>=1)
-            or self.BollingerIndicator.BollUp is None
+            or self.BollingerIndicator.DeltaUP() is None
             ):
             return None
 
@@ -739,14 +801,12 @@ class DayTradingPosition():
             return _LONG_MACD_RSI_RULE_3
 
 
-
-
         # line 4
         if (    self.MACDIndicator.GetMaxAbsMSCrossover(absMaxMSPeriodParam.IntValue) < self.SmoothMACDRSIParam(macdRSISmoothedMode, self.MACDIndicator.AbsMaxMS, absMSMaxMinLast5ParamH, absMSMaxMinLast5ParamHH)
             and self.GetReggrSlope(candlebarsArr,5) >= sec5MinSlopeParamI.FloatValue
             and self.MinuteSmoothedRSIIndicator.GetRSIReggr(5) > rsi30SlopeSkip5ParamC.FloatValue
             and self.MinuteSmoothedRSIIndicator.GetRSIReggr(10) >= (-1 * rsi30SlopeSkip10ParamG.FloatValue)
-            and self.BollingerIndicator.BollUp > deltaUpParamYYY.FloatValue
+            and self.BollingerIndicator.DeltaUP() > deltaUpParamYYY.FloatValue
             and self.VolumeAvgIndicator.ValidateRule4()
             and macdRsiOpenLongRule4ModelParam.IntValue >= 1
           ):
@@ -1025,45 +1085,6 @@ class DayTradingPosition():
         return None
 
 
-    #Strong and simple Terminal
-    def IsTermianlCondition(self,condition):
-        return (condition==_EXIT_TERM_COND_EOF or condition==_EXIT_TERM_COND_1 or condition==_EXIT_TERM_COND_2
-                or condition == _TERMINALLY_CLOSED or condition==_EXIT_TERM_COND_FLEX_STOP_LOSS)
-
-        # Defines if the condition for closing the day, will imply not opening another position during the day
-    def EvaluateStrongTerminal(self, candlebarsArr, endOfdayLimitModelParam):
-
-            lastCandlebar = candlebarsArr[-1]
-
-            # EXIT any open trades at 2:59 PM central time
-            if (endOfdayLimitModelParam.StringValue is not None and self.EvaluateBiggerDate(lastCandlebar,
-                                                                                            endOfdayLimitModelParam)):
-                return _EXIT_TERM_COND_EOF
-
-            return None
-
-    #Defines if the condition for closing the day, will imply not opening another position during the day
-    def EvaluateClosingTerminalCondition(self,candlebarsArr,takeGainLimitModelParam,stopLossLimitModelParam,
-                                         implFlexibeStopLoss, flexibleStopLossL1ModelParam):
-
-        lastCandlebar = candlebarsArr[-1]
-
-        # CUMULATIVE Gain for the Day exceeds Take Gain Limit
-        if ( takeGainLimitModelParam.FloatValue is not None and (self.CurrentProfit is not None and self.CurrentProfit > takeGainLimitModelParam.FloatValue*100)):
-            return _EXIT_TERM_COND_1
-
-        # CUMULATIVE Loss for the Day exceeds (worse than) Stop Loss Limit
-        if (stopLossLimitModelParam.FloatValue is not None and (self.CurrentProfit is not None and self.CurrentProfit < stopLossLimitModelParam.FloatValue*100)):
-            return _EXIT_TERM_COND_2
-
-        # L1- Flexible Stop Loss
-        if (    implFlexibeStopLoss.IntValue >=1 and self.PriceVolatilityIndicators.FlexibleStopLoss is not None
-            and self.PriceVolatilityIndicators.FlexibleStopLoss!=0):
-            openQty = abs(self.GetNetOpenShares()) if self.GetNetOpenShares() != 0 else 1
-            if (self.MaxMonetaryLossCurrentTrade/openQty) < self.PriceVolatilityIndicators.FlexibleStopLoss:
-                return _EXIT_TERM_COND_FLEX_STOP_LOSS
-
-        return None
 
     def EvaluateClosingMACDRSILongTrade(self,candlebarsArr,msNowParamA,macdMaxGainParamJ,macdMaxGainParamJJ,gainMaxTradeParamJJJ,
                                             gainMaxTradeParamSDMult,gainMaxTradeParamFixedGain,macdGainNowMaxParamK,
@@ -1288,56 +1309,136 @@ class DayTradingPosition():
         return None
 
 
-    def EvaluateTimeRange(self,candlebar,timeFromModelParam,timeToModelParam):
-        now = candlebar.DateTime
-        fromTimeLowVol = time.strptime(timeFromModelParam.StringValue, "%I:%M %p")
-        toTimeLowVol = time.strptime(timeToModelParam.StringValue, "%I:%M %p")
-        todayStart = now.replace(hour=fromTimeLowVol.tm_hour, minute=fromTimeLowVol.tm_min, second=0, microsecond=0)
-        todayEnd = now.replace(hour=toTimeLowVol.tm_hour, minute=toTimeLowVol.tm_min,
-                               second=0, microsecond=0)
-        return todayStart < now and now <todayEnd
+    #endregion
 
-    def EvaluateBiggerDate(self,candlebar ,timeFromModelParam):
-        now = candlebar.DateTime
-        fromTime = time.strptime(timeFromModelParam.StringValue, "%I:%M %p")
-        todayStart = now.replace(hour=fromTime.tm_hour, minute=fromTime.tm_min, second=0, microsecond=0)
-        return todayStart<now
+    #region Manual Trading Rules
 
-    def EvaluateValidTimeToEnterTrade(self,candlebar,lowVolEntryThresholdModelParam,highVolEntryThresholdModelParam,
-                                      lowVolFromTimeModelParam,lowVolToTimeModelParam,
-                                      highVolFromTime1,highVolToTime1,highVolFromTime2,highVolToTime2):
+    def EvaluateClosingOnEndOfDay(self, candlebar, endOfdayLimitModelParam):
+        if not self.Open():
+            return False  # Position not opened
 
-        if(self.LastNDaysStdDev is not None):
+        openSummary = self.GetLastTradedSummary(Side.Buy if self.GetNetOpenShares() > 0 else Side.Sell)
 
-            if (lowVolEntryThresholdModelParam.FloatValue is None or self.LastNDaysStdDev<lowVolEntryThresholdModelParam.FloatValue):
-                if ( lowVolFromTimeModelParam.StringValue is not None and lowVolToTimeModelParam.StringValue is not None):
-                    return  self.EvaluateTimeRange(candlebar,lowVolFromTimeModelParam,lowVolToTimeModelParam)
-                else:
-                    return True #I am in a lowVol env , but no time prefferences
-
-
-            if (highVolEntryThresholdModelParam.FloatValue is None or self.LastNDaysStdDev >= highVolEntryThresholdModelParam.FloatValue):
-                volEntry1 = False
-                volEntry2 = False
-                if (highVolFromTime1.StringValue is not None and highVolToTime1.StringValue is not None):
-                    volEntry1 =  self.EvaluateTimeRange(candlebar,highVolFromTime1, highVolToTime1)
-
-                if (  highVolFromTime2.StringValue is not None and highVolToTime2.StringValue is not None):
-                    volEntry2 = self.EvaluateTimeRange(candlebar,highVolFromTime2, highVolToTime2)
-
-                return volEntry1 or volEntry2
-
-            return False
-
+        if (openSummary is not None
+                and openSummary.Position.CloseEndOfDay is not None
+                and openSummary.Position.CloseEndOfDay == True
+                and self.EvaluateBiggerDate(candlebar, endOfdayLimitModelParam)
+                and self.GetNetOpenShares() != 0):
+            return True
         else:
             return False
 
+    def EvaluateClosingOnStopLoss(self, candlebar):
 
-    def GetAceptedSummaries(self):
+        if not self.Open():
+            return False  # Position not opened
 
-        return  sorted(list(filter(lambda x: x.Position.GetLastOrder() is not None or x.Position.IsRejectedPosition(),
-                                   self.ExecutionSummaries.values())),
-                                   key=lambda x: x.CreateTime,reverse=True)
+        if self.GetNetOpenShares() < 0:  # Stop loss on short position
+            openSummary = self.GetLastTradedSummary(Side.Sell)
 
+            if (openSummary is not None
+                    and openSummary.AvgPx is not None
+                    and openSummary.Position.StopLoss is not None
+                    and candlebar.Close is not None
+                    and candlebar.Close > (openSummary.AvgPx + openSummary.Position.StopLoss)  # Short --> bigger than
+            ):
+                return True
+            else:
+                return False
+
+        elif self.GetNetOpenShares() > 0:  # Stop loss on long position
+            openSummary = self.GetLastTradedSummary(Side.Buy)
+
+            if (openSummary is not None
+                    and openSummary.Position.StopLoss is not None
+                    and openSummary.AvgPx is not None
+                    and candlebar.Close is not None
+                    and candlebar.Close < (openSummary.AvgPx - openSummary.Position.StopLoss)  # Long --> lower than
+            ):
+                return True
+            else:
+                return False
+        else:
+            return False
+
+    def EvaluateClosingOnTakeProfit(self, candlebar):
+
+        if not self.Open():
+            return False  # Position not opened
+
+        if self.GetNetOpenShares() < 0:  # take profit on short position
+            openSummary = self.GetLastTradedSummary(Side.Sell)
+
+            if (openSummary is not None
+                    and openSummary.Position.TakeProfit is not None
+                    and openSummary.AvgPx is not None
+                    and candlebar.Close is not None
+                    and candlebar.Close < (openSummary.AvgPx - openSummary.Position.TakeProfit)
+            ):  # Short position --> lower than AvgPx - take profit
+                return True
+            else:
+                return False
+        elif self.GetNetOpenShares() > 0:  # Stop loss on long position
+
+            openSummary = self.GetLastTradedSummary(Side.Buy)
+
+            if (
+                    openSummary is not None
+                    and openSummary.AvgPx is not None
+                    and candlebar.Close is not None
+                    and openSummary.Position.TakeProfit is not None
+                    and candlebar.Close > (openSummary.AvgPx + openSummary.Position.TakeProfit)
+            ):
+                return True
+            else:
+                return False
+        else:
+            return False
+
+    #endregion
+
+    #region Strong and simple Terminal
+    def IsTermianlCondition(self,condition):
+        return (condition==_EXIT_TERM_COND_EOF or condition==_EXIT_TERM_COND_1 or condition==_EXIT_TERM_COND_2
+                or condition == _TERMINALLY_CLOSED or condition==_EXIT_TERM_COND_FLEX_STOP_LOSS)
+
+        # Defines if the condition for closing the day, will imply not opening another position during the day
+
+    def EvaluateStrongTerminal(self, candlebarsArr, endOfdayLimitModelParam):
+
+            lastCandlebar = candlebarsArr[-1]
+
+            # EXIT any open trades at 2:59 PM central time
+            if (endOfdayLimitModelParam.StringValue is not None and self.EvaluateBiggerDate(lastCandlebar,
+                                                                                            endOfdayLimitModelParam)):
+                return _EXIT_TERM_COND_EOF
+
+            return None
+
+    #Defines if the condition for closing the day, will imply not opening another position during the day
+    def EvaluateClosingTerminalCondition(self,candlebarsArr,takeGainLimitModelParam,stopLossLimitModelParam,
+                                         implFlexibeStopLoss, flexibleStopLossL1ModelParam):
+
+        lastCandlebar = candlebarsArr[-1]
+
+        # CUMULATIVE Gain for the Day exceeds Take Gain Limit
+        if ( takeGainLimitModelParam.FloatValue is not None and (self.CurrentProfit is not None and self.CurrentProfit > takeGainLimitModelParam.FloatValue*100)):
+            return _EXIT_TERM_COND_1
+
+        # CUMULATIVE Loss for the Day exceeds (worse than) Stop Loss Limit
+        if (stopLossLimitModelParam.FloatValue is not None and (self.CurrentProfit is not None and self.CurrentProfit < stopLossLimitModelParam.FloatValue*100)):
+            return _EXIT_TERM_COND_2
+
+        # L1- Flexible Stop Loss
+        if (    implFlexibeStopLoss.IntValue >=1 and self.PriceVolatilityIndicators.FlexibleStopLoss is not None
+            and self.PriceVolatilityIndicators.FlexibleStopLoss!=0):
+            openQty = abs(self.GetNetOpenShares()) if self.GetNetOpenShares() != 0 else 1
+            if (self.MaxMonetaryLossCurrentTrade/openQty) < self.PriceVolatilityIndicators.FlexibleStopLoss:
+                return _EXIT_TERM_COND_FLEX_STOP_LOSS
+
+        return None
+
+
+    #endregion
 
     #endregion
