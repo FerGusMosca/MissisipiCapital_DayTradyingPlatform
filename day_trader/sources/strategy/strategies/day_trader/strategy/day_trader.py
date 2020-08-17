@@ -610,11 +610,11 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
                     datTradingPos.DailyRSIIndicator.UpdateDaily(security.MarketDataArr,self.ModelParametersHandler.Get(ModelParametersHandler.HISTORICAL_PRICES_PAST_DAYS_DAILY_RSI()).IntValue)
 
-                    '''
+
                     datTradingPos.CalculateStdDevForLastNDays(security.MarketDataArr,
                                                               self.ModelParametersHandler.Get(
                                                                   ModelParametersHandler.HISTORICAL_PRICES_PAST_DAYS_STD_DEV()))
-                    '''
+
                     #print("RSI calculated for symbol {}:{}".format(security.Symbol,datTradingPos.DailyRSIIndicator.RSI))
                 except Exception as e:
                     self.DoLog(str(e),MessageType.ERROR)

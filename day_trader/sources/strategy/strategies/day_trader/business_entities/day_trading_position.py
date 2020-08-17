@@ -128,6 +128,8 @@ class DayTradingPosition():
         self.TerminalCloseCond = None
         self.Recomendation = _REC_UNDEFINED
         self.ShowTradingRecommndations = False
+        self.PricesReggrSlope = None
+        self.PricesReggrSlopePeriod = None
 
         self.MinuteNonSmoothedRSIIndicator = RSIIndicator(False)
         self.MinuteSmoothedRSIIndicator = RSIIndicatorSmoothed()
@@ -178,6 +180,9 @@ class DayTradingPosition():
         self.Recomendation=_REC_UNDEFINED
         self.ShowTradingRecommndations=False
 
+        self.PricesReggrSlope = None
+        self.PricesReggrSlopePeriod = None
+
     #endregion
 
     #region Static Methods
@@ -220,6 +225,20 @@ class DayTradingPosition():
 
     #region Private Util/Aux
 
+    # Formats like a.m. or p.m. times are converted to AM or PM
+    def FormatTime(self, time):
+
+        if str(time).endswith("a.m."):
+            return time.replace("a.m.", "AM")
+        elif str(time).endswith("a. m."):
+            return time.replace("a. m.", "AM")
+        elif str(time).endswith("p.m."):
+            return time.replace("p.m.", "PM")
+        elif str(time).endswith("p. m."):
+            return time.replace("p. m.", "PM")
+        else:
+            return time
+
     def GetMov(self, candleBarArr, skip, length):
         sortedBars = sorted(list(filter(lambda x: x is not None, candleBarArr)),key=lambda x:x.DateTime,reverse = True)
 
@@ -256,6 +275,10 @@ class DayTradingPosition():
         #reggr = linregress(arrayPrices, arrayIndex)
 
         slope = (reggr.slope*100)/arrayPrices[-1]
+
+        self.PricesReggrSlope = slope
+        self.PricesReggrSlopePeriod = length
+
         return slope
 
     def GetSlope (self,currMovAvg,prevMovAvg):
@@ -339,8 +362,8 @@ class DayTradingPosition():
 
     def EvaluateTimeRange(self,candlebar,timeFromModelParam,timeToModelParam):
         now = candlebar.DateTime
-        fromTimeLowVol = time.strptime(timeFromModelParam.StringValue, "%I:%M %p")
-        toTimeLowVol = time.strptime(timeToModelParam.StringValue, "%I:%M %p")
+        fromTimeLowVol = time.strptime( self.CalculateStdDevForLastNDays( timeFromModelParam.StringValue), "%I:%M %p")
+        toTimeLowVol = time.strptime( self.FormatTime ( timeToModelParam.StringValue), "%I:%M %p")
         todayStart = now.replace(hour=fromTimeLowVol.tm_hour, minute=fromTimeLowVol.tm_min, second=0, microsecond=0)
         todayEnd = now.replace(hour=toTimeLowVol.tm_hour, minute=toTimeLowVol.tm_min,
                                second=0, microsecond=0)
@@ -348,7 +371,7 @@ class DayTradingPosition():
 
     def EvaluateBiggerDate(self,candlebar ,timeFromModelParam):
         now = candlebar.DateTime
-        fromTime = time.strptime(timeFromModelParam.StringValue, "%I:%M %p")
+        fromTime = time.strptime( self.FormatTime( timeFromModelParam.StringValue), "%I:%M %p")
         todayStart = now.replace(hour=fromTime.tm_hour, minute=fromTime.tm_min, second=0, microsecond=0)
         return todayStart<now
 
@@ -587,6 +610,19 @@ class DayTradingPosition():
     #region Public Methods
 
     #region Public Util/Aux
+
+
+    def CalculateStdDevForLastNDays(self,marketDataArr, numDaysModelParam):
+        
+        if numDaysModelParam.IntValue is None:
+            raise Exception("Could not calculate las N days prices std. dev as there is not a number for N")
+
+        prices = []
+
+        for md in list( marketDataArr.values())[-1*numDaysModelParam.IntValue:]:
+            prices.append(md.ClosingPrice)
+
+        self.LastNDaysStdDev = statistics.stdev(prices)
 
     def toJSON(self):
         return json.dumps(self, default=lambda o: o.__dict__,sort_keys=True, indent=4)
@@ -891,6 +927,7 @@ class DayTradingPosition():
         else:
             openQty= abs(self.GetNetOpenShares()) if self.GetNetOpenShares()!=0 else 1
 
+
         #Rule TERMINAL --> Positions are not closed. They won't just be opened again
         terminalCond = self.EvaluateClosingTerminalCondition(candlebarsArr,takeGainLimitModelParam,stopLossLimitModelParam,
                                                              implFlexibeStopLoss, flexibleStopLossL1ModelParam)
@@ -1001,6 +1038,8 @@ class DayTradingPosition():
             and macdRsiCloseShortRule8ModelParam.IntValue>=1
             ):
             return _EXIT_SHORT_MACD_RSI_COND_8
+
+
 
         # rule 9
         if (        (self.MaxMonetaryLossCurrentTrade/openQty) < ( self.SmoothMACDRSIParam(macdRSISmoothedMode,self.MACDIndicator.PriceHMinusL,gainMinStopLossExitParamU,gainMinStopLossExitParamUU))
@@ -1430,10 +1469,11 @@ class DayTradingPosition():
             return _EXIT_TERM_COND_2
 
         # L1- Flexible Stop Loss
+
         if (    implFlexibeStopLoss.IntValue >=1 and self.PriceVolatilityIndicators.FlexibleStopLoss is not None
             and self.PriceVolatilityIndicators.FlexibleStopLoss!=0):
             openQty = abs(self.GetNetOpenShares()) if self.GetNetOpenShares() != 0 else 1
-            if (self.MaxMonetaryLossCurrentTrade/openQty) < self.PriceVolatilityIndicators.FlexibleStopLoss:
+            if (self.CurrentProfitMonetary/openQty) < self.PriceVolatilityIndicators.FlexibleStopLoss:
                 return _EXIT_TERM_COND_FLEX_STOP_LOSS
 
         return None

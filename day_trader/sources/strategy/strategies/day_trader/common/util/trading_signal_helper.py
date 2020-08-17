@@ -320,23 +320,40 @@ class TradingSignalHelper:
 
     def PersistMACDIndicators(self,dayTradingPos,tradingSignalId):
 
-        self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "MSPrev",
+        self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "MACD.MSPrev",
                                                                     dayTradingPos.MACDIndicator.MSPrev)
-        self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "MSNow",
+        self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "MACD.MSNow",
                                                                     dayTradingPos.MACDIndicator.MS)
-        self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "MaxMS",
+        self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "MACD.MaxMS",
                                                                     dayTradingPos.MACDIndicator.MaxMS)
-        self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "MinMS",
+        self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "MACD.MinMS",
                                                                     dayTradingPos.MACDIndicator.MinMS)
-        self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "AbsMaxMS",
+        self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "MACD.AbsMaxMS",
                                                                     dayTradingPos.MACDIndicator.AbsMaxMS)
-        self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "MS3SL",
+        self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "MACD.MS3SL",
                                                                     dayTradingPos.MACDIndicator.GetMSSlope(3))
 
-        self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "MACD",
+        self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "MACD.PriceHMinusL",
+                                                                    dayTradingPos.MACDIndicator.PriceHMinusL)
+
+        absMaxMSPeriodParam = self.ModelParametersHandler.Get(ModelParametersHandler.MACD_RSI_ABS_MAX_MS_PERIOD(),
+                                                              dayTradingPos.Security.Symbol)
+
+        self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "MACD.MaxAbsMSCrossover",
+                                                                    dayTradingPos.MACDIndicator.GetMaxAbsMSCrossover(
+                                                                        absMaxMSPeriodParam.IntValue))
+
+        self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "MACD.MaxAbsMSPeriod",
+                                                                    absMaxMSPeriodParam.IntValue)
+
+        self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "MACD.MACD",
                                                                     dayTradingPos.MACDIndicator.MACD)
-        self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "Signal",
+        self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "MACD.Signal",
                                                                     dayTradingPos.MACDIndicator.Signal)
+
+    def PersistPricesIndicators(self,dayTradingPos,tradingSignalId):
+        self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "Symbol 5SL",dayTradingPos.PricesReggrSlope)
+        self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "Symbol 5SL Period",dayTradingPos.PricesReggrSlopePeriod)
 
     def PersistRSIIndicators(self,dayTradingPos,tradingSignalId):
         self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "RSISmoothed5SL",
@@ -437,6 +454,8 @@ class TradingSignalHelper:
                     ModelParametersHandler.M_S_3_SLOPE_X(), symbol))
                 self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
                     ModelParametersHandler.M_S_3_SLOPE_X_X(), symbol))
+                self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
+                    ModelParametersHandler.MACD_RSI_ABS_MAX_MS_PERIOD(), symbol))
 
                 self.PersistOpeningRules(dayTradingPos,tradingSignalId,symbol)
 
@@ -445,6 +464,8 @@ class TradingSignalHelper:
                 self.PersistBroomsParamters(tradingSignalId,symbol)
 
                 self.PersistVolumeParamters(tradingSignalId,symbol)
+
+                self.PersistPricesIndicators(dayTradingPos, tradingSignalId)
 
                 self.PersistMACDIndicators(dayTradingPos,tradingSignalId)
 
@@ -525,6 +546,8 @@ class TradingSignalHelper:
                 self.PersistVolumeParamters(tradingSignalId, symbol)
 
                 self.PersistClosingRules(tradingSignalId,symbol)
+
+                self.PersistPricesIndicators(dayTradingPos, tradingSignalId)
 
                 self.PersistMACDIndicators(dayTradingPos, tradingSignalId)
 
