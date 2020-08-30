@@ -27,7 +27,10 @@ class BollingerIndicator():
 
     def CalculateTP(self,candlebar):
 
-        self.TP = (candlebar.Low + candlebar.High + candlebar.Close)/3
+        if (candlebar.Low is  None or candlebar.High is  None or candlebar.Close is  None):
+            return
+
+        self.TP = (candlebar.Low + candlebar.High + candlebar.Close) / 3
 
     def CalculateTPMA(self,candleBarArr,BROOMS_TPMA_A):
 

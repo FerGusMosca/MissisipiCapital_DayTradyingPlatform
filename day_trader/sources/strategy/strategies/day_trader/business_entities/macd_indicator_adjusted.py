@@ -50,6 +50,9 @@ class MACDIndicatorAdjusted(MACDIndicator):
         sortedBars = sorted(list(filter(lambda x: x is not None, CandleBarArr)), key=lambda x: x.DateTime,
                             reverse=False)
 
+        if (len(sortedBars) == 0):
+            return
+
         lastBar = sortedBars[-1]
 
         if (self.LastProcessedDateTime is not None and self.LastProcessedDateTime == lastBar.DateTime):

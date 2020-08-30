@@ -33,6 +33,9 @@ class BroomsIndicator(RSIBase):
         if BROOMS_NN.IntValue is None:
             raise Exception("Missing value for BROOMS_NN parameter")
 
+        if TP is None:
+            return
+
         self.TPArray.append(TP)
 
         if(len(self.TPArray)>=BROOMS_NN.IntValue):
@@ -154,6 +157,7 @@ class BroomsIndicator(RSIBase):
 
         if self.LastProcessedDateTime == candlebar.DateTime:
             return  # Already Processed
+
 
         self.CalculateTPSL(TP,BROOMS_NN)
 

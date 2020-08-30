@@ -54,7 +54,11 @@ class MSStrengthIndicator():
         P=BROOMS_MS_STRENGTH_P.FloatValue
         Q=BROOMS_MS_STRENGTH_Q.FloatValue
 
-        self.MSI=((M - N ) /(self.TPSD * (P + Q)) )* (MS - (self.TPSD * P )) + M
+
+        if (P+Q)!=0 and self.TPSD!=0:
+            self.MSI=((M - N ) /(self.TPSD * (P + Q)) )* (MS - (self.TPSD * P )) + M
+        else :
+            self.MSI=None
 
 
     #endregion

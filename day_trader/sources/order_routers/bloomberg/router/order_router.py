@@ -1041,8 +1041,10 @@ class OrderRouter( BaseCommunicationModule, ICommunicationModule):
 
             if wrapper.GetAction() == Actions.NEW_ORDER:
                 if(self.Configuration.ImplementMock):
+
                     self.ProcessNewOrderMock(wrapper)
                 else:
+
                     self.ProcessNewOrder(wrapper)
             elif wrapper.GetAction() == Actions.UPDATE_ORDER:
                 raise Exception("Update Order not implemented @Bloomberg order router")

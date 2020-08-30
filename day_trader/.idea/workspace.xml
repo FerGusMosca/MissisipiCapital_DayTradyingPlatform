@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/sources/order_routers/bloomberg/router/order_router.py" />
-    <bookmark url="file://$PROJECT_DIR$/sources/order_routers/bloomberg/router/order_router.py" line="855" />
-    <bookmark url="file://$PROJECT_DIR$/sources/strategy/strategies/day_trader/strategy/day_trader.py" line="2038" />
-    <bookmark url="file://$PROJECT_DIR$/sources/strategy/strategies/day_trader/strategy/day_trader.py" line="2042" />
-    <bookmark url="file://$PROJECT_DIR$/main.py" description="from sources.framework.common.enums.fields.executi..." line="4" />
-    <bookmark url="file://$PROJECT_DIR$/sources/strategy/strategies/day_trader/strategy/day_trader.py" />
-  </component>
   <component name="ChangeListManager">
     <list default="true" id="e8dcb44a-98f3-452c-abc0-45825b180530" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/configs/orderRouter.Bloomberg.ini" beforeDir="false" afterPath="$PROJECT_DIR$/configs/orderRouter.Bloomberg.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/files/processed/EXAMPLE Jan 2 2019.xlsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sources/order_routers/bloomberg/router/order_router.py" beforeDir="false" afterPath="$PROJECT_DIR$/sources/order_routers/bloomberg/router/order_router.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sources/strategy/strategies/day_trader/business_entities/MS_strength_indicator.py" beforeDir="false" afterPath="$PROJECT_DIR$/sources/strategy/strategies/day_trader/business_entities/MS_strength_indicator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sources/strategy/strategies/day_trader/business_entities/TG_indicator.py" beforeDir="false" afterPath="$PROJECT_DIR$/sources/strategy/strategies/day_trader/business_entities/TG_indicator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sources/strategy/strategies/day_trader/business_entities/bollinger_indicator.py" beforeDir="false" afterPath="$PROJECT_DIR$/sources/strategy/strategies/day_trader/business_entities/bollinger_indicator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sources/strategy/strategies/day_trader/business_entities/brooms_indicator.py" beforeDir="false" afterPath="$PROJECT_DIR$/sources/strategy/strategies/day_trader/business_entities/brooms_indicator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sources/strategy/strategies/day_trader/business_entities/macd_indicator_adjusted.py" beforeDir="false" afterPath="$PROJECT_DIR$/sources/strategy/strategies/day_trader/business_entities/macd_indicator_adjusted.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sources/strategy/strategies/day_trader/strategy/day_trader.py" beforeDir="false" afterPath="$PROJECT_DIR$/sources/strategy/strategies/day_trader/strategy/day_trader.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -22,7 +23,7 @@
     <SUITE FILE_PATH="coverage/day_trader$day_trader.coverage" NAME="day_trader Coverage Results" MODIFIED="1583890481958" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/sources/strategy/strategies/day_trader/strategy" />
     <SUITE FILE_PATH="coverage/day_trader$candle_bar_data_wrapper.coverage" NAME="candle_bar_data_wrapper Coverage Results" MODIFIED="1573140790433" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/sources/order_routers/bloomberg/common/wrappers" />
     <SUITE FILE_PATH="coverage/emsxapi$main.coverage" NAME="main Coverage Results" MODIFIED="1572717625086" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/" />
-    <SUITE FILE_PATH="coverage/day_trader$main.coverage" NAME="main Coverage Results" MODIFIED="1597688072728" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/" />
+    <SUITE FILE_PATH="coverage/day_trader$main.coverage" NAME="main Coverage Results" MODIFIED="1598547959824" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/" />
     <SUITE FILE_PATH="coverage/emsxapi$order_router.coverage" NAME="main Coverage Results" MODIFIED="1567618440959" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/" />
   </component>
   <component name="DatabaseView">
@@ -45,10 +46,24 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/configs/orderRouter.Bloomberg.ini">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="306">
+              <caret line="18" column="21" selection-start-line="18" selection-start-column="21" selection-end-line="18" selection-end-column="21" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/sources/strategy/strategies/day_trader/strategy/__init__.py">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/sources/strategy/strategies/day_trader/strategy/day_trader.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="95">
-              <caret line="615" selection-start-line="615" selection-end-line="615" />
+            <state relative-caret-position="221">
+              <caret line="113" column="37" selection-start-line="113" selection-start-column="37" selection-end-line="113" selection-end-column="37" />
               <folding>
                 <element signature="e#0#90#0" expanded="true" />
               </folding>
@@ -56,65 +71,23 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37/Lib/threading.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="113">
-              <caret line="864" selection-start-line="864" selection-end-line="864" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/sources/strategy/strategies/day_trader/common/util/model_parameters_handler.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="720" selection-start-line="720" selection-end-line="720" />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/sources/strategy/strategies/day_trader/business_entities/day_trading_position.py">
+        <entry file="file://$PROJECT_DIR$/sources/strategy/strategies/day_trader/common/wrappers/execution_summary_wrapper.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="253">
-              <caret line="625" lean-forward="true" selection-start-line="625" selection-end-line="625" />
-              <folding>
-                <element signature="e#0#69#0" expanded="true" />
-                <element signature="e#1572#1586#0" />
-                <element signature="e#4052#4071#0" />
-                <element signature="e#6054#6082#0" />
-                <element signature="e#7090#7112#0" />
-                <element signature="e#7960#7984#0" />
-                <element signature="e#8099#8505#0" />
-                <element signature="e#7883#8545#0" />
-                <element signature="e#8606#9007#0" />
-                <element signature="e#9065#9228#0" />
-                <element signature="e#9333#10051#0" />
-                <element signature="e#10237#10736#0" />
-                <element signature="e#10782#11039#0" />
-                <element signature="e#11099#11351#0" />
-                <element signature="e#11417#11663#0" />
-                <element signature="e#11714#12497#0" />
-                <element signature="e#12616#12817#0" />
-                <element signature="e#12906#13401#0" />
-                <element signature="e#13475#13711#0" />
-                <element signature="e#14030#15274#0" />
-                <element signature="e#15296#15329#0" />
-                <element signature="e#25408#25486#0" />
-                <element signature="e#26084#26115#0" />
-                <element signature="e#68989#69017#0" />
-                <element signature="e#73051#73085#0" />
-              </folding>
+            <state relative-caret-position="136">
+              <caret line="10" column="18" lean-forward="true" selection-start-line="10" selection-start-column="18" selection-end-line="10" selection-end-column="18" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/sources/framework/business_entities/market_data/market_data.py">
+        <entry file="file://$PROJECT_DIR$/sources/strategy/strategies/day_trader/common/util/trading_signal_helper.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="2" column="20" selection-start-line="2" selection-start-column="20" selection-end-line="2" selection-end-column="20" />
+            <state relative-caret-position="6341">
+              <caret line="378" column="110" selection-start-line="378" selection-start-column="94" selection-end-line="378" selection-end-column="110" />
+              <folding>
+                <element signature="e#0#89#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -122,8 +95,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/sources/strategy/strategies/day_trader/business_entities/price_volatility_indicators.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="464">
-              <caret line="55" column="74" selection-start-line="55" selection-start-column="74" selection-end-line="55" selection-end-column="74" />
+            <state relative-caret-position="918">
+              <caret line="55" column="8" selection-start-line="55" selection-start-column="8" selection-end-line="55" selection-end-column="8" />
               <folding>
                 <element signature="e#0#72#0" expanded="true" />
               </folding>
@@ -132,10 +105,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/sources/strategy/strategies/day_trader/business_entities/brooms_indicator.py">
+        <entry file="file://$PROJECT_DIR$/sources/strategy/strategies/day_trader/business_entities/MS_strength_indicator.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-9">
-              <caret line="142" column="40" selection-start-line="142" selection-start-column="37" selection-end-line="142" selection-end-column="40" />
+            <state relative-caret-position="969">
+              <caret line="58" column="54" selection-start-line="58" selection-start-column="54" selection-end-line="58" selection-end-column="54" />
               <folding>
                 <element signature="e#0#72#0" expanded="true" />
               </folding>
@@ -144,28 +117,36 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/configs/orderRouter.Bloomberg.ini">
+        <entry file="file://$PROJECT_DIR$/sources/strategy/strategies/day_trader/business_entities/day_trading_position.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="12" selection-start-line="12" selection-end-line="13" selection-end-column="35" />
+            <state relative-caret-position="22661">
+              <caret line="1457" column="8" selection-start-line="1457" selection-start-column="8" selection-end-line="1457" selection-end-column="8" />
+              <folding>
+                <element signature="e#0#69#0" expanded="true" />
+                <element signature="e#1572#1586#0" />
+                <element signature="e#67263#70222#0" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/configs/day_trader.ini">
+        <entry file="file://$PROJECT_DIR$/sources/strategy/strategies/day_trader/business_entities/bollinger_indicator.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="14" column="15" selection-start-line="14" selection-start-column="15" selection-end-line="14" selection-end-column="15" />
+            <state relative-caret-position="765">
+              <caret line="46" selection-start-line="46" selection-end-line="46" />
+              <folding>
+                <element signature="e#0#72#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/sources/strategy/strategies/day_trader/business_entities/volume_avg_indicator.py">
+        <entry file="file://$PROJECT_DIR$/sources/strategy/strategies/day_trader/business_entities/TG_indicator.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-135">
-              <caret line="79" column="8" selection-start-line="79" selection-start-column="8" selection-end-line="79" selection-end-column="8" />
+            <state relative-caret-position="816">
+              <caret line="48" column="24" selection-start-line="48" selection-start-column="24" selection-end-line="48" selection-end-column="24" />
             </state>
           </provider>
         </entry>
@@ -179,106 +160,8 @@
       </list>
     </option>
   </component>
-  <component name="FindInProjectRecents">
-    <findStrings>
-      <find>evaluateclosingmacd</find>
-      <find>.persistmac</find>
-      <find>.persistmacdrsi</find>
-      <find>GetMaxAbsMSCrossover</find>
-      <find>runbacktest</find>
-      <find>RunBacktest</find>
-      <find>.PERSISTMACDRSI</find>
-      <find>MACD_RSI_ABS_MAX_MS_PERIOD</find>
-      <find>evaluatemacdrsilong</find>
-      <find>reset</find>
-      <find>getregg</find>
-      <find>PersistMACDIndicators</find>
-      <find>MinuteSmoothedRSIIndicator</find>
-      <find>GetReggrSlope</find>
-      <find>%p</find>
-      <find>util</find>
-      <find>time.strptime</find>
-      <find>strptime</find>
-      <find>evaluateclosingmacdrsi</find>
-      <find>PriceVolatilityIndicators.FlexibleStopLoss</find>
-      <find>MaxMonetaryLossCurrentTrade</find>
-      <find>MaxLoss</find>
-      <find>CalculateStdDevForLastNDays</find>
-      <find>updatetech</find>
-      <find>exttern</find>
-      <find>processhistorica</find>
-      <find>marketdatareq</find>
-      <find>stddev</find>
-      <find>.values</find>
-      <find>requesthistorical</find>
-    </findStrings>
-    <replaceStrings>
-      <replace />
-    </replaceStrings>
-    <dirStrings>
-      <dir>C:\Users\zimzum\Desktop\Projects\Tradehelm\Missisipi\python\day_trader\sources</dir>
-      <dir>C:\Users\zimzum\Desktop\Projects\Tradehelm\Missisipi\python\day_trader\sources\strategy</dir>
-    </dirStrings>
-  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
-  </component>
-  <component name="IdeDocumentHistory">
-    <option name="CHANGED_PATHS">
-      <list>
-        <option value="$PROJECT_DIR$/sources/strategy/strategies/day_trader/strategy/services/websocket/common/wrappers/position_trading_signal_subscription_wrapper.py" />
-        <option value="$PROJECT_DIR$/sources/strategy/strategies/day_trader/strategy/services/websocket/common/DTO/positions/trading_signal_dto.py" />
-        <option value="$PROJECT_DIR$/sources/framework/util/generic_log_helper.py" />
-        <option value="$PROJECT_DIR$/sources/order_routers/bloomberg/common/util/log_helper.py" />
-        <option value="$PROJECT_DIR$/configs/day_trader.file_handler.py" />
-        <option value="$PROJECT_DIR$/sources/strategy/strategies/day_trader/common/configuration/configuration.py" />
-        <option value="$PROJECT_DIR$/sources/strategy/strategies/day_trader/strategy/services/websocket/websocket_module/websocket_module.py" />
-        <option value="$PROJECT_DIR$/configs/day_trader.ini" />
-        <option value="$PROJECT_DIR$/sources/framework/common/enums/fields/strategy_backtest_field.py" />
-        <option value="$PROJECT_DIR$/sources/strategy/strategies/day_trader/strategy/services/file_handler/common/dto/strategy_backtest_dto.py" />
-        <option value="$PROJECT_DIR$/sources/strategy/strategies/day_trader/strategy/services/file_handler/common/wrapper/strategy_backtest_wrapper.py" />
-        <option value="$PROJECT_DIR$/sources/framework/business_entities/positions/execution_summary.py" />
-        <option value="$PROJECT_DIR$/sources/framework/common/enums/Actions.py" />
-        <option value="$PROJECT_DIR$/sources/framework/common/enums/fields/strategy_backtest_result_field.py" />
-        <option value="$PROJECT_DIR$/sources/strategy/strategies/day_trader/common/wrappers/strategy_backtest_result_wrapper.py" />
-        <option value="$PROJECT_DIR$/configs/day_trader.file_handler.ini" />
-        <option value="$PROJECT_DIR$/sources/strategy/strategies/day_trader/strategy/services/file_handler/common/configuration/configuration.py" />
-        <option value="$PROJECT_DIR$/sources/strategy/strategies/day_trader/strategy/services/file_handler/file_handler_module/file_handler_module.py" />
-        <option value="$PROJECT_DIR$/sources/strategy/strategies/day_trader/common/dto/backtest_dto.py" />
-        <option value="$PROJECT_DIR$/sources/strategy/strategies/day_trader/strategy/services/file_handler/common/util/output_file_converter.py" />
-        <option value="$PROJECT_DIR$/sources/strategy/strategies/day_trader/business_entities/testers/macd_indicator_tester.py" />
-        <option value="$PROJECT_DIR$/sources/strategy/strategies/day_trader/business_entities/testers/macd_indicator_adjusted_tester.py" />
-        <option value="$PROJECT_DIR$/sources/strategy/strategies/day_trader/business_entities/macd_indicator.py" />
-        <option value="$PROJECT_DIR$/sources/strategy/strategies/day_trader/business_entities/macd_indicator_adjusted.py" />
-        <option value="$PROJECT_DIR$/sources/order_routers/bloomberg/common/configuration/configuration.py" />
-        <option value="$PROJECT_DIR$/sources/strategy/strategies/day_trader/business_entities/rsi_indicator.py" />
-        <option value="$PROJECT_DIR$/configs/orderRouter.Bloomberg.ini" />
-        <option value="$PROJECT_DIR$/sources/strategy/strategies/day_trader/business_entities/MSStrengthIndicator.py" />
-        <option value="$PROJECT_DIR$/sources/strategy/strategies/day_trader/business_entities/BroomsIndicator.py" />
-        <option value="$PROJECT_DIR$/sources/generic_orderrouter/market_order_router/router/market_order_router.py" />
-        <option value="$PROJECT_DIR$/sources/strategy/strategies/day_trader/business_entities/MS_strength_indicator.py" />
-        <option value="$PROJECT_DIR$/sources/strategy/strategies/day_trader/business_entities/rsi_indicator_smoothed.py" />
-        <option value="$PROJECT_DIR$/sources/strategy/strategies/day_trader/business_entities/testers/bollinger_tester.py" />
-        <option value="$PROJECT_DIR$/sources/strategy/strategies/day_trader/business_entities/rsi_base.py" />
-        <option value="$PROJECT_DIR$/sources/strategy/strategies/day_trader/business_entities/testers/rsi_indicator_tester.py" />
-        <option value="$PROJECT_DIR$/sources/strategy/strategies/day_trader/business_entities/testers/brooms_tester.py" />
-        <option value="$PROJECT_DIR$/sources/strategy/strategies/day_trader/business_entities/brooms_indicator.py" />
-        <option value="$PROJECT_DIR$/sources/framework/util/log_helper.py" />
-        <option value="$PROJECT_DIR$/sources/strategy/strategies/day_trader/business_entities/last_sdd_days_std_dev_indicator.py" />
-        <option value="$PROJECT_DIR$/sources/order_routers/bloomberg/router/order_router.py" />
-        <option value="$PROJECT_DIR$/sources/strategy/strategies/day_trader/business_entities/price_volatility_indicators.py" />
-        <option value="$PROJECT_DIR$/sources/strategy/strategies/day_trader/business_entities/TG_indicator.py" />
-        <option value="$PROJECT_DIR$/sources/strategy/strategies/day_trader/strategy/services/file_handler/common/util/file_handler.py" />
-        <option value="$PROJECT_DIR$/sources/strategy/strategies/day_trader/strategy/services/file_handler/common/util/input_file_converter.py" />
-        <option value="$PROJECT_DIR$/sources/strategy/strategies/day_trader/common/util/model_parameters_handler.py" />
-        <option value="$PROJECT_DIR$/sources/strategy/strategies/day_trader/business_entities/bollinger_indicator.py" />
-        <option value="$PROJECT_DIR$/sources/strategy/strategies/day_trader/business_entities/volume_avg_indicator.py" />
-        <option value="$PROJECT_DIR$/sources/framework/business_entities/orders/order.py" />
-        <option value="$PROJECT_DIR$/sources/strategy/strategies/day_trader/common/util/trading_signal_helper.py" />
-        <option value="$PROJECT_DIR$/sources/strategy/strategies/day_trader/strategy/day_trader.py" />
-        <option value="$PROJECT_DIR$/sources/strategy/strategies/day_trader/business_entities/day_trading_position.py" />
-      </list>
-    </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-7" />
@@ -293,7 +176,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -306,154 +188,11 @@
               <item name="day_trader" type="462c0819:PsiDirectoryNode" />
               <item name="configs" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="day_trader" type="b2602c69:ProjectViewProjectNode" />
-              <item name="day_trader" type="462c0819:PsiDirectoryNode" />
-              <item name="sources" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="day_trader" type="b2602c69:ProjectViewProjectNode" />
-              <item name="day_trader" type="462c0819:PsiDirectoryNode" />
-              <item name="sources" type="462c0819:PsiDirectoryNode" />
-              <item name="framework" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="day_trader" type="b2602c69:ProjectViewProjectNode" />
-              <item name="day_trader" type="462c0819:PsiDirectoryNode" />
-              <item name="sources" type="462c0819:PsiDirectoryNode" />
-              <item name="framework" type="462c0819:PsiDirectoryNode" />
-              <item name="business_entities" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="day_trader" type="b2602c69:ProjectViewProjectNode" />
-              <item name="day_trader" type="462c0819:PsiDirectoryNode" />
-              <item name="sources" type="462c0819:PsiDirectoryNode" />
-              <item name="framework" type="462c0819:PsiDirectoryNode" />
-              <item name="business_entities" type="462c0819:PsiDirectoryNode" />
-              <item name="market_data" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="day_trader" type="b2602c69:ProjectViewProjectNode" />
-              <item name="day_trader" type="462c0819:PsiDirectoryNode" />
-              <item name="sources" type="462c0819:PsiDirectoryNode" />
-              <item name="framework" type="462c0819:PsiDirectoryNode" />
-              <item name="business_entities" type="462c0819:PsiDirectoryNode" />
-              <item name="orders" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="day_trader" type="b2602c69:ProjectViewProjectNode" />
-              <item name="day_trader" type="462c0819:PsiDirectoryNode" />
-              <item name="sources" type="462c0819:PsiDirectoryNode" />
-              <item name="order_routers" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="day_trader" type="b2602c69:ProjectViewProjectNode" />
-              <item name="day_trader" type="462c0819:PsiDirectoryNode" />
-              <item name="sources" type="462c0819:PsiDirectoryNode" />
-              <item name="order_routers" type="462c0819:PsiDirectoryNode" />
-              <item name="bloomberg" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="day_trader" type="b2602c69:ProjectViewProjectNode" />
-              <item name="day_trader" type="462c0819:PsiDirectoryNode" />
-              <item name="sources" type="462c0819:PsiDirectoryNode" />
-              <item name="strategy" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="day_trader" type="b2602c69:ProjectViewProjectNode" />
-              <item name="day_trader" type="462c0819:PsiDirectoryNode" />
-              <item name="sources" type="462c0819:PsiDirectoryNode" />
-              <item name="strategy" type="462c0819:PsiDirectoryNode" />
-              <item name="strategies" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="day_trader" type="b2602c69:ProjectViewProjectNode" />
-              <item name="day_trader" type="462c0819:PsiDirectoryNode" />
-              <item name="sources" type="462c0819:PsiDirectoryNode" />
-              <item name="strategy" type="462c0819:PsiDirectoryNode" />
-              <item name="strategies" type="462c0819:PsiDirectoryNode" />
-              <item name="day_trader" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="day_trader" type="b2602c69:ProjectViewProjectNode" />
-              <item name="day_trader" type="462c0819:PsiDirectoryNode" />
-              <item name="sources" type="462c0819:PsiDirectoryNode" />
-              <item name="strategy" type="462c0819:PsiDirectoryNode" />
-              <item name="strategies" type="462c0819:PsiDirectoryNode" />
-              <item name="day_trader" type="462c0819:PsiDirectoryNode" />
-              <item name="business_entities" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="day_trader" type="b2602c69:ProjectViewProjectNode" />
-              <item name="day_trader" type="462c0819:PsiDirectoryNode" />
-              <item name="sources" type="462c0819:PsiDirectoryNode" />
-              <item name="strategy" type="462c0819:PsiDirectoryNode" />
-              <item name="strategies" type="462c0819:PsiDirectoryNode" />
-              <item name="day_trader" type="462c0819:PsiDirectoryNode" />
-              <item name="strategy" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="day_trader" type="b2602c69:ProjectViewProjectNode" />
-              <item name="day_trader" type="462c0819:PsiDirectoryNode" />
-              <item name="sources" type="462c0819:PsiDirectoryNode" />
-              <item name="strategy" type="462c0819:PsiDirectoryNode" />
-              <item name="strategies" type="462c0819:PsiDirectoryNode" />
-              <item name="day_trader" type="462c0819:PsiDirectoryNode" />
-              <item name="strategy" type="462c0819:PsiDirectoryNode" />
-              <item name="services" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="day_trader" type="b2602c69:ProjectViewProjectNode" />
-              <item name="day_trader" type="462c0819:PsiDirectoryNode" />
-              <item name="sources" type="462c0819:PsiDirectoryNode" />
-              <item name="strategy" type="462c0819:PsiDirectoryNode" />
-              <item name="strategies" type="462c0819:PsiDirectoryNode" />
-              <item name="day_trader" type="462c0819:PsiDirectoryNode" />
-              <item name="strategy" type="462c0819:PsiDirectoryNode" />
-              <item name="services" type="462c0819:PsiDirectoryNode" />
-              <item name="file_handler" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="day_trader" type="b2602c69:ProjectViewProjectNode" />
-              <item name="day_trader" type="462c0819:PsiDirectoryNode" />
-              <item name="sources" type="462c0819:PsiDirectoryNode" />
-              <item name="strategy" type="462c0819:PsiDirectoryNode" />
-              <item name="strategies" type="462c0819:PsiDirectoryNode" />
-              <item name="day_trader" type="462c0819:PsiDirectoryNode" />
-              <item name="strategy" type="462c0819:PsiDirectoryNode" />
-              <item name="services" type="462c0819:PsiDirectoryNode" />
-              <item name="file_handler" type="462c0819:PsiDirectoryNode" />
-              <item name="common" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="day_trader" type="b2602c69:ProjectViewProjectNode" />
-              <item name="day_trader" type="462c0819:PsiDirectoryNode" />
-              <item name="sources" type="462c0819:PsiDirectoryNode" />
-              <item name="strategy" type="462c0819:PsiDirectoryNode" />
-              <item name="strategies" type="462c0819:PsiDirectoryNode" />
-              <item name="day_trader" type="462c0819:PsiDirectoryNode" />
-              <item name="strategy" type="462c0819:PsiDirectoryNode" />
-              <item name="services" type="462c0819:PsiDirectoryNode" />
-              <item name="file_handler" type="462c0819:PsiDirectoryNode" />
-              <item name="common" type="462c0819:PsiDirectoryNode" />
-              <item name="util" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="day_trader" type="b2602c69:ProjectViewProjectNode" />
-              <item name="day_trader" type="462c0819:PsiDirectoryNode" />
-              <item name="sources" type="462c0819:PsiDirectoryNode" />
-              <item name="strategy" type="462c0819:PsiDirectoryNode" />
-              <item name="strategies" type="462c0819:PsiDirectoryNode" />
-              <item name="day_trader" type="462c0819:PsiDirectoryNode" />
-              <item name="strategy" type="462c0819:PsiDirectoryNode" />
-              <item name="services" type="462c0819:PsiDirectoryNode" />
-              <item name="file_handler" type="462c0819:PsiDirectoryNode" />
-              <item name="file_handler_module" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -464,16 +203,16 @@
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\zimzum\Desktop\Projects\Tradehelm\Missisipi\python\day_trader\sources\strategy\strategies\day_trader\common\wrappers" />
-      <recent name="C:\Users\zimzum\Desktop\Projects\Tradehelm\Missisipi\python\day_trader\configs" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\zimzum\Desktop\Projects\Tradehelm\Missisipi\python\develop\MissisipiCapital_DayTradyingPlatform\day_trader\sources\framework\util" />
       <recent name="C:\Users\zimzum\Desktop\Projects\Tradehelm\Missisipi\python\develop\MissisipiCapital_DayTradyingPlatform\day_trader\sources\strategy\strategies\day_trader\business_entities\testers" />
       <recent name="C:\Users\zimzum\Desktop\Projects\Tradehelm\Missisipi\python\day_trader\sources\strategy\strategies\day_trader\common\wrappers" />
       <recent name="C:\Users\zimzum\Desktop\Projects\Tradehelm\Missisipi\python\day_trader\sources\strategy\common\dto" />
       <recent name="C:\Users\zimzum\Desktop\Projects\Tradehelm\Missisipi\python\day_trader\sources\framework\common\wrappers" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\zimzum\Desktop\Projects\Tradehelm\Missisipi\python\day_trader\sources\strategy\strategies\day_trader\common\wrappers" />
+      <recent name="C:\Users\zimzum\Desktop\Projects\Tradehelm\Missisipi\python\day_trader\configs" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -488,7 +227,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.main">
+  <component name="RunManager" selected="Python.candle_bar_data_wrapper">
     <configuration name="candle_bar_data_wrapper" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="emsxapi" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -561,13 +300,6 @@
       <item itemvalue="Python.day_trader" />
       <item itemvalue="Python.main" />
     </list>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Python.main" />
-        <item itemvalue="Python.day_trader" />
-        <item itemvalue="Python.candle_bar_data_wrapper" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -805,12 +537,19 @@
       <workItem from="1596915535538" duration="1891000" />
       <workItem from="1597006141653" duration="8412000" />
       <workItem from="1597103950211" duration="1233000" />
-      <workItem from="1597231381458" duration="18361000" />
+      <workItem from="1597231381458" duration="20491000" />
+      <workItem from="1597888488818" duration="13483000" />
+      <workItem from="1598016703702" duration="10565000" />
+      <workItem from="1598050596392" duration="446000" />
+      <workItem from="1598202046263" duration="4741000" />
+      <workItem from="1598221798032" duration="28000" />
+      <workItem from="1598277572710" duration="12483000" />
+      <workItem from="1598480819453" duration="4218000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1968108000" />
+    <option name="totallyTimeSpent" value="2016202000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -823,15 +562,14 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24810892" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.31013617" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.64484453" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.95090014" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.49924356" visible="true" weight="0.31914893" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.13584287" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49924356" weight="0.6759411" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -886,6 +624,7 @@
               <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
                 <collection />
               </option>
+              <option name="COLUMN_ORDER" />
             </State>
           </value>
         </entry>
@@ -906,20 +645,38 @@
       </map>
     </option>
   </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <default-breakpoints>
-        <breakpoint log-message="true" log-stack="true" type="python-exception">
-          <properties notifyOnlyOnFirst="true" notifyOnTerminate="true" exception="BaseException">
-            <option name="notifyOnTerminate" value="true" />
-            <option name="notifyOnlyOnFirst" value="true" />
-          </properties>
-        </breakpoint>
-      </default-breakpoints>
-    </breakpoint-manager>
-  </component>
   <component name="debuggerHistoryManager">
     <expressions id="evaluateCodeFragment">
+      <expression>
+        <expression-string>candlebarArr</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>(candlebar.Low + candlebar.High + candlebar.Close)</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>candlebar.Low is not None and candlebar.High is not None and candlebar.Close is not None</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>self.Open()</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>candlebarDict.values()</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
+      </expression>
+      <expression>
+        <expression-string>dayTradingPos,candlebarDict.values()</expression-string>
+        <language-id>Python</language-id>
+        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
+      </expression>
       <expression>
         <expression-string>list( marketDataArr.values())[-5:]</expression-string>
         <language-id>Python</language-id>
@@ -935,490 +692,6 @@
         <language-id>Python</language-id>
         <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
       </expression>
-      <expression>
-        <expression-string>marketDataArr.values()[-1*numDaysModelParam.IntValue:]</expression-string>
-        <language-id>Python</language-id>
-        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>marketDataArr[-1*numDaysModelParam.IntValue:]</expression-string>
-        <language-id>Python</language-id>
-        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>self.MACDIndicator.GetMaxAbsMSCrossover(absMaxMSPeriodParam.IntValue)</expression-string>
-        <language-id>Python</language-id>
-        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>self.SmoothMACDRSIParam(macdRSISmoothedMode, self.MACDIndicator.AbsMaxMS, absMSMaxMinLast5ParamH, absMSMaxMinLast5ParamHH)</expression-string>
-        <language-id>Python</language-id>
-        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>self.BollingerIndicator.DeltaUP()</expression-string>
-        <language-id>Python</language-id>
-        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
-      </expression>
-      <expression>
-        <expression-string>self.MinuteSmoothedRSIIndicator.GetRSIReggr(5)</expression-string>
-        <language-id>Python</language-id>
-        <evaluation-mode>CODE_FRAGMENT</evaluation-mode>
-      </expression>
     </expressions>
-  </component>
-  <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/env/Lib/site-packages/scipy/stats/_stats_mstats_common.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2125">
-          <caret line="129" selection-start-line="129" selection-end-line="129" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sources/strategy/strategies/day_trader/business_entities/trading_signal.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="23" selection-start-line="5" selection-start-column="23" selection-end-line="5" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sources/strategy/strategies/day_trader/business_entities/testers/macd_indicator_adjusted_tester.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="348">
-          <caret line="48" column="91" selection-start-line="48" selection-start-column="12" selection-end-line="48" selection-end-column="91" />
-          <folding>
-            <element signature="e#0#94#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/env/Lib/site-packages/numpy/core/_methods.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2380">
-          <caret line="150" selection-start-line="150" selection-end-line="150" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sources/strategy/strategies/day_trader/business_entities/testers/rsi_indicator_tester.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="884">
-          <caret line="55" column="8" selection-start-line="55" selection-start-column="8" selection-end-line="55" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sources/framework/business_entities/positions/execution_summary.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="22" column="8" selection-start-line="22" selection-start-column="8" selection-end-line="22" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sources/framework/business_entities/positions/position.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2074">
-          <caret line="127" column="8" selection-start-line="127" selection-start-column="8" selection-end-line="127" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sources/framework/util/log_helper.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="5" column="8" selection-start-line="5" selection-start-column="8" selection-end-line="5" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sources/strategy/strategies/day_trader/business_entities/rsi_base.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="731">
-          <caret line="43" selection-start-line="43" selection-end-line="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sources/strategy/strategies/day_trader/business_entities/testers/brooms_tester.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1037">
-          <caret line="69" column="8" selection-start-line="69" selection-start-column="8" selection-end-line="69" selection-end-column="8" />
-          <folding>
-            <element signature="e#0#90#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sources/order_routers/bloomberg/common/util/bloomberg_translation_helper.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="177">
-          <caret line="94" column="34" lean-forward="true" selection-start-line="94" selection-start-column="34" selection-end-line="94" selection-end-column="34" />
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sources/strategy/strategies/day_trader/strategy/services/websocket/websocket_module/websocket_module.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#90#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sources/order_routers/bloomberg/common/converter/order_converter.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="13" selection-end-line="64" />
-          <folding>
-            <element signature="e#0#62#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sources/framework/common/wrappers/historical_prices_request_wrapper.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="7" column="8" selection-start-line="7" selection-start-column="8" selection-end-line="7" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sources/strategy/strategies/day_trader/strategy/services/websocket/common/DTO/subscriptions/websocket_subscribe_message.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="4" selection-start-line="14" selection-start-column="4" selection-end-line="14" selection-end-column="90" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sources/order_routers/bloomberg/common/wrappers/rejected_execution_report_wrapper.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="17" selection-start-line="17" selection-end-line="17" />
-          <folding>
-            <element signature="e#0#61#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sources/order_routers/bloomberg/common/configuration/configuration.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="49" selection-start-line="8" selection-start-column="8" selection-end-line="8" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/env/Lib/site-packages/pandas/core/dtypes/dtypes.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="8551">
-          <caret line="515" column="5" selection-start-line="515" selection-start-column="4" selection-end-line="515" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sources/order_routers/bloomberg/common/wrappers/new_execution_report_wrapper.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret selection-end-line="91" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sources/order_routers/bloomberg/common/wrappers/execution_report_wrapper.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#13#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" selection-start-line="6" selection-end-line="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/env/Lib/site-packages/icalendar/caselessdict.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="918">
-          <caret line="57" column="15" selection-start-line="57" selection-start-column="15" selection-end-line="57" selection-end-column="66" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sources/order_routers/bloomberg/router/order_router.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="177">
-          <caret line="251" column="73" selection-start-line="251" selection-start-column="73" selection-end-line="251" selection-end-column="73" />
-          <folding>
-            <element signature="e#0#68#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sources/framework/business_entities/market_data/candle_bar.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sources/strategy/strategies/day_trader/business_entities/rsi_indicator_smoothed.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-9">
-          <caret line="45" column="8" selection-start-line="45" selection-start-column="8" selection-end-line="45" selection-end-column="8" />
-          <folding>
-            <element signature="e#0#72#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sources/strategy/strategies/day_trader/business_entities/rsi_indicator.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-833">
-          <caret line="4" column="23" lean-forward="true" selection-start-line="4" selection-start-column="23" selection-end-line="4" selection-end-column="23" />
-          <folding>
-            <element signature="e#0#72#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sources/strategy/strategies/day_trader/business_entities/MS_strength_indicator.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="65" selection-start-line="64" selection-start-column="4" selection-end-line="65" />
-          <folding>
-            <element signature="e#0#72#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../../../../../../../Missisipi - Releases/test_releases/v 3.0.0.0 - 27.05/sources/strategy/strategies/day_trader/business_entities/day_trading_position.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="280">
-          <caret line="915" lean-forward="true" selection-start-line="915" selection-end-line="915" />
-          <folding>
-            <element signature="e#0#69#0" expanded="true" />
-            <element signature="e#44502#45015#0" />
-            <element signature="e#45078#46263#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sources/strategy/strategies/day_trader/business_entities/macd_indicator_adjusted.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="3" column="31" selection-start-line="3" selection-start-column="31" selection-end-line="3" selection-end-column="31" />
-          <folding>
-            <element signature="e#0#100#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sources/strategy/data_access_layer/trading_signal_manager.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="578">
-          <caret line="37" column="8" selection-start-line="37" selection-start-column="8" selection-end-line="37" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sources/strategy/strategies/day_trader/business_entities/macd_indicator.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="867">
-          <caret line="53" column="12" selection-start-line="53" selection-start-column="12" selection-end-line="53" selection-end-column="12" />
-          <folding>
-            <element signature="e#0#100#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sources/framework/business_entities/orders/order.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="30" column="36" selection-start-line="30" selection-start-column="36" selection-end-line="30" selection-end-column="36" />
-          <folding>
-            <element signature="e#0#76#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sources/strategy/strategies/day_trader/strategy/services/file_handler/common/util/file_handler.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="7" column="16" selection-start-line="7" selection-start-column="16" selection-end-line="7" selection-end-column="16" />
-          <folding>
-            <element signature="e#0#116#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sources/strategy/strategies/day_trader/business_entities/TG_indicator.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="799">
-          <caret line="47" selection-start-line="47" selection-end-line="47" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sources/strategy/strategies/day_trader/strategy/services/websocket/data_access_layer/websocket_server.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="529">
-          <caret line="497" column="44" selection-start-line="495" selection-start-column="5" selection-end-line="497" selection-end-column="44" />
-          <folding>
-            <element signature="e#0#24#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sources/strategy/strategies/day_trader/strategy/services/file_handler/common/util/input_file_converter.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1498">
-          <caret line="112" column="37" selection-start-line="112" selection-start-column="37" selection-end-line="112" selection-end-column="37" />
-          <folding>
-            <element signature="e#0#72#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sources/strategy/strategies/day_trader/business_entities/bollinger_indicator.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="274">
-          <caret line="149" column="8" selection-start-line="149" selection-start-column="8" selection-end-line="149" selection-end-column="8" />
-          <folding>
-            <element signature="e#0#72#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sources/strategy/strategies/day_trader/strategy/services/file_handler/file_handler_module/file_handler_module.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="544">
-          <caret line="45" column="27" selection-start-line="45" selection-start-column="27" selection-end-line="45" selection-end-column="27" />
-          <folding>
-            <element signature="e#0#90#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/.PyCharm2018.3/system/python_stubs/-971389187/time.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="107">
-          <caret line="202" column="4" selection-start-line="202" selection-start-column="4" selection-end-line="202" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37/Lib/_strptime.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="81">
-          <caret line="570" selection-start-line="570" selection-end-line="570" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sources/strategy/strategies/day_trader/common/util/trading_signal_helper.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="279">
-          <caret line="379" column="124" selection-start-line="379" selection-start-column="82" selection-end-line="379" selection-end-column="124" />
-          <folding>
-            <element signature="e#0#89#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sources/framework/business_entities/market_data/market_data.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="20" selection-start-line="2" selection-start-column="20" selection-end-line="2" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sources/strategy/strategies/day_trader/business_entities/volume_avg_indicator.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-135">
-          <caret line="79" column="8" selection-start-line="79" selection-start-column="8" selection-end-line="79" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sources/strategy/strategies/day_trader/business_entities/price_volatility_indicators.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="464">
-          <caret line="55" column="74" selection-start-line="55" selection-start-column="74" selection-end-line="55" selection-end-column="74" />
-          <folding>
-            <element signature="e#0#72#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sources/strategy/strategies/day_trader/business_entities/brooms_indicator.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-9">
-          <caret line="142" column="40" selection-start-line="142" selection-start-column="37" selection-end-line="142" selection-end-column="40" />
-          <folding>
-            <element signature="e#0#72#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/configs/orderRouter.Bloomberg.ini">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="12" selection-start-line="12" selection-end-line="13" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/configs/day_trader.ini">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="15" selection-start-line="14" selection-start-column="15" selection-end-line="14" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sources/strategy/strategies/day_trader/common/util/model_parameters_handler.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="720" selection-start-line="720" selection-end-line="720" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37/Lib/threading.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="113">
-          <caret line="864" selection-start-line="864" selection-end-line="864" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sources/strategy/strategies/day_trader/strategy/day_trader.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="615" selection-start-line="615" selection-end-line="615" />
-          <folding>
-            <element signature="e#0#90#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/sources/strategy/strategies/day_trader/business_entities/day_trading_position.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="253">
-          <caret line="625" lean-forward="true" selection-start-line="625" selection-end-line="625" />
-          <folding>
-            <element signature="e#0#69#0" expanded="true" />
-            <element signature="e#1572#1586#0" />
-            <element signature="e#4052#4071#0" />
-            <element signature="e#6054#6082#0" />
-            <element signature="e#7090#7112#0" />
-            <element signature="e#7960#7984#0" />
-            <element signature="e#8099#8505#0" />
-            <element signature="e#7883#8545#0" />
-            <element signature="e#8606#9007#0" />
-            <element signature="e#9065#9228#0" />
-            <element signature="e#9333#10051#0" />
-            <element signature="e#10237#10736#0" />
-            <element signature="e#10782#11039#0" />
-            <element signature="e#11099#11351#0" />
-            <element signature="e#11417#11663#0" />
-            <element signature="e#11714#12497#0" />
-            <element signature="e#12616#12817#0" />
-            <element signature="e#12906#13401#0" />
-            <element signature="e#13475#13711#0" />
-            <element signature="e#14030#15274#0" />
-            <element signature="e#15296#15329#0" />
-            <element signature="e#25408#25486#0" />
-            <element signature="e#26084#26115#0" />
-            <element signature="e#68989#69017#0" />
-            <element signature="e#73051#73085#0" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
   </component>
 </project>

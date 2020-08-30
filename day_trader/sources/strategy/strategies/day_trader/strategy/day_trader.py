@@ -543,7 +543,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
         md = MarketDataConverter.ConvertMarketData(wrapper)
 
         try:
-            self.LockMarketData.acquire()
+            self.LockCandlebar.acquire()
             md = MarketDataConverter.ConvertMarketData(wrapper)
 
             LogHelper.LogPublishMarketDataOnSecurity("DayTrader Recv MarketData", self, md.Security.Symbol,md)
@@ -567,7 +567,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
             traceback.print_exc()
             self.ProcessErrorInMethod("@DayTrader.ProcessMarketData", e,md.Security.Symbol is md if not None else None)
         finally:
-            self.LockMarketData.release()
+            self.LockCandlebar.release()
 
     def ProcessErrorInMethod(self,method,e, symbol=None):
         try:
@@ -699,18 +699,33 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
             msg = "Critical error @DayTrader.UpdateTradingSignals.:{}".format(str(e))
             self.ProcessError(ErrorWrapper(Exception(msg)))
 
+    def FilterCandlesToUse(self,dayTradingPos,candlebarArr):
 
+        sortedBarsArr = sorted(list(filter(lambda x: x is not None, candlebarArr)), key=lambda x: x.DateTime,
+                               reverse=False)
+
+        if not dayTradingPos.RunningBacktest:
+            if(len(sortedBarsArr))>=2:
+                filteredBarsArr = sortedBarsArr[:-1]
+                return filteredBarsArr
+            else:
+                return []
+        else:
+            return sortedBarsArr
 
     def UpdateTechnicalAnalysisParameters(self, candlebar,candlebarDict):
         dayTradingPos = next(iter(list(filter(lambda x: x.Security.Symbol == candlebar.Security.Symbol, self.DayTradingPositions))),None)
         if dayTradingPos is not None:
+            candlebarArr = self.FilterCandlesToUse(dayTradingPos,candlebarDict.values())
+            
             #prevLastProcessedTime = dayTradingPos.MinuteSmoothedRSIIndicator.LastProcessedDateTime
-            dayTradingPos.MinuteNonSmoothedRSIIndicator.Update(candlebarDict.values(),
+            dayTradingPos.MinuteNonSmoothedRSIIndicator.Update(candlebarArr,
                                                     self.ModelParametersHandler.Get(ModelParametersHandler.CANDLE_BARS_NON_SMOTHED_MINUTES_RSI()).IntValue)
-            dayTradingPos.MinuteSmoothedRSIIndicator.Update(candlebarDict.values(),
+            
+            dayTradingPos.MinuteSmoothedRSIIndicator.Update(candlebarArr,
                                                     self.ModelParametersHandler.Get(ModelParametersHandler.CANDLE_BARS_SMOOTHED_MINUTES_RSI()).IntValue)
 
-            dayTradingPos.MACDIndicator.Update(candlebarDict.values(),
+            dayTradingPos.MACDIndicator.Update(candlebarArr,
                                                slow=self.ModelParametersHandler.Get(ModelParametersHandler.MACD_SLOW()).IntValue,
                                                fast=self.ModelParametersHandler.Get(ModelParametersHandler.MACD_FAST()).IntValue,
                                                signal=self.ModelParametersHandler.Get(ModelParametersHandler.MACD_SIGNAL()).IntValue,
@@ -719,7 +734,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                                                )
 
 
-            dayTradingPos.BollingerIndicator.Update(candlebarDict.values(),
+            dayTradingPos.BollingerIndicator.Update(candlebarArr,
                                                     self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_TPMA_A()),
                                                     self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_TPSD_B()),
                                                     self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_BOLLUP_C()),
@@ -731,7 +746,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                                                     )
 
 
-            dayTradingPos.MSStrengthIndicator.Update(candlebarDict.values(),dayTradingPos.MACDIndicator.MS,
+            dayTradingPos.MSStrengthIndicator.Update(candlebarArr,dayTradingPos.MACDIndicator.MS,
                                                      self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_TPSD_B()),
                                                      self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_MS_STRENGTH_M()),
                                                      self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_MS_STRENGTH_N()),
@@ -740,7 +755,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                                                      )
 
 
-            dayTradingPos.BroomsIndicator.Update(candlebarDict.values(),
+            dayTradingPos.BroomsIndicator.Update(candlebarArr,
                                                  dayTradingPos.BollingerIndicator.TP,
                                                  dayTradingPos.BollingerIndicator.BSI,
                                                  dayTradingPos.MSStrengthIndicator.MSI,
@@ -781,7 +796,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                                              )
 
 
-            dayTradingPos.VolumeAvgIndicator.Update(candlebarDict.values(),
+            dayTradingPos.VolumeAvgIndicator.Update(candlebarArr,
                                                     self.ModelParametersHandler.Get(ModelParametersHandler.VOLUME_INDICATOR_T1()),
                                                     self.ModelParametersHandler.Get(ModelParametersHandler.VOLUME_INDICATOR_T2()),
                                                     self.ModelParametersHandler.Get(ModelParametersHandler.VOLUME_INDICATOR_T3()),
@@ -1370,6 +1385,10 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
         try:
             if(candlebar is None):
                 raise Exception("Invalid candlebar received")
+
+            if candlebar.High is None or candlebar.Low is None or candlebar.Close is None:
+                return
+
             LogHelper.LogPublishCandleBarOnSecurity("DayTrader Recv Candlebar", self, candlebar.Security.Symbol,candlebar)
             self.LockCandlebar.acquire()
 
@@ -1399,7 +1418,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
             LogHelper.LogPublishCandleBarOnSecurity("DayTrader Processed Candlebar", self, candlebar.Security.Symbol,candlebar)
 
         except Exception as e:
-
+            traceback.print_exc()
             self.ProcessErrorInMethod("@DayTrader.ProcessCandleBar", e,candlebar.Security.Symbol if candlebar is not None else None)
         finally:
             if self.LockCandlebar.locked():
@@ -2312,13 +2331,13 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
     def RequestMarketData(self):
         for secIn in self.DayTradingPositions:
             try:
-                self.LockMarketData.acquire()
+                self.LockCandlebar.acquire()
                 self.MarketData[secIn.Security.Symbol]=secIn.Security
                 mdReqWrapper = MarketDataRequestWrapper(secIn.Security,SubscriptionRequestType.SnapshotAndUpdates)
                 self.MarketDataModule.ProcessMessage(mdReqWrapper)
             finally:
-                if self.LockMarketData.locked():
-                    self.LockMarketData.release()
+                if self.LockCandlebar.locked():
+                    self.LockCandlebar.release()
 
 
     def RequestBars(self):

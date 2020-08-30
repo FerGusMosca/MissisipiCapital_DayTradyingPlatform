@@ -45,6 +45,9 @@ class TGIndicator():
 
             self.K = KK + ( KX * (((KY*maxMonetaryProfitCurrentTrade)/TPSDStartOfTrade) -KK ) )
 
+            if self.K>1:
+                self.K=1
+
 
 
     #endregion
