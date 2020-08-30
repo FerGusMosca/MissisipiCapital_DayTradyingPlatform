@@ -43,6 +43,9 @@ _EXIT_SHORT_COND_5="EXIT_SHORT_COND_5"
 _EXIT_SHORT_COND_6="EXIT_SHORT_COND_6"
 _EXIT_SHORT_COND_EOF="EXIT_SHORT_COND_EOF"
 
+_GENERIC_LONG_RULE_1="GENERIC_LONG_RULE_1"
+_GENERIC_SHORT_RULE_1="GENERIC_SHORT_RULE_1"
+
 _EXIT_LONG_MACD_RSI_COND_1="EXIT_LONG_MACD_RSI_COND_1"
 _EXIT_LONG_MACD_RSI_COND_2="EXIT_LONG_MACD_RSI_COND_2"
 _EXIT_LONG_MACD_RSI_COND_3="EXIT_LONG_MACD_RSI_COND_3"
@@ -78,6 +81,7 @@ _SHORT_MACD_RSI_RULE_5="SHORT_MACD_RSI_RULE_5"
 _SHORT_MACD_RSI_RULE_BROOMS="SHORT_MACD_RSI_RULE_BROOMS"
 
 _TERMINALLY_CLOSED ="TERMINALLY_CLOSED"
+_INVALID_TIME_TRADE ="INVALID_TIME_TRADE"
 
 _REC_UNDEFINED = -1
 _REC_GO_LONG_NOW = 0
@@ -123,11 +127,21 @@ class DayTradingPosition():
         self.MaxMonetaryLossCurrentTrade = 0
         self.LastNDaysStdDev = 0
         self.PosUpdTimestamp = None
-        self.TerminalClose = False
+
         self.RunningBacktest = False
+
+
+        #region Terminal Conds
+        self.TerminalClose = False
         self.TerminalCloseCond = None
         self.Recomendation = _REC_UNDEFINED
         self.ShowTradingRecommndations = False
+
+        self.SoftTerminalCondEvaluated= None
+        self.StrongTerminalCondEvaluated = None
+
+        #endregion
+
         self.PricesReggrSlope = None
         self.PricesReggrSlopePeriod = None
 
@@ -174,9 +188,15 @@ class DayTradingPosition():
         self.PriceVolatilityIndicators.Reset()
         self.TGIndicator.Reset()
         self.VolumeAvgIndicator.Reset()
-        self.TerminalClose = False
         self.RunningBacktest= False
+
+        #region Terminal Conditions
+        self.TerminalClose = False
         self.TerminalCloseCond = None
+        self.SoftTerminalCondEvaluated=None
+        self.StrongTerminalCondEvaluated=None
+        #endregion
+
         self.Recomendation=_REC_UNDEFINED
         self.ShowTradingRecommndations=False
 
@@ -190,6 +210,10 @@ class DayTradingPosition():
     @staticmethod
     def _TERMINALLY_CLOSED():
         return _TERMINALLY_CLOSED
+
+    @staticmethod
+    def _INVALID_TIME_TRADE():
+        return _INVALID_TIME_TRADE
 
     @staticmethod
     def _REC_GO_LONG_NOW():
@@ -651,11 +675,11 @@ class DayTradingPosition():
 
         if self.Open():
             #print ("Not opening because is opened:{}".format(self.Security.Symbol))
-            return False #Position already opened
+            return None #Position already opened
 
         if self.Routing:
             #print("Not opening because is routing:{}".format(self.Security.Symbol))
-            return False #cannot open positions that are being routed
+            return None #cannot open positions that are being routed
 
         statisticalParams = self.GetStatisticalParameters(candlebarsArr)
 
@@ -665,7 +689,7 @@ class DayTradingPosition():
         if  (statisticalParams.TenMinSkipSlope is None or statisticalParams.ThreeMinSkipSlope is None
             or statisticalParams.ThreeToSixMinSkipSlope is None or statisticalParams.SixToNineMinSkipSlope is None
             or statisticalParams.PctChangeLastThreeMinSlope is None or statisticalParams.DeltaCurrValueAndFiftyMMov is None):
-            return False
+            return None
 
         if  (   (dailyBiasModelParam.FloatValue is None or dailyBiasModelParam.FloatValue<0) #Daily Bias
                 # Last 10 minute slope of 50 minute moving average
@@ -682,9 +706,9 @@ class DayTradingPosition():
             and (posMaxShortDeltaParam.FloatValue is None or statisticalParams.DeltaCurrValueAndFiftyMMov > posMaxShortDeltaParam.FloatValue)
 
         ):
-            return True
+            return _GENERIC_SHORT_RULE_1
         else:
-            return False
+            return None
 
 
 
@@ -868,18 +892,18 @@ class DayTradingPosition():
 
         if self.Open():
             #print ("Not opening because is opened:{}".format(self.Security.Symbol))
-            return False #Position already opened
+            return None #Position already opened
 
         if self.Routing:
             #print("Not opening because is routing:{}".format(self.Security.Symbol))
-            return False #cannot open positions that are being routed
+            return None #cannot open positions that are being routed
 
         statisticalParams = self.GetStatisticalParameters(candlebarsArr)
 
         if  (statisticalParams.TenMinSkipSlope is None or statisticalParams.ThreeMinSkipSlope is None
             or statisticalParams.ThreeToSixMinSkipSlope is None or statisticalParams.SixToNineMinSkipSlope is None
             or statisticalParams.PctChangeLastThreeMinSlope is None or statisticalParams.DeltaCurrValueAndFiftyMMov is None):
-            return False
+            return None
 
 
         if  (   (dailyBiasModelParam.FloatValue is None or dailyBiasModelParam.FloatValue>=0 ) #Daily Bias
@@ -897,9 +921,9 @@ class DayTradingPosition():
             and (posMaximChangeParam.FloatValue is None or statisticalParams.DeltaCurrValueAndFiftyMMov < posMaxLongDeltaParam.FloatValue)
 
             ):
-            return True
+            return _GENERIC_LONG_RULE_1
         else:
-            return False
+            return None
 
     def EvaluateClosingMACDRSIShortTrade(self,candlebarsArr,msNowParamA,macdMaxGainParamJ,macdMaxGainParamJJ,gainMaxTradeParamJJJ,
                                          gainMaxTradeParamSDMult,gainMaxTradeParamFixedGain,macdGainNowMaxParamK,
@@ -927,15 +951,16 @@ class DayTradingPosition():
         else:
             openQty= abs(self.GetNetOpenShares()) if self.GetNetOpenShares()!=0 else 1
 
-
+        '''
         #Rule TERMINAL --> Positions are not closed. They won't just be opened again
-        terminalCond = self.EvaluateClosingTerminalCondition(candlebarsArr,takeGainLimitModelParam,stopLossLimitModelParam,
+        terminalCond = self.EvaluateSoftTerminalCondition(candlebarsArr,takeGainLimitModelParam,stopLossLimitModelParam,
                                                              implFlexibeStopLoss, flexibleStopLossL1ModelParam)
 
         if terminalCond is not None:
             self.TerminalClose =True
             self.TerminalCloseCond = terminalCond #This won't be closed. It won't just open another position again
             #return terminalCond
+        '''
 
         # Rule STRONG TERMINAL --> Positions are closed and They won't just be opened again
         eodCond = self.EvaluateStrongTerminal(candlebarsArr, endOfdayLimitModelParam)
@@ -1076,14 +1101,17 @@ class DayTradingPosition():
         if self.GetNetOpenShares()>0:
             return None#We are in a long position
 
+
+        '''
         # Rule TERMINAL --> Positions are not closed. They won't just be opened again
-        terminalCond = self.EvaluateClosingTerminalCondition(candlebarsArr, takeGainLimitModelParam,stopLossLimitModelParam,
+        terminalCond = self.EvaluateSoftTerminalCondition(candlebarsArr, takeGainLimitModelParam,stopLossLimitModelParam,
                                                              implFlexibeStopLoss, flexibleStopLossL1ModelParam)
 
         if terminalCond is not None:
             self.TerminalClose = True
             self.TerminalCloseCond = terminalCond  # This won't be closed. It won't just open another position again
             # return terminalCond
+        '''
 
         # Rule STRONG TERMINAL --> Positions are closed and They won't just be opened again
         eodCond = self.EvaluateStrongTerminal(candlebarsArr, endOfdayLimitModelParam)
@@ -1151,14 +1179,16 @@ class DayTradingPosition():
         else:
             openQty=abs(self.GetNetOpenShares()) if self.GetNetOpenShares()!=0 else 1
 
+        '''
         # Rule TERMINAL --> Positions are not closed. They won't just be opened again
-        terminalCond = self.EvaluateClosingTerminalCondition(candlebarsArr,takeGainLimitModelParam,stopLossLimitModelParam,
+        terminalCond = self.EvaluateSoftTerminalCondition(candlebarsArr,takeGainLimitModelParam,stopLossLimitModelParam,
                                                              implFlexibeStopLoss, flexibleStopLossL1ModelParam)
 
         if terminalCond is not None:
             self.TerminalClose=True
             self.TerminalCloseCond = terminalCond #This won't be closed. It won't just open another position again
             #return terminalCond
+        '''
 
         # Rule STRONG TERMINAL --> Positions are closed and They won't just be opened again
         eodCond = self.EvaluateStrongTerminal(candlebarsArr, endOfdayLimitModelParam)
@@ -1299,14 +1329,17 @@ class DayTradingPosition():
         if self.GetNetOpenShares() < 0:
             return None  # We are in a short position
 
+        '''
         # Rule TERMINAL --> Positions are not closed. They won't just be opened again
-        terminalCond = self.EvaluateClosingTerminalCondition(candlebarsArr, takeGainLimitModelParam,stopLossLimitModelParam,
+        terminalCond = self.EvaluateSoftTerminalCondition(candlebarsArr, takeGainLimitModelParam,stopLossLimitModelParam,
                                                              implFlexibeStopLoss, flexibleStopLossL1ModelParam)
 
         if terminalCond is not None:
             self.TerminalClose = True
             self.TerminalCloseCond = terminalCond  # This won't be closed. It won't just open another position again
             # return terminalCond
+        '''
+
 
         # Rule STRONG TERMINAL --> Positions are closed and They won't just be opened again
         eodCond = self.EvaluateStrongTerminal(candlebarsArr, endOfdayLimitModelParam)
@@ -1437,7 +1470,31 @@ class DayTradingPosition():
     #endregion
 
     #region Strong and simple Terminal
-    def IsTermianlCondition(self,condition):
+
+    def CanOpenPosition(self,candlebarArr,TAKE_GAIN_LIMIT,STOP_LOSS_LIMIT,IMPL_FLEXIBLE_STOP_LOSSES,FLEXIBLE_STOP_LOSS_L1,END_OF_DAY_LIMIT):
+
+        self.SoftTerminalCondEvaluated = self.EvaluateSoftTerminalCondition (candlebarArr,TAKE_GAIN_LIMIT,STOP_LOSS_LIMIT,
+                                                                             IMPL_FLEXIBLE_STOP_LOSSES,FLEXIBLE_STOP_LOSS_L1 )
+        self.StrongTerminalCondEvaluated = self.EvaluateStrongTerminal(candlebarArr,END_OF_DAY_LIMIT)
+
+        return not self.TerminalClose  and  self.SoftTerminalCondEvaluated is  None and self.StrongTerminalCondEvaluated is None
+
+
+    def TerminalConditionActivated(self):
+
+        if not self.TerminalClose:
+            if self.SoftTerminalCondEvaluated is not None:
+                return self.SoftTerminalCondEvaluated
+            elif self.StrongTerminalCondEvaluated is not None:
+                return self.StrongTerminalCondEvaluated
+            else:
+                raise Exception("Inconsistent state where the is no a terminal close and no soft terminal and strong terminals activated")
+        else:
+            return self.StrongTerminalCondEvaluated if self.StrongTerminalCondEvaluated is not None else self._TERMINALLY_CLOSED()
+
+
+    
+    def IsTerminalCondition(self,condition):
         return (condition==_EXIT_TERM_COND_EOF or condition==_EXIT_TERM_COND_1 or condition==_EXIT_TERM_COND_2
                 or condition == _TERMINALLY_CLOSED or condition==_EXIT_TERM_COND_FLEX_STOP_LOSS)
 
@@ -1455,7 +1512,7 @@ class DayTradingPosition():
             return None
 
     #Defines if the condition for closing the day, will imply not opening another position during the day
-    def EvaluateClosingTerminalCondition(self,candlebarsArr,takeGainLimitModelParam,stopLossLimitModelParam,
+    def EvaluateSoftTerminalCondition(self,candlebarsArr,takeGainLimitModelParam,stopLossLimitModelParam,
                                          implFlexibeStopLoss, flexibleStopLossL1ModelParam):
 
         lastCandlebar = candlebarsArr[-1]
@@ -1477,7 +1534,6 @@ class DayTradingPosition():
                 return _EXIT_TERM_COND_FLEX_STOP_LOSS
 
         return None
-
 
     #endregion
 
