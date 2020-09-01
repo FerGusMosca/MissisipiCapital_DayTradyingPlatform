@@ -524,6 +524,10 @@ class ModelParametersHandler:
         return "BROOMS_BOLLDN_DvHALF"
 
     @staticmethod
+    def SD_LIMIT_FACTOR():
+        return "SD_LIMIT_FACTOR"
+
+    @staticmethod
     def BROOMS_BOLLINGER_K():
         return "BROOMS_BOLLINGER_K"
 

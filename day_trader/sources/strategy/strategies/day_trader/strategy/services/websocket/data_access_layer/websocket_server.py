@@ -207,11 +207,12 @@ class WSHandler(tornado.websocket.WebSocketHandler):
 
   def UnsubscribeService(self,subscrMsg):
     #Unsubscription don't have confirmation messages
-    if subscrMsg.Service not in self.SubscribedServices:
+    if subscrMsg.Service  in self.SubscribedServices:
       del self.SubscribedServices[subscrMsg.Service]
 
     if subscrMsg.Service == _POSITION_TRADING_SIGNALS:
       self.ProcessPositionsTradingSignals(subscrMsg,subscribe=False)
+
 
 
   def ProcessNewPositionReq(self,posNewReq):

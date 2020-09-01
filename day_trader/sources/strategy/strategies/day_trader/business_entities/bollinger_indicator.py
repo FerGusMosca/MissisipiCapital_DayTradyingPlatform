@@ -22,8 +22,19 @@ class BollingerIndicator():
 
 
         self.TPSDStartOfTrade = None
+        self.SDLimit = None
 
         self.LastProcessedDateTime =None
+
+
+    def EvalSDLimit(self,candlebar,SD_LIMIT_FACTOR):
+
+        if SD_LIMIT_FACTOR.FloatValue is None:
+            raise Exception("Missing value for SD_LIMIT_FACTOR parameter")
+
+        if self.SDLimit is None:
+            self.SDLimit=candlebar.Open*SD_LIMIT_FACTOR.FloatValue
+
 
     def CalculateTP(self,candlebar):
 
@@ -126,7 +137,7 @@ class BollingerIndicator():
     #region Public Methods
 
     def Update(self, candleBarArr, BROOMS_TPMA_A,BROOMS_TPSD_B,BROOMS_BOLLUP_C,BROOMS_BOLLDN_D,BROOMS_BOLLINGER_K,
-               BROOMS_BOLLINGER_L,BROOMS_BOLLUP_CvHALF,BROOMS_BOLLDN_DvHALF):
+               BROOMS_BOLLINGER_L,BROOMS_BOLLUP_CvHALF,BROOMS_BOLLDN_DvHALF,SD_LIMIT_FACTOR):
 
         sortedBars = sorted(list(filter(lambda x: x is not None, candleBarArr)), key=lambda x: x.DateTime,
                             reverse=False)
@@ -139,6 +150,7 @@ class BollingerIndicator():
         if self.LastProcessedDateTime == candlebar.DateTime:
             return  # Already Processed
 
+        self.EvalSDLimit(candlebar,SD_LIMIT_FACTOR)
         self.CalculateTP(candlebar)
         self.CalculateTPMA(sortedBars,BROOMS_TPMA_A)
         self.CalculateTPSD(sortedBars,BROOMS_TPSD_B)
@@ -151,7 +163,15 @@ class BollingerIndicator():
         self.LastProcessedDateTime=candlebar.DateTime
 
     def OnTradeSignal(self):
-        self.TPSDStartOfTrade=self.TPSD
+
+        if self.SDLimit is not None:
+            if self.TPSD > self.SDLimit:
+                self.TPSDStartOfTrade=self.SDLimit
+            else:
+                self.TPSDStartOfTrade=self.TPSD
+
+        else:
+            self.TPSDStartOfTrade=self.TPSD
 
 
     def DeltaDN(self):

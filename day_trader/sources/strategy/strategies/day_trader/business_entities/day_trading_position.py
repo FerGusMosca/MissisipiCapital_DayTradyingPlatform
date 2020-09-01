@@ -386,7 +386,7 @@ class DayTradingPosition():
 
     def EvaluateTimeRange(self,candlebar,timeFromModelParam,timeToModelParam):
         now = candlebar.DateTime
-        fromTimeLowVol = time.strptime( self.CalculateStdDevForLastNDays( timeFromModelParam.StringValue), "%I:%M %p")
+        fromTimeLowVol = time.strptime( self.FormatTime( timeFromModelParam.StringValue), "%I:%M %p")
         toTimeLowVol = time.strptime( self.FormatTime ( timeToModelParam.StringValue), "%I:%M %p")
         todayStart = now.replace(hour=fromTimeLowVol.tm_hour, minute=fromTimeLowVol.tm_min, second=0, microsecond=0)
         todayEnd = now.replace(hour=toTimeLowVol.tm_hour, minute=toTimeLowVol.tm_min,

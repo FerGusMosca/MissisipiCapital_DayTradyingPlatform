@@ -743,6 +743,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                                                     self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_BOLLINGER_L()),
                                                     self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_BOLLUP_CvHALF()),
                                                     self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_BOLLDN_DvHALF()),
+                                                    self.ModelParametersHandler.Get(ModelParametersHandler.SD_LIMIT_FACTOR()),
                                                     )
 
 
