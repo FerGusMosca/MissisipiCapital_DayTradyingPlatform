@@ -1269,6 +1269,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                                                                         self.ModelParametersHandler.Get(ModelParametersHandler.GAIN_MAX_TRADE_FIXEDGAIN(),symbol),
                                                                         self.ModelParametersHandler.Get(ModelParametersHandler.MACD_GAIN_NOW_MAX_K(),symbol),
                                                                         self.ModelParametersHandler.Get(ModelParametersHandler.RSI_30_SLOPE_SKIP_5_EXIT_L(),symbol),
+                                                                        self.ModelParametersHandler.Get(ModelParametersHandler.RSI_30_5SL_LX(),symbol),
                                                                         self.ModelParametersHandler.Get( ModelParametersHandler.M_S_NOW_EXIT_N(),symbol),
                                                                         self.ModelParametersHandler.Get(ModelParametersHandler.M_S_NOW_EXIT_N_N(),symbol),
                                                                         self.ModelParametersHandler.Get(ModelParametersHandler.M_S_MAX_MIN_EXIT_N_BIS(),symbol),
@@ -1336,6 +1337,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                                                                          self.ModelParametersHandler.Get(ModelParametersHandler.GAIN_MAX_TRADE_FIXEDGAIN(),symbol),
                                                                          self.ModelParametersHandler.Get(ModelParametersHandler.MACD_GAIN_NOW_MAX_K(),symbol),
                                                                          self.ModelParametersHandler.Get(ModelParametersHandler.RSI_30_SLOPE_SKIP_5_EXIT_L(),symbol),
+                                                                         self.ModelParametersHandler.Get(ModelParametersHandler.RSI_30_5SL_LX(),symbol),
                                                                          self.ModelParametersHandler.Get(ModelParametersHandler.M_S_NOW_EXIT_N(),symbol),
                                                                          self.ModelParametersHandler.Get(ModelParametersHandler.M_S_NOW_EXIT_N_N(),symbol),
                                                                          self.ModelParametersHandler.Get(ModelParametersHandler.M_S_MAX_MIN_EXIT_N_BIS(),symbol),
@@ -1810,11 +1812,12 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                     dayTradingPos.MarketData = md
                     dayTradingPos.CalculateCurrentDayProfits(md)
 
-
                     opening = self.EvaluateOpeningPositions(candlebar, cbDict) if not dayTradingPos.Open() else False
                     closing = self.EvaluateClosingPositions(candlebar, cbDict) if dayTradingPos.Open() else False
 
                     self.WaitForFilledToArrive = opening or closing
+
+                    self.WaitToSyncBacktest(opening, closing, sleepMilisec)
 
                     backtestDto = BacktestDTO(pSymbol=dayTradingPos.Security.Symbol,
                                               pDate=candlebar.DateTime.date(),
@@ -1832,7 +1835,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
                 threading.Thread(target=self.PublishPortfolioPositionThread, args=(dayTradingPos,)).start()
 
-                self.WaitToSyncBacktest(opening,closing,sleepMilisec)
+                #self.WaitToSyncBacktest(opening,closing,sleepMilisec)
 
                 i+=1
             days+=1

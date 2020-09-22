@@ -336,6 +336,10 @@ class ModelParametersHandler:
         return "GAIN_MIN_STOP_LOSS_EXIT_Z_Z"
 
     @staticmethod
+    def RSI_30_5SL_LX():
+        return "RSI_30_5SL_LX"
+
+    @staticmethod
     def DELTAUP_YYY():
         return "DELTAUP_YYY"
 

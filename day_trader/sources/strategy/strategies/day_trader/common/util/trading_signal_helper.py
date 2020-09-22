@@ -490,6 +490,8 @@ class TradingSignalHelper:
                 self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
                     ModelParametersHandler.RSI_30_SLOPE_SKIP_5_EXIT_L(), symbol))
                 self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
+                    ModelParametersHandler.RSI_30_5SL_LX(), symbol))
+                self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
                     ModelParametersHandler.M_S_NOW_EXIT_N(), symbol))
                 self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
                     ModelParametersHandler.M_S_NOW_EXIT_N_N(), symbol))

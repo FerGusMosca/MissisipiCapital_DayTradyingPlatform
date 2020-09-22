@@ -109,13 +109,14 @@ class InputFileConverter:
                         if "-" in fields:
                             try:
                                 if len(fields.split("-")[field])>0:
+
                                     fieldsDict[j] = float(fields.split("-")[field])
                                 else:
                                     fieldsDict[j]=0
                             except Exception as e:
                                 raise Exception("Critical error converting complex price-volume format to decimal value for field {} (value={}):{}".format(field,fields,str(e)))
                         else:
-                            raise Exception("You mas enter values (prices/volume) in fields format when you have (...) in the input file")
+                            raise Exception("You must enter values (prices/volume) in fields format when you have (...) in the input file")
                     else:
                         if field==0:
                             fieldsDict[j]=float(col)

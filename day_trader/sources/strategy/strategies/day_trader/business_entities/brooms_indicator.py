@@ -158,7 +158,6 @@ class BroomsIndicator(RSIBase):
         if self.LastProcessedDateTime == candlebar.DateTime:
             return  # Already Processed
 
-
         self.CalculateTPSL(TP,BROOMS_NN)
 
         self.CalculateBSIMaxMin(BSI,BROOMS_PP,BROOMS_QQ)

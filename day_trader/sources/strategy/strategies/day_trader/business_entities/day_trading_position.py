@@ -823,8 +823,6 @@ class DayTradingPosition():
             ):
             return None
 
-
-
         #NO TRADE ON --> LONG ON
         #line 1
         if (self.MACDIndicator.MSPrev >=msNowParamA.FloatValue and self.MACDIndicator.MS >=msNowParamA.FloatValue
@@ -927,7 +925,7 @@ class DayTradingPosition():
 
     def EvaluateClosingMACDRSIShortTrade(self,candlebarsArr,msNowParamA,macdMaxGainParamJ,macdMaxGainParamJJ,gainMaxTradeParamJJJ,
                                          gainMaxTradeParamSDMult,gainMaxTradeParamFixedGain,macdGainNowMaxParamK,
-                                         rsi30SlopeSkip5ExitParamL,msNowExitParamN,msNowExitParamNN,msMaxMinExitParamNBis,
+                                         rsi30SlopeSkip5ExitParamL,rsi30Skip5ParamLX,msNowExitParamN,msNowExitParamNN,msMaxMinExitParamNBis,
                                          msMaxMinExitParamNNBis,msNowMaxMinExitParamP,msNowExitParamQ,msNowExitParamQQ,
                                          rsi30SlopeSkip10ExitParamR,msMaxMinExitParamS,msMaxMinExitParamSS,sec5MinSlopeExitParamT,
                                          gainMinStopLossExitParamU,gainMinStopLossExitParamUU,gainMinTradeParamUUU,
@@ -986,7 +984,7 @@ class DayTradingPosition():
         # rule 1
         if (    (self.MaxMonetaryProfitCurrentTrade/openQty) >= self.SmoothMACDRSIParam(macdRSISmoothedMode,self.MACDIndicator.PriceHMinusL,macdMaxGainParamJ,macdMaxGainParamJJ)
             and (self.MaxMonetaryProfitCurrentTrade > 0 and self.TGIndicator.HasValidValue() and ((self.CurrentProfitMonetaryLastTrade / self.MaxMonetaryProfitCurrentTrade) < self.TGIndicator.K))
-            and self.MinuteSmoothedRSIIndicator.GetRSIReggr(5) > rsi30SlopeSkip5ExitParamL.FloatValue
+            and self.MinuteSmoothedRSIIndicator.GetRSIReggr(5) > rsi30Skip5ParamLX.FloatValue
             and (self.MaxMonetaryProfitCurrentTrade/openQty) >= (self.BollingerIndicator.TPSDStartOfTrade*gainMaxTradeParamJJJ.FloatValue)
             and (self.MaxMonetaryProfitCurrentTrade / openQty) >= gainMaxTradeParamSDMult.FloatValue * self.PriceVolatilityIndicators.LastSDDDaysOpenStdDev
             and (self.MaxMonetaryProfitCurrentTrade / openQty) >= gainMaxTradeParamFixedGain.FloatValue
@@ -1155,7 +1153,7 @@ class DayTradingPosition():
 
     def EvaluateClosingMACDRSILongTrade(self,candlebarsArr,msNowParamA,macdMaxGainParamJ,macdMaxGainParamJJ,gainMaxTradeParamJJJ,
                                             gainMaxTradeParamSDMult,gainMaxTradeParamFixedGain,macdGainNowMaxParamK,
-                                            rsi30SlopeSkip5ExitParamL,msNowExitParamN,msNowExitParamNN,msMaxMinExitParamNBis,
+                                            rsi30SlopeSkip5ExitParamL,rsi30Skip5ParamLX,msNowExitParamN,msNowExitParamNN,msMaxMinExitParamNBis,
                                             msMaxMinExitParamNNBis,msNowMaxMinExitParamP,msNowExitParamQ,msNowExitParamQQ,
                                             rsi30SlopeSkip10ExitParamR,msMaxMinExitParamS,msMaxMinExitParamSS,
                                             sec5MinSlopeExitParamT,gainMinStopLossExitParamU,gainMinStopLossExitParamUU,
@@ -1215,7 +1213,7 @@ class DayTradingPosition():
         if (
                     (self.MaxMonetaryProfitCurrentTrade/openQty) >= self.SmoothMACDRSIParam(macdRSISmoothedMode,self.MACDIndicator.PriceHMinusL,macdMaxGainParamJ,macdMaxGainParamJJ)
                 and (self.MaxMonetaryProfitCurrentTrade> 0 and self.TGIndicator.HasValidValue()  and ((self.CurrentProfitMonetaryLastTrade/self.MaxMonetaryProfitCurrentTrade)<self.TGIndicator.K))
-                and self.MinuteSmoothedRSIIndicator.GetRSIReggr(5) < (-1*rsi30SlopeSkip5ExitParamL.FloatValue)
+                and self.MinuteSmoothedRSIIndicator.GetRSIReggr(5) < (-1*rsi30Skip5ParamLX.FloatValue)
                 and (self.MaxMonetaryProfitCurrentTrade / openQty) >= (self.BollingerIndicator.TPSDStartOfTrade * gainMaxTradeParamJJJ.FloatValue)
                 and (self.MaxMonetaryProfitCurrentTrade / openQty) >= gainMaxTradeParamSDMult.FloatValue * self.PriceVolatilityIndicators.LastSDDDaysOpenStdDev
                 and (self.MaxMonetaryProfitCurrentTrade / openQty) >= gainMaxTradeParamFixedGain.FloatValue
