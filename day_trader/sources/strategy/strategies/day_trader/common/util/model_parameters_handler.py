@@ -280,6 +280,10 @@ class ModelParametersHandler:
         return "GAIN_MIN_STOP_LOSS_EXIT_Z"
 
     @staticmethod
+    def DAILY_BIAS_MACD_RSI():
+        return "DAILY_BIAS_MACD_RSI"
+
+    @staticmethod
     def PROCESS_EXTERNAL_TRADING():
         return "PROCESS_EXTERNAL_TRADING"
 

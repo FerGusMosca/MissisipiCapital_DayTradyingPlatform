@@ -456,6 +456,8 @@ class TradingSignalHelper:
                     ModelParametersHandler.M_S_3_SLOPE_X_X(), symbol))
                 self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
                     ModelParametersHandler.MACD_RSI_ABS_MAX_MS_PERIOD(), symbol))
+                self.TradingSignalManager.PersistSignalModelParameter(tradingSignalId, self.ModelParametersHandler.Get(
+                    ModelParametersHandler.DAILY_BIAS_MACD_RSI(), symbol))
 
                 self.PersistOpeningRules(dayTradingPos,tradingSignalId,symbol)
 

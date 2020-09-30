@@ -903,7 +903,9 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
         longCond =  self.EvaluateGenericLongTrade(dayTradingPos, symbol, cbDict, candlebar)
         shortCond = self.EvaluateGenericShortTrade(dayTradingPos, symbol, cbDict, candlebar)
 
-        if dayTradingPos.IsTerminalCondition(longCond) or dayTradingPos.IsTerminalCondition(shortCond):
+        if (dayTradingPos.IsTerminalCondition(longCond) or dayTradingPos.IsTerminalCondition(shortCond)
+            or longCond==dayTradingPos._INVALID_TIME_TRADE() or shortCond==dayTradingPos._INVALID_TIME_TRADE()
+            ):
             return False
         else:
             return longCond is not None or shortCond is not None
@@ -948,6 +950,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                                   self.ModelParametersHandler.Get(ModelParametersHandler.MACD_RSI_OPEN_LONG_RULE_4(),symbol),
                                   self.ModelParametersHandler.Get(ModelParametersHandler.MACD_RSI_OPEN_LONG_RULE_BROOMS(),symbol),
                                   self.ModelParametersHandler.Get(ModelParametersHandler.MACD_RSI_START_TRADING(),symbol),
+                                  self.ModelParametersHandler.Get(ModelParametersHandler.DAILY_BIAS_MACD_RSI(),symbol),
                                   list(cbDict.values()))
                if longCondition is not None:
 
@@ -957,6 +960,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                    dayTradingPos.Routing = True
                    #print("Open Pos Long --> Routing=True")
                    dayTradingPos.MACDIndicator.UpdateLastTradeTimestamp()
+
                    return longCondition
                else:
                    return None
@@ -1006,6 +1010,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                                                                     self.ModelParametersHandler.Get(ModelParametersHandler.MACD_RSI_OPEN_SHORT_RULE_4(), symbol),
                                                                     self.ModelParametersHandler.Get(ModelParametersHandler.MACD_RSI_OPEN_SHORT_RULE_BROOMS(), symbol),
                                                                     self.ModelParametersHandler.Get(ModelParametersHandler.MACD_RSI_START_TRADING(), symbol),
+                                                                    self.ModelParametersHandler.Get(ModelParametersHandler.DAILY_BIAS_MACD_RSI(), symbol),
                                                                     list(cbDict.values()))
 
             if shortCondition is not None:
@@ -1832,6 +1837,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                     msg = "Error processing strategy backtest for date {} : {}!".format(candlebar.DateTime,str(e))
                     self.ProcessError(ErrorWrapper(Exception(msg)))
                     self.DoLog(msg, MessageType.ERROR)
+                    raise e
 
                 threading.Thread(target=self.PublishPortfolioPositionThread, args=(dayTradingPos,)).start()
 

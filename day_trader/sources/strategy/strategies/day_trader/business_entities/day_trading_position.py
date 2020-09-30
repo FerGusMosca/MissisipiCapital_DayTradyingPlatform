@@ -718,7 +718,7 @@ class DayTradingPosition():
                                   ms3SlopeParamXX,deltaDnParamXXX,broomsParamZ,broomsParamBias,macdRSISmoothedMode,absMaxMSPeriodParam,
                                   macdRsiOpenShortRule1ModelParam,macdRsiOpenShortRule2ModelParam,macdRsiOpenShortRule3ModelParam,
                                   macdRsiOpenShortRule4ModelParam,macdRsiOpenShortRuleBroomsModelParam,macdRsiStartTradingModelParam,
-                                  candlebarsArr):
+                                  dailyBiasMACDRSI,candlebarsArr):
 
         if self.Open():
             return None #Position already opened
@@ -779,6 +779,7 @@ class DayTradingPosition():
                 and self.BollingerIndicator.DeltaDN() < deltaDnParamXXX.FloatValue
                 and self.VolumeAvgIndicator.ValidateRule4()
                 and macdRsiOpenShortRule4ModelParam.IntValue >= 1
+                and dailyBiasMACDRSI.FloatValue<=0
             ):
             self.BollingerIndicator.OnTradeSignal()
             return _SHORT_MACD_RSI_RULE_4
@@ -790,6 +791,7 @@ class DayTradingPosition():
             and broomsParamBias.FloatValue <=0
             and self.VolumeAvgIndicator.ValidateBroomsRule()
             and macdRsiOpenShortRuleBroomsModelParam.IntValue>=1
+            and dailyBiasMACDRSI.FloatValue<=0
         ):
             self.BollingerIndicator.OnTradeSignal()
             return _SHORT_MACD_RSI_RULE_BROOMS
@@ -804,7 +806,7 @@ class DayTradingPosition():
                                  ms3SlopeParamX,ms3SlopeParamXX,deltaUpParamYYY,macdRSISmoothedMode,absMaxMSPeriodParam,
                                  macdRsiOpenLongRule1ModelParam,macdRsiOpenLongRule2ModelParam,macdRsiOpenLongRule3ModelParam,
                                  macdRsiOpenLongRule4ModelParam,macdRsiOpenLongRuleBroomsModelParam,macdRsiStartTradingModelParam,
-                                 candlebarsArr):
+                                 dailyBiasMACDRSI,candlebarsArr):
 
         if self.Open():
             return None  # Position already opened
@@ -854,6 +856,7 @@ class DayTradingPosition():
             and self.MinuteNonSmoothedRSIIndicator.GetRSIReggr(3) >= rsi14SlopeSkip3ExitParamV.FloatValue
             and self.MACDIndicator.GetMSReggr(3) >= self.SmoothMACDRSIParam(macdRSISmoothedMode,self.MACDIndicator.AbsMaxMS,ms3SlopeParamX,ms3SlopeParamXX)
             and macdRsiOpenLongRule3ModelParam.IntValue>=1
+
             ):
             self.BollingerIndicator.OnTradeSignal()
             return _LONG_MACD_RSI_RULE_3
@@ -867,6 +870,7 @@ class DayTradingPosition():
             and self.BollingerIndicator.DeltaUP() > deltaUpParamYYY.FloatValue
             and self.VolumeAvgIndicator.ValidateRule4()
             and macdRsiOpenLongRule4ModelParam.IntValue >= 1
+            and dailyBiasMACDRSI.FloatValue >= 0
           ):
             self.BollingerIndicator.OnTradeSignal()
             return _LONG_MACD_RSI_RULE_4
@@ -877,6 +881,7 @@ class DayTradingPosition():
             and broomsParamBias.FloatValue >=0
             and self.VolumeAvgIndicator.ValidateBroomsRule()
             and macdRsiOpenLongRuleBroomsModelParam.IntValue>=1
+            and dailyBiasMACDRSI.FloatValue >= 0
 
         ):
             self.BollingerIndicator.OnTradeSignal()
@@ -986,8 +991,8 @@ class DayTradingPosition():
             and (self.MaxMonetaryProfitCurrentTrade > 0 and self.TGIndicator.HasValidValue() and ((self.CurrentProfitMonetaryLastTrade / self.MaxMonetaryProfitCurrentTrade) < self.TGIndicator.K))
             and self.MinuteSmoothedRSIIndicator.GetRSIReggr(5) > rsi30Skip5ParamLX.FloatValue
             and (self.MaxMonetaryProfitCurrentTrade/openQty) >= (self.BollingerIndicator.TPSDStartOfTrade*gainMaxTradeParamJJJ.FloatValue)
-            and (self.MaxMonetaryProfitCurrentTrade / openQty) >= gainMaxTradeParamSDMult.FloatValue * self.PriceVolatilityIndicators.LastSDDDaysOpenStdDev
-            and (self.MaxMonetaryProfitCurrentTrade / openQty) >= gainMaxTradeParamFixedGain.FloatValue
+            and (self.MaxProfitCurrentTrade  >= gainMaxTradeParamSDMult.FloatValue * self.PriceVolatilityIndicators.LastSDDDaysOpenStdDev)
+            and (self.MaxProfitCurrentTrade >= gainMaxTradeParamFixedGain.FloatValue)
             and macdRsiCloseShortRule1ModelParam.IntValue>=1
             ):
             return _EXIT_SHORT_MACD_RSI_COND_1
@@ -1067,8 +1072,8 @@ class DayTradingPosition():
         # rule 9
         if (        (self.MaxMonetaryLossCurrentTrade/openQty) < ( self.SmoothMACDRSIParam(macdRSISmoothedMode,self.MACDIndicator.PriceHMinusL,gainMinStopLossExitParamU,gainMinStopLossExitParamUU))
                 and (self.MaxMonetaryLossCurrentTrade/openQty) < (-1*self.BollingerIndicator.TPSDStartOfTrade*gainMinTradeParamUUU.FloatValue)
-                and (self.MaxMonetaryLossCurrentTrade / openQty) < gainMinTradeParamFixedLoss.FloatValue
-
+                #and (self.MaxMonetaryLossCurrentTrade / openQty) < gainMinTradeParamFixedLoss.FloatValue
+                and (self.MaxLossCurrentTrade<gainMinTradeParamFixedLoss.FloatValue)
                 and macdRsiCloseShortRule9ModelParam.IntValue>=1
             ):
             return _EXIT_SHORT_MACD_RSI_COND_9
@@ -1216,7 +1221,8 @@ class DayTradingPosition():
                 and self.MinuteSmoothedRSIIndicator.GetRSIReggr(5) < (-1*rsi30Skip5ParamLX.FloatValue)
                 and (self.MaxMonetaryProfitCurrentTrade / openQty) >= (self.BollingerIndicator.TPSDStartOfTrade * gainMaxTradeParamJJJ.FloatValue)
                 and (self.MaxMonetaryProfitCurrentTrade / openQty) >= gainMaxTradeParamSDMult.FloatValue * self.PriceVolatilityIndicators.LastSDDDaysOpenStdDev
-                and (self.MaxMonetaryProfitCurrentTrade / openQty) >= gainMaxTradeParamFixedGain.FloatValue
+                and (self.MaxProfitCurrentTrade >= gainMaxTradeParamSDMult.FloatValue * self.PriceVolatilityIndicators.LastSDDDaysOpenStdDev)
+                and (self.MaxProfitCurrentTrade>=gainMaxTradeParamFixedGain.FloatValue)
                 and macdRsiCloseLongRule1ModelParam.IntValue>=1
            ):
             return _EXIT_LONG_MACD_RSI_COND_1
@@ -1294,11 +1300,11 @@ class DayTradingPosition():
             ):
             return _EXIT_LONG_MACD_RSI_COND_8
 
-
         # rule 9
         if (        (self.MaxMonetaryLossCurrentTrade/openQty) < ( self.SmoothMACDRSIParam(macdRSISmoothedMode,self.MACDIndicator.PriceHMinusL,gainMinStopLossExitParamU,gainMinStopLossExitParamUU))
                     and (self.MaxMonetaryLossCurrentTrade / openQty) < ( -1 * self.BollingerIndicator.TPSDStartOfTrade * gainMinTradeParamUUU.FloatValue)
-                    and (self.MaxMonetaryLossCurrentTrade / openQty) < gainMinTradeParamFixedLoss.FloatValue
+                    #and (self.MaxMonetaryLossCurrentTrade / openQty) < gainMinTradeParamFixedLoss.FloatValue
+                    and (self.MaxLossCurrentTrade <gainMinTradeParamFixedLoss.FloatValue)
                 and macdRsiCloseLongRule9ModelParam.IntValue>=1
             ):
             return  _EXIT_LONG_MACD_RSI_COND_9
@@ -1337,7 +1343,6 @@ class DayTradingPosition():
             self.TerminalCloseCond = terminalCond  # This won't be closed. It won't just open another position again
             # return terminalCond
         '''
-
 
         # Rule STRONG TERMINAL --> Positions are closed and They won't just be opened again
         eodCond = self.EvaluateStrongTerminal(candlebarsArr, endOfdayLimitModelParam)
