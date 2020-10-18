@@ -703,6 +703,10 @@ class ModelParametersHandler:
     def VOLUME_INDICATOR_RULE_BROOMS():
         return "VOLUME_INDICATOR_RULE_BROOMS"
 
+    @staticmethod
+    def PERSIST_TRADING_SIGNAL():
+        return "PERSIST_TRADING_SIGNAL"
+
     #endregion
 
     #region Public Methods

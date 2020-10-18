@@ -1,0 +1,626 @@
+2020-10-12 10:17:22 [logger INFO] DayTrader  Initializing
+2020-10-12 10:17:25 [logger INFO] Loading 5940 summaries for security SPY
+2020-10-12 10:17:25 [logger INFO] WebSocketModule  Initializing
+2020-10-12 10:17:25 [logger INFO] WebSocketModule Successfully initialized
+2020-10-12 10:17:25 [logger INFO] Websocket commands successfully opened on port 7172: 
+2020-10-12 10:17:25 [logger INFO] FileHandlerModule  Initializing
+2020-10-12 10:17:25 [logger INFO] FileHandlerModule Successfully initialized
+2020-10-12 10:17:25 [logger INFO] Initializing Bloomberg Order Router
+2020-10-12 10:17:25 [logger INFO] Connecting to localhost:8194
+2020-10-12 10:17:41 [logger INFO] Bloomberg Order Router Initialized
+2020-10-12 10:17:41 [logger INFO] SingletonModuleHandler Successfully initializer
+2020-10-12 10:17:41 [logger INFO] Initializing Generic Market Order Router
+2020-10-12 10:17:41 [logger INFO] SingletonModuleHandler Successfully initializer
+2020-10-12 10:17:41 [logger INFO] Generic Market Order Router Initialized
+2020-10-12 10:17:42 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:SPY
+2020-10-12 10:17:42 [logger INFO] DayTrader Successfully initialized
+2020-10-12 10:17:42 [logger ERROR] Critical error subscribing for Market Data for symbol SPY:Session Not Started (0x00010009)
+2020-10-12 10:17:43 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2020-10-12 10:17:43 [logger ERROR] Bloomberg Session failed to start...
+2020-10-12 10:17:43 [logger INFO] Requesting for open orders...
+2020-10-12 10:17:43 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-10-12 10:17:43 [logger INFO] Subscribing to order and route events
+2020-10-12 10:17:43 [logger ERROR] Error running ProcessMessage @OrderRouter.Bloomberg module:Session Not Started (0x00010009)
+2020-10-12 10:17:43 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:SPY
+2020-10-12 10:17:43 [logger ERROR] Critical error subscribing for candlebars for symbol SPY:Session Not Started (0x00010009)
+2020-10-12 10:17:43 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:SPY
+2020-10-12 10:17:43 [logger ERROR] Critical error subscribing for historical prices for symbol SPY:Null service handle (0x00020002)
+2020-10-12 10:17:43 [logger INFO] Found CSV file INPUT_APRIL_7_2020_MODEL_23NEW_NOFLEXTG4_NOFLEXSLh_JJJ4_FLEXGp25_FLh.csv. Extracting simulated market data
+2020-10-12 10:17:43 [logger INFO] File Handler Module : Moving file ./files/input/INPUT_APRIL_7_2020_MODEL_23NEW_NOFLEXTG4_NOFLEXSLh_JJJ4_FLEXGp25_FLh.csv to ./files/processed/INPUT_APRIL_7_2020_MODEL_23NEW_NOFLEXTG4_NOFLEXSLh_JJJ4_FLEXGp25_FLh.csv
+2020-10-12 10:17:44 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-10-12 10:17:45 [logger INFO] Starting to process for date:2020-04-07
+2020-10-12 10:17:45 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-10-12 10:17:45 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2020-04-07 09:19:00
+2020-10-12 10:17:45 [logger INFO] Managed Position Updated: Arrival=2020-10-12 10:17:45.242940 TradeId=trd__SPY_1602508665 PosId=d4ade00c-9443-46f6-bb9c-11afc599910c Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=270.51 Text=Fake New Order 
+2020-10-12 10:17:45 [logger INFO] Managed Position Finished: Arrival=2020-10-12 10:17:45.273181 TradeId=trd__SPY_1602508665 PosId=d4ade00c-9443-46f6-bb9c-11afc599910c Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=270.51 Text=Fake Filled Order 
+2020-10-12 10:17:45 [logger INFO] MACD-RSI - Closing long position for symbol SPY at 2020-04-07 09:23:00 
+2020-10-12 10:17:45 [logger INFO] Managed Position Updated: Arrival=2020-10-12 10:17:45.364369 TradeId=trd__SPY_1602508665 PosId=0f0a75dc-8232-4bea-ad61-05bc01cc4c1d Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=269.87 Text=Fake New Order 
+2020-10-12 10:17:45 [logger INFO] Managed Position Finished: Arrival=2020-10-12 10:17:45.381324 TradeId=trd__SPY_1602508665 PosId=0f0a75dc-8232-4bea-ad61-05bc01cc4c1d Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=269.87 Text=Fake Filled Order 
+2020-10-12 10:17:46 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2020-04-07 09:57:00
+2020-10-12 10:17:46 [logger INFO] Managed Position Updated: Arrival=2020-10-12 10:17:46.025667 TradeId=trd__SPY_1602508666 PosId=032ea648-6e7b-47cd-ac9e-ce28cdeb5cfe Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=269.17 Text=Fake New Order 
+2020-10-12 10:17:46 [logger INFO] Managed Position Finished: Arrival=2020-10-12 10:17:46.052595 TradeId=trd__SPY_1602508666 PosId=032ea648-6e7b-47cd-ac9e-ce28cdeb5cfe Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=269.17 Text=Fake Filled Order 
+2020-10-12 10:17:46 [logger INFO] MACD-RSI - Closing long position for symbol SPY at 2020-04-07 10:02:00 
+2020-10-12 10:17:46 [logger INFO] Managed Position Updated: Arrival=2020-10-12 10:17:46.143352 TradeId=trd__SPY_1602508666 PosId=348646c5-11d8-4f1d-9fc5-05af6351e000 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=268.545 Text=Fake New Order 
+2020-10-12 10:17:46 [logger INFO] Managed Position Finished: Arrival=2020-10-12 10:17:46.159310 TradeId=trd__SPY_1602508666 PosId=348646c5-11d8-4f1d-9fc5-05af6351e000 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=268.545 Text=Fake Filled Order 
+2020-10-12 10:17:46 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-10-12 10:17:46 [logger INFO] MACD/RSI = Running short trade for symbol SPY at 2020-04-07 10:20:00
+2020-10-12 10:17:46 [logger INFO] Managed Position Updated: Arrival=2020-10-12 10:17:46.486433 TradeId=trd__SPY_1602508666 PosId=df15db62-7166-4f9c-9025-246d14884145 Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=270.54 Text=Fake New Order 
+2020-10-12 10:17:46 [logger INFO] Managed Position Finished: Arrival=2020-10-12 10:17:46.512364 TradeId=trd__SPY_1602508666 PosId=df15db62-7166-4f9c-9025-246d14884145 Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=270.54 Text=Fake Filled Order 
+2020-10-12 10:17:46 [logger INFO] MACD-RSI - Closing short position for symbol SPY at 2020-04-07 10:31:00 
+2020-10-12 10:17:46 [logger INFO] Managed Position Updated: Arrival=2020-10-12 10:17:46.684902 TradeId=trd__SPY_1602508666 PosId=c3a9331e-c300-4d40-8a2c-c8f034b8894a Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=271.3 Text=Fake New Order 
+2020-10-12 10:17:46 [logger INFO] Managed Position Finished: Arrival=2020-10-12 10:17:46.699862 TradeId=trd__SPY_1602508666 PosId=c3a9331e-c300-4d40-8a2c-c8f034b8894a Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=271.3 Text=Fake Filled Order 
+2020-10-12 10:17:46 [logger INFO] MACD/RSI = Running short trade for symbol SPY at 2020-04-07 10:36:00
+2020-10-12 10:17:46 [logger INFO] Managed Position Updated: Arrival=2020-10-12 10:17:46.809570 TradeId=trd__SPY_1602508666 PosId=e08f2207-8c9c-4476-8d81-05bff3fb66b8 Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=271.49 Text=Fake New Order 
+2020-10-12 10:17:46 [logger INFO] Managed Position Finished: Arrival=2020-10-12 10:17:46.843478 TradeId=trd__SPY_1602508666 PosId=e08f2207-8c9c-4476-8d81-05bff3fb66b8 Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=271.49 Text=Fake Filled Order 
+2020-10-12 10:17:47 [logger INFO] MACD-RSI - Closing short position for symbol SPY at 2020-04-07 10:40:00 
+2020-10-12 10:17:47 [logger INFO] Managed Position Updated: Arrival=2020-10-12 10:17:47.072941 TradeId=trd__SPY_1602508667 PosId=25f29a39-f4ec-4989-ae9c-df9fdbe9d2a5 Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=272.26 Text=Fake New Order 
+2020-10-12 10:17:47 [logger INFO] Managed Position Finished: Arrival=2020-10-12 10:17:47.086902 TradeId=trd__SPY_1602508667 PosId=25f29a39-f4ec-4989-ae9c-df9fdbe9d2a5 Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=272.26 Text=Fake Filled Order 
+2020-10-12 10:17:47 [logger INFO] MACD/RSI = Running short trade for symbol SPY at 2020-04-07 10:46:00
+2020-10-12 10:17:47 [logger INFO] Managed Position Updated: Arrival=2020-10-12 10:17:47.205584 TradeId=trd__SPY_1602508667 PosId=fea66c5f-818b-4643-84b0-c0fcdf139f36 Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=271.93 Text=Fake New Order 
+2020-10-12 10:17:47 [logger INFO] Managed Position Finished: Arrival=2020-10-12 10:17:47.220546 TradeId=trd__SPY_1602508667 PosId=fea66c5f-818b-4643-84b0-c0fcdf139f36 Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=271.93 Text=Fake Filled Order 
+2020-10-12 10:17:47 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-10-12 10:17:47 [logger INFO] MACD-RSI - Closing short position for symbol SPY at 2020-04-07 11:06:00 
+2020-10-12 10:17:47 [logger INFO] Managed Position Updated: Arrival=2020-10-12 10:17:47.432983 TradeId=trd__SPY_1602508667 PosId=b1acb3bc-0228-4a28-9676-e39fe5ea9a86 Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=272.87 Text=Fake New Order 
+2020-10-12 10:17:47 [logger INFO] Managed Position Finished: Arrival=2020-10-12 10:17:47.449947 TradeId=trd__SPY_1602508667 PosId=b1acb3bc-0228-4a28-9676-e39fe5ea9a86 Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=272.87 Text=Fake Filled Order 
+2020-10-12 10:17:47 [logger INFO] MACD/RSI = Running short trade for symbol SPY at 2020-04-07 11:14:00
+2020-10-12 10:17:47 [logger INFO] Managed Position Updated: Arrival=2020-10-12 10:17:47.567158 TradeId=trd__SPY_1602508667 PosId=27ce65c0-78e1-4a3b-8989-ccc9e49ac922 Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=273.07 Text=Fake New Order 
+2020-10-12 10:17:47 [logger INFO] Managed Position Finished: Arrival=2020-10-12 10:17:47.592534 TradeId=trd__SPY_1602508667 PosId=27ce65c0-78e1-4a3b-8989-ccc9e49ac922 Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=273.07 Text=Fake Filled Order 
+2020-10-12 10:17:47 [logger INFO] MACD-RSI - Closing short position for symbol SPY at 2020-04-07 11:19:00 
+2020-10-12 10:17:47 [logger INFO] Managed Position Updated: Arrival=2020-10-12 10:17:47.653371 TradeId=trd__SPY_1602508667 PosId=2e824bb2-d659-4573-a50f-a525cee46a5f Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=273.79 Text=Fake New Order 
+2020-10-12 10:17:47 [logger INFO] Managed Position Finished: Arrival=2020-10-12 10:17:47.666336 TradeId=trd__SPY_1602508667 PosId=2e824bb2-d659-4573-a50f-a525cee46a5f Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=273.79 Text=Fake Filled Order 
+2020-10-12 10:17:47 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2020-04-07 11:39:00
+2020-10-12 10:17:47 [logger INFO] Managed Position Updated: Arrival=2020-10-12 10:17:47.894615 TradeId=trd__SPY_1602508667 PosId=c730247d-da20-47ea-aa96-87b8263c0a54 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=272.69 Text=Fake New Order 
+2020-10-12 10:17:47 [logger INFO] Managed Position Finished: Arrival=2020-10-12 10:17:47.914563 TradeId=trd__SPY_1602508667 PosId=c730247d-da20-47ea-aa96-87b8263c0a54 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=272.69 Text=Fake Filled Order 
+2020-10-12 10:17:48 [logger INFO] MACD-RSI - Closing long position for symbol SPY at 2020-04-07 12:18:00 
+2020-10-12 10:17:48 [logger INFO] Managed Position Updated: Arrival=2020-10-12 10:17:48.182033 TradeId=trd__SPY_1602508668 PosId=7bedd93f-d818-4f20-9ebe-18d31d59e845 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=272.07 Text=Fake New Order 
+2020-10-12 10:17:48 [logger INFO] Managed Position Finished: Arrival=2020-10-12 10:17:48.211596 TradeId=trd__SPY_1602508668 PosId=7bedd93f-d818-4f20-9ebe-18d31d59e845 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=272.07 Text=Fake Filled Order 
+2020-10-12 10:17:48 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-10-12 10:17:48 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2020-04-07 12:23:00
+2020-10-12 10:17:48 [logger INFO] Managed Position Updated: Arrival=2020-10-12 10:17:48.286175 TradeId=trd__SPY_1602508668 PosId=1bf29302-2fea-4e83-ab18-9f121053cdaf Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=272.137 Text=Fake New Order 
+2020-10-12 10:17:48 [logger INFO] Managed Position Finished: Arrival=2020-10-12 10:17:48.302139 TradeId=trd__SPY_1602508668 PosId=1bf29302-2fea-4e83-ab18-9f121053cdaf Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=272.137 Text=Fake Filled Order 
+2020-10-12 10:17:48 [logger INFO] MACD-RSI - Closing long position for symbol SPY at 2020-04-07 12:36:00 
+2020-10-12 10:17:48 [logger INFO] Managed Position Updated: Arrival=2020-10-12 10:17:48.448041 TradeId=trd__SPY_1602508668 PosId=b4d95d67-60b2-495c-9b51-202ab4d67e99 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=271.42 Text=Fake New Order 
+2020-10-12 10:17:48 [logger INFO] Managed Position Finished: Arrival=2020-10-12 10:17:48.474014 TradeId=trd__SPY_1602508668 PosId=b4d95d67-60b2-495c-9b51-202ab4d67e99 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=271.42 Text=Fake Filled Order 
+2020-10-12 10:17:48 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2020-04-07 12:43:00
+2020-10-12 10:17:48 [logger INFO] Managed Position Updated: Arrival=2020-10-12 10:17:48.617677 TradeId=trd__SPY_1602508668 PosId=1e1d1a89-9c26-4be3-8741-90f896abf4f1 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=271.74 Text=Fake New Order 
+2020-10-12 10:17:48 [logger INFO] Managed Position Finished: Arrival=2020-10-12 10:17:48.643086 TradeId=trd__SPY_1602508668 PosId=1e1d1a89-9c26-4be3-8741-90f896abf4f1 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=271.74 Text=Fake Filled Order 
+2020-10-12 10:17:48 [logger INFO] MACD-RSI - Closing long position for symbol SPY at 2020-04-07 12:51:00 
+2020-10-12 10:17:48 [logger INFO] Managed Position Updated: Arrival=2020-10-12 10:17:48.731036 TradeId=trd__SPY_1602508668 PosId=3d09fb3f-ce3a-4130-9131-2f6ead5b9485 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=270.8 Text=Fake New Order 
+2020-10-12 10:17:48 [logger INFO] Managed Position Finished: Arrival=2020-10-12 10:17:48.752589 TradeId=trd__SPY_1602508668 PosId=3d09fb3f-ce3a-4130-9131-2f6ead5b9485 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=270.8 Text=Fake Filled Order 
+2020-10-12 10:17:48 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2020-04-07 12:55:00
+2020-10-12 10:17:48 [logger INFO] Managed Position Updated: Arrival=2020-10-12 10:17:48.820836 TradeId=trd__SPY_1602508668 PosId=46fb02d2-1671-40a0-aaa8-0c4f7af10183 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=271.04 Text=Fake New Order 
+2020-10-12 10:17:48 [logger INFO] Managed Position Finished: Arrival=2020-10-12 10:17:48.846548 TradeId=trd__SPY_1602508668 PosId=46fb02d2-1671-40a0-aaa8-0c4f7af10183 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=271.04 Text=Fake Filled Order 
+2020-10-12 10:17:48 [logger INFO] MACD-RSI - Closing long position for symbol SPY at 2020-04-07 13:04:00 
+2020-10-12 10:17:48 [logger INFO] Managed Position Updated: Arrival=2020-10-12 10:17:48.946089 TradeId=trd__SPY_1602508668 PosId=1497c49e-a372-47a1-ae99-2c3e2156c437 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=270.338 Text=Fake New Order 
+2020-10-12 10:17:48 [logger INFO] Managed Position Finished: Arrival=2020-10-12 10:17:48.969186 TradeId=trd__SPY_1602508668 PosId=1497c49e-a372-47a1-ae99-2c3e2156c437 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=270.338 Text=Fake Filled Order 
+2020-10-12 10:17:49 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2020-04-07 13:11:00
+2020-10-12 10:17:49 [logger INFO] Managed Position Updated: Arrival=2020-10-12 10:17:49.087981 TradeId=trd__SPY_1602508669 PosId=3fa21671-97cb-42a5-bb82-42e14fa1c2e9 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=270.23 Text=Fake New Order 
+2020-10-12 10:17:49 [logger INFO] Managed Position Finished: Arrival=2020-10-12 10:17:49.111879 TradeId=trd__SPY_1602508669 PosId=3fa21671-97cb-42a5-bb82-42e14fa1c2e9 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=270.23 Text=Fake Filled Order 
+2020-10-12 10:17:49 [logger INFO] MACD-RSI - Closing long position for symbol SPY at 2020-04-07 13:15:00 
+2020-10-12 10:17:49 [logger INFO] Managed Position Updated: Arrival=2020-10-12 10:17:49.195369 TradeId=trd__SPY_1602508669 PosId=e002618a-dd64-4385-80c3-5f3b41e2125e Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=269.563 Text=Fake New Order 
+2020-10-12 10:17:49 [logger INFO] Managed Position Finished: Arrival=2020-10-12 10:17:49.219532 TradeId=trd__SPY_1602508669 PosId=e002618a-dd64-4385-80c3-5f3b41e2125e Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=269.563 Text=Fake Filled Order 
+2020-10-12 10:17:49 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-10-12 10:17:49 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2020-04-07 13:23:00
+2020-10-12 10:17:49 [logger INFO] Managed Position Updated: Arrival=2020-10-12 10:17:49.316336 TradeId=trd__SPY_1602508669 PosId=1a374401-004a-4dc2-a763-6b079922a49f Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=269.39 Text=Fake New Order 
+2020-10-12 10:17:49 [logger INFO] Managed Position Finished: Arrival=2020-10-12 10:17:49.331109 TradeId=trd__SPY_1602508669 PosId=1a374401-004a-4dc2-a763-6b079922a49f Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=269.39 Text=Fake Filled Order 
+2020-10-12 10:17:49 [logger INFO] MACD-RSI - Closing long position for symbol SPY at 2020-04-07 13:39:00 
+2020-10-12 10:17:49 [logger INFO] Managed Position Updated: Arrival=2020-10-12 10:17:49.476751 TradeId=trd__SPY_1602508669 PosId=70c788b8-e1e3-446f-9185-33456a8ac393 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=268.77 Text=Fake New Order 
+2020-10-12 10:17:49 [logger INFO] Managed Position Finished: Arrival=2020-10-12 10:17:49.501127 TradeId=trd__SPY_1602508669 PosId=70c788b8-e1e3-446f-9185-33456a8ac393 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=268.77 Text=Fake Filled Order 
+2020-10-12 10:17:49 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2020-04-07 13:47:00
+2020-10-12 10:17:49 [logger INFO] Managed Position Updated: Arrival=2020-10-12 10:17:49.592028 TradeId=trd__SPY_1602508669 PosId=1a9e3d8b-8954-4eac-83a8-9a09c774a664 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=268.06 Text=Fake New Order 
+2020-10-12 10:17:49 [logger INFO] Managed Position Finished: Arrival=2020-10-12 10:17:49.608874 TradeId=trd__SPY_1602508669 PosId=1a9e3d8b-8954-4eac-83a8-9a09c774a664 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=268.06 Text=Fake Filled Order 
+2020-10-12 10:17:49 [logger INFO] MACD-RSI - Closing long position for symbol SPY at 2020-04-07 13:52:00 
+2020-10-12 10:17:49 [logger INFO] Managed Position Updated: Arrival=2020-10-12 10:17:49.686155 TradeId=trd__SPY_1602508669 PosId=b5d9fbfa-d4d0-4b26-bdfc-87f1cc920c0e Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=267.22 Text=Fake New Order 
+2020-10-12 10:17:49 [logger INFO] Managed Position Finished: Arrival=2020-10-12 10:17:49.702271 TradeId=trd__SPY_1602508669 PosId=b5d9fbfa-d4d0-4b26-bdfc-87f1cc920c0e Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=267.22 Text=Fake Filled Order 
+2020-10-12 10:17:49 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2020-04-07 13:58:00
+2020-10-12 10:17:49 [logger INFO] Managed Position Updated: Arrival=2020-10-12 10:17:49.794650 TradeId=trd__SPY_1602508669 PosId=a85b3e34-45fe-4de1-a134-3f781edd4fe9 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=266.91 Text=Fake New Order 
+2020-10-12 10:17:49 [logger INFO] Managed Position Finished: Arrival=2020-10-12 10:17:49.810372 TradeId=trd__SPY_1602508669 PosId=a85b3e34-45fe-4de1-a134-3f781edd4fe9 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=266.91 Text=Fake Filled Order 
+2020-10-12 10:17:50 [logger INFO] MACD-RSI - Closing long position for symbol SPY at 2020-04-07 14:25:00 
+2020-10-12 10:17:50 [logger INFO] Managed Position Updated: Arrival=2020-10-12 10:17:50.048161 TradeId=trd__SPY_1602508670 PosId=22466d7e-817c-476e-8850-05539a5f897c Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=265.87 Text=Fake New Order 
+2020-10-12 10:17:50 [logger INFO] Managed Position Finished: Arrival=2020-10-12 10:17:50.060811 TradeId=trd__SPY_1602508670 PosId=22466d7e-817c-476e-8850-05539a5f897c Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=265.87 Text=Fake Filled Order 
+2020-10-12 10:17:50 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-10-12 10:17:50 [logger INFO] MACD/RSI = Running short trade for symbol SPY at 2020-04-07 14:51:00
+2020-10-12 10:17:50 [logger INFO] Managed Position Updated: Arrival=2020-10-12 10:17:50.369086 TradeId=trd__SPY_1602508670 PosId=77b615a1-5af8-4f6f-bae2-772e9ffc1dfa Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=267.02 Text=Fake New Order 
+2020-10-12 10:17:50 [logger INFO] Managed Position Finished: Arrival=2020-10-12 10:17:50.384226 TradeId=trd__SPY_1602508670 PosId=77b615a1-5af8-4f6f-bae2-772e9ffc1dfa Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=267.02 Text=Fake Filled Order 
+2020-10-12 10:17:50 [logger INFO] MACD-RSI - Closing short position for symbol SPY at 2020-04-07 14:56:00 
+2020-10-12 10:17:50 [logger INFO] Managed Position Updated: Arrival=2020-10-12 10:17:50.462217 TradeId=trd__SPY_1602508670 PosId=cab80b87-61a3-4afe-ae4a-cd2bdb0e6d47 Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=266.42 Text=Fake New Order 
+2020-10-12 10:17:50 [logger INFO] Managed Position Finished: Arrival=2020-10-12 10:17:50.476757 TradeId=trd__SPY_1602508670 PosId=cab80b87-61a3-4afe-ae4a-cd2bdb0e6d47 Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=266.42 Text=Fake Filled Order 
+2020-10-12 10:17:50 [logger INFO] Backtest successfully completed...
+2020-10-12 10:17:51 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-10-12 10:17:52 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-10-12 10:17:53 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-10-12 10:17:54 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-10-12 10:17:55 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-10-12 10:17:56 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-10-12 10:17:57 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-10-12 10:17:58 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-10-12 10:17:59 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-10-12 10:18:00 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-10-12 10:18:01 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-10-12 10:18:02 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-10-12 10:18:03 [logger ERROR] Critical Error running ProcessExecutionReportListThread @OrderRouter.Bloomberg module:Timeout waiting for the previous orders
+2020-10-12 10:18:03 [logger INFO] Received list of Open Positions: 0 positions
+2020-10-12 10:18:03 [logger INFO] Process ready to receive commands and trade
+2020-10-12 10:18:26 [logger INFO] DayTrader  Initializing
+2020-10-12 10:18:26 [logger INFO] Loading 5946 summaries for security SPY
+2020-10-12 10:18:27 [logger INFO] WebSocketModule  Initializing
+2020-10-12 10:18:27 [logger INFO] WebSocketModule Successfully initialized
+2020-10-12 10:18:27 [logger INFO] Websocket commands successfully opened on port 7172: 
+2020-10-12 10:18:27 [logger INFO] FileHandlerModule  Initializing
+2020-10-12 10:18:27 [logger INFO] FileHandlerModule Successfully initialized
+2020-10-12 10:18:27 [logger INFO] Initializing Bloomberg Order Router
+2020-10-12 10:18:27 [logger INFO] Connecting to localhost:8194
+2020-10-12 10:18:42 [logger INFO] Bloomberg Order Router Initialized
+2020-10-12 10:18:42 [logger INFO] SingletonModuleHandler Successfully initializer
+2020-10-12 10:18:42 [logger INFO] Initializing Generic Market Order Router
+2020-10-12 10:18:42 [logger INFO] SingletonModuleHandler Successfully initializer
+2020-10-12 10:18:42 [logger INFO] Generic Market Order Router Initialized
+2020-10-12 10:18:43 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:SPY
+2020-10-12 10:18:43 [logger INFO] DayTrader Successfully initialized
+2020-10-12 10:18:43 [logger ERROR] Critical error subscribing for Market Data for symbol SPY:Session Not Started (0x00010009)
+2020-10-12 10:18:44 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2020-10-12 10:18:44 [logger ERROR] Bloomberg Session failed to start...
+2020-10-12 10:18:44 [logger INFO] Requesting for open orders...
+2020-10-12 10:18:44 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-10-12 10:18:44 [logger INFO] Subscribing to order and route events
+2020-10-12 10:18:44 [logger ERROR] Error running ProcessMessage @OrderRouter.Bloomberg module:Session Not Started (0x00010009)
+2020-10-12 10:18:44 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:SPY
+2020-10-12 10:18:44 [logger ERROR] Critical error subscribing for candlebars for symbol SPY:Session Not Started (0x00010009)
+2020-10-12 10:18:44 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:SPY
+2020-10-12 10:18:44 [logger ERROR] Critical error subscribing for historical prices for symbol SPY:Null service handle (0x00020002)
+2020-10-12 10:18:45 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-10-12 10:18:46 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-10-12 10:18:47 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-10-12 10:18:48 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-10-12 10:18:49 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-10-12 10:18:50 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-10-12 10:18:51 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-10-12 10:18:52 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-10-12 10:18:53 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-10-12 10:18:54 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-10-12 10:18:55 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-10-12 10:18:56 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-10-12 10:18:57 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-10-12 10:18:58 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-10-12 10:18:59 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-10-12 10:19:00 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-10-12 10:19:01 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-10-12 10:19:02 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-10-12 10:19:03 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-10-12 10:19:04 [logger ERROR] Critical Error running ProcessExecutionReportListThread @OrderRouter.Bloomberg module:Timeout waiting for the previous orders
+2020-10-12 10:19:04 [logger INFO] Received list of Open Positions: 0 positions
+2020-10-12 10:19:04 [logger INFO] Process ready to receive commands and trade
+2020-10-12 10:19:18 [logger INFO] Found CSV file INPUT_APRIL_7_2020_MODEL_23NEW_NOFLEXTG4_NOFLEXSLh_JJJ4_FLEXGp25_FLh.csv. Extracting simulated market data
+2020-10-12 10:19:18 [logger INFO] File Handler Module : Moving file ./files/input/INPUT_APRIL_7_2020_MODEL_23NEW_NOFLEXTG4_NOFLEXSLh_JJJ4_FLEXGp25_FLh.csv to ./files/processed/INPUT_APRIL_7_2020_MODEL_23NEW_NOFLEXTG4_NOFLEXSLh_JJJ4_FLEXGp25_FLh.csv
+2020-10-12 10:19:19 [logger INFO] Starting to process for date:2020-04-07
+2020-10-12 10:19:19 [logger ERROR] Error processing strategy backtest for date 2020-04-07 08:30:00 : 'DayTradingPosition' object has no attribute 'stopLossLimitModelParam'!
+2020-10-12 10:19:19 [logger ERROR] Critical Error processing strategy backtest (@thread): 'DayTradingPosition' object has no attribute 'stopLossLimitModelParam'!
+2020-10-12 10:19:40 [logger INFO] DayTrader  Initializing
+2020-10-12 10:19:41 [logger INFO] Loading 5946 summaries for security SPY
+2020-10-12 10:19:41 [logger INFO] WebSocketModule  Initializing
+2020-10-12 10:19:41 [logger INFO] WebSocketModule Successfully initialized
+2020-10-12 10:19:41 [logger INFO] Websocket commands successfully opened on port 7172: 
+2020-10-12 10:19:41 [logger INFO] FileHandlerModule  Initializing
+2020-10-12 10:19:41 [logger INFO] FileHandlerModule Successfully initialized
+2020-10-12 10:19:41 [logger INFO] Initializing Bloomberg Order Router
+2020-10-12 10:19:41 [logger INFO] Connecting to localhost:8194
+2020-10-12 10:19:56 [logger INFO] Bloomberg Order Router Initialized
+2020-10-12 10:19:56 [logger INFO] SingletonModuleHandler Successfully initializer
+2020-10-12 10:19:56 [logger INFO] Initializing Generic Market Order Router
+2020-10-12 10:19:56 [logger INFO] SingletonModuleHandler Successfully initializer
+2020-10-12 10:19:56 [logger INFO] Generic Market Order Router Initialized
+2020-10-12 10:19:57 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:SPY
+2020-10-12 10:19:57 [logger INFO] DayTrader Successfully initialized
+2020-10-12 10:19:57 [logger ERROR] Critical error subscribing for Market Data for symbol SPY:Session Not Started (0x00010009)
+2020-10-12 10:19:58 [logger INFO] Requesting for open orders...
+2020-10-12 10:19:58 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-10-12 10:19:58 [logger INFO] Subscribing to order and route events
+2020-10-12 10:19:58 [logger ERROR] Error running ProcessMessage @OrderRouter.Bloomberg module:Session Not Started (0x00010009)
+2020-10-12 10:19:58 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:SPY
+2020-10-12 10:19:58 [logger ERROR] Critical error subscribing for candlebars for symbol SPY:Session Not Started (0x00010009)
+2020-10-12 10:19:58 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2020-10-12 10:19:58 [logger ERROR] Bloomberg Session failed to start...
+2020-10-12 10:19:58 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:SPY
+2020-10-12 10:19:58 [logger ERROR] Critical error subscribing for historical prices for symbol SPY:Null service handle (0x00020002)
+2020-10-12 10:19:59 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-10-12 10:20:00 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-10-12 10:20:01 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-10-12 10:20:02 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-10-12 10:20:03 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-10-12 10:20:04 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-10-12 10:20:05 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-10-12 10:20:06 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-10-12 10:20:07 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-10-12 10:20:08 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-10-12 10:20:09 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-10-12 10:20:10 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-10-12 10:20:11 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-10-12 10:20:12 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-10-12 10:20:13 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-10-12 10:20:14 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-10-12 10:20:15 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-10-12 10:20:16 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-10-12 10:20:17 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-10-12 10:20:18 [logger ERROR] Critical Error running ProcessExecutionReportListThread @OrderRouter.Bloomberg module:Timeout waiting for the previous orders
+2020-10-12 10:20:18 [logger INFO] Received list of Open Positions: 0 positions
+2020-10-12 10:20:18 [logger INFO] Process ready to receive commands and trade
+2020-10-12 10:20:23 [logger INFO] Found CSV file INPUT_APRIL_7_2020_MODEL_23NEW_NOFLEXTG4_NOFLEXSLh_JJJ4_FLEXGp25_FLh.csv. Extracting simulated market data
+2020-10-12 10:20:23 [logger INFO] File Handler Module : Moving file ./files/input/INPUT_APRIL_7_2020_MODEL_23NEW_NOFLEXTG4_NOFLEXSLh_JJJ4_FLEXGp25_FLh.csv to ./files/processed/INPUT_APRIL_7_2020_MODEL_23NEW_NOFLEXTG4_NOFLEXSLh_JJJ4_FLEXGp25_FLh.csv
+2020-10-12 10:20:24 [logger INFO] Starting to process for date:2020-04-07
+2020-10-12 10:20:24 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2020-04-07 09:19:00
+2020-10-12 10:20:24 [logger INFO] Managed Position Updated: Arrival=2020-10-12 10:20:24.930350 TradeId=trd__SPY_1602508824 PosId=084d62c6-4c5e-4c13-8925-966dbb877db3 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=270.51 Text=Fake New Order 
+2020-10-12 10:20:24 [logger INFO] Managed Position Finished: Arrival=2020-10-12 10:20:24.960616 TradeId=trd__SPY_1602508824 PosId=084d62c6-4c5e-4c13-8925-966dbb877db3 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=270.51 Text=Fake Filled Order 
+2020-10-12 10:20:25 [logger INFO] MACD-RSI - Closing long position for symbol SPY at 2020-04-07 09:23:00 
+2020-10-12 10:20:25 [logger INFO] Managed Position Updated: Arrival=2020-10-12 10:20:25.012937 TradeId=trd__SPY_1602508825 PosId=45d0dc13-2f35-4f06-aec1-bf73908195a9 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=269.87 Text=Fake New Order 
+2020-10-12 10:20:25 [logger INFO] Managed Position Finished: Arrival=2020-10-12 10:20:25.038887 TradeId=trd__SPY_1602508825 PosId=45d0dc13-2f35-4f06-aec1-bf73908195a9 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=269.87 Text=Fake Filled Order 
+2020-10-12 10:20:25 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2020-04-07 09:57:00
+2020-10-12 10:20:25 [logger INFO] Managed Position Updated: Arrival=2020-10-12 10:20:25.331655 TradeId=trd__SPY_1602508825 PosId=2d6d1dee-6f63-4ffe-856a-b4d7ae85ec92 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=269.17 Text=Fake New Order 
+2020-10-12 10:20:25 [logger INFO] Managed Position Finished: Arrival=2020-10-12 10:20:25.350177 TradeId=trd__SPY_1602508825 PosId=2d6d1dee-6f63-4ffe-856a-b4d7ae85ec92 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=269.17 Text=Fake Filled Order 
+2020-10-12 10:20:25 [logger INFO] MACD-RSI - Closing long position for symbol SPY at 2020-04-07 10:02:00 
+2020-10-12 10:20:25 [logger INFO] Managed Position Updated: Arrival=2020-10-12 10:20:25.419296 TradeId=trd__SPY_1602508825 PosId=e1e5c341-1577-4f1d-b563-a37b0ca6d693 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=268.545 Text=Fake New Order 
+2020-10-12 10:20:25 [logger INFO] Managed Position Finished: Arrival=2020-10-12 10:20:25.445869 TradeId=trd__SPY_1602508825 PosId=e1e5c341-1577-4f1d-b563-a37b0ca6d693 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=268.545 Text=Fake Filled Order 
+2020-10-12 10:20:25 [logger INFO] MACD/RSI = Running short trade for symbol SPY at 2020-04-07 10:20:00
+2020-10-12 10:20:25 [logger INFO] Managed Position Updated: Arrival=2020-10-12 10:20:25.599127 TradeId=trd__SPY_1602508825 PosId=be54ba5b-e2cf-4c6e-a363-11caedd909bf Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=270.54 Text=Fake New Order 
+2020-10-12 10:20:25 [logger INFO] Managed Position Finished: Arrival=2020-10-12 10:20:25.615302 TradeId=trd__SPY_1602508825 PosId=be54ba5b-e2cf-4c6e-a363-11caedd909bf Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=270.54 Text=Fake Filled Order 
+2020-10-12 10:20:25 [logger INFO] MACD-RSI - Closing short position for symbol SPY at 2020-04-07 10:31:00 
+2020-10-12 10:20:25 [logger INFO] Managed Position Updated: Arrival=2020-10-12 10:20:25.718995 TradeId=trd__SPY_1602508825 PosId=79684953-e434-4acb-ad02-f913ac3d0281 Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=271.3 Text=Fake New Order 
+2020-10-12 10:20:25 [logger INFO] Managed Position Finished: Arrival=2020-10-12 10:20:25.737297 TradeId=trd__SPY_1602508825 PosId=79684953-e434-4acb-ad02-f913ac3d0281 Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=271.3 Text=Fake Filled Order 
+2020-10-12 10:20:25 [logger INFO] MACD/RSI = Running short trade for symbol SPY at 2020-04-07 10:36:00
+2020-10-12 10:20:25 [logger INFO] Managed Position Updated: Arrival=2020-10-12 10:20:25.857197 TradeId=trd__SPY_1602508825 PosId=3ecadf00-4c87-4d6c-8339-7097fcb2840f Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=271.49 Text=Fake New Order 
+2020-10-12 10:20:25 [logger INFO] Managed Position Finished: Arrival=2020-10-12 10:20:25.878137 TradeId=trd__SPY_1602508825 PosId=3ecadf00-4c87-4d6c-8339-7097fcb2840f Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=271.49 Text=Fake Filled Order 
+2020-10-12 10:20:25 [logger INFO] MACD-RSI - Closing short position for symbol SPY at 2020-04-07 10:40:00 
+2020-10-12 10:20:25 [logger INFO] Managed Position Updated: Arrival=2020-10-12 10:20:25.974873 TradeId=trd__SPY_1602508825 PosId=3be43d4b-6516-40cd-ba94-66185e38e2b2 Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=272.26 Text=Fake New Order 
+2020-10-12 10:20:26 [logger INFO] Managed Position Finished: Arrival=2020-10-12 10:20:26.038211 TradeId=trd__SPY_1602508825 PosId=3be43d4b-6516-40cd-ba94-66185e38e2b2 Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=272.26 Text=Fake Filled Order 
+2020-10-12 10:20:26 [logger INFO] MACD/RSI = Running short trade for symbol SPY at 2020-04-07 10:46:00
+2020-10-12 10:20:26 [logger INFO] Managed Position Updated: Arrival=2020-10-12 10:20:26.100074 TradeId=trd__SPY_1602508826 PosId=dd3c80ea-0160-4c8d-b539-f91d47715cd9 Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=271.93 Text=Fake New Order 
+2020-10-12 10:20:26 [logger INFO] Managed Position Finished: Arrival=2020-10-12 10:20:26.125664 TradeId=trd__SPY_1602508826 PosId=dd3c80ea-0160-4c8d-b539-f91d47715cd9 Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=271.93 Text=Fake Filled Order 
+2020-10-12 10:20:26 [logger INFO] MACD-RSI - Closing short position for symbol SPY at 2020-04-07 11:06:00 
+2020-10-12 10:20:26 [logger INFO] Managed Position Updated: Arrival=2020-10-12 10:20:26.265665 TradeId=trd__SPY_1602508826 PosId=b687be69-521e-4d52-ae68-758e9c22adfe Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=272.87 Text=Fake New Order 
+2020-10-12 10:20:26 [logger INFO] Managed Position Finished: Arrival=2020-10-12 10:20:26.281052 TradeId=trd__SPY_1602508826 PosId=b687be69-521e-4d52-ae68-758e9c22adfe Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=272.87 Text=Fake Filled Order 
+2020-10-12 10:20:26 [logger INFO] MACD/RSI = Running short trade for symbol SPY at 2020-04-07 11:14:00
+2020-10-12 10:20:26 [logger INFO] Managed Position Updated: Arrival=2020-10-12 10:20:26.393097 TradeId=trd__SPY_1602508826 PosId=0f29c08b-58a2-49a4-9c03-a2847200a5b9 Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=273.07 Text=Fake New Order 
+2020-10-12 10:20:26 [logger INFO] Managed Position Finished: Arrival=2020-10-12 10:20:26.418539 TradeId=trd__SPY_1602508826 PosId=0f29c08b-58a2-49a4-9c03-a2847200a5b9 Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=273.07 Text=Fake Filled Order 
+2020-10-12 10:20:26 [logger INFO] MACD-RSI - Closing short position for symbol SPY at 2020-04-07 11:19:00 
+2020-10-12 10:20:26 [logger INFO] Managed Position Updated: Arrival=2020-10-12 10:20:26.483530 TradeId=trd__SPY_1602508826 PosId=ccc0d928-77cb-40ec-92a0-5f4ba8efbca9 Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=273.79 Text=Fake New Order 
+2020-10-12 10:20:26 [logger INFO] Managed Position Finished: Arrival=2020-10-12 10:20:26.495823 TradeId=trd__SPY_1602508826 PosId=ccc0d928-77cb-40ec-92a0-5f4ba8efbca9 Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=273.79 Text=Fake Filled Order 
+2020-10-12 10:20:26 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2020-04-07 11:39:00
+2020-10-12 10:20:26 [logger INFO] Managed Position Updated: Arrival=2020-10-12 10:20:26.675267 TradeId=trd__SPY_1602508826 PosId=829b0f89-7963-4a25-8d75-f5c0ff390b5a Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=272.69 Text=Fake New Order 
+2020-10-12 10:20:26 [logger INFO] Managed Position Finished: Arrival=2020-10-12 10:20:26.700113 TradeId=trd__SPY_1602508826 PosId=829b0f89-7963-4a25-8d75-f5c0ff390b5a Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=272.69 Text=Fake Filled Order 
+2020-10-12 10:20:26 [logger INFO] MACD-RSI - Closing long position for symbol SPY at 2020-04-07 12:18:00 
+2020-10-12 10:20:26 [logger INFO] Managed Position Updated: Arrival=2020-10-12 10:20:26.944495 TradeId=trd__SPY_1602508826 PosId=4206e884-af38-4a2b-b4de-6a042d13de18 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=272.07 Text=Fake New Order 
+2020-10-12 10:20:26 [logger INFO] Managed Position Finished: Arrival=2020-10-12 10:20:26.964634 TradeId=trd__SPY_1602508826 PosId=4206e884-af38-4a2b-b4de-6a042d13de18 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=272.07 Text=Fake Filled Order 
+2020-10-12 10:20:27 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2020-04-07 12:23:00
+2020-10-12 10:20:27 [logger INFO] Managed Position Updated: Arrival=2020-10-12 10:20:27.048538 TradeId=trd__SPY_1602508827 PosId=1e432b26-7978-4c03-9e8b-c0663c665359 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=272.137 Text=Fake New Order 
+2020-10-12 10:20:27 [logger INFO] Managed Position Finished: Arrival=2020-10-12 10:20:27.074591 TradeId=trd__SPY_1602508827 PosId=1e432b26-7978-4c03-9e8b-c0663c665359 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=272.137 Text=Fake Filled Order 
+2020-10-12 10:20:27 [logger INFO] MACD-RSI - Closing long position for symbol SPY at 2020-04-07 12:36:00 
+2020-10-12 10:20:27 [logger INFO] Managed Position Updated: Arrival=2020-10-12 10:20:27.175197 TradeId=trd__SPY_1602508827 PosId=ba0b7180-639b-4623-9c17-68860b64be2c Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=271.42 Text=Fake New Order 
+2020-10-12 10:20:27 [logger INFO] Managed Position Finished: Arrival=2020-10-12 10:20:27.199132 TradeId=trd__SPY_1602508827 PosId=ba0b7180-639b-4623-9c17-68860b64be2c Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=271.42 Text=Fake Filled Order 
+2020-10-12 10:20:27 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2020-04-07 12:43:00
+2020-10-12 10:20:27 [logger INFO] Managed Position Updated: Arrival=2020-10-12 10:20:27.287271 TradeId=trd__SPY_1602508827 PosId=acf2fdcf-eb39-4669-b876-486096f22f15 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=271.74 Text=Fake New Order 
+2020-10-12 10:20:27 [logger INFO] Managed Position Finished: Arrival=2020-10-12 10:20:27.307647 TradeId=trd__SPY_1602508827 PosId=acf2fdcf-eb39-4669-b876-486096f22f15 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=271.74 Text=Fake Filled Order 
+2020-10-12 10:20:27 [logger INFO] MACD-RSI - Closing long position for symbol SPY at 2020-04-07 12:51:00 
+2020-10-12 10:20:27 [logger INFO] Managed Position Updated: Arrival=2020-10-12 10:20:27.394273 TradeId=trd__SPY_1602508827 PosId=0155a780-56aa-48d9-9368-63acd5547149 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=270.8 Text=Fake New Order 
+2020-10-12 10:20:27 [logger INFO] Managed Position Finished: Arrival=2020-10-12 10:20:27.414221 TradeId=trd__SPY_1602508827 PosId=0155a780-56aa-48d9-9368-63acd5547149 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=270.8 Text=Fake Filled Order 
+2020-10-12 10:20:27 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2020-04-07 12:55:00
+2020-10-12 10:20:27 [logger INFO] Managed Position Updated: Arrival=2020-10-12 10:20:27.501829 TradeId=trd__SPY_1602508827 PosId=5e900257-040f-4609-a2e2-0fe22ca2177a Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=271.04 Text=Fake New Order 
+2020-10-12 10:20:27 [logger INFO] Managed Position Finished: Arrival=2020-10-12 10:20:27.523327 TradeId=trd__SPY_1602508827 PosId=5e900257-040f-4609-a2e2-0fe22ca2177a Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=271.04 Text=Fake Filled Order 
+2020-10-12 10:20:27 [logger INFO] MACD-RSI - Closing long position for symbol SPY at 2020-04-07 13:04:00 
+2020-10-12 10:20:27 [logger INFO] Managed Position Updated: Arrival=2020-10-12 10:20:27.625112 TradeId=trd__SPY_1602508827 PosId=a0fa292a-7081-43e8-8515-cfb04450ceaf Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=270.338 Text=Fake New Order 
+2020-10-12 10:20:27 [logger INFO] Managed Position Finished: Arrival=2020-10-12 10:20:27.646963 TradeId=trd__SPY_1602508827 PosId=a0fa292a-7081-43e8-8515-cfb04450ceaf Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=270.338 Text=Fake Filled Order 
+2020-10-12 10:20:27 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2020-04-07 13:11:00
+2020-10-12 10:20:27 [logger INFO] Managed Position Updated: Arrival=2020-10-12 10:20:27.734410 TradeId=trd__SPY_1602508827 PosId=f7aa41dd-c1c2-4be8-8497-ec39a61b4756 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=270.23 Text=Fake New Order 
+2020-10-12 10:20:27 [logger INFO] Managed Position Finished: Arrival=2020-10-12 10:20:27.757328 TradeId=trd__SPY_1602508827 PosId=f7aa41dd-c1c2-4be8-8497-ec39a61b4756 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=270.23 Text=Fake Filled Order 
+2020-10-12 10:20:27 [logger INFO] MACD-RSI - Closing long position for symbol SPY at 2020-04-07 13:15:00 
+2020-10-12 10:20:27 [logger INFO] Managed Position Updated: Arrival=2020-10-12 10:20:27.817453 TradeId=trd__SPY_1602508827 PosId=1aff3432-bca0-4016-9ad7-b50d6000b0b7 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=269.563 Text=Fake New Order 
+2020-10-12 10:20:27 [logger INFO] Managed Position Finished: Arrival=2020-10-12 10:20:27.836694 TradeId=trd__SPY_1602508827 PosId=1aff3432-bca0-4016-9ad7-b50d6000b0b7 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=269.563 Text=Fake Filled Order 
+2020-10-12 10:20:27 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2020-04-07 13:23:00
+2020-10-12 10:20:27 [logger INFO] Managed Position Updated: Arrival=2020-10-12 10:20:27.942385 TradeId=trd__SPY_1602508827 PosId=cca888d1-6df3-4210-905d-2b560817c38a Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=269.39 Text=Fake New Order 
+2020-10-12 10:20:27 [logger INFO] Managed Position Finished: Arrival=2020-10-12 10:20:27.960743 TradeId=trd__SPY_1602508827 PosId=cca888d1-6df3-4210-905d-2b560817c38a Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=269.39 Text=Fake Filled Order 
+2020-10-12 10:20:28 [logger INFO] MACD-RSI - Closing long position for symbol SPY at 2020-04-07 13:39:00 
+2020-10-12 10:20:28 [logger INFO] Managed Position Updated: Arrival=2020-10-12 10:20:28.115520 TradeId=trd__SPY_1602508828 PosId=0a84b9ea-8d7e-43a4-9c7b-2c3c5a250aeb Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=268.77 Text=Fake New Order 
+2020-10-12 10:20:28 [logger INFO] Managed Position Finished: Arrival=2020-10-12 10:20:28.133674 TradeId=trd__SPY_1602508828 PosId=0a84b9ea-8d7e-43a4-9c7b-2c3c5a250aeb Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=268.77 Text=Fake Filled Order 
+2020-10-12 10:20:28 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2020-04-07 13:47:00
+2020-10-12 10:20:28 [logger INFO] Managed Position Updated: Arrival=2020-10-12 10:20:28.235325 TradeId=trd__SPY_1602508828 PosId=e7422f8a-fc87-4fd7-a24f-08c1715217dc Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=268.06 Text=Fake New Order 
+2020-10-12 10:20:28 [logger INFO] Managed Position Finished: Arrival=2020-10-12 10:20:28.260010 TradeId=trd__SPY_1602508828 PosId=e7422f8a-fc87-4fd7-a24f-08c1715217dc Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=268.06 Text=Fake Filled Order 
+2020-10-12 10:20:28 [logger INFO] MACD-RSI - Closing long position for symbol SPY at 2020-04-07 13:52:00 
+2020-10-12 10:20:28 [logger INFO] Managed Position Updated: Arrival=2020-10-12 10:20:28.318996 TradeId=trd__SPY_1602508828 PosId=63f9650c-aa15-4a16-9c73-24b1a2748d7f Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=267.22 Text=Fake New Order 
+2020-10-12 10:20:28 [logger INFO] Managed Position Finished: Arrival=2020-10-12 10:20:28.337553 TradeId=trd__SPY_1602508828 PosId=63f9650c-aa15-4a16-9c73-24b1a2748d7f Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=267.22 Text=Fake Filled Order 
+2020-10-12 10:20:28 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2020-04-07 13:58:00
+2020-10-12 10:20:28 [logger INFO] Managed Position Updated: Arrival=2020-10-12 10:20:28.430912 TradeId=trd__SPY_1602508828 PosId=c1506aae-5989-431e-85cc-3ad81ad1dacc Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=266.91 Text=Fake New Order 
+2020-10-12 10:20:28 [logger INFO] Managed Position Finished: Arrival=2020-10-12 10:20:28.447286 TradeId=trd__SPY_1602508828 PosId=c1506aae-5989-431e-85cc-3ad81ad1dacc Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=266.91 Text=Fake Filled Order 
+2020-10-12 10:20:28 [logger INFO] MACD-RSI - Closing long position for symbol SPY at 2020-04-07 14:25:00 
+2020-10-12 10:20:28 [logger INFO] Managed Position Updated: Arrival=2020-10-12 10:20:28.705070 TradeId=trd__SPY_1602508828 PosId=65cd53c4-3d27-4ed7-b9b5-7f7c5e6c309d Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=265.87 Text=Fake New Order 
+2020-10-12 10:20:28 [logger INFO] Managed Position Finished: Arrival=2020-10-12 10:20:28.723941 TradeId=trd__SPY_1602508828 PosId=65cd53c4-3d27-4ed7-b9b5-7f7c5e6c309d Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=265.87 Text=Fake Filled Order 
+2020-10-12 10:20:29 [logger INFO] MACD/RSI = Running short trade for symbol SPY at 2020-04-07 14:51:00
+2020-10-12 10:20:29 [logger INFO] Managed Position Updated: Arrival=2020-10-12 10:20:29.011418 TradeId=trd__SPY_1602508829 PosId=ee6143f8-3fe2-43f3-8a52-2d1e82c8e546 Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=267.02 Text=Fake New Order 
+2020-10-12 10:20:29 [logger INFO] Managed Position Finished: Arrival=2020-10-12 10:20:29.037361 TradeId=trd__SPY_1602508829 PosId=ee6143f8-3fe2-43f3-8a52-2d1e82c8e546 Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=267.02 Text=Fake Filled Order 
+2020-10-12 10:20:29 [logger INFO] MACD-RSI - Closing short position for symbol SPY at 2020-04-07 14:56:00 
+2020-10-12 10:20:29 [logger INFO] Managed Position Updated: Arrival=2020-10-12 10:20:29.107125 TradeId=trd__SPY_1602508829 PosId=18822bb7-4749-4d1f-bce9-57f8252b2688 Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=266.42 Text=Fake New Order 
+2020-10-12 10:20:29 [logger INFO] Managed Position Finished: Arrival=2020-10-12 10:20:29.131192 TradeId=trd__SPY_1602508829 PosId=18822bb7-4749-4d1f-bce9-57f8252b2688 Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=266.42 Text=Fake Filled Order 
+2020-10-12 10:20:29 [logger INFO] Backtest successfully completed...
+2020-10-12 10:26:06 [logger INFO] DayTrader  Initializing
+2020-10-12 10:26:07 [logger INFO] Loading 5952 summaries for security SPY
+2020-10-12 10:26:07 [logger INFO] WebSocketModule  Initializing
+2020-10-12 10:26:07 [logger INFO] WebSocketModule Successfully initialized
+2020-10-12 10:26:07 [logger INFO] Websocket commands successfully opened on port 7172: 
+2020-10-12 10:26:07 [logger INFO] FileHandlerModule  Initializing
+2020-10-12 10:26:07 [logger INFO] FileHandlerModule Successfully initialized
+2020-10-12 10:26:07 [logger INFO] Initializing Bloomberg Order Router
+2020-10-12 10:26:07 [logger INFO] Connecting to localhost:8194
+2020-10-12 10:26:22 [logger INFO] Bloomberg Order Router Initialized
+2020-10-12 10:26:22 [logger INFO] SingletonModuleHandler Successfully initializer
+2020-10-12 10:26:22 [logger INFO] Initializing Generic Market Order Router
+2020-10-12 10:26:22 [logger INFO] SingletonModuleHandler Successfully initializer
+2020-10-12 10:26:22 [logger INFO] Generic Market Order Router Initialized
+2020-10-12 10:26:23 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:SPY
+2020-10-12 10:26:23 [logger INFO] DayTrader Successfully initialized
+2020-10-12 10:26:23 [logger ERROR] Critical error subscribing for Market Data for symbol SPY:Session Not Started (0x00010009)
+2020-10-12 10:26:24 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2020-10-12 10:26:24 [logger ERROR] Bloomberg Session failed to start...
+2020-10-12 10:26:24 [logger INFO] Requesting for open orders...
+2020-10-12 10:26:24 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-10-12 10:26:24 [logger INFO] Subscribing to order and route events
+2020-10-12 10:26:24 [logger ERROR] Error running ProcessMessage @OrderRouter.Bloomberg module:Session Not Started (0x00010009)
+2020-10-12 10:26:24 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:SPY
+2020-10-12 10:26:24 [logger ERROR] Critical error subscribing for candlebars for symbol SPY:Session Not Started (0x00010009)
+2020-10-12 10:26:24 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:SPY
+2020-10-12 10:26:24 [logger ERROR] Critical error subscribing for historical prices for symbol SPY:Null service handle (0x00020002)
+2020-10-12 10:26:25 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-10-12 10:26:26 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-10-12 10:26:27 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-10-12 10:26:28 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-10-12 10:26:29 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-10-12 10:26:30 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-10-12 10:26:31 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-10-12 10:26:32 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-10-12 10:26:33 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-10-12 10:26:34 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-10-12 10:26:35 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-10-12 10:26:36 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-10-12 10:26:37 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-10-12 10:26:38 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-10-12 10:26:39 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-10-12 10:26:40 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-10-12 10:26:41 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-10-12 10:26:42 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-10-12 10:26:43 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-10-12 10:26:44 [logger ERROR] Critical Error running ProcessExecutionReportListThread @OrderRouter.Bloomberg module:Timeout waiting for the previous orders
+2020-10-12 10:26:44 [logger INFO] Received list of Open Positions: 0 positions
+2020-10-12 10:26:44 [logger INFO] Process ready to receive commands and trade
+2020-10-12 10:27:13 [logger INFO] Found CSV file INPUT_APRIL_7_2020_MODEL_23NEW_NOFLEXTG4_NOFLEXSLh_JJJ4_FLEXGp25_FLh.csv. Extracting simulated market data
+2020-10-12 10:27:13 [logger INFO] File Handler Module : Moving file ./files/input/INPUT_APRIL_7_2020_MODEL_23NEW_NOFLEXTG4_NOFLEXSLh_JJJ4_FLEXGp25_FLh.csv to ./files/processed/INPUT_APRIL_7_2020_MODEL_23NEW_NOFLEXTG4_NOFLEXSLh_JJJ4_FLEXGp25_FLh.csv
+2020-10-12 10:27:14 [logger INFO] Starting to process for date:2020-04-07
+2020-10-12 10:27:15 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2020-04-07 09:19:00
+2020-10-12 10:27:15 [logger INFO] Managed Position Updated: Arrival=2020-10-12 10:27:15.087217 TradeId=trd__SPY_1602509235 PosId=062a5435-3099-47da-8886-1c44b3c712ff Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=270.51 Text=Fake New Order 
+2020-10-12 10:27:15 [logger INFO] Managed Position Finished: Arrival=2020-10-12 10:27:15.105168 TradeId=trd__SPY_1602509235 PosId=062a5435-3099-47da-8886-1c44b3c712ff Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=270.51 Text=Fake Filled Order 
+2020-10-12 10:27:15 [logger INFO] MACD-RSI - Closing long position for symbol SPY at 2020-04-07 09:23:00 
+2020-10-12 10:27:15 [logger INFO] Managed Position Updated: Arrival=2020-10-12 10:27:15.170992 TradeId=trd__SPY_1602509235 PosId=c6f60b09-52e9-460f-ab3a-12b43e1689a3 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=269.87 Text=Fake New Order 
+2020-10-12 10:27:15 [logger INFO] Managed Position Finished: Arrival=2020-10-12 10:27:15.195505 TradeId=trd__SPY_1602509235 PosId=c6f60b09-52e9-460f-ab3a-12b43e1689a3 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=269.87 Text=Fake Filled Order 
+2020-10-12 10:27:15 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2020-04-07 09:57:00
+2020-10-12 10:27:15 [logger INFO] Managed Position Updated: Arrival=2020-10-12 10:27:15.460298 TradeId=trd__SPY_1602509235 PosId=59abcf4d-05c8-4176-97bc-9b1db1eeb3e4 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=269.17 Text=Fake New Order 
+2020-10-12 10:27:15 [logger INFO] Managed Position Finished: Arrival=2020-10-12 10:27:15.475820 TradeId=trd__SPY_1602509235 PosId=59abcf4d-05c8-4176-97bc-9b1db1eeb3e4 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=269.17 Text=Fake Filled Order 
+2020-10-12 10:27:15 [logger INFO] MACD-RSI - Closing long position for symbol SPY at 2020-04-07 10:02:00 
+2020-10-12 10:27:15 [logger INFO] Managed Position Updated: Arrival=2020-10-12 10:27:15.545077 TradeId=trd__SPY_1602509235 PosId=3d58f61a-fee6-4cc4-bfd0-df3cfbe41342 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=268.545 Text=Fake New Order 
+2020-10-12 10:27:15 [logger INFO] Managed Position Finished: Arrival=2020-10-12 10:27:15.569597 TradeId=trd__SPY_1602509235 PosId=3d58f61a-fee6-4cc4-bfd0-df3cfbe41342 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=268.545 Text=Fake Filled Order 
+2020-10-12 10:27:15 [logger INFO] MACD/RSI = Running short trade for symbol SPY at 2020-04-07 10:20:00
+2020-10-12 10:27:15 [logger INFO] Managed Position Updated: Arrival=2020-10-12 10:27:15.748193 TradeId=trd__SPY_1602509235 PosId=21fd1695-9234-4653-a80a-0229743879e1 Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=270.54 Text=Fake New Order 
+2020-10-12 10:27:15 [logger INFO] Managed Position Finished: Arrival=2020-10-12 10:27:15.770776 TradeId=trd__SPY_1602509235 PosId=21fd1695-9234-4653-a80a-0229743879e1 Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=270.54 Text=Fake Filled Order 
+2020-10-12 10:27:15 [logger INFO] MACD-RSI - Closing short position for symbol SPY at 2020-04-07 10:31:00 
+2020-10-12 10:27:15 [logger INFO] Managed Position Updated: Arrival=2020-10-12 10:27:15.847238 TradeId=trd__SPY_1602509235 PosId=1914f8ba-3927-412e-851f-1809e8b9eefb Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=271.3 Text=Fake New Order 
+2020-10-12 10:27:15 [logger INFO] Managed Position Finished: Arrival=2020-10-12 10:27:15.865340 TradeId=trd__SPY_1602509235 PosId=1914f8ba-3927-412e-851f-1809e8b9eefb Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=271.3 Text=Fake Filled Order 
+2020-10-12 10:27:15 [logger INFO] MACD/RSI = Running short trade for symbol SPY at 2020-04-07 10:36:00
+2020-10-12 10:27:15 [logger INFO] Managed Position Updated: Arrival=2020-10-12 10:27:15.945195 TradeId=trd__SPY_1602509235 PosId=df607528-b913-4fce-9b23-b59a8213e7bb Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=271.49 Text=Fake New Order 
+2020-10-12 10:27:15 [logger INFO] Managed Position Finished: Arrival=2020-10-12 10:27:15.958159 TradeId=trd__SPY_1602509235 PosId=df607528-b913-4fce-9b23-b59a8213e7bb Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=271.49 Text=Fake Filled Order 
+2020-10-12 10:27:16 [logger INFO] MACD-RSI - Closing short position for symbol SPY at 2020-04-07 10:40:00 
+2020-10-12 10:27:16 [logger INFO] Managed Position Updated: Arrival=2020-10-12 10:27:16.034530 TradeId=trd__SPY_1602509236 PosId=3530d906-22d2-4b94-8ef4-fb7673632cb9 Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=272.26 Text=Fake New Order 
+2020-10-12 10:27:16 [logger INFO] Managed Position Finished: Arrival=2020-10-12 10:27:16.052966 TradeId=trd__SPY_1602509236 PosId=3530d906-22d2-4b94-8ef4-fb7673632cb9 Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=272.26 Text=Fake Filled Order 
+2020-10-12 10:27:16 [logger INFO] MACD/RSI = Running short trade for symbol SPY at 2020-04-07 10:46:00
+2020-10-12 10:27:16 [logger INFO] Managed Position Updated: Arrival=2020-10-12 10:27:16.156573 TradeId=trd__SPY_1602509236 PosId=2bc507cb-1ab6-4103-855f-f7e60ab201d0 Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=271.93 Text=Fake New Order 
+2020-10-12 10:27:16 [logger INFO] Managed Position Finished: Arrival=2020-10-12 10:27:16.175655 TradeId=trd__SPY_1602509236 PosId=2bc507cb-1ab6-4103-855f-f7e60ab201d0 Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=271.93 Text=Fake Filled Order 
+2020-10-12 10:27:16 [logger INFO] MACD-RSI - Closing short position for symbol SPY at 2020-04-07 11:06:00 
+2020-10-12 10:27:16 [logger INFO] Managed Position Updated: Arrival=2020-10-12 10:27:16.321268 TradeId=trd__SPY_1602509236 PosId=fe1c5878-38d6-4cbb-98b1-34c4d685944e Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=272.87 Text=Fake New Order 
+2020-10-12 10:27:16 [logger INFO] Managed Position Finished: Arrival=2020-10-12 10:27:16.347979 TradeId=trd__SPY_1602509236 PosId=fe1c5878-38d6-4cbb-98b1-34c4d685944e Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=272.87 Text=Fake Filled Order 
+2020-10-12 10:27:16 [logger INFO] MACD/RSI = Running short trade for symbol SPY at 2020-04-07 11:14:00
+2020-10-12 10:27:16 [logger INFO] Managed Position Updated: Arrival=2020-10-12 10:27:16.440355 TradeId=trd__SPY_1602509236 PosId=af78d0d9-7a96-4b75-bbf3-c8a06a436845 Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=273.07 Text=Fake New Order 
+2020-10-12 10:27:16 [logger INFO] Managed Position Finished: Arrival=2020-10-12 10:27:16.459046 TradeId=trd__SPY_1602509236 PosId=af78d0d9-7a96-4b75-bbf3-c8a06a436845 Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=273.07 Text=Fake Filled Order 
+2020-10-12 10:27:16 [logger INFO] MACD-RSI - Closing short position for symbol SPY at 2020-04-07 11:19:00 
+2020-10-12 10:27:16 [logger INFO] Managed Position Updated: Arrival=2020-10-12 10:27:16.527222 TradeId=trd__SPY_1602509236 PosId=9a3be1be-02df-4274-bc5b-bf8b96f8b9a6 Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=273.79 Text=Fake New Order 
+2020-10-12 10:27:16 [logger INFO] Managed Position Finished: Arrival=2020-10-12 10:27:16.552391 TradeId=trd__SPY_1602509236 PosId=9a3be1be-02df-4274-bc5b-bf8b96f8b9a6 Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=273.79 Text=Fake Filled Order 
+2020-10-12 10:27:16 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2020-04-07 11:39:00
+2020-10-12 10:27:16 [logger INFO] Managed Position Updated: Arrival=2020-10-12 10:27:16.729335 TradeId=trd__SPY_1602509236 PosId=90638af6-30e3-4839-9df9-16608ba35a68 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=272.69 Text=Fake New Order 
+2020-10-12 10:27:16 [logger INFO] Managed Position Finished: Arrival=2020-10-12 10:27:16.756299 TradeId=trd__SPY_1602509236 PosId=90638af6-30e3-4839-9df9-16608ba35a68 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=272.69 Text=Fake Filled Order 
+2020-10-12 10:27:16 [logger INFO] MACD-RSI - Closing long position for symbol SPY at 2020-04-07 12:18:00 
+2020-10-12 10:27:16 [logger INFO] Managed Position Updated: Arrival=2020-10-12 10:27:16.961397 TradeId=trd__SPY_1602509236 PosId=7ddef97f-b807-4145-9fd7-2ce039fb9b3d Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=272.07 Text=Fake New Order 
+2020-10-12 10:27:16 [logger INFO] Managed Position Finished: Arrival=2020-10-12 10:27:16.974604 TradeId=trd__SPY_1602509236 PosId=7ddef97f-b807-4145-9fd7-2ce039fb9b3d Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=272.07 Text=Fake Filled Order 
+2020-10-12 10:27:17 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2020-04-07 12:23:00
+2020-10-12 10:27:17 [logger INFO] Managed Position Updated: Arrival=2020-10-12 10:27:17.058260 TradeId=trd__SPY_1602509237 PosId=abf337ec-58af-4825-aa87-77acd133fab2 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=272.137 Text=Fake New Order 
+2020-10-12 10:27:17 [logger INFO] Managed Position Finished: Arrival=2020-10-12 10:27:17.084261 TradeId=trd__SPY_1602509237 PosId=abf337ec-58af-4825-aa87-77acd133fab2 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=272.137 Text=Fake Filled Order 
+2020-10-12 10:27:17 [logger INFO] MACD-RSI - Closing long position for symbol SPY at 2020-04-07 12:36:00 
+2020-10-12 10:27:17 [logger INFO] Managed Position Updated: Arrival=2020-10-12 10:27:17.191450 TradeId=trd__SPY_1602509237 PosId=e088d5ae-7c7e-4ca2-8109-a8c438889165 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=271.42 Text=Fake New Order 
+2020-10-12 10:27:17 [logger INFO] Managed Position Finished: Arrival=2020-10-12 10:27:17.209280 TradeId=trd__SPY_1602509237 PosId=e088d5ae-7c7e-4ca2-8109-a8c438889165 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=271.42 Text=Fake Filled Order 
+2020-10-12 10:27:17 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2020-04-07 12:43:00
+2020-10-12 10:27:17 [logger INFO] Managed Position Updated: Arrival=2020-10-12 10:27:17.308567 TradeId=trd__SPY_1602509237 PosId=cbb6a0dc-7560-4116-9269-2b098333d421 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=271.74 Text=Fake New Order 
+2020-10-12 10:27:17 [logger INFO] Managed Position Finished: Arrival=2020-10-12 10:27:17.334430 TradeId=trd__SPY_1602509237 PosId=cbb6a0dc-7560-4116-9269-2b098333d421 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=271.74 Text=Fake Filled Order 
+2020-10-12 10:27:17 [logger INFO] MACD-RSI - Closing long position for symbol SPY at 2020-04-07 12:51:00 
+2020-10-12 10:27:17 [logger INFO] Managed Position Updated: Arrival=2020-10-12 10:27:17.407616 TradeId=trd__SPY_1602509237 PosId=2409ed90-0715-4b42-83c5-18937324f08d Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=270.8 Text=Fake New Order 
+2020-10-12 10:27:17 [logger INFO] Managed Position Finished: Arrival=2020-10-12 10:27:17.427410 TradeId=trd__SPY_1602509237 PosId=2409ed90-0715-4b42-83c5-18937324f08d Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=270.8 Text=Fake Filled Order 
+2020-10-12 10:27:17 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2020-04-07 12:55:00
+2020-10-12 10:27:17 [logger INFO] Managed Position Updated: Arrival=2020-10-12 10:27:17.503078 TradeId=trd__SPY_1602509237 PosId=740105bf-11b7-4d63-a520-83d5ee14d043 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=271.04 Text=Fake New Order 
+2020-10-12 10:27:17 [logger INFO] Managed Position Finished: Arrival=2020-10-12 10:27:17.521577 TradeId=trd__SPY_1602509237 PosId=740105bf-11b7-4d63-a520-83d5ee14d043 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=271.04 Text=Fake Filled Order 
+2020-10-12 10:27:17 [logger INFO] MACD-RSI - Closing long position for symbol SPY at 2020-04-07 13:04:00 
+2020-10-12 10:27:17 [logger INFO] Managed Position Updated: Arrival=2020-10-12 10:27:17.612325 TradeId=trd__SPY_1602509237 PosId=370df700-c5d9-4d08-99b4-9117ab1eed61 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=270.338 Text=Fake New Order 
+2020-10-12 10:27:17 [logger INFO] Managed Position Finished: Arrival=2020-10-12 10:27:17.630036 TradeId=trd__SPY_1602509237 PosId=370df700-c5d9-4d08-99b4-9117ab1eed61 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=270.338 Text=Fake Filled Order 
+2020-10-12 10:27:17 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2020-04-07 13:11:00
+2020-10-12 10:27:17 [logger INFO] Managed Position Updated: Arrival=2020-10-12 10:27:17.724146 TradeId=trd__SPY_1602509237 PosId=a10dd3ee-79a8-45f6-8344-2d4eb24757f3 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=270.23 Text=Fake New Order 
+2020-10-12 10:27:17 [logger INFO] Managed Position Finished: Arrival=2020-10-12 10:27:17.738940 TradeId=trd__SPY_1602509237 PosId=a10dd3ee-79a8-45f6-8344-2d4eb24757f3 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=270.23 Text=Fake Filled Order 
+2020-10-12 10:27:17 [logger INFO] MACD-RSI - Closing long position for symbol SPY at 2020-04-07 13:15:00 
+2020-10-12 10:27:17 [logger INFO] Managed Position Updated: Arrival=2020-10-12 10:27:17.830616 TradeId=trd__SPY_1602509237 PosId=42f996f8-ae46-452c-a793-592c95c4db1e Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=269.563 Text=Fake New Order 
+2020-10-12 10:27:17 [logger INFO] Managed Position Finished: Arrival=2020-10-12 10:27:17.848505 TradeId=trd__SPY_1602509237 PosId=42f996f8-ae46-452c-a793-592c95c4db1e Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=269.563 Text=Fake Filled Order 
+2020-10-12 10:27:17 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2020-04-07 13:23:00
+2020-10-12 10:27:17 [logger INFO] Managed Position Updated: Arrival=2020-10-12 10:27:17.954908 TradeId=trd__SPY_1602509237 PosId=681efb09-e9d5-475e-9930-eada600ba977 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=269.39 Text=Fake New Order 
+2020-10-12 10:27:17 [logger INFO] Managed Position Finished: Arrival=2020-10-12 10:27:17.973866 TradeId=trd__SPY_1602509237 PosId=681efb09-e9d5-475e-9930-eada600ba977 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=269.39 Text=Fake Filled Order 
+2020-10-12 10:27:18 [logger INFO] MACD-RSI - Closing long position for symbol SPY at 2020-04-07 13:39:00 
+2020-10-12 10:27:18 [logger INFO] Managed Position Updated: Arrival=2020-10-12 10:27:18.125201 TradeId=trd__SPY_1602509238 PosId=af4ef4c8-8755-4f9f-8d0d-7e117c705441 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=268.77 Text=Fake New Order 
+2020-10-12 10:27:18 [logger INFO] Managed Position Finished: Arrival=2020-10-12 10:27:18.145950 TradeId=trd__SPY_1602509238 PosId=af4ef4c8-8755-4f9f-8d0d-7e117c705441 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=268.77 Text=Fake Filled Order 
+2020-10-12 10:27:18 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2020-04-07 13:47:00
+2020-10-12 10:27:18 [logger INFO] Managed Position Updated: Arrival=2020-10-12 10:27:18.253340 TradeId=trd__SPY_1602509238 PosId=b38402fd-c3f7-40c6-9fbf-541ed4085fab Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=268.06 Text=Fake New Order 
+2020-10-12 10:27:18 [logger INFO] Managed Position Finished: Arrival=2020-10-12 10:27:18.270790 TradeId=trd__SPY_1602509238 PosId=b38402fd-c3f7-40c6-9fbf-541ed4085fab Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=268.06 Text=Fake Filled Order 
+2020-10-12 10:27:18 [logger INFO] MACD-RSI - Closing long position for symbol SPY at 2020-04-07 13:52:00 
+2020-10-12 10:27:18 [logger INFO] Managed Position Updated: Arrival=2020-10-12 10:27:18.345244 TradeId=trd__SPY_1602509238 PosId=f03b8f87-3a2a-47cc-b78d-052ead583d23 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=267.22 Text=Fake New Order 
+2020-10-12 10:27:18 [logger INFO] Managed Position Finished: Arrival=2020-10-12 10:27:18.363638 TradeId=trd__SPY_1602509238 PosId=f03b8f87-3a2a-47cc-b78d-052ead583d23 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=267.22 Text=Fake Filled Order 
+2020-10-12 10:27:18 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2020-04-07 13:58:00
+2020-10-12 10:27:18 [logger INFO] Managed Position Updated: Arrival=2020-10-12 10:27:18.462959 TradeId=trd__SPY_1602509238 PosId=625d6dcf-c823-45a0-8a77-34239a1a502f Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=266.91 Text=Fake New Order 
+2020-10-12 10:27:18 [logger INFO] Managed Position Finished: Arrival=2020-10-12 10:27:18.487782 TradeId=trd__SPY_1602509238 PosId=625d6dcf-c823-45a0-8a77-34239a1a502f Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=266.91 Text=Fake Filled Order 
+2020-10-12 10:27:18 [logger INFO] MACD-RSI - Closing long position for symbol SPY at 2020-04-07 14:25:00 
+2020-10-12 10:27:18 [logger INFO] Managed Position Updated: Arrival=2020-10-12 10:27:18.680379 TradeId=trd__SPY_1602509238 PosId=54e5bd2f-5867-4fce-8cab-812f87b44d9d Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=265.87 Text=Fake New Order 
+2020-10-12 10:27:18 [logger INFO] Managed Position Finished: Arrival=2020-10-12 10:27:18.692906 TradeId=trd__SPY_1602509238 PosId=54e5bd2f-5867-4fce-8cab-812f87b44d9d Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=265.87 Text=Fake Filled Order 
+2020-10-12 10:27:18 [logger INFO] MACD/RSI = Running short trade for symbol SPY at 2020-04-07 14:51:00
+2020-10-12 10:27:18 [logger INFO] Managed Position Updated: Arrival=2020-10-12 10:27:18.970462 TradeId=trd__SPY_1602509238 PosId=ad3c23a4-dd91-4525-b689-3e0ac145db15 Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=267.02 Text=Fake New Order 
+2020-10-12 10:27:18 [logger INFO] Managed Position Finished: Arrival=2020-10-12 10:27:18.989055 TradeId=trd__SPY_1602509238 PosId=ad3c23a4-dd91-4525-b689-3e0ac145db15 Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=267.02 Text=Fake Filled Order 
+2020-10-12 10:27:19 [logger INFO] MACD-RSI - Closing short position for symbol SPY at 2020-04-07 14:56:00 
+2020-10-12 10:27:19 [logger INFO] Managed Position Updated: Arrival=2020-10-12 10:27:19.068165 TradeId=trd__SPY_1602509239 PosId=3e4bd07e-3fff-417b-8f69-7f007a9d026d Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=266.42 Text=Fake New Order 
+2020-10-12 10:27:19 [logger INFO] Managed Position Finished: Arrival=2020-10-12 10:27:19.082249 TradeId=trd__SPY_1602509239 PosId=3e4bd07e-3fff-417b-8f69-7f007a9d026d Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=266.42 Text=Fake Filled Order 
+2020-10-12 10:27:19 [logger INFO] Backtest successfully completed...
+2020-10-12 10:30:10 [logger INFO] DayTrader  Initializing
+2020-10-12 10:30:11 [logger INFO] Loading 5957 summaries for security SPY
+2020-10-12 10:30:11 [logger INFO] WebSocketModule  Initializing
+2020-10-12 10:30:11 [logger INFO] WebSocketModule Successfully initialized
+2020-10-12 10:30:11 [logger INFO] Websocket commands successfully opened on port 7172: 
+2020-10-12 10:30:11 [logger INFO] FileHandlerModule  Initializing
+2020-10-12 10:30:11 [logger INFO] FileHandlerModule Successfully initialized
+2020-10-12 10:30:11 [logger INFO] Initializing Bloomberg Order Router
+2020-10-12 10:30:11 [logger INFO] Connecting to localhost:8194
+2020-10-12 10:30:26 [logger INFO] Bloomberg Order Router Initialized
+2020-10-12 10:30:26 [logger INFO] SingletonModuleHandler Successfully initializer
+2020-10-12 10:30:26 [logger INFO] Initializing Generic Market Order Router
+2020-10-12 10:30:26 [logger INFO] SingletonModuleHandler Successfully initializer
+2020-10-12 10:30:26 [logger INFO] Generic Market Order Router Initialized
+2020-10-12 10:30:27 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:SPY
+2020-10-12 10:30:27 [logger INFO] DayTrader Successfully initialized
+2020-10-12 10:30:27 [logger ERROR] Critical error subscribing for Market Data for symbol SPY:Session Not Started (0x00010009)
+2020-10-12 10:30:28 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2020-10-12 10:30:28 [logger ERROR] Bloomberg Session failed to start...
+2020-10-12 10:30:28 [logger INFO] Requesting for open orders...
+2020-10-12 10:30:28 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-10-12 10:30:28 [logger INFO] Subscribing to order and route events
+2020-10-12 10:30:28 [logger ERROR] Error running ProcessMessage @OrderRouter.Bloomberg module:Session Not Started (0x00010009)
+2020-10-12 10:30:28 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:SPY
+2020-10-12 10:30:28 [logger ERROR] Critical error subscribing for candlebars for symbol SPY:Session Not Started (0x00010009)
+2020-10-12 10:30:28 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:SPY
+2020-10-12 10:30:28 [logger ERROR] Critical error subscribing for historical prices for symbol SPY:Null service handle (0x00020002)
+2020-10-12 10:30:29 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-10-12 10:30:30 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-10-12 10:30:31 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-10-12 10:30:32 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-10-12 10:30:33 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-10-12 10:30:34 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-10-12 10:30:35 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-10-12 10:30:36 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-10-12 10:30:37 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-10-12 10:30:38 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-10-12 10:30:39 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-10-12 10:30:40 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-10-12 10:30:41 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-10-12 10:30:42 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-10-12 10:30:43 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-10-12 10:30:44 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-10-12 10:30:45 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-10-12 10:30:46 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-10-12 10:30:47 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-10-12 10:30:48 [logger ERROR] Critical Error running ProcessExecutionReportListThread @OrderRouter.Bloomberg module:Timeout waiting for the previous orders
+2020-10-12 10:30:48 [logger INFO] Received list of Open Positions: 0 positions
+2020-10-12 10:30:48 [logger INFO] Process ready to receive commands and trade
+2020-10-12 10:31:32 [logger INFO] Found CSV file INPUT_APRIL_7_2020_MODEL_23NEW_NOFLEXTG4_NOFLEXSLh_JJJ4_FLEXGp25_FLh.csv. Extracting simulated market data
+2020-10-12 10:31:32 [logger INFO] File Handler Module : Moving file ./files/input/INPUT_APRIL_7_2020_MODEL_23NEW_NOFLEXTG4_NOFLEXSLh_JJJ4_FLEXGp25_FLh.csv to ./files/processed/INPUT_APRIL_7_2020_MODEL_23NEW_NOFLEXTG4_NOFLEXSLh_JJJ4_FLEXGp25_FLh.csv
+2020-10-12 10:31:33 [logger INFO] Starting to process for date:2020-04-07
+2020-10-12 10:31:33 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2020-04-07 09:19:00
+2020-10-12 10:31:33 [logger INFO] Managed Position Updated: Arrival=2020-10-12 10:31:33.863170 TradeId=trd__SPY_1602509493 PosId=f9effe4c-5d87-4023-95bc-672a510e59a4 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=270.51 Text=Fake New Order 
+2020-10-12 10:31:33 [logger INFO] Managed Position Finished: Arrival=2020-10-12 10:31:33.879604 TradeId=trd__SPY_1602509493 PosId=f9effe4c-5d87-4023-95bc-672a510e59a4 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=270.51 Text=Fake Filled Order 
+2020-10-12 10:31:33 [logger INFO] MACD-RSI - Closing long position for symbol SPY at 2020-04-07 09:23:00 
+2020-10-12 10:31:33 [logger INFO] Managed Position Updated: Arrival=2020-10-12 10:31:33.947376 TradeId=trd__SPY_1602509493 PosId=01e7fec3-ca85-4956-853b-d3b5b24b53e5 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=269.87 Text=Fake New Order 
+2020-10-12 10:31:33 [logger INFO] Managed Position Finished: Arrival=2020-10-12 10:31:33.970762 TradeId=trd__SPY_1602509493 PosId=01e7fec3-ca85-4956-853b-d3b5b24b53e5 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=269.87 Text=Fake Filled Order 
+2020-10-12 10:31:34 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2020-04-07 09:57:00
+2020-10-12 10:31:34 [logger INFO] Managed Position Updated: Arrival=2020-10-12 10:31:34.315760 TradeId=trd__SPY_1602509494 PosId=556c42d1-a40a-4f87-89d9-47ab7b594b47 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=269.17 Text=Fake New Order 
+2020-10-12 10:31:34 [logger INFO] Managed Position Finished: Arrival=2020-10-12 10:31:34.342293 TradeId=trd__SPY_1602509494 PosId=556c42d1-a40a-4f87-89d9-47ab7b594b47 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=269.17 Text=Fake Filled Order 
+2020-10-12 10:31:34 [logger INFO] MACD-RSI - Closing long position for symbol SPY at 2020-04-07 10:02:00 
+2020-10-12 10:31:34 [logger INFO] Managed Position Updated: Arrival=2020-10-12 10:31:34.398142 TradeId=trd__SPY_1602509494 PosId=1e21fa3e-8349-4a92-91fb-ae32393b769e Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=268.545 Text=Fake New Order 
+2020-10-12 10:31:34 [logger INFO] Managed Position Finished: Arrival=2020-10-12 10:31:34.422084 TradeId=trd__SPY_1602509494 PosId=1e21fa3e-8349-4a92-91fb-ae32393b769e Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=268.545 Text=Fake Filled Order 
+2020-10-12 10:31:34 [logger INFO] MACD/RSI = Running short trade for symbol SPY at 2020-04-07 10:20:00
+2020-10-12 10:31:34 [logger INFO] Managed Position Updated: Arrival=2020-10-12 10:31:34.613981 TradeId=trd__SPY_1602509494 PosId=c4d5865a-1beb-4e0b-8db9-fb5742c98b44 Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=270.54 Text=Fake New Order 
+2020-10-12 10:31:34 [logger INFO] Managed Position Finished: Arrival=2020-10-12 10:31:34.638359 TradeId=trd__SPY_1602509494 PosId=c4d5865a-1beb-4e0b-8db9-fb5742c98b44 Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=270.54 Text=Fake Filled Order 
+2020-10-12 10:31:34 [logger INFO] MACD-RSI - Closing short position for symbol SPY at 2020-04-07 10:31:00 
+2020-10-12 10:31:34 [logger INFO] Managed Position Updated: Arrival=2020-10-12 10:31:34.722135 TradeId=trd__SPY_1602509494 PosId=d16c3801-4ec2-446d-8087-369cac664e18 Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=271.3 Text=Fake New Order 
+2020-10-12 10:31:34 [logger INFO] Managed Position Finished: Arrival=2020-10-12 10:31:34.734106 TradeId=trd__SPY_1602509494 PosId=d16c3801-4ec2-446d-8087-369cac664e18 Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=271.3 Text=Fake Filled Order 
+2020-10-12 10:31:34 [logger INFO] MACD/RSI = Running short trade for symbol SPY at 2020-04-07 10:36:00
+2020-10-12 10:31:34 [logger INFO] Managed Position Updated: Arrival=2020-10-12 10:31:34.847167 TradeId=trd__SPY_1602509494 PosId=19fb6a4b-a34b-4196-9e80-7b97e7cc413f Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=271.49 Text=Fake New Order 
+2020-10-12 10:31:34 [logger INFO] Managed Position Finished: Arrival=2020-10-12 10:31:34.860134 TradeId=trd__SPY_1602509494 PosId=19fb6a4b-a34b-4196-9e80-7b97e7cc413f Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=271.49 Text=Fake Filled Order 
+2020-10-12 10:31:34 [logger INFO] MACD-RSI - Closing short position for symbol SPY at 2020-04-07 10:40:00 
+2020-10-12 10:31:34 [logger INFO] Managed Position Updated: Arrival=2020-10-12 10:31:34.927075 TradeId=trd__SPY_1602509494 PosId=bd2619b8-3f66-4259-a489-f3bcf18cbc60 Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=272.26 Text=Fake New Order 
+2020-10-12 10:31:34 [logger INFO] Managed Position Finished: Arrival=2020-10-12 10:31:34.942678 TradeId=trd__SPY_1602509494 PosId=bd2619b8-3f66-4259-a489-f3bcf18cbc60 Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=272.26 Text=Fake Filled Order 
+2020-10-12 10:31:35 [logger INFO] MACD/RSI = Running short trade for symbol SPY at 2020-04-07 10:46:00
+2020-10-12 10:31:35 [logger INFO] Managed Position Updated: Arrival=2020-10-12 10:31:35.032014 TradeId=trd__SPY_1602509495 PosId=948c0a9b-8d37-4b54-8f9b-15e4b0dc801e Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=271.93 Text=Fake New Order 
+2020-10-12 10:31:35 [logger INFO] Managed Position Finished: Arrival=2020-10-12 10:31:35.049650 TradeId=trd__SPY_1602509495 PosId=948c0a9b-8d37-4b54-8f9b-15e4b0dc801e Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=271.93 Text=Fake Filled Order 
+2020-10-12 10:31:35 [logger INFO] MACD-RSI - Closing short position for symbol SPY at 2020-04-07 11:06:00 
+2020-10-12 10:31:35 [logger INFO] Managed Position Updated: Arrival=2020-10-12 10:31:35.201968 TradeId=trd__SPY_1602509495 PosId=031ab2aa-237b-4ca1-82ea-0d606ca685e0 Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=272.87 Text=Fake New Order 
+2020-10-12 10:31:35 [logger INFO] Managed Position Finished: Arrival=2020-10-12 10:31:35.223732 TradeId=trd__SPY_1602509495 PosId=031ab2aa-237b-4ca1-82ea-0d606ca685e0 Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=272.87 Text=Fake Filled Order 
+2020-10-12 10:31:35 [logger INFO] MACD/RSI = Running short trade for symbol SPY at 2020-04-07 11:14:00
+2020-10-12 10:31:35 [logger INFO] Managed Position Updated: Arrival=2020-10-12 10:31:35.317904 TradeId=trd__SPY_1602509495 PosId=59514ac8-1315-4828-aba9-16bc729cccc6 Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=273.07 Text=Fake New Order 
+2020-10-12 10:31:35 [logger INFO] Managed Position Finished: Arrival=2020-10-12 10:31:35.332961 TradeId=trd__SPY_1602509495 PosId=59514ac8-1315-4828-aba9-16bc729cccc6 Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=273.07 Text=Fake Filled Order 
+2020-10-12 10:31:35 [logger INFO] MACD-RSI - Closing short position for symbol SPY at 2020-04-07 11:19:00 
+2020-10-12 10:31:35 [logger INFO] Managed Position Updated: Arrival=2020-10-12 10:31:35.415639 TradeId=trd__SPY_1602509495 PosId=5b69262b-e502-42bf-85ff-2c107a344165 Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=273.79 Text=Fake New Order 
+2020-10-12 10:31:35 [logger INFO] Managed Position Finished: Arrival=2020-10-12 10:31:35.441378 TradeId=trd__SPY_1602509495 PosId=5b69262b-e502-42bf-85ff-2c107a344165 Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=273.79 Text=Fake Filled Order 
+2020-10-12 10:31:35 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2020-04-07 11:39:00
+2020-10-12 10:31:35 [logger INFO] Managed Position Updated: Arrival=2020-10-12 10:31:35.631933 TradeId=trd__SPY_1602509495 PosId=8d9aff66-6d53-44fd-9f2f-12acbf5ff896 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=272.69 Text=Fake New Order 
+2020-10-12 10:31:35 [logger INFO] Managed Position Finished: Arrival=2020-10-12 10:31:35.643831 TradeId=trd__SPY_1602509495 PosId=8d9aff66-6d53-44fd-9f2f-12acbf5ff896 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=272.69 Text=Fake Filled Order 
+2020-10-12 10:31:35 [logger INFO] MACD-RSI - Closing long position for symbol SPY at 2020-04-07 12:18:00 
+2020-10-12 10:31:35 [logger INFO] Managed Position Updated: Arrival=2020-10-12 10:31:35.906527 TradeId=trd__SPY_1602509495 PosId=99ea6e09-99c3-42ed-b1e5-f3dd42a502ba Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=272.07 Text=Fake New Order 
+2020-10-12 10:31:35 [logger INFO] Managed Position Finished: Arrival=2020-10-12 10:31:35.924648 TradeId=trd__SPY_1602509495 PosId=99ea6e09-99c3-42ed-b1e5-f3dd42a502ba Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=272.07 Text=Fake Filled Order 
+2020-10-12 10:31:36 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2020-04-07 12:23:00
+2020-10-12 10:31:36 [logger INFO] Managed Position Updated: Arrival=2020-10-12 10:31:36.014000 TradeId=trd__SPY_1602509496 PosId=cf905848-ef4b-4022-b84a-d7bb58425f26 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=272.137 Text=Fake New Order 
+2020-10-12 10:31:36 [logger INFO] Managed Position Finished: Arrival=2020-10-12 10:31:36.034922 TradeId=trd__SPY_1602509496 PosId=cf905848-ef4b-4022-b84a-d7bb58425f26 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=272.137 Text=Fake Filled Order 
+2020-10-12 10:31:36 [logger INFO] MACD-RSI - Closing long position for symbol SPY at 2020-04-07 12:36:00 
+2020-10-12 10:31:36 [logger INFO] Managed Position Updated: Arrival=2020-10-12 10:31:36.168484 TradeId=trd__SPY_1602509496 PosId=dd9d4222-f430-4d20-ba18-d84535fdddde Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=271.42 Text=Fake New Order 
+2020-10-12 10:31:36 [logger INFO] Managed Position Finished: Arrival=2020-10-12 10:31:36.192231 TradeId=trd__SPY_1602509496 PosId=dd9d4222-f430-4d20-ba18-d84535fdddde Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=271.42 Text=Fake Filled Order 
+2020-10-12 10:31:36 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2020-04-07 12:43:00
+2020-10-12 10:31:36 [logger INFO] Managed Position Updated: Arrival=2020-10-12 10:31:36.282253 TradeId=trd__SPY_1602509496 PosId=06335a57-6449-41e5-aa15-a542d8749484 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=271.74 Text=Fake New Order 
+2020-10-12 10:31:36 [logger INFO] Managed Position Finished: Arrival=2020-10-12 10:31:36.299422 TradeId=trd__SPY_1602509496 PosId=06335a57-6449-41e5-aa15-a542d8749484 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=271.74 Text=Fake Filled Order 
+2020-10-12 10:31:36 [logger INFO] MACD-RSI - Closing long position for symbol SPY at 2020-04-07 12:51:00 
+2020-10-12 10:31:36 [logger INFO] Managed Position Updated: Arrival=2020-10-12 10:31:36.387152 TradeId=trd__SPY_1602509496 PosId=7b631fe0-b29b-451d-af11-49e4ffe08047 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=270.8 Text=Fake New Order 
+2020-10-12 10:31:36 [logger INFO] Managed Position Finished: Arrival=2020-10-12 10:31:36.408096 TradeId=trd__SPY_1602509496 PosId=7b631fe0-b29b-451d-af11-49e4ffe08047 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=270.8 Text=Fake Filled Order 
+2020-10-12 10:31:36 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2020-04-07 12:55:00
+2020-10-12 10:31:36 [logger INFO] Managed Position Updated: Arrival=2020-10-12 10:31:36.486079 TradeId=trd__SPY_1602509496 PosId=9cf9c5cd-c171-462c-a604-37abd2bdc8a7 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=271.04 Text=Fake New Order 
+2020-10-12 10:31:36 [logger INFO] Managed Position Finished: Arrival=2020-10-12 10:31:36.501294 TradeId=trd__SPY_1602509496 PosId=9cf9c5cd-c171-462c-a604-37abd2bdc8a7 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=271.04 Text=Fake Filled Order 
+2020-10-12 10:31:36 [logger INFO] MACD-RSI - Closing long position for symbol SPY at 2020-04-07 13:04:00 
+2020-10-12 10:31:36 [logger INFO] Managed Position Updated: Arrival=2020-10-12 10:31:36.593233 TradeId=trd__SPY_1602509496 PosId=2238dfce-ebb2-4023-b4ac-293957e8544d Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=270.338 Text=Fake New Order 
+2020-10-12 10:31:36 [logger INFO] Managed Position Finished: Arrival=2020-10-12 10:31:36.613148 TradeId=trd__SPY_1602509496 PosId=2238dfce-ebb2-4023-b4ac-293957e8544d Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=270.338 Text=Fake Filled Order 
+2020-10-12 10:31:36 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2020-04-07 13:11:00
+2020-10-12 10:31:36 [logger INFO] Managed Position Updated: Arrival=2020-10-12 10:31:36.716126 TradeId=trd__SPY_1602509496 PosId=8044a8a9-55f4-42f4-94bc-d2655e60bc83 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=270.23 Text=Fake New Order 
+2020-10-12 10:31:36 [logger INFO] Managed Position Finished: Arrival=2020-10-12 10:31:36.738285 TradeId=trd__SPY_1602509496 PosId=8044a8a9-55f4-42f4-94bc-d2655e60bc83 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=270.23 Text=Fake Filled Order 
+2020-10-12 10:31:36 [logger INFO] MACD-RSI - Closing long position for symbol SPY at 2020-04-07 13:15:00 
+2020-10-12 10:31:36 [logger INFO] Managed Position Updated: Arrival=2020-10-12 10:31:36.813155 TradeId=trd__SPY_1602509496 PosId=a0da29e0-4089-4b11-af8d-6a6b3ab1a366 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=269.563 Text=Fake New Order 
+2020-10-12 10:31:36 [logger INFO] Managed Position Finished: Arrival=2020-10-12 10:31:36.831760 TradeId=trd__SPY_1602509496 PosId=a0da29e0-4089-4b11-af8d-6a6b3ab1a366 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=269.563 Text=Fake Filled Order 
+2020-10-12 10:31:36 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2020-04-07 13:23:00
+2020-10-12 10:31:36 [logger INFO] Managed Position Updated: Arrival=2020-10-12 10:31:36.952960 TradeId=trd__SPY_1602509496 PosId=84b8ff41-0816-4237-9dd5-f61b579d587a Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=269.39 Text=Fake New Order 
+2020-10-12 10:31:36 [logger INFO] Managed Position Finished: Arrival=2020-10-12 10:31:36.972088 TradeId=trd__SPY_1602509496 PosId=84b8ff41-0816-4237-9dd5-f61b579d587a Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=269.39 Text=Fake Filled Order 
+2020-10-12 10:31:37 [logger INFO] MACD-RSI - Closing long position for symbol SPY at 2020-04-07 13:39:00 
+2020-10-12 10:31:37 [logger INFO] Managed Position Updated: Arrival=2020-10-12 10:31:37.164149 TradeId=trd__SPY_1602509497 PosId=0c0dc1c4-7a59-4102-8dd9-6ff1bd684cd3 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=268.77 Text=Fake New Order 
+2020-10-12 10:31:37 [logger INFO] Managed Position Finished: Arrival=2020-10-12 10:31:37.190347 TradeId=trd__SPY_1602509497 PosId=0c0dc1c4-7a59-4102-8dd9-6ff1bd684cd3 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=268.77 Text=Fake Filled Order 
+2020-10-12 10:31:37 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2020-04-07 13:47:00
+2020-10-12 10:31:37 [logger INFO] Managed Position Updated: Arrival=2020-10-12 10:31:37.317536 TradeId=trd__SPY_1602509497 PosId=005e1407-5ecc-4d8e-b8f1-cd95009010b9 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=268.06 Text=Fake New Order 
+2020-10-12 10:31:37 [logger INFO] Managed Position Finished: Arrival=2020-10-12 10:31:37.330173 TradeId=trd__SPY_1602509497 PosId=005e1407-5ecc-4d8e-b8f1-cd95009010b9 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=268.06 Text=Fake Filled Order 
+2020-10-12 10:31:37 [logger INFO] MACD-RSI - Closing long position for symbol SPY at 2020-04-07 13:52:00 
+2020-10-12 10:31:37 [logger INFO] Managed Position Updated: Arrival=2020-10-12 10:31:37.429999 TradeId=trd__SPY_1602509497 PosId=558e5597-dcca-47f6-82be-eae687d15973 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=267.22 Text=Fake New Order 
+2020-10-12 10:31:37 [logger INFO] Managed Position Finished: Arrival=2020-10-12 10:31:37.455795 TradeId=trd__SPY_1602509497 PosId=558e5597-dcca-47f6-82be-eae687d15973 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=267.22 Text=Fake Filled Order 
+2020-10-12 10:31:37 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2020-04-07 13:58:00
+2020-10-12 10:31:37 [logger INFO] Managed Position Updated: Arrival=2020-10-12 10:31:37.546549 TradeId=trd__SPY_1602509497 PosId=be982312-59f0-4b2e-89dd-13904c6a6c6c Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=266.91 Text=Fake New Order 
+2020-10-12 10:31:37 [logger INFO] Managed Position Finished: Arrival=2020-10-12 10:31:37.565538 TradeId=trd__SPY_1602509497 PosId=be982312-59f0-4b2e-89dd-13904c6a6c6c Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=266.91 Text=Fake Filled Order 
+2020-10-12 10:31:37 [logger INFO] MACD-RSI - Closing long position for symbol SPY at 2020-04-07 14:25:00 
+2020-10-12 10:31:37 [logger INFO] Managed Position Updated: Arrival=2020-10-12 10:31:37.787021 TradeId=trd__SPY_1602509497 PosId=55b77ba0-9144-4bbd-8995-aacf5a5169c8 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=265.87 Text=Fake New Order 
+2020-10-12 10:31:37 [logger INFO] Managed Position Finished: Arrival=2020-10-12 10:31:37.798926 TradeId=trd__SPY_1602509497 PosId=55b77ba0-9144-4bbd-8995-aacf5a5169c8 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=265.87 Text=Fake Filled Order 
+2020-10-12 10:31:38 [logger INFO] MACD/RSI = Running short trade for symbol SPY at 2020-04-07 14:51:00
+2020-10-12 10:31:38 [logger INFO] Managed Position Updated: Arrival=2020-10-12 10:31:38.102429 TradeId=trd__SPY_1602509498 PosId=28b2377a-742c-4a45-8c76-144e9d97b175 Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=267.02 Text=Fake New Order 
+2020-10-12 10:31:38 [logger INFO] Managed Position Finished: Arrival=2020-10-12 10:31:38.127241 TradeId=trd__SPY_1602509498 PosId=28b2377a-742c-4a45-8c76-144e9d97b175 Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=267.02 Text=Fake Filled Order 
+2020-10-12 10:31:38 [logger INFO] MACD-RSI - Closing short position for symbol SPY at 2020-04-07 14:56:00 
+2020-10-12 10:31:38 [logger INFO] Managed Position Updated: Arrival=2020-10-12 10:31:38.196679 TradeId=trd__SPY_1602509498 PosId=b92ce2fd-1feb-455f-bc2e-3faadc79cc56 Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=266.42 Text=Fake New Order 
+2020-10-12 10:31:38 [logger INFO] Managed Position Finished: Arrival=2020-10-12 10:31:38.221475 TradeId=trd__SPY_1602509498 PosId=b92ce2fd-1feb-455f-bc2e-3faadc79cc56 Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=266.42 Text=Fake Filled Order 
+2020-10-12 10:31:38 [logger INFO] Backtest successfully completed...

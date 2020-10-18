@@ -404,6 +404,12 @@ class TradingSignalHelper:
     def PersistMACDRSITradingSignal(self, dayTradingPos, action, side,candlebar,logger,condition=None):
         try:
 
+            persistTradingSignalParam  = self.ModelParametersHandler.Get(ModelParametersHandler.PERSIST_TRADING_SIGNAL(),
+                                                                         dayTradingPos.Security.Symbol)
+
+            if persistTradingSignalParam.IntValue!=1:
+                return
+
             self.PersistingLock.acquire()
 
             now=candlebar.DateTime
@@ -590,6 +596,12 @@ class TradingSignalHelper:
 
         try:
 
+            persistTradingSignalParam = self.ModelParametersHandler.Get(ModelParametersHandler.PERSIST_TRADING_SIGNAL(),
+                                                                        dayTradingPos.Security.Symbol)
+
+            if persistTradingSignalParam.IntValue != 1:
+                return
+
             self.PersistingLock.acquire()
 
             now=candlebar.DateTime
@@ -721,6 +733,9 @@ class TradingSignalHelper:
                                                                         dayTradingPos.MaxLoss)
             self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "MaxLossCurrentTrade",
                                                                         dayTradingPos.MaxLossCurrentTrade)
+
+            self.TradingSignalManager.PersistSignalStatisticalParameter(tradingSignalId, "CurrentProfitToSecurity",
+                                                                        dayTradingPos.CurrentProfit)
 
             self.TradingSignalManager.Commit()
 

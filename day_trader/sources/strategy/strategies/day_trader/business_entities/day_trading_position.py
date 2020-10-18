@@ -104,7 +104,10 @@ class DayTradingPosition():
         self.Security = security
         self.SharesQuantity= shares
         self.Active=active
-        self.MarketData=None
+
+        self.MarketData = None
+        self.OpenMarketData=None
+
         self.ExecutionSummaries={}
         self.Routing =routing
         #self.Open=open
@@ -113,6 +116,8 @@ class DayTradingPosition():
         self.SignalType=signalType
         self.SignalDesc = signalDesc
 
+
+        self.CurrentProfitToSecurity = 0
         self.CurrentProfit = 0
         self.CurrentProfitLastTrade = 0
         self.CurrentProfitMonetary = 0
@@ -171,6 +176,7 @@ class DayTradingPosition():
         self.CurrentProfitLastTrade= 0
         self.CurrentProfitMonetary = 0
         self.CurrentProfitMonetaryLastTrade= 0
+        self.CurrentProfitToSecurity = 0
 
         self.MaxLoss = 0
         self.MaxProfit = 0
@@ -202,6 +208,9 @@ class DayTradingPosition():
 
         self.PricesReggrSlope = None
         self.PricesReggrSlopePeriod = None
+
+        self.OpenMarketData=None
+        self.MarketData = None
 
     #endregion
 
@@ -366,7 +375,7 @@ class DayTradingPosition():
         else:
             return 0
 
-    def UpdateTimestap(self,marketData):
+    def UpdateMarketData(self,marketData):
         if(marketData.MDEntryDate is not None):
             self.PosUpdTimestamp=self.PosUpdTimestamp.replace(hour=marketData.MDEntryDate.hour,
                                                               minute=marketData.MDEntryDate.minute,
@@ -377,6 +386,8 @@ class DayTradingPosition():
                                                                 minute=datetime.now().minute,
                                                                 second=datetime.now().second,
                                                                 microsecond=0)
+        if self.OpenMarketData is None and marketData is not None and marketData.OpeningPrice is not None:
+            self.OpenMarketData=marketData
 
     def SmoothMACDRSIParam(self,macdRSISmoothedMode,paramToComp,modelParamToSmooth,modelParamToSmoothIndex):
         if macdRSISmoothedMode.IntValue==0:
@@ -434,7 +445,7 @@ class DayTradingPosition():
 
     def CalculateCurrentDayProfits(self,marketData):
 
-        self.UpdateTimestap(marketData)
+        self.UpdateMarketData(marketData)
 
         profitsAndLosses = PositionsProfitsAndLosses()
 
@@ -470,11 +481,16 @@ class DayTradingPosition():
                 self.MaxMonetaryLossCurrentTrade = profitsAndLosses.MonetaryProfitLastTrade
 
 
+
             self.CurrentProfit=profitsAndLosses.Profits
             self.CurrentProfitMonetary = profitsAndLosses.MonetaryProfits
             self.CurrentProfitLastTrade = profitsAndLosses.ProfitLastTrade
             self.CurrentProfitMonetaryLastTrade = profitsAndLosses.MonetaryProfitLastTrade
             self.IncreaseDecrease=profitsAndLosses.IncreaseDecrease
+
+            if (self.SharesQuantity>0 and self.SharesQuantity!=0 and self.OpenMarketData is not None
+                and self.OpenMarketData.OpeningPrice is not None and self.OpenMarketData.OpeningPrice!=0):
+                self.CurrentProfitToSecurity= (self.CurrentProfitMonetary/(self.SharesQuantity*self.OpenMarketData.OpeningPrice))*100
         else:
 
             #Last Trade remains as the last estimation while was opened
@@ -565,6 +581,8 @@ class DayTradingPosition():
                 profits = 0
             else:
                 raise Exception( "Could not calculate profit for closed position where money outflow is 0, for symbol {}" .format(self.Security.Symbol))
+
+        #print("Outflow={} Inflow={} MTM={}".format(profitsAndLosses.MoneyOutflow,profitsAndLosses.MoneyIncome, profitsAndLosses.PosMTM))
         return profits*100 #as a percentage
 
     def CalculateMarkToMarket(self,marketData,profitsAndLosses,foundOpenPositions):
@@ -1520,12 +1538,16 @@ class DayTradingPosition():
 
         lastCandlebar = candlebarsArr[-1]
 
+        #print("{} - CurrentProfit = {} StopLoss={}".format(lastCandlebar.DateTime,self.CurrentProfit,stopLossLimitModelParam.FloatValue))
+
         # CUMULATIVE Gain for the Day exceeds Take Gain Limit
-        if ( takeGainLimitModelParam.FloatValue is not None and (self.CurrentProfit is not None and self.CurrentProfit > takeGainLimitModelParam.FloatValue*100)):
+        if (takeGainLimitModelParam.FloatValue is not None and (self.CurrentProfitToSecurity is not None and self.CurrentProfitToSecurity > takeGainLimitModelParam.FloatValue * 100)):
+        #if ( takeGainLimitModelParam.FloatValue is not None and (self.CurrentProfit is not None and self.CurrentProfit > takeGainLimitModelParam.FloatValue*100)):
             return _EXIT_TERM_COND_1
 
         # CUMULATIVE Loss for the Day exceeds (worse than) Stop Loss Limit
-        if (stopLossLimitModelParam.FloatValue is not None and (self.CurrentProfit is not None and self.CurrentProfit < stopLossLimitModelParam.FloatValue*100)):
+        if (stopLossLimitModelParam.FloatValue is not None and (self.CurrentProfitToSecurity is not None and self.CurrentProfitToSecurity < stopLossLimitModelParam.FloatValue * 100)):
+            #if (stopLossLimitModelParam.FloatValue is not None and (self.CurrentProfit is not None and self.CurrentProfit < stopLossLimitModelParam.FloatValue*100)):
             return _EXIT_TERM_COND_2
 
         # L1- Flexible Stop Loss
