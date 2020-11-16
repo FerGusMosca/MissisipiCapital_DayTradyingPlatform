@@ -1,0 +1,141 @@
+2020-11-07 13:26:23 [logger INFO] DayTrader  Initializing
+2020-11-07 13:26:23 [logger INFO] Loading 1 summaries for security SPY
+2020-11-07 13:26:24 [logger INFO] WebSocketModule  Initializing
+2020-11-07 13:26:24 [logger INFO] WebSocketModule Successfully initialized
+2020-11-07 13:26:24 [logger INFO] Websocket commands successfully opened on port 7172: 
+2020-11-07 13:26:24 [logger INFO] FileHandlerModule  Initializing
+2020-11-07 13:26:24 [logger INFO] FileHandlerModule Successfully initialized
+2020-11-07 13:26:24 [logger INFO] Initializing Bloomberg Order Router
+2020-11-07 13:26:24 [logger INFO] Connecting to localhost:8194
+2020-11-07 13:26:24 [logger INFO] Bloomberg Order Router Initialized
+2020-11-07 13:26:24 [logger INFO] SingletonModuleHandler Successfully initializer
+2020-11-07 13:26:24 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2020-11-07 13:26:24 [logger INFO] Bloomberg Session Connection is UP...
+2020-11-07 13:26:24 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2020-11-07 13:26:24 [logger INFO] Bloomberg Session started...
+2020-11-07 13:26:24 [logger INFO] Initializing Generic Market Order Router
+2020-11-07 13:26:24 [logger INFO] SingletonModuleHandler Successfully initializer
+2020-11-07 13:26:24 [logger INFO] Generic Market Order Router Initialized
+2020-11-07 13:26:25 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:SPY
+2020-11-07 13:26:25 [logger INFO] DayTrader Successfully initialized
+2020-11-07 13:26:26 [logger INFO] Requesting for open orders...
+2020-11-07 13:26:26 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-11-07 13:26:26 [logger INFO] Subscribing to order and route events
+2020-11-07 13:26:26 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:SPY
+2020-11-07 13:26:26 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:SPY
+2020-11-07 13:26:27 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-11-07 13:26:28 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-11-07 13:26:29 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-11-07 13:26:30 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-11-07 13:26:31 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-11-07 13:26:32 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-11-07 13:26:33 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-11-07 13:26:35 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-11-07 13:26:36 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-11-07 13:26:37 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-11-07 13:26:38 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-11-07 13:26:39 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-11-07 13:26:40 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-11-07 13:26:41 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-11-07 13:26:42 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-11-07 13:26:43 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-11-07 13:26:44 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-11-07 13:26:45 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-11-07 13:26:46 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-11-07 13:26:47 [logger ERROR] Critical Error running ProcessExecutionReportListThread @OrderRouter.Bloomberg module:Timeout waiting for the previous orders
+2020-11-07 13:26:47 [logger INFO] Received list of Open Positions: 0 positions
+2020-11-07 13:26:47 [logger INFO] Process ready to receive commands and trade
+2020-11-07 13:26:54 [logger INFO] Found CSV file INPUT_NOV_5_2020_MODEL_23NEW_NOFLEXTG10_NOFLEXSL0pt25_JJJ4_FLh.csv. Extracting simulated market data
+2020-11-07 13:26:54 [logger INFO] File Handler Module : Moving file ./files/input/INPUT_NOV_5_2020_MODEL_23NEW_NOFLEXTG10_NOFLEXSL0pt25_JJJ4_FLh.csv to ./files/processed/INPUT_NOV_5_2020_MODEL_23NEW_NOFLEXTG10_NOFLEXSL0pt25_JJJ4_FLh.csv
+2020-11-07 13:26:55 [logger INFO] Starting to process for date:2020-11-05
+2020-11-07 13:26:56 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2020-11-05 10:15:00
+2020-11-07 13:26:56 [logger INFO] Managed Position Updated: Arrival=2020-11-07 13:26:56.362767 TradeId=trd__SPY_1604766416 PosId=da24a89f-9d83-4bf2-99af-a7adeb8ef876 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=351.074 Text=Fake New Order 
+2020-11-07 13:26:56 [logger INFO] Managed Position Finished: Arrival=2020-11-07 13:26:56.387102 TradeId=trd__SPY_1604766416 PosId=da24a89f-9d83-4bf2-99af-a7adeb8ef876 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=351.074 Text=Fake Filled Order 
+2020-11-07 13:26:56 [logger INFO] MACD-RSI - Closing long position for symbol SPY at 2020-11-05 10:39:00 
+2020-11-07 13:26:56 [logger INFO] Managed Position Updated: Arrival=2020-11-07 13:26:56.559973 TradeId=trd__SPY_1604766416 PosId=557f0cc8-b964-4587-bed9-0c2f4c5bd9a4 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=350.585 Text=Fake New Order 
+2020-11-07 13:26:56 [logger INFO] Managed Position Finished: Arrival=2020-11-07 13:26:56.573985 TradeId=trd__SPY_1604766416 PosId=557f0cc8-b964-4587-bed9-0c2f4c5bd9a4 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=350.585 Text=Fake Filled Order 
+2020-11-07 13:26:56 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2020-11-05 11:02:00
+2020-11-07 13:26:56 [logger INFO] Managed Position Updated: Arrival=2020-11-07 13:26:56.833292 TradeId=trd__SPY_1604766416 PosId=bb72ca1d-5a14-40fb-bf06-b8e78f11d665 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=350.43 Text=Fake New Order 
+2020-11-07 13:26:56 [logger INFO] Managed Position Finished: Arrival=2020-11-07 13:26:56.849250 TradeId=trd__SPY_1604766416 PosId=bb72ca1d-5a14-40fb-bf06-b8e78f11d665 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=350.43 Text=Fake Filled Order 
+2020-11-07 13:26:56 [logger INFO] MACD-RSI - Closing long position for symbol SPY at 2020-11-05 11:17:00 
+2020-11-07 13:26:56 [logger INFO] Managed Position Updated: Arrival=2020-11-07 13:26:56.992865 TradeId=trd__SPY_1604766416 PosId=44403a1f-ed60-453f-977d-5b0e973ec794 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=350.056 Text=Fake New Order 
+2020-11-07 13:26:57 [logger INFO] Managed Position Finished: Arrival=2020-11-07 13:26:57.004834 TradeId=trd__SPY_1604766416 PosId=44403a1f-ed60-453f-977d-5b0e973ec794 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=350.056 Text=Fake Filled Order 
+2020-11-07 13:26:57 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2020-11-05 11:26:00
+2020-11-07 13:26:57 [logger INFO] Managed Position Updated: Arrival=2020-11-07 13:26:57.116534 TradeId=trd__SPY_1604766417 PosId=267dbf2c-7780-4c5f-a6cd-6f9e14be43ba Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=349.26 Text=Fake New Order 
+2020-11-07 13:26:57 [logger INFO] Managed Position Finished: Arrival=2020-11-07 13:26:57.129538 TradeId=trd__SPY_1604766417 PosId=267dbf2c-7780-4c5f-a6cd-6f9e14be43ba Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=349.26 Text=Fake Filled Order 
+2020-11-07 13:26:59 [logger INFO] MACD-RSI - Closing long position for symbol SPY at 2020-11-05 13:37:00 
+2020-11-07 13:26:59 [logger INFO] Managed Position Updated: Arrival=2020-11-07 13:26:59.365730 TradeId=trd__SPY_1604766419 PosId=f5e0868b-4559-44d8-a099-16569a4746c4 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=351.04 Text=Fake New Order 
+2020-11-07 13:26:59 [logger INFO] Managed Position Finished: Arrival=2020-11-07 13:26:59.391699 TradeId=trd__SPY_1604766419 PosId=f5e0868b-4559-44d8-a099-16569a4746c4 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=351.04 Text=Fake Filled Order 
+2020-11-07 13:27:00 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2020-11-05 14:21:00
+2020-11-07 13:27:00 [logger INFO] Managed Position Updated: Arrival=2020-11-07 13:27:00.133479 TradeId=trd__SPY_1604766420 PosId=f565a7b6-73ef-4c5a-8a56-54fcf5f81019 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=351.0 Text=Fake New Order 
+2020-11-07 13:27:00 [logger INFO] Managed Position Finished: Arrival=2020-11-07 13:27:00.157501 TradeId=trd__SPY_1604766420 PosId=f565a7b6-73ef-4c5a-8a56-54fcf5f81019 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=351.0 Text=Fake Filled Order 
+2020-11-07 13:27:00 [logger INFO] MACD-RSI - Closing long position for symbol SPY at 2020-11-05 14:34:00 
+2020-11-07 13:27:00 [logger INFO] Managed Position Updated: Arrival=2020-11-07 13:27:00.305105 TradeId=trd__SPY_1604766420 PosId=98e42419-8ef7-4b2b-a4bc-6155b3e764b2 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=350.48 Text=Fake New Order 
+2020-11-07 13:27:00 [logger INFO] Managed Position Finished: Arrival=2020-11-07 13:27:00.325052 TradeId=trd__SPY_1604766420 PosId=98e42419-8ef7-4b2b-a4bc-6155b3e764b2 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=350.48 Text=Fake Filled Order 
+2020-11-07 13:27:00 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2020-11-05 14:41:00
+2020-11-07 13:27:00 [logger INFO] Managed Position Updated: Arrival=2020-11-07 13:27:00.467671 TradeId=trd__SPY_1604766420 PosId=fafbc7a8-eb48-43a6-b260-16df5d9b06da Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=350.24 Text=Fake New Order 
+2020-11-07 13:27:00 [logger INFO] Managed Position Finished: Arrival=2020-11-07 13:27:00.479638 TradeId=trd__SPY_1604766420 PosId=fafbc7a8-eb48-43a6-b260-16df5d9b06da Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=350.24 Text=Fake Filled Order 
+2020-11-07 13:27:00 [logger INFO] MACD-RSI - Closing long position for symbol SPY at 2020-11-05 14:45:00 
+2020-11-07 13:27:00 [logger INFO] Managed Position Updated: Arrival=2020-11-07 13:27:00.589347 TradeId=trd__SPY_1604766420 PosId=192316ce-a0b8-4e5a-b218-ebafd0a711cb Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=349.88 Text=Fake New Order 
+2020-11-07 13:27:00 [logger INFO] Managed Position Finished: Arrival=2020-11-07 13:27:00.604307 TradeId=trd__SPY_1604766420 PosId=192316ce-a0b8-4e5a-b218-ebafd0a711cb Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=349.88 Text=Fake Filled Order 
+2020-11-07 13:27:00 [logger INFO] Backtest successfully completed...
+2020-11-07 13:27:24 [logger INFO] Processing SERVICE_STATUS event
+2020-11-07 13:27:24 [logger ERROR] Error: Service //blp/emapisvc failed to open
+2020-11-07 13:27:26 [logger INFO] Processing SERVICE_STATUS event
+2020-11-07 13:27:26 [logger ERROR] Error: Service //blp/mktbar failed to open
+2020-11-07 13:27:26 [logger ERROR] Error Subscribing to Bloomberg Events:1-Failed to auto-open corresponding service (//blp/mktbar) (Symbol SPY US Equity)
+2020-11-07 13:28:24 [logger INFO] Processing SERVICE_STATUS event
+2020-11-07 13:28:24 [logger ERROR] Error: Service //blp/mktdata failed to open
+2020-11-07 13:28:24 [logger ERROR] Error Subscribing to Bloomberg Events:1-Failed to auto-open corresponding service (//blp/mktdata) (Symbol SPY US Equity)
+2020-11-07 13:28:26 [logger INFO] Processing SERVICE_STATUS event
+2020-11-07 13:28:26 [logger ERROR] Error: Service //blp/refdata failed to open
+2020-11-07 13:28:26 [logger ERROR] Critical error subscribing for historical prices for symbol SPY:Null service handle (0x00020002)
+2020-11-07 13:29:24 [logger INFO] Processing SERVICE_STATUS event
+2020-11-07 13:29:24 [logger ERROR] Error: Service //blp/emapisvc failed to open
+2020-11-07 13:29:24 [logger ERROR] Error Subscribing to Bloomberg Events:1-Failed to auto-open corresponding service (//blp/emapisvc) (Symbol 98)
+2020-11-07 13:30:24 [logger INFO] Processing SERVICE_STATUS event
+2020-11-07 13:30:24 [logger ERROR] Error: Service //blp/emapisvc failed to open
+2020-11-07 13:30:24 [logger ERROR] Error Subscribing to Bloomberg Events:1-Failed to auto-open corresponding service (//blp/emapisvc) (Symbol 99)
+2020-11-08 09:23:20 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:SPY
+2020-11-08 09:23:26 [logger INFO] Requesting for open orders...
+2020-11-08 09:23:28 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-11-08 09:23:28 [logger INFO] Subscribing to order and route events
+2020-11-08 09:23:28 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:SPY
+2020-11-08 09:23:31 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:SPY
+2020-11-08 09:23:31 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-11-08 09:23:33 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-11-08 09:23:36 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-11-08 09:23:37 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-11-08 09:23:39 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-11-08 09:23:44 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-11-08 09:23:49 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-11-08 09:23:52 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-11-08 09:23:56 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-11-08 09:23:58 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-11-08 09:24:03 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-11-08 09:24:06 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-11-08 09:24:08 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-11-08 09:24:10 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-11-08 09:24:13 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-11-08 09:24:14 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-11-08 09:24:17 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-11-08 09:24:20 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-11-08 09:24:22 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-11-08 09:24:24 [logger ERROR] Critical Error running ProcessExecutionReportListThread @OrderRouter.Bloomberg module:Timeout waiting for the previous orders
+2020-11-08 09:24:27 [logger INFO] Received list of Open Positions: 0 positions
+2020-11-08 09:24:27 [logger INFO] Process ready to receive commands and trade
+2020-11-08 09:24:31 [logger INFO] Processing SERVICE_STATUS event
+2020-11-08 09:24:31 [logger ERROR] Error: Service //blp/mktdata failed to open
+2020-11-08 09:24:31 [logger INFO] Processing SERVICE_STATUS event
+2020-11-08 09:24:31 [logger ERROR] Error: Service //blp/mktbar failed to open
+2020-11-08 09:24:32 [logger ERROR] Error Subscribing to Bloomberg Events:1-Failed to auto-open corresponding service (//blp/mktdata) (Symbol SPY US Equity)
+2020-11-08 09:24:32 [logger ERROR] Error Subscribing to Bloomberg Events:1-Failed to auto-open corresponding service (//blp/mktbar) (Symbol SPY US Equity)
+2020-11-08 09:25:33 [logger ERROR] Critical error subscribing for historical prices for symbol SPY:Null service handle (0x00020002)
+2020-11-08 09:25:36 [logger INFO] Processing SERVICE_STATUS event
+2020-11-08 09:25:36 [logger ERROR] Error: Service //blp/emapisvc failed to open
+2020-11-08 09:25:36 [logger INFO] Processing SERVICE_STATUS event
+2020-11-08 09:25:36 [logger ERROR] Error: Service //blp/refdata failed to open
+2020-11-08 09:25:36 [logger ERROR] Error Subscribing to Bloomberg Events:1-Failed to auto-open corresponding service (//blp/emapisvc) (Symbol 98)
+2020-11-08 09:26:38 [logger INFO] Processing SERVICE_STATUS event
+2020-11-08 09:26:38 [logger ERROR] Error: Service //blp/emapisvc failed to open
+2020-11-08 09:26:38 [logger ERROR] Error Subscribing to Bloomberg Events:1-Failed to auto-open corresponding service (//blp/emapisvc) (Symbol 99)

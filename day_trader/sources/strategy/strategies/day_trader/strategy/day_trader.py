@@ -567,7 +567,8 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
             traceback.print_exc()
             self.ProcessErrorInMethod("@DayTrader.ProcessMarketData", e,md.Security.Symbol is md if not None else None)
         finally:
-            self.LockCandlebar.release()
+            if self.LockCandlebar.locked():
+                self.LockCandlebar.release()
 
     def ProcessErrorInMethod(self,method,e, symbol=None):
         try:
@@ -843,9 +844,12 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
             if longCond is not None:
 
                 self.DoLog("Generic Automatic = Running long trade for symbol {} at {}".format(dayTradingPos.Security.Symbol,candlebar.DateTime), MessageType.INFO)
+
+                self.ProcessNewPositionReqManagedPos(dayTradingPos, Side.Buy, dayTradingPos.SharesQuantity,self.Configuration.DefaultAccount)
+
                 self.TradingSignalHelper.PersistTradingSignal(dayTradingPos, TradingSignalHelper._ACTION_OPEN(),
                                                               Side.Buy, dayTradingPos.GetStatisticalParameters(list(cbDict.values())), candlebar, self)
-                self.ProcessNewPositionReqManagedPos(dayTradingPos, Side.Buy, dayTradingPos.SharesQuantity,self.Configuration.DefaultAccount)
+
                 dayTradingPos.Routing=True
                 return longCond
             else:
@@ -887,9 +891,12 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
             if shortCond is not None:
                 self.DoLog("Generic Automatic = Running short trade for symbol {} at {}".format(dayTradingPos.Security.Symbol,candlebar.DateTime), MessageType.INFO)
+
+                self.ProcessNewPositionReqManagedPos(dayTradingPos, Side.Sell, dayTradingPos.SharesQuantity,self.Configuration.DefaultAccount)
+
                 self.TradingSignalHelper.PersistTradingSignal(dayTradingPos, TradingSignalHelper._ACTION_OPEN(),
                                                               Side.SellShort, dayTradingPos.GetStatisticalParameters(list(cbDict.values())), candlebar, self)
-                self.ProcessNewPositionReqManagedPos(dayTradingPos, Side.Sell, dayTradingPos.SharesQuantity,self.Configuration.DefaultAccount)
+
                 dayTradingPos.Routing = True
                 return shortCond
             else:
@@ -955,8 +962,9 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                if longCondition is not None:
 
                    self.DoLog("MACD/RSI = Running long trade for symbol {} at {}".format(dayTradingPos.Security.Symbol,candlebar.DateTime),MessageType.INFO)
-                   self.TradingSignalHelper.PersistMACDRSITradingSignal(dayTradingPos,TradingSignalHelper._ACTION_OPEN(), Side.Buy,candlebar, self,condition=longCondition)
                    self.ProcessNewPositionReqManagedPos(dayTradingPos, Side.Buy, dayTradingPos.SharesQuantity,self.Configuration.DefaultAccount)
+                   self.TradingSignalHelper.PersistMACDRSITradingSignal(dayTradingPos,TradingSignalHelper._ACTION_OPEN(), Side.Buy,candlebar, self, condition=longCondition)
+
                    dayTradingPos.Routing = True
                    #print("Open Pos Long --> Routing=True")
                    dayTradingPos.MACDIndicator.UpdateLastTradeTimestamp()
@@ -1016,10 +1024,12 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
             if shortCondition is not None:
 
                 self.DoLog("MACD/RSI = Running short trade for symbol {} at {}".format(dayTradingPos.Security.Symbol, candlebar.DateTime),MessageType.INFO)
-                self.TradingSignalHelper.PersistMACDRSITradingSignal(dayTradingPos, TradingSignalHelper._ACTION_OPEN(),Side.SellShort, candlebar,
-                                                                     self,condition=shortCondition)
+
                 self.ProcessNewPositionReqManagedPos(dayTradingPos, Side.Sell, dayTradingPos.SharesQuantity,
                                                      self.Configuration.DefaultAccount)
+                self.TradingSignalHelper.PersistMACDRSITradingSignal(dayTradingPos, TradingSignalHelper._ACTION_OPEN(),
+                                                                     Side.SellShort, candlebar,
+                                                                     self, condition=shortCondition)
                 dayTradingPos.Routing = True
                 #print("Open Pos Short --> Routing=True")
                 dayTradingPos.MACDIndicator.UpdateLastTradeTimestamp()
@@ -1136,6 +1146,10 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
             if netShares!=0: #if there is something to close
                 # print("Now we do close positions for security {} for net open shares {}".format(dayTradingPos.Security.Symbol, netShares))
 
+                self.ProcessNewPositionReqManagedPos(dayTradingPos, side,
+                                                     netShares if netShares > 0 else netShares * (-1),
+                                                     self.Configuration.DefaultAccount, text=text)
+
                 if generic:
                     self.TradingSignalHelper.PersistTradingSignal(dayTradingPos, TradingSignalHelper._ACTION_CLOSE(),
                                                                   self.TranslateSide(dayTradingPos,side), statisticalParam,
@@ -1145,8 +1159,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                                                                          self.TranslateSide(dayTradingPos,side),candlebar,
                                                                          self,closingCond)
 
-                self.ProcessNewPositionReqManagedPos(dayTradingPos,side,netShares if netShares > 0 else netShares * (-1),
-                                                     self.Configuration.DefaultAccount,text=text)
+
 
 
     def EvaluateClosingForManualConditions(self,candlebar,cbDict):
@@ -1402,7 +1415,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
             if(candlebar is None):
                 raise Exception("Invalid candlebar received")
 
-            if candlebar.High is None or candlebar.Low is None or candlebar.Close is None:
+            if  candlebar.Open is None or candlebar.High is None or candlebar.Low is None or candlebar.Close is None:
                 return
 
             LogHelper.LogPublishCandleBarOnSecurity("DayTrader Recv Candlebar", self, candlebar.Security.Symbol,candlebar)
@@ -1412,6 +1425,10 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                             None)
 
             if  not dayTradingPos.RunningBacktest:
+
+                dayTradingPos.ProcessCandlebarPrices(self.ModelParametersHandler.Get(ModelParametersHandler.CANDLE_PRICE_METHOD(),
+                                                     dayTradingPos.Security.Symbol),candlebar)
+
                 cbDict = self.Candlebars[candlebar.Security.Symbol]
                 if cbDict is  None:
                     cbDict = {}
@@ -1660,7 +1677,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
             if posId is not None:
 
-                self.RoutingLock.acquire()
+                self.RoutingLock.acquire(blocking=True)
                 dayTradingPos = next(iter(list(filter(lambda x: x.Id == posId, self.DayTradingPositions))),None)
                 self.RoutingLock.release()
                 if dayTradingPos is not None:

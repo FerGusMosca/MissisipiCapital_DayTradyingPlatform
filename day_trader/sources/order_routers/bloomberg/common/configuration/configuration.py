@@ -29,6 +29,8 @@ class Configuration:
         self.ExternalOrdersPacingSeconds = int(config['DEFAULT']['EXTERNAL_ORDERS_PACING_SECONDS'])
         self.MarketDataUpdateFreqSeconds = float(config['DEFAULT']['MARKET_DATA_UPDATE_FREQ_SECONDS'])
 
+        self.TimeZone = int(config['DEFAULT']['TIME_ZONE'])
+
 
 
 

@@ -410,13 +410,16 @@ class TradingSignalHelper:
             if persistTradingSignalParam.IntValue!=1:
                 return
 
-            self.PersistingLock.acquire()
+            self.PersistingLock.acquire(blocking=True)
 
             now=candlebar.DateTime
 
             self.TradingSignalManager.PersistTradingSignal(dayTradingPos,now,action, SideConverter.ConvertSideToString(side),candlebar)
 
             tradingSignalId= self.TradingSignalManager.GetTradingSignal(now,dayTradingPos.Security.Symbol)
+
+            if self.PersistingLock.locked():
+                self.PersistingLock.release()
 
             if tradingSignalId is None:
                 raise  Exception("Critical error saving RSI/MACD trading signal. Could not recover trading signal from DB. Symbol={} datetime={}".format(dayTradingPos.Security.Symbol,now))
@@ -602,7 +605,7 @@ class TradingSignalHelper:
             if persistTradingSignalParam.IntValue != 1:
                 return
 
-            self.PersistingLock.acquire()
+            self.PersistingLock.acquire(blocking=True)
 
             now=candlebar.DateTime
 
@@ -610,6 +613,9 @@ class TradingSignalHelper:
                                                            candlebar)
 
             tradingSignalId= self.TradingSignalManager.GetTradingSignal(now,dayTradingPos.Security.Symbol)
+
+            if self.PersistingLock.locked():
+                self.PersistingLock.release()
 
             if tradingSignalId is None:
                 raise  Exception("Critical error saving trading signal. Could not recover trading signal from DB. Symbol={} datetime={}".format(dayTradingPos.Security.Symbol,now))

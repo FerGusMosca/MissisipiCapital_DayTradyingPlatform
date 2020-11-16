@@ -15,7 +15,7 @@ class SubscriptionHelper:
 
 
     @staticmethod
-    def UpdateMarketData(logger,msg,md):
+    def UpdateMarketData(logger,msg,md,implTimeZone=True):
 
         if(BloombergTranslationHelper.GetSafeFloat(logger,msg,"MID",None) is not None):
             md.MidPrice=BloombergTranslationHelper.GetSafeFloat(logger,msg,"MID",None)
@@ -29,8 +29,8 @@ class SubscriptionHelper:
         if (BloombergTranslationHelper.GetSafeFloat(logger, msg, "PX_LAST", None) is not None):
             md.ClosingPrice = BloombergTranslationHelper.GetSafeFloat(logger, msg, "PX_LAST", None)
 
-        if (BloombergTranslationHelper.GetSafeDateTime(logger, msg, "date", None) is not None):
-            md.MDEntryDate = BloombergTranslationHelper.GetSafeDateTime(logger, msg, "date", None)
+        if (BloombergTranslationHelper.GetSafeDateTime(logger, msg, "date", None,implTimeZone) is not None):
+            md.MDEntryDate = BloombergTranslationHelper.GetSafeDateTime(logger, msg, "date", None,implTimeZone)
 
         if (BloombergTranslationHelper.GetSafeFloat(logger, msg, "BEST_BID", None) is not None):
             md.BestBidPrice = BloombergTranslationHelper.GetSafeFloat(logger, msg, "BEST_BID", None)
@@ -92,7 +92,7 @@ class SubscriptionHelper:
                 for i in range(fieldDataArray.numValues()):
                     fieldData = fieldDataArray.getValueAsElement(i)
                     md = MarketData()
-                    SubscriptionHelper.UpdateMarketData(logger,fieldData,md)
+                    SubscriptionHelper.UpdateMarketData(logger,fieldData,md,implTimeZone=False)
                     historicalPrices.append(md)
 
         return historicalPrices

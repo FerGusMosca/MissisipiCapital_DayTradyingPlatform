@@ -57,6 +57,9 @@ class MACDIndicator():
 
         def UpdatePricesIndicators(self,lastBar):
 
+                if lastBar.Close is None:
+                        return
+
                 if self.MaxPrice is None or self.MaxPrice < lastBar.Close:
                         self.MaxPrice=lastBar.Close
 

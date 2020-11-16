@@ -1081,6 +1081,8 @@ class OrderRouter( BaseCommunicationModule, ICommunicationModule):
                 self.DoLog("Initializing Bloomberg Order Router", MessageType.INFO)
                 if self.LoadConfig():
 
+                    BloombergTranslationHelper.Init(self.Configuration.TimeZone)
+
                     self.LoadSession()
 
                     self.DoLog("Bloomberg Order Router Initialized", MessageType.INFO)

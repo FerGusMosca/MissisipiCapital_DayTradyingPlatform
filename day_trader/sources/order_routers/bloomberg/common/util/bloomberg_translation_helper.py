@@ -45,7 +45,16 @@ _BLOOMBERG_FILLS_PREFIX = "EMSX_FILL_"
 _DEFAULT_EXCHANGE = "US"
 _CS_SECURITY_TYPE="Equity"
 
+_TIME_ZONE=0
+
 class BloombergTranslationHelper:
+
+    @staticmethod
+    def Init(pTimeZone=None):
+        global _TIME_ZONE
+        if pTimeZone is not None:
+            _TIME_ZONE=pTimeZone
+
 
     @staticmethod
     def GetFillId(self, msg):
@@ -291,11 +300,16 @@ class BloombergTranslationHelper:
             return default
 
     @staticmethod
-    def GetSafeDateTime(self, msg, key, default):
+    def GetSafeDateTime(self, msg, key, default,implTimeZone=True):
 
         try:
             if msg.hasElement(key):
-                return msg.getElementAsDatetime(key)
+                dateTime=msg.getElementAsDatetime(key)
+                if implTimeZone:
+
+                    dateTime = dateTime + timedelta(hours=_TIME_ZONE if _TIME_ZONE is not None else 0)
+
+                return dateTime
             else:
                 return default
 

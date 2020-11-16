@@ -96,6 +96,7 @@ class InputFileConverter:
     def ExtractField(cls,columns,timeDict,field=0):
         j = 0
         fieldsDict = {}
+        #print("aca:{}".format(columns[0]))
         for col in columns:
             if j== 0 :
                 pass #we just ignore the date
@@ -119,6 +120,7 @@ class InputFileConverter:
                             raise Exception("You must enter values (prices/volume) in fields format when you have (...) in the input file")
                     else:
                         if field==0:
+                            #print("read"+col)
                             fieldsDict[j]=float(col)
                         else:
                             fieldsDict[j] = 0
@@ -208,6 +210,9 @@ class InputFileConverter:
             i=0
             timeDict={}
             for row in reader:
+
+                if len( row[0])==0:
+                    continue
 
                 if i==0:
                     timeDict = InputFileConverter.ExtractTimes(cls,row)

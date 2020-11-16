@@ -707,6 +707,10 @@ class ModelParametersHandler:
     def PERSIST_TRADING_SIGNAL():
         return "PERSIST_TRADING_SIGNAL"
 
+    @staticmethod
+    def CANDLE_PRICE_METHOD():
+        return "CANDLE_PRICE_METHOD"
+
     #endregion
 
     #region Public Methods

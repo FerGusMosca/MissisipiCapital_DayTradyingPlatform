@@ -45,7 +45,7 @@ class BollingerIndicator():
 
     def CalculateTPMA(self,candleBarArr,BROOMS_TPMA_A):
 
-        if BROOMS_TPMA_A.IntValue is None:
+        if BROOMS_TPMA_A.IntValue is None :
             raise Exception("Missing value for BROOMS_TPMA_A parameter")
 
         if len(candleBarArr)<BROOMS_TPMA_A.IntValue:
@@ -55,7 +55,7 @@ class BollingerIndicator():
 
         sum=0
         for candlebar in candlesToConsider:
-            sum+=candlebar.Close
+            sum+=candlebar.Close if candlebar.Close is not None else 0
 
         self.TPMA = sum/BROOMS_TPMA_A.IntValue
 

@@ -92,6 +92,9 @@ _REC_EXIT_LONG_NOW = 4
 _REC_EXIT_SHORT_NOW = 5
 _REC_STAY_OUT= 5
 
+_CANDLE_PRICE_METHOD_OPEN=1
+_CANDLE_PRICE_METHOD_CLOSE=2
+_CANDLE_PRICE_METHOD_AVERAGE=3
 
 #endregion
 
@@ -257,6 +260,28 @@ class DayTradingPosition():
     #region Private Methods
 
     #region Private Util/Aux
+
+    def ProcessCandlebarPrices(self,msCandlePriceMethod,candlebar):
+        if msCandlePriceMethod.IntValue == _CANDLE_PRICE_METHOD_OPEN:
+            candlebar.Close=candlebar.Open
+            candlebar.High=candlebar.Open
+            candlebar.Low=candlebar.Open
+            #print("Symbol={} DateTime={} Method=OPEN Open={} Close{}".format(self.Security.Symbol,candlebar.DateTime,candlebar.Open,candlebar.Close))
+        elif msCandlePriceMethod.IntValue == _CANDLE_PRICE_METHOD_CLOSE:
+            #print("Symbol={} DateTime={} Method=CLOSE Open={} Close{}".format(self.Security.Symbol,candlebar.DateTime, candlebar.Open, candlebar.Close))
+            pass
+        elif msCandlePriceMethod.IntValue == _CANDLE_PRICE_METHOD_AVERAGE:
+            #print("Symbol={} DateTime={} Method=AVERAGE Open={} Close{}".format(self.Security.Symbol,candlebar.DateTime, candlebar.Open, candlebar.Close))
+            avg = (candlebar.Open+candlebar.Close)/2
+            #print("Avg calculated={}".format(avg))
+            candlebar.Close = avg
+            candlebar.High = avg
+            candlebar.Low = avg
+            candlebar.Open = avg
+        else:
+            raise Exception("Invalid candle price method {}".format(msCandlePriceMethod.IntValue))
+
+
 
     # Formats like a.m. or p.m. times are converted to AM or PM
     def FormatTime(self, time):
@@ -1084,8 +1109,6 @@ class DayTradingPosition():
             and macdRsiCloseShortRule8ModelParam.IntValue>=1
             ):
             return _EXIT_SHORT_MACD_RSI_COND_8
-
-
 
         # rule 9
         if (        (self.MaxMonetaryLossCurrentTrade/openQty) < ( self.SmoothMACDRSIParam(macdRSISmoothedMode,self.MACDIndicator.PriceHMinusL,gainMinStopLossExitParamU,gainMinStopLossExitParamUU))
