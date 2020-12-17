@@ -1,0 +1,911 @@
+2020-11-17 21:16:51 [logger INFO] DayTrader  Initializing
+2020-11-17 21:16:51 [logger INFO] Loading 21 summaries for security SPY
+2020-11-17 21:16:52 [logger INFO] WebSocketModule  Initializing
+2020-11-17 21:16:52 [logger INFO] WebSocketModule Successfully initialized
+2020-11-17 21:16:52 [logger INFO] Websocket commands successfully opened on port 7172: 
+2020-11-17 21:16:52 [logger INFO] FileHandlerModule  Initializing
+2020-11-17 21:16:52 [logger INFO] FileHandlerModule Successfully initialized
+2020-11-17 21:16:52 [logger ERROR] Error Loading Singleton Modules Handler module:invalid syntax (order_router.py, line 910)
+2020-11-18 11:29:32 [logger INFO] DayTrader  Initializing
+2020-11-18 11:29:33 [logger INFO] Loading 21 summaries for security SPY
+2020-11-18 11:29:33 [logger INFO] WebSocketModule  Initializing
+2020-11-18 11:29:33 [logger INFO] WebSocketModule Successfully initialized
+2020-11-18 11:29:33 [logger INFO] Websocket commands successfully opened on port 7172: 
+2020-11-18 11:29:33 [logger INFO] FileHandlerModule  Initializing
+2020-11-18 11:29:33 [logger INFO] FileHandlerModule Successfully initialized
+2020-11-18 11:29:34 [logger INFO] Initializing Bloomberg Order Router
+2020-11-18 11:29:34 [logger INFO] Connecting to localhost:8194
+2020-11-18 11:29:38 [logger INFO] Bloomberg Order Router Initialized
+2020-11-18 11:29:38 [logger INFO] SingletonModuleHandler Successfully initializer
+2020-11-18 11:29:38 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2020-11-18 11:29:38 [logger INFO] Bloomberg Session Connection is UP...
+2020-11-18 11:29:38 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2020-11-18 11:29:38 [logger INFO] Bloomberg Session started...
+2020-11-18 11:29:38 [logger INFO] Initializing Generic Market Order Router
+2020-11-18 11:29:38 [logger INFO] SingletonModuleHandler Successfully initializer
+2020-11-18 11:29:38 [logger INFO] Generic Market Order Router Initialized
+2020-11-18 11:29:39 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:SPY
+2020-11-18 11:29:39 [logger INFO] DayTrader Successfully initialized
+2020-11-18 11:29:40 [logger INFO] Requesting for open orders...
+2020-11-18 11:29:40 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-11-18 11:29:40 [logger INFO] Subscribing to order and route events
+2020-11-18 11:29:40 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:SPY
+2020-11-18 11:29:40 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:SPY
+2020-11-18 11:29:41 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-11-18 11:29:42 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-11-18 11:29:43 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-11-18 11:29:44 [logger INFO] Processing SERVICE_STATUS event
+2020-11-18 11:29:44 [logger INFO] Service //blp/emapisvc opened...
+2020-11-18 11:29:44 [logger INFO] Processing SERVICE_STATUS event
+2020-11-18 11:29:44 [logger INFO] Service //blp/mktbar opened...
+2020-11-18 11:29:44 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-11-18 11:29:45 [logger INFO] Processing SERVICE_STATUS event
+2020-11-18 11:29:45 [logger INFO] Service //blp/mktdata opened...
+2020-11-18 11:29:45 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-11-18 11:29:45 [logger INFO] Processing SERVICE_STATUS event
+2020-11-18 11:29:45 [logger INFO] Service //blp/refdata opened...
+2020-11-18 11:29:46 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-11-18 11:29:47 [logger INFO] Processing SERVICE_STATUS event
+2020-11-18 11:29:47 [logger INFO] Service //blp/emapisvc opened...
+2020-11-18 11:29:47 [logger INFO] Historical prices successfully loaded for symbol SPY 
+2020-11-18 11:29:47 [logger INFO] Processing SERVICE_STATUS event
+2020-11-18 11:29:47 [logger INFO] Service //blp/emapisvc opened...
+2020-11-18 11:29:47 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-11-18 11:29:48 [logger INFO] Order subscription started successfully
+2020-11-18 11:29:48 [logger INFO] Route subscription started successfully
+2020-11-18 11:29:48 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-11-18 11:29:49 [logger INFO] Recovered 0 previously existing execution reports
+2020-11-18 11:29:49 [logger INFO] Received list of Open Positions: 0 positions
+2020-11-18 11:29:49 [logger INFO] Process ready to receive commands and trade
+2020-11-18 13:05:27 [logger INFO] DayTrader  Initializing
+2020-11-18 13:05:28 [logger INFO] Loading 21 summaries for security SPY
+2020-11-18 13:05:28 [logger INFO] Loading 0 summaries for security PG
+2020-11-18 13:05:28 [logger INFO] Loading 0 summaries for security JPM
+2020-11-18 13:05:28 [logger INFO] Loading 0 summaries for security fake
+2020-11-18 13:05:28 [logger INFO] Loading 0 summaries for security F
+2020-11-18 13:05:28 [logger INFO] Loading 0 summaries for security AKAM
+2020-11-18 13:05:28 [logger INFO] Loading 0 summaries for security ALTR
+2020-11-18 13:05:28 [logger INFO] Loading 0 summaries for security AYX
+2020-11-18 13:05:28 [logger INFO] Loading 0 summaries for security BMRN
+2020-11-18 13:05:28 [logger INFO] Loading 0 summaries for security CNMD
+2020-11-18 13:05:28 [logger INFO] Loading 0 summaries for security CY
+2020-11-18 13:05:28 [logger INFO] Loading 0 summaries for security CYBR
+2020-11-18 13:05:28 [logger INFO] Loading 0 summaries for security DTE
+2020-11-18 13:05:28 [logger INFO] Loading 0 summaries for security DY
+2020-11-18 13:05:28 [logger INFO] Loading 0 summaries for security EGHT
+2020-11-18 13:05:28 [logger INFO] Loading 0 summaries for security EQH
+2020-11-18 13:05:28 [logger INFO] Loading 0 summaries for security FEYE
+2020-11-18 13:05:28 [logger INFO] Loading 0 summaries for security FTV
+2020-11-18 13:05:28 [logger INFO] Loading 0 summaries for security GES
+2020-11-18 13:05:28 [logger INFO] WebSocketModule  Initializing
+2020-11-18 13:05:28 [logger INFO] WebSocketModule Successfully initialized
+2020-11-18 13:05:28 [logger INFO] Websocket commands successfully opened on port 7172: 
+2020-11-18 13:05:28 [logger INFO] FileHandlerModule  Initializing
+2020-11-18 13:05:28 [logger INFO] FileHandlerModule Successfully initialized
+2020-11-18 13:05:28 [logger INFO] Initializing Bloomberg Order Router
+2020-11-18 13:05:28 [logger INFO] Connecting to localhost:8194
+2020-11-18 13:05:30 [logger INFO] Bloomberg Order Router Initialized
+2020-11-18 13:05:30 [logger INFO] SingletonModuleHandler Successfully initializer
+2020-11-18 13:05:30 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2020-11-18 13:05:30 [logger INFO] Bloomberg Session Connection is UP...
+2020-11-18 13:05:30 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2020-11-18 13:05:30 [logger INFO] Bloomberg Session started...
+2020-11-18 13:05:30 [logger INFO] Initializing Generic Market Order Router
+2020-11-18 13:05:30 [logger INFO] SingletonModuleHandler Successfully initializer
+2020-11-18 13:05:30 [logger INFO] Generic Market Order Router Initialized
+2020-11-18 13:05:31 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:SPY
+2020-11-18 13:05:31 [logger INFO] DayTrader Successfully initialized
+2020-11-18 13:05:31 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:PG
+2020-11-18 13:05:31 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:JPM
+2020-11-18 13:05:31 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:fake
+2020-11-18 13:05:31 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:F
+2020-11-18 13:05:31 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:AKAM
+2020-11-18 13:05:31 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:ALTR
+2020-11-18 13:05:31 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:AYX
+2020-11-18 13:05:31 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:BMRN
+2020-11-18 13:05:31 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:CNMD
+2020-11-18 13:05:31 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:CY
+2020-11-18 13:05:31 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:CYBR
+2020-11-18 13:05:31 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:DTE
+2020-11-18 13:05:31 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:DY
+2020-11-18 13:05:31 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:EGHT
+2020-11-18 13:05:31 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:EQH
+2020-11-18 13:05:31 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:FEYE
+2020-11-18 13:05:31 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:FTV
+2020-11-18 13:05:31 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:GES
+2020-11-18 13:05:32 [logger INFO] Requesting for open orders...
+2020-11-18 13:05:32 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-11-18 13:05:32 [logger INFO] Subscribing to order and route events
+2020-11-18 13:05:32 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:SPY
+2020-11-18 13:05:32 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:PG
+2020-11-18 13:05:32 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:JPM
+2020-11-18 13:05:32 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:fake
+2020-11-18 13:05:32 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:F
+2020-11-18 13:05:32 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:AKAM
+2020-11-18 13:05:32 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:ALTR
+2020-11-18 13:05:32 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:AYX
+2020-11-18 13:05:32 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:BMRN
+2020-11-18 13:05:32 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:CNMD
+2020-11-18 13:05:32 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:CY
+2020-11-18 13:05:32 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:CYBR
+2020-11-18 13:05:32 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:DTE
+2020-11-18 13:05:32 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:DY
+2020-11-18 13:05:32 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:EGHT
+2020-11-18 13:05:32 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:EQH
+2020-11-18 13:05:32 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:FEYE
+2020-11-18 13:05:32 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:FTV
+2020-11-18 13:05:32 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:GES
+2020-11-18 13:05:32 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:SPY
+2020-11-18 13:05:33 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-11-18 13:05:34 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-11-18 13:05:35 [logger INFO] Processing SERVICE_STATUS event
+2020-11-18 13:05:35 [logger INFO] Service //blp/emapisvc opened...
+2020-11-18 13:05:35 [logger INFO] Processing SERVICE_STATUS event
+2020-11-18 13:05:35 [logger INFO] Service //blp/mktbar opened...
+2020-11-18 13:05:35 [logger INFO] Processing SERVICE_STATUS event
+2020-11-18 13:05:35 [logger INFO] Service //blp/mktbar opened...
+2020-11-18 13:05:35 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-11-18 13:05:36 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-11-18 13:05:37 [logger INFO] Processing SERVICE_STATUS event
+2020-11-18 13:05:37 [logger INFO] Service //blp/mktdata opened...
+2020-11-18 13:05:37 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-11-18 13:05:39 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-11-18 13:05:39 [logger INFO] Processing SERVICE_STATUS event
+2020-11-18 13:05:39 [logger INFO] Service //blp/mktbar opened...
+2020-11-18 13:05:39 [logger INFO] Processing SERVICE_STATUS event
+2020-11-18 13:05:39 [logger INFO] Service //blp/mktbar opened...
+2020-11-18 13:05:39 [logger INFO] Processing SERVICE_STATUS event
+2020-11-18 13:05:39 [logger INFO] Service //blp/mktdata opened...
+2020-11-18 13:05:39 [logger INFO] Processing SERVICE_STATUS event
+2020-11-18 13:05:39 [logger INFO] Service //blp/mktbar opened...
+2020-11-18 13:05:39 [logger INFO] Processing SERVICE_STATUS event
+2020-11-18 13:05:39 [logger INFO] Service //blp/mktbar opened...
+2020-11-18 13:05:40 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-11-18 13:05:40 [logger ERROR] Error Subscribing to Bloomberg Events:2-Invalid security, rcode = -1 (Symbol fake US Equity)
+2020-11-18 13:05:40 [logger INFO] Processing SERVICE_STATUS event
+2020-11-18 13:05:40 [logger INFO] Service //blp/mktbar opened...
+2020-11-18 13:05:40 [logger INFO] Processing SERVICE_STATUS event
+2020-11-18 13:05:40 [logger INFO] Service //blp/mktdata opened...
+2020-11-18 13:05:40 [logger INFO] Processing SERVICE_STATUS event
+2020-11-18 13:05:40 [logger INFO] Service //blp/mktbar opened...
+2020-11-18 13:05:40 [logger INFO] Processing SERVICE_STATUS event
+2020-11-18 13:05:40 [logger INFO] Service //blp/mktbar opened...
+2020-11-18 13:05:40 [logger INFO] Processing SERVICE_STATUS event
+2020-11-18 13:05:40 [logger INFO] Service //blp/mktbar opened...
+2020-11-18 13:05:41 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-11-18 13:05:41 [logger INFO] Processing SERVICE_STATUS event
+2020-11-18 13:05:41 [logger INFO] Service //blp/mktdata opened...
+2020-11-18 13:05:41 [logger INFO] Processing SERVICE_STATUS event
+2020-11-18 13:05:41 [logger INFO] Service //blp/mktbar opened...
+2020-11-18 13:05:42 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-11-18 13:05:42 [logger INFO] Processing SERVICE_STATUS event
+2020-11-18 13:05:42 [logger INFO] Service //blp/mktbar opened...
+2020-11-18 13:05:42 [logger ERROR] Error Subscribing to Bloomberg Events:2-Invalid security, rcode = -1 (Symbol fake US Equity)
+2020-11-18 13:05:42 [logger INFO] Processing SERVICE_STATUS event
+2020-11-18 13:05:42 [logger INFO] Service //blp/mktbar opened...
+2020-11-18 13:05:42 [logger ERROR] Subscription terminated connected to Bloomberg Events:SubscriptionTerminated = {
+    reason = {
+        errorCode = 12
+        description = "Not monitorable. Security not active."
+        category = "NOT_MONITORABLE"
+        source = " [nid:166]:bbdbm9"
+    }
+}
+
+2020-11-18 13:05:42 [logger INFO] Processing SERVICE_STATUS event
+2020-11-18 13:05:42 [logger INFO] Service //blp/mktdata opened...
+2020-11-18 13:05:42 [logger INFO] Processing SERVICE_STATUS event
+2020-11-18 13:05:42 [logger INFO] Service //blp/mktbar opened...
+2020-11-18 13:05:43 [logger INFO] Processing SERVICE_STATUS event
+2020-11-18 13:05:43 [logger INFO] Service //blp/mktbar opened...
+2020-11-18 13:05:43 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-11-18 13:05:43 [logger INFO] Processing SERVICE_STATUS event
+2020-11-18 13:05:43 [logger INFO] Service //blp/mktbar opened...
+2020-11-18 13:05:44 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-11-18 13:05:45 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-11-18 13:05:45 [logger INFO] Processing SERVICE_STATUS event
+2020-11-18 13:05:45 [logger INFO] Service //blp/mktdata opened...
+2020-11-18 13:05:45 [logger INFO] Processing SERVICE_STATUS event
+2020-11-18 13:05:45 [logger INFO] Service //blp/mktbar opened...
+2020-11-18 13:05:45 [logger INFO] Processing SERVICE_STATUS event
+2020-11-18 13:05:45 [logger INFO] Service //blp/mktbar opened...
+2020-11-18 13:05:46 [logger INFO] Processing SERVICE_STATUS event
+2020-11-18 13:05:46 [logger INFO] Service //blp/mktdata opened...
+2020-11-18 13:05:46 [logger INFO] Processing SERVICE_STATUS event
+2020-11-18 13:05:46 [logger INFO] Service //blp/mktbar opened...
+2020-11-18 13:05:46 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-11-18 13:05:46 [logger INFO] Processing SERVICE_STATUS event
+2020-11-18 13:05:46 [logger INFO] Service //blp/refdata opened...
+2020-11-18 13:05:46 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:PG
+2020-11-18 13:05:46 [logger INFO] Processing SERVICE_STATUS event
+2020-11-18 13:05:46 [logger INFO] Service //blp/mktdata opened...
+2020-11-18 13:05:46 [logger INFO] Historical prices successfully loaded for symbol SPY 
+2020-11-18 13:05:46 [logger INFO] Processing SERVICE_STATUS event
+2020-11-18 13:05:46 [logger INFO] Service //blp/refdata opened...
+2020-11-18 13:05:46 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:JPM
+2020-11-18 13:05:47 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-11-18 13:05:47 [logger INFO] Processing SERVICE_STATUS event
+2020-11-18 13:05:47 [logger INFO] Service //blp/mktdata opened...
+2020-11-18 13:05:47 [logger INFO] Processing SERVICE_STATUS event
+2020-11-18 13:05:47 [logger INFO] Service //blp/refdata opened...
+2020-11-18 13:05:47 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:fake
+2020-11-18 13:05:47 [logger INFO] Historical prices successfully loaded for symbol PG 
+2020-11-18 13:05:48 [logger INFO] Historical prices successfully loaded for symbol JPM 
+2020-11-18 13:05:48 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-11-18 13:05:48 [logger INFO] Processing SERVICE_STATUS event
+2020-11-18 13:05:48 [logger INFO] Service //blp/refdata opened...
+2020-11-18 13:05:48 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:F
+2020-11-18 13:05:48 [logger INFO] Processing SERVICE_STATUS event
+2020-11-18 13:05:48 [logger INFO] Service //blp/mktdata opened...
+2020-11-18 13:05:48 [logger ERROR] Error @ProcessHistoricalPrice:fake US Equity:Unknown/Invalid securityInvalid Security [nid:3495] 
+2020-11-18 13:05:48 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:AKAM
+2020-11-18 13:05:48 [logger INFO] Processing SERVICE_STATUS event
+2020-11-18 13:05:48 [logger INFO] Service //blp/refdata opened...
+2020-11-18 13:05:49 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-11-18 13:05:49 [logger INFO] Processing SERVICE_STATUS event
+2020-11-18 13:05:49 [logger INFO] Service //blp/mktdata opened...
+2020-11-18 13:05:49 [logger INFO] Historical prices successfully loaded for symbol F 
+2020-11-18 13:05:49 [logger INFO] Processing SERVICE_STATUS event
+2020-11-18 13:05:49 [logger INFO] Service //blp/refdata opened...
+2020-11-18 13:05:49 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:ALTR
+2020-11-18 13:05:49 [logger ERROR] Error Subscribing to Bloomberg Events:12-Not monitorable. Security not active. (Symbol CY US Equity)
+2020-11-18 13:05:49 [logger INFO] Processing SERVICE_STATUS event
+2020-11-18 13:05:49 [logger INFO] Service //blp/mktdata opened...
+2020-11-18 13:05:49 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:AYX
+2020-11-18 13:05:49 [logger INFO] Processing SERVICE_STATUS event
+2020-11-18 13:05:49 [logger INFO] Service //blp/refdata opened...
+2020-11-18 13:05:49 [logger INFO] Historical prices successfully loaded for symbol AKAM 
+2020-11-18 13:05:50 [logger INFO] Historical prices successfully loaded for symbol ALTR 
+2020-11-18 13:05:50 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-11-18 13:05:50 [logger INFO] Processing SERVICE_STATUS event
+2020-11-18 13:05:50 [logger INFO] Service //blp/mktdata opened...
+2020-11-18 13:05:50 [logger INFO] Processing SERVICE_STATUS event
+2020-11-18 13:05:50 [logger INFO] Service //blp/refdata opened...
+2020-11-18 13:05:50 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:BMRN
+2020-11-18 13:05:50 [logger INFO] Historical prices successfully loaded for symbol AYX 
+2020-11-18 13:05:50 [logger INFO] Processing SERVICE_STATUS event
+2020-11-18 13:05:50 [logger INFO] Service //blp/refdata opened...
+2020-11-18 13:05:50 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:CNMD
+2020-11-18 13:05:51 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-11-18 13:05:51 [logger INFO] Processing SERVICE_STATUS event
+2020-11-18 13:05:51 [logger INFO] Service //blp/mktdata opened...
+2020-11-18 13:05:51 [logger INFO] Historical prices successfully loaded for symbol BMRN 
+2020-11-18 13:05:51 [logger INFO] Processing SERVICE_STATUS event
+2020-11-18 13:05:51 [logger INFO] Service //blp/refdata opened...
+2020-11-18 13:05:51 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:CY
+2020-11-18 13:05:51 [logger INFO] Processing SERVICE_STATUS event
+2020-11-18 13:05:51 [logger INFO] Service //blp/mktdata opened...
+2020-11-18 13:05:51 [logger INFO] Processing SERVICE_STATUS event
+2020-11-18 13:05:51 [logger INFO] Service //blp/refdata opened...
+2020-11-18 13:05:51 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:CYBR
+2020-11-18 13:05:51 [logger INFO] Historical prices successfully loaded for symbol CNMD 
+2020-11-18 13:05:52 [logger ERROR] variance requires at least two data points
+2020-11-18 13:05:52 [logger INFO] Historical prices successfully loaded for symbol CY 
+2020-11-18 13:05:52 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-11-18 13:05:52 [logger INFO] Processing SERVICE_STATUS event
+2020-11-18 13:05:52 [logger INFO] Service //blp/refdata opened...
+2020-11-18 13:05:52 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:DTE
+2020-11-18 13:05:52 [logger INFO] Processing SERVICE_STATUS event
+2020-11-18 13:05:52 [logger INFO] Service //blp/mktdata opened...
+2020-11-18 13:05:52 [logger INFO] Historical prices successfully loaded for symbol CYBR 
+2020-11-18 13:05:52 [logger INFO] Processing SERVICE_STATUS event
+2020-11-18 13:05:52 [logger INFO] Service //blp/refdata opened...
+2020-11-18 13:05:52 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:DY
+2020-11-18 13:05:52 [logger INFO] Processing SERVICE_STATUS event
+2020-11-18 13:05:52 [logger INFO] Service //blp/mktdata opened...
+2020-11-18 13:05:52 [logger INFO] Historical prices successfully loaded for symbol DTE 
+2020-11-18 13:05:53 [logger INFO] Processing SERVICE_STATUS event
+2020-11-18 13:05:53 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:EGHT
+2020-11-18 13:05:53 [logger INFO] Service //blp/refdata opened...
+2020-11-18 13:05:53 [logger INFO] Processing SERVICE_STATUS event
+2020-11-18 13:05:53 [logger INFO] Service //blp/mktdata opened...
+2020-11-18 13:05:53 [logger INFO] Processing SERVICE_STATUS event
+2020-11-18 13:05:53 [logger INFO] Service //blp/refdata opened...
+2020-11-18 13:05:53 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:EQH
+2020-11-18 13:05:53 [logger INFO] Historical prices successfully loaded for symbol DY 
+2020-11-18 13:05:53 [logger INFO] Historical prices successfully loaded for symbol EGHT 
+2020-11-18 13:05:54 [logger INFO] Processing SERVICE_STATUS event
+2020-11-18 13:05:54 [logger INFO] Service //blp/mktdata opened...
+2020-11-18 13:05:54 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:FEYE
+2020-11-18 13:05:54 [logger INFO] Processing SERVICE_STATUS event
+2020-11-18 13:05:54 [logger INFO] Service //blp/refdata opened...
+2020-11-18 13:05:54 [logger INFO] Processing SERVICE_STATUS event
+2020-11-18 13:05:54 [logger INFO] Service //blp/emapisvc opened...
+2020-11-18 13:05:54 [logger INFO] Historical prices successfully loaded for symbol EQH 
+2020-11-18 13:05:54 [logger INFO] Processing SERVICE_STATUS event
+2020-11-18 13:05:54 [logger INFO] Service //blp/refdata opened...
+2020-11-18 13:05:54 [logger INFO] Processing SERVICE_STATUS event
+2020-11-18 13:05:54 [logger INFO] Service //blp/emapisvc opened...
+2020-11-18 13:05:54 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:FTV
+2020-11-18 13:05:54 [logger INFO] Historical prices successfully loaded for symbol FEYE 
+2020-11-18 13:05:54 [logger INFO] Processing SERVICE_STATUS event
+2020-11-18 13:05:54 [logger INFO] Service //blp/refdata opened...
+2020-11-18 13:05:54 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:GES
+2020-11-18 13:05:54 [logger INFO] Route subscription started successfully
+2020-11-18 13:05:54 [logger INFO] Order subscription started successfully
+2020-11-18 13:05:55 [logger INFO] Historical prices successfully loaded for symbol FTV 
+2020-11-18 13:05:55 [logger INFO] Processing SERVICE_STATUS event
+2020-11-18 13:05:55 [logger INFO] Service //blp/refdata opened...
+2020-11-18 13:05:55 [logger INFO] Historical prices successfully loaded for symbol GES 
+2020-11-18 13:46:06 [logger INFO] MACD/RSI = Running short trade for symbol CNMD at 2020-11-18 13:31:00+00:00
+2020-11-18 13:46:06 [logger INFO] Managed Position Updated: Arrival=2020-11-18 13:46:06.490485 TradeId=trd__CNMD_1605717966 PosId=9f2dadf5-d500-45c2-8a09-d417dc2a9fd1 Symbol=CNMD Side=Side.SellShort Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 13:46:06 [logger INFO] Managed Position Finished: Arrival=2020-11-18 13:46:06.516413 TradeId=trd__CNMD_1605717966 PosId=9f2dadf5-d500-45c2-8a09-d417dc2a9fd1 Symbol=CNMD Side=Side.SellShort Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=102.793 Text=Fake Filled Order 
+2020-11-18 13:53:05 [logger INFO] MACD/RSI = Running long trade for symbol DTE at 2020-11-18 13:38:00+00:00
+2020-11-18 13:53:05 [logger INFO] Managed Position Updated: Arrival=2020-11-18 13:53:05.225322 TradeId=trd__DTE_1605718385 PosId=c263152a-dc2e-4133-9fc8-72fb56e3f9bf Symbol=DTE Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 13:53:05 [logger INFO] Managed Position Finished: Arrival=2020-11-18 13:53:05.253768 TradeId=trd__DTE_1605718385 PosId=c263152a-dc2e-4133-9fc8-72fb56e3f9bf Symbol=DTE Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=131.78 Text=Fake Filled Order 
+2020-11-18 13:58:02 [logger INFO] MACD/RSI = Running short trade for symbol JPM at 2020-11-18 13:43:00+00:00
+2020-11-18 13:58:02 [logger INFO] Managed Position Updated: Arrival=2020-11-18 13:58:02.513201 TradeId=trd__JPM_1605718682 PosId=ff402f49-9c40-4a3e-ab31-1e3b2d5254c5 Symbol=JPM Side=Side.SellShort Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 13:58:02 [logger INFO] Managed Position Finished: Arrival=2020-11-18 13:58:02.536140 TradeId=trd__JPM_1605718682 PosId=ff402f49-9c40-4a3e-ab31-1e3b2d5254c5 Symbol=JPM Side=Side.SellShort Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=118.22 Text=Fake Filled Order 
+2020-11-18 13:59:02 [logger INFO] MACD/RSI = Running long trade for symbol EGHT at 2020-11-18 13:44:00+00:00
+2020-11-18 13:59:02 [logger INFO] Managed Position Updated: Arrival=2020-11-18 13:59:02.366351 TradeId=trd__EGHT_1605718742 PosId=a2d07d51-77da-4efd-bd24-628c32bdb8fb Symbol=EGHT Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 13:59:02 [logger INFO] Managed Position Finished: Arrival=2020-11-18 13:59:02.384408 TradeId=trd__EGHT_1605718742 PosId=a2d07d51-77da-4efd-bd24-628c32bdb8fb Symbol=EGHT Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=19.3 Text=Fake Filled Order 
+2020-11-18 14:00:05 [logger INFO] MACD/RSI = Running short trade for symbol AYX at 2020-11-18 13:45:00+00:00
+2020-11-18 14:00:05 [logger INFO] Managed Position Updated: Arrival=2020-11-18 14:00:05.971417 TradeId=trd__AYX_1605718805 PosId=99d77c08-f4fe-41b6-956b-2701c5ed4878 Symbol=AYX Side=Side.SellShort Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 14:00:05 [logger INFO] Managed Position Finished: Arrival=2020-11-18 14:00:05.983612 TradeId=trd__AYX_1605718805 PosId=99d77c08-f4fe-41b6-956b-2701c5ed4878 Symbol=AYX Side=Side.SellShort Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=113.289 Text=Fake Filled Order 
+2020-11-18 14:10:22 [logger INFO] MACD-RSI - Closing long position for symbol DTE at 2020-11-18 13:55:00+00:00 
+2020-11-18 14:10:22 [logger INFO] Managed Position Updated: Arrival=2020-11-18 14:10:22.831303 TradeId=trd__DTE_1605719422 PosId=9636ffb7-b391-4e8a-852a-8f18edd8273f Symbol=DTE Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 14:10:22 [logger INFO] MACD-RSI - Closing long position for symbol DTE at 2020-11-18 13:55:00+00:00 
+2020-11-18 14:10:22 [logger INFO] Managed Position Finished: Arrival=2020-11-18 14:10:22.850254 TradeId=trd__DTE_1605719422 PosId=9636ffb7-b391-4e8a-852a-8f18edd8273f Symbol=DTE Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=131.58 Text=Fake Filled Order 
+2020-11-18 14:11:36 [logger INFO] MACD-RSI - Closing short position for symbol JPM at 2020-11-18 13:56:00+00:00 
+2020-11-18 14:11:36 [logger INFO] Managed Position Updated: Arrival=2020-11-18 14:11:36.584633 TradeId=trd__JPM_1605719496 PosId=886a8b26-a9c2-404a-97c1-a55e4924ffa7 Symbol=JPM Side=Side.BuyToClose Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 14:11:36 [logger INFO] Managed Position Finished: Arrival=2020-11-18 14:11:36.608687 TradeId=trd__JPM_1605719496 PosId=886a8b26-a9c2-404a-97c1-a55e4924ffa7 Symbol=JPM Side=Side.BuyToClose Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=118.079 Text=Fake Filled Order 
+2020-11-18 14:16:16 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2020-11-18 14:01:00+00:00
+2020-11-18 14:16:16 [logger INFO] Managed Position Updated: Arrival=2020-11-18 14:16:16.958229 TradeId=trd__SPY_1605719776 PosId=08c72840-116e-4686-a6f4-ed3074e00a7a Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 14:16:16 [logger INFO] Managed Position Finished: Arrival=2020-11-18 14:16:16.979173 TradeId=trd__SPY_1605719776 PosId=08c72840-116e-4686-a6f4-ed3074e00a7a Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=361.3 Text=Fake Filled Order 
+2020-11-18 14:17:55 [logger INFO] MACD-RSI - Closing long position for symbol SPY at 2020-11-18 14:02:00+00:00 
+2020-11-18 14:17:55 [logger INFO] Managed Position Updated: Arrival=2020-11-18 14:17:55.855068 TradeId=trd__SPY_1605719875 PosId=6f21dada-26b2-455e-a59b-9f051d366369 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 14:17:55 [logger INFO] Managed Position Finished: Arrival=2020-11-18 14:17:55.870028 TradeId=trd__SPY_1605719875 PosId=6f21dada-26b2-455e-a59b-9f051d366369 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=361.415 Text=Fake Filled Order 
+2020-11-18 14:26:02 [logger INFO] MACD/RSI = Running short trade for symbol EQH at 2020-11-18 14:11:00+00:00
+2020-11-18 14:26:02 [logger INFO] Managed Position Updated: Arrival=2020-11-18 14:26:02.274370 TradeId=trd__EQH_1605720362 PosId=0c2d9a8d-7639-40e0-83e7-967dc5f9d9e0 Symbol=EQH Side=Side.SellShort Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 14:26:02 [logger INFO] Managed Position Finished: Arrival=2020-11-18 14:26:02.299045 TradeId=trd__EQH_1605720362 PosId=0c2d9a8d-7639-40e0-83e7-967dc5f9d9e0 Symbol=EQH Side=Side.SellShort Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=25.34 Text=Fake Filled Order 
+2020-11-18 14:26:02 [logger INFO] MACD/RSI = Running short trade for symbol F at 2020-11-18 14:11:00+00:00
+2020-11-18 14:26:02 [logger INFO] Managed Position Updated: Arrival=2020-11-18 14:26:02.475250 TradeId=trd__F_1605720362 PosId=2adc4660-44f6-48d1-9c03-65acd97928ff Symbol=F Side=Side.SellShort Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 14:26:02 [logger INFO] Managed Position Finished: Arrival=2020-11-18 14:26:02.498453 TradeId=trd__F_1605720362 PosId=2adc4660-44f6-48d1-9c03-65acd97928ff Symbol=F Side=Side.SellShort Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=9.04 Text=Fake Filled Order 
+2020-11-18 14:26:14 [logger INFO] MACD-RSI - Closing long position for symbol EGHT at 2020-11-18 14:10:00+00:00 
+2020-11-18 14:26:14 [logger INFO] Managed Position Updated: Arrival=2020-11-18 14:26:14.463489 TradeId=trd__EGHT_1605720374 PosId=b13bfe5f-345f-4ae5-9d9f-c630002b31f5 Symbol=EGHT Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 14:26:14 [logger INFO] MACD-RSI - Closing long position for symbol EGHT at 2020-11-18 14:11:00+00:00 
+2020-11-18 14:26:14 [logger INFO] Managed Position Finished: Arrival=2020-11-18 14:26:14.477452 TradeId=trd__EGHT_1605720374 PosId=b13bfe5f-345f-4ae5-9d9f-c630002b31f5 Symbol=EGHT Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=19.36 Text=Fake Filled Order 
+2020-11-18 14:26:15 [logger INFO] MACD/RSI = Running long trade for symbol DTE at 2020-11-18 14:11:00+00:00
+2020-11-18 14:26:15 [logger INFO] Managed Position Updated: Arrival=2020-11-18 14:26:15.807358 TradeId=trd__DTE_1605720375 PosId=6f02cc5b-57a8-447a-ad43-8d3cb16a832b Symbol=DTE Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 14:26:15 [logger INFO] Managed Position Finished: Arrival=2020-11-18 14:26:15.822318 TradeId=trd__DTE_1605720375 PosId=6f02cc5b-57a8-447a-ad43-8d3cb16a832b Symbol=DTE Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=131.88 Text=Fake Filled Order 
+2020-11-18 14:27:11 [logger INFO] MACD/RSI = Running long trade for symbol PG at 2020-11-18 14:12:00+00:00
+2020-11-18 14:27:11 [logger INFO] Managed Position Updated: Arrival=2020-11-18 14:27:11.130531 TradeId=trd__PG_1605720431 PosId=b93f956a-95f3-4366-b23e-a9fe269fdafe Symbol=PG Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 14:27:11 [logger INFO] Managed Position Finished: Arrival=2020-11-18 14:27:11.152585 TradeId=trd__PG_1605720431 PosId=b93f956a-95f3-4366-b23e-a9fe269fdafe Symbol=PG Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=141.43 Text=Fake Filled Order 
+2020-11-18 14:27:47 [logger INFO] MACD/RSI = Running short trade for symbol CYBR at 2020-11-18 14:12:00+00:00
+2020-11-18 14:27:47 [logger INFO] Managed Position Updated: Arrival=2020-11-18 14:27:47.029204 TradeId=trd__CYBR_1605720467 PosId=e75b8bfa-aa26-4eb5-a654-b1198efd0881 Symbol=CYBR Side=Side.SellShort Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 14:27:47 [logger INFO] Managed Position Finished: Arrival=2020-11-18 14:27:47.054122 TradeId=trd__CYBR_1605720467 PosId=e75b8bfa-aa26-4eb5-a654-b1198efd0881 Symbol=CYBR Side=Side.SellShort Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=107.05 Text=Fake Filled Order 
+2020-11-18 14:28:06 [logger INFO] MACD/RSI = Running short trade for symbol BMRN at 2020-11-18 14:13:00+00:00
+2020-11-18 14:28:06 [logger INFO] Managed Position Updated: Arrival=2020-11-18 14:28:06.294864 TradeId=trd__BMRN_1605720486 PosId=628fb56c-3c8b-4708-8ea8-6df6b42272af Symbol=BMRN Side=Side.SellShort Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 14:28:06 [logger INFO] Managed Position Finished: Arrival=2020-11-18 14:28:06.322234 TradeId=trd__BMRN_1605720486 PosId=628fb56c-3c8b-4708-8ea8-6df6b42272af Symbol=BMRN Side=Side.SellShort Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=75.585 Text=Fake Filled Order 
+2020-11-18 14:28:07 [logger INFO] MACD/RSI = Running long trade for symbol GES at 2020-11-18 14:13:00+00:00
+2020-11-18 14:28:07 [logger INFO] Managed Position Updated: Arrival=2020-11-18 14:28:07.417514 TradeId=trd__GES_1605720487 PosId=149fe57b-3877-43b9-89b0-e99e604f3750 Symbol=GES Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 14:28:07 [logger INFO] Managed Position Finished: Arrival=2020-11-18 14:28:07.430480 TradeId=trd__GES_1605720487 PosId=149fe57b-3877-43b9-89b0-e99e604f3750 Symbol=GES Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=15.23 Text=Fake Filled Order 
+2020-11-18 14:29:13 [logger INFO] MACD/RSI = Running short trade for symbol FTV at 2020-11-18 14:14:00+00:00
+2020-11-18 14:29:13 [logger INFO] Managed Position Updated: Arrival=2020-11-18 14:29:13.504202 TradeId=trd__FTV_1605720553 PosId=9291cd1b-da19-412c-be36-bb75b8c0973e Symbol=FTV Side=Side.SellShort Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 14:29:13 [logger INFO] Managed Position Finished: Arrival=2020-11-18 14:29:13.529734 TradeId=trd__FTV_1605720553 PosId=9291cd1b-da19-412c-be36-bb75b8c0973e Symbol=FTV Side=Side.SellShort Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=71.9899 Text=Fake Filled Order 
+2020-11-18 14:35:11 [logger INFO] MACD/RSI = Running short trade for symbol AKAM at 2020-11-18 14:18:00+00:00
+2020-11-18 14:35:11 [logger INFO] Managed Position Updated: Arrival=2020-11-18 14:35:11.104244 TradeId=trd__AKAM_1605720911 PosId=f68cddbe-3bf3-458c-86d6-cef40225c8fd Symbol=AKAM Side=Side.SellShort Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 14:35:11 [logger INFO] Managed Position Finished: Arrival=2020-11-18 14:35:11.127181 TradeId=trd__AKAM_1605720911 PosId=f68cddbe-3bf3-458c-86d6-cef40225c8fd Symbol=AKAM Side=Side.SellShort Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=102.27 Text=Fake Filled Order 
+2020-11-18 14:35:18 [logger INFO] MACD/RSI = Running short trade for symbol ALTR at 2020-11-18 14:20:00+00:00
+2020-11-18 14:35:18 [logger INFO] Managed Position Updated: Arrival=2020-11-18 14:35:18.060433 TradeId=trd__ALTR_1605720918 PosId=9e91c81d-08c8-4076-983c-c206cffde36c Symbol=ALTR Side=Side.SellShort Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 14:35:18 [logger INFO] Managed Position Finished: Arrival=2020-11-18 14:35:18.075479 TradeId=trd__ALTR_1605720918 PosId=9e91c81d-08c8-4076-983c-c206cffde36c Symbol=ALTR Side=Side.SellShort Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=49.59 Text=Fake Filled Order 
+2020-11-18 14:42:29 [logger INFO] MACD-RSI - Closing long position for symbol GES at 2020-11-18 14:27:00+00:00 
+2020-11-18 14:42:29 [logger INFO] Managed Position Updated: Arrival=2020-11-18 14:42:29.756919 TradeId=trd__GES_1605721349 PosId=ffdba100-34ff-4158-8d2e-46268ec3b01f Symbol=GES Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 14:42:29 [logger INFO] Managed Position Finished: Arrival=2020-11-18 14:42:29.785573 TradeId=trd__GES_1605721349 PosId=ffdba100-34ff-4158-8d2e-46268ec3b01f Symbol=GES Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=15.115 Text=Fake Filled Order 
+2020-11-18 14:56:29 [logger INFO] MACD-RSI - Closing long position for symbol PG at 2020-11-18 14:41:00+00:00 
+2020-11-18 14:56:29 [logger INFO] Managed Position Updated: Arrival=2020-11-18 14:56:29.795892 TradeId=trd__PG_1605722189 PosId=e43ed716-f201-44af-8092-196e296f6b0a Symbol=PG Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 14:56:29 [logger INFO] Managed Position Finished: Arrival=2020-11-18 14:56:29.813585 TradeId=trd__PG_1605722189 PosId=e43ed716-f201-44af-8092-196e296f6b0a Symbol=PG Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=141.08 Text=Fake Filled Order 
+2020-11-18 15:07:37 [logger INFO] MACD-RSI - Closing long position for symbol DTE at 2020-11-18 14:52:00+00:00 
+2020-11-18 15:07:37 [logger INFO] Managed Position Updated: Arrival=2020-11-18 15:07:37.257019 TradeId=trd__DTE_1605722857 PosId=f945e0fc-7080-4cdb-a11a-5283bb526510 Symbol=DTE Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 15:07:37 [logger INFO] Managed Position Finished: Arrival=2020-11-18 15:07:37.283386 TradeId=trd__DTE_1605722857 PosId=f945e0fc-7080-4cdb-a11a-5283bb526510 Symbol=DTE Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=131.48 Text=Fake Filled Order 
+2020-11-18 15:15:03 [logger INFO] MACD/RSI = Running long trade for symbol EGHT at 2020-11-18 15:00:00+00:00
+2020-11-18 15:15:03 [logger INFO] Managed Position Updated: Arrival=2020-11-18 15:15:03.409021 TradeId=trd__EGHT_1605723303 PosId=f016f484-2bfc-4d45-bd83-1430cf2c6ac8 Symbol=EGHT Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 15:15:03 [logger INFO] Managed Position Finished: Arrival=2020-11-18 15:15:03.434608 TradeId=trd__EGHT_1605723303 PosId=f016f484-2bfc-4d45-bd83-1430cf2c6ac8 Symbol=EGHT Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=19.23 Text=Fake Filled Order 
+2020-11-18 15:20:02 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2020-11-18 15:05:00+00:00
+2020-11-18 15:20:02 [logger INFO] Managed Position Updated: Arrival=2020-11-18 15:20:02.543842 TradeId=trd__SPY_1605723602 PosId=535829ce-2939-49e7-ae9c-e1c4a385bb33 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 15:20:02 [logger INFO] Managed Position Finished: Arrival=2020-11-18 15:20:02.557805 TradeId=trd__SPY_1605723602 PosId=535829ce-2939-49e7-ae9c-e1c4a385bb33 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=360.9 Text=Fake Filled Order 
+2020-11-18 15:20:06 [logger INFO] MACD/RSI = Running long trade for symbol JPM at 2020-11-18 15:05:00+00:00
+2020-11-18 15:20:06 [logger INFO] Managed Position Updated: Arrival=2020-11-18 15:20:06.440432 TradeId=trd__JPM_1605723606 PosId=80cf2dbe-06c9-4347-ba0c-c59af3d8dcfb Symbol=JPM Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 15:20:06 [logger INFO] Managed Position Finished: Arrival=2020-11-18 15:20:06.457387 TradeId=trd__JPM_1605723606 PosId=80cf2dbe-06c9-4347-ba0c-c59af3d8dcfb Symbol=JPM Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=117.65 Text=Fake Filled Order 
+2020-11-18 15:25:37 [logger INFO] MACD/RSI = Running long trade for symbol DTE at 2020-11-18 15:10:00+00:00
+2020-11-18 15:25:37 [logger INFO] Managed Position Updated: Arrival=2020-11-18 15:25:37.249830 TradeId=trd__DTE_1605723937 PosId=5f9ab205-427c-4487-905f-a0921b86398e Symbol=DTE Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 15:25:37 [logger INFO] Managed Position Finished: Arrival=2020-11-18 15:25:37.273773 TradeId=trd__DTE_1605723937 PosId=5f9ab205-427c-4487-905f-a0921b86398e Symbol=DTE Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=131.43 Text=Fake Filled Order 
+2020-11-18 15:29:11 [logger INFO] MACD/RSI = Running short trade for symbol GES at 2020-11-18 15:13:00+00:00
+2020-11-18 15:29:11 [logger INFO] Managed Position Updated: Arrival=2020-11-18 15:29:11.257060 TradeId=trd__GES_1605724151 PosId=089705a7-e16b-4c9f-9ad1-c710685504e5 Symbol=GES Side=Side.SellShort Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 15:29:11 [logger INFO] Managed Position Finished: Arrival=2020-11-18 15:29:11.278950 TradeId=trd__GES_1605724151 PosId=089705a7-e16b-4c9f-9ad1-c710685504e5 Symbol=GES Side=Side.SellShort Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=15.19 Text=Fake Filled Order 
+2020-11-18 15:29:12 [logger INFO] MACD-RSI - Closing short position for symbol FTV at 2020-11-18 15:13:00+00:00 
+2020-11-18 15:29:12 [logger INFO] Managed Position Updated: Arrival=2020-11-18 15:29:12.713561 TradeId=trd__FTV_1605724152 PosId=44075bae-6afa-486a-9cce-9e628045a08f Symbol=FTV Side=Side.BuyToClose Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 15:29:12 [logger INFO] MACD-RSI - Closing short position for symbol FTV at 2020-11-18 15:14:00+00:00 
+2020-11-18 15:29:12 [logger INFO] Cancelling order previously to closing position for symbol FTV
+2020-11-18 15:29:12 [logger INFO] Publishing cancel reject for orderId None reason:Error processing order cancel request for orderId None: OrderId None is not an active order 
+2020-11-18 15:29:12 [logger INFO] Managed Position Finished: Arrival=2020-11-18 15:29:12.739492 TradeId=trd__FTV_1605724152 PosId=44075bae-6afa-486a-9cce-9e628045a08f Symbol=FTV Side=Side.BuyToClose Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=71.61 Text=Fake Filled Order 
+2020-11-18 15:30:38 [logger INFO] MACD-RSI - Closing long position for symbol JPM at 2020-11-18 15:15:00+00:00 
+2020-11-18 15:30:38 [logger INFO] Managed Position Updated: Arrival=2020-11-18 15:30:38.073641 TradeId=trd__JPM_1605724238 PosId=011603dd-536c-40c3-9d91-c742c78e8e6e Symbol=JPM Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 15:30:38 [logger INFO] Managed Position Finished: Arrival=2020-11-18 15:30:38.100462 TradeId=trd__JPM_1605724238 PosId=011603dd-536c-40c3-9d91-c742c78e8e6e Symbol=JPM Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=117.575 Text=Fake Filled Order 
+2020-11-18 15:30:51 [logger INFO] MACD-RSI - Closing long position for symbol SPY at 2020-11-18 15:15:00+00:00 
+2020-11-18 15:30:51 [logger INFO] Managed Position Updated: Arrival=2020-11-18 15:30:51.991996 TradeId=trd__SPY_1605724251 PosId=fdf93b4d-07e5-4f1c-a862-81de42db9a79 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 15:30:52 [logger INFO] Managed Position Finished: Arrival=2020-11-18 15:30:52.009708 TradeId=trd__SPY_1605724251 PosId=fdf93b4d-07e5-4f1c-a862-81de42db9a79 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=360.715 Text=Fake Filled Order 
+2020-11-18 15:33:40 [logger INFO] MACD-RSI - Closing short position for symbol ALTR at 2020-11-18 15:17:00+00:00 
+2020-11-18 15:33:40 [logger INFO] Managed Position Updated: Arrival=2020-11-18 15:33:40.401924 TradeId=trd__ALTR_1605724420 PosId=9a2c6ecf-b13c-4038-8b64-4ac383d02f7d Symbol=ALTR Side=Side.BuyToClose Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 15:33:40 [logger INFO] Managed Position Finished: Arrival=2020-11-18 15:33:40.423713 TradeId=trd__ALTR_1605724420 PosId=9a2c6ecf-b13c-4038-8b64-4ac383d02f7d Symbol=ALTR Side=Side.BuyToClose Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=49.455 Text=Fake Filled Order 
+2020-11-18 15:34:27 [logger INFO] MACD/RSI = Running long trade for symbol ALTR at 2020-11-18 15:19:00+00:00
+2020-11-18 15:34:27 [logger INFO] Managed Position Updated: Arrival=2020-11-18 15:34:27.433691 TradeId=trd__ALTR_1605724467 PosId=79cf3634-f9a6-41c6-ae25-5f4b98dd6edb Symbol=ALTR Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 15:34:27 [logger INFO] Managed Position Finished: Arrival=2020-11-18 15:34:27.456012 TradeId=trd__ALTR_1605724467 PosId=79cf3634-f9a6-41c6-ae25-5f4b98dd6edb Symbol=ALTR Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=49.455 Text=Fake Filled Order 
+2020-11-18 15:41:46 [logger INFO] MACD-RSI - Closing long position for symbol EGHT at 2020-11-18 15:26:00+00:00 
+2020-11-18 15:41:46 [logger INFO] Managed Position Updated: Arrival=2020-11-18 15:41:46.369786 TradeId=trd__EGHT_1605724906 PosId=1e17af36-e78a-4417-9b74-3d0803155598 Symbol=EGHT Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 15:41:46 [logger INFO] Managed Position Finished: Arrival=2020-11-18 15:41:46.392702 TradeId=trd__EGHT_1605724906 PosId=1e17af36-e78a-4417-9b74-3d0803155598 Symbol=EGHT Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=19.14 Text=Fake Filled Order 
+2020-11-18 15:45:40 [logger INFO] MACD-RSI - Closing long position for symbol ALTR at 2020-11-18 15:29:00+00:00 
+2020-11-18 15:45:40 [logger INFO] Managed Position Updated: Arrival=2020-11-18 15:45:40.424224 TradeId=trd__ALTR_1605725140 PosId=61bca8ee-71ca-42cb-8e89-bda9de90a672 Symbol=ALTR Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 15:45:40 [logger INFO] Managed Position Finished: Arrival=2020-11-18 15:45:40.449657 TradeId=trd__ALTR_1605725140 PosId=61bca8ee-71ca-42cb-8e89-bda9de90a672 Symbol=ALTR Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=49.32 Text=Fake Filled Order 
+2020-11-18 15:51:04 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2020-11-18 15:36:00+00:00
+2020-11-18 15:51:04 [logger INFO] Managed Position Updated: Arrival=2020-11-18 15:51:04.161838 TradeId=trd__SPY_1605725464 PosId=5fd6e93a-1f18-40a4-91a1-ab924e0a33d6 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 15:51:04 [logger INFO] Managed Position Finished: Arrival=2020-11-18 15:51:04.176799 TradeId=trd__SPY_1605725464 PosId=5fd6e93a-1f18-40a4-91a1-ab924e0a33d6 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=360.33 Text=Fake Filled Order 
+2020-11-18 15:51:33 [logger INFO] MACD/RSI = Running long trade for symbol FTV at 2020-11-18 15:36:00+00:00
+2020-11-18 15:51:33 [logger INFO] Managed Position Updated: Arrival=2020-11-18 15:51:33.619925 TradeId=trd__FTV_1605725493 PosId=9ef398e7-94d3-4558-bc7e-7de53831bdf3 Symbol=FTV Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 15:51:33 [logger INFO] Managed Position Finished: Arrival=2020-11-18 15:51:33.638872 TradeId=trd__FTV_1605725493 PosId=9ef398e7-94d3-4558-bc7e-7de53831bdf3 Symbol=FTV Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=71.52 Text=Fake Filled Order 
+2020-11-18 15:52:24 [logger INFO] MACD-RSI - Closing short position for symbol GES at 2020-11-18 15:36:00+00:00 
+2020-11-18 15:52:24 [logger INFO] Managed Position Updated: Arrival=2020-11-18 15:52:24.303602 TradeId=trd__GES_1605725544 PosId=c1098b90-705d-425b-9473-da899092602b Symbol=GES Side=Side.BuyToClose Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 15:52:24 [logger INFO] MACD-RSI - Closing short position for symbol GES at 2020-11-18 15:37:00+00:00 
+2020-11-18 15:52:24 [logger INFO] Cancelling order previously to closing position for symbol GES
+2020-11-18 15:52:24 [logger INFO] Publishing cancel reject for orderId None reason:Error processing order cancel request for orderId None: OrderId None is not an active order 
+2020-11-18 15:52:24 [logger INFO] Managed Position Finished: Arrival=2020-11-18 15:52:24.321643 TradeId=trd__GES_1605725544 PosId=c1098b90-705d-425b-9473-da899092602b Symbol=GES Side=Side.BuyToClose Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=15.13 Text=Fake Filled Order 
+2020-11-18 15:52:39 [logger INFO] MACD/RSI = Running long trade for symbol GES at 2020-11-18 15:37:00+00:00
+2020-11-18 15:52:39 [logger INFO] Managed Position Updated: Arrival=2020-11-18 15:52:39.564922 TradeId=trd__GES_1605725559 PosId=306cef3c-9d1d-4cfc-b85b-375d2876bd4d Symbol=GES Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 15:52:39 [logger INFO] Managed Position Finished: Arrival=2020-11-18 15:52:39.585919 TradeId=trd__GES_1605725559 PosId=306cef3c-9d1d-4cfc-b85b-375d2876bd4d Symbol=GES Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=15.13 Text=Fake Filled Order 
+2020-11-18 15:57:05 [logger INFO] MACD/RSI = Running short trade for symbol PG at 2020-11-18 15:42:00+00:00
+2020-11-18 15:57:05 [logger INFO] Managed Position Updated: Arrival=2020-11-18 15:57:05.552225 TradeId=trd__PG_1605725825 PosId=6d18d4b2-56ce-4b30-a2b0-8f7361716035 Symbol=PG Side=Side.SellShort Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 15:57:05 [logger INFO] Managed Position Finished: Arrival=2020-11-18 15:57:05.564743 TradeId=trd__PG_1605725825 PosId=6d18d4b2-56ce-4b30-a2b0-8f7361716035 Symbol=PG Side=Side.SellShort Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=140.86 Text=Fake Filled Order 
+2020-11-18 16:00:57 [logger INFO] MACD-RSI - Closing long position for symbol SPY at 2020-11-18 15:45:00+00:00 
+2020-11-18 16:00:57 [logger INFO] Managed Position Updated: Arrival=2020-11-18 16:00:57.903433 TradeId=trd__SPY_1605726057 PosId=c4c7e79f-e1b7-4c0c-a3be-3f235c53bd72 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 16:00:57 [logger INFO] Managed Position Finished: Arrival=2020-11-18 16:00:57.922378 TradeId=trd__SPY_1605726057 PosId=c4c7e79f-e1b7-4c0c-a3be-3f235c53bd72 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=360.01 Text=Fake Filled Order 
+2020-11-18 16:02:40 [logger INFO] MACD/RSI = Running long trade for symbol ALTR at 2020-11-18 15:46:00+00:00
+2020-11-18 16:02:40 [logger INFO] Managed Position Updated: Arrival=2020-11-18 16:02:40.380540 TradeId=trd__ALTR_1605726160 PosId=245abaf5-0086-49b9-a535-4247ccf95542 Symbol=ALTR Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 16:02:40 [logger INFO] Managed Position Finished: Arrival=2020-11-18 16:02:40.404472 TradeId=trd__ALTR_1605726160 PosId=245abaf5-0086-49b9-a535-4247ccf95542 Symbol=ALTR Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=49.33 Text=Fake Filled Order 
+2020-11-18 16:06:04 [logger INFO] MACD-RSI - Closing short position for symbol PG at 2020-11-18 15:51:00+00:00 
+2020-11-18 16:06:04 [logger INFO] Managed Position Updated: Arrival=2020-11-18 16:06:04.880545 TradeId=trd__PG_1605726364 PosId=e3c1aa08-fee5-4d80-b13d-10f777e0e259 Symbol=PG Side=Side.BuyToClose Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 16:06:04 [logger INFO] Managed Position Finished: Arrival=2020-11-18 16:06:04.905648 TradeId=trd__PG_1605726364 PosId=e3c1aa08-fee5-4d80-b13d-10f777e0e259 Symbol=PG Side=Side.BuyToClose Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=140.67 Text=Fake Filled Order 
+2020-11-18 16:06:40 [logger INFO] MACD-RSI - Closing short position for symbol F at 2020-11-18 15:51:00+00:00 
+2020-11-18 16:06:40 [logger INFO] Managed Position Updated: Arrival=2020-11-18 16:06:40.882227 TradeId=trd__F_1605726400 PosId=9b7d03b4-a502-48da-8ff2-dd31bb28a409 Symbol=F Side=Side.BuyToClose Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 16:06:40 [logger INFO] Managed Position Finished: Arrival=2020-11-18 16:06:40.900425 TradeId=trd__F_1605726400 PosId=9b7d03b4-a502-48da-8ff2-dd31bb28a409 Symbol=F Side=Side.BuyToClose Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=8.95 Text=Fake Filled Order 
+2020-11-18 16:07:30 [logger INFO] MACD-RSI - Closing long position for symbol GES at 2020-11-18 15:52:00+00:00 
+2020-11-18 16:07:30 [logger INFO] Managed Position Updated: Arrival=2020-11-18 16:07:30.206044 TradeId=trd__GES_1605726450 PosId=651caecd-9c0d-483c-ac9b-5ba91ddde4bd Symbol=GES Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 16:07:30 [logger INFO] Managed Position Finished: Arrival=2020-11-18 16:07:30.220006 TradeId=trd__GES_1605726450 PosId=651caecd-9c0d-483c-ac9b-5ba91ddde4bd Symbol=GES Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=15.06 Text=Fake Filled Order 
+2020-11-18 16:08:01 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2020-11-18 15:53:00+00:00
+2020-11-18 16:08:01 [logger INFO] Managed Position Updated: Arrival=2020-11-18 16:08:01.474117 TradeId=trd__SPY_1605726481 PosId=04801430-494d-40b2-bd6a-6670849ad635 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 16:08:01 [logger INFO] Managed Position Finished: Arrival=2020-11-18 16:08:01.495061 TradeId=trd__SPY_1605726481 PosId=04801430-494d-40b2-bd6a-6670849ad635 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=359.79 Text=Fake Filled Order 
+2020-11-18 16:08:01 [logger INFO] MACD/RSI = Running long trade for symbol F at 2020-11-18 15:53:00+00:00
+2020-11-18 16:08:01 [logger INFO] Managed Position Updated: Arrival=2020-11-18 16:08:01.692947 TradeId=trd__F_1605726481 PosId=61335d98-2ab0-4228-9e08-5cdcf2e7f894 Symbol=F Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 16:08:01 [logger INFO] Managed Position Finished: Arrival=2020-11-18 16:08:01.718877 TradeId=trd__F_1605726481 PosId=61335d98-2ab0-4228-9e08-5cdcf2e7f894 Symbol=F Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=8.95 Text=Fake Filled Order 
+2020-11-18 16:08:02 [logger INFO] MACD/RSI = Running long trade for symbol JPM at 2020-11-18 15:53:00+00:00
+2020-11-18 16:08:02 [logger INFO] Managed Position Updated: Arrival=2020-11-18 16:08:02.235042 TradeId=trd__JPM_1605726482 PosId=0d602875-ff34-448a-b080-212c9f807162 Symbol=JPM Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 16:08:02 [logger INFO] Managed Position Finished: Arrival=2020-11-18 16:08:02.258089 TradeId=trd__JPM_1605726482 PosId=0d602875-ff34-448a-b080-212c9f807162 Symbol=JPM Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=117.029 Text=Fake Filled Order 
+2020-11-18 16:09:55 [logger INFO] MACD-RSI - Closing long position for symbol JPM at 2020-11-18 15:54:00+00:00 
+2020-11-18 16:09:55 [logger INFO] Managed Position Updated: Arrival=2020-11-18 16:09:55.792102 TradeId=trd__JPM_1605726595 PosId=f709a43c-6d6d-49c0-a1b6-e901e12d6d37 Symbol=JPM Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 16:09:55 [logger INFO] Managed Position Finished: Arrival=2020-11-18 16:09:55.805944 TradeId=trd__JPM_1605726595 PosId=f709a43c-6d6d-49c0-a1b6-e901e12d6d37 Symbol=JPM Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=116.9 Text=Fake Filled Order 
+2020-11-18 16:10:05 [logger INFO] MACD-RSI - Closing long position for symbol ALTR at 2020-11-18 15:54:00+00:00 
+2020-11-18 16:10:05 [logger INFO] Managed Position Updated: Arrival=2020-11-18 16:10:05.937947 TradeId=trd__ALTR_1605726605 PosId=c7ea9fe0-edb8-458d-b94e-33b350b1e926 Symbol=ALTR Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 16:10:05 [logger INFO] Managed Position Finished: Arrival=2020-11-18 16:10:05.962841 TradeId=trd__ALTR_1605726605 PosId=c7ea9fe0-edb8-458d-b94e-33b350b1e926 Symbol=ALTR Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=49.24 Text=Fake Filled Order 
+2020-11-18 16:10:05 [logger INFO] MACD-RSI - Closing long position for symbol ALTR at 2020-11-18 15:55:00+00:00 
+2020-11-18 16:11:13 [logger INFO] MACD/RSI = Running long trade for symbol EGHT at 2020-11-18 15:56:00+00:00
+2020-11-18 16:11:13 [logger INFO] Managed Position Updated: Arrival=2020-11-18 16:11:13.540644 TradeId=trd__EGHT_1605726673 PosId=4f403b89-8e6e-4289-847e-9f432c10951a Symbol=EGHT Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 16:11:13 [logger INFO] Managed Position Finished: Arrival=2020-11-18 16:11:13.564628 TradeId=trd__EGHT_1605726673 PosId=4f403b89-8e6e-4289-847e-9f432c10951a Symbol=EGHT Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=19.135 Text=Fake Filled Order 
+2020-11-18 16:11:25 [logger INFO] MACD-RSI - Closing long position for symbol SPY at 2020-11-18 15:56:00+00:00 
+2020-11-18 16:11:25 [logger INFO] Managed Position Updated: Arrival=2020-11-18 16:11:25.633429 TradeId=trd__SPY_1605726685 PosId=7b473d9e-5fd0-49c9-bfe8-1a9f1dbcedb3 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 16:11:25 [logger INFO] Managed Position Finished: Arrival=2020-11-18 16:11:25.658426 TradeId=trd__SPY_1605726685 PosId=7b473d9e-5fd0-49c9-bfe8-1a9f1dbcedb3 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=359.445 Text=Fake Filled Order 
+2020-11-18 16:15:01 [logger INFO] MACD/RSI = Running long trade for symbol JPM at 2020-11-18 16:00:00+00:00
+2020-11-18 16:15:01 [logger INFO] Managed Position Updated: Arrival=2020-11-18 16:15:01.946767 TradeId=trd__JPM_1605726901 PosId=3f7604ff-85a6-47b4-a423-e49f30227040 Symbol=JPM Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 16:15:01 [logger INFO] Managed Position Finished: Arrival=2020-11-18 16:15:01.975516 TradeId=trd__JPM_1605726901 PosId=3f7604ff-85a6-47b4-a423-e49f30227040 Symbol=JPM Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=116.91 Text=Fake Filled Order 
+2020-11-18 16:15:19 [logger INFO] MACD/RSI = Running long trade for symbol DY at 2020-11-18 15:59:00+00:00
+2020-11-18 16:15:19 [logger INFO] Managed Position Updated: Arrival=2020-11-18 16:15:19.032261 TradeId=trd__DY_1605726919 PosId=923951f0-73ee-425f-bd0f-a98c449fe44f Symbol=DY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 16:15:19 [logger INFO] Managed Position Finished: Arrival=2020-11-18 16:15:19.058192 TradeId=trd__DY_1605726919 PosId=923951f0-73ee-425f-bd0f-a98c449fe44f Symbol=DY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=73.835 Text=Fake Filled Order 
+2020-11-18 16:16:06 [logger INFO] MACD-RSI - Closing long position for symbol EGHT at 2020-11-18 16:01:00+00:00 
+2020-11-18 16:16:06 [logger INFO] Managed Position Updated: Arrival=2020-11-18 16:16:06.623467 TradeId=trd__EGHT_1605726966 PosId=f5caeaa5-2ed7-4b79-983c-6a932db281b2 Symbol=EGHT Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 16:16:06 [logger INFO] Managed Position Finished: Arrival=2020-11-18 16:16:06.646405 TradeId=trd__EGHT_1605726966 PosId=f5caeaa5-2ed7-4b79-983c-6a932db281b2 Symbol=EGHT Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=19.09 Text=Fake Filled Order 
+2020-11-18 16:19:57 [logger INFO] MACD-RSI - Closing long position for symbol FTV at 2020-11-18 16:04:00+00:00 
+2020-11-18 16:19:57 [logger INFO] Managed Position Updated: Arrival=2020-11-18 16:19:57.044457 TradeId=trd__FTV_1605727197 PosId=a226c50b-f796-46be-afde-0ff1e617198f Symbol=FTV Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 16:19:57 [logger INFO] Managed Position Finished: Arrival=2020-11-18 16:19:57.064910 TradeId=trd__FTV_1605727197 PosId=a226c50b-f796-46be-afde-0ff1e617198f Symbol=FTV Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=71.68 Text=Fake Filled Order 
+2020-11-18 16:22:37 [logger INFO] MACD-RSI - Closing long position for symbol F at 2020-11-18 16:07:00+00:00 
+2020-11-18 16:22:37 [logger INFO] Managed Position Updated: Arrival=2020-11-18 16:22:37.573728 TradeId=trd__F_1605727357 PosId=ceab34ce-8f48-4f13-9d92-035f114677bc Symbol=F Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 16:22:37 [logger INFO] Managed Position Finished: Arrival=2020-11-18 16:22:37.592739 TradeId=trd__F_1605727357 PosId=ceab34ce-8f48-4f13-9d92-035f114677bc Symbol=F Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=9.0014 Text=Fake Filled Order 
+2020-11-18 16:25:02 [logger INFO] MACD/RSI = Running short trade for symbol PG at 2020-11-18 16:10:00+00:00
+2020-11-18 16:25:02 [logger INFO] Managed Position Updated: Arrival=2020-11-18 16:25:02.442726 TradeId=trd__PG_1605727502 PosId=17a0a9f7-1fe0-4b63-9f7b-b33415d7fae2 Symbol=PG Side=Side.SellShort Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 16:25:02 [logger INFO] Managed Position Finished: Arrival=2020-11-18 16:25:02.473314 TradeId=trd__PG_1605727502 PosId=17a0a9f7-1fe0-4b63-9f7b-b33415d7fae2 Symbol=PG Side=Side.SellShort Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=141.01 Text=Fake Filled Order 
+2020-11-18 16:25:11 [logger INFO] MACD/RSI = Running long trade for symbol EGHT at 2020-11-18 16:10:00+00:00
+2020-11-18 16:25:11 [logger INFO] Managed Position Updated: Arrival=2020-11-18 16:25:11.272818 TradeId=trd__EGHT_1605727511 PosId=8874fe73-4f83-4121-9424-ff36c92b2805 Symbol=EGHT Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 16:25:11 [logger INFO] Managed Position Finished: Arrival=2020-11-18 16:25:11.296754 TradeId=trd__EGHT_1605727511 PosId=8874fe73-4f83-4121-9424-ff36c92b2805 Symbol=EGHT Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=19.065 Text=Fake Filled Order 
+2020-11-18 16:30:05 [logger INFO] MACD-RSI - Closing long position for symbol JPM at 2020-11-18 16:15:00+00:00 
+2020-11-18 16:30:05 [logger INFO] Managed Position Updated: Arrival=2020-11-18 16:30:05.092315 TradeId=trd__JPM_1605727805 PosId=2e04b4f3-8ed2-4e07-ab90-0073f2e343b0 Symbol=JPM Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 16:30:05 [logger INFO] Managed Position Finished: Arrival=2020-11-18 16:30:05.105908 TradeId=trd__JPM_1605727805 PosId=2e04b4f3-8ed2-4e07-ab90-0073f2e343b0 Symbol=JPM Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=116.71 Text=Fake Filled Order 
+2020-11-18 16:31:16 [logger INFO] MACD-RSI - Closing long position for symbol DTE at 2020-11-18 16:16:00+00:00 
+2020-11-18 16:31:16 [logger INFO] Managed Position Updated: Arrival=2020-11-18 16:31:16.036069 TradeId=trd__DTE_1605727876 PosId=4a351f54-a124-42fd-b381-69335e0a9ca2 Symbol=DTE Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 16:31:16 [logger INFO] Managed Position Finished: Arrival=2020-11-18 16:31:16.052026 TradeId=trd__DTE_1605727876 PosId=4a351f54-a124-42fd-b381-69335e0a9ca2 Symbol=DTE Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=131.04 Text=Fake Filled Order 
+2020-11-18 16:36:02 [logger INFO] MACD-RSI - Closing long position for symbol EGHT at 2020-11-18 16:20:00+00:00 
+2020-11-18 16:36:02 [logger INFO] Managed Position Updated: Arrival=2020-11-18 16:36:02.255851 TradeId=trd__EGHT_1605728162 PosId=b658d086-021d-4de7-9071-20a67b159d65 Symbol=EGHT Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 16:36:02 [logger INFO] MACD-RSI - Closing long position for symbol EGHT at 2020-11-18 16:21:00+00:00 
+2020-11-18 16:36:02 [logger INFO] Managed Position Finished: Arrival=2020-11-18 16:36:02.267818 TradeId=trd__EGHT_1605728162 PosId=b658d086-021d-4de7-9071-20a67b159d65 Symbol=EGHT Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=19.01 Text=Fake Filled Order 
+2020-11-18 16:40:03 [logger INFO] MACD/RSI = Running long trade for symbol GES at 2020-11-18 16:25:00+00:00
+2020-11-18 16:40:03 [logger INFO] Managed Position Updated: Arrival=2020-11-18 16:40:03.817284 TradeId=trd__GES_1605728403 PosId=86ce3792-9f7b-409b-9208-d237b14bc5a2 Symbol=GES Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 16:40:03 [logger INFO] Managed Position Finished: Arrival=2020-11-18 16:40:03.843214 TradeId=trd__GES_1605728403 PosId=86ce3792-9f7b-409b-9208-d237b14bc5a2 Symbol=GES Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=15.1 Text=Fake Filled Order 
+2020-11-18 16:40:53 [logger INFO] MACD-RSI - Closing long position for symbol GES at 2020-11-18 16:25:00+00:00 
+2020-11-18 16:40:53 [logger INFO] Managed Position Updated: Arrival=2020-11-18 16:40:53.181398 TradeId=trd__GES_1605728453 PosId=448d9273-1dd6-4401-a5a9-d602e3437ddc Symbol=GES Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 16:40:53 [logger INFO] Managed Position Finished: Arrival=2020-11-18 16:40:53.194194 TradeId=trd__GES_1605728453 PosId=448d9273-1dd6-4401-a5a9-d602e3437ddc Symbol=GES Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=15.01 Text=Fake Filled Order 
+2020-11-18 16:40:57 [logger INFO] MACD/RSI = Running long trade for symbol GES at 2020-11-18 16:25:00+00:00
+2020-11-18 16:40:57 [logger INFO] Managed Position Updated: Arrival=2020-11-18 16:40:57.498560 TradeId=trd__GES_1605728457 PosId=c64c7112-bc8b-4fc1-9606-7c5ee644ceac Symbol=GES Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 16:40:57 [logger INFO] Managed Position Finished: Arrival=2020-11-18 16:40:57.522705 TradeId=trd__GES_1605728457 PosId=c64c7112-bc8b-4fc1-9606-7c5ee644ceac Symbol=GES Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=15.01 Text=Fake Filled Order 
+2020-11-18 16:44:03 [logger INFO] MACD/RSI = Running long trade for symbol JPM at 2020-11-18 16:29:00+00:00
+2020-11-18 16:44:03 [logger INFO] Managed Position Updated: Arrival=2020-11-18 16:44:03.715269 TradeId=trd__JPM_1605728643 PosId=39601d4e-77da-454b-91c7-a5ffff5866ba Symbol=JPM Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 16:44:03 [logger INFO] Managed Position Finished: Arrival=2020-11-18 16:44:03.732584 TradeId=trd__JPM_1605728643 PosId=39601d4e-77da-454b-91c7-a5ffff5866ba Symbol=JPM Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=116.36 Text=Fake Filled Order 
+2020-11-18 16:44:22 [logger INFO] MACD/RSI = Running long trade for symbol FTV at 2020-11-18 16:29:00+00:00
+2020-11-18 16:44:22 [logger INFO] Managed Position Updated: Arrival=2020-11-18 16:44:22.617159 TradeId=trd__FTV_1605728662 PosId=49a5f965-efe0-4311-8d8a-1cd27d2f3124 Symbol=FTV Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 16:44:22 [logger INFO] Managed Position Finished: Arrival=2020-11-18 16:44:22.632121 TradeId=trd__FTV_1605728662 PosId=49a5f965-efe0-4311-8d8a-1cd27d2f3124 Symbol=FTV Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=71.545 Text=Fake Filled Order 
+2020-11-18 16:44:26 [logger INFO] MACD/RSI = Running long trade for symbol DTE at 2020-11-18 16:29:00+00:00
+2020-11-18 16:44:26 [logger INFO] Managed Position Updated: Arrival=2020-11-18 16:44:26.027348 TradeId=trd__DTE_1605728666 PosId=cd419cee-f02a-4a42-b64d-d7d91586f7ac Symbol=DTE Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 16:44:26 [logger INFO] Managed Position Finished: Arrival=2020-11-18 16:44:26.054499 TradeId=trd__DTE_1605728666 PosId=cd419cee-f02a-4a42-b64d-d7d91586f7ac Symbol=DTE Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=131.08 Text=Fake Filled Order 
+2020-11-18 16:48:05 [logger INFO] MACD/RSI = Running long trade for symbol EGHT at 2020-11-18 16:32:00+00:00
+2020-11-18 16:48:05 [logger INFO] Managed Position Updated: Arrival=2020-11-18 16:48:05.416909 TradeId=trd__EGHT_1605728885 PosId=f58df9e1-cf56-4718-b2c9-c906bc1d02e4 Symbol=EGHT Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 16:48:05 [logger INFO] Managed Position Finished: Arrival=2020-11-18 16:48:05.440837 TradeId=trd__EGHT_1605728885 PosId=f58df9e1-cf56-4718-b2c9-c906bc1d02e4 Symbol=EGHT Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=19.07 Text=Fake Filled Order 
+2020-11-18 16:51:24 [logger INFO] MACD-RSI - Closing short position for symbol CNMD at 2020-11-18 16:36:00+00:00 
+2020-11-18 16:51:24 [logger INFO] Managed Position Updated: Arrival=2020-11-18 16:51:24.574323 TradeId=trd__CNMD_1605729084 PosId=e2bbf0fe-b15a-4391-88f4-3d8a96289476 Symbol=CNMD Side=Side.BuyToClose Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 16:51:24 [logger INFO] Managed Position Finished: Arrival=2020-11-18 16:51:24.601740 TradeId=trd__CNMD_1605729084 PosId=e2bbf0fe-b15a-4391-88f4-3d8a96289476 Symbol=CNMD Side=Side.BuyToClose Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=101.445 Text=Fake Filled Order 
+2020-11-18 16:59:10 [logger INFO] MACD-RSI - Closing short position for symbol PG at 2020-11-18 16:44:00+00:00 
+2020-11-18 16:59:10 [logger INFO] Managed Position Updated: Arrival=2020-11-18 16:59:10.588190 TradeId=trd__PG_1605729550 PosId=566a177c-5a80-40b1-ab34-c4f6ec4853c5 Symbol=PG Side=Side.BuyToClose Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 16:59:10 [logger INFO] Managed Position Finished: Arrival=2020-11-18 16:59:10.611129 TradeId=trd__PG_1605729550 PosId=566a177c-5a80-40b1-ab34-c4f6ec4853c5 Symbol=PG Side=Side.BuyToClose Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=140.755 Text=Fake Filled Order 
+2020-11-18 16:59:16 [logger INFO] MACD/RSI = Running long trade for symbol PG at 2020-11-18 16:44:00+00:00
+2020-11-18 16:59:16 [logger INFO] Managed Position Updated: Arrival=2020-11-18 16:59:16.405096 TradeId=trd__PG_1605729556 PosId=67c0da7e-e356-481f-9a0c-c6f49e38a777 Symbol=PG Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 16:59:16 [logger INFO] Managed Position Finished: Arrival=2020-11-18 16:59:16.429143 TradeId=trd__PG_1605729556 PosId=67c0da7e-e356-481f-9a0c-c6f49e38a777 Symbol=PG Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=140.755 Text=Fake Filled Order 
+2020-11-18 17:03:28 [logger INFO] MACD-RSI - Closing long position for symbol PG at 2020-11-18 16:48:00+00:00 
+2020-11-18 17:03:28 [logger INFO] Managed Position Updated: Arrival=2020-11-18 17:03:28.483527 TradeId=trd__PG_1605729808 PosId=a07f6045-bfea-4957-8790-2fcc99a48035 Symbol=PG Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 17:03:28 [logger INFO] Managed Position Finished: Arrival=2020-11-18 17:03:28.498484 TradeId=trd__PG_1605729808 PosId=a07f6045-bfea-4957-8790-2fcc99a48035 Symbol=PG Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=140.635 Text=Fake Filled Order 
+2020-11-18 17:04:02 [logger INFO] MACD/RSI = Running short trade for symbol SPY at 2020-11-18 16:49:00+00:00
+2020-11-18 17:04:02 [logger INFO] Managed Position Updated: Arrival=2020-11-18 17:04:02.281144 TradeId=trd__SPY_1605729842 PosId=5fcd23bb-8d4c-4753-9a84-31a68c62da37 Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 17:04:02 [logger INFO] Managed Position Finished: Arrival=2020-11-18 17:04:02.311759 TradeId=trd__SPY_1605729842 PosId=5fcd23bb-8d4c-4753-9a84-31a68c62da37 Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=359.48 Text=Fake Filled Order 
+2020-11-18 17:05:02 [logger INFO] MACD/RSI = Running short trade for symbol F at 2020-11-18 16:50:00+00:00
+2020-11-18 17:05:02 [logger INFO] Managed Position Updated: Arrival=2020-11-18 17:05:02.750803 TradeId=trd__F_1605729902 PosId=17470b36-8250-4c82-a96f-188e289a1f6a Symbol=F Side=Side.SellShort Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 17:05:02 [logger INFO] Managed Position Finished: Arrival=2020-11-18 17:05:02.768755 TradeId=trd__F_1605729902 PosId=17470b36-8250-4c82-a96f-188e289a1f6a Symbol=F Side=Side.SellShort Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=8.9439 Text=Fake Filled Order 
+2020-11-18 17:05:30 [logger INFO] MACD-RSI - Closing short position for symbol F at 2020-11-18 16:50:00+00:00 
+2020-11-18 17:05:30 [logger INFO] Managed Position Updated: Arrival=2020-11-18 17:05:30.423060 TradeId=trd__F_1605729930 PosId=7df15b84-5fe3-4b4d-adf1-912c96d676cf Symbol=F Side=Side.BuyToClose Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 17:05:30 [logger INFO] Managed Position Finished: Arrival=2020-11-18 17:05:30.437023 TradeId=trd__F_1605729930 PosId=7df15b84-5fe3-4b4d-adf1-912c96d676cf Symbol=F Side=Side.BuyToClose Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=8.96 Text=Fake Filled Order 
+2020-11-18 17:05:32 [logger INFO] MACD/RSI = Running short trade for symbol F at 2020-11-18 16:50:00+00:00
+2020-11-18 17:05:32 [logger INFO] Managed Position Updated: Arrival=2020-11-18 17:05:32.972414 TradeId=trd__F_1605729932 PosId=db452e51-8584-45a2-b3e9-01eee9a513d5 Symbol=F Side=Side.SellShort Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 17:05:32 [logger INFO] Managed Position Finished: Arrival=2020-11-18 17:05:32.987835 TradeId=trd__F_1605729932 PosId=db452e51-8584-45a2-b3e9-01eee9a513d5 Symbol=F Side=Side.SellShort Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=8.96 Text=Fake Filled Order 
+2020-11-18 17:06:29 [logger INFO] MACD/RSI = Running short trade for symbol ALTR at 2020-11-18 16:51:00+00:00
+2020-11-18 17:06:29 [logger INFO] Managed Position Updated: Arrival=2020-11-18 17:06:29.798697 TradeId=trd__ALTR_1605729989 PosId=529f16ee-3864-4be8-a910-0b4a1e98d077 Symbol=ALTR Side=Side.SellShort Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 17:06:29 [logger INFO] Managed Position Finished: Arrival=2020-11-18 17:06:29.819790 TradeId=trd__ALTR_1605729989 PosId=529f16ee-3864-4be8-a910-0b4a1e98d077 Symbol=ALTR Side=Side.SellShort Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=49.33 Text=Fake Filled Order 
+2020-11-18 17:06:35 [logger INFO] MACD-RSI - Closing short position for symbol SPY at 2020-11-18 16:51:00+00:00 
+2020-11-18 17:06:35 [logger INFO] Managed Position Updated: Arrival=2020-11-18 17:06:35.769957 TradeId=trd__SPY_1605729995 PosId=9029c669-fdf2-4e11-9d28-7c89490dba53 Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 17:06:35 [logger INFO] Managed Position Finished: Arrival=2020-11-18 17:06:35.788680 TradeId=trd__SPY_1605729995 PosId=9029c669-fdf2-4e11-9d28-7c89490dba53 Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=359.75 Text=Fake Filled Order 
+2020-11-18 17:09:22 [logger INFO] MACD-RSI - Closing short position for symbol BMRN at 2020-11-18 16:53:00+00:00 
+2020-11-18 17:09:22 [logger INFO] Managed Position Updated: Arrival=2020-11-18 17:09:22.790884 TradeId=trd__BMRN_1605730162 PosId=353b19b4-dde6-4333-adf9-c21ac932bc86 Symbol=BMRN Side=Side.BuyToClose Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 17:09:22 [logger INFO] MACD-RSI - Closing short position for symbol BMRN at 2020-11-18 16:54:00+00:00 
+2020-11-18 17:09:22 [logger INFO] Cancelling order previously to closing position for symbol BMRN
+2020-11-18 17:09:22 [logger INFO] Publishing cancel reject for orderId None reason:Error processing order cancel request for orderId None: OrderId None is not an active order 
+2020-11-18 17:09:22 [logger INFO] Managed Position Finished: Arrival=2020-11-18 17:09:22.809834 TradeId=trd__BMRN_1605730162 PosId=353b19b4-dde6-4333-adf9-c21ac932bc86 Symbol=BMRN Side=Side.BuyToClose Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=74.96 Text=Fake Filled Order 
+2020-11-18 17:09:35 [logger INFO] MACD-RSI - Closing long position for symbol GES at 2020-11-18 16:54:00+00:00 
+2020-11-18 17:09:35 [logger INFO] Managed Position Updated: Arrival=2020-11-18 17:09:35.432889 TradeId=trd__GES_1605730175 PosId=01607d59-f84e-41d7-9dad-de11ded1dbee Symbol=GES Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 17:09:35 [logger INFO] Managed Position Finished: Arrival=2020-11-18 17:09:35.457822 TradeId=trd__GES_1605730175 PosId=01607d59-f84e-41d7-9dad-de11ded1dbee Symbol=GES Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=15.115 Text=Fake Filled Order 
+2020-11-18 17:11:11 [logger INFO] MACD/RSI = Running short trade for symbol FEYE at 2020-11-18 16:56:00+00:00
+2020-11-18 17:11:11 [logger INFO] Managed Position Updated: Arrival=2020-11-18 17:11:11.131001 TradeId=trd__FEYE_1605730271 PosId=da005085-e165-448e-8c2c-853f69002f01 Symbol=FEYE Side=Side.SellShort Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 17:11:11 [logger INFO] Managed Position Finished: Arrival=2020-11-18 17:11:11.144459 TradeId=trd__FEYE_1605730271 PosId=da005085-e165-448e-8c2c-853f69002f01 Symbol=FEYE Side=Side.SellShort Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=14.425 Text=Fake Filled Order 
+2020-11-18 17:11:50 [logger INFO] MACD-RSI - Closing long position for symbol FTV at 2020-11-18 16:56:00+00:00 
+2020-11-18 17:11:50 [logger INFO] Managed Position Updated: Arrival=2020-11-18 17:11:50.470536 TradeId=trd__FTV_1605730310 PosId=8cc02c91-5e57-457c-80a1-a5c048ccadd4 Symbol=FTV Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 17:11:50 [logger INFO] Managed Position Finished: Arrival=2020-11-18 17:11:50.488641 TradeId=trd__FTV_1605730310 PosId=8cc02c91-5e57-457c-80a1-a5c048ccadd4 Symbol=FTV Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=71.77 Text=Fake Filled Order 
+2020-11-18 17:11:53 [logger INFO] MACD-RSI - Closing short position for symbol EQH at 2020-11-18 16:56:00+00:00 
+2020-11-18 17:11:53 [logger INFO] Managed Position Updated: Arrival=2020-11-18 17:11:53.640966 TradeId=trd__EQH_1605730313 PosId=b67f63f2-b7e9-4227-bb89-e9403a85b6ef Symbol=EQH Side=Side.BuyToClose Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 17:11:53 [logger INFO] Managed Position Finished: Arrival=2020-11-18 17:11:53.663355 TradeId=trd__EQH_1605730313 PosId=b67f63f2-b7e9-4227-bb89-e9403a85b6ef Symbol=EQH Side=Side.BuyToClose Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=24.92 Text=Fake Filled Order 
+2020-11-18 17:12:01 [logger INFO] MACD/RSI = Running short trade for symbol FTV at 2020-11-18 16:57:00+00:00
+2020-11-18 17:12:01 [logger INFO] Managed Position Updated: Arrival=2020-11-18 17:12:01.685814 TradeId=trd__FTV_1605730321 PosId=1efc0a4e-49de-4dbe-8138-31e1d0cd93c7 Symbol=FTV Side=Side.SellShort Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 17:12:01 [logger INFO] Managed Position Finished: Arrival=2020-11-18 17:12:01.707074 TradeId=trd__FTV_1605730321 PosId=1efc0a4e-49de-4dbe-8138-31e1d0cd93c7 Symbol=FTV Side=Side.SellShort Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=71.77 Text=Fake Filled Order 
+2020-11-18 17:13:40 [logger INFO] MACD-RSI - Closing short position for symbol ALTR at 2020-11-18 16:57:00+00:00 
+2020-11-18 17:13:40 [logger INFO] Managed Position Updated: Arrival=2020-11-18 17:13:40.361815 TradeId=trd__ALTR_1605730420 PosId=e8da1f57-09f3-4f57-9688-f156c1df846c Symbol=ALTR Side=Side.BuyToClose Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 17:13:40 [logger INFO] Managed Position Finished: Arrival=2020-11-18 17:13:40.388750 TradeId=trd__ALTR_1605730420 PosId=e8da1f57-09f3-4f57-9688-f156c1df846c Symbol=ALTR Side=Side.BuyToClose Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=49.45 Text=Fake Filled Order 
+2020-11-18 17:16:02 [logger INFO] MACD/RSI = Running short trade for symbol GES at 2020-11-18 17:01:00+00:00
+2020-11-18 17:16:02 [logger INFO] Managed Position Updated: Arrival=2020-11-18 17:16:02.747218 TradeId=trd__GES_1605730562 PosId=049c7d73-8b65-4976-8f92-9afd5a6509eb Symbol=GES Side=Side.SellShort Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 17:16:02 [logger INFO] Managed Position Finished: Arrival=2020-11-18 17:16:02.773974 TradeId=trd__GES_1605730562 PosId=049c7d73-8b65-4976-8f92-9afd5a6509eb Symbol=GES Side=Side.SellShort Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=15.07 Text=Fake Filled Order 
+2020-11-18 17:16:11 [logger INFO] MACD/RSI = Running short trade for symbol CNMD at 2020-11-18 17:01:00+00:00
+2020-11-18 17:16:11 [logger INFO] Managed Position Updated: Arrival=2020-11-18 17:16:11.178095 TradeId=trd__CNMD_1605730571 PosId=dfe81f09-12ae-4633-aefb-70c3facacc58 Symbol=CNMD Side=Side.SellShort Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 17:16:11 [logger INFO] Managed Position Finished: Arrival=2020-11-18 17:16:11.208115 TradeId=trd__CNMD_1605730571 PosId=dfe81f09-12ae-4633-aefb-70c3facacc58 Symbol=CNMD Side=Side.SellShort Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=102.03 Text=Fake Filled Order 
+2020-11-18 17:17:01 [logger INFO] MACD/RSI = Running short trade for symbol EQH at 2020-11-18 17:02:00+00:00
+2020-11-18 17:17:01 [logger INFO] Managed Position Updated: Arrival=2020-11-18 17:17:01.945528 TradeId=trd__EQH_1605730621 PosId=6e08eb40-f10f-4c8b-9a02-c9f4281578f8 Symbol=EQH Side=Side.SellShort Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 17:17:01 [logger INFO] Managed Position Finished: Arrival=2020-11-18 17:17:01.971946 TradeId=trd__EQH_1605730621 PosId=6e08eb40-f10f-4c8b-9a02-c9f4281578f8 Symbol=EQH Side=Side.SellShort Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=24.82 Text=Fake Filled Order 
+2020-11-18 17:19:05 [logger INFO] MACD-RSI - Closing short position for symbol EQH at 2020-11-18 17:04:00+00:00 
+2020-11-18 17:19:05 [logger INFO] Managed Position Updated: Arrival=2020-11-18 17:19:05.770450 TradeId=trd__EQH_1605730745 PosId=0049be59-0077-4aa8-9da4-ffb3c7af4ba4 Symbol=EQH Side=Side.BuyToClose Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 17:19:05 [logger INFO] Managed Position Finished: Arrival=2020-11-18 17:19:05.792178 TradeId=trd__EQH_1605730745 PosId=0049be59-0077-4aa8-9da4-ffb3c7af4ba4 Symbol=EQH Side=Side.BuyToClose Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=24.76 Text=Fake Filled Order 
+2020-11-18 17:19:24 [logger INFO] MACD-RSI - Closing short position for symbol FTV at 2020-11-18 17:04:00+00:00 
+2020-11-18 17:19:24 [logger INFO] Managed Position Updated: Arrival=2020-11-18 17:19:24.163202 TradeId=trd__FTV_1605730764 PosId=8a878b36-b1a7-49cf-accd-1df90cc49e86 Symbol=FTV Side=Side.BuyToClose Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 17:19:24 [logger INFO] Managed Position Finished: Arrival=2020-11-18 17:19:24.184292 TradeId=trd__FTV_1605730764 PosId=8a878b36-b1a7-49cf-accd-1df90cc49e86 Symbol=FTV Side=Side.BuyToClose Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=71.6 Text=Fake Filled Order 
+2020-11-18 17:21:26 [logger INFO] MACD-RSI - Closing short position for symbol F at 2020-11-18 17:06:00+00:00 
+2020-11-18 17:21:26 [logger INFO] Managed Position Updated: Arrival=2020-11-18 17:21:26.351736 TradeId=trd__F_1605730886 PosId=837c58f9-e502-468e-adca-726e2f75faff Symbol=F Side=Side.BuyToClose Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 17:21:26 [logger INFO] Managed Position Finished: Arrival=2020-11-18 17:21:26.368006 TradeId=trd__F_1605730886 PosId=837c58f9-e502-468e-adca-726e2f75faff Symbol=F Side=Side.BuyToClose Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=8.905 Text=Fake Filled Order 
+2020-11-18 17:23:01 [logger INFO] MACD/RSI = Running long trade for symbol F at 2020-11-18 17:08:00+00:00
+2020-11-18 17:23:01 [logger INFO] Managed Position Updated: Arrival=2020-11-18 17:23:01.573193 TradeId=trd__F_1605730981 PosId=f89bed2c-c608-47b9-9618-c63c611e11af Symbol=F Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 17:23:01 [logger INFO] Managed Position Finished: Arrival=2020-11-18 17:23:01.588853 TradeId=trd__F_1605730981 PosId=f89bed2c-c608-47b9-9618-c63c611e11af Symbol=F Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=8.905 Text=Fake Filled Order 
+2020-11-18 17:24:09 [logger INFO] MACD-RSI - Closing short position for symbol FEYE at 2020-11-18 17:09:00+00:00 
+2020-11-18 17:24:09 [logger INFO] Managed Position Updated: Arrival=2020-11-18 17:24:09.251269 TradeId=trd__FEYE_1605731049 PosId=9d5fc299-059f-4631-9c55-77b3617810e0 Symbol=FEYE Side=Side.BuyToClose Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 17:24:09 [logger INFO] Managed Position Finished: Arrival=2020-11-18 17:24:09.272178 TradeId=trd__FEYE_1605731049 PosId=9d5fc299-059f-4631-9c55-77b3617810e0 Symbol=FEYE Side=Side.BuyToClose Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=14.395 Text=Fake Filled Order 
+2020-11-18 17:31:01 [logger INFO] MACD/RSI = Running short trade for symbol PG at 2020-11-18 17:16:00+00:00
+2020-11-18 17:31:01 [logger INFO] Managed Position Updated: Arrival=2020-11-18 17:31:01.918849 TradeId=trd__PG_1605731461 PosId=a38bbbad-905b-4dda-b513-d91a8be88cba Symbol=PG Side=Side.SellShort Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 17:31:01 [logger INFO] Managed Position Finished: Arrival=2020-11-18 17:31:01.942780 TradeId=trd__PG_1605731461 PosId=a38bbbad-905b-4dda-b513-d91a8be88cba Symbol=PG Side=Side.SellShort Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=140.99 Text=Fake Filled Order 
+2020-11-18 17:33:47 [logger INFO] MACD-RSI - Closing long position for symbol DTE at 2020-11-18 17:18:00+00:00 
+2020-11-18 17:33:47 [logger INFO] Managed Position Updated: Arrival=2020-11-18 17:33:47.798087 TradeId=trd__DTE_1605731627 PosId=2c378f85-31db-4c54-9c45-7e3e20d1b7ae Symbol=DTE Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 17:33:47 [logger INFO] Managed Position Finished: Arrival=2020-11-18 17:33:47.814659 TradeId=trd__DTE_1605731627 PosId=2c378f85-31db-4c54-9c45-7e3e20d1b7ae Symbol=DTE Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=131.77 Text=Fake Filled Order 
+2020-11-18 17:33:50 [logger INFO] MACD/RSI = Running short trade for symbol DTE at 2020-11-18 17:18:00+00:00
+2020-11-18 17:33:50 [logger INFO] Managed Position Updated: Arrival=2020-11-18 17:33:50.169403 TradeId=trd__DTE_1605731630 PosId=2eef3d60-e1c9-4f6d-93e7-91cbdd4de00a Symbol=DTE Side=Side.SellShort Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 17:33:50 [logger INFO] Managed Position Finished: Arrival=2020-11-18 17:33:50.191818 TradeId=trd__DTE_1605731630 PosId=2eef3d60-e1c9-4f6d-93e7-91cbdd4de00a Symbol=DTE Side=Side.SellShort Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=131.77 Text=Fake Filled Order 
+2020-11-18 17:40:57 [logger INFO] MACD-RSI - Closing long position for symbol DY at 2020-11-18 17:25:00+00:00 
+2020-11-18 17:40:57 [logger INFO] Managed Position Updated: Arrival=2020-11-18 17:40:57.509473 TradeId=trd__DY_1605732057 PosId=c8dab80f-0a1e-4802-9d71-a12a620a4367 Symbol=DY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 17:40:57 [logger INFO] Managed Position Finished: Arrival=2020-11-18 17:40:57.529422 TradeId=trd__DY_1605732057 PosId=c8dab80f-0a1e-4802-9d71-a12a620a4367 Symbol=DY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=73.02 Text=Fake Filled Order 
+2020-11-18 17:44:44 [logger INFO] MACD-RSI - Closing long position for symbol JPM at 2020-11-18 17:29:00+00:00 
+2020-11-18 17:44:44 [logger INFO] Managed Position Updated: Arrival=2020-11-18 17:44:44.497286 TradeId=trd__JPM_1605732284 PosId=c9ad2b15-1bee-40bd-8f00-6ddb6e619605 Symbol=JPM Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 17:44:44 [logger INFO] Managed Position Finished: Arrival=2020-11-18 17:44:44.517233 TradeId=trd__JPM_1605732284 PosId=c9ad2b15-1bee-40bd-8f00-6ddb6e619605 Symbol=JPM Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=116.045 Text=Fake Filled Order 
+2020-11-18 17:45:19 [logger INFO] MACD-RSI - Closing long position for symbol F at 2020-11-18 17:30:00+00:00 
+2020-11-18 17:45:19 [logger INFO] Managed Position Updated: Arrival=2020-11-18 17:45:19.505063 TradeId=trd__F_1605732319 PosId=856f7a45-3d17-462f-808d-7a4a27291f64 Symbol=F Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 17:45:19 [logger INFO] Managed Position Finished: Arrival=2020-11-18 17:45:19.524661 TradeId=trd__F_1605732319 PosId=856f7a45-3d17-462f-808d-7a4a27291f64 Symbol=F Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=8.885 Text=Fake Filled Order 
+2020-11-18 17:45:21 [logger INFO] MACD/RSI = Running long trade for symbol DY at 2020-11-18 17:30:00+00:00
+2020-11-18 17:45:21 [logger INFO] Managed Position Updated: Arrival=2020-11-18 17:45:21.925584 TradeId=trd__DY_1605732321 PosId=fb37f4b3-6768-426c-9804-36624f0fcc60 Symbol=DY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 17:45:21 [logger INFO] Managed Position Finished: Arrival=2020-11-18 17:45:21.937953 TradeId=trd__DY_1605732321 PosId=fb37f4b3-6768-426c-9804-36624f0fcc60 Symbol=DY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=73.345 Text=Fake Filled Order 
+2020-11-18 17:49:03 [logger INFO] MACD-RSI - Closing short position for symbol PG at 2020-11-18 17:34:00+00:00 
+2020-11-18 17:49:03 [logger INFO] Managed Position Updated: Arrival=2020-11-18 17:49:03.105330 TradeId=trd__PG_1605732543 PosId=ed79ddd2-54d0-4f30-a00d-ad25a3770a4f Symbol=PG Side=Side.BuyToClose Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 17:49:03 [logger INFO] Managed Position Finished: Arrival=2020-11-18 17:49:03.134245 TradeId=trd__PG_1605732543 PosId=ed79ddd2-54d0-4f30-a00d-ad25a3770a4f Symbol=PG Side=Side.BuyToClose Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=140.7 Text=Fake Filled Order 
+2020-11-18 17:50:02 [logger INFO] MACD/RSI = Running long trade for symbol JPM at 2020-11-18 17:35:00+00:00
+2020-11-18 17:50:02 [logger INFO] Managed Position Updated: Arrival=2020-11-18 17:50:02.026319 TradeId=trd__JPM_1605732602 PosId=720b25c3-1784-4c22-a3b4-b8faa01cb53a Symbol=JPM Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 17:50:02 [logger INFO] Managed Position Finished: Arrival=2020-11-18 17:50:02.047262 TradeId=trd__JPM_1605732602 PosId=720b25c3-1784-4c22-a3b4-b8faa01cb53a Symbol=JPM Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=116.055 Text=Fake Filled Order 
+2020-11-18 17:50:07 [logger INFO] MACD/RSI = Running long trade for symbol FEYE at 2020-11-18 17:35:00+00:00
+2020-11-18 17:50:07 [logger INFO] Managed Position Updated: Arrival=2020-11-18 17:50:07.799129 TradeId=trd__FEYE_1605732607 PosId=6598c74f-456d-412b-ae3b-79d85f0a7b14 Symbol=FEYE Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 17:50:07 [logger INFO] Managed Position Finished: Arrival=2020-11-18 17:50:07.812285 TradeId=trd__FEYE_1605732607 PosId=6598c74f-456d-412b-ae3b-79d85f0a7b14 Symbol=FEYE Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=14.345 Text=Fake Filled Order 
+2020-11-18 17:51:02 [logger INFO] MACD/RSI = Running long trade for symbol PG at 2020-11-18 17:36:00+00:00
+2020-11-18 17:51:02 [logger INFO] Managed Position Updated: Arrival=2020-11-18 17:51:02.465466 TradeId=trd__PG_1605732662 PosId=3d9a0547-2a40-4243-9eb7-65471c7a9a9c Symbol=PG Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 17:51:02 [logger INFO] Managed Position Finished: Arrival=2020-11-18 17:51:02.478721 TradeId=trd__PG_1605732662 PosId=3d9a0547-2a40-4243-9eb7-65471c7a9a9c Symbol=PG Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=140.69 Text=Fake Filled Order 
+2020-11-18 17:51:41 [logger INFO] MACD-RSI - Closing short position for symbol GES at 2020-11-18 17:36:00+00:00 
+2020-11-18 17:51:41 [logger INFO] Managed Position Updated: Arrival=2020-11-18 17:51:41.401482 TradeId=trd__GES_1605732701 PosId=34951157-3791-4147-b0e4-54e4f21e788d Symbol=GES Side=Side.BuyToClose Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 17:51:41 [logger INFO] Managed Position Finished: Arrival=2020-11-18 17:51:41.413451 TradeId=trd__GES_1605732701 PosId=34951157-3791-4147-b0e4-54e4f21e788d Symbol=GES Side=Side.BuyToClose Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=14.97 Text=Fake Filled Order 
+2020-11-18 17:52:01 [logger INFO] MACD-RSI - Closing long position for symbol PG at 2020-11-18 17:36:00+00:00 
+2020-11-18 17:52:01 [logger INFO] Managed Position Updated: Arrival=2020-11-18 17:52:01.520626 TradeId=trd__PG_1605732721 PosId=9788cfe0-ed7e-4d0e-938c-b6993880cc7d Symbol=PG Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 17:52:01 [logger INFO] Managed Position Finished: Arrival=2020-11-18 17:52:01.540837 TradeId=trd__PG_1605732721 PosId=9788cfe0-ed7e-4d0e-938c-b6993880cc7d Symbol=PG Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=140.52 Text=Fake Filled Order 
+2020-11-18 17:52:05 [logger INFO] MACD/RSI = Running long trade for symbol PG at 2020-11-18 17:36:00+00:00
+2020-11-18 17:52:05 [logger INFO] Managed Position Updated: Arrival=2020-11-18 17:52:05.734239 TradeId=trd__PG_1605732725 PosId=af263a7e-4c06-4e30-8697-f9d9fe3bd9c5 Symbol=PG Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 17:52:05 [logger INFO] Managed Position Finished: Arrival=2020-11-18 17:52:05.755183 TradeId=trd__PG_1605732725 PosId=af263a7e-4c06-4e30-8697-f9d9fe3bd9c5 Symbol=PG Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=140.52 Text=Fake Filled Order 
+2020-11-18 17:52:07 [logger INFO] MACD/RSI = Running long trade for symbol GES at 2020-11-18 17:37:00+00:00
+2020-11-18 17:52:07 [logger INFO] Managed Position Updated: Arrival=2020-11-18 17:52:07.196140 TradeId=trd__GES_1605732727 PosId=60f38807-dc02-4516-8f9d-14b692a40498 Symbol=GES Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 17:52:07 [logger INFO] Managed Position Finished: Arrival=2020-11-18 17:52:07.214357 TradeId=trd__GES_1605732727 PosId=60f38807-dc02-4516-8f9d-14b692a40498 Symbol=GES Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=14.96 Text=Fake Filled Order 
+2020-11-18 17:52:12 [logger INFO] MACD-RSI - Closing long position for symbol JPM at 2020-11-18 17:37:00+00:00 
+2020-11-18 17:52:12 [logger INFO] Managed Position Updated: Arrival=2020-11-18 17:52:12.668680 TradeId=trd__JPM_1605732732 PosId=8ab2d4c7-4624-462a-8622-7a92ef55cce4 Symbol=JPM Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 17:52:12 [logger INFO] Managed Position Finished: Arrival=2020-11-18 17:52:12.695929 TradeId=trd__JPM_1605732732 PosId=8ab2d4c7-4624-462a-8622-7a92ef55cce4 Symbol=JPM Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=115.85 Text=Fake Filled Order 
+2020-11-18 17:52:17 [logger INFO] MACD-RSI - Closing long position for symbol FEYE at 2020-11-18 17:37:00+00:00 
+2020-11-18 17:52:17 [logger INFO] Managed Position Updated: Arrival=2020-11-18 17:52:17.743581 TradeId=trd__FEYE_1605732737 PosId=bfb36338-b2b6-499b-a89b-891c2a71df6e Symbol=FEYE Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 17:52:17 [logger INFO] Managed Position Finished: Arrival=2020-11-18 17:52:17.765422 TradeId=trd__FEYE_1605732737 PosId=bfb36338-b2b6-499b-a89b-891c2a71df6e Symbol=FEYE Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=14.305 Text=Fake Filled Order 
+2020-11-18 17:52:22 [logger INFO] MACD-RSI - Closing long position for symbol PG at 2020-11-18 17:37:00+00:00 
+2020-11-18 17:52:22 [logger INFO] Managed Position Updated: Arrival=2020-11-18 17:52:22.398230 TradeId=trd__PG_1605732742 PosId=66d3e8f2-3a91-4429-a0fb-24fb9de43f6e Symbol=PG Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 17:52:22 [logger INFO] Managed Position Finished: Arrival=2020-11-18 17:52:22.422344 TradeId=trd__PG_1605732742 PosId=66d3e8f2-3a91-4429-a0fb-24fb9de43f6e Symbol=PG Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=140.37 Text=Fake Filled Order 
+2020-11-18 17:54:18 [logger INFO] MACD-RSI - Closing long position for symbol DY at 2020-11-18 17:39:00+00:00 
+2020-11-18 17:54:18 [logger INFO] Managed Position Updated: Arrival=2020-11-18 17:54:18.088979 TradeId=trd__DY_1605732858 PosId=4a92541c-c863-46e6-86bd-c9d18496ef04 Symbol=DY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 17:54:18 [logger INFO] Managed Position Finished: Arrival=2020-11-18 17:54:18.106807 TradeId=trd__DY_1605732858 PosId=4a92541c-c863-46e6-86bd-c9d18496ef04 Symbol=DY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=72.82 Text=Fake Filled Order 
+2020-11-18 17:54:59 [logger INFO] MACD-RSI - Closing long position for symbol EGHT at 2020-11-18 17:39:00+00:00 
+2020-11-18 17:54:59 [logger INFO] Managed Position Updated: Arrival=2020-11-18 17:54:59.415017 TradeId=trd__EGHT_1605732899 PosId=db878471-8613-4347-8fcd-9ce73a10b644 Symbol=EGHT Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 17:54:59 [logger INFO] Managed Position Finished: Arrival=2020-11-18 17:54:59.433876 TradeId=trd__EGHT_1605732899 PosId=db878471-8613-4347-8fcd-9ce73a10b644 Symbol=EGHT Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=18.96 Text=Fake Filled Order 
+2020-11-18 17:59:02 [logger INFO] MACD/RSI = Running long trade for symbol PG at 2020-11-18 17:44:00+00:00
+2020-11-18 17:59:02 [logger INFO] Managed Position Updated: Arrival=2020-11-18 17:59:02.935367 TradeId=trd__PG_1605733142 PosId=94dfd15c-2d18-47c9-91ff-07406041cc45 Symbol=PG Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 17:59:02 [logger INFO] Managed Position Finished: Arrival=2020-11-18 17:59:02.961313 TradeId=trd__PG_1605733142 PosId=94dfd15c-2d18-47c9-91ff-07406041cc45 Symbol=PG Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=140.49 Text=Fake Filled Order 
+2020-11-18 18:00:02 [logger INFO] MACD/RSI = Running long trade for symbol JPM at 2020-11-18 17:45:00+00:00
+2020-11-18 18:00:02 [logger INFO] Managed Position Updated: Arrival=2020-11-18 18:00:02.245634 TradeId=trd__JPM_1605733202 PosId=37bf01d5-b0bd-49de-b382-138632b6976d Symbol=JPM Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 18:00:02 [logger INFO] Managed Position Finished: Arrival=2020-11-18 18:00:02.270879 TradeId=trd__JPM_1605733202 PosId=37bf01d5-b0bd-49de-b382-138632b6976d Symbol=JPM Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=115.75 Text=Fake Filled Order 
+2020-11-18 18:00:03 [logger INFO] MACD/RSI = Running long trade for symbol BMRN at 2020-11-18 17:45:00+00:00
+2020-11-18 18:00:03 [logger INFO] Managed Position Updated: Arrival=2020-11-18 18:00:03.565224 TradeId=trd__BMRN_1605733203 PosId=14c9472b-81d3-4a27-93dc-c272e1aa7705 Symbol=BMRN Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 18:00:03 [logger INFO] Managed Position Finished: Arrival=2020-11-18 18:00:03.579268 TradeId=trd__BMRN_1605733203 PosId=14c9472b-81d3-4a27-93dc-c272e1aa7705 Symbol=BMRN Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=74.34 Text=Fake Filled Order 
+2020-11-18 18:00:21 [logger INFO] MACD/RSI = Running long trade for symbol EGHT at 2020-11-18 17:45:00+00:00
+2020-11-18 18:00:21 [logger INFO] Managed Position Updated: Arrival=2020-11-18 18:00:21.759879 TradeId=trd__EGHT_1605733221 PosId=910c161e-a5fe-4936-aad9-b45d584903f9 Symbol=EGHT Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 18:00:21 [logger INFO] Managed Position Finished: Arrival=2020-11-18 18:00:21.783051 TradeId=trd__EGHT_1605733221 PosId=910c161e-a5fe-4936-aad9-b45d584903f9 Symbol=EGHT Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=18.97 Text=Fake Filled Order 
+2020-11-18 18:01:01 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2020-11-18 17:46:00+00:00
+2020-11-18 18:01:01 [logger INFO] Managed Position Updated: Arrival=2020-11-18 18:01:01.791247 TradeId=trd__SPY_1605733261 PosId=61efe48b-802c-4080-8902-332309c45bd5 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 18:01:01 [logger INFO] Managed Position Finished: Arrival=2020-11-18 18:01:01.816276 TradeId=trd__SPY_1605733261 PosId=61efe48b-802c-4080-8902-332309c45bd5 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=357.88 Text=Fake Filled Order 
+2020-11-18 18:01:02 [logger INFO] MACD/RSI = Running long trade for symbol F at 2020-11-18 17:46:00+00:00
+2020-11-18 18:01:02 [logger INFO] Managed Position Updated: Arrival=2020-11-18 18:01:02.205076 TradeId=trd__F_1605733262 PosId=511b36c9-ded7-4ca7-a8f4-3511c1ccf0a9 Symbol=F Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 18:01:02 [logger INFO] Managed Position Finished: Arrival=2020-11-18 18:01:02.220302 TradeId=trd__F_1605733262 PosId=511b36c9-ded7-4ca7-a8f4-3511c1ccf0a9 Symbol=F Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=8.865 Text=Fake Filled Order 
+2020-11-18 18:01:09 [logger INFO] MACD/RSI = Running long trade for symbol ALTR at 2020-11-18 17:46:00+00:00
+2020-11-18 18:01:09 [logger INFO] Managed Position Updated: Arrival=2020-11-18 18:01:09.642081 TradeId=trd__ALTR_1605733269 PosId=bcca1f43-c964-40d4-8f97-bf1f7dd14194 Symbol=ALTR Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 18:01:09 [logger INFO] Managed Position Finished: Arrival=2020-11-18 18:01:09.666905 TradeId=trd__ALTR_1605733269 PosId=bcca1f43-c964-40d4-8f97-bf1f7dd14194 Symbol=ALTR Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=49.33 Text=Fake Filled Order 
+2020-11-18 18:03:10 [logger INFO] MACD/RSI = Running long trade for symbol DY at 2020-11-18 17:48:00+00:00
+2020-11-18 18:03:10 [logger INFO] Managed Position Updated: Arrival=2020-11-18 18:03:10.363193 TradeId=trd__DY_1605733390 PosId=0061e166-c3f0-4669-8e48-897222a740b1 Symbol=DY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 18:03:10 [logger INFO] Managed Position Finished: Arrival=2020-11-18 18:03:10.383126 TradeId=trd__DY_1605733390 PosId=0061e166-c3f0-4669-8e48-897222a740b1 Symbol=DY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=72.9 Text=Fake Filled Order 
+2020-11-18 18:04:09 [logger INFO] MACD-RSI - Closing long position for symbol ALTR at 2020-11-18 17:48:00+00:00 
+2020-11-18 18:04:09 [logger INFO] Managed Position Updated: Arrival=2020-11-18 18:04:09.471997 TradeId=trd__ALTR_1605733449 PosId=f04a4a6f-0c1c-42f0-82b0-e0a51fa04215 Symbol=ALTR Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 18:04:09 [logger INFO] MACD-RSI - Closing long position for symbol ALTR at 2020-11-18 17:49:00+00:00 
+2020-11-18 18:04:09 [logger INFO] Managed Position Finished: Arrival=2020-11-18 18:04:09.491934 TradeId=trd__ALTR_1605733449 PosId=f04a4a6f-0c1c-42f0-82b0-e0a51fa04215 Symbol=ALTR Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=49.275 Text=Fake Filled Order 
+2020-11-18 18:04:22 [logger INFO] MACD-RSI - Closing long position for symbol PG at 2020-11-18 17:49:00+00:00 
+2020-11-18 18:04:22 [logger INFO] Managed Position Updated: Arrival=2020-11-18 18:04:22.819686 TradeId=trd__PG_1605733462 PosId=35df67b7-313c-4061-bdff-6d5f81675362 Symbol=PG Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 18:04:22 [logger INFO] Managed Position Finished: Arrival=2020-11-18 18:04:22.840247 TradeId=trd__PG_1605733462 PosId=35df67b7-313c-4061-bdff-6d5f81675362 Symbol=PG Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=140.225 Text=Fake Filled Order 
+2020-11-18 18:04:33 [logger INFO] MACD-RSI - Closing long position for symbol DY at 2020-11-18 17:49:00+00:00 
+2020-11-18 18:04:33 [logger INFO] Managed Position Updated: Arrival=2020-11-18 18:04:33.125288 TradeId=trd__DY_1605733473 PosId=44d1d3d2-5e84-4d46-a9ba-3d4ec5d9e763 Symbol=DY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 18:04:33 [logger INFO] Managed Position Finished: Arrival=2020-11-18 18:04:33.152266 TradeId=trd__DY_1605733473 PosId=44d1d3d2-5e84-4d46-a9ba-3d4ec5d9e763 Symbol=DY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=72.44 Text=Fake Filled Order 
+2020-11-18 18:04:59 [logger INFO] MACD/RSI = Running long trade for symbol DY at 2020-11-18 17:49:00+00:00
+2020-11-18 18:04:59 [logger INFO] Managed Position Updated: Arrival=2020-11-18 18:04:59.169514 TradeId=trd__DY_1605733499 PosId=830a19c4-93b2-4de5-9256-b9308ddc46e7 Symbol=DY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 18:04:59 [logger INFO] Managed Position Finished: Arrival=2020-11-18 18:04:59.185647 TradeId=trd__DY_1605733499 PosId=830a19c4-93b2-4de5-9256-b9308ddc46e7 Symbol=DY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=72.44 Text=Fake Filled Order 
+2020-11-18 18:06:13 [logger INFO] MACD-RSI - Closing long position for symbol F at 2020-11-18 17:51:00+00:00 
+2020-11-18 18:06:13 [logger INFO] Managed Position Updated: Arrival=2020-11-18 18:06:13.679309 TradeId=trd__F_1605733573 PosId=0af862d4-0b45-4636-97d2-fb328e4ec7bd Symbol=F Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 18:06:13 [logger INFO] Managed Position Finished: Arrival=2020-11-18 18:06:13.693912 TradeId=trd__F_1605733573 PosId=0af862d4-0b45-4636-97d2-fb328e4ec7bd Symbol=F Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=8.845 Text=Fake Filled Order 
+2020-11-18 18:06:58 [logger INFO] MACD-RSI - Closing long position for symbol SPY at 2020-11-18 17:51:00+00:00 
+2020-11-18 18:06:58 [logger INFO] Managed Position Updated: Arrival=2020-11-18 18:06:58.130448 TradeId=trd__SPY_1605733618 PosId=6d0c1e1a-a80a-4503-8993-f8dbfd89aa85 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 18:06:58 [logger INFO] Managed Position Finished: Arrival=2020-11-18 18:06:58.145012 TradeId=trd__SPY_1605733618 PosId=6d0c1e1a-a80a-4503-8993-f8dbfd89aa85 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=357.05 Text=Fake Filled Order 
+2020-11-18 18:07:33 [logger INFO] MACD-RSI - Closing long position for symbol JPM at 2020-11-18 17:52:00+00:00 
+2020-11-18 18:07:33 [logger INFO] Managed Position Updated: Arrival=2020-11-18 18:07:33.690750 TradeId=trd__JPM_1605733653 PosId=62715eef-84db-4f11-a113-729e4fd73bc1 Symbol=JPM Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 18:07:33 [logger INFO] Managed Position Finished: Arrival=2020-11-18 18:07:33.714517 TradeId=trd__JPM_1605733653 PosId=62715eef-84db-4f11-a113-729e4fd73bc1 Symbol=JPM Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=115.51 Text=Fake Filled Order 
+2020-11-18 18:11:01 [logger INFO] MACD/RSI = Running long trade for symbol JPM at 2020-11-18 17:56:00+00:00
+2020-11-18 18:11:01 [logger INFO] Managed Position Updated: Arrival=2020-11-18 18:11:01.675729 TradeId=trd__JPM_1605733861 PosId=2a32fd2e-3b2b-48d4-8709-587e4cca0a70 Symbol=JPM Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 18:11:01 [logger INFO] Managed Position Finished: Arrival=2020-11-18 18:11:01.702090 TradeId=trd__JPM_1605733861 PosId=2a32fd2e-3b2b-48d4-8709-587e4cca0a70 Symbol=JPM Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=115.58 Text=Fake Filled Order 
+2020-11-18 18:12:02 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2020-11-18 17:57:00+00:00
+2020-11-18 18:12:02 [logger INFO] Managed Position Updated: Arrival=2020-11-18 18:12:02.028376 TradeId=trd__SPY_1605733922 PosId=d11d5376-a0a0-4910-89a0-fbd5dd139142 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 18:12:02 [logger INFO] MACD/RSI = Running long trade for symbol PG at 2020-11-18 17:57:00+00:00
+2020-11-18 18:12:02 [logger INFO] Managed Position Finished: Arrival=2020-11-18 18:12:02.053779 TradeId=trd__SPY_1605733922 PosId=d11d5376-a0a0-4910-89a0-fbd5dd139142 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=357.105 Text=Fake Filled Order 
+2020-11-18 18:12:02 [logger INFO] Managed Position Updated: Arrival=2020-11-18 18:12:02.056769 TradeId=trd__PG_1605733922 PosId=79093a37-5e2a-43e1-a5f5-7579616918c6 Symbol=PG Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 18:12:02 [logger INFO] Managed Position Finished: Arrival=2020-11-18 18:12:02.085856 TradeId=trd__PG_1605733922 PosId=79093a37-5e2a-43e1-a5f5-7579616918c6 Symbol=PG Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=140.045 Text=Fake Filled Order 
+2020-11-18 18:12:23 [logger INFO] MACD-RSI - Closing long position for symbol EGHT at 2020-11-18 17:57:00+00:00 
+2020-11-18 18:12:23 [logger INFO] Managed Position Updated: Arrival=2020-11-18 18:12:23.062648 TradeId=trd__EGHT_1605733943 PosId=3a7e3b7c-7967-4da1-91e2-7ab24d9ce35e Symbol=EGHT Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 18:12:23 [logger INFO] Managed Position Finished: Arrival=2020-11-18 18:12:23.087581 TradeId=trd__EGHT_1605733943 PosId=3a7e3b7c-7967-4da1-91e2-7ab24d9ce35e Symbol=EGHT Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=18.9 Text=Fake Filled Order 
+2020-11-18 18:14:19 [logger INFO] MACD-RSI - Closing long position for symbol JPM at 2020-11-18 17:59:00+00:00 
+2020-11-18 18:14:19 [logger INFO] Managed Position Updated: Arrival=2020-11-18 18:14:19.227187 TradeId=trd__JPM_1605734059 PosId=7a380681-3e43-4fc5-885f-6ddfb50800e4 Symbol=JPM Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 18:14:19 [logger INFO] Managed Position Finished: Arrival=2020-11-18 18:14:19.248478 TradeId=trd__JPM_1605734059 PosId=7a380681-3e43-4fc5-885f-6ddfb50800e4 Symbol=JPM Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=115.35 Text=Fake Filled Order 
+2020-11-18 18:14:39 [logger INFO] MACD-RSI - Closing long position for symbol PG at 2020-11-18 17:59:00+00:00 
+2020-11-18 18:14:39 [logger INFO] Managed Position Updated: Arrival=2020-11-18 18:14:39.303703 TradeId=trd__PG_1605734079 PosId=fe281588-f176-46ec-87b2-f3bb00786805 Symbol=PG Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 18:14:39 [logger INFO] Managed Position Finished: Arrival=2020-11-18 18:14:39.319233 TradeId=trd__PG_1605734079 PosId=fe281588-f176-46ec-87b2-f3bb00786805 Symbol=PG Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=139.735 Text=Fake Filled Order 
+2020-11-18 18:14:50 [logger INFO] MACD-RSI - Closing long position for symbol DY at 2020-11-18 17:59:00+00:00 
+2020-11-18 18:14:50 [logger INFO] Managed Position Updated: Arrival=2020-11-18 18:14:50.182958 TradeId=trd__DY_1605734090 PosId=0627e704-55a9-4221-875b-b78172ef30c4 Symbol=DY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 18:14:50 [logger INFO] Managed Position Finished: Arrival=2020-11-18 18:14:50.203902 TradeId=trd__DY_1605734090 PosId=0627e704-55a9-4221-875b-b78172ef30c4 Symbol=DY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=72.13 Text=Fake Filled Order 
+2020-11-18 18:14:52 [logger INFO] MACD/RSI = Running long trade for symbol DY at 2020-11-18 17:59:00+00:00
+2020-11-18 18:14:52 [logger INFO] Managed Position Updated: Arrival=2020-11-18 18:14:52.449899 TradeId=trd__DY_1605734092 PosId=3f95d240-f108-40d7-9918-c10128b4607d Symbol=DY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 18:14:52 [logger INFO] Managed Position Finished: Arrival=2020-11-18 18:14:52.462991 TradeId=trd__DY_1605734092 PosId=3f95d240-f108-40d7-9918-c10128b4607d Symbol=DY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=72.13 Text=Fake Filled Order 
+2020-11-18 18:14:54 [logger INFO] MACD-RSI - Closing long position for symbol SPY at 2020-11-18 17:59:00+00:00 
+2020-11-18 18:14:54 [logger INFO] Managed Position Updated: Arrival=2020-11-18 18:14:54.658100 TradeId=trd__SPY_1605734094 PosId=ded1c9b4-3215-482b-87a9-c396a8956376 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 18:14:54 [logger INFO] Managed Position Finished: Arrival=2020-11-18 18:14:54.677050 TradeId=trd__SPY_1605734094 PosId=ded1c9b4-3215-482b-87a9-c396a8956376 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=356.35 Text=Fake Filled Order 
+2020-11-18 18:14:59 [logger INFO] MACD-RSI - Closing long position for symbol BMRN at 2020-11-18 17:59:00+00:00 
+2020-11-18 18:14:59 [logger INFO] Managed Position Updated: Arrival=2020-11-18 18:14:59.536236 TradeId=trd__BMRN_1605734099 PosId=0db31cdf-03ff-47ac-8167-c49081a05c0c Symbol=BMRN Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 18:14:59 [logger INFO] Managed Position Finished: Arrival=2020-11-18 18:14:59.563507 TradeId=trd__BMRN_1605734099 PosId=0db31cdf-03ff-47ac-8167-c49081a05c0c Symbol=BMRN Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=74.11 Text=Fake Filled Order 
+2020-11-18 18:16:40 [logger INFO] MACD/RSI = Running long trade for symbol ALTR at 2020-11-18 18:00:00+00:00
+2020-11-18 18:16:40 [logger INFO] Managed Position Updated: Arrival=2020-11-18 18:16:40.483359 TradeId=trd__ALTR_1605734200 PosId=bff01d64-6ef8-40b9-979b-ad7f2eb2586b Symbol=ALTR Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 18:16:40 [logger INFO] Managed Position Finished: Arrival=2020-11-18 18:16:40.510284 TradeId=trd__ALTR_1605734200 PosId=bff01d64-6ef8-40b9-979b-ad7f2eb2586b Symbol=ALTR Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=49.25 Text=Fake Filled Order 
+2020-11-18 18:18:40 [logger INFO] MACD/RSI = Running long trade for symbol EGHT at 2020-11-18 18:02:00+00:00
+2020-11-18 18:18:40 [logger INFO] Managed Position Updated: Arrival=2020-11-18 18:18:40.595312 TradeId=trd__EGHT_1605734320 PosId=9e5e9490-8f69-43cc-aa4e-9092f69a048d Symbol=EGHT Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2020-11-18 18:18:40 [logger INFO] Managed Position Finished: Arrival=2020-11-18 18:18:40.622765 TradeId=trd__EGHT_1605734320 PosId=9e5e9490-8f69-43cc-aa4e-9092f69a048d Symbol=EGHT Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=18.89 Text=Fake Filled Order 
+2020-11-18 18:57:23 [logger INFO] Processing SERVICE_STATUS event
+2020-11-18 18:57:23 [logger INFO] Processing SERVICE_STATUS event
+2020-11-18 18:57:26 [logger INFO] Processing SERVICE_STATUS event
+2020-11-18 18:57:27 [logger INFO] Processing SERVICE_STATUS event
+2020-11-19 00:36:54 [logger INFO] Processing SERVICE_STATUS event
+2020-11-19 00:36:54 [logger INFO] Processing SERVICE_STATUS event
+2020-11-19 00:36:59 [logger INFO] Processing SERVICE_STATUS event
+2020-11-19 00:36:59 [logger INFO] Processing SERVICE_STATUS event
+2020-11-19 08:44:52 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:SPY
+2020-11-19 08:44:52 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:PG
+2020-11-19 08:44:52 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:JPM
+2020-11-19 08:44:52 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:fake
+2020-11-19 08:44:52 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:F
+2020-11-19 08:44:52 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:AKAM
+2020-11-19 08:44:52 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:ALTR
+2020-11-19 08:44:52 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:AYX
+2020-11-19 08:44:52 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:BMRN
+2020-11-19 08:44:52 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:CNMD
+2020-11-19 08:44:52 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:CY
+2020-11-19 08:44:52 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:CYBR
+2020-11-19 08:44:52 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:DTE
+2020-11-19 08:44:52 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:DY
+2020-11-19 08:44:52 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:EGHT
+2020-11-19 08:44:52 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:EQH
+2020-11-19 08:44:52 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:FEYE
+2020-11-19 08:44:52 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:FTV
+2020-11-19 08:44:52 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:GES
+2020-11-19 08:44:52 [logger INFO] Processing SERVICE_STATUS event
+2020-11-19 08:44:52 [logger INFO] Processing SERVICE_STATUS event
+2020-11-19 08:44:54 [logger INFO] Requesting for open orders...
+2020-11-19 08:44:54 [logger INFO] Recovered 0 previously existing execution reports
+2020-11-19 08:44:54 [logger INFO] Subscribing to order and route events
+2020-11-19 08:44:54 [logger ERROR] Error running ProcessMessage @OrderRouter.Bloomberg module:Duplicate correlation id: [ valueType=INT classId=0 value=98 ] (0x00020005)
+2020-11-19 08:44:54 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:SPY
+2020-11-19 08:44:54 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:PG
+2020-11-19 08:44:54 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:JPM
+2020-11-19 08:44:54 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:fake
+2020-11-19 08:44:54 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:F
+2020-11-19 08:44:54 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:AKAM
+2020-11-19 08:44:54 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:ALTR
+2020-11-19 08:44:54 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:AYX
+2020-11-19 08:44:54 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:BMRN
+2020-11-19 08:44:54 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:CNMD
+2020-11-19 08:44:54 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:CY
+2020-11-19 08:44:54 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:CYBR
+2020-11-19 08:44:54 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:DTE
+2020-11-19 08:44:54 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:DY
+2020-11-19 08:44:54 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:EGHT
+2020-11-19 08:44:54 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:EQH
+2020-11-19 08:44:54 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:FEYE
+2020-11-19 08:44:54 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:FTV
+2020-11-19 08:44:54 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:GES
+2020-11-19 08:44:54 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:SPY
+2020-11-19 08:44:54 [logger INFO] Received list of Open Positions: 0 positions
+2020-11-19 08:44:54 [logger INFO] Process ready to receive commands and trade
+2020-11-19 08:45:05 [logger INFO] Processing SERVICE_STATUS event
+2020-11-19 08:45:05 [logger INFO] Processing SERVICE_STATUS event
+2020-11-19 08:45:05 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:PG
+2020-11-19 08:45:06 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:JPM
+2020-11-19 08:45:06 [logger ERROR] Error Subscribing to Bloomberg Events:12-Not monitorable. Security not active. (Symbol CY US Equity)
+2020-11-19 08:45:06 [logger ERROR] Error Subscribing to Bloomberg Events:2-Invalid security, rcode = -1 (Symbol fake US Equity)
+2020-11-19 08:45:06 [logger INFO] Processing SERVICE_STATUS event
+2020-11-19 08:45:06 [logger INFO] Service //blp/refdata opened...
+2020-11-19 08:45:06 [logger INFO] Processing SERVICE_STATUS event
+2020-11-19 08:45:06 [logger INFO] Service //blp/refdata opened...
+2020-11-19 08:45:06 [logger ERROR] Error Subscribing to Bloomberg Events:2-Invalid security, rcode = -1 (Symbol fake US Equity)
+2020-11-19 08:45:06 [logger INFO] Historical prices successfully loaded for symbol SPY 
+2020-11-19 08:45:06 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:fake
+2020-11-19 08:45:07 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:F
+2020-11-19 08:45:07 [logger INFO] Processing SERVICE_STATUS event
+2020-11-19 08:45:07 [logger INFO] Service //blp/refdata opened...
+2020-11-19 08:45:07 [logger INFO] Historical prices successfully loaded for symbol PG 
+2020-11-19 08:45:07 [logger INFO] Processing SERVICE_STATUS event
+2020-11-19 08:45:07 [logger INFO] Service //blp/refdata opened...
+2020-11-19 08:45:07 [logger ERROR] Subscription terminated connected to Bloomberg Events:SubscriptionTerminated = {
+    reason = {
+        errorCode = 12
+        description = "Not monitorable. Security not active."
+        category = "NOT_MONITORABLE"
+        source = " [nid:209]:bbdbm5"
+    }
+}
+
+2020-11-19 08:45:07 [logger INFO] Historical prices successfully loaded for symbol JPM 
+2020-11-19 08:45:07 [logger ERROR] Error @ProcessHistoricalPrice:fake US Equity:Unknown/Invalid securityInvalid Security [nid:65] 
+2020-11-19 08:45:07 [logger INFO] Processing SERVICE_STATUS event
+2020-11-19 08:45:07 [logger INFO] Service //blp/refdata opened...
+2020-11-19 08:45:07 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:AKAM
+2020-11-19 08:45:07 [logger INFO] Historical prices successfully loaded for symbol F 
+2020-11-19 08:45:07 [logger INFO] Processing SERVICE_STATUS event
+2020-11-19 08:45:07 [logger INFO] Service //blp/refdata opened...
+2020-11-19 08:45:07 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:ALTR
+2020-11-19 08:45:08 [logger INFO] Historical prices successfully loaded for symbol AKAM 
+2020-11-19 08:45:08 [logger INFO] Processing SERVICE_STATUS event
+2020-11-19 08:45:08 [logger INFO] Service //blp/refdata opened...
+2020-11-19 08:45:08 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:AYX
+2020-11-19 08:45:08 [logger INFO] Historical prices successfully loaded for symbol ALTR 
+2020-11-19 08:45:08 [logger INFO] Processing SERVICE_STATUS event
+2020-11-19 08:45:08 [logger INFO] Service //blp/refdata opened...
+2020-11-19 08:45:08 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:BMRN
+2020-11-19 08:45:09 [logger INFO] Historical prices successfully loaded for symbol AYX 
+2020-11-19 08:45:09 [logger INFO] Processing SERVICE_STATUS event
+2020-11-19 08:45:09 [logger INFO] Service //blp/refdata opened...
+2020-11-19 08:45:09 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:CNMD
+2020-11-19 08:45:09 [logger INFO] Historical prices successfully loaded for symbol BMRN 
+2020-11-19 08:45:09 [logger INFO] Processing SERVICE_STATUS event
+2020-11-19 08:45:09 [logger INFO] Service //blp/refdata opened...
+2020-11-19 08:45:09 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:CY
+2020-11-19 08:45:09 [logger INFO] Historical prices successfully loaded for symbol CNMD 
+2020-11-19 08:45:10 [logger INFO] Processing SERVICE_STATUS event
+2020-11-19 08:45:10 [logger INFO] Service //blp/refdata opened...
+2020-11-19 08:45:10 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:CYBR
+2020-11-19 08:45:10 [logger ERROR] variance requires at least two data points
+2020-11-19 08:45:10 [logger INFO] Historical prices successfully loaded for symbol CY 
+2020-11-19 08:45:10 [logger INFO] Processing SERVICE_STATUS event
+2020-11-19 08:45:10 [logger INFO] Service //blp/refdata opened...
+2020-11-19 08:45:10 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:DTE
+2020-11-19 08:45:10 [logger INFO] Historical prices successfully loaded for symbol CYBR 
+2020-11-19 08:45:10 [logger INFO] Processing SERVICE_STATUS event
+2020-11-19 08:45:10 [logger INFO] Service //blp/refdata opened...
+2020-11-19 08:45:10 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:DY
+2020-11-19 08:45:11 [logger INFO] Historical prices successfully loaded for symbol DTE 
+2020-11-19 08:45:11 [logger INFO] Processing SERVICE_STATUS event
+2020-11-19 08:45:11 [logger INFO] Service //blp/refdata opened...
+2020-11-19 08:45:11 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:EGHT
+2020-11-19 08:45:11 [logger INFO] Historical prices successfully loaded for symbol DY 
+2020-11-19 08:45:11 [logger INFO] Processing SERVICE_STATUS event
+2020-11-19 08:45:11 [logger INFO] Service //blp/refdata opened...
+2020-11-19 08:45:11 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:EQH
+2020-11-19 08:45:12 [logger INFO] Historical prices successfully loaded for symbol EGHT 
+2020-11-19 08:45:12 [logger INFO] Processing SERVICE_STATUS event
+2020-11-19 08:45:12 [logger INFO] Service //blp/refdata opened...
+2020-11-19 08:45:12 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:FEYE
+2020-11-19 08:45:12 [logger INFO] Historical prices successfully loaded for symbol EQH 
+2020-11-19 08:45:12 [logger INFO] Processing SERVICE_STATUS event
+2020-11-19 08:45:12 [logger INFO] Service //blp/refdata opened...
+2020-11-19 08:45:12 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:FTV
+2020-11-19 08:45:12 [logger INFO] Historical prices successfully loaded for symbol FEYE 
+2020-11-19 08:45:12 [logger INFO] Processing SERVICE_STATUS event
+2020-11-19 08:45:12 [logger INFO] Service //blp/refdata opened...
+2020-11-19 08:45:12 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:GES
+2020-11-19 08:45:13 [logger INFO] Historical prices successfully loaded for symbol FTV 
+2020-11-19 08:45:13 [logger INFO] Processing SERVICE_STATUS event
+2020-11-19 08:45:13 [logger INFO] Service //blp/refdata opened...
+2020-11-19 08:45:13 [logger INFO] Historical prices successfully loaded for symbol GES 

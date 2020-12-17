@@ -95,6 +95,7 @@ _REC_STAY_OUT= 5
 _CANDLE_PRICE_METHOD_OPEN=1
 _CANDLE_PRICE_METHOD_CLOSE=2
 _CANDLE_PRICE_METHOD_AVERAGE=3
+_CANDLE_PRICE_METHOD_CROSS=4
 
 #endregion
 
@@ -261,23 +262,32 @@ class DayTradingPosition():
 
     #region Private Util/Aux
 
-    def ProcessCandlebarPrices(self,msCandlePriceMethod,candlebar):
+    def ProcessCandlebarPrices(self,msCandlePriceMethod,cbDict,candlebar):
         if msCandlePriceMethod.IntValue == _CANDLE_PRICE_METHOD_OPEN:
             candlebar.Close=candlebar.Open
             candlebar.High=candlebar.Open
             candlebar.Low=candlebar.Open
-            #print("Symbol={} DateTime={} Method=OPEN Open={} Close{}".format(self.Security.Symbol,candlebar.DateTime,candlebar.Open,candlebar.Close))
         elif msCandlePriceMethod.IntValue == _CANDLE_PRICE_METHOD_CLOSE:
-            #print("Symbol={} DateTime={} Method=CLOSE Open={} Close{}".format(self.Security.Symbol,candlebar.DateTime, candlebar.Open, candlebar.Close))
             pass
         elif msCandlePriceMethod.IntValue == _CANDLE_PRICE_METHOD_AVERAGE:
-            #print("Symbol={} DateTime={} Method=AVERAGE Open={} Close{}".format(self.Security.Symbol,candlebar.DateTime, candlebar.Open, candlebar.Close))
-            avg = (candlebar.Open+candlebar.Close)/2
-            #print("Avg calculated={}".format(avg))
-            candlebar.Close = avg
-            candlebar.High = avg
-            candlebar.Low = avg
-            candlebar.Open = avg
+            prevDateTime = candlebar.DateTime - timedelta(minutes=1)
+            if prevDateTime in cbDict:
+                prevCandle = cbDict[prevDateTime]
+                avg = (prevCandle.Open + prevCandle.Close) / 2
+                prevCandle.Open = avg
+                prevCandle.High = avg
+                prevCandle.Low = avg
+                prevCandle.Close = avg
+
+        elif  msCandlePriceMethod.IntValue == _CANDLE_PRICE_METHOD_CROSS:
+            prevDateTime = candlebar.DateTime - timedelta(minutes=1)
+            if prevDateTime in cbDict:
+                prevCandle=cbDict[prevDateTime]
+                prevCandle.Open=candlebar.Open
+                prevCandle.High = candlebar.Open
+                prevCandle.Low = candlebar.Open
+                prevCandle.Close = candlebar.Open
+
         else:
             raise Exception("Invalid candle price method {}".format(msCandlePriceMethod.IntValue))
 

@@ -343,7 +343,9 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
                 if pos_id in self.PositionSecurities:
                     dayTradingPos = self.PositionSecurities[pos_id]
+
                     if pos_id in dayTradingPos.ExecutionSummaries:
+
                         summary = dayTradingPos.ExecutionSummaries[pos_id]
                         self.UpdateManagedPosExecutionSummary(dayTradingPos,summary,exec_report)
                         self.ProcessOrder(summary, False)
@@ -720,6 +722,11 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
             candlebarArr = self.FilterCandlesToUse(dayTradingPos,candlebarDict.values())
             
             #prevLastProcessedTime = dayTradingPos.MinuteSmoothedRSIIndicator.LastProcessedDateTime
+
+            doRecord = False
+            if len(candlebarArr)>0 and dayTradingPos.MinuteNonSmoothedRSIIndicator.LastProcessedDateTime != candlebarArr[-1].DateTime:
+                doRecord = True
+
             dayTradingPos.MinuteNonSmoothedRSIIndicator.Update(candlebarArr,
                                                     self.ModelParametersHandler.Get(ModelParametersHandler.CANDLE_BARS_NON_SMOTHED_MINUTES_RSI()).IntValue)
             
@@ -805,6 +812,14 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                                                     self.ModelParametersHandler.Get(ModelParametersHandler.VOLUME_INDICATOR_RULE_4()),
                                                     self.ModelParametersHandler.Get(ModelParametersHandler.VOLUME_INDICATOR_RULE_BROOMS())
                                                     )
+
+            if doRecord:
+                
+                self.TradingSignalHelper.PersistMACDRSITradingSignal(dayTradingPos, TradingSignalHelper._ACTION_OPEN(),
+                                                                     Side.Buy, candlebarArr[-1], self, condition=None)
+
+                self.DoLog("DB1-{} -Symbol={} Open={} Close={}".format(candlebarArr[-1].DateTime, candlebarArr[-1].Security.Symbol,
+                                                                       candlebarArr[-1].Open, candlebarArr[-1].Close),MessageType.INFO)
 
 
     def EvaluateGenericLongTrade(self,dayTradingPos,symbol,cbDict,candlebar):
@@ -1328,9 +1343,11 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
             if closingCond is not None and runClose:
                 self.DoLog("MACD-RSI - Closing long position for symbol {} at {} ".format(dayTradingPos.Security.Symbol,candlebar.DateTime),MessageType.INFO)
+
                 self.RunClose(dayTradingPos, Side.Sell if dayTradingPos.GetNetOpenShares() > 0 else Side.Buy,
                               dayTradingPos.GetStatisticalParameters(list(cbDict.values())), candlebar,generic=False,
                               closingCond=closingCond)
+
             return closingCond
 
         else:
@@ -1396,6 +1413,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
             if closingCond is not None and runClose:
                 self.DoLog("MACD-RSI - Closing short position for symbol {} at {} ".format(dayTradingPos.Security.Symbol,candlebar.DateTime),MessageType.INFO)
+
                 self.RunClose(dayTradingPos, Side.Sell if dayTradingPos.GetNetOpenShares() > 0 else Side.Buy,
                               dayTradingPos.GetStatisticalParameters(list(cbDict.values())), candlebar,generic=False,
                               closingCond=closingCond)
@@ -1418,6 +1436,9 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
             if  candlebar.Open is None or candlebar.High is None or candlebar.Low is None or candlebar.Close is None:
                 return
 
+            self.DoLog("DB0-{} -Symbol={} Open={} Close={}".format(candlebar.DateTime, candlebar.Security.Symbol,
+                                                               candlebar.Open, candlebar.Close), MessageType.INFO)
+
             LogHelper.LogPublishCandleBarOnSecurity("DayTrader Recv Candlebar", self, candlebar.Security.Symbol,candlebar)
             self.LockCandlebar.acquire()
 
@@ -1426,9 +1447,6 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
             if  not dayTradingPos.RunningBacktest:
 
-                dayTradingPos.ProcessCandlebarPrices(self.ModelParametersHandler.Get(ModelParametersHandler.CANDLE_PRICE_METHOD(),
-                                                     dayTradingPos.Security.Symbol),candlebar)
-
                 cbDict = self.Candlebars[candlebar.Security.Symbol]
                 if cbDict is  None:
                     cbDict = {}
@@ -1436,6 +1454,9 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                 cbDict[candlebar.DateTime] = candlebar
 
                 self.Candlebars[candlebar.Security.Symbol] = cbDict
+
+                cpMethod=self.ModelParametersHandler.Get(ModelParametersHandler.CANDLE_PRICE_METHOD(),dayTradingPos.Security.Symbol)
+                dayTradingPos.ProcessCandlebarPrices(cpMethod,cbDict, candlebar)
 
                 self.UpdateTechnicalAnalysisParameters(candlebar,cbDict)
                 self.EvaluateOpeningPositions(candlebar,cbDict)

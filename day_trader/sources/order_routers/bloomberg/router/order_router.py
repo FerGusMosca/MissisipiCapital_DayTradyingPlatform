@@ -124,9 +124,9 @@ class OrderRouter( BaseCommunicationModule, ICommunicationModule):
             return True
 
 
-    def UpdateAndSendCandlebar(self,msg,candlebar):
-        if self.ValidateMarketDataPacing(candlebar):
-            SubscriptionHelper.UpdateCandleBar(self, msg, candlebar)
+    def UpdateAndSendCandlebar(self,msg,candlebar,isStart):
+        if self.ValidateMarketDataPacing(candlebar) or isStart:
+            SubscriptionHelper.UpdateCandleBar(self, msg, candlebar,isStart)
             LogHelper.LogPublishCandleBarOnSecurity("Bloomberg Order Router",self, candlebar.Security.Symbol, candlebar)
             cbWrapper = CandleBarDataWrapper(self, candlebar)
             self.OnMarketData.ProcessIncoming(cbWrapper)
@@ -522,7 +522,7 @@ class OrderRouter( BaseCommunicationModule, ICommunicationModule):
         if symbol in self.CandleBarSubscriptions:
             cb = self.CandleBarSubscriptions[symbol]
             cb = CandleBar(cb.Security)
-            self.UpdateAndSendCandlebar(msg, cb)
+            self.UpdateAndSendCandlebar(msg, cb,isStart=True)
         else:
             self.DoLog( "Received candlebar for unknown subscription. Symbol= {}".format(msg.correlationIds()[0].value()), MessageType.ERROR)
 
@@ -530,7 +530,7 @@ class OrderRouter( BaseCommunicationModule, ICommunicationModule):
         symbol = msg.correlationIds()[0].value()
         if symbol in self.CandleBarSubscriptions:
             cb = self.CandleBarSubscriptions[symbol]
-            self.UpdateAndSendCandlebar(msg, cb)
+            self.UpdateAndSendCandlebar(msg, cb,isStart=False)
         else:
             self.DoLog("Received candlebar for unknown subscription. Symbol= {}".format(msg.correlationIds()[0].value()),MessageType.ERROR)
 
@@ -795,27 +795,34 @@ class OrderRouter( BaseCommunicationModule, ICommunicationModule):
         self.ActiveOrdersLock.release()
 
     def SendMockFilledExecutionReportsThread(self,newOrder):
+        try:
 
-        newOrder.OrderId = int(time.time())
-        newOrder.MarketArrivalTime = datetime.now()
-        self.ActiveOrders[newOrder.OrderId] = newOrder
+            newOrder.OrderId = int(time.time())
+            newOrder.MarketArrivalTime = datetime.now()
+            self.ActiveOrders[newOrder.OrderId] = newOrder
 
-        newWrapper = NewExecutionReportWrapper(newOrder)
-        self.DoSendExecutionReportThread(newWrapper)
-        time.sleep(self.Configuration.SecondsToSleepOnTradeForMock)
+            newWrapper = NewExecutionReportWrapper(newOrder)
+            self.DoSendExecutionReportThread(newWrapper)
+            time.sleep(self.Configuration.SecondsToSleepOnTradeForMock)
 
-        lastCandlebar = None
-        fullSymbol = "{} {} {}".format(newOrder.Security.Symbol,
-                                       newOrder.Security.Exchange if newOrder.Security.Exchange is not None else self.Configuration.Exchange,
-                                       BloombergTranslationHelper.GetBloombergSecType(newOrder.Security.SecurityType) if newOrder.Security.SecurityType is not None else self.Configuration.SecurityType)
+            lastCandlebar = None
+            fullSymbol = "{} {} {}".format(newOrder.Security.Symbol,
+                                           newOrder.Security.Exchange if newOrder.Security.Exchange is not None else self.Configuration.Exchange,
+                                           BloombergTranslationHelper.GetBloombergSecType(newOrder.Security.SecurityType) if newOrder.Security.SecurityType is not None else self.Configuration.SecurityType)
 
-        if fullSymbol in  self.CandleBarSubscriptions:
-           lastCandlebar = self.CandleBarSubscriptions[fullSymbol]
+            if fullSymbol in  self.CandleBarSubscriptions:
+               lastCandlebar = self.CandleBarSubscriptions[fullSymbol]
 
-        executionPrice = newOrder.Price if newOrder.Price is not None else (lastCandlebar.Close if lastCandlebar is not None else None)
+            executionPrice = newOrder.Price if newOrder.Price is not None else (lastCandlebar.Close if lastCandlebar is not None else None)
 
-        filledWrapper = FilledExecutionReportWrapper(newOrder,executionPrice)
-        self.DoSendExecutionReportThread(filledWrapper)
+            filledWrapper = FilledExecutionReportWrapper(newOrder,executionPrice)
+            self.DoSendExecutionReportThread(filledWrapper)
+
+        except Exception as e:
+            msg = "Critical error @SendMockFilledExecutionReportsThread:{}".format(str(e))
+            self.DoLog(msg, MessageType.ERROR)
+            errorWrapper = ErrorWrapper(e)
+            self.OnMarketData.ProcessIncoming(errorWrapper)
 
 
     def ProcessNewOrderMock(self,wrapper):
@@ -901,10 +908,7 @@ class OrderRouter( BaseCommunicationModule, ICommunicationModule):
             for execReport in self.ExecutionReportsPendinToBeSent:
                 self.DoSendExecutionReport(execReport)
 
-        except Exception as e:
-            self.DoLog("Critical Error running ProcessExecutionReportListThread @OrderRouter.Bloomberg module:{}".format(str(e)),MessageType.ERROR)
-            emptyWrapper = ExecutionReportListWrapper([])
-            self.OnExecutionReport.ProcessOutgoing(emptyWrapper)
+
         finally:
             if self.ActiveOrdersLock.locked():
                 self.ActiveOrdersLock.release()

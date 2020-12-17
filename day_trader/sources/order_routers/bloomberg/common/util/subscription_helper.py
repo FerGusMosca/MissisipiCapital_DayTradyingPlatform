@@ -99,12 +99,12 @@ class SubscriptionHelper:
 
 
     @staticmethod
-    def UpdateCandleBar(logger, msg, cb):
+    def UpdateCandleBar(logger, msg, cb,isStart):
 
         if (BloombergTranslationHelper.GetSafeDateTime(logger,msg,"TIME",None) is not None):
             cb.Time = BloombergTranslationHelper.GetSafeDateTime(logger,msg,"TIME",None)
 
-        if (BloombergTranslationHelper.GetSafeFloat(logger,msg,"OPEN",None) is not None):
+        if (BloombergTranslationHelper.GetSafeFloat(logger,msg,"OPEN",None) is not None and isStart):
             cb.Open = BloombergTranslationHelper.GetSafeFloat(logger, msg, "OPEN", None)
 
         if (BloombergTranslationHelper.GetSafeFloat(logger,msg,"CLOSE",None) is not None):
