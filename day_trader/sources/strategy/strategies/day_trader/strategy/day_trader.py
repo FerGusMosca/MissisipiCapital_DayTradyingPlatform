@@ -812,15 +812,15 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                                                     self.ModelParametersHandler.Get(ModelParametersHandler.VOLUME_INDICATOR_RULE_4()),
                                                     self.ModelParametersHandler.Get(ModelParametersHandler.VOLUME_INDICATOR_RULE_BROOMS())
                                                     )
-
+            '''
             if doRecord:
                 
                 self.TradingSignalHelper.PersistMACDRSITradingSignal(dayTradingPos, TradingSignalHelper._ACTION_OPEN(),
                                                                      Side.Buy, candlebarArr[-1], self, condition=None)
 
-                self.DoLog("DB1-{} -Symbol={} Open={} Close={}".format(candlebarArr[-1].DateTime, candlebarArr[-1].Security.Symbol,
+                self.DoLog("DBproc-{} -Symbol={} Open={} Close={}".format(candlebarArr[-1].DateTime, candlebarArr[-1].Security.Symbol,
                                                                        candlebarArr[-1].Open, candlebarArr[-1].Close),MessageType.INFO)
-
+            '''
 
     def EvaluateGenericLongTrade(self,dayTradingPos,symbol,cbDict,candlebar):
 
@@ -1435,10 +1435,10 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
             if  candlebar.Open is None or candlebar.High is None or candlebar.Low is None or candlebar.Close is None:
                 return
-
-            self.DoLog("DB0-{} -Symbol={} Open={} Close={}".format(candlebar.DateTime, candlebar.Security.Symbol,
+            ''''
+            self.DoLog("DBRec-{} -Symbol={} Open={} Close={}".format(candlebar.DateTime, candlebar.Security.Symbol,
                                                                candlebar.Open, candlebar.Close), MessageType.INFO)
-
+            '''
             LogHelper.LogPublishCandleBarOnSecurity("DayTrader Recv Candlebar", self, candlebar.Security.Symbol,candlebar)
             self.LockCandlebar.acquire()
 
