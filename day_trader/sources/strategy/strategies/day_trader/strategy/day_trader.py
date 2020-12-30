@@ -2052,7 +2052,9 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
             self.DayTradingPositions.append(persistedDayTradingPos)
 
-
+            time = int(self.ModelParametersHandler.Get(ModelParametersHandler.BAR_FREQUENCY(), persistedDayTradingPos.Security.Symbol).IntValue)
+            self.Candlebars[persistedDayTradingPos.Security.Symbol] = None
+            persistedDayTradingPos.ResetProfitCounters(datetime.datetime.now())
 
             #1- We request historical prices
             histLength=self.GetHistoricalPricesToReq(symbol)

@@ -1,0 +1,235 @@
+2020-12-27 13:05:33 [logger INFO] DayTrader  Initializing
+2020-12-27 13:05:34 [logger INFO] Loading 0 summaries for security SPY
+2020-12-27 13:05:34 [logger INFO] Loading 0 summaries for security PG
+2020-12-27 13:05:34 [logger INFO] Loading 0 summaries for security JPM
+2020-12-27 13:05:34 [logger INFO] Loading 0 summaries for security fake
+2020-12-27 13:05:34 [logger INFO] Loading 0 summaries for security F
+2020-12-27 13:05:34 [logger INFO] Loading 0 summaries for security AKAM
+2020-12-27 13:05:34 [logger INFO] Loading 0 summaries for security ALTR
+2020-12-27 13:05:34 [logger INFO] Loading 0 summaries for security AYX
+2020-12-27 13:05:34 [logger INFO] Loading 0 summaries for security BMRN
+2020-12-27 13:05:34 [logger INFO] Loading 0 summaries for security CNMD
+2020-12-27 13:05:34 [logger INFO] Loading 0 summaries for security CY
+2020-12-27 13:05:34 [logger INFO] Loading 0 summaries for security CYBR
+2020-12-27 13:05:34 [logger INFO] Loading 0 summaries for security DTE
+2020-12-27 13:05:34 [logger INFO] Loading 0 summaries for security DY
+2020-12-27 13:05:34 [logger INFO] Loading 0 summaries for security EGHT
+2020-12-27 13:05:34 [logger INFO] Loading 0 summaries for security EQH
+2020-12-27 13:05:34 [logger INFO] Loading 0 summaries for security FEYE
+2020-12-27 13:05:34 [logger INFO] Loading 0 summaries for security FTV
+2020-12-27 13:05:34 [logger INFO] Loading 0 summaries for security GES
+2020-12-27 13:05:34 [logger INFO] WebSocketModule  Initializing
+2020-12-27 13:05:34 [logger INFO] WebSocketModule Successfully initialized
+2020-12-27 13:05:34 [logger INFO] Websocket commands successfully opened on port 7172: 
+2020-12-27 13:05:34 [logger INFO] FileHandlerModule  Initializing
+2020-12-27 13:05:34 [logger INFO] FileHandlerModule Successfully initialized
+2020-12-27 13:05:34 [logger INFO] Initializing Bloomberg Order Router
+2020-12-27 13:05:34 [logger INFO] Connecting to localhost:8194
+2020-12-27 13:05:49 [logger INFO] Client succesfully connected 
+2020-12-27 13:05:49 [logger INFO] Incoming subscription for service OP - ServiceKey:* 
+2020-12-27 13:05:49 [logger INFO] SubscriptionResponse UUID:None ReqId:2d103911-43c1-49d4-a52f-4346f70310d9 Service:OP ServiceKey:* Success:True
+2020-12-27 13:05:49 [logger INFO] Bloomberg Order Router Initialized
+2020-12-27 13:05:49 [logger INFO] SingletonModuleHandler Successfully initializer
+2020-12-27 13:05:49 [logger INFO] Initializing Generic Market Order Router
+2020-12-27 13:05:49 [logger INFO] SingletonModuleHandler Successfully initializer
+2020-12-27 13:05:49 [logger INFO] Generic Market Order Router Initialized
+2020-12-27 13:05:50 [logger INFO] DayTrader Successfully initialized
+2020-12-27 13:05:50 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:SPY
+2020-12-27 13:05:50 [logger ERROR] Critical error subscribing for Market Data for symbol SPY:Session Not Started (0x00010009)
+2020-12-27 13:05:50 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:PG
+2020-12-27 13:05:50 [logger ERROR] Critical error subscribing for Market Data for symbol PG:Session Not Started (0x00010009)
+2020-12-27 13:05:50 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:JPM
+2020-12-27 13:05:50 [logger ERROR] Critical error subscribing for Market Data for symbol JPM:Session Not Started (0x00010009)
+2020-12-27 13:05:50 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:fake
+2020-12-27 13:05:50 [logger ERROR] Critical error subscribing for Market Data for symbol fake:Session Not Started (0x00010009)
+2020-12-27 13:05:50 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:F
+2020-12-27 13:05:50 [logger ERROR] Critical error subscribing for Market Data for symbol F:Session Not Started (0x00010009)
+2020-12-27 13:05:50 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:AKAM
+2020-12-27 13:05:50 [logger ERROR] Critical error subscribing for Market Data for symbol AKAM:Session Not Started (0x00010009)
+2020-12-27 13:05:50 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:ALTR
+2020-12-27 13:05:50 [logger ERROR] Critical error subscribing for Market Data for symbol ALTR:Session Not Started (0x00010009)
+2020-12-27 13:05:50 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:AYX
+2020-12-27 13:05:50 [logger ERROR] Critical error subscribing for Market Data for symbol AYX:Session Not Started (0x00010009)
+2020-12-27 13:05:50 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:BMRN
+2020-12-27 13:05:50 [logger ERROR] Critical error subscribing for Market Data for symbol BMRN:Session Not Started (0x00010009)
+2020-12-27 13:05:50 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:CNMD
+2020-12-27 13:05:50 [logger ERROR] Critical error subscribing for Market Data for symbol CNMD:Session Not Started (0x00010009)
+2020-12-27 13:05:50 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:CY
+2020-12-27 13:05:50 [logger ERROR] Critical error subscribing for Market Data for symbol CY:Session Not Started (0x00010009)
+2020-12-27 13:05:50 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:CYBR
+2020-12-27 13:05:50 [logger ERROR] Critical error subscribing for Market Data for symbol CYBR:Session Not Started (0x00010009)
+2020-12-27 13:05:50 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:DTE
+2020-12-27 13:05:50 [logger ERROR] Critical error subscribing for Market Data for symbol DTE:Session Not Started (0x00010009)
+2020-12-27 13:05:50 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:DY
+2020-12-27 13:05:50 [logger ERROR] Critical error subscribing for Market Data for symbol DY:Session Not Started (0x00010009)
+2020-12-27 13:05:50 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:EGHT
+2020-12-27 13:05:50 [logger ERROR] Critical error subscribing for Market Data for symbol EGHT:Session Not Started (0x00010009)
+2020-12-27 13:05:50 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:EQH
+2020-12-27 13:05:50 [logger ERROR] Critical error subscribing for Market Data for symbol EQH:Session Not Started (0x00010009)
+2020-12-27 13:05:50 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:FEYE
+2020-12-27 13:05:50 [logger ERROR] Critical error subscribing for Market Data for symbol FEYE:Session Not Started (0x00010009)
+2020-12-27 13:05:50 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:FTV
+2020-12-27 13:05:50 [logger ERROR] Critical error subscribing for Market Data for symbol FTV:Session Not Started (0x00010009)
+2020-12-27 13:05:50 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:GES
+2020-12-27 13:05:50 [logger ERROR] Critical error subscribing for Market Data for symbol GES:Session Not Started (0x00010009)
+2020-12-27 13:05:51 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2020-12-27 13:05:51 [logger ERROR] Bloomberg Session failed to start...
+2020-12-27 13:05:51 [logger INFO] Requesting for open orders...
+2020-12-27 13:05:51 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-12-27 13:05:51 [logger INFO] Subscribing to order and route events
+2020-12-27 13:05:51 [logger ERROR] Error running ProcessMessage @OrderRouter.Bloomberg module:Session Not Started (0x00010009)
+2020-12-27 13:05:51 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:SPY
+2020-12-27 13:05:51 [logger ERROR] Critical error subscribing for candlebars for symbol SPY:Session Not Started (0x00010009)
+2020-12-27 13:05:51 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:PG
+2020-12-27 13:05:51 [logger ERROR] Critical error subscribing for candlebars for symbol PG:Session Not Started (0x00010009)
+2020-12-27 13:05:51 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:JPM
+2020-12-27 13:05:51 [logger ERROR] Critical error subscribing for candlebars for symbol JPM:Session Not Started (0x00010009)
+2020-12-27 13:05:51 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:fake
+2020-12-27 13:05:51 [logger ERROR] Critical error subscribing for candlebars for symbol fake:Session Not Started (0x00010009)
+2020-12-27 13:05:51 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:F
+2020-12-27 13:05:51 [logger ERROR] Critical error subscribing for candlebars for symbol F:Session Not Started (0x00010009)
+2020-12-27 13:05:51 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:AKAM
+2020-12-27 13:05:51 [logger ERROR] Critical error subscribing for candlebars for symbol AKAM:Session Not Started (0x00010009)
+2020-12-27 13:05:51 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:ALTR
+2020-12-27 13:05:51 [logger ERROR] Critical error subscribing for candlebars for symbol ALTR:Session Not Started (0x00010009)
+2020-12-27 13:05:51 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:AYX
+2020-12-27 13:05:51 [logger ERROR] Critical error subscribing for candlebars for symbol AYX:Session Not Started (0x00010009)
+2020-12-27 13:05:51 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:BMRN
+2020-12-27 13:05:51 [logger ERROR] Critical error subscribing for candlebars for symbol BMRN:Session Not Started (0x00010009)
+2020-12-27 13:05:51 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:CNMD
+2020-12-27 13:05:51 [logger ERROR] Critical error subscribing for candlebars for symbol CNMD:Session Not Started (0x00010009)
+2020-12-27 13:05:51 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:CY
+2020-12-27 13:05:51 [logger ERROR] Critical error subscribing for candlebars for symbol CY:Session Not Started (0x00010009)
+2020-12-27 13:05:51 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:CYBR
+2020-12-27 13:05:51 [logger ERROR] Critical error subscribing for candlebars for symbol CYBR:Session Not Started (0x00010009)
+2020-12-27 13:05:51 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:DTE
+2020-12-27 13:05:51 [logger ERROR] Critical error subscribing for candlebars for symbol DTE:Session Not Started (0x00010009)
+2020-12-27 13:05:51 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:DY
+2020-12-27 13:05:51 [logger ERROR] Critical error subscribing for candlebars for symbol DY:Session Not Started (0x00010009)
+2020-12-27 13:05:51 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:EGHT
+2020-12-27 13:05:51 [logger ERROR] Critical error subscribing for candlebars for symbol EGHT:Session Not Started (0x00010009)
+2020-12-27 13:05:51 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:EQH
+2020-12-27 13:05:51 [logger ERROR] Critical error subscribing for candlebars for symbol EQH:Session Not Started (0x00010009)
+2020-12-27 13:05:51 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:FEYE
+2020-12-27 13:05:51 [logger ERROR] Critical error subscribing for candlebars for symbol FEYE:Session Not Started (0x00010009)
+2020-12-27 13:05:51 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:FTV
+2020-12-27 13:05:51 [logger ERROR] Critical error subscribing for candlebars for symbol FTV:Session Not Started (0x00010009)
+2020-12-27 13:05:51 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:GES
+2020-12-27 13:05:51 [logger ERROR] Critical error subscribing for candlebars for symbol GES:Session Not Started (0x00010009)
+2020-12-27 13:05:51 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:SPY
+2020-12-27 13:05:51 [logger ERROR] Critical error subscribing for historical prices for symbol SPY:Null service handle (0x00020002)
+2020-12-27 13:05:51 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:PG
+2020-12-27 13:05:51 [logger ERROR] Critical error subscribing for historical prices for symbol PG:Null service handle (0x00020002)
+2020-12-27 13:05:51 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:JPM
+2020-12-27 13:05:51 [logger ERROR] Critical error subscribing for historical prices for symbol JPM:Null service handle (0x00020002)
+2020-12-27 13:05:51 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:fake
+2020-12-27 13:05:51 [logger ERROR] Critical error subscribing for historical prices for symbol fake:Null service handle (0x00020002)
+2020-12-27 13:05:51 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:F
+2020-12-27 13:05:51 [logger ERROR] Critical error subscribing for historical prices for symbol F:Null service handle (0x00020002)
+2020-12-27 13:05:51 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:AKAM
+2020-12-27 13:05:51 [logger ERROR] Critical error subscribing for historical prices for symbol AKAM:Null service handle (0x00020002)
+2020-12-27 13:05:51 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:ALTR
+2020-12-27 13:05:51 [logger ERROR] Critical error subscribing for historical prices for symbol ALTR:Null service handle (0x00020002)
+2020-12-27 13:05:51 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:AYX
+2020-12-27 13:05:51 [logger ERROR] Critical error subscribing for historical prices for symbol AYX:Null service handle (0x00020002)
+2020-12-27 13:05:51 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:BMRN
+2020-12-27 13:05:51 [logger ERROR] Critical error subscribing for historical prices for symbol BMRN:Null service handle (0x00020002)
+2020-12-27 13:05:51 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:CNMD
+2020-12-27 13:05:51 [logger ERROR] Critical error subscribing for historical prices for symbol CNMD:Null service handle (0x00020002)
+2020-12-27 13:05:51 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:CY
+2020-12-27 13:05:51 [logger ERROR] Critical error subscribing for historical prices for symbol CY:Null service handle (0x00020002)
+2020-12-27 13:05:51 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:CYBR
+2020-12-27 13:05:51 [logger ERROR] Critical error subscribing for historical prices for symbol CYBR:Null service handle (0x00020002)
+2020-12-27 13:05:51 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:DTE
+2020-12-27 13:05:51 [logger ERROR] Critical error subscribing for historical prices for symbol DTE:Null service handle (0x00020002)
+2020-12-27 13:05:51 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:DY
+2020-12-27 13:05:51 [logger ERROR] Critical error subscribing for historical prices for symbol DY:Null service handle (0x00020002)
+2020-12-27 13:05:51 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:EGHT
+2020-12-27 13:05:51 [logger ERROR] Critical error subscribing for historical prices for symbol EGHT:Null service handle (0x00020002)
+2020-12-27 13:05:51 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:EQH
+2020-12-27 13:05:51 [logger ERROR] Critical error subscribing for historical prices for symbol EQH:Null service handle (0x00020002)
+2020-12-27 13:05:51 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:FEYE
+2020-12-27 13:05:51 [logger ERROR] Critical error subscribing for historical prices for symbol FEYE:Null service handle (0x00020002)
+2020-12-27 13:05:51 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:FTV
+2020-12-27 13:05:51 [logger ERROR] Critical error subscribing for historical prices for symbol FTV:Null service handle (0x00020002)
+2020-12-27 13:05:51 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:GES
+2020-12-27 13:05:51 [logger ERROR] Critical error subscribing for historical prices for symbol GES:Null service handle (0x00020002)
+2020-12-27 13:05:52 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-12-27 13:05:53 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-12-27 13:05:54 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-12-27 13:05:55 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-12-27 13:05:56 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-12-27 13:05:57 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-12-27 13:05:58 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-12-27 13:05:59 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-12-27 13:06:00 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-12-27 13:06:01 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-12-27 13:06:02 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-12-27 13:06:03 [logger INFO] Client succesfully disconnected 
+2020-12-27 13:06:03 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-12-27 13:06:04 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-12-27 13:06:05 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-12-27 13:06:05 [logger INFO] Client succesfully connected 
+2020-12-27 13:06:05 [logger INFO] Incoming subscription for service OP - ServiceKey:* 
+2020-12-27 13:06:05 [logger INFO] SubscriptionResponse UUID:None ReqId:4e5eb5fa-c894-4b49-92c7-2cd3103cef0a Service:OP ServiceKey:* Success:True
+2020-12-27 13:06:06 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-12-27 13:06:07 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-12-27 13:06:08 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-12-27 13:06:09 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-12-27 13:06:10 [logger INFO] Waiting initial paints to finish to return active execution reports
+2020-12-27 13:06:11 [logger INFO] Incoming model param Req for key DAILY_BIAS for symbol JPM 
+2020-12-27 13:06:11 [logger INFO] Model param request sent for symbol JPM...
+2020-12-27 13:06:15 [logger INFO] Incoming Model Param Upd Req 
+2020-12-27 13:06:16 [logger INFO] Model Param Upd Req sent...
+2020-12-27 13:06:16 [logger INFO] Incoming position update Req for posId 3
+2020-12-27 13:06:16 [logger INFO] Position Update request sent for PosId 3...
+2020-12-27 13:06:16 [logger INFO] Incoming Historical Prices Req from 2020-12-20T01:06:16-03:00 to 2020-12-27T01:06:16-03:00 for symbol JPM 
+2020-12-27 13:06:16 [logger ERROR] Exception @WebsocketModule.ProcessError:asyncio.run() cannot be called from a running event loop
+2020-12-27 13:06:16 [logger ERROR] Critical Error recovering historical prices from memory: No historical prices loaded for symbol JPM!
+2020-12-27 13:06:16 [logger ERROR] Critical ERROR for Historical Prices Req for Symbol JPM From 2020-12-20T01:06:16-03:00 To 2020-12-27T01:06:16-03:00. Error:No historical prices loaded for symbol JPM
+2020-12-27 13:06:16 [logger INFO] Incoming model param Req for key TRADING_MODE for symbol JPM 
+2020-12-27 13:06:16 [logger INFO] Model param request sent for symbol JPM...
+2020-12-27 13:06:16 [logger INFO] Incoming Market Data Req for symbol JPM 
+2020-12-27 13:06:16 [logger ERROR] Exception @WebsocketModule.ProcessMarketData:Error processing market data msg:'Security' object has no attribute 'Security'
+2020-12-27 13:06:16 [logger INFO] Market Data request sent for symbol JPM...
+2020-12-27 13:06:16 [logger INFO] Incoming model param Req for key AUTOMATIC_TRADING_ALLOWED for symbol * 
+2020-12-27 13:06:16 [logger INFO] Model param request sent for symbol *...
+2020-12-27 13:06:18 [logger INFO] Incoming Model Param Upd Req 
+2020-12-27 13:06:18 [logger INFO] Model Param Upd Req sent...
+2020-12-27 13:06:24 [logger INFO] Incoming subscription for service PE - ServiceKey:3 
+2020-12-27 13:06:24 [logger INFO] SubscriptionResponse UUID:None ReqId:88f44406-edc7-490c-8121-760d9348db05 Service:PE ServiceKey:3 Success:True
+2020-12-27 13:06:24 [logger INFO] SubscriptionResponse UUID:None ReqId:eb0e8787-07a1-411d-a502-fa4e98c9ab78 Service:PTS ServiceKey:3 Success:True
+2020-12-27 13:06:26 [logger INFO] SubscriptionResponse UUID:None ReqId:e9d3685e-6a50-47a6-83fd-0f42c2180e50 Service:PTS ServiceKey:3 Success:True
+2020-12-27 13:06:28 [logger INFO] Incoming model param Req for key DAILY_BIAS for symbol SPY 
+2020-12-27 13:06:28 [logger INFO] Model param request sent for symbol SPY...
+2020-12-27 13:06:29 [logger INFO] Incoming Model Param Upd Req 
+2020-12-27 13:06:29 [logger INFO] Model Param Upd Req sent...
+2020-12-27 13:06:29 [logger INFO] Incoming position update Req for posId 1
+2020-12-27 13:06:29 [logger INFO] Position Update request sent for PosId 1...
+2020-12-27 13:06:29 [logger INFO] Incoming Historical Prices Req from 2020-12-20T01:06:29-03:00 to 2020-12-27T01:06:29-03:00 for symbol SPY 
+2020-12-27 13:06:29 [logger ERROR] Exception @WebsocketModule.ProcessError:asyncio.run() cannot be called from a running event loop
+2020-12-27 13:06:29 [logger ERROR] Critical Error recovering historical prices from memory: No historical prices loaded for symbol SPY!
+2020-12-27 13:06:29 [logger ERROR] Critical ERROR for Historical Prices Req for Symbol SPY From 2020-12-20T01:06:29-03:00 To 2020-12-27T01:06:29-03:00. Error:No historical prices loaded for symbol SPY
+2020-12-27 13:06:29 [logger INFO] Incoming model param Req for key TRADING_MODE for symbol SPY 
+2020-12-27 13:06:29 [logger INFO] Model param request sent for symbol SPY...
+2020-12-27 13:06:29 [logger INFO] Incoming Market Data Req for symbol SPY 
+2020-12-27 13:06:29 [logger ERROR] Exception @WebsocketModule.ProcessMarketData:Error processing market data msg:'Security' object has no attribute 'Security'
+2020-12-27 13:06:29 [logger INFO] Market Data request sent for symbol SPY...
+2020-12-27 13:06:29 [logger INFO] Incoming model param Req for key AUTOMATIC_TRADING_ALLOWED for symbol * 
+2020-12-27 13:06:29 [logger INFO] Model param request sent for symbol *...
+2020-12-27 13:06:30 [logger INFO] Incoming Model Param Upd Req 
+2020-12-27 13:06:30 [logger INFO] Model Param Upd Req sent...
+2020-12-27 13:06:30 [logger INFO] Incoming subscription for service PE - ServiceKey:1 
+2020-12-27 13:06:30 [logger INFO] SubscriptionResponse UUID:None ReqId:5e98c135-eb25-46ca-b643-99adbbdf3e9f Service:PE ServiceKey:1 Success:True
+2020-12-27 13:06:45 [logger INFO] Incoming model param Req for key * for symbol fake 
+2020-12-27 13:06:45 [logger INFO] Model param request sent for symbol fake...
+2020-12-27 13:06:54 [logger INFO] Incoming model param Req for key DAILY_BIAS for symbol AKAM 
+2020-12-27 13:06:54 [logger INFO] Model param request sent for symbol AKAM...
+2020-12-27 13:06:59 [logger INFO] Incoming model param Req for key DAILY_BIAS for symbol DTE 
+2020-12-27 13:06:59 [logger INFO] Model param request sent for symbol DTE...
+2020-12-27 13:07:22 [logger INFO] Incoming model param Req for key * for symbol EQH 
+2020-12-27 13:07:22 [logger INFO] Model param request sent for symbol EQH...
+2020-12-27 13:07:29 [logger INFO] Incoming model param Req for key DAILY_BIAS for symbol fake 
+2020-12-27 13:07:29 [logger INFO] Model param request sent for symbol fake...
+2020-12-27 13:07:38 [logger INFO] Incoming model param Req for key * for symbol - 
+2020-12-27 13:07:38 [logger INFO] Model param request sent for symbol None...
