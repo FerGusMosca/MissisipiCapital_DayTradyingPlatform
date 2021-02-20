@@ -79,6 +79,7 @@ namespace DayTraderTestClient
             Console.WriteLine("DepuratePosition <posId>");
             Console.WriteLine("UpdateModelParamReq <key> <symbol> <intValue> <stringValue> <floatValue>");
             Console.WriteLine("CreateModelParamReq <key> <symbol> <intValue> <stringValue> <floatValue>");
+            Console.WriteLine("DeleteModelParamReq <key> <symbol>");
             Console.WriteLine("PositionCleanTriggers <posId> <includeEoD>");
             Console.WriteLine("Unsubscribe <Service> <ServiceKey>");
             Console.WriteLine("-CLEAR");
@@ -316,6 +317,27 @@ namespace DayTraderTestClient
         }
 
         //
+        private static void ProcessDeleteModelParamReq(string[] param)
+        {
+
+            if (param.Length == 3)
+            {
+                DeleteModelParamReq deleteParamReq = new DeleteModelParamReq()
+                {
+                    Msg = "DeleteModelParamReq",
+                    UUID = UUID,
+                    ReqId = Guid.NewGuid().ToString(),
+                    Key = param[1],
+                    Symbol = param[2] != "*" ? param[2] : null,
+                };
+
+                DoSend<DeleteModelParamReq>(deleteParamReq);
+            }
+            else
+                DoLog(string.Format("Missing mandatory parameters for DeleteModelParamReq message"));
+
+        }
+        //
         private static void ProcessCreateModelParamReq(string[] param)
         {
 
@@ -484,6 +506,10 @@ namespace DayTraderTestClient
             else if (mainCmd == "CreateModelParamReq")
             {
                 ProcessCreateModelParamReq(param);
+            }
+            else if (mainCmd == "DeleteModelParamReq")
+            {
+                ProcessDeleteModelParamReq(param);
             }
             else if (mainCmd == "RoutePositionReq")
             {

@@ -403,7 +403,7 @@ class TradingSignalHelper:
 
     def PersistMACDRSITradingSignal(self, dayTradingPos, action, side,candlebar,logger,condition=None):
         try:
-
+            start = datetime.datetime.now()
             persistTradingSignalParam  = self.ModelParametersHandler.Get(ModelParametersHandler.PERSIST_TRADING_SIGNAL(),
                                                                          dayTradingPos.Security.Symbol)
 
@@ -418,8 +418,10 @@ class TradingSignalHelper:
 
             tradingSignalId= self.TradingSignalManager.GetTradingSignal(now,dayTradingPos.Security.Symbol)
 
+            '''
             if self.PersistingLock.locked():
                 self.PersistingLock.release()
+            '''
 
             if tradingSignalId is None:
                 raise  Exception("Critical error saving RSI/MACD trading signal. Could not recover trading signal from DB. Symbol={} datetime={}".format(dayTradingPos.Security.Symbol,now))
@@ -584,6 +586,13 @@ class TradingSignalHelper:
 
 
             self.TradingSignalManager.Commit()
+
+            finish = datetime.datetime.now()
+            tdelta =  finish - start
+
+            if tdelta.total_seconds()>1:
+                raise Exception("Persisting trading signal took {} seconds!".format(tdelta))
+
 
         except Exception as e:
             logger.DoLog("Critical error persisting trading signal for symbol {}:{}".format(

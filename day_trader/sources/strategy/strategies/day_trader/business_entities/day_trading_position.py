@@ -1353,7 +1353,7 @@ class DayTradingPosition():
 
         # rule 9
         if (        (self.MaxMonetaryLossCurrentTrade/openQty) < ( self.SmoothMACDRSIParam(macdRSISmoothedMode,self.MACDIndicator.PriceHMinusL,gainMinStopLossExitParamU,gainMinStopLossExitParamUU))
-                    and (self.MaxMonetaryLossCurrentTrade / openQty) < ( -1 * self.BollingerIndicator.TPSDStartOfTrade * gainMinTradeParamUUU.FloatValue)
+                    and (self.BollingerIndicator.TPSDStartOfTrade is None or ( (self.MaxMonetaryLossCurrentTrade / openQty) < ( -1 * self.BollingerIndicator.TPSDStartOfTrade * gainMinTradeParamUUU.FloatValue)))
                     #and (self.MaxMonetaryLossCurrentTrade / openQty) < gainMinTradeParamFixedLoss.FloatValue
                     and (self.MaxLossCurrentTrade <gainMinTradeParamFixedLoss.FloatValue)
                 and macdRsiCloseLongRule9ModelParam.IntValue>=1

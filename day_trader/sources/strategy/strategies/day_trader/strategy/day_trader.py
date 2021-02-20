@@ -153,7 +153,18 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
                 try:
                     dayTradingPos = self.DayTradingPositionsQueue.get()
+
+                    start = datetime.datetime.now()
+
                     self.DayTradingPositionManager.PersistDayTradingPosition(dayTradingPos)
+
+                    finish = datetime.datetime.now()
+                    tdelta = finish - start
+
+                    if tdelta.total_seconds() > 1:
+                        self.DoLog("DBG Warning -Persisting Position for security {} took  {} seconds"
+                                   .format(dayTradingPos.Security.Symbol,tdelta.total_seconds()), MessageType.ERROR)
+
 
                 except Exception as e:
                     self.DoLog("Error Saving Day Trading Position to DB: {}".format(e), MessageType.ERROR)
@@ -167,11 +178,20 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
                 try:
                     summary = self.SummariesQueue.get()
+                    start = datetime.datetime.now()
+
                     if summary.Position.PosId in self.PositionSecurities:
                         dayTradingPos = self.PositionSecurities[summary.Position.PosId]
                         self.ExecutionSummaryManager.PersistExecutionSummary(summary,dayTradingPos.Id if dayTradingPos is not None else None)
                     else:
                         self.ExecutionSummaryManager.PersistExecutionSummary(summary,None)
+
+                    finish = datetime.datetime.now()
+                    tdelta = finish - start
+
+                    if tdelta.total_seconds() > 1:
+                        self.DoLog("DBG Warning -Persisting summary for PosId {} took {} seconds"
+                                   .format(summary.Position.PosId,tdelta.total_seconds()), MessageType.ERROR)
 
                 except Exception as e:
                     self.DoLog("Error Saving Trades to DB: {}".format(e), MessageType.ERROR)
@@ -231,9 +251,17 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
     def UpdateManagedPosExecutionSummary(self,dayTradingPos, summary, execReport):
 
+        if not summary.Position.IsOpenPosition() and not execReport.IsDoneExecutionReport():
+            self.DoLog("Discarding execution report because received {} exec. report for {} summary".format(execReport.OrdStatus,summary.Position.PosStatus),MessageType.ERROR)
+            return
+
         self.ProcessExecutionPrices(dayTradingPos,execReport)
         summary.UpdateStatus(execReport, marketDataToUse=dayTradingPos.MarketData if dayTradingPos.RunningBacktest else None)
         dayTradingPos.UpdateRouting() #order is important!
+        self.DoLog("DBG<ER>-Symbol={} PosStatus={} ExecType={} LeavesQty={} Routing={} "
+                   .format(dayTradingPos.Security.Symbol,summary.Position.PosStatus,execReport.ExecType,execReport.LeavesQty,
+                           dayTradingPos.Routing),MessageType.INFO)
+
         if summary.Position.IsFinishedPosition():
             self.WaitForFilledToArrive = False
             #print("{}-<Reset>-WaitForFilledToArriv:{}".format(datetime.datetime.now(),self.WaitForFilledToArrive))
@@ -339,7 +367,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
             if pos_id is not None:
 
-                self.RoutingLock.acquire()
+                self.RoutingLock.acquire(blocking=True)
 
                 if pos_id in self.PositionSecurities:
                     dayTradingPos = self.PositionSecurities[pos_id]
@@ -1142,7 +1170,11 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
     def RunClose(self,dayTradingPos,side,statisticalParam,candlebar, text=None, generic = False, closingCond = None):
 
+        self.DoLog("DBG<ER>- RunClose Symbol={} Routing={} ".format(dayTradingPos.Security.Symbol,dayTradingPos.Routing), MessageType.INFO)
         if dayTradingPos.Routing:
+            self.DoLog("DBG<ER>- RunClose Symbol={} OpenSumms={} "
+                       .format(dayTradingPos.Security.Symbol, dayTradingPos.GetOpenSummaries()),MessageType.INFO)
+
             for summary in dayTradingPos.GetOpenSummaries():
 
                 # we just cancel summaries whose side is different than the closing side. We don't want to cancel the close
@@ -1157,6 +1189,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                         self.ProcessError(state.Exception)
 
         else:
+            self.DoLog("DBG<ER>- RunClose Symbol={} NetShares={} ".format(dayTradingPos.Security.Symbol, dayTradingPos.GetNetOpenShares()), MessageType.INFO)
             netShares = dayTradingPos.GetNetOpenShares()
             if netShares!=0: #if there is something to close
                 # print("Now we do close positions for security {} for net open shares {}".format(dayTradingPos.Security.Symbol, netShares))
@@ -1435,7 +1468,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
             if  candlebar.Open is None or candlebar.High is None or candlebar.Low is None or candlebar.Close is None:
                 return
-            ''''
+            '''
             self.DoLog("DBRec-{} -Symbol={} Open={} Close={}".format(candlebar.DateTime, candlebar.Security.Symbol,
                                                                candlebar.Open, candlebar.Close), MessageType.INFO)
             '''
@@ -1584,7 +1617,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
     def ProcessNewPositionReqManagedPos(self, dayTradingPos, side,qty,account, price = None,stopLoss=None,
                                         takeProfit=None,closeEndOfDay=None, text=None):
         try:
-            self.RoutingLock.acquire()
+            self.RoutingLock.acquire(blocking=True)
 
             if dayTradingPos.Routing:
                 return
@@ -1795,6 +1828,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
             while  self.WaitForFilledToArrive:
                 #print("{}-WaitForFilledToArrive-{} @WaitToSyncBacktest:{}".format(datetime.datetime.now(),countWaiting,self.WaitForFilledToArrive))
                 time.sleep(sleepMilisec)
+
                 countWaiting += 1
                 if countWaiting >= 10:
                     raise Exception(
@@ -2270,7 +2304,24 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
             self.DoLog(msg,MessageType.ERROR)
             return CMState.BuildFailure(self, Exception=e)
 
+    def ProcessDeleteModelParamReq(self, wrapper):
 
+        try:
+            symbol = wrapper.GetField(ModelParamField.Symbol)
+            key = wrapper.GetField(ModelParamField.Key)
+
+            paramToDel = ModelParameter(key=key, symbol=symbol, stringValue=None, intValue=None,floatValue=None)
+
+            self.ModelParametersHandler.RemoveLight(key, symbol)
+
+            self.ModelParametersManager.DeleteModelParameter(paramToDel)
+
+            return CMState.BuildSuccess(self)
+        except Exception as e:
+            msg = "Critical Error deleting model param: {}!".format(str(e))
+            self.ProcessError(ErrorWrapper(Exception(msg)))
+            self.DoLog(msg, MessageType.ERROR)
+            return CMState.BuildFailure(self, Exception=e)
 
     def ProcessUpdateModelParamReq(self,wrapper):
 
@@ -2449,6 +2500,8 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                 return self.ProcessCreateModelParamReq(wrapper)
             elif wrapper.GetAction() == Actions.UPDATE_MODEL_PARAM_REQUEST:
                 return self.ProcessUpdateModelParamReq(wrapper)
+            elif wrapper.GetAction() == Actions.DELETE_MODEL_PARAM_REQUEST:
+                return self.ProcessDeleteModelParamReq(wrapper)
             elif wrapper.GetAction() == Actions.HISTORICAL_PRICES_REQUEST:
                 return self.ProcessHistoricalPricesReq(wrapper)
             elif wrapper.GetAction() == Actions.MODEL_PARAM_REQUEST:

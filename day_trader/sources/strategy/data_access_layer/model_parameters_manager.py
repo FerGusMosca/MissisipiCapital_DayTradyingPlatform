@@ -43,6 +43,14 @@ class ModelParametersManager():
             cursor.execute("{CALL PersistModelParameter (?,?,?,?,?)}", params)
             self.connection.commit()
 
+    def DeleteModelParameter(self, modelPrameter):
+        with self.connection.cursor() as cursor:
+            params = (modelPrameter.Key,
+                      modelPrameter.Symbol if modelPrameter.Symbol is not None and modelPrameter.Symbol != "*" else None
+                      )
+            cursor.execute("{CALL DeleteModelParameter (?,?)}", params)
+            self.connection.commit()
+
     def GetModelParametersManager(self):
         modelParameters=[]
         with self.connection.cursor() as cursor:

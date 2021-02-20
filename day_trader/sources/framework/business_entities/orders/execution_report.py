@@ -25,3 +25,8 @@ class ExecutionReport:
         self.ArrivalPrice=ArrivalPrice
 
         # endregion
+
+    def IsDoneExecutionReport(self):
+        return OrdStatus==OrdStatus.Filled or OrdStatus==OrdStatus.DoneForDay or OrdStatus==OrdStatus.Canceled \
+               or OrdStatus==OrdStatus.Stopped or OrdStatus==OrdStatus.Rejected or OrdStatus==OrdStatus.Rejected \
+               or OrdStatus==OrdStatus.Suspended or OrdStatus==OrdStatus.Calculated or OrdStatus==OrdStatus.Expired

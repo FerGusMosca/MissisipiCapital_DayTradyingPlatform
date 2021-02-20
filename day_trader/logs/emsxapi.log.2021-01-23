@@ -1,0 +1,564 @@
+2021-01-22 16:37:44 [logger INFO] MACD-RSI - Closing short position for symbol CNMD at 2021-01-22 16:22:00+00:00 
+2021-01-22 16:37:44 [logger INFO] MACD-RSI - Closing short position for symbol CNMD at 2021-01-22 16:22:00+00:00 
+2021-01-22 16:37:44 [logger INFO] Cancelling order previously to closing position for symbol CNMD
+2021-01-22 16:37:44 [logger INFO] Managed Position Updated: Arrival=2021-01-22 16:37:44.573711 TradeId=trd__CNMD_1611344264 PosId=05e6df53-cd32-483a-a7e5-8964bac583ba Symbol=CNMD Side=Side.BuyToClose Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2021-01-22 16:37:44 [logger INFO] Publishing cancel reject for orderId None reason:Error processing order cancel request for orderId None: OrderId None is not an active order 
+2021-01-22 16:37:44 [logger INFO] Managed Position Finished: Arrival=2021-01-22 16:37:44.675440 TradeId=trd__CNMD_1611344264 PosId=05e6df53-cd32-483a-a7e5-8964bac583ba Symbol=CNMD Side=Side.BuyToClose Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=119.05 Text=Fake Filled Order 
+2021-01-22 16:39:18 [logger INFO] MACD-RSI - Closing long position for symbol DY at 2021-01-22 16:24:00+00:00 
+2021-01-22 16:39:18 [logger INFO] Managed Position Updated: Arrival=2021-01-22 16:39:18.737006 TradeId=trd__DY_1611344358 PosId=231cad65-f11a-4a23-a36e-c8144a510940 Symbol=DY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2021-01-22 16:39:18 [logger INFO] MACD-RSI - Closing long position for symbol DY at 2021-01-22 16:24:00+00:00 
+2021-01-22 16:39:18 [logger INFO] Managed Position Finished: Arrival=2021-01-22 16:39:18.839732 TradeId=trd__DY_1611344358 PosId=231cad65-f11a-4a23-a36e-c8144a510940 Symbol=DY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=88.7 Text=Fake Filled Order 
+2021-01-23 06:24:41 [logger INFO] Processing SERVICE_STATUS event
+2021-01-23 06:24:41 [logger INFO] Processing SERVICE_STATUS event
+2021-01-23 10:28:13 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:SPY
+2021-01-23 10:28:13 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:PG
+2021-01-23 10:28:13 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:JPM
+2021-01-23 10:28:13 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:fake
+2021-01-23 10:28:13 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:F
+2021-01-23 10:28:13 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:AKAM
+2021-01-23 10:28:13 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:ALTR
+2021-01-23 10:28:13 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:AYX
+2021-01-23 10:28:13 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:BMRN
+2021-01-23 10:28:13 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:CNMD
+2021-01-23 10:28:13 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:CY
+2021-01-23 10:28:13 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:CYBR
+2021-01-23 10:28:13 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:DTE
+2021-01-23 10:28:13 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:DY
+2021-01-23 10:28:13 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:EGHT
+2021-01-23 10:28:13 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:EQH
+2021-01-23 10:28:13 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:FEYE
+2021-01-23 10:28:13 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:FTV
+2021-01-23 10:28:13 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:GES
+2021-01-23 10:28:14 [logger INFO] Requesting for open orders...
+2021-01-23 10:28:14 [logger INFO] Recovered 0 previously existing execution reports
+2021-01-23 10:28:14 [logger INFO] Subscribing to order and route events
+2021-01-23 10:28:14 [logger ERROR] Error running ProcessMessage @OrderRouter.Bloomberg module:Duplicate correlation id: [ valueType=INT classId=0 value=98 ] (0x00020005)
+2021-01-23 10:28:14 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:SPY
+2021-01-23 10:28:14 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:PG
+2021-01-23 10:28:14 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:JPM
+2021-01-23 10:28:14 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:fake
+2021-01-23 10:28:14 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:F
+2021-01-23 10:28:14 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:AKAM
+2021-01-23 10:28:14 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:ALTR
+2021-01-23 10:28:14 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:AYX
+2021-01-23 10:28:14 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:BMRN
+2021-01-23 10:28:14 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:CNMD
+2021-01-23 10:28:14 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:CY
+2021-01-23 10:28:14 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:CYBR
+2021-01-23 10:28:14 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:DTE
+2021-01-23 10:28:14 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:DY
+2021-01-23 10:28:14 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:EGHT
+2021-01-23 10:28:14 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:EQH
+2021-01-23 10:28:14 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:FEYE
+2021-01-23 10:28:15 [logger INFO] Received list of Open Positions: 0 positions
+2021-01-23 10:28:15 [logger INFO] Process ready to receive commands and trade
+2021-01-23 10:28:15 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:FTV
+2021-01-23 10:28:15 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:GES
+2021-01-23 10:28:15 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:SPY
+2021-01-23 10:29:15 [logger INFO] Processing SERVICE_STATUS event
+2021-01-23 10:29:15 [logger ERROR] Error: Service //blp/refdata failed to open
+2021-01-23 10:29:15 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:PG
+2021-01-23 10:30:15 [logger INFO] Processing SERVICE_STATUS event
+2021-01-23 10:30:15 [logger ERROR] Error: Service //blp/refdata failed to open
+2021-01-23 10:30:15 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:JPM
+2021-01-23 10:31:15 [logger INFO] Processing SERVICE_STATUS event
+2021-01-23 10:31:15 [logger ERROR] Error: Service //blp/refdata failed to open
+2021-01-23 10:31:15 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:fake
+2021-01-23 10:32:15 [logger INFO] Processing SERVICE_STATUS event
+2021-01-23 10:32:15 [logger ERROR] Error: Service //blp/refdata failed to open
+2021-01-23 10:32:15 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:F
+2021-01-23 10:33:15 [logger INFO] Processing SERVICE_STATUS event
+2021-01-23 10:33:15 [logger ERROR] Error: Service //blp/refdata failed to open
+2021-01-23 10:33:15 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:AKAM
+2021-01-23 10:34:15 [logger INFO] Processing SERVICE_STATUS event
+2021-01-23 10:34:15 [logger ERROR] Error: Service //blp/refdata failed to open
+2021-01-23 10:34:15 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:ALTR
+2021-01-23 10:35:15 [logger INFO] Processing SERVICE_STATUS event
+2021-01-23 10:35:15 [logger ERROR] Error: Service //blp/refdata failed to open
+2021-01-23 10:35:15 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:AYX
+2021-01-23 10:36:15 [logger INFO] Processing SERVICE_STATUS event
+2021-01-23 10:36:15 [logger ERROR] Error: Service //blp/refdata failed to open
+2021-01-23 10:36:15 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:BMRN
+2021-01-23 10:37:15 [logger INFO] Processing SERVICE_STATUS event
+2021-01-23 10:37:15 [logger ERROR] Error: Service //blp/refdata failed to open
+2021-01-23 10:37:15 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:CNMD
+2021-01-23 10:38:15 [logger INFO] Processing SERVICE_STATUS event
+2021-01-23 10:38:15 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:CY
+2021-01-23 10:38:15 [logger ERROR] Error: Service //blp/refdata failed to open
+2021-01-23 10:39:15 [logger INFO] Processing SERVICE_STATUS event
+2021-01-23 10:39:15 [logger ERROR] Error: Service //blp/refdata failed to open
+2021-01-23 10:39:15 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:CYBR
+2021-01-23 10:40:15 [logger INFO] Processing SERVICE_STATUS event
+2021-01-23 10:40:15 [logger ERROR] Error: Service //blp/refdata failed to open
+2021-01-23 10:40:15 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:DTE
+2021-01-23 10:41:15 [logger INFO] Processing SERVICE_STATUS event
+2021-01-23 10:41:15 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:DY
+2021-01-23 10:41:15 [logger ERROR] Error: Service //blp/refdata failed to open
+2021-01-23 10:42:15 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:EGHT
+2021-01-23 10:42:15 [logger INFO] Processing SERVICE_STATUS event
+2021-01-23 10:42:15 [logger ERROR] Error: Service //blp/refdata failed to open
+2021-01-23 10:43:15 [logger INFO] Processing SERVICE_STATUS event
+2021-01-23 10:43:15 [logger ERROR] Error: Service //blp/refdata failed to open
+2021-01-23 10:43:15 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:EQH
+2021-01-23 10:44:15 [logger INFO] Processing SERVICE_STATUS event
+2021-01-23 10:44:15 [logger ERROR] Error: Service //blp/refdata failed to open
+2021-01-23 10:44:15 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:FEYE
+2021-01-23 10:45:15 [logger INFO] Processing SERVICE_STATUS event
+2021-01-23 10:45:15 [logger ERROR] Error: Service //blp/refdata failed to open
+2021-01-23 10:45:15 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:FTV
+2021-01-23 10:46:15 [logger INFO] Processing SERVICE_STATUS event
+2021-01-23 10:46:15 [logger ERROR] Error: Service //blp/refdata failed to open
+2021-01-23 10:46:15 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:GES
+2021-01-23 10:47:15 [logger INFO] Processing SERVICE_STATUS event
+2021-01-23 10:47:15 [logger ERROR] Error: Service //blp/refdata failed to open
+2021-01-23 19:37:49 [logger INFO] DayTrader  Initializing
+2021-01-23 19:37:50 [logger INFO] Loading 16 summaries for security SPY
+2021-01-23 19:37:50 [logger INFO] Loading 26 summaries for security PG
+2021-01-23 19:37:50 [logger INFO] Loading 0 summaries for security JPM
+2021-01-23 19:37:50 [logger INFO] Loading 0 summaries for security fake
+2021-01-23 19:37:50 [logger INFO] Loading 11 summaries for security F
+2021-01-23 19:37:50 [logger INFO] Loading 12 summaries for security AKAM
+2021-01-23 19:37:50 [logger INFO] Loading 14 summaries for security ALTR
+2021-01-23 19:37:50 [logger INFO] Loading 15 summaries for security AYX
+2021-01-23 19:37:50 [logger INFO] Loading 22 summaries for security BMRN
+2021-01-23 19:37:50 [logger INFO] Loading 10 summaries for security CNMD
+2021-01-23 19:37:50 [logger INFO] Loading 0 summaries for security CY
+2021-01-23 19:37:50 [logger INFO] Loading 14 summaries for security CYBR
+2021-01-23 19:37:50 [logger INFO] Loading 21 summaries for security DTE
+2021-01-23 19:37:50 [logger INFO] Loading 7 summaries for security DY
+2021-01-23 19:37:50 [logger INFO] Loading 14 summaries for security EGHT
+2021-01-23 19:37:50 [logger INFO] Loading 13 summaries for security EQH
+2021-01-23 19:37:50 [logger INFO] Loading 20 summaries for security FEYE
+2021-01-23 19:37:50 [logger INFO] Loading 10 summaries for security FTV
+2021-01-23 19:37:50 [logger INFO] Loading 18 summaries for security GES
+2021-01-23 19:37:50 [logger INFO] WebSocketModule  Initializing
+2021-01-23 19:37:50 [logger INFO] WebSocketModule Successfully initialized
+2021-01-23 19:37:50 [logger INFO] Websocket commands successfully opened on port 7172: 
+2021-01-23 19:37:50 [logger INFO] FileHandlerModule  Initializing
+2021-01-23 19:37:50 [logger INFO] FileHandlerModule Successfully initialized
+2021-01-23 19:37:51 [logger INFO] Initializing Bloomberg Order Router
+2021-01-23 19:37:51 [logger INFO] Connecting to localhost:8194
+2021-01-23 19:37:51 [logger INFO] Bloomberg Order Router Initialized
+2021-01-23 19:37:51 [logger INFO] SingletonModuleHandler Successfully initializer
+2021-01-23 19:37:51 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2021-01-23 19:37:51 [logger INFO] Bloomberg Session Connection is UP...
+2021-01-23 19:37:51 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2021-01-23 19:37:51 [logger INFO] Bloomberg Session started...
+2021-01-23 19:37:51 [logger INFO] Initializing Generic Market Order Router
+2021-01-23 19:37:51 [logger INFO] SingletonModuleHandler Successfully initializer
+2021-01-23 19:37:51 [logger INFO] Generic Market Order Router Initialized
+2021-01-23 19:37:52 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:SPY
+2021-01-23 19:37:52 [logger INFO] DayTrader Successfully initialized
+2021-01-23 19:37:52 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:PG
+2021-01-23 19:37:52 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:JPM
+2021-01-23 19:37:52 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:fake
+2021-01-23 19:37:52 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:F
+2021-01-23 19:37:52 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:AKAM
+2021-01-23 19:37:52 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:ALTR
+2021-01-23 19:37:52 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:AYX
+2021-01-23 19:37:52 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:BMRN
+2021-01-23 19:37:52 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:CNMD
+2021-01-23 19:37:52 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:CY
+2021-01-23 19:37:52 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:CYBR
+2021-01-23 19:37:52 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:DTE
+2021-01-23 19:37:52 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:DY
+2021-01-23 19:37:52 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:EGHT
+2021-01-23 19:37:52 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:EQH
+2021-01-23 19:37:52 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:FEYE
+2021-01-23 19:37:52 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:FTV
+2021-01-23 19:37:52 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:GES
+2021-01-23 19:37:53 [logger INFO] Requesting for open orders...
+2021-01-23 19:37:53 [logger INFO] Waiting initial paints to finish to return active execution reports
+2021-01-23 19:37:53 [logger INFO] Subscribing to order and route events
+2021-01-23 19:37:53 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:SPY
+2021-01-23 19:37:53 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:PG
+2021-01-23 19:37:53 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:JPM
+2021-01-23 19:37:53 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:fake
+2021-01-23 19:37:53 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:F
+2021-01-23 19:37:53 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:AKAM
+2021-01-23 19:37:53 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:ALTR
+2021-01-23 19:37:53 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:AYX
+2021-01-23 19:37:53 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:BMRN
+2021-01-23 19:37:53 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:CNMD
+2021-01-23 19:37:53 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:CY
+2021-01-23 19:37:53 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:CYBR
+2021-01-23 19:37:53 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:DTE
+2021-01-23 19:37:53 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:DY
+2021-01-23 19:37:53 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:EGHT
+2021-01-23 19:37:53 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:EQH
+2021-01-23 19:37:53 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:FEYE
+2021-01-23 19:37:53 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:FTV
+2021-01-23 19:37:53 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:GES
+2021-01-23 19:37:53 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:SPY
+2021-01-23 19:37:54 [logger INFO] Waiting initial paints to finish to return active execution reports
+2021-01-23 19:37:55 [logger INFO] Waiting initial paints to finish to return active execution reports
+2021-01-23 19:37:56 [logger INFO] Waiting initial paints to finish to return active execution reports
+2021-01-23 19:37:57 [logger INFO] Waiting initial paints to finish to return active execution reports
+2021-01-23 19:37:58 [logger INFO] Waiting initial paints to finish to return active execution reports
+2021-01-23 19:37:59 [logger INFO] Waiting initial paints to finish to return active execution reports
+2021-01-23 19:38:00 [logger INFO] Waiting initial paints to finish to return active execution reports
+2021-01-23 19:38:01 [logger INFO] Waiting initial paints to finish to return active execution reports
+2021-01-23 19:38:02 [logger INFO] Waiting initial paints to finish to return active execution reports
+2021-01-23 19:38:03 [logger INFO] Waiting initial paints to finish to return active execution reports
+2021-01-23 19:38:04 [logger INFO] Waiting initial paints to finish to return active execution reports
+2021-01-23 19:38:05 [logger INFO] Waiting initial paints to finish to return active execution reports
+2021-01-23 19:38:06 [logger INFO] Waiting initial paints to finish to return active execution reports
+2021-01-23 19:38:07 [logger INFO] Waiting initial paints to finish to return active execution reports
+2021-01-23 19:38:08 [logger INFO] Waiting initial paints to finish to return active execution reports
+2021-01-23 19:38:09 [logger INFO] Waiting initial paints to finish to return active execution reports
+2021-01-23 19:38:10 [logger INFO] Waiting initial paints to finish to return active execution reports
+2021-01-23 19:38:11 [logger INFO] Waiting initial paints to finish to return active execution reports
+2021-01-23 19:38:12 [logger INFO] Waiting initial paints to finish to return active execution reports
+2021-01-23 19:38:28 [logger INFO] Client succesfully connected 
+2021-01-23 19:38:28 [logger INFO] Incoming subscription for service OP - ServiceKey:* 
+2021-01-23 19:38:28 [logger INFO] SubscriptionResponse UUID:None ReqId:c92f6f4e-7512-457c-868b-553ee19b81a4 Service:OP ServiceKey:* Success:True
+2021-01-23 19:38:51 [logger INFO] Processing SERVICE_STATUS event
+2021-01-23 19:38:51 [logger ERROR] Error: Service //blp/emapisvc failed to open
+2021-01-23 19:38:53 [logger INFO] Processing SERVICE_STATUS event
+2021-01-23 19:38:53 [logger ERROR] Error: Service //blp/mktbar failed to open
+2021-01-23 19:38:53 [logger ERROR] Error Subscribing to Bloomberg Events:1-Failed to auto-open corresponding service (//blp/mktbar) (Symbol SPY US Equity)
+2021-01-23 19:39:51 [logger INFO] Processing SERVICE_STATUS event
+2021-01-23 19:39:51 [logger ERROR] Error: Service //blp/mktdata failed to open
+2021-01-23 19:39:51 [logger ERROR] Error Subscribing to Bloomberg Events:1-Failed to auto-open corresponding service (//blp/mktdata) (Symbol SPY US Equity)
+2021-01-23 19:39:53 [logger INFO] Processing SERVICE_STATUS event
+2021-01-23 19:39:53 [logger ERROR] Error: Service //blp/mktbar failed to open
+2021-01-23 19:39:53 [logger ERROR] Error Subscribing to Bloomberg Events:1-Failed to auto-open corresponding service (//blp/mktbar) (Symbol PG US Equity)
+2021-01-23 19:46:33 [logger INFO] DayTrader  Initializing
+2021-01-23 19:46:33 [logger INFO] Loading 16 summaries for security SPY
+2021-01-23 19:46:33 [logger INFO] Loading 26 summaries for security PG
+2021-01-23 19:46:33 [logger INFO] Loading 0 summaries for security JPM
+2021-01-23 19:46:33 [logger INFO] Loading 0 summaries for security fake
+2021-01-23 19:46:33 [logger INFO] Loading 11 summaries for security F
+2021-01-23 19:46:33 [logger INFO] Loading 12 summaries for security AKAM
+2021-01-23 19:46:33 [logger INFO] Loading 14 summaries for security ALTR
+2021-01-23 19:46:33 [logger INFO] Loading 15 summaries for security AYX
+2021-01-23 19:46:33 [logger INFO] Loading 22 summaries for security BMRN
+2021-01-23 19:46:33 [logger INFO] Loading 10 summaries for security CNMD
+2021-01-23 19:46:33 [logger INFO] Loading 0 summaries for security CY
+2021-01-23 19:46:33 [logger INFO] Loading 14 summaries for security CYBR
+2021-01-23 19:46:33 [logger INFO] Loading 21 summaries for security DTE
+2021-01-23 19:46:33 [logger INFO] Loading 7 summaries for security DY
+2021-01-23 19:46:33 [logger INFO] Loading 14 summaries for security EGHT
+2021-01-23 19:46:33 [logger INFO] Loading 13 summaries for security EQH
+2021-01-23 19:46:33 [logger INFO] Loading 20 summaries for security FEYE
+2021-01-23 19:46:33 [logger INFO] Loading 10 summaries for security FTV
+2021-01-23 19:46:33 [logger INFO] Loading 18 summaries for security GES
+2021-01-23 19:46:34 [logger INFO] WebSocketModule  Initializing
+2021-01-23 19:46:34 [logger INFO] WebSocketModule Successfully initialized
+2021-01-23 19:46:34 [logger INFO] Websocket commands successfully opened on port 7172: 
+2021-01-23 19:46:34 [logger INFO] FileHandlerModule  Initializing
+2021-01-23 19:46:34 [logger INFO] FileHandlerModule Successfully initialized
+2021-01-23 19:46:34 [logger INFO] Initializing Bloomberg Order Router
+2021-01-23 19:46:34 [logger INFO] Connecting to localhost:8194
+2021-01-23 19:46:34 [logger INFO] Bloomberg Order Router Initialized
+2021-01-23 19:46:34 [logger INFO] SingletonModuleHandler Successfully initializer
+2021-01-23 19:46:34 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2021-01-23 19:46:34 [logger INFO] Bloomberg Session Connection is UP...
+2021-01-23 19:46:34 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2021-01-23 19:46:34 [logger INFO] Bloomberg Session started...
+2021-01-23 19:46:34 [logger INFO] Initializing Generic Market Order Router
+2021-01-23 19:46:34 [logger INFO] SingletonModuleHandler Successfully initializer
+2021-01-23 19:46:34 [logger INFO] Generic Market Order Router Initialized
+2021-01-23 19:46:35 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:SPY
+2021-01-23 19:46:35 [logger INFO] DayTrader Successfully initialized
+2021-01-23 19:46:35 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:PG
+2021-01-23 19:46:35 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:JPM
+2021-01-23 19:46:35 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:fake
+2021-01-23 19:46:35 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:F
+2021-01-23 19:46:35 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:AKAM
+2021-01-23 19:46:35 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:ALTR
+2021-01-23 19:46:35 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:AYX
+2021-01-23 19:46:35 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:BMRN
+2021-01-23 19:46:35 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:CNMD
+2021-01-23 19:46:35 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:CY
+2021-01-23 19:46:35 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:CYBR
+2021-01-23 19:46:35 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:DTE
+2021-01-23 19:46:35 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:DY
+2021-01-23 19:46:35 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:EGHT
+2021-01-23 19:46:35 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:EQH
+2021-01-23 19:46:35 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:FEYE
+2021-01-23 19:46:35 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:FTV
+2021-01-23 19:46:35 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:GES
+2021-01-23 19:46:36 [logger INFO] Requesting for open orders...
+2021-01-23 19:46:36 [logger INFO] Waiting initial paints to finish to return active execution reports
+2021-01-23 19:46:36 [logger INFO] Subscribing to order and route events
+2021-01-23 19:46:36 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:SPY
+2021-01-23 19:46:36 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:PG
+2021-01-23 19:46:36 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:JPM
+2021-01-23 19:46:36 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:fake
+2021-01-23 19:46:36 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:F
+2021-01-23 19:46:36 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:AKAM
+2021-01-23 19:46:36 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:ALTR
+2021-01-23 19:46:36 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:AYX
+2021-01-23 19:46:36 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:BMRN
+2021-01-23 19:46:36 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:CNMD
+2021-01-23 19:46:36 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:CY
+2021-01-23 19:46:36 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:CYBR
+2021-01-23 19:46:36 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:DTE
+2021-01-23 19:46:36 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:DY
+2021-01-23 19:46:36 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:EGHT
+2021-01-23 19:46:36 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:EQH
+2021-01-23 19:46:36 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:FEYE
+2021-01-23 19:46:36 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:FTV
+2021-01-23 19:46:36 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:GES
+2021-01-23 19:46:36 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:SPY
+2021-01-23 19:46:37 [logger INFO] Waiting initial paints to finish to return active execution reports
+2021-01-23 19:46:38 [logger INFO] Waiting initial paints to finish to return active execution reports
+2021-01-23 19:46:39 [logger INFO] Waiting initial paints to finish to return active execution reports
+2021-01-23 19:46:39 [logger INFO] Client succesfully connected 
+2021-01-23 19:46:39 [logger INFO] Incoming subscription for service OP - ServiceKey:* 
+2021-01-23 19:46:39 [logger INFO] SubscriptionResponse UUID:None ReqId:6202b88e-35c0-46a9-bd84-e9ff57f06de5 Service:OP ServiceKey:* Success:True
+2021-01-23 19:46:40 [logger INFO] Waiting initial paints to finish to return active execution reports
+2021-01-23 19:46:41 [logger INFO] Waiting initial paints to finish to return active execution reports
+2021-01-23 19:46:42 [logger INFO] Incoming model param Req for key DAILY_BIAS for symbol PG 
+2021-01-23 19:46:42 [logger INFO] Model param request sent for symbol PG...
+2021-01-23 19:46:42 [logger INFO] Waiting initial paints to finish to return active execution reports
+2021-01-23 19:46:43 [logger INFO] Waiting initial paints to finish to return active execution reports
+2021-01-23 19:46:44 [logger INFO] Waiting initial paints to finish to return active execution reports
+2021-01-23 19:46:45 [logger INFO] Waiting initial paints to finish to return active execution reports
+2021-01-23 19:46:45 [logger INFO] Incoming Model Param Upd Req 
+2021-01-23 19:46:45 [logger INFO] Model Param Upd Req sent...
+2021-01-23 19:46:45 [logger INFO] Incoming position update Req for posId 2
+2021-01-23 19:46:45 [logger INFO] Position Update request sent for PosId 2...
+2021-01-23 19:46:45 [logger INFO] Incoming Historical Prices Req from 2021-01-16T07:46:45-03:00 to 2021-01-23T07:46:45-03:00 for symbol PG 
+2021-01-23 19:46:45 [logger ERROR] Exception @WebsocketModule.ProcessError:asyncio.run() cannot be called from a running event loop
+2021-01-23 19:46:45 [logger ERROR] Critical Error recovering historical prices from memory: No historical prices loaded for symbol PG!
+2021-01-23 19:46:45 [logger ERROR] Critical ERROR for Historical Prices Req for Symbol PG From 2021-01-16T07:46:45-03:00 To 2021-01-23T07:46:45-03:00. Error:No historical prices loaded for symbol PG
+2021-01-23 19:46:45 [logger INFO] Incoming model param Req for key TRADING_MODE for symbol PG 
+2021-01-23 19:46:45 [logger INFO] Model param request sent for symbol PG...
+2021-01-23 19:46:45 [logger INFO] Incoming Market Data Req for symbol PG 
+2021-01-23 19:46:45 [logger ERROR] Exception @WebsocketModule.ProcessMarketData:Error processing market data msg:'Security' object has no attribute 'Security'
+2021-01-23 19:46:45 [logger INFO] Market Data request sent for symbol PG...
+2021-01-23 19:46:45 [logger INFO] Incoming model param Req for key AUTOMATIC_TRADING_ALLOWED for symbol * 
+2021-01-23 19:46:45 [logger INFO] Model param request sent for symbol *...
+2021-01-23 19:46:46 [logger INFO] Waiting initial paints to finish to return active execution reports
+2021-01-23 19:46:47 [logger INFO] Waiting initial paints to finish to return active execution reports
+2021-01-23 19:46:48 [logger INFO] Waiting initial paints to finish to return active execution reports
+2021-01-23 19:46:49 [logger INFO] Waiting initial paints to finish to return active execution reports
+2021-01-23 19:46:50 [logger INFO] Incoming Model Param Upd Req 
+2021-01-23 19:46:50 [logger ERROR] Exception @WebsocketModule.ProcessError:asyncio.run() cannot be called from a running event loop
+2021-01-23 19:46:50 [logger ERROR] Critical Error updating model param: Could not find a model parameters in memory for key TRADING_MODE and symbolPG. Parameters insertion should be made !
+2021-01-23 19:46:50 [logger ERROR] Critical ERROR for Model Param Upd Req . Error:Could not find a model parameters in memory for key TRADING_MODE and symbolPG. Parameters insertion should be made 
+2021-01-23 19:46:50 [logger INFO] Waiting initial paints to finish to return active execution reports
+2021-01-23 19:46:51 [logger INFO] Waiting initial paints to finish to return active execution reports
+2021-01-23 19:46:52 [logger INFO] Waiting initial paints to finish to return active execution reports
+2021-01-23 19:46:53 [logger INFO] Waiting initial paints to finish to return active execution reports
+2021-01-23 19:46:54 [logger INFO] Waiting initial paints to finish to return active execution reports
+2021-01-23 19:46:55 [logger INFO] Waiting initial paints to finish to return active execution reports
+2021-01-23 19:46:56 [logger INFO] Incoming Model Param Upd Req 
+2021-01-23 19:46:56 [logger ERROR] Exception @WebsocketModule.ProcessError:asyncio.run() cannot be called from a running event loop
+2021-01-23 19:46:56 [logger ERROR] Critical Error updating model param: Could not find a model parameters in memory for key TRADING_MODE and symbolPG. Parameters insertion should be made !
+2021-01-23 19:46:56 [logger ERROR] Critical ERROR for Model Param Upd Req . Error:Could not find a model parameters in memory for key TRADING_MODE and symbolPG. Parameters insertion should be made 
+2021-01-23 19:47:31 [logger INFO] DayTrader  Initializing
+2021-01-23 19:47:31 [logger INFO] Loading 16 summaries for security SPY
+2021-01-23 19:47:31 [logger INFO] Loading 26 summaries for security PG
+2021-01-23 19:47:31 [logger INFO] Loading 0 summaries for security JPM
+2021-01-23 19:47:31 [logger INFO] Loading 0 summaries for security fake
+2021-01-23 19:47:31 [logger INFO] Loading 11 summaries for security F
+2021-01-23 19:47:31 [logger INFO] Loading 12 summaries for security AKAM
+2021-01-23 19:47:31 [logger INFO] Loading 14 summaries for security ALTR
+2021-01-23 19:47:31 [logger INFO] Loading 15 summaries for security AYX
+2021-01-23 19:47:31 [logger INFO] Loading 22 summaries for security BMRN
+2021-01-23 19:47:31 [logger INFO] Loading 10 summaries for security CNMD
+2021-01-23 19:47:31 [logger INFO] Loading 0 summaries for security CY
+2021-01-23 19:47:31 [logger INFO] Loading 14 summaries for security CYBR
+2021-01-23 19:47:31 [logger INFO] Loading 21 summaries for security DTE
+2021-01-23 19:47:31 [logger INFO] Loading 7 summaries for security DY
+2021-01-23 19:47:31 [logger INFO] Loading 14 summaries for security EGHT
+2021-01-23 19:47:31 [logger INFO] Loading 13 summaries for security EQH
+2021-01-23 19:47:31 [logger INFO] Loading 20 summaries for security FEYE
+2021-01-23 19:47:31 [logger INFO] Loading 10 summaries for security FTV
+2021-01-23 19:47:31 [logger INFO] Loading 18 summaries for security GES
+2021-01-23 19:47:31 [logger INFO] WebSocketModule  Initializing
+2021-01-23 19:47:31 [logger INFO] WebSocketModule Successfully initialized
+2021-01-23 19:47:31 [logger INFO] Websocket commands successfully opened on port 7172: 
+2021-01-23 19:47:31 [logger INFO] FileHandlerModule  Initializing
+2021-01-23 19:47:31 [logger INFO] FileHandlerModule Successfully initialized
+2021-01-23 19:47:31 [logger INFO] Initializing Bloomberg Order Router
+2021-01-23 19:47:31 [logger INFO] Connecting to localhost:8194
+2021-01-23 19:47:31 [logger INFO] Bloomberg Order Router Initialized
+2021-01-23 19:47:31 [logger INFO] SingletonModuleHandler Successfully initializer
+2021-01-23 19:47:31 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2021-01-23 19:47:31 [logger INFO] Bloomberg Session Connection is UP...
+2021-01-23 19:47:31 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2021-01-23 19:47:31 [logger INFO] Bloomberg Session started...
+2021-01-23 19:47:31 [logger INFO] Initializing Generic Market Order Router
+2021-01-23 19:47:31 [logger INFO] SingletonModuleHandler Successfully initializer
+2021-01-23 19:47:31 [logger INFO] Generic Market Order Router Initialized
+2021-01-23 19:47:32 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:SPY
+2021-01-23 19:47:32 [logger INFO] DayTrader Successfully initialized
+2021-01-23 19:47:32 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:PG
+2021-01-23 19:47:32 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:JPM
+2021-01-23 19:47:32 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:fake
+2021-01-23 19:47:32 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:F
+2021-01-23 19:47:32 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:AKAM
+2021-01-23 19:47:32 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:ALTR
+2021-01-23 19:47:32 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:AYX
+2021-01-23 19:47:32 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:BMRN
+2021-01-23 19:47:32 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:CNMD
+2021-01-23 19:47:32 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:CY
+2021-01-23 19:47:32 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:CYBR
+2021-01-23 19:47:32 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:DTE
+2021-01-23 19:47:32 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:DY
+2021-01-23 19:47:32 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:EGHT
+2021-01-23 19:47:32 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:EQH
+2021-01-23 19:47:32 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:FEYE
+2021-01-23 19:47:32 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:FTV
+2021-01-23 19:47:32 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:GES
+2021-01-23 19:47:33 [logger INFO] Requesting for open orders...
+2021-01-23 19:47:33 [logger INFO] Waiting initial paints to finish to return active execution reports
+2021-01-23 19:47:33 [logger INFO] Subscribing to order and route events
+2021-01-23 19:47:33 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:SPY
+2021-01-23 19:47:33 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:PG
+2021-01-23 19:47:33 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:JPM
+2021-01-23 19:47:33 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:fake
+2021-01-23 19:47:33 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:F
+2021-01-23 19:47:33 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:AKAM
+2021-01-23 19:47:33 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:ALTR
+2021-01-23 19:47:33 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:AYX
+2021-01-23 19:47:33 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:BMRN
+2021-01-23 19:47:33 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:CNMD
+2021-01-23 19:47:33 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:CY
+2021-01-23 19:47:33 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:CYBR
+2021-01-23 19:47:33 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:DTE
+2021-01-23 19:47:33 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:DY
+2021-01-23 19:47:33 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:EGHT
+2021-01-23 19:47:33 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:EQH
+2021-01-23 19:47:33 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:FEYE
+2021-01-23 19:47:33 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:FTV
+2021-01-23 19:47:33 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:GES
+2021-01-23 19:47:33 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:SPY
+2021-01-23 19:47:34 [logger INFO] Waiting initial paints to finish to return active execution reports
+2021-01-23 19:47:35 [logger INFO] Waiting initial paints to finish to return active execution reports
+2021-01-23 19:47:36 [logger INFO] Waiting initial paints to finish to return active execution reports
+2021-01-23 19:47:37 [logger INFO] Waiting initial paints to finish to return active execution reports
+2021-01-23 19:47:38 [logger INFO] Waiting initial paints to finish to return active execution reports
+2021-01-23 19:47:39 [logger INFO] Waiting initial paints to finish to return active execution reports
+2021-01-23 19:47:40 [logger INFO] Waiting initial paints to finish to return active execution reports
+2021-01-23 19:47:41 [logger INFO] Waiting initial paints to finish to return active execution reports
+2021-01-23 19:47:42 [logger INFO] Waiting initial paints to finish to return active execution reports
+2021-01-23 19:47:43 [logger INFO] Waiting initial paints to finish to return active execution reports
+2021-01-23 19:47:44 [logger INFO] Waiting initial paints to finish to return active execution reports
+2021-01-23 19:47:45 [logger INFO] Waiting initial paints to finish to return active execution reports
+2021-01-23 19:47:46 [logger INFO] Waiting initial paints to finish to return active execution reports
+2021-01-23 19:47:47 [logger INFO] Waiting initial paints to finish to return active execution reports
+2021-01-23 19:47:48 [logger INFO] Waiting initial paints to finish to return active execution reports
+2021-01-23 19:47:49 [logger INFO] Waiting initial paints to finish to return active execution reports
+2021-01-23 19:47:50 [logger INFO] Waiting initial paints to finish to return active execution reports
+2021-01-23 19:47:51 [logger INFO] Waiting initial paints to finish to return active execution reports
+2021-01-23 19:47:52 [logger INFO] Waiting initial paints to finish to return active execution reports
+2021-01-23 19:48:21 [logger INFO] Client succesfully connected 
+2021-01-23 19:48:21 [logger INFO] Incoming subscription for service OP - ServiceKey:* 
+2021-01-23 19:48:21 [logger INFO] SubscriptionResponse UUID:None ReqId:0ca9445d-d63c-4e05-a03e-3091b3cfefd4 Service:OP ServiceKey:* Success:True
+2021-01-23 19:48:31 [logger INFO] Processing SERVICE_STATUS event
+2021-01-23 19:48:31 [logger ERROR] Error: Service //blp/emapisvc failed to open
+2021-01-23 19:48:33 [logger INFO] Processing SERVICE_STATUS event
+2021-01-23 19:48:33 [logger ERROR] Error: Service //blp/mktbar failed to open
+2021-01-23 19:48:33 [logger ERROR] Error Subscribing to Bloomberg Events:1-Failed to auto-open corresponding service (//blp/mktbar) (Symbol SPY US Equity)
+2021-01-23 19:49:15 [logger INFO] DayTrader  Initializing
+2021-01-23 19:49:15 [logger INFO] Loading 16 summaries for security SPY
+2021-01-23 19:49:15 [logger INFO] Loading 26 summaries for security PG
+2021-01-23 19:49:15 [logger INFO] Loading 0 summaries for security JPM
+2021-01-23 19:49:15 [logger INFO] Loading 0 summaries for security fake
+2021-01-23 19:49:15 [logger INFO] Loading 11 summaries for security F
+2021-01-23 19:49:15 [logger INFO] Loading 12 summaries for security AKAM
+2021-01-23 19:49:15 [logger INFO] Loading 14 summaries for security ALTR
+2021-01-23 19:49:15 [logger INFO] Loading 15 summaries for security AYX
+2021-01-23 19:49:15 [logger INFO] Loading 22 summaries for security BMRN
+2021-01-23 19:49:15 [logger INFO] Loading 10 summaries for security CNMD
+2021-01-23 19:49:15 [logger INFO] Loading 0 summaries for security CY
+2021-01-23 19:49:15 [logger INFO] Loading 14 summaries for security CYBR
+2021-01-23 19:49:15 [logger INFO] Loading 21 summaries for security DTE
+2021-01-23 19:49:15 [logger INFO] Loading 7 summaries for security DY
+2021-01-23 19:49:15 [logger INFO] Loading 14 summaries for security EGHT
+2021-01-23 19:49:15 [logger INFO] Loading 13 summaries for security EQH
+2021-01-23 19:49:15 [logger INFO] Loading 20 summaries for security FEYE
+2021-01-23 19:49:15 [logger INFO] Loading 10 summaries for security FTV
+2021-01-23 19:49:15 [logger INFO] Loading 18 summaries for security GES
+2021-01-23 19:49:16 [logger INFO] WebSocketModule  Initializing
+2021-01-23 19:49:16 [logger INFO] WebSocketModule Successfully initialized
+2021-01-23 19:49:16 [logger INFO] Websocket commands successfully opened on port 7172: 
+2021-01-23 19:49:16 [logger INFO] FileHandlerModule  Initializing
+2021-01-23 19:49:16 [logger INFO] FileHandlerModule Successfully initialized
+2021-01-23 19:49:16 [logger INFO] Initializing Bloomberg Order Router
+2021-01-23 19:49:16 [logger INFO] Connecting to localhost:8194
+2021-01-23 19:49:16 [logger INFO] Bloomberg Order Router Initialized
+2021-01-23 19:49:16 [logger INFO] SingletonModuleHandler Successfully initializer
+2021-01-23 19:49:16 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2021-01-23 19:49:16 [logger INFO] Bloomberg Session Connection is UP...
+2021-01-23 19:49:16 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2021-01-23 19:49:16 [logger INFO] Bloomberg Session started...
+2021-01-23 19:49:16 [logger INFO] Initializing Generic Market Order Router
+2021-01-23 19:49:16 [logger INFO] SingletonModuleHandler Successfully initializer
+2021-01-23 19:49:16 [logger INFO] Generic Market Order Router Initialized
+2021-01-23 19:49:17 [logger INFO] DayTrader Successfully initialized
+2021-01-23 19:49:17 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:SPY
+2021-01-23 19:49:17 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:PG
+2021-01-23 19:49:17 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:JPM
+2021-01-23 19:49:17 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:fake
+2021-01-23 19:49:17 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:F
+2021-01-23 19:49:17 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:AKAM
+2021-01-23 19:49:17 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:ALTR
+2021-01-23 19:49:17 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:AYX
+2021-01-23 19:49:17 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:BMRN
+2021-01-23 19:49:17 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:CNMD
+2021-01-23 19:49:17 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:CY
+2021-01-23 19:49:17 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:CYBR
+2021-01-23 19:49:17 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:DTE
+2021-01-23 19:49:17 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:DY
+2021-01-23 19:49:17 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:EGHT
+2021-01-23 19:49:17 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:EQH
+2021-01-23 19:49:17 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:FEYE
+2021-01-23 19:49:17 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:FTV
+2021-01-23 19:49:17 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:GES
+2021-01-23 19:49:18 [logger INFO] Requesting for open orders...
+2021-01-23 19:49:18 [logger INFO] Waiting initial paints to finish to return active execution reports
+2021-01-23 19:49:18 [logger INFO] Subscribing to order and route events
+2021-01-23 19:49:18 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:SPY
+2021-01-23 19:49:18 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:PG
+2021-01-23 19:49:18 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:JPM
+2021-01-23 19:49:18 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:fake
+2021-01-23 19:49:18 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:F
+2021-01-23 19:49:18 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:AKAM
+2021-01-23 19:49:18 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:ALTR
+2021-01-23 19:49:18 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:AYX
+2021-01-23 19:49:18 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:BMRN
+2021-01-23 19:49:18 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:CNMD
+2021-01-23 19:49:18 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:CY
+2021-01-23 19:49:18 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:CYBR
+2021-01-23 19:49:18 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:DTE
+2021-01-23 19:49:18 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:DY
+2021-01-23 19:49:18 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:EGHT
+2021-01-23 19:49:18 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:EQH
+2021-01-23 19:49:18 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:FEYE
+2021-01-23 19:49:18 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:FTV
+2021-01-23 19:49:18 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:GES
+2021-01-23 19:49:18 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:SPY
+2021-01-23 19:49:19 [logger INFO] Waiting initial paints to finish to return active execution reports
+2021-01-23 19:49:20 [logger INFO] Waiting initial paints to finish to return active execution reports
+2021-01-23 19:49:21 [logger INFO] Waiting initial paints to finish to return active execution reports
+2021-01-23 19:49:22 [logger INFO] Waiting initial paints to finish to return active execution reports
+2021-01-23 19:49:23 [logger INFO] Waiting initial paints to finish to return active execution reports
+2021-01-23 19:49:24 [logger INFO] Waiting initial paints to finish to return active execution reports
+2021-01-23 19:49:25 [logger INFO] Waiting initial paints to finish to return active execution reports
+2021-01-23 19:49:26 [logger INFO] Waiting initial paints to finish to return active execution reports
+2021-01-23 19:49:27 [logger INFO] Waiting initial paints to finish to return active execution reports
+2021-01-23 19:49:28 [logger INFO] Client succesfully connected 
+2021-01-23 19:49:28 [logger INFO] Incoming subscription for service OP - ServiceKey:* 
+2021-01-23 19:49:28 [logger INFO] SubscriptionResponse UUID:None ReqId:d72647ff-ebf9-456a-8534-f78dd4887aad Service:OP ServiceKey:* Success:True
+2021-01-23 19:49:28 [logger INFO] Waiting initial paints to finish to return active execution reports
+2021-01-23 19:49:29 [logger INFO] Waiting initial paints to finish to return active execution reports
+2021-01-23 19:49:30 [logger INFO] Waiting initial paints to finish to return active execution reports
+2021-01-23 19:49:31 [logger INFO] Waiting initial paints to finish to return active execution reports
+2021-01-23 19:49:32 [logger INFO] Waiting initial paints to finish to return active execution reports
+2021-01-23 19:49:33 [logger INFO] Waiting initial paints to finish to return active execution reports
+2021-01-23 19:49:34 [logger INFO] Waiting initial paints to finish to return active execution reports
+2021-01-23 19:49:35 [logger INFO] Waiting initial paints to finish to return active execution reports
+2021-01-23 19:49:36 [logger INFO] Waiting initial paints to finish to return active execution reports
+2021-01-23 19:49:37 [logger INFO] Waiting initial paints to finish to return active execution reports
+2021-01-23 19:50:16 [logger INFO] Processing SERVICE_STATUS event
+2021-01-23 19:50:16 [logger ERROR] Error: Service //blp/emapisvc failed to open
+2021-01-23 19:50:18 [logger INFO] Processing SERVICE_STATUS event
+2021-01-23 19:50:18 [logger ERROR] Error: Service //blp/mktbar failed to open
+2021-01-23 19:50:18 [logger ERROR] Error Subscribing to Bloomberg Events:1-Failed to auto-open corresponding service (//blp/mktbar) (Symbol SPY US Equity)
+2021-01-23 19:50:44 [logger INFO] Client succesfully disconnected 

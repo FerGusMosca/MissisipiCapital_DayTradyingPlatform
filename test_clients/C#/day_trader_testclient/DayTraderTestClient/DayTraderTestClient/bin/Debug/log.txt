@@ -1,1 +1,3 @@
 Starting DayTraderTestClient...
+@2/19/2021 9:03:23 AM:{"Error": null, "Msg": "PositionUpdateAck", "ReqId": "34265283-c916-43e7-a46e-8cd3d9d47516", "Success": true, "UUID": null}
+

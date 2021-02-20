@@ -295,6 +295,8 @@ class WebSocketModule(BaseCommunicationModule, ICommunicationModule):
                 return self.InvokingModule.ProcessMessage(wrapper)
             elif wrapper.GetAction() == Actions.UPDATE_MODEL_PARAM_REQUEST:
                 return self.InvokingModule.ProcessMessage(wrapper)
+            elif wrapper.GetAction() == Actions.DELETE_MODEL_PARAM_REQUEST:
+                return self.InvokingModule.ProcessMessage(wrapper)
             elif wrapper.GetAction() == Actions.HISTORICAL_PRICES_REQUEST:
                 return self.InvokingModule.ProcessMessage(wrapper)
             elif wrapper.GetAction() == Actions.MODEL_PARAM_REQUEST:

@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="DTO\Batchs\GetOpenPositionsBatch.cs" />
     <Compile Include="DTO\Config\CreateModelParamReq.cs" />
+    <Compile Include="DTO\Config\DeleteModelParamReq.cs" />
     <Compile Include="DTO\Config\ModelParamReq.cs" />
     <Compile Include="DTO\Config\UpdateModelParamReq.cs" />
     <Compile Include="DTO\ErrorMessage.cs" />

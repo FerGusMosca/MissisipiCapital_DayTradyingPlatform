@@ -755,6 +755,17 @@ class ModelParametersHandler:
         else:
             return None
 
+    def RemoveLight(self, key,symbol):
+        finalKey = key
+        if symbol is not None:
+            finalKey = symbol + _KEY_CHAR + key
+
+        if finalKey in self.ModelParametersDict:
+            del self.ModelParametersDict[finalKey]
+
+        else:
+            return None
+
     def Set(self, key, symbol,modelParam):
         if(symbol is not None and symbol!="*"):
             self.ModelParametersDict[symbol + _KEY_CHAR +key] = modelParam

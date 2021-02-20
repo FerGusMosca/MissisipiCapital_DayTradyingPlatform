@@ -1,0 +1,204 @@
+2021-02-02 19:42:09 [logger INFO] DayTrader  Initializing
+2021-02-02 19:42:09 [logger INFO] Loading 0 summaries for security SPY
+2021-02-02 19:42:09 [logger INFO] Loading 0 summaries for security PG
+2021-02-02 19:42:09 [logger INFO] Loading 0 summaries for security JPM
+2021-02-02 19:42:09 [logger INFO] Loading 0 summaries for security fake
+2021-02-02 19:42:09 [logger INFO] Loading 0 summaries for security F
+2021-02-02 19:42:09 [logger INFO] Loading 0 summaries for security AKAM
+2021-02-02 19:42:09 [logger INFO] Loading 0 summaries for security ALTR
+2021-02-02 19:42:09 [logger INFO] Loading 0 summaries for security AYX
+2021-02-02 19:42:09 [logger INFO] Loading 0 summaries for security BMRN
+2021-02-02 19:42:09 [logger INFO] Loading 0 summaries for security CNMD
+2021-02-02 19:42:09 [logger INFO] Loading 0 summaries for security CY
+2021-02-02 19:42:09 [logger INFO] Loading 0 summaries for security CYBR
+2021-02-02 19:42:09 [logger INFO] Loading 0 summaries for security DTE
+2021-02-02 19:42:09 [logger INFO] Loading 0 summaries for security DY
+2021-02-02 19:42:09 [logger INFO] Loading 0 summaries for security EGHT
+2021-02-02 19:42:09 [logger INFO] Loading 0 summaries for security EQH
+2021-02-02 19:42:09 [logger INFO] Loading 0 summaries for security FEYE
+2021-02-02 19:42:09 [logger INFO] Loading 0 summaries for security FTV
+2021-02-02 19:42:09 [logger INFO] Loading 0 summaries for security GES
+2021-02-02 19:42:10 [logger INFO] WebSocketModule  Initializing
+2021-02-02 19:42:10 [logger INFO] WebSocketModule Successfully initialized
+2021-02-02 19:42:10 [logger INFO] Websocket commands successfully opened on port 7172: 
+2021-02-02 19:42:10 [logger INFO] FileHandlerModule  Initializing
+2021-02-02 19:42:10 [logger INFO] FileHandlerModule Successfully initialized
+2021-02-02 19:42:10 [logger INFO] Initializing Bloomberg Order Router
+2021-02-02 19:42:10 [logger INFO] Connecting to localhost:8194
+2021-02-02 19:42:10 [logger INFO] Bloomberg Order Router Initialized
+2021-02-02 19:42:10 [logger INFO] SingletonModuleHandler Successfully initializer
+2021-02-02 19:42:10 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2021-02-02 19:42:10 [logger INFO] Bloomberg Session Connection is UP...
+2021-02-02 19:42:10 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2021-02-02 19:42:10 [logger INFO] Bloomberg Session started...
+2021-02-02 19:42:10 [logger INFO] Initializing Generic Market Order Router
+2021-02-02 19:42:10 [logger INFO] SingletonModuleHandler Successfully initializer
+2021-02-02 19:42:10 [logger INFO] Generic Market Order Router Initialized
+2021-02-02 19:42:10 [logger INFO] Processing SERVICE_STATUS event
+2021-02-02 19:42:10 [logger INFO] Service //blp/emapisvc opened...
+2021-02-02 19:42:11 [logger INFO] DayTrader Successfully initialized
+2021-02-02 19:42:11 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:SPY
+2021-02-02 19:42:11 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:PG
+2021-02-02 19:42:11 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:JPM
+2021-02-02 19:42:11 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:fake
+2021-02-02 19:42:11 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:F
+2021-02-02 19:42:11 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:AKAM
+2021-02-02 19:42:11 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:ALTR
+2021-02-02 19:42:11 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:AYX
+2021-02-02 19:42:11 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:BMRN
+2021-02-02 19:42:11 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:CNMD
+2021-02-02 19:42:11 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:CY
+2021-02-02 19:42:11 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:CYBR
+2021-02-02 19:42:11 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:DTE
+2021-02-02 19:42:11 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:DY
+2021-02-02 19:42:11 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:EGHT
+2021-02-02 19:42:11 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:EQH
+2021-02-02 19:42:11 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:FEYE
+2021-02-02 19:42:11 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:FTV
+2021-02-02 19:42:11 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:GES
+2021-02-02 19:42:12 [logger INFO] Processing SERVICE_STATUS event
+2021-02-02 19:42:12 [logger INFO] Service //blp/mktdata opened...
+2021-02-02 19:42:12 [logger ERROR] Error Subscribing to Bloomberg Events:7-uuid: 22748905, SN: 422794, sid: 8722920 Workflow review needed. (Symbol SPY US Equity)
+2021-02-02 19:42:12 [logger INFO] Requesting for open orders...
+2021-02-02 19:42:12 [logger INFO] Waiting initial paints to finish to return active execution reports
+2021-02-02 19:42:12 [logger INFO] Subscribing to order and route events
+2021-02-02 19:42:12 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:SPY
+2021-02-02 19:42:12 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:PG
+2021-02-02 19:42:12 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:JPM
+2021-02-02 19:42:12 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:fake
+2021-02-02 19:42:12 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:F
+2021-02-02 19:42:12 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:AKAM
+2021-02-02 19:42:12 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:ALTR
+2021-02-02 19:42:12 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:AYX
+2021-02-02 19:42:12 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:BMRN
+2021-02-02 19:42:12 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:CNMD
+2021-02-02 19:42:12 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:CY
+2021-02-02 19:42:12 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:CYBR
+2021-02-02 19:42:12 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:DTE
+2021-02-02 19:42:12 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:DY
+2021-02-02 19:42:12 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:EGHT
+2021-02-02 19:42:12 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:EQH
+2021-02-02 19:42:12 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:FEYE
+2021-02-02 19:42:12 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:FTV
+2021-02-02 19:42:12 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:GES
+2021-02-02 19:42:12 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:SPY
+2021-02-02 19:42:12 [logger INFO] Processing SERVICE_STATUS event
+2021-02-02 19:42:12 [logger INFO] Service //blp/mktdata opened...
+2021-02-02 19:42:12 [logger INFO] Order subscription started successfully
+2021-02-02 19:42:12 [logger INFO] Route subscription started successfully
+2021-02-02 19:42:12 [logger ERROR] Error Subscribing to Bloomberg Events:7-uuid: 22748905, SN: 422794, sid: 8722920 Workflow review needed. (Symbol PG US Equity)
+2021-02-02 19:42:12 [logger INFO] Processing SERVICE_STATUS event
+2021-02-02 19:42:12 [logger INFO] Service //blp/mktbar opened...
+2021-02-02 19:42:12 [logger INFO] Processing SERVICE_STATUS event
+2021-02-02 19:42:12 [logger INFO] Service //blp/mktdata opened...
+2021-02-02 19:42:12 [logger INFO] Processing SERVICE_STATUS event
+2021-02-02 19:42:12 [logger INFO] Service //blp/mktbar opened...
+2021-02-02 19:42:13 [logger INFO] Processing SERVICE_STATUS event
+2021-02-02 19:42:13 [logger INFO] Service //blp/mktbar opened...
+2021-02-02 19:42:13 [logger INFO] Processing SERVICE_STATUS event
+2021-02-02 19:42:13 [logger INFO] Service //blp/mktdata opened...
+2021-02-02 19:42:13 [logger INFO] Processing SERVICE_STATUS event
+2021-02-02 19:42:13 [logger INFO] Service //blp/mktbar opened...
+2021-02-02 19:42:13 [logger ERROR] Error Subscribing to Bloomberg Events:7-uuid: 22748905, SN: 422794, sid: 8722920 Workflow review needed. (Symbol JPM US Equity)
+2021-02-02 19:42:13 [logger ERROR] Error Subscribing to Bloomberg Events:7-uuid: 22748905, SN: 422794, sid: 8722920 Workflow review needed. (Symbol JPM US Equity)
+2021-02-02 19:42:13 [logger ERROR] Error Subscribing to Bloomberg Events:7-uuid: 22748905, SN: 422794, sid: 8722920 Workflow review needed. (Symbol PG US Equity)
+2021-02-02 19:42:13 [logger ERROR] Error Subscribing to Bloomberg Events:7-uuid: 22748905, SN: 422794, sid: 8722920 Workflow review needed. (Symbol SPY US Equity)
+2021-02-02 19:42:13 [logger ERROR] Error Subscribing to Bloomberg Events:7-uuid: 22748905, SN: 422794, sid: 8722920 Workflow review needed. (Symbol fake US Equity)
+2021-02-02 19:42:13 [logger INFO] Processing SERVICE_STATUS event
+2021-02-02 19:42:13 [logger INFO] Service //blp/mktbar opened...
+2021-02-02 19:42:13 [logger INFO] Waiting initial paints to finish to return active execution reports
+2021-02-02 19:42:13 [logger ERROR] Error Subscribing to Bloomberg Events:7-uuid: 22748905, SN: 422794, sid: 8722920 Workflow review needed. (Symbol fake US Equity)
+2021-02-02 19:42:13 [logger INFO] Processing SERVICE_STATUS event
+2021-02-02 19:42:13 [logger INFO] Service //blp/mktdata opened...
+2021-02-02 19:42:13 [logger INFO] Processing SERVICE_STATUS event
+2021-02-02 19:42:13 [logger INFO] Service //blp/mktbar opened...
+2021-02-02 19:42:13 [logger ERROR] Error Subscribing to Bloomberg Events:7-uuid: 22748905, SN: 422794, sid: 8722920 Workflow review needed. (Symbol F US Equity)
+2021-02-02 19:42:13 [logger ERROR] Error Subscribing to Bloomberg Events:7-uuid: 22748905, SN: 422794, sid: 8722920 Workflow review needed. (Symbol F US Equity)
+2021-02-02 19:42:13 [logger INFO] Processing SERVICE_STATUS event
+2021-02-02 19:42:13 [logger INFO] Service //blp/mktbar opened...
+2021-02-02 19:42:13 [logger ERROR] Error Subscribing to Bloomberg Events:7-uuid: 22748905, SN: 422794, sid: 8722920 Workflow review needed. (Symbol AKAM US Equity)
+2021-02-02 19:42:13 [logger INFO] Processing SERVICE_STATUS event
+2021-02-02 19:42:13 [logger INFO] Service //blp/mktdata opened...
+2021-02-02 19:42:13 [logger INFO] Processing SERVICE_STATUS event
+2021-02-02 19:42:13 [logger INFO] Service //blp/mktbar opened...
+2021-02-02 19:42:13 [logger ERROR] Error Subscribing to Bloomberg Events:7-uuid: 22748905, SN: 422794, sid: 8722920 Workflow review needed. (Symbol ALTR US Equity)
+2021-02-02 19:42:13 [logger ERROR] Error Subscribing to Bloomberg Events:7-uuid: 22748905, SN: 422794, sid: 8722920 Workflow review needed. (Symbol AKAM US Equity)
+2021-02-02 19:42:14 [logger INFO] Processing SERVICE_STATUS event
+2021-02-02 19:42:14 [logger INFO] Service //blp/mktbar opened...
+2021-02-02 19:42:14 [logger ERROR] Error Subscribing to Bloomberg Events:7-uuid: 22748905, SN: 422794, sid: 8722920 Workflow review needed. (Symbol AYX US Equity)
+2021-02-02 19:42:14 [logger INFO] Processing SERVICE_STATUS event
+2021-02-02 19:42:14 [logger INFO] Service //blp/mktdata opened...
+2021-02-02 19:42:14 [logger INFO] Processing SERVICE_STATUS event
+2021-02-02 19:42:14 [logger INFO] Service //blp/mktbar opened...
+2021-02-02 19:42:14 [logger ERROR] Error Subscribing to Bloomberg Events:7-uuid: 22748905, SN: 422794, sid: 8722920 Workflow review needed. (Symbol BMRN US Equity)
+2021-02-02 19:42:14 [logger ERROR] Error Subscribing to Bloomberg Events:7-uuid: 22748905, SN: 422794, sid: 8722920 Workflow review needed. (Symbol ALTR US Equity)
+2021-02-02 19:42:14 [logger INFO] Processing SERVICE_STATUS event
+2021-02-02 19:42:14 [logger INFO] Service //blp/mktbar opened...
+2021-02-02 19:42:14 [logger ERROR] Error Subscribing to Bloomberg Events:7-uuid: 22748905, SN: 422794, sid: 8722920 Workflow review needed. (Symbol CNMD US Equity)
+2021-02-02 19:42:14 [logger INFO] Recovered 1 previously existing execution reports
+2021-02-02 19:42:14 [logger INFO] Received list of Open Positions: 0 positions
+2021-02-02 19:42:14 [logger INFO] Process ready to receive commands and trade
+2021-02-02 19:42:14 [logger INFO] Processing SERVICE_STATUS event
+2021-02-02 19:42:14 [logger INFO] Service //blp/mktdata opened...
+2021-02-02 19:42:14 [logger INFO] Processing SERVICE_STATUS event
+2021-02-02 19:42:14 [logger INFO] Service //blp/mktbar opened...
+2021-02-02 19:42:14 [logger ERROR] Error Subscribing to Bloomberg Events:7-uuid: 22748905, SN: 422794, sid: 8722920 Workflow review needed. (Symbol CY US Equity)
+2021-02-02 19:42:14 [logger ERROR] Error Subscribing to Bloomberg Events:7-uuid: 22748905, SN: 422794, sid: 8722920 Workflow review needed. (Symbol AYX US Equity)
+2021-02-02 19:42:14 [logger INFO] Processing SERVICE_STATUS event
+2021-02-02 19:42:14 [logger INFO] Service //blp/mktbar opened...
+2021-02-02 19:42:14 [logger ERROR] Error Subscribing to Bloomberg Events:7-uuid: 22748905, SN: 422794, sid: 8722920 Workflow review needed. (Symbol CYBR US Equity)
+2021-02-02 19:42:14 [logger INFO] Processing SERVICE_STATUS event
+2021-02-02 19:42:14 [logger INFO] Service //blp/mktdata opened...
+2021-02-02 19:42:14 [logger INFO] Processing SERVICE_STATUS event
+2021-02-02 19:42:14 [logger INFO] Service //blp/mktbar opened...
+2021-02-02 19:42:14 [logger ERROR] Error Subscribing to Bloomberg Events:7-uuid: 22748905, SN: 422794, sid: 8722920 Workflow review needed. (Symbol DTE US Equity)
+2021-02-02 19:42:15 [logger ERROR] Error Subscribing to Bloomberg Events:7-uuid: 22748905, SN: 422794, sid: 8722920 Workflow review needed. (Symbol BMRN US Equity)
+2021-02-02 19:42:15 [logger INFO] Processing SERVICE_STATUS event
+2021-02-02 19:42:15 [logger INFO] Service //blp/mktbar opened...
+2021-02-02 19:42:15 [logger ERROR] Error Subscribing to Bloomberg Events:7-uuid: 22748905, SN: 422794, sid: 8722920 Workflow review needed. (Symbol DY US Equity)
+2021-02-02 19:42:15 [logger INFO] Processing SERVICE_STATUS event
+2021-02-02 19:42:15 [logger INFO] Service //blp/mktdata opened...
+2021-02-02 19:42:15 [logger INFO] Processing SERVICE_STATUS event
+2021-02-02 19:42:15 [logger INFO] Service //blp/mktbar opened...
+2021-02-02 19:42:15 [logger ERROR] Error Subscribing to Bloomberg Events:7-uuid: 22748905, SN: 422794, sid: 8722920 Workflow review needed. (Symbol EGHT US Equity)
+2021-02-02 19:42:15 [logger ERROR] Error Subscribing to Bloomberg Events:7-uuid: 22748905, SN: 422794, sid: 8722920 Workflow review needed. (Symbol CNMD US Equity)
+2021-02-02 19:42:15 [logger INFO] Processing SERVICE_STATUS event
+2021-02-02 19:42:15 [logger INFO] Service //blp/mktbar opened...
+2021-02-02 19:42:15 [logger ERROR] Error Subscribing to Bloomberg Events:7-uuid: 22748905, SN: 422794, sid: 8722920 Workflow review needed. (Symbol EQH US Equity)
+2021-02-02 19:42:15 [logger INFO] Processing SERVICE_STATUS event
+2021-02-02 19:42:15 [logger INFO] Service //blp/mktdata opened...
+2021-02-02 19:42:15 [logger INFO] Processing SERVICE_STATUS event
+2021-02-02 19:42:15 [logger INFO] Service //blp/mktbar opened...
+2021-02-02 19:42:15 [logger ERROR] Error Subscribing to Bloomberg Events:7-uuid: 22748905, SN: 422794, sid: 8722920 Workflow review needed. (Symbol FEYE US Equity)
+2021-02-02 19:42:15 [logger ERROR] Error Subscribing to Bloomberg Events:7-uuid: 22748905, SN: 422794, sid: 8722920 Workflow review needed. (Symbol CY US Equity)
+2021-02-02 19:42:15 [logger INFO] Processing SERVICE_STATUS event
+2021-02-02 19:42:15 [logger INFO] Service //blp/mktbar opened...
+2021-02-02 19:42:15 [logger ERROR] Error Subscribing to Bloomberg Events:7-uuid: 22748905, SN: 422794, sid: 8722920 Workflow review needed. (Symbol FTV US Equity)
+2021-02-02 19:42:15 [logger INFO] Processing SERVICE_STATUS event
+2021-02-02 19:42:15 [logger INFO] Service //blp/mktdata opened...
+2021-02-02 19:42:15 [logger ERROR] Error Subscribing to Bloomberg Events:7-uuid: 22748905, SN: 422794, sid: 8722920 Workflow review needed. (Symbol GES US Equity)
+2021-02-02 19:42:16 [logger ERROR] Error Subscribing to Bloomberg Events:7-uuid: 22748905, SN: 422794, sid: 8722920 Workflow review needed. (Symbol CYBR US Equity)
+2021-02-02 19:42:16 [logger INFO] Processing SERVICE_STATUS event
+2021-02-02 19:42:16 [logger INFO] Service //blp/refdata opened...
+2021-02-02 19:42:16 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:PG
+2021-02-02 19:42:16 [logger INFO] Processing SERVICE_STATUS event
+2021-02-02 19:42:16 [logger INFO] Service //blp/mktdata opened...
+2021-02-02 19:42:16 [logger ERROR] Error @ProcessHistoricalPrice:Choice sub-element not found for name 'securityData'. (0x00020002)
+2021-02-02 19:42:16 [logger ERROR] Error Subscribing to Bloomberg Events:7-uuid: 22748905, SN: 422794, sid: 8722920 Workflow review needed. (Symbol DTE US Equity)
+2021-02-02 19:42:16 [logger INFO] Processing SERVICE_STATUS event
+2021-02-02 19:42:16 [logger INFO] Service //blp/refdata opened...
+2021-02-02 19:42:16 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:JPM
+2021-02-02 19:42:16 [logger INFO] Processing SERVICE_STATUS event
+2021-02-02 19:42:16 [logger INFO] Service //blp/mktdata opened...
+2021-02-02 19:42:16 [logger ERROR] Error @ProcessHistoricalPrice:Choice sub-element not found for name 'securityData'. (0x00020002)
+2021-02-02 19:42:16 [logger INFO] Processing SERVICE_STATUS event
+2021-02-02 19:42:16 [logger INFO] Service //blp/refdata opened...
+2021-02-02 19:42:16 [logger ERROR] Error Subscribing to Bloomberg Events:7-uuid: 22748905, SN: 422794, sid: 8722920 Workflow review needed. (Symbol DY US Equity)
+2021-02-02 19:42:16 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:fake
+2021-02-02 19:42:16 [logger INFO] Processing SERVICE_STATUS event
+2021-02-02 19:42:16 [logger INFO] Service //blp/mktdata opened...
+2021-02-02 19:42:16 [logger ERROR] Error @ProcessHistoricalPrice:Choice sub-element not found for name 'securityData'. (0x00020002)
+2021-02-02 19:42:17 [logger INFO] Processing SERVICE_STATUS event
+2021-02-02 19:42:17 [logger INFO] Service //blp/refdata opened...
+2021-02-02 19:42:17 [logger ERROR] Error Subscribing to Bloomberg Events:7-uuid: 22748905, SN: 422794, sid: 8722920 Workflow review needed. (Symbol EGHT US Equity)
+2021-02-02 19:42:17 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:F
