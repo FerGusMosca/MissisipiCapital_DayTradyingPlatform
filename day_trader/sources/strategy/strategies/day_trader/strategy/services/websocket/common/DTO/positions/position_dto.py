@@ -6,6 +6,7 @@ class PositionDTO:
         self.Msg="DayTradingPosition"
         self.PosId = dayTradingPos.Id
         self.Symbol = dayTradingPos.Security.Symbol
+        self.Active=dayTradingPos.Active
         self.PositionSize = dayTradingPos.SharesQuantity
         self.IsOpen=dayTradingPos.Open()
         self.IsRouting = dayTradingPos.Routing

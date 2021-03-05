@@ -224,7 +224,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                 time.sleep(1)
 
             except Exception as e:
-                #traceback.print_exc()
+                #trace-back.print_exc()
                 msg = "Critical error @DayTrader.MarketSubscriptionsThread:{}".format(str(e))
                 self.ProcessCriticalError(e, msg)
                 self.SendToInvokingModule(ErrorWrapper(Exception(msg)))
@@ -746,6 +746,8 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
     def UpdateTechnicalAnalysisParameters(self, candlebar,candlebarDict):
         dayTradingPos = next(iter(list(filter(lambda x: x.Security.Symbol == candlebar.Security.Symbol, self.DayTradingPositions))),None)
+        symbol =candlebar.Security.Symbol
+
         if dayTradingPos is not None:
             candlebarArr = self.FilterCandlesToUse(dayTradingPos,candlebarDict.values())
             
@@ -756,39 +758,39 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                 doRecord = True
 
             dayTradingPos.MinuteNonSmoothedRSIIndicator.Update(candlebarArr,
-                                                    self.ModelParametersHandler.Get(ModelParametersHandler.CANDLE_BARS_NON_SMOTHED_MINUTES_RSI()).IntValue)
+                                                    self.ModelParametersHandler.Get(ModelParametersHandler.CANDLE_BARS_NON_SMOTHED_MINUTES_RSI(),symbol).IntValue)
             
             dayTradingPos.MinuteSmoothedRSIIndicator.Update(candlebarArr,
-                                                    self.ModelParametersHandler.Get(ModelParametersHandler.CANDLE_BARS_SMOOTHED_MINUTES_RSI()).IntValue)
+                                                    self.ModelParametersHandler.Get(ModelParametersHandler.CANDLE_BARS_SMOOTHED_MINUTES_RSI(),symbol).IntValue)
 
             dayTradingPos.MACDIndicator.Update(candlebarArr,
-                                               slow=self.ModelParametersHandler.Get(ModelParametersHandler.MACD_SLOW()).IntValue,
-                                               fast=self.ModelParametersHandler.Get(ModelParametersHandler.MACD_FAST()).IntValue,
-                                               signal=self.ModelParametersHandler.Get(ModelParametersHandler.MACD_SIGNAL()).IntValue,
+                                               slow=self.ModelParametersHandler.Get(ModelParametersHandler.MACD_SLOW(),symbol).IntValue,
+                                               fast=self.ModelParametersHandler.Get(ModelParametersHandler.MACD_FAST(),symbol).IntValue,
+                                               signal=self.ModelParametersHandler.Get(ModelParametersHandler.MACD_SIGNAL(),symbol).IntValue,
                                                #absMaxMSPeriod= self.ModelParametersHandler.Get(ModelParametersHandler.MACD_RSI_ABS_MAX_MS_PERIOD()).IntValue
                                                absMaxMSPeriod=0
                                                )
 
 
             dayTradingPos.BollingerIndicator.Update(candlebarArr,
-                                                    self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_TPMA_A()),
-                                                    self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_TPSD_B()),
-                                                    self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_BOLLUP_C()),
-                                                    self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_BOLLDN_D()),
-                                                    self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_BOLLINGER_K()),
-                                                    self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_BOLLINGER_L()),
-                                                    self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_BOLLUP_CvHALF()),
-                                                    self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_BOLLDN_DvHALF()),
-                                                    self.ModelParametersHandler.Get(ModelParametersHandler.SD_LIMIT_FACTOR()),
+                                                    self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_TPMA_A(),symbol),
+                                                    self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_TPSD_B(),symbol),
+                                                    self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_BOLLUP_C(),symbol),
+                                                    self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_BOLLDN_D(),symbol),
+                                                    self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_BOLLINGER_K(),symbol),
+                                                    self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_BOLLINGER_L(),symbol),
+                                                    self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_BOLLUP_CvHALF(),symbol),
+                                                    self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_BOLLDN_DvHALF(),symbol),
+                                                    self.ModelParametersHandler.Get(ModelParametersHandler.SD_LIMIT_FACTOR(),symbol),
                                                     )
 
 
             dayTradingPos.MSStrengthIndicator.Update(candlebarArr,dayTradingPos.MACDIndicator.MS,
-                                                     self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_TPSD_B()),
-                                                     self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_MS_STRENGTH_M()),
-                                                     self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_MS_STRENGTH_N()),
-                                                     self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_MS_STRENGTH_P()),
-                                                     self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_MS_STRENGTH_Q()),
+                                                     self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_TPSD_B(),symbol),
+                                                     self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_MS_STRENGTH_M(),symbol),
+                                                     self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_MS_STRENGTH_N(),symbol),
+                                                     self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_MS_STRENGTH_P(),symbol),
+                                                     self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_MS_STRENGTH_Q(),symbol),
                                                      )
 
 
@@ -798,47 +800,47 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                                                  dayTradingPos.MSStrengthIndicator.MSI,
                                                  dayTradingPos.MinuteNonSmoothedRSIIndicator.RSI,
                                                  dayTradingPos.MACDIndicator.MS,
-                                                 dayTradingPos.MinuteSmoothedRSIIndicator.GetRSIReggr(self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_J()).IntValue),#RSI30smSL
-                                                 self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_NN()),
-                                                 self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_PP()),
-                                                 self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_QQ()),
-                                                 self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_RR()),
-                                                 self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_SS()),
-                                                 self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_R()),
-                                                 self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_S()),
-                                                 self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_T()),
-                                                 self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_U()),
-                                                 self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_V()),
-                                                 self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_W()),
-                                                 self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_X()),
-                                                 self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_Y()),
-                                                 self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_Z()),
-                                                 self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_CC()),
-                                                 self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_DD()),
-                                                 self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_EE()),
-                                                 self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_TT()),
-                                                 self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_UU()),
-                                                 self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_VV()),
-                                                 self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_WW()),
-                                                 self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_XX())
+                                                 dayTradingPos.MinuteSmoothedRSIIndicator.GetRSIReggr(self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_J(),symbol).IntValue),#RSI30smSL
+                                                 self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_NN(),symbol),
+                                                 self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_PP(),symbol),
+                                                 self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_QQ(),symbol),
+                                                 self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_RR(),symbol),
+                                                 self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_SS(),symbol),
+                                                 self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_R(),symbol),
+                                                 self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_S(),symbol),
+                                                 self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_T(),symbol),
+                                                 self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_U(),symbol),
+                                                 self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_V(),symbol),
+                                                 self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_W(),symbol),
+                                                 self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_X(),symbol),
+                                                 self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_Y(),symbol),
+                                                 self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_Z(),symbol),
+                                                 self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_CC(),symbol),
+                                                 self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_DD(),symbol),
+                                                 self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_EE(),symbol),
+                                                 self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_TT(),symbol),
+                                                 self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_UU(),symbol),
+                                                 self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_VV(),symbol),
+                                                 self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_WW(),symbol),
+                                                 self.ModelParametersHandler.Get(ModelParametersHandler.BROOMS_XX(),symbol)
                                                  )
 
-            dayTradingPos.TGIndicator.Update(self.ModelParametersHandler.Get(ModelParametersHandler.TG_INDICATOR_KK()),
-                                             self.ModelParametersHandler.Get(ModelParametersHandler.TG_INDICATOR_KX()),
-                                             self.ModelParametersHandler.Get(ModelParametersHandler.TG_INDICATOR_KY()),
+            dayTradingPos.TGIndicator.Update(self.ModelParametersHandler.Get(ModelParametersHandler.TG_INDICATOR_KK(),symbol),
+                                             self.ModelParametersHandler.Get(ModelParametersHandler.TG_INDICATOR_KX(),symbol),
+                                             self.ModelParametersHandler.Get(ModelParametersHandler.TG_INDICATOR_KY(),symbol),
                                              dayTradingPos.MaxMonetaryProfitCurrentTrade,
                                              dayTradingPos.BollingerIndicator.TPSDStartOfTrade,
-                                             self.ModelParametersHandler.Get(ModelParametersHandler.MACD_RSI_CLOSE_LONG_RULE_1()),
-                                             self.ModelParametersHandler.Get(ModelParametersHandler.MACD_RSI_CLOSE_SHORT_RULE_1())
+                                             self.ModelParametersHandler.Get(ModelParametersHandler.MACD_RSI_CLOSE_LONG_RULE_1(),symbol),
+                                             self.ModelParametersHandler.Get(ModelParametersHandler.MACD_RSI_CLOSE_SHORT_RULE_1(),symbol)
                                              )
 
 
             dayTradingPos.VolumeAvgIndicator.Update(candlebarArr,
-                                                    self.ModelParametersHandler.Get(ModelParametersHandler.VOLUME_INDICATOR_T1()),
-                                                    self.ModelParametersHandler.Get(ModelParametersHandler.VOLUME_INDICATOR_T2()),
-                                                    self.ModelParametersHandler.Get(ModelParametersHandler.VOLUME_INDICATOR_T3()),
-                                                    self.ModelParametersHandler.Get(ModelParametersHandler.VOLUME_INDICATOR_RULE_4()),
-                                                    self.ModelParametersHandler.Get(ModelParametersHandler.VOLUME_INDICATOR_RULE_BROOMS())
+                                                    self.ModelParametersHandler.Get(ModelParametersHandler.VOLUME_INDICATOR_T1(),symbol),
+                                                    self.ModelParametersHandler.Get(ModelParametersHandler.VOLUME_INDICATOR_T2(),symbol),
+                                                    self.ModelParametersHandler.Get(ModelParametersHandler.VOLUME_INDICATOR_T3(),symbol),
+                                                    self.ModelParametersHandler.Get(ModelParametersHandler.VOLUME_INDICATOR_RULE_4(),symbol),
+                                                    self.ModelParametersHandler.Get(ModelParametersHandler.VOLUME_INDICATOR_RULE_BROOMS(),symbol)
                                                     )
             '''
             if doRecord:
@@ -969,7 +971,6 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                                                         self.ModelParametersHandler.Get(ModelParametersHandler.FLEXIBLE_STOP_LOSS_L1(), symbol),
                                                         self.ModelParametersHandler.Get(ModelParametersHandler.END_OF_DAY_LIMIT(), symbol),
                                                         )
-
 
         if canOpenPosition:
 
