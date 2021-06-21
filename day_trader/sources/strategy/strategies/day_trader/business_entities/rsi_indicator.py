@@ -48,6 +48,9 @@ class RSIIndicator(RSIBase):
         arrayRSIToUse = []
         arrayIndex = []
 
+        if len(self.RSIArray)<index:
+            return None
+
         i = index
         for rsi in self.RSIArray[-1 * index:]:
             arrayRSIToUse.append(rsi)

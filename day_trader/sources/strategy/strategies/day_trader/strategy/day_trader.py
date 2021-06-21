@@ -892,8 +892,9 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
                 self.ProcessNewPositionReqManagedPos(dayTradingPos, Side.Buy, dayTradingPos.SharesQuantity,self.Configuration.DefaultAccount)
 
-                self.TradingSignalHelper.PersistTradingSignal(dayTradingPos, TradingSignalHelper._ACTION_OPEN(),
-                                                              Side.Buy, dayTradingPos.GetStatisticalParameters(list(cbDict.values())), candlebar, self)
+                threading.Thread(target=self.DoPersistTradingSignalThread, args=(True, dayTradingPos, TradingSignalHelper._ACTION_OPEN(), Side.Buy,candlebar, dayTradingPos.GetStatisticalParameters(list(cbDict.values())), self, longCond)).start()
+
+                #self.TradingSignalHelper.PersistTradingSignal(dayTradingPos, TradingSignalHelper._ACTION_OPEN(),Side.Buy, dayTradingPos.GetStatisticalParameters(list(cbDict.values())), candlebar, self)
 
                 dayTradingPos.Routing=True
                 return longCond
@@ -939,8 +940,8 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
                 self.ProcessNewPositionReqManagedPos(dayTradingPos, Side.Sell, dayTradingPos.SharesQuantity,self.Configuration.DefaultAccount)
 
-                self.TradingSignalHelper.PersistTradingSignal(dayTradingPos, TradingSignalHelper._ACTION_OPEN(),
-                                                              Side.SellShort, dayTradingPos.GetStatisticalParameters(list(cbDict.values())), candlebar, self)
+                threading.Thread(target=self.DoPersistTradingSignalThread, args=(True, dayTradingPos, TradingSignalHelper._ACTION_OPEN(), Side.SellShort, candlebar,dayTradingPos.GetStatisticalParameters(list(cbDict.values())), self, shortCond)).start()
+                #self.TradingSignalHelper.PersistTradingSignal(dayTradingPos, TradingSignalHelper._ACTION_OPEN(),Side.SellShort, dayTradingPos.GetStatisticalParameters(list(cbDict.values())), candlebar, self)
 
                 dayTradingPos.Routing = True
                 return shortCond
@@ -949,6 +950,16 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
         else:
             return  dayTradingPos.TerminalConditionActivated() if not canOpenPosition else dayTradingPos._INVALID_TIME_TRADE() #Nothing happens
 
+    def DoPersistTradingSignalThread(self,generic,dayTradingPos,action,side,candlebar,statParam,logger,condition):
+
+        try:
+            if not generic:
+                self.TradingSignalHelper.PersistMACDRSITradingSignal(dayTradingPos, action,side, candlebar, logger,condition=condition)
+            else:
+                self.TradingSignalHelper.PersistTradingSignal(dayTradingPos, action,self.TranslateSide(dayTradingPos, side), statParam,candlebar, logger, condition=logger)
+        except Exception as e:
+            traceback.print_exc()
+            self.ProcessErrorInMethod("@DayTrader.DoPersistTradingSignalThread", e,candlebar.Security.Symbol if candlebar is not None else None)
 
     def EvaluateOpeningGenericAutomaticTrading(self,dayTradingPos,symbol,cbDict,candlebar):
 
@@ -1007,7 +1018,8 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
                    self.DoLog("MACD/RSI = Running long trade for symbol {} at {}".format(dayTradingPos.Security.Symbol,candlebar.DateTime),MessageType.INFO)
                    self.ProcessNewPositionReqManagedPos(dayTradingPos, Side.Buy, dayTradingPos.SharesQuantity,self.Configuration.DefaultAccount)
-                   self.TradingSignalHelper.PersistMACDRSITradingSignal(dayTradingPos,TradingSignalHelper._ACTION_OPEN(), Side.Buy,candlebar, self, condition=longCondition)
+                   threading.Thread(target=self.DoPersistTradingSignalThread, args=(False,dayTradingPos,TradingSignalHelper._ACTION_OPEN(),Side.Buy,candlebar,None, self,longCondition)).start()
+                   #self.TradingSignalHelper.PersistMACDRSITradingSignal(dayTradingPos,TradingSignalHelper._ACTION_OPEN(), Side.Buy,candlebar, self, condition=longCondition)
 
                    dayTradingPos.Routing = True
                    #print("Open Pos Long --> Routing=True")
@@ -1071,9 +1083,8 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
                 self.ProcessNewPositionReqManagedPos(dayTradingPos, Side.Sell, dayTradingPos.SharesQuantity,
                                                      self.Configuration.DefaultAccount)
-                self.TradingSignalHelper.PersistMACDRSITradingSignal(dayTradingPos, TradingSignalHelper._ACTION_OPEN(),
-                                                                     Side.SellShort, candlebar,
-                                                                     self, condition=shortCondition)
+                threading.Thread(target=self.DoPersistTradingSignalThread, args=(False,dayTradingPos, TradingSignalHelper._ACTION_OPEN(), Side.SellShort, candlebar, None, self,shortCondition)).start()
+                #self.TradingSignalHelper.PersistMACDRSITradingSignal(dayTradingPos, TradingSignalHelper._ACTION_OPEN(),Side.SellShort, candlebar,self, condition=shortCondition)
                 dayTradingPos.Routing = True
                 #print("Open Pos Short --> Routing=True")
                 dayTradingPos.MACDIndicator.UpdateLastTradeTimestamp()
@@ -1198,15 +1209,14 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                 self.ProcessNewPositionReqManagedPos(dayTradingPos, side,
                                                      netShares if netShares > 0 else netShares * (-1),
                                                      self.Configuration.DefaultAccount, text=text)
+                threading.Thread(target=self.DoPersistTradingSignalThread, args=(generic, dayTradingPos, TradingSignalHelper._ACTION_CLOSE(), self.TranslateSide(dayTradingPos, side),candlebar, statisticalParam, self, closingCond)).start()
 
-                if generic:
-                    self.TradingSignalHelper.PersistTradingSignal(dayTradingPos, TradingSignalHelper._ACTION_CLOSE(),
-                                                                  self.TranslateSide(dayTradingPos,side), statisticalParam,
-                                                                  candlebar, self,closingCond)
-                else:
-                    self.TradingSignalHelper.PersistMACDRSITradingSignal(dayTradingPos,TradingSignalHelper._ACTION_CLOSE(),
-                                                                         self.TranslateSide(dayTradingPos,side),candlebar,
-                                                                         self,closingCond)
+                # if generic:
+                #     self.TradingSignalHelper.PersistTradingSignal(dayTradingPos, TradingSignalHelper._ACTION_CLOSE(),
+                #                                                   self.TranslateSide(dayTradingPos,side), statisticalParam,
+                #                                                   candlebar, self,closingCond)
+                # else:
+                #     self.TradingSignalHelper.PersistMACDRSITradingSignal(dayTradingPos,TradingSignalHelper._ACTION_CLOSE(),self.TranslateSide(dayTradingPos,side),candlebar,self,closingCond)
 
 
 

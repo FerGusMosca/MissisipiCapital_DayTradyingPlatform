@@ -1,3 +1,5 @@
+import traceback
+
 from sources.strategy.strategies.day_trader.common.util.model_parameters_handler import *
 from sources.framework.common.enums.Side import *
 from sources.framework.common.logger.message_type import *
@@ -591,11 +593,12 @@ class TradingSignalHelper:
             tdelta =  finish - start
 
             if tdelta.total_seconds()>1:
-                raise Exception("Persisting trading signal took {} seconds!".format(tdelta))
+                raise Exception("WARNING - Persisting trading signal took {} seconds!".format(tdelta))
 
 
         except Exception as e:
-            logger.DoLog("Critical error persisting trading signal for symbol {}:{}".format(
+            #traceback.print_exc()
+            logger.DoLog("Error persisting trading signal for symbol {}:{}".format(
                          dayTradingPos.Security.Symbol if (dayTradingPos is not None and dayTradingPos.Security is not None) else "?",str(e)),
                          MessageType.ERROR)
         finally:
@@ -755,7 +758,8 @@ class TradingSignalHelper:
             self.TradingSignalManager.Commit()
 
         except Exception as e:
-            logger.DoLog("Critical error persisting trading signal for symbol {}:{}".format(
+            traceback.print_exc()
+            logger.DoLog("Error persisting trading signal for symbol {}:{}".format(
                          dayTradingPos.Security.Symbol if (dayTradingPos is not None and dayTradingPos.Security is not None) else "?",str(e)),
                          MessageType.ERROR)
         finally:
