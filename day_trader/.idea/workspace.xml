@@ -716,18 +716,13 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/sources/strategy/data_access_layer/model_parameters_manager.py</url>
-          <line>50</line>
-          <option name="timeStamp" value="8" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/sources/strategy/strategies/day_trader/common/util/trading_signal_helper.py</url>
-          <line>360</line>
-          <option name="timeStamp" value="12" />
-        </line-breakpoint>
-      </breakpoints>
+      <breakpoints-dialog>
+        <breakpoints-dialog>
+          <selected-grouping-rules>
+            <grouping-rule id="by-file" />
+          </selected-grouping-rules>
+        </breakpoints-dialog>
+      </breakpoints-dialog>
     </breakpoint-manager>
   </component>
   <component name="debuggerHistoryManager">

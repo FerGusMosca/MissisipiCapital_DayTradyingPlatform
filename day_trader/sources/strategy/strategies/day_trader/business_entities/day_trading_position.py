@@ -55,6 +55,7 @@ _EXIT_LONG_MACD_RSI_COND_6="EXIT_LONG_MACD_RSI_COND_6"
 _EXIT_LONG_MACD_RSI_COND_7="EXIT_LONG_MACD_RSI_COND_7"
 _EXIT_LONG_MACD_RSI_COND_8="EXIT_LONG_MACD_RSI_COND_8"
 _EXIT_LONG_MACD_RSI_COND_9="EXIT_LONG_MACD_RSI_COND_9"
+_EXIT_LONG_MACD_RSI_COND_10="EXIT_LONG_MACD_RSI_COND_10"
 
 _EXIT_SHORT_MACD_RSI_COND_1 = "EXIT_SHORT_MACD_RSI_COND_1"
 _EXIT_SHORT_MACD_RSI_COND_2 = "EXIT_SHORT_MACD_RSI_COND_2"
@@ -65,6 +66,7 @@ _EXIT_SHORT_MACD_RSI_COND_6 = "EXIT_SHORT_MACD_RSI_COND_6"
 _EXIT_SHORT_MACD_RSI_COND_7 = "EXIT_SHORT_MACD_RSI_COND_7"
 _EXIT_SHORT_MACD_RSI_COND_8 = "EXIT_SHORT_MACD_RSI_COND_8"
 _EXIT_SHORT_MACD_RSI_COND_9 = "EXIT_SHORT_MACD_RSI_COND_9"
+_EXIT_SHORT_MACD_RSI_COND_10 = "EXIT_SHORT_MACD_RSI_COND_10"
 
 _LONG_MACD_RSI_RULE_1="LONG_MACD_RSI_RULE_1"
 _LONG_MACD_RSI_RULE_2="LONG_MACD_RSI_RULE_2"
@@ -987,7 +989,7 @@ class DayTradingPosition():
                                          msMaxMinExitParamNNBis,msNowMaxMinExitParamP,msNowExitParamQ,msNowExitParamQQ,
                                          rsi30SlopeSkip10ExitParamR,msMaxMinExitParamS,msMaxMinExitParamSS,sec5MinSlopeExitParamT,
                                          gainMinStopLossExitParamU,gainMinStopLossExitParamUU,gainMinTradeParamUUU,
-                                         gainMinTradeParamFixedLoss,gainMinStopLossExitParamW,
+                                         gainMinTradeParamFixedLoss,gainMinTradeParamFixedLoss2,gainMinStopLossExitParamW,
                                          gainMinStopLossExitParamWW,gainStopLossExitParamY, gainMinStopLossExitParamZ,
                                          gainMinStopLossExitParamZZ,endOfdayLimitModelParam,takeGainLimitModelParam,
                                          stopLossLimitModelParam,implFlexibeStopLoss,flexibleStopLossL1ModelParam,
@@ -995,7 +997,8 @@ class DayTradingPosition():
                                          macdRsiCloseShortRule2ModelParam,macdRsiCloseShortRule3ModelParam,
                                          macdRsiCloseShortRule4ModelParam,macdRsiCloseShortRule5ModelParam,
                                          macdRsiCloseShortRule6ModelParam,macdRsiCloseShortRule7ModelParam,
-                                         macdRsiCloseShortRule8ModelParam,macdRsiCloseShortRule9ModelParam):
+                                         macdRsiCloseShortRule8ModelParam,macdRsiCloseShortRule9ModelParam,
+                                         slFlipModelParam):
 
 
         openQty=1
@@ -1128,6 +1131,18 @@ class DayTradingPosition():
                 and macdRsiCloseShortRule9ModelParam.IntValue>=1
             ):
             return _EXIT_SHORT_MACD_RSI_COND_9
+
+        # rule 10
+        if (slFlipModelParam.IntValue == 1):  # enabled
+            if (self.CurrentProfitLastTrade > (-1 * gainMinTradeParamFixedLoss.FloatValue)):
+                if (self.CurrentProfitLastTrade < gainMinTradeParamFixedLoss2.FloatValue):
+                    return _EXIT_SHORT_MACD_RSI_COND_10
+            else:
+                if (self.CurrentProfitLastTrade < gainMinTradeParamFixedLoss.FloatValue):
+                    return _EXIT_SHORT_MACD_RSI_COND_10
+        else:
+            if (self.CurrentProfitLastTrade < gainMinTradeParamFixedLoss.FloatValue):
+                return _EXIT_SHORT_MACD_RSI_COND_10
             
 
 
@@ -1213,7 +1228,7 @@ class DayTradingPosition():
                                             msMaxMinExitParamNNBis,msNowMaxMinExitParamP,msNowExitParamQ,msNowExitParamQQ,
                                             rsi30SlopeSkip10ExitParamR,msMaxMinExitParamS,msMaxMinExitParamSS,
                                             sec5MinSlopeExitParamT,gainMinStopLossExitParamU,gainMinStopLossExitParamUU,
-                                            gainMinTradeParamUUU, gainMinTradeParamFixedLoss,
+                                            gainMinTradeParamUUU, gainMinTradeParamFixedLoss,gainMinTradeParamFixedLoss2,
                                             gainMinStopLossExitParamW,gainMinStopLossExitParamWW,gainStopLossExitParamY,
                                             gainMinStopLossExitParamZ,gainMinStopLossExitParamZZ,endOfdayLimitModelParam,
                                             takeGainLimitModelParam,stopLossLimitModelParam,
@@ -1221,7 +1236,8 @@ class DayTradingPosition():
                                             macdRSISmoothedMode,absMaxMSPeriodParam,
                                             macdRsiCloseLongRule1ModelParam,macdRsiCloseLongRule2ModelParam,macdRsiCloseLongRule3ModelParam,
                                             macdRsiCloseLongRule4ModelParam,macdRsiCloseLongRule5ModelParam,macdRsiCloseLongRule6ModelParam,
-                                            macdRsiCloseLongRule7ModelParam,macdRsiCloseLongRule8ModelParam,macdRsiCloseLongRule9ModelParam):
+                                            macdRsiCloseLongRule7ModelParam,macdRsiCloseLongRule8ModelParam,macdRsiCloseLongRule9ModelParam,
+                                            slFlipModelParam):
 
 
         openQty = 1
@@ -1359,6 +1375,18 @@ class DayTradingPosition():
                 and macdRsiCloseLongRule9ModelParam.IntValue>=1
             ):
             return  _EXIT_LONG_MACD_RSI_COND_9
+
+        # rule 10
+        if(slFlipModelParam.IntValue==1):#enabled
+            if(self.CurrentProfitLastTrade>(-1*gainMinTradeParamFixedLoss.FloatValue)):
+                if(self.CurrentProfitLastTrade<gainMinTradeParamFixedLoss2.FloatValue):
+                    return _EXIT_LONG_MACD_RSI_COND_10
+            else:
+                if(self.CurrentProfitLastTrade<gainMinTradeParamFixedLoss.FloatValue):
+                    return _EXIT_LONG_MACD_RSI_COND_10
+        else:
+            if (self.CurrentProfitLastTrade < gainMinTradeParamFixedLoss.FloatValue):
+                return _EXIT_LONG_MACD_RSI_COND_10
 
 
         return None #No condition to exit

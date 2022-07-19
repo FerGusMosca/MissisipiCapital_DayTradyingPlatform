@@ -1362,6 +1362,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                                                                         self.ModelParametersHandler.Get(ModelParametersHandler.GAIN_MIN_STOP_LOSS_EXIT_U_U(),symbol),
                                                                         self.ModelParametersHandler.Get(ModelParametersHandler.GAIN_MIN_TRADE_UUU(),symbol),
                                                                         self.ModelParametersHandler.Get(ModelParametersHandler.GAIN_MIN_TRADE_FIXEDLOSS(),symbol),
+                                                                        self.ModelParametersHandler.Get(ModelParametersHandler.GAIN_MIN_TRADE_FIXEDLOSS_2(),symbol),
                                                                         self.ModelParametersHandler.Get(ModelParametersHandler.GAIN_MIN_STOP_LOSS_EXIT_W(),symbol),
                                                                         self.ModelParametersHandler.Get(ModelParametersHandler.GAIN_MIN_STOP_LOSS_EXIT_W_W(),symbol),
                                                                         self.ModelParametersHandler.Get(ModelParametersHandler.GAIN_STOP_LOSS_EXIT_Y(),symbol),
@@ -1382,7 +1383,8 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                                                                         self.ModelParametersHandler.Get(ModelParametersHandler.MACD_RSI_CLOSE_LONG_RULE_6(),symbol),
                                                                         self.ModelParametersHandler.Get(ModelParametersHandler.MACD_RSI_CLOSE_LONG_RULE_7(),symbol),
                                                                         self.ModelParametersHandler.Get(ModelParametersHandler.MACD_RSI_CLOSE_LONG_RULE_8(),symbol),
-                                                                        self.ModelParametersHandler.Get(ModelParametersHandler.MACD_RSI_CLOSE_LONG_RULE_9(),symbol)
+                                                                        self.ModelParametersHandler.Get(ModelParametersHandler.MACD_RSI_CLOSE_LONG_RULE_9(),symbol),
+                                                                        self.ModelParametersHandler.Get(ModelParametersHandler.SL_FLIP(), symbol)
                                                                         )
 
             if closingCond is not None and runClose:
@@ -1432,6 +1434,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                                                                          self.ModelParametersHandler.Get(ModelParametersHandler.GAIN_MIN_STOP_LOSS_EXIT_U_U(),symbol),
                                                                          self.ModelParametersHandler.Get(ModelParametersHandler.GAIN_MIN_TRADE_UUU(),symbol),
                                                                          self.ModelParametersHandler.Get(ModelParametersHandler.GAIN_MIN_TRADE_FIXEDLOSS(),symbol),
+                                                                         self.ModelParametersHandler.Get(ModelParametersHandler.GAIN_MIN_TRADE_FIXEDLOSS_2(),symbol),
                                                                          self.ModelParametersHandler.Get(ModelParametersHandler.GAIN_MIN_STOP_LOSS_EXIT_W(),symbol),
                                                                          self.ModelParametersHandler.Get(ModelParametersHandler.GAIN_MIN_STOP_LOSS_EXIT_W_W(),symbol),
                                                                          self.ModelParametersHandler.Get(ModelParametersHandler.GAIN_STOP_LOSS_EXIT_Y(),symbol),
@@ -1452,7 +1455,8 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                                                                          self.ModelParametersHandler.Get( ModelParametersHandler.MACD_RSI_CLOSE_SHORT_RULE_6(),symbol),
                                                                          self.ModelParametersHandler.Get(ModelParametersHandler.MACD_RSI_CLOSE_SHORT_RULE_7(),symbol),
                                                                          self.ModelParametersHandler.Get(ModelParametersHandler.MACD_RSI_CLOSE_SHORT_RULE_8(),symbol),
-                                                                         self.ModelParametersHandler.Get(ModelParametersHandler.MACD_RSI_CLOSE_SHORT_RULE_9(),symbol)
+                                                                         self.ModelParametersHandler.Get(ModelParametersHandler.MACD_RSI_CLOSE_SHORT_RULE_9(),symbol),
+                                                                         self.ModelParametersHandler.Get(ModelParametersHandler.SL_FLIP(), symbol)
                                                                          )
 
             if closingCond is not None and runClose:

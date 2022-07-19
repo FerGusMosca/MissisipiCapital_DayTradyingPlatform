@@ -372,6 +372,10 @@ class ModelParametersHandler:
         return "GAIN_MIN_TRADE_FIXEDLOSS"
 
     @staticmethod
+    def GAIN_MIN_TRADE_FIXEDLOSS_2():
+        return "GAIN_MIN_TRADE_FIXEDLOSS_2"
+
+    @staticmethod
     def PROCESS_EXTERNAL_TRADING():
         return "PROCESS_EXTERNAL_TRADING"
 
@@ -710,6 +714,10 @@ class ModelParametersHandler:
     @staticmethod
     def CANDLE_PRICE_METHOD():
         return "CANDLE_PRICE_METHOD"
+
+    @staticmethod
+    def SL_FLIP():
+        return "SL_FLIP"
 
     #endregion
 
