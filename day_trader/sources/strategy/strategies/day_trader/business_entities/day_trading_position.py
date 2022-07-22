@@ -647,6 +647,7 @@ class DayTradingPosition():
         if(len(lastTradedSummaries)>0):
             lastTradedSummary=lastTradedSummaries[0]
 
+
         if lastTradedSummary is not None and marketData.Trade is not None and lastTradedSummary.AvgPx is not None:
             profitsAndLosses.IncreaseDecrease = marketData.Trade-  lastTradedSummary.AvgPx
             if lastTradedSummary.SharesAcquired():#LONG
@@ -989,7 +990,7 @@ class DayTradingPosition():
                                          msMaxMinExitParamNNBis,msNowMaxMinExitParamP,msNowExitParamQ,msNowExitParamQQ,
                                          rsi30SlopeSkip10ExitParamR,msMaxMinExitParamS,msMaxMinExitParamSS,sec5MinSlopeExitParamT,
                                          gainMinStopLossExitParamU,gainMinStopLossExitParamUU,gainMinTradeParamUUU,
-                                         gainMinTradeParamFixedLoss,gainMinTradeParamFixedLoss2,gainMinStopLossExitParamW,
+                                         gainMinTradeParamFixedLoss,gainMinTradeParamFixedLoss2,changeFixedLossAtThisGainParam,gainMinStopLossExitParamW,
                                          gainMinStopLossExitParamWW,gainStopLossExitParamY, gainMinStopLossExitParamZ,
                                          gainMinStopLossExitParamZZ,endOfdayLimitModelParam,takeGainLimitModelParam,
                                          stopLossLimitModelParam,implFlexibeStopLoss,flexibleStopLossL1ModelParam,
@@ -1132,18 +1133,15 @@ class DayTradingPosition():
             ):
             return _EXIT_SHORT_MACD_RSI_COND_9
 
-        # rule 10
-        if (slFlipModelParam.IntValue == 1):  # enabled
-            if (self.CurrentProfitLastTrade > (-1 * gainMinTradeParamFixedLoss.FloatValue)):
-                if (self.CurrentProfitLastTrade < gainMinTradeParamFixedLoss2.FloatValue):
-                    return _EXIT_SHORT_MACD_RSI_COND_10
+        #rule 10
+        if(slFlipModelParam.IntValue==1):#enabled
+
+            if(self.MaxProfitCurrentTrade> changeFixedLossAtThisGainParam.FloatValue):
+                if self.CurrentProfit <gainMinTradeParamFixedLoss2.FloatValue:
+                    return  _EXIT_SHORT_MACD_RSI_COND_10
             else:
-                if (self.CurrentProfitLastTrade < gainMinTradeParamFixedLoss.FloatValue):
+                if self.CurrentProfit < gainMinTradeParamFixedLoss.FloatValue:
                     return _EXIT_SHORT_MACD_RSI_COND_10
-        else:
-            if (self.CurrentProfitLastTrade < gainMinTradeParamFixedLoss.FloatValue):
-                return _EXIT_SHORT_MACD_RSI_COND_10
-            
 
 
 
@@ -1229,6 +1227,7 @@ class DayTradingPosition():
                                             rsi30SlopeSkip10ExitParamR,msMaxMinExitParamS,msMaxMinExitParamSS,
                                             sec5MinSlopeExitParamT,gainMinStopLossExitParamU,gainMinStopLossExitParamUU,
                                             gainMinTradeParamUUU, gainMinTradeParamFixedLoss,gainMinTradeParamFixedLoss2,
+                                            changeFixedLossAtThisGainParam,
                                             gainMinStopLossExitParamW,gainMinStopLossExitParamWW,gainStopLossExitParamY,
                                             gainMinStopLossExitParamZ,gainMinStopLossExitParamZZ,endOfdayLimitModelParam,
                                             takeGainLimitModelParam,stopLossLimitModelParam,
@@ -1378,16 +1377,13 @@ class DayTradingPosition():
 
         # rule 10
         if(slFlipModelParam.IntValue==1):#enabled
-            if(self.CurrentProfitLastTrade>(-1*gainMinTradeParamFixedLoss.FloatValue)):
-                if(self.CurrentProfitLastTrade<gainMinTradeParamFixedLoss2.FloatValue):
-                    return _EXIT_LONG_MACD_RSI_COND_10
-            else:
-                if(self.CurrentProfitLastTrade<gainMinTradeParamFixedLoss.FloatValue):
-                    return _EXIT_LONG_MACD_RSI_COND_10
-        else:
-            if (self.CurrentProfitLastTrade < gainMinTradeParamFixedLoss.FloatValue):
-                return _EXIT_LONG_MACD_RSI_COND_10
 
+            if(self.MaxProfitCurrentTrade> changeFixedLossAtThisGainParam.FloatValue):
+                if self.CurrentProfit <gainMinTradeParamFixedLoss2.FloatValue:
+                    return  _EXIT_LONG_MACD_RSI_COND_10
+            else:
+                if self.CurrentProfit < gainMinTradeParamFixedLoss.FloatValue:
+                    return _EXIT_LONG_MACD_RSI_COND_10
 
         return None #No condition to exit
 

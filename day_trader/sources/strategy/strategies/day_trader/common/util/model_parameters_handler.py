@@ -376,6 +376,10 @@ class ModelParametersHandler:
         return "GAIN_MIN_TRADE_FIXEDLOSS_2"
 
     @staticmethod
+    def CHANGE_FIXED_LOSS_AT_THIS_GAIN():
+        return "CHANGE_FIXED_LOSS_AT_THIS_GAIN"
+
+    @staticmethod
     def PROCESS_EXTERNAL_TRADING():
         return "PROCESS_EXTERNAL_TRADING"
 
