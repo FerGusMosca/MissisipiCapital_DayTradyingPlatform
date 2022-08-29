@@ -1143,11 +1143,49 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
         return closingLong is not None or closingShort is not None
 
+    def EvaluateClosingMACDRSIAutomaticTradingByTick(self,md):
+        closingLong = self.EvaluateClosingMACDRSILongPositionsByTick(md)
+        closingShort = self.EvaluateClosingMACDRSIShortPositionsByTick(md)
+
+        return closingLong is not None or closingShort is not None
+
     def EvaluateClosingMACDRSIAutomaticTrading(self,cbDict,candlebar):
         closingLong = self.EvaluateClosingMACDRSILongPositions(candlebar,cbDict)
         closingShort = self.EvaluateClosingMACDRSIShortPositions(candlebar,cbDict)
 
         return closingLong is not None or closingShort is not None
+
+    def EvaluateClosingPositionsByTick(self,md):
+        tradingMode = self.ModelParametersHandler.Get(ModelParametersHandler.TRADING_MODE(), md.Security.Symbol)
+
+        dayTradingPos = next(
+            iter(list(filter(lambda x: x.Security.Symbol == md.Security.Symbol, self.DayTradingPositions))),
+            None)
+
+        if tradingMode.StringValue == _TRADING_MODE_AUTOMATIC or dayTradingPos.RunningBacktest:
+
+            if dayTradingPos is not None:
+
+                automTradingModeModelParam = self.ModelParametersHandler.Get(ModelParametersHandler.AUTOMATIC_TRADING_MODE(),md.Security.Symbol)
+
+                if automTradingModeModelParam is None or automTradingModeModelParam.IntValue is None:
+                    raise Exception("Critical error for automatic trading: You must specify parameter AUTOMATIC_TRADING_MODE")
+
+                if automTradingModeModelParam.IntValue == _AUTOMATIC_TRADING_MODE_GENERIC:  # First version of the auomatic trading algo
+                    pass#No urgent closing developed in the Generic Algo
+                elif automTradingModeModelParam.IntValue == _AUTOMATIC_TRADING_MODE_MACD_RSI:  # Second version of the auomatic trading algo
+                    return self.EvaluateClosingMACDRSIAutomaticTradingByTick( md)
+                else:
+                    raise Exception("Unknown automatic trading mode {}".format(automTradingModeModelParam.IntValue))
+
+            else:
+                msg = "Could not find Day Trading Position for market data symbol {} @EvaluateClosingPositionsByTick. Please Resync.".format(md.Security.Symbol)
+                self.SendToInvokingModule(ErrorWrapper(Exception(msg)))
+                self.DoLog(msg, MessageType.ERROR)
+                return False
+        else:
+            return False
+
 
     def EvaluateClosingPositions(self, candlebar, cbDict):
         symbol = candlebar.Security.Symbol
@@ -1180,7 +1218,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
         else:
             return False
 
-    def RunClose(self,dayTradingPos,side,statisticalParam,candlebar, text=None, generic = False, closingCond = None):
+    def RunClose(self,dayTradingPos,side,statisticalParam=None,candlebar=None, text=None, generic = False, closingCond = None):
 
         self.DoLog("DBG<ER>- RunClose Symbol={} Routing={} ".format(dayTradingPos.Security.Symbol,dayTradingPos.Routing), MessageType.INFO)
         if dayTradingPos.Routing:
@@ -1209,7 +1247,9 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                 self.ProcessNewPositionReqManagedPos(dayTradingPos, side,
                                                      netShares if netShares > 0 else netShares * (-1),
                                                      self.Configuration.DefaultAccount, text=text)
-                threading.Thread(target=self.DoPersistTradingSignalThread, args=(generic, dayTradingPos, TradingSignalHelper._ACTION_CLOSE(), self.TranslateSide(dayTradingPos, side),candlebar, statisticalParam, self, closingCond)).start()
+
+                if (candlebar is not None and statisticalParam is not None):
+                    threading.Thread(target=self.DoPersistTradingSignalThread, args=(generic, dayTradingPos, TradingSignalHelper._ACTION_CLOSE(), self.TranslateSide(dayTradingPos, side),candlebar, statisticalParam, self, closingCond)).start()
 
                 # if generic:
                 #     self.TradingSignalHelper.PersistTradingSignal(dayTradingPos, TradingSignalHelper._ACTION_CLOSE(),
@@ -1330,6 +1370,62 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                 self.SendToInvokingModule(ErrorWrapper(Exception(msg)))
                 self.DoLog(msg, MessageType.ERROR)
                 return None
+
+
+    def EvaluateClosingMACDRSILongPositionsByTick(self,md):
+        dayTradingPos = next(iter(list(filter(lambda x: x.Security.Symbol == md.Security.Symbol, self.DayTradingPositions))),None)
+
+        if dayTradingPos is not None:
+            slFlipModelParam=self.ModelParametersHandler.Get(ModelParametersHandler.SL_FLIP())
+            changeFixedLossAtThisGainParam=self.ModelParametersHandler.Get(ModelParametersHandler.CHANGE_FIXED_LOSS_AT_THIS_GAIN(), md.Security.Symbol)
+            gainMinTradeParamFixedLoss=self.ModelParametersHandler.Get(ModelParametersHandler.GAIN_MIN_TRADE_FIXEDLOSS(), md.Security.Symbol)
+            gainMinTradeParamFixedLoss2=self.ModelParametersHandler.Get(ModelParametersHandler.GAIN_MIN_TRADE_FIXEDLOSS_2(), md.Security.Symbol)
+
+            closingCond = dayTradingPos.EvaluateClosingMACDRSILongTradeByTick(slFlipModelParam,changeFixedLossAtThisGainParam,gainMinTradeParamFixedLoss,gainMinTradeParamFixedLoss2)
+
+
+            if(closingCond is not None):
+                self.DoLog("MACD-RSI - Closing long position by Tick for symbol {} at {} ".format(dayTradingPos.Security.Symbol,
+                                                                                          md.DateTime),
+                           MessageType.INFO)
+
+                self.RunClose(dayTradingPos, Side.Sell if dayTradingPos.GetNetOpenShares() > 0 else Side.Buy,statisticalParam=None, candlebar=None, generic=False,closingCond=closingCond)
+
+
+
+        else:
+            msg = "Could not find Day Trading Position for market data symbol {} @EvaluateClosingMACDRSILongPositionsByTick. Please Resync.".format(md.Security.Symbol)
+            self.SendToInvokingModule(ErrorWrapper(Exception(msg)))
+            self.DoLog(msg, MessageType.ERROR)
+            return None
+
+
+    def EvaluateClosingMACDRSIShortPositionsByTick(self,md):
+        dayTradingPos = next(iter(list(filter(lambda x: x.Security.Symbol == md.Security.Symbol, self.DayTradingPositions))),None)
+
+        if dayTradingPos is not None:
+            slFlipModelParam=self.ModelParametersHandler.Get(ModelParametersHandler.SL_FLIP())
+            changeFixedLossAtThisGainParam=self.ModelParametersHandler.Get(ModelParametersHandler.CHANGE_FIXED_LOSS_AT_THIS_GAIN(), md.Security.Symbol)
+            gainMinTradeParamFixedLoss=self.ModelParametersHandler.Get(ModelParametersHandler.GAIN_MIN_TRADE_FIXEDLOSS(), md.Security.Symbol)
+            gainMinTradeParamFixedLoss2=self.ModelParametersHandler.Get(ModelParametersHandler.GAIN_MIN_TRADE_FIXEDLOSS_2(), md.Security.Symbol)
+
+            closingCond = dayTradingPos.EvaluateClosingMACDRSIShortTradeByTick(slFlipModelParam,changeFixedLossAtThisGainParam,gainMinTradeParamFixedLoss,gainMinTradeParamFixedLoss2)
+
+
+            if(closingCond is not None):
+                self.DoLog("MACD-RSI - Closing short position by Tick for symbol {} at {} ".format(dayTradingPos.Security.Symbol,md.DateTime),MessageType.INFO)
+
+                self.RunClose(dayTradingPos, Side.Sell if dayTradingPos.GetNetOpenShares() > 0 else Side.Buy,statisticalParam=None, candlebar=None, generic=False,closingCond=closingCond)
+
+
+
+        else:
+            msg = "Could not find Day Trading Position for market data symbol {} @EvaluateClosingMACDRSIShortPositionsByTick. Please Resync.".format(md.Security.Symbol)
+            self.SendToInvokingModule(ErrorWrapper(Exception(msg)))
+            self.DoLog(msg, MessageType.ERROR)
+            return None
+
+
 
     def EvaluateClosingMACDRSILongPositions(self, candlebar, cbDict, runClose=True):
         symbol = candlebar.Security.Symbol

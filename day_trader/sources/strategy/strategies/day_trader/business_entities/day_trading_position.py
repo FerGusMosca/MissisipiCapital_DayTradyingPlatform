@@ -984,6 +984,23 @@ class DayTradingPosition():
         else:
             return None
 
+    def RunRuleTenShortPos(self,slFlipModelParam,changeFixedLossAtThisGainParam,gainMinTradeParamFixedLoss,gainMinTradeParamFixedLoss2):
+
+        if (slFlipModelParam.IntValue == 1):  # enabled
+
+            if (self.MaxProfitCurrentTrade > changeFixedLossAtThisGainParam.FloatValue):
+                if self.CurrentProfit < gainMinTradeParamFixedLoss2.FloatValue:
+                    return _EXIT_SHORT_MACD_RSI_COND_10
+                else:
+                    return None
+            else:
+                if self.CurrentProfit < gainMinTradeParamFixedLoss.FloatValue:
+                    return _EXIT_SHORT_MACD_RSI_COND_10
+                else:
+                    return None
+        else:
+            return None
+
     def EvaluateClosingMACDRSIShortTrade(self,candlebarsArr,msNowParamA,macdMaxGainParamJ,macdMaxGainParamJJ,gainMaxTradeParamJJJ,
                                          gainMaxTradeParamSDMult,gainMaxTradeParamFixedGain,macdGainNowMaxParamK,
                                          rsi30SlopeSkip5ExitParamL,rsi30Skip5ParamLX,msNowExitParamN,msNowExitParamNN,msMaxMinExitParamNBis,
@@ -1133,15 +1150,14 @@ class DayTradingPosition():
             ):
             return _EXIT_SHORT_MACD_RSI_COND_9
 
-        #rule 10
-        if(slFlipModelParam.IntValue==1):#enabled
 
-            if(self.MaxProfitCurrentTrade> changeFixedLossAtThisGainParam.FloatValue):
-                if self.CurrentProfit <gainMinTradeParamFixedLoss2.FloatValue:
-                    return  _EXIT_SHORT_MACD_RSI_COND_10
-            else:
-                if self.CurrentProfit < gainMinTradeParamFixedLoss.FloatValue:
-                    return _EXIT_SHORT_MACD_RSI_COND_10
+        ruleTenCond=self.RunRuleTenShortPos(slFlipModelParam,changeFixedLossAtThisGainParam,gainMinTradeParamFixedLoss,gainMinTradeParamFixedLoss2)
+
+        if(ruleTenCond is not None):
+            return ruleTenCond
+
+
+        return None
 
 
 
@@ -1217,6 +1233,24 @@ class DayTradingPosition():
 
 
         return None
+
+
+    def RunRuleTenLongPos(self,slFlipModelParam,changeFixedLossAtThisGainParam,gainMinTradeParamFixedLoss,gainMinTradeParamFixedLoss2):
+        # rule 10
+        if (slFlipModelParam.IntValue == 1):  # enabled
+
+            if (self.MaxProfitCurrentTrade > changeFixedLossAtThisGainParam.FloatValue):
+                if self.CurrentProfit < gainMinTradeParamFixedLoss2.FloatValue:
+                    return _EXIT_LONG_MACD_RSI_COND_10
+                else:
+                    return None
+            else:
+                if self.CurrentProfit < gainMinTradeParamFixedLoss.FloatValue:
+                    return _EXIT_LONG_MACD_RSI_COND_10
+                else:
+                    return None
+        else:
+            return None
 
 
 
@@ -1375,17 +1409,31 @@ class DayTradingPosition():
             ):
             return  _EXIT_LONG_MACD_RSI_COND_9
 
-        # rule 10
-        if(slFlipModelParam.IntValue==1):#enabled
 
-            if(self.MaxProfitCurrentTrade> changeFixedLossAtThisGainParam.FloatValue):
-                if self.CurrentProfit <gainMinTradeParamFixedLoss2.FloatValue:
-                    return  _EXIT_LONG_MACD_RSI_COND_10
-            else:
-                if self.CurrentProfit < gainMinTradeParamFixedLoss.FloatValue:
-                    return _EXIT_LONG_MACD_RSI_COND_10
+        #rule #10
+        ruleTenExitCond=self.RunRuleTenLongPos(slFlipModelParam,changeFixedLossAtThisGainParam,gainMinTradeParamFixedLoss,gainMinTradeParamFixedLoss2)
+        if(ruleTenExitCond is not None):
+            return ruleTenExitCond
 
         return None #No condition to exit
+
+    def EvaluateClosingMACDRSILongTradeByTick(self,slFlipModelParam,changeFixedLossAtThisGainParam,gainMinTradeParamFixedLoss,gainMinTradeParamFixedLoss2):
+
+        # rule #10
+        ruleTenExitCond = self.RunRuleTenLongPos(slFlipModelParam, changeFixedLossAtThisGainParam,gainMinTradeParamFixedLoss, gainMinTradeParamFixedLoss2)
+        if (ruleTenExitCond is not None):
+            return ruleTenExitCond
+
+        return None
+
+    def EvaluateClosingMACDRSIShortTradeByTick(self, slFlipModelParam, changeFixedLossAtThisGainParam,gainMinTradeParamFixedLoss, gainMinTradeParamFixedLoss2):
+
+        # rule #10
+        ruleTenExitCond = self.RunRuleTenShortPos(slFlipModelParam, changeFixedLossAtThisGainParam,gainMinTradeParamFixedLoss, gainMinTradeParamFixedLoss2)
+        if (ruleTenExitCond is not None):
+            return ruleTenExitCond
+
+        return None
 
 
 
