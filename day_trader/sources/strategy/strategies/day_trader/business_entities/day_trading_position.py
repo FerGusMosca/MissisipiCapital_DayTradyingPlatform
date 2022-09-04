@@ -85,6 +85,10 @@ _SHORT_MACD_RSI_RULE_BROOMS="SHORT_MACD_RSI_RULE_BROOMS"
 _TERMINALLY_CLOSED ="TERMINALLY_CLOSED"
 _INVALID_TIME_TRADE ="INVALID_TIME_TRADE"
 
+_LONG_SHORT_ON_CANDLE_LONG_MARKET ="LONG_SHORT_ON_CANDLE_LONG_MARKET"
+_LONG_SHORT_ON_CANDLE_SHORT_MARKET ="LONG_SHORT_ON_CANDLE_SHORT_MARKET"
+_LONG_SHORT_ON_CANDLE_OFF ="LONG_SHORT_ON_CANDLE_OFF"
+
 _REC_UNDEFINED = -1
 _REC_GO_LONG_NOW = 0
 _REC_GO_SHORT_NOW = 1
@@ -1597,13 +1601,17 @@ class DayTradingPosition():
 
     #region Strong and simple Terminal
 
-    def CanOpenPosition(self,candlebarArr,TAKE_GAIN_LIMIT,STOP_LOSS_LIMIT,IMPL_FLEXIBLE_STOP_LOSSES,FLEXIBLE_STOP_LOSS_L1,END_OF_DAY_LIMIT):
+    def CanOpenPosition(self,candlebarArr,TAKE_GAIN_LIMIT,STOP_LOSS_LIMIT,IMPL_FLEXIBLE_STOP_LOSSES,FLEXIBLE_STOP_LOSS_L1,END_OF_DAY_LIMIT,
+                            LONG_SHORT_ON_CANDLE,longTrade):
 
         self.SoftTerminalCondEvaluated = self.EvaluateSoftTerminalCondition (candlebarArr,TAKE_GAIN_LIMIT,STOP_LOSS_LIMIT,
                                                                              IMPL_FLEXIBLE_STOP_LOSSES,FLEXIBLE_STOP_LOSS_L1 )
         self.StrongTerminalCondEvaluated = self.EvaluateStrongTerminal(candlebarArr,END_OF_DAY_LIMIT)
 
-        return not self.TerminalClose  and  self.SoftTerminalCondEvaluated is  None and self.StrongTerminalCondEvaluated is None
+        momentumCond= self.EvaluateMomentumConditions(candlebarArr,LONG_SHORT_ON_CANDLE,longTrade)
+
+        return (not self.TerminalClose  and  self.SoftTerminalCondEvaluated is  None and self.StrongTerminalCondEvaluated is None
+                and momentumCond is not None)
 
 
     def TerminalConditionActivated(self):
@@ -1625,6 +1633,27 @@ class DayTradingPosition():
                 or condition == _TERMINALLY_CLOSED or condition==_EXIT_TERM_COND_FLEX_STOP_LOSS)
 
         # Defines if the condition for closing the day, will imply not opening another position during the day
+
+    def EvaluateMomentumConditions(self,candlebarsArr,longShortOnCandleParam,longTrade):
+        lastCandlebar = candlebarsArr[-1]
+
+        if(longShortOnCandleParam.IntValue is not None and longShortOnCandleParam.IntValue>0 and self.OpenMarketData is not None
+            and self.OpenMarketData.OpeningPrice is not None):
+
+            if longTrade:
+                if lastCandlebar.Close> self.OpenMarketData.OpeningPrice:
+                    return _LONG_SHORT_ON_CANDLE_LONG_MARKET
+                else:
+                    return None
+            else:
+                if lastCandlebar.Close< self.OpenMarketData.OpeningPrice:
+                    return _LONG_SHORT_ON_CANDLE_SHORT_MARKET
+                else:
+                    return None
+        else:
+            return _LONG_SHORT_ON_CANDLE_OFF
+
+
 
     def EvaluateStrongTerminal(self, candlebarsArr, endOfdayLimitModelParam):
 

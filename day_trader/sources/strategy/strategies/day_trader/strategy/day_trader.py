@@ -860,6 +860,8 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                                 self.ModelParametersHandler.Get(ModelParametersHandler.IMPL_FLEXIBLE_STOP_LOSSES(), symbol),
                                 self.ModelParametersHandler.Get(ModelParametersHandler.FLEXIBLE_STOP_LOSS_L1(), symbol),
                                 self.ModelParametersHandler.Get(ModelParametersHandler.END_OF_DAY_LIMIT(), symbol),
+                                self.ModelParametersHandler.Get(ModelParametersHandler.LONG_SHORT_ON_CANDLE(), symbol),
+                                longTrade=True
                                 )
 
 
@@ -923,7 +925,9 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                             self.ModelParametersHandler.Get(ModelParametersHandler.IMPL_FLEXIBLE_STOP_LOSSES(), symbol),
                             self.ModelParametersHandler.Get(ModelParametersHandler.FLEXIBLE_STOP_LOSS_L1(), symbol),
                             self.ModelParametersHandler.Get(ModelParametersHandler.END_OF_DAY_LIMIT(), symbol),
-                                                        )
+                            self.ModelParametersHandler.Get(ModelParametersHandler.LONG_SHORT_ON_CANDLE(), symbol),
+                            longTrade=False
+                            )
 
         if (validTimeEnterTrade and canOpenPosition):
 
@@ -981,6 +985,8 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                                                         self.ModelParametersHandler.Get(ModelParametersHandler.IMPL_FLEXIBLE_STOP_LOSSES(), symbol),
                                                         self.ModelParametersHandler.Get(ModelParametersHandler.FLEXIBLE_STOP_LOSS_L1(), symbol),
                                                         self.ModelParametersHandler.Get(ModelParametersHandler.END_OF_DAY_LIMIT(), symbol),
+                                                        self.ModelParametersHandler.Get(ModelParametersHandler.LONG_SHORT_ON_CANDLE(), symbol),
+                                                        longTrade=True
                                                         )
 
         if canOpenPosition:
@@ -1041,6 +1047,8 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                                                         self.ModelParametersHandler.Get( ModelParametersHandler.IMPL_FLEXIBLE_STOP_LOSSES(), symbol),
                                                         self.ModelParametersHandler.Get( ModelParametersHandler.FLEXIBLE_STOP_LOSS_L1(), symbol),
                                                         self.ModelParametersHandler.Get(ModelParametersHandler.END_OF_DAY_LIMIT(), symbol),
+                                                        self.ModelParametersHandler.Get(ModelParametersHandler.LONG_SHORT_ON_CANDLE(), symbol),
+                                                        longTrade=False
                                                         )
 
         if canOpenPosition:

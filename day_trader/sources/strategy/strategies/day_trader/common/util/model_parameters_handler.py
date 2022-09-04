@@ -723,6 +723,10 @@ class ModelParametersHandler:
     def SL_FLIP():
         return "SL_FLIP"
 
+    @staticmethod
+    def LONG_SHORT_ON_CANDLE():
+        return "LONG_SHORT_ON_CANDLE"
+
     #endregion
 
     #region Public Methods
