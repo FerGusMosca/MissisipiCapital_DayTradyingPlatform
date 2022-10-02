@@ -225,7 +225,7 @@ class DayTradingPosition():
 
     #endregion
 
-    #region Static Methods
+    #region Static Methodsx
 
     @staticmethod
     def _TERMINALLY_CLOSED():
