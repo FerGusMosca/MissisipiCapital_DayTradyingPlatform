@@ -1,0 +1,1455 @@
+2022-09-06 10:49:04 [logger INFO] DayTrader  Initializing
+2022-09-06 10:49:22 [logger INFO] DayTrader  Initializing
+2022-09-06 10:50:32 [logger INFO] DayTrader  Initializing
+2022-09-06 10:50:34 [logger INFO] Loading 0 summaries for security SPY
+2022-09-06 10:50:34 [logger INFO] WebSocketModule  Initializing
+2022-09-06 10:50:34 [logger INFO] WebSocketModule Successfully initialized
+2022-09-06 10:50:34 [logger ERROR] Critical error opening websocket @OpenWebsocket: [WinError 10048] Solo se permite un uso de cada dirección de socket (protocolo/dirección de red/puerto)
+2022-09-06 10:50:34 [logger INFO] FileHandlerModule  Initializing
+2022-09-06 10:50:34 [logger INFO] FileHandlerModule Successfully initialized
+2022-09-06 10:50:35 [logger INFO] Initializing Bloomberg Order Router
+2022-09-06 10:50:35 [logger INFO] Connecting to localhost:8194
+2022-09-06 10:50:35 [logger INFO] Bloomberg Order Router Initialized
+2022-09-06 10:50:35 [logger INFO] SingletonModuleHandler Successfully initializer
+2022-09-06 10:50:35 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2022-09-06 10:50:35 [logger INFO] Bloomberg Session Connection is UP...
+2022-09-06 10:50:35 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2022-09-06 10:50:35 [logger INFO] Bloomberg Session started...
+2022-09-06 10:50:35 [logger INFO] Initializing Generic Market Order Router
+2022-09-06 10:50:35 [logger INFO] SingletonModuleHandler Successfully initializer
+2022-09-06 10:50:35 [logger INFO] Generic Market Order Router Initialized
+2022-09-06 10:50:35 [logger INFO] Processing SERVICE_STATUS event
+2022-09-06 10:50:35 [logger INFO] Service //blp/emapisvc opened...
+2022-09-06 10:50:36 [logger INFO] DayTrader Successfully initialized
+2022-09-06 10:50:36 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:SPY
+2022-09-06 10:50:37 [logger INFO] Processing SERVICE_STATUS event
+2022-09-06 10:50:37 [logger INFO] Service //blp/mktdata opened...
+2022-09-06 10:50:37 [logger INFO] Requesting for open orders...
+2022-09-06 10:50:37 [logger INFO] Waiting initial paints to finish to return active execution reports
+2022-09-06 10:50:37 [logger INFO] Subscribing to order and route events
+2022-09-06 10:50:37 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:SPY
+2022-09-06 10:50:37 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:SPY
+2022-09-06 10:50:37 [logger INFO] Route subscription started successfully
+2022-09-06 10:50:37 [logger INFO] Order subscription started successfully
+2022-09-06 10:50:37 [logger INFO] Processing SERVICE_STATUS event
+2022-09-06 10:50:37 [logger INFO] Service //blp/mktbar opened...
+2022-09-06 10:50:38 [logger ERROR] Error @@DayTrader.ProcessCandleBar for security SPY:Inconsistent state where the is no a terminal close and no soft terminal and strong terminals activated 
+2022-09-06 10:50:38 [logger INFO] Processing SERVICE_STATUS event
+2022-09-06 10:50:38 [logger INFO] Service //blp/refdata opened...
+2022-09-06 10:50:38 [logger INFO] Waiting initial paints to finish to return active execution reports
+2022-09-06 10:50:38 [logger INFO] Historical prices successfully loaded for symbol SPY 
+2022-09-06 10:50:39 [logger INFO] Recovered 0 previously existing execution reports
+2022-09-06 10:50:39 [logger INFO] Received list of Open Positions: 0 positions
+2022-09-06 10:50:39 [logger INFO] Process ready to receive commands and trade
+2022-09-06 10:51:24 [logger INFO] DayTrader  Initializing
+2022-09-06 10:51:25 [logger INFO] Loading 0 summaries for security SPY
+2022-09-06 10:51:25 [logger INFO] WebSocketModule  Initializing
+2022-09-06 10:51:25 [logger INFO] WebSocketModule Successfully initialized
+2022-09-06 10:51:25 [logger ERROR] Critical error opening websocket @OpenWebsocket: [WinError 10048] Solo se permite un uso de cada dirección de socket (protocolo/dirección de red/puerto)
+2022-09-06 10:51:25 [logger INFO] FileHandlerModule  Initializing
+2022-09-06 10:51:25 [logger INFO] FileHandlerModule Successfully initialized
+2022-09-06 10:51:25 [logger INFO] Initializing Bloomberg Order Router
+2022-09-06 10:51:25 [logger INFO] Connecting to localhost:8194
+2022-09-06 10:51:25 [logger INFO] Bloomberg Order Router Initialized
+2022-09-06 10:51:25 [logger INFO] SingletonModuleHandler Successfully initializer
+2022-09-06 10:51:25 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2022-09-06 10:51:25 [logger INFO] Bloomberg Session Connection is UP...
+2022-09-06 10:51:25 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2022-09-06 10:51:25 [logger INFO] Bloomberg Session started...
+2022-09-06 10:51:25 [logger INFO] Initializing Generic Market Order Router
+2022-09-06 10:51:25 [logger INFO] SingletonModuleHandler Successfully initializer
+2022-09-06 10:51:25 [logger INFO] Generic Market Order Router Initialized
+2022-09-06 10:51:25 [logger INFO] Processing SERVICE_STATUS event
+2022-09-06 10:51:25 [logger INFO] Service //blp/emapisvc opened...
+2022-09-06 10:51:26 [logger INFO] DayTrader Successfully initialized
+2022-09-06 10:51:26 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:SPY
+2022-09-06 10:51:27 [logger INFO] Processing SERVICE_STATUS event
+2022-09-06 10:51:27 [logger INFO] Service //blp/mktdata opened...
+2022-09-06 10:51:27 [logger INFO] Requesting for open orders...
+2022-09-06 10:51:27 [logger INFO] Waiting initial paints to finish to return active execution reports
+2022-09-06 10:51:27 [logger INFO] Subscribing to order and route events
+2022-09-06 10:51:27 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:SPY
+2022-09-06 10:51:27 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:SPY
+2022-09-06 10:51:27 [logger INFO] Route subscription started successfully
+2022-09-06 10:51:27 [logger INFO] Order subscription started successfully
+2022-09-06 10:51:27 [logger INFO] Processing SERVICE_STATUS event
+2022-09-06 10:51:27 [logger INFO] Service //blp/mktbar opened...
+2022-09-06 10:51:28 [logger INFO] Processing SERVICE_STATUS event
+2022-09-06 10:51:28 [logger INFO] Service //blp/refdata opened...
+2022-09-06 10:51:28 [logger INFO] Waiting initial paints to finish to return active execution reports
+2022-09-06 10:51:28 [logger INFO] Historical prices successfully loaded for symbol SPY 
+2022-09-06 10:51:29 [logger INFO] Recovered 0 previously existing execution reports
+2022-09-06 10:51:29 [logger INFO] Received list of Open Positions: 0 positions
+2022-09-06 10:51:29 [logger INFO] Process ready to receive commands and trade
+2022-09-06 10:52:20 [logger INFO] DayTrader  Initializing
+2022-09-06 10:52:20 [logger INFO] Loading 0 summaries for security SPY
+2022-09-06 10:52:20 [logger INFO] WebSocketModule  Initializing
+2022-09-06 10:52:20 [logger INFO] WebSocketModule Successfully initialized
+2022-09-06 10:52:20 [logger ERROR] Critical error opening websocket @OpenWebsocket: [WinError 10048] Solo se permite un uso de cada dirección de socket (protocolo/dirección de red/puerto)
+2022-09-06 10:52:20 [logger INFO] FileHandlerModule  Initializing
+2022-09-06 10:52:20 [logger INFO] FileHandlerModule Successfully initialized
+2022-09-06 10:52:20 [logger INFO] Initializing Bloomberg Order Router
+2022-09-06 10:52:20 [logger INFO] Connecting to localhost:8194
+2022-09-06 10:52:20 [logger INFO] Bloomberg Order Router Initialized
+2022-09-06 10:52:20 [logger INFO] SingletonModuleHandler Successfully initializer
+2022-09-06 10:52:20 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2022-09-06 10:52:20 [logger INFO] Bloomberg Session Connection is UP...
+2022-09-06 10:52:20 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2022-09-06 10:52:20 [logger INFO] Bloomberg Session started...
+2022-09-06 10:52:20 [logger INFO] Initializing Generic Market Order Router
+2022-09-06 10:52:20 [logger INFO] SingletonModuleHandler Successfully initializer
+2022-09-06 10:52:20 [logger INFO] Generic Market Order Router Initialized
+2022-09-06 10:52:20 [logger INFO] Processing SERVICE_STATUS event
+2022-09-06 10:52:20 [logger INFO] Service //blp/emapisvc opened...
+2022-09-06 10:52:21 [logger INFO] DayTrader Successfully initialized
+2022-09-06 10:52:21 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:SPY
+2022-09-06 10:52:22 [logger INFO] Processing SERVICE_STATUS event
+2022-09-06 10:52:22 [logger INFO] Service //blp/mktdata opened...
+2022-09-06 10:52:22 [logger INFO] Requesting for open orders...
+2022-09-06 10:52:22 [logger INFO] Waiting initial paints to finish to return active execution reports
+2022-09-06 10:52:22 [logger INFO] Subscribing to order and route events
+2022-09-06 10:52:22 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:SPY
+2022-09-06 10:52:22 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:SPY
+2022-09-06 10:52:22 [logger INFO] Order subscription started successfully
+2022-09-06 10:52:22 [logger INFO] Route subscription started successfully
+2022-09-06 10:52:22 [logger INFO] Processing SERVICE_STATUS event
+2022-09-06 10:52:22 [logger INFO] Service //blp/mktbar opened...
+2022-09-06 10:52:23 [logger INFO] Processing SERVICE_STATUS event
+2022-09-06 10:52:23 [logger INFO] Service //blp/refdata opened...
+2022-09-06 10:52:23 [logger INFO] Waiting initial paints to finish to return active execution reports
+2022-09-06 10:52:23 [logger INFO] Historical prices successfully loaded for symbol SPY 
+2022-09-06 10:52:24 [logger INFO] Recovered 0 previously existing execution reports
+2022-09-06 10:52:24 [logger INFO] Received list of Open Positions: 0 positions
+2022-09-06 10:52:24 [logger INFO] Process ready to receive commands and trade
+2022-09-06 10:56:02 [logger INFO] DayTrader  Initializing
+2022-09-06 10:56:02 [logger INFO] Loading 0 summaries for security SPY
+2022-09-06 10:56:03 [logger INFO] WebSocketModule  Initializing
+2022-09-06 10:56:03 [logger INFO] WebSocketModule Successfully initialized
+2022-09-06 10:56:03 [logger ERROR] Critical error opening websocket @OpenWebsocket: [WinError 10048] Solo se permite un uso de cada dirección de socket (protocolo/dirección de red/puerto)
+2022-09-06 10:56:03 [logger INFO] FileHandlerModule  Initializing
+2022-09-06 10:56:03 [logger INFO] FileHandlerModule Successfully initialized
+2022-09-06 10:56:03 [logger INFO] Initializing Bloomberg Order Router
+2022-09-06 10:56:03 [logger INFO] Connecting to localhost:8194
+2022-09-06 10:56:03 [logger INFO] Bloomberg Order Router Initialized
+2022-09-06 10:56:03 [logger INFO] SingletonModuleHandler Successfully initializer
+2022-09-06 10:56:03 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2022-09-06 10:56:03 [logger INFO] Bloomberg Session Connection is UP...
+2022-09-06 10:56:03 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2022-09-06 10:56:03 [logger INFO] Bloomberg Session started...
+2022-09-06 10:56:03 [logger INFO] Initializing Generic Market Order Router
+2022-09-06 10:56:03 [logger INFO] SingletonModuleHandler Successfully initializer
+2022-09-06 10:56:03 [logger INFO] Generic Market Order Router Initialized
+2022-09-06 10:56:03 [logger INFO] Processing SERVICE_STATUS event
+2022-09-06 10:56:03 [logger INFO] Service //blp/emapisvc opened...
+2022-09-06 10:56:04 [logger INFO] DayTrader Successfully initialized
+2022-09-06 10:56:04 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:SPY
+2022-09-06 10:56:05 [logger INFO] Processing SERVICE_STATUS event
+2022-09-06 10:56:05 [logger INFO] Service //blp/mktdata opened...
+2022-09-06 10:56:05 [logger INFO] Requesting for open orders...
+2022-09-06 10:56:05 [logger INFO] Waiting initial paints to finish to return active execution reports
+2022-09-06 10:56:05 [logger INFO] Subscribing to order and route events
+2022-09-06 10:56:05 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:SPY
+2022-09-06 10:56:05 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:SPY
+2022-09-06 10:56:05 [logger INFO] Order subscription started successfully
+2022-09-06 10:56:05 [logger INFO] Route subscription started successfully
+2022-09-06 10:56:05 [logger INFO] Processing SERVICE_STATUS event
+2022-09-06 10:56:05 [logger INFO] Service //blp/mktbar opened...
+2022-09-06 10:56:06 [logger INFO] Processing SERVICE_STATUS event
+2022-09-06 10:56:06 [logger INFO] Service //blp/refdata opened...
+2022-09-06 10:56:06 [logger INFO] Waiting initial paints to finish to return active execution reports
+2022-09-06 10:56:06 [logger INFO] Historical prices successfully loaded for symbol SPY 
+2022-09-06 10:56:07 [logger INFO] Recovered 0 previously existing execution reports
+2022-09-06 10:56:07 [logger INFO] Received list of Open Positions: 0 positions
+2022-09-06 10:56:07 [logger INFO] Process ready to receive commands and trade
+2022-09-06 12:10:59 [logger INFO] MACD/RSI = Running short trade for symbol SPY at 2022-09-06 11:56:00+00:00
+2022-09-06 12:10:59 [logger INFO] DBG<ER>-Symbol=SPY PosStatus=PositionStatus.New ExecType=ExecType.New LeavesQty=1 Routing=True 
+2022-09-06 12:10:59 [logger INFO] Managed Position Updated: Arrival=2022-09-06 12:10:59.972616 TradeId=trd__SPY_1662477059 PosId=de4a870a-66bb-48a1-bcee-6c372628f4d4 Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2022-09-06 12:11:00 [logger INFO] DBG<ER>-Symbol=SPY PosStatus=PositionStatus.Filled ExecType=ExecType.Trade LeavesQty=0 Routing=False 
+2022-09-06 12:11:00 [logger INFO] Managed Position Finished: Arrival=2022-09-06 12:11:00.192031 TradeId=trd__SPY_1662477059 PosId=de4a870a-66bb-48a1-bcee-6c372628f4d4 Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=392.85 Text=Fake Filled Order 
+2022-09-06 12:11:02 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:02.316570 seconds!
+2022-09-06 13:58:59 [logger INFO] MACD-RSI - Closing short position for symbol SPY at 2022-09-06 13:44:00+00:00 
+2022-09-06 13:58:59 [logger INFO] DBG<ER>- RunClose Symbol=SPY Routing=False 
+2022-09-06 13:58:59 [logger INFO] DBG<ER>- RunClose Symbol=SPY NetShares=-1 
+2022-09-06 13:58:59 [logger INFO] DBG<ER>-Symbol=SPY PosStatus=PositionStatus.New ExecType=ExecType.New LeavesQty=1 Routing=True 
+2022-09-06 13:58:59 [logger INFO] Managed Position Updated: Arrival=2022-09-06 13:58:59.263547 TradeId=trd__SPY_1662483539 PosId=1d791b5e-1e9e-42f2-91c7-94d7ae6d3026 Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2022-09-06 13:58:59 [logger INFO] DBG<ER>-Symbol=SPY PosStatus=PositionStatus.Filled ExecType=ExecType.Trade LeavesQty=0 Routing=False 
+2022-09-06 13:58:59 [logger INFO] Managed Position Finished: Arrival=2022-09-06 13:58:59.475309 TradeId=trd__SPY_1662483539 PosId=1d791b5e-1e9e-42f2-91c7-94d7ae6d3026 Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=391.55 Text=Fake Filled Order 
+2022-09-06 13:59:15 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:16.678745 seconds!
+2022-09-06 14:06:59 [logger INFO] MACD/RSI = Running short trade for symbol SPY at 2022-09-06 13:52:00+00:00
+2022-09-06 14:06:59 [logger INFO] DBG<ER>-Symbol=SPY PosStatus=PositionStatus.New ExecType=ExecType.New LeavesQty=1 Routing=True 
+2022-09-06 14:06:59 [logger INFO] Managed Position Updated: Arrival=2022-09-06 14:06:59.525739 TradeId=trd__SPY_1662484019 PosId=c9811165-352d-480d-b6f7-56d2ac31cd25 Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2022-09-06 14:06:59 [logger INFO] DBG<ER>-Symbol=SPY PosStatus=PositionStatus.Filled ExecType=ExecType.Trade LeavesQty=0 Routing=False 
+2022-09-06 14:06:59 [logger INFO] Managed Position Finished: Arrival=2022-09-06 14:06:59.732034 TradeId=trd__SPY_1662484019 PosId=c9811165-352d-480d-b6f7-56d2ac31cd25 Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=391.6 Text=Fake Filled Order 
+2022-09-06 14:45:58 [logger INFO] MACD-RSI - Closing short position for symbol SPY at 2022-09-06 14:31:00+00:00 
+2022-09-06 14:45:58 [logger INFO] DBG<ER>- RunClose Symbol=SPY Routing=False 
+2022-09-06 14:45:58 [logger INFO] DBG<ER>- RunClose Symbol=SPY NetShares=-1 
+2022-09-06 14:45:58 [logger INFO] DBG<ER>-Symbol=SPY PosStatus=PositionStatus.New ExecType=ExecType.New LeavesQty=1 Routing=True 
+2022-09-06 14:45:58 [logger INFO] Managed Position Updated: Arrival=2022-09-06 14:45:58.938958 TradeId=trd__SPY_1662486358 PosId=1baa4187-e688-4775-9641-4fde62cc8db4 Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2022-09-06 14:45:59 [logger INFO] DBG<ER>-Symbol=SPY PosStatus=PositionStatus.Filled ExecType=ExecType.Trade LeavesQty=0 Routing=False 
+2022-09-06 14:45:59 [logger INFO] Managed Position Finished: Arrival=2022-09-06 14:45:59.153468 TradeId=trd__SPY_1662486358 PosId=1baa4187-e688-4775-9641-4fde62cc8db4 Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=389.8 Text=Fake Filled Order 
+2022-09-06 15:20:58 [logger INFO] MACD/RSI = Running short trade for symbol SPY at 2022-09-06 15:06:00+00:00
+2022-09-06 15:20:58 [logger INFO] DBG<ER>-Symbol=SPY PosStatus=PositionStatus.New ExecType=ExecType.New LeavesQty=1 Routing=True 
+2022-09-06 15:20:58 [logger INFO] Managed Position Updated: Arrival=2022-09-06 15:20:58.983111 TradeId=trd__SPY_1662488458 PosId=c89d5fc4-5933-4a69-8742-4753914947e2 Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2022-09-06 15:20:59 [logger INFO] DBG<ER>-Symbol=SPY PosStatus=PositionStatus.Filled ExecType=ExecType.Trade LeavesQty=0 Routing=False 
+2022-09-06 15:20:59 [logger INFO] Managed Position Finished: Arrival=2022-09-06 15:20:59.197549 TradeId=trd__SPY_1662488458 PosId=c89d5fc4-5933-4a69-8742-4753914947e2 Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=390.435 Text=Fake Filled Order 
+2022-09-06 15:21:01 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:02.564943 seconds!
+2022-09-06 17:10:59 [logger INFO] MACD-RSI - Closing short position for symbol SPY at 2022-09-06 16:56:00+00:00 
+2022-09-06 17:10:59 [logger INFO] DBG<ER>- RunClose Symbol=SPY Routing=False 
+2022-09-06 17:10:59 [logger INFO] DBG<ER>- RunClose Symbol=SPY NetShares=-1 
+2022-09-06 17:10:59 [logger INFO] DBG<ER>-Symbol=SPY PosStatus=PositionStatus.New ExecType=ExecType.New LeavesQty=1 Routing=True 
+2022-09-06 17:10:59 [logger INFO] Managed Position Updated: Arrival=2022-09-06 17:10:59.263531 TradeId=trd__SPY_1662495059 PosId=1de04022-59c2-436c-a1de-4550fab7c7ab Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2022-09-06 17:10:59 [logger INFO] DBG<ER>-Symbol=SPY PosStatus=PositionStatus.Filled ExecType=ExecType.Trade LeavesQty=0 Routing=False 
+2022-09-06 17:10:59 [logger INFO] Managed Position Finished: Arrival=2022-09-06 17:10:59.479929 TradeId=trd__SPY_1662495059 PosId=1de04022-59c2-436c-a1de-4550fab7c7ab Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=390.065 Text=Fake Filled Order 
+2022-09-06 17:11:01 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:02.539152 seconds!
+2022-09-07 08:00:00 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:SPY
+2022-09-07 08:00:01 [logger INFO] Requesting for open orders...
+2022-09-07 08:00:01 [logger INFO] Recovered 0 previously existing execution reports
+2022-09-07 08:00:01 [logger INFO] Subscribing to order and route events
+2022-09-07 08:00:01 [logger INFO] Received list of Open Positions: 0 positions
+2022-09-07 08:00:01 [logger INFO] Process ready to receive commands and trade
+2022-09-07 08:00:01 [logger ERROR] Error running ProcessMessage @OrderRouter.Bloomberg module:Duplicate CorrelationId: [ valueType=INT classId=0 value=98 ] (0x00020005)
+2022-09-07 08:00:01 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:SPY
+2022-09-07 08:00:01 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:SPY
+2022-09-07 08:00:02 [logger INFO] Processing SERVICE_STATUS event
+2022-09-07 08:00:02 [logger INFO] Service //blp/refdata opened...
+2022-09-07 08:00:02 [logger INFO] Historical prices successfully loaded for symbol SPY 
+2022-09-07 10:33:36 [logger INFO] DayTrader  Initializing
+2022-09-07 10:33:37 [logger INFO] Loading 6 summaries for security SPY
+2022-09-07 10:33:37 [logger INFO] WebSocketModule  Initializing
+2022-09-07 10:33:37 [logger INFO] WebSocketModule Successfully initialized
+2022-09-07 10:33:37 [logger ERROR] Critical error opening websocket @OpenWebsocket: [WinError 10048] Solo se permite un uso de cada dirección de socket (protocolo/dirección de red/puerto)
+2022-09-07 10:33:38 [logger INFO] FileHandlerModule  Initializing
+2022-09-07 10:33:38 [logger INFO] FileHandlerModule Successfully initialized
+2022-09-07 10:33:38 [logger INFO] Initializing Bloomberg Order Router
+2022-09-07 10:33:38 [logger INFO] Connecting to localhost:8194
+2022-09-07 10:33:38 [logger INFO] Bloomberg Order Router Initialized
+2022-09-07 10:33:38 [logger INFO] SingletonModuleHandler Successfully initializer
+2022-09-07 10:33:38 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2022-09-07 10:33:38 [logger INFO] Bloomberg Session Connection is UP...
+2022-09-07 10:33:38 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2022-09-07 10:33:38 [logger INFO] Bloomberg Session started...
+2022-09-07 10:33:38 [logger INFO] Initializing Generic Market Order Router
+2022-09-07 10:33:38 [logger INFO] SingletonModuleHandler Successfully initializer
+2022-09-07 10:33:38 [logger INFO] Generic Market Order Router Initialized
+2022-09-07 10:33:38 [logger INFO] Processing SERVICE_STATUS event
+2022-09-07 10:33:38 [logger INFO] Service //blp/emapisvc opened...
+2022-09-07 10:33:39 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:SPY
+2022-09-07 10:33:39 [logger INFO] DayTrader Successfully initialized
+2022-09-07 10:33:40 [logger INFO] Processing SERVICE_STATUS event
+2022-09-07 10:33:40 [logger INFO] Service //blp/mktdata opened...
+2022-09-07 10:33:40 [logger INFO] Requesting for open orders...
+2022-09-07 10:33:40 [logger INFO] Waiting initial paints to finish to return active execution reports
+2022-09-07 10:33:40 [logger INFO] Subscribing to order and route events
+2022-09-07 10:33:40 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:SPY
+2022-09-07 10:33:40 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:SPY
+2022-09-07 10:33:40 [logger INFO] Order subscription started successfully
+2022-09-07 10:33:40 [logger INFO] Route subscription started successfully
+2022-09-07 10:33:40 [logger INFO] Processing SERVICE_STATUS event
+2022-09-07 10:33:40 [logger INFO] Service //blp/mktbar opened...
+2022-09-07 10:33:41 [logger INFO] Processing SERVICE_STATUS event
+2022-09-07 10:33:41 [logger INFO] Service //blp/refdata opened...
+2022-09-07 10:33:41 [logger INFO] Waiting initial paints to finish to return active execution reports
+2022-09-07 10:33:41 [logger INFO] Historical prices successfully loaded for symbol SPY 
+2022-09-07 10:33:42 [logger INFO] Recovered 0 previously existing execution reports
+2022-09-07 10:33:42 [logger INFO] Received list of Open Positions: 0 positions
+2022-09-07 10:33:42 [logger INFO] Process ready to receive commands and trade
+2022-09-07 13:03:02 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2022-09-07 12:48:00+00:00
+2022-09-07 13:03:02 [logger INFO] DBG<ER>-Symbol=SPY PosStatus=PositionStatus.New ExecType=ExecType.New LeavesQty=1 Routing=True 
+2022-09-07 13:03:02 [logger INFO] Managed Position Updated: Arrival=2022-09-07 13:03:02.284928 TradeId=trd__SPY_1662566582 PosId=636d760b-2769-41fe-a214-b1168b3e6875 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2022-09-07 13:03:02 [logger INFO] DBG<ER>-Symbol=SPY PosStatus=PositionStatus.Filled ExecType=ExecType.Trade LeavesQty=0 Routing=False 
+2022-09-07 13:03:02 [logger INFO] Managed Position Finished: Arrival=2022-09-07 13:03:02.488725 TradeId=trd__SPY_1662566582 PosId=636d760b-2769-41fe-a214-b1168b3e6875 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=394.02 Text=Fake Filled Order 
+2022-09-07 13:03:35 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:32.992543 seconds!
+2022-09-07 13:59:00 [logger INFO] MACD-RSI - Closing long position for symbol SPY at 2022-09-07 13:44:00+00:00 
+2022-09-07 13:59:00 [logger INFO] DBG<ER>- RunClose Symbol=SPY Routing=False 
+2022-09-07 13:59:00 [logger INFO] DBG<ER>- RunClose Symbol=SPY NetShares=1 
+2022-09-07 13:59:00 [logger INFO] DBG<ER>-Symbol=SPY PosStatus=PositionStatus.New ExecType=ExecType.New LeavesQty=1 Routing=True 
+2022-09-07 13:59:00 [logger INFO] Managed Position Updated: Arrival=2022-09-07 13:59:00.988588 TradeId=trd__SPY_1662569940 PosId=b9f77322-f6e2-4e42-a6ad-5e27aa09cc08 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2022-09-07 13:59:01 [logger INFO] DBG<ER>-Symbol=SPY PosStatus=PositionStatus.Filled ExecType=ExecType.Trade LeavesQty=0 Routing=False 
+2022-09-07 13:59:01 [logger INFO] Managed Position Finished: Arrival=2022-09-07 13:59:01.198062 TradeId=trd__SPY_1662569940 PosId=b9f77322-f6e2-4e42-a6ad-5e27aa09cc08 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=394.77 Text=Fake Filled Order 
+2022-09-07 13:59:21 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:20.194868 seconds!
+2022-09-07 14:40:37 [logger INFO] DayTrader  Initializing
+2022-09-07 14:40:37 [logger INFO] Loading 8 summaries for security SPY
+2022-09-07 14:40:37 [logger INFO] WebSocketModule  Initializing
+2022-09-07 14:40:37 [logger INFO] WebSocketModule Successfully initialized
+2022-09-07 14:40:37 [logger ERROR] Critical error opening websocket @OpenWebsocket: [WinError 10048] Solo se permite un uso de cada dirección de socket (protocolo/dirección de red/puerto)
+2022-09-07 14:40:37 [logger INFO] FileHandlerModule  Initializing
+2022-09-07 14:40:37 [logger INFO] FileHandlerModule Successfully initialized
+2022-09-07 14:40:38 [logger INFO] Initializing Bloomberg Order Router
+2022-09-07 14:40:38 [logger INFO] Connecting to localhost:8194
+2022-09-07 14:40:38 [logger INFO] Bloomberg Order Router Initialized
+2022-09-07 14:40:38 [logger INFO] SingletonModuleHandler Successfully initializer
+2022-09-07 14:40:38 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2022-09-07 14:40:38 [logger INFO] Bloomberg Session Connection is UP...
+2022-09-07 14:40:38 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2022-09-07 14:40:38 [logger INFO] Bloomberg Session started...
+2022-09-07 14:40:38 [logger INFO] Initializing Generic Market Order Router
+2022-09-07 14:40:38 [logger INFO] SingletonModuleHandler Successfully initializer
+2022-09-07 14:40:38 [logger INFO] Generic Market Order Router Initialized
+2022-09-07 14:40:38 [logger INFO] Processing SERVICE_STATUS event
+2022-09-07 14:40:38 [logger INFO] Service //blp/emapisvc opened...
+2022-09-07 14:40:39 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:SPY
+2022-09-07 14:40:39 [logger INFO] DayTrader Successfully initialized
+2022-09-07 14:40:39 [logger INFO] Processing SERVICE_STATUS event
+2022-09-07 14:40:39 [logger INFO] Service //blp/mktdata opened...
+2022-09-07 14:40:40 [logger INFO] Requesting for open orders...
+2022-09-07 14:40:40 [logger INFO] Waiting initial paints to finish to return active execution reports
+2022-09-07 14:40:40 [logger INFO] Subscribing to order and route events
+2022-09-07 14:40:40 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:SPY
+2022-09-07 14:40:40 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:SPY
+2022-09-07 14:40:40 [logger INFO] Order subscription started successfully
+2022-09-07 14:40:40 [logger INFO] Route subscription started successfully
+2022-09-07 14:40:40 [logger INFO] Processing SERVICE_STATUS event
+2022-09-07 14:40:40 [logger INFO] Service //blp/mktbar opened...
+2022-09-07 14:40:40 [logger INFO] Processing SERVICE_STATUS event
+2022-09-07 14:40:40 [logger INFO] Service //blp/refdata opened...
+2022-09-07 14:40:41 [logger INFO] Recovered 0 previously existing execution reports
+2022-09-07 14:40:41 [logger INFO] Received list of Open Positions: 0 positions
+2022-09-07 14:40:41 [logger INFO] Process ready to receive commands and trade
+2022-09-07 14:40:41 [logger INFO] Historical prices successfully loaded for symbol SPY 
+2022-09-07 15:36:51 [logger INFO] DayTrader  Initializing
+2022-09-07 15:36:51 [logger INFO] Loading 8 summaries for security SPY
+2022-09-07 15:36:52 [logger INFO] WebSocketModule  Initializing
+2022-09-07 15:36:52 [logger INFO] WebSocketModule Successfully initialized
+2022-09-07 15:36:52 [logger ERROR] Critical error opening websocket @OpenWebsocket: [WinError 10048] Solo se permite un uso de cada dirección de socket (protocolo/dirección de red/puerto)
+2022-09-07 15:36:52 [logger INFO] FileHandlerModule  Initializing
+2022-09-07 15:36:52 [logger INFO] FileHandlerModule Successfully initialized
+2022-09-07 15:36:52 [logger INFO] Initializing Bloomberg Order Router
+2022-09-07 15:36:52 [logger INFO] Connecting to localhost:8194
+2022-09-07 15:36:52 [logger INFO] Bloomberg Order Router Initialized
+2022-09-07 15:36:52 [logger INFO] SingletonModuleHandler Successfully initializer
+2022-09-07 15:36:52 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2022-09-07 15:36:52 [logger INFO] Bloomberg Session Connection is UP...
+2022-09-07 15:36:52 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2022-09-07 15:36:52 [logger INFO] Bloomberg Session started...
+2022-09-07 15:36:52 [logger INFO] Initializing Generic Market Order Router
+2022-09-07 15:36:52 [logger INFO] SingletonModuleHandler Successfully initializer
+2022-09-07 15:36:52 [logger INFO] Generic Market Order Router Initialized
+2022-09-07 15:36:52 [logger INFO] Processing SERVICE_STATUS event
+2022-09-07 15:36:52 [logger INFO] Service //blp/emapisvc opened...
+2022-09-07 15:36:53 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:SPY
+2022-09-07 15:36:53 [logger INFO] DayTrader Successfully initialized
+2022-09-07 15:36:54 [logger INFO] Requesting for open orders...
+2022-09-07 15:36:54 [logger INFO] Waiting initial paints to finish to return active execution reports
+2022-09-07 15:36:54 [logger INFO] Subscribing to order and route events
+2022-09-07 15:36:54 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:SPY
+2022-09-07 15:36:54 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:SPY
+2022-09-07 15:36:54 [logger INFO] Processing SERVICE_STATUS event
+2022-09-07 15:36:54 [logger INFO] Service //blp/mktdata opened...
+2022-09-07 15:36:54 [logger INFO] Order subscription started successfully
+2022-09-07 15:36:54 [logger INFO] Route subscription started successfully
+2022-09-07 15:36:55 [logger INFO] Processing SERVICE_STATUS event
+2022-09-07 15:36:55 [logger INFO] Service //blp/mktbar opened...
+2022-09-07 15:36:55 [logger INFO] Waiting initial paints to finish to return active execution reports
+2022-09-07 15:36:55 [logger INFO] Processing SERVICE_STATUS event
+2022-09-07 15:36:55 [logger INFO] Service //blp/refdata opened...
+2022-09-07 15:36:55 [logger INFO] Historical prices successfully loaded for symbol SPY 
+2022-09-07 15:36:56 [logger INFO] Recovered 0 previously existing execution reports
+2022-09-07 15:36:56 [logger INFO] Received list of Open Positions: 0 positions
+2022-09-07 15:36:56 [logger INFO] Process ready to receive commands and trade
+2022-09-08 11:32:10 [logger INFO] DayTrader  Initializing
+2022-09-08 11:32:11 [logger INFO] Loading 8 summaries for security SPY
+2022-09-08 11:32:12 [logger INFO] WebSocketModule  Initializing
+2022-09-08 11:32:12 [logger INFO] WebSocketModule Successfully initialized
+2022-09-08 11:32:12 [logger ERROR] Critical error opening websocket @OpenWebsocket: [WinError 10048] Solo se permite un uso de cada dirección de socket (protocolo/dirección de red/puerto)
+2022-09-08 11:32:13 [logger INFO] FileHandlerModule  Initializing
+2022-09-08 11:32:13 [logger INFO] FileHandlerModule Successfully initialized
+2022-09-08 11:32:13 [logger INFO] Initializing Bloomberg Order Router
+2022-09-08 11:32:13 [logger INFO] Connecting to localhost:8194
+2022-09-08 11:32:13 [logger INFO] Bloomberg Order Router Initialized
+2022-09-08 11:32:13 [logger INFO] SingletonModuleHandler Successfully initializer
+2022-09-08 11:32:13 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2022-09-08 11:32:13 [logger INFO] Bloomberg Session Connection is UP...
+2022-09-08 11:32:13 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2022-09-08 11:32:13 [logger INFO] Bloomberg Session started...
+2022-09-08 11:32:14 [logger INFO] Initializing Generic Market Order Router
+2022-09-08 11:32:14 [logger INFO] SingletonModuleHandler Successfully initializer
+2022-09-08 11:32:14 [logger INFO] Generic Market Order Router Initialized
+2022-09-08 11:32:14 [logger INFO] Processing SERVICE_STATUS event
+2022-09-08 11:32:14 [logger INFO] Service //blp/emapisvc opened...
+2022-09-08 11:32:15 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:SPY
+2022-09-08 11:32:15 [logger INFO] DayTrader Successfully initialized
+2022-09-08 11:32:15 [logger INFO] Processing SERVICE_STATUS event
+2022-09-08 11:32:15 [logger INFO] Service //blp/mktdata opened...
+2022-09-08 11:32:16 [logger INFO] Requesting for open orders...
+2022-09-08 11:32:16 [logger INFO] Waiting initial paints to finish to return active execution reports
+2022-09-08 11:32:16 [logger INFO] Subscribing to order and route events
+2022-09-08 11:32:16 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:SPY
+2022-09-08 11:32:16 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:SPY
+2022-09-08 11:32:16 [logger INFO] Order subscription started successfully
+2022-09-08 11:32:16 [logger INFO] Route subscription started successfully
+2022-09-08 11:32:16 [logger INFO] Processing SERVICE_STATUS event
+2022-09-08 11:32:16 [logger INFO] Service //blp/mktbar opened...
+2022-09-08 11:32:16 [logger INFO] Processing SERVICE_STATUS event
+2022-09-08 11:32:16 [logger INFO] Service //blp/refdata opened...
+2022-09-08 11:32:17 [logger INFO] Recovered 0 previously existing execution reports
+2022-09-08 11:32:17 [logger INFO] Received list of Open Positions: 0 positions
+2022-09-08 11:32:17 [logger INFO] Process ready to receive commands and trade
+2022-09-08 11:32:17 [logger INFO] Historical prices successfully loaded for symbol SPY 
+2022-09-08 13:01:59 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2022-09-08 12:47:00+00:00
+2022-09-08 13:01:59 [logger INFO] DBG<ER>-Symbol=SPY PosStatus=PositionStatus.New ExecType=ExecType.New LeavesQty=1 Routing=True 
+2022-09-08 13:01:59 [logger INFO] Managed Position Updated: Arrival=2022-09-08 13:01:59.810336 TradeId=trd__SPY_1662652919 PosId=dbb81abd-e7e6-4195-90c2-753ea0c15a61 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2022-09-08 13:02:00 [logger INFO] DBG<ER>-Symbol=SPY PosStatus=PositionStatus.Filled ExecType=ExecType.Trade LeavesQty=0 Routing=False 
+2022-09-08 13:02:00 [logger INFO] Managed Position Finished: Arrival=2022-09-08 13:02:00.014120 TradeId=trd__SPY_1662652919 PosId=dbb81abd-e7e6-4195-90c2-753ea0c15a61 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=399.84 Text=Fake Filled Order 
+2022-09-08 13:02:00 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:02:00 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:01.123035 seconds!
+2022-09-08 13:02:01 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:02:02 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:02:03 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:02:05 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:02:06 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:02:07 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:02:08 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:02:09 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:02:10 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:02:11 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:02:12 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:02:13 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:02:14 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:02:16 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:02:17 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:02:18 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:02:19 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:02:20 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:02:21 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:02:22 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:02:23 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:02:25 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:02:26 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:02:27 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:02:28 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:02:29 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:02:30 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:02:31 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:02:32 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:02:33 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:02:35 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:02:36 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:02:37 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:02:38 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:02:39 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:02:40 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:02:41 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:02:42 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:02:43 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:02:44 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:02:45 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:02:46 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:02:48 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:02:49 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:02:50 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:02:51 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:02:52 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:02:53 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:02:54 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:02:55 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:02:56 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:02:57 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:02:58 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:03:00 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:03:01 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:03:02 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:03:03 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:03:04 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:03:05 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:03:06 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:03:07 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:03:08 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:03:09 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:03:10 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:03:12 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:03:13 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:03:14 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:03:16 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:03:16 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:03:18 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:03:19 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:03:20 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:03:21 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:03:22 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:03:24 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:03:25 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:03:26 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:03:27 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:03:28 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:03:29 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:03:31 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:03:32 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:03:33 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:03:34 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:03:35 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:03:36 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:03:37 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:03:38 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:03:39 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:03:40 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:03:41 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:03:43 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:03:44 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:03:45 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:03:46 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:03:47 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:03:48 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:03:49 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:03:50 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:03:52 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:03:53 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:03:54 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:03:55 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:03:56 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:03:57 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:03:58 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:03:59 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:04:00 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:04:01 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:04:02 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:04:03 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:04:04 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:04:05 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:04:06 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:04:07 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:04:09 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:04:10 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:04:11 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:04:12 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:04:13 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:04:14 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:04:15 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:04:16 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:04:18 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:04:19 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:04:20 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:04:21 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:04:22 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:04:23 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:04:24 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:04:25 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:04:26 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:04:27 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:04:28 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:04:29 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:04:30 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:04:32 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:04:33 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:04:34 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:04:35 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:04:36 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:04:37 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:04:38 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:04:39 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:04:40 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:04:41 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:04:42 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:04:43 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:04:44 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:04:46 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:04:47 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:04:48 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:04:49 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:04:50 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:04:51 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:04:52 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:04:53 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:04:54 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:04:55 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:04:56 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:04:57 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:04:58 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:05:00 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:05:01 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:05:02 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:05:03 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:05:04 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:05:05 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:05:06 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:05:07 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:05:08 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:05:09 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:05:10 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:05:12 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:05:13 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:05:14 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:05:15 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:05:16 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:05:18 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:05:19 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:05:20 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:05:21 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:05:22 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:05:24 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:05:25 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:05:26 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:05:27 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:05:28 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:05:29 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:05:30 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:05:31 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:05:33 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:05:34 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:05:35 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:05:36 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:05:37 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:05:38 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:05:39 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:05:41 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:05:42 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:05:43 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:05:44 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:05:45 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:05:47 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:05:48 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:05:49 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:05:50 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:05:51 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:05:52 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:05:53 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:05:54 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:05:55 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:05:56 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:05:57 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:05:58 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:06:00 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:06:01 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:06:02 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:06:03 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:06:04 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:06:05 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:06:06 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:06:07 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:06:08 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:06:09 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:06:11 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:06:12 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:06:13 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:06:14 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:06:15 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:06:16 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:06:18 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:06:19 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:06:20 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:06:21 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:06:22 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:06:23 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:06:24 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:06:25 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:06:27 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:06:28 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:06:29 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:06:30 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:06:31 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:06:32 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:06:33 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:06:34 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:06:35 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:06:36 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:06:37 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:06:38 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:06:40 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:06:41 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:06:42 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:06:43 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:06:44 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:06:45 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:06:46 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:06:47 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:06:48 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:06:50 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:06:51 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:06:52 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:06:53 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:06:54 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:06:55 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:06:56 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:06:57 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:06:58 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:06:59 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:07:01 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:07:02 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:07:03 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:07:04 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:07:05 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:07:06 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:07:07 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:07:08 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:07:09 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:07:10 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:07:12 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:07:13 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:07:14 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:07:15 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:07:16 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:07:18 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:07:19 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:07:20 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:07:21 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:07:23 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:07:24 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:07:25 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:07:26 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:07:27 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:07:28 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:07:29 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:07:30 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:07:31 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:07:32 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:07:34 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:07:35 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:07:36 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:07:37 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:07:38 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:07:39 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:07:40 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:07:41 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:07:42 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:07:43 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:07:44 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:07:45 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:07:46 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:07:48 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:07:49 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:07:50 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:07:51 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:07:52 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:07:53 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:07:54 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:07:55 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:07:56 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:07:57 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:07:58 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:07:59 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:08:01 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:08:02 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:08:03 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:08:04 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:08:05 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:08:06 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:08:07 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:08:08 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:08:09 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:08:10 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:08:11 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:08:12 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:08:13 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:08:15 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:08:16 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:08:17 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:08:18 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:08:19 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:08:20 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:08:21 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:08:22 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:08:23 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:08:24 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:08:25 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:08:26 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:08:28 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:08:29 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:08:30 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:08:31 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:08:32 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:08:33 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:08:34 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:08:35 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:08:36 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:08:37 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:08:38 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:08:39 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:08:40 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:08:41 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:08:42 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:08:43 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:08:45 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:08:46 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:08:47 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:08:48 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:08:49 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:08:50 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:08:51 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:08:52 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:08:53 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:08:54 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:08:55 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:08:56 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:08:58 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:08:59 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:09:00 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:09:01 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:09:02 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:09:03 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:09:04 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:09:05 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:09:06 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:09:07 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:09:08 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:09:10 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:09:11 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:09:12 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:09:13 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:09:14 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:09:15 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:09:17 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:09:18 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:09:19 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:09:20 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:09:21 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:09:22 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:09:24 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:09:25 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:09:26 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:09:27 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:09:28 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:09:29 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:09:31 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:09:32 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:09:33 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:09:34 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:09:36 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:09:37 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:09:38 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:09:39 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:09:40 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:09:41 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:09:42 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:09:43 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:09:44 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:09:46 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:09:47 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:09:48 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:09:49 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:09:50 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:09:51 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:09:52 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:09:53 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:09:54 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:09:55 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:09:56 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:09:57 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:09:58 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:10:00 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:10:01 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:10:02 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:10:03 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:10:04 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:10:05 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:10:06 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:10:07 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:10:08 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:10:09 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:10:10 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:10:12 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:10:13 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:10:14 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:10:15 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:10:16 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:10:17 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:10:18 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:10:20 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:10:21 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:10:22 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:10:23 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:10:24 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:10:25 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:10:26 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:10:27 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:10:28 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:10:29 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:10:31 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:10:32 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:10:33 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:10:34 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:10:35 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:10:36 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:10:37 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:10:38 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:10:39 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:10:40 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:10:41 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:10:42 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:10:43 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:10:45 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:10:46 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:10:47 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:10:48 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:10:49 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:10:50 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:10:51 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:10:52 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:10:53 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:10:54 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:10:56 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:10:57 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:10:58 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:10:59 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:11:00 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:11:01 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:11:02 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:11:03 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:11:04 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:11:05 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:11:06 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:11:08 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:11:09 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:11:10 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:11:11 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:11:12 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:11:13 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:11:15 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:11:16 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:11:17 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:11:18 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:11:20 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:11:21 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:11:22 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:11:23 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:11:24 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:11:25 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:11:26 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:11:27 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:11:29 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:11:30 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:11:31 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:11:32 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:11:33 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:11:34 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:11:35 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:11:36 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:11:37 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:11:38 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:11:39 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:11:41 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:11:42 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:11:43 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:11:44 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:11:45 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:11:46 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:11:47 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:11:48 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:11:49 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:11:50 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:11:51 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:11:52 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:11:54 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:11:55 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:11:56 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:11:57 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:11:58 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:11:59 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:12:00 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:12:01 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:12:02 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:12:03 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:12:04 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:12:06 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:12:07 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:12:08 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:12:09 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:12:10 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:12:11 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:12:12 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:12:13 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:12:14 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:12:15 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:12:17 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:12:18 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:12:19 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:12:20 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:12:21 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:12:22 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:12:23 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:12:24 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:12:25 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:12:26 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:12:27 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:12:28 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:12:30 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:12:31 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:12:32 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:12:33 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:12:34 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:12:35 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:12:36 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:12:37 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:12:38 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:12:39 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:12:41 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:12:42 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:12:43 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:12:44 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:12:45 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:12:46 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:12:47 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:12:48 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:12:49 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:12:50 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:12:51 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:12:52 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:12:53 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:12:55 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:12:56 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:12:57 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:12:58 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:12:59 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:13:00 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:13:01 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:13:02 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:13:03 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:13:04 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:13:05 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:13:06 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:13:08 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:13:09 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:13:10 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:13:11 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:13:12 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:13:13 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:13:14 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:13:16 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:13:17 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:13:18 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:13:19 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:13:20 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:13:22 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:13:23 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:13:24 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:13:25 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:13:26 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:13:27 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:13:28 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:13:30 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:13:31 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:13:32 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:13:33 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:13:34 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:13:35 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:13:36 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:13:37 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:13:38 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:13:39 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:13:40 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:13:41 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:13:43 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:13:44 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:13:45 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:13:46 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:13:47 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:13:48 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:13:49 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:13:50 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:13:51 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:13:52 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:13:53 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:13:54 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:13:55 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:13:56 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:13:58 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:13:59 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:14:00 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:14:01 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:14:02 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:14:03 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:14:04 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:14:05 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:14:06 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:14:07 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:14:08 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:14:10 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:14:11 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:14:12 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:14:13 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:14:14 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:14:15 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:14:16 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:14:18 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:14:19 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:14:20 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:14:21 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:14:22 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:14:23 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:14:24 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:14:25 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:14:26 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:14:27 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:14:28 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:14:30 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:14:31 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:14:32 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:14:33 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:14:34 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:14:35 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:14:36 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:14:37 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:14:38 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:14:39 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:14:40 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:14:42 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:14:43 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:14:44 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:14:45 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:14:46 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:14:47 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:14:48 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:14:49 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:14:50 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:14:51 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:14:52 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:14:53 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:14:55 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:14:56 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:14:57 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:14:58 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:14:59 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 13:15:00 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 14:24:06 [logger INFO] DayTrader  Initializing
+2022-09-08 14:24:07 [logger INFO] Loading 9 summaries for security SPY
+2022-09-08 14:24:07 [logger INFO] WebSocketModule  Initializing
+2022-09-08 14:24:07 [logger INFO] WebSocketModule Successfully initialized
+2022-09-08 14:24:07 [logger ERROR] Critical error opening websocket @OpenWebsocket: [WinError 10048] Solo se permite un uso de cada dirección de socket (protocolo/dirección de red/puerto)
+2022-09-08 14:24:07 [logger INFO] FileHandlerModule  Initializing
+2022-09-08 14:24:07 [logger INFO] FileHandlerModule Successfully initialized
+2022-09-08 14:24:07 [logger INFO] Initializing Bloomberg Order Router
+2022-09-08 14:24:07 [logger INFO] Connecting to localhost:8194
+2022-09-08 14:24:07 [logger INFO] Bloomberg Order Router Initialized
+2022-09-08 14:24:07 [logger INFO] SingletonModuleHandler Successfully initializer
+2022-09-08 14:24:07 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2022-09-08 14:24:07 [logger INFO] Bloomberg Session Connection is UP...
+2022-09-08 14:24:07 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2022-09-08 14:24:07 [logger INFO] Bloomberg Session started...
+2022-09-08 14:24:07 [logger INFO] Initializing Generic Market Order Router
+2022-09-08 14:24:07 [logger INFO] SingletonModuleHandler Successfully initializer
+2022-09-08 14:24:07 [logger INFO] Generic Market Order Router Initialized
+2022-09-08 14:24:07 [logger INFO] Processing SERVICE_STATUS event
+2022-09-08 14:24:07 [logger INFO] Service //blp/emapisvc opened...
+2022-09-08 14:24:08 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:SPY
+2022-09-08 14:24:08 [logger INFO] DayTrader Successfully initialized
+2022-09-08 14:24:09 [logger INFO] Processing SERVICE_STATUS event
+2022-09-08 14:24:09 [logger INFO] Service //blp/mktdata opened...
+2022-09-08 14:24:09 [logger INFO] Requesting for open orders...
+2022-09-08 14:24:09 [logger INFO] Waiting initial paints to finish to return active execution reports
+2022-09-08 14:24:09 [logger INFO] Subscribing to order and route events
+2022-09-08 14:24:09 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:SPY
+2022-09-08 14:24:09 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:SPY
+2022-09-08 14:24:09 [logger INFO] MACD-RSI - Closing long position by Tick for symbol SPY at None 
+2022-09-08 14:24:09 [logger INFO] DBG<ER>- RunClose Symbol=SPY Routing=False 
+2022-09-08 14:24:09 [logger INFO] DBG<ER>- RunClose Symbol=SPY NetShares=1 
+2022-09-08 14:24:09 [logger INFO] DBG<ER>-Symbol=SPY PosStatus=PositionStatus.New ExecType=ExecType.New LeavesQty=1 Routing=True 
+2022-09-08 14:24:09 [logger INFO] Managed Position Updated: Arrival=2022-09-08 14:24:09.832388 TradeId=trd__SPY_1662657849 PosId=8016bcf1-367e-4e1f-941c-9a74da277e04 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2022-09-08 14:24:09 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 14:24:09 [logger INFO] Order subscription started successfully
+2022-09-08 14:24:09 [logger INFO] Route subscription started successfully
+2022-09-08 14:24:09 [logger INFO] Processing SERVICE_STATUS event
+2022-09-08 14:24:09 [logger INFO] Service //blp/mktbar opened...
+2022-09-08 14:24:10 [logger INFO] DBG<ER>-Symbol=SPY PosStatus=PositionStatus.Filled ExecType=ExecType.Trade LeavesQty=0 Routing=False 
+2022-09-08 14:24:10 [logger INFO] Managed Position Finished: Arrival=2022-09-08 14:24:10.042364 TradeId=trd__SPY_1662657849 PosId=8016bcf1-367e-4e1f-941c-9a74da277e04 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=None Text=Fake Filled Order 
+2022-09-08 14:24:10 [logger INFO] Processing SERVICE_STATUS event
+2022-09-08 14:24:10 [logger INFO] Service //blp/refdata opened...
+2022-09-08 14:24:10 [logger INFO] Waiting initial paints to finish to return active execution reports
+2022-09-08 14:24:10 [logger INFO] Historical prices successfully loaded for symbol SPY 
+2022-09-08 14:24:10 [logger INFO] MACD-RSI - Closing long position by Tick for symbol SPY at None 
+2022-09-08 14:24:10 [logger INFO] DBG<ER>- RunClose Symbol=SPY Routing=False 
+2022-09-08 14:24:10 [logger INFO] DBG<ER>- RunClose Symbol=SPY NetShares=1 
+2022-09-08 14:24:10 [logger INFO] DBG<ER>-Symbol=SPY PosStatus=PositionStatus.New ExecType=ExecType.New LeavesQty=1 Routing=True 
+2022-09-08 14:24:10 [logger INFO] Managed Position Updated: Arrival=2022-09-08 14:24:10.950320 TradeId=trd__SPY_1662657850 PosId=e67feed7-305f-4912-bd84-6657da9ea168 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2022-09-08 14:24:10 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'MarketData' object has no attribute 'DateTime' 
+2022-09-08 14:24:11 [logger INFO] DBG<ER>-Symbol=SPY PosStatus=PositionStatus.Filled ExecType=ExecType.Trade LeavesQty=0 Routing=False 
+2022-09-08 14:24:11 [logger INFO] Managed Position Finished: Arrival=2022-09-08 14:24:11.166765 TradeId=trd__SPY_1662657850 PosId=e67feed7-305f-4912-bd84-6657da9ea168 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=397.26 Text=Fake Filled Order 
+2022-09-08 14:24:11 [logger INFO] Recovered 0 previously existing execution reports
+2022-09-08 14:24:11 [logger INFO] Received list of Open Positions: 0 positions
+2022-09-08 14:24:11 [logger INFO] Process ready to receive commands and trade
+2022-09-08 14:36:36 [logger INFO] DayTrader  Initializing
+2022-09-08 14:36:36 [logger INFO] Loading 11 summaries for security SPY
+2022-09-08 14:36:36 [logger INFO] WebSocketModule  Initializing
+2022-09-08 14:36:36 [logger INFO] WebSocketModule Successfully initialized
+2022-09-08 14:36:36 [logger ERROR] Critical error opening websocket @OpenWebsocket: [WinError 10048] Solo se permite un uso de cada dirección de socket (protocolo/dirección de red/puerto)
+2022-09-08 14:36:36 [logger INFO] FileHandlerModule  Initializing
+2022-09-08 14:36:36 [logger INFO] FileHandlerModule Successfully initialized
+2022-09-08 14:36:36 [logger INFO] Initializing Bloomberg Order Router
+2022-09-08 14:36:36 [logger INFO] Connecting to localhost:8194
+2022-09-08 14:36:36 [logger INFO] Bloomberg Order Router Initialized
+2022-09-08 14:36:36 [logger INFO] SingletonModuleHandler Successfully initializer
+2022-09-08 14:36:36 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2022-09-08 14:36:36 [logger INFO] Bloomberg Session Connection is UP...
+2022-09-08 14:36:36 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2022-09-08 14:36:36 [logger INFO] Bloomberg Session started...
+2022-09-08 14:36:36 [logger INFO] Initializing Generic Market Order Router
+2022-09-08 14:36:36 [logger INFO] SingletonModuleHandler Successfully initializer
+2022-09-08 14:36:36 [logger INFO] Generic Market Order Router Initialized
+2022-09-08 14:36:37 [logger INFO] Processing SERVICE_STATUS event
+2022-09-08 14:36:37 [logger INFO] Service //blp/emapisvc opened...
+2022-09-08 14:36:38 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:SPY
+2022-09-08 14:36:38 [logger INFO] DayTrader Successfully initialized
+2022-09-08 14:36:38 [logger INFO] Processing SERVICE_STATUS event
+2022-09-08 14:36:38 [logger INFO] Service //blp/mktdata opened...
+2022-09-08 14:36:39 [logger INFO] Requesting for open orders...
+2022-09-08 14:36:39 [logger INFO] Waiting initial paints to finish to return active execution reports
+2022-09-08 14:36:39 [logger INFO] Subscribing to order and route events
+2022-09-08 14:36:39 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:SPY
+2022-09-08 14:36:39 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:SPY
+2022-09-08 14:36:39 [logger INFO] Order subscription started successfully
+2022-09-08 14:36:39 [logger INFO] Route subscription started successfully
+2022-09-08 14:36:39 [logger INFO] Processing SERVICE_STATUS event
+2022-09-08 14:36:39 [logger INFO] Service //blp/mktbar opened...
+2022-09-08 14:36:39 [logger INFO] Processing SERVICE_STATUS event
+2022-09-08 14:36:39 [logger INFO] Service //blp/refdata opened...
+2022-09-08 14:36:40 [logger INFO] Recovered 0 previously existing execution reports
+2022-09-08 14:36:40 [logger INFO] Received list of Open Positions: 0 positions
+2022-09-08 14:36:40 [logger INFO] Process ready to receive commands and trade
+2022-09-08 14:36:40 [logger INFO] Historical prices successfully loaded for symbol SPY 
+2022-09-08 15:15:01 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2022-09-08 15:00:00+00:00
+2022-09-08 15:15:01 [logger INFO] DBG<ER>-Symbol=SPY PosStatus=PositionStatus.New ExecType=ExecType.New LeavesQty=1 Routing=True 
+2022-09-08 15:15:01 [logger INFO] Managed Position Updated: Arrival=2022-09-08 15:15:01.354595 TradeId=trd__SPY_1662660901 PosId=d9f630b7-5d25-4043-b180-d4f4fceeb0ce Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2022-09-08 15:15:01 [logger INFO] DBG<ER>-Symbol=SPY PosStatus=PositionStatus.Filled ExecType=ExecType.Trade LeavesQty=0 Routing=False 
+2022-09-08 15:15:01 [logger INFO] Managed Position Finished: Arrival=2022-09-08 15:15:01.559049 TradeId=trd__SPY_1662660901 PosId=d9f630b7-5d25-4043-b180-d4f4fceeb0ce Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=399.04 Text=Fake Filled Order 
+2022-09-08 15:15:02 [logger INFO] MACD-RSI - Closing long position by Tick for symbol SPY at None 
+2022-09-08 15:15:02 [logger INFO] DBG<ER>- RunClose Symbol=SPY Routing=False 
+2022-09-08 15:15:02 [logger INFO] DBG<ER>- RunClose Symbol=SPY NetShares=1 
+2022-09-08 15:15:02 [logger INFO] DBG<ER>-Symbol=SPY PosStatus=PositionStatus.New ExecType=ExecType.New LeavesQty=1 Routing=True 
+2022-09-08 15:15:02 [logger INFO] Managed Position Updated: Arrival=2022-09-08 15:15:02.545588 TradeId=trd__SPY_1662660902 PosId=e158b312-3ef1-498d-84a0-1fc6147975eb Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2022-09-08 15:15:02 [logger INFO] MACD-RSI - Closing short position by Tick for symbol SPY at None 
+2022-09-08 15:15:02 [logger INFO] DBG<ER>- RunClose Symbol=SPY Routing=True 
+2022-09-08 15:15:02 [logger INFO] DBG<ER>- RunClose Symbol=SPY OpenSumms=[<sources.framework.business_entities.positions.execution_summary.ExecutionSummary object at 0x00000187573A6630>] 
+2022-09-08 15:15:02 [logger INFO] DBG<ER>-Symbol=SPY PosStatus=PositionStatus.Filled ExecType=ExecType.Trade LeavesQty=0 Routing=False 
+2022-09-08 15:15:02 [logger INFO] Managed Position Finished: Arrival=2022-09-08 15:15:02.762388 TradeId=trd__SPY_1662660902 PosId=e158b312-3ef1-498d-84a0-1fc6147975eb Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=399.071 Text=Fake Filled Order 
+2022-09-08 15:15:03 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:02.069013 seconds!
+2022-09-08 15:16:01 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2022-09-08 15:01:00+00:00
+2022-09-08 15:16:01 [logger INFO] DBG<ER>-Symbol=SPY PosStatus=PositionStatus.New ExecType=ExecType.New LeavesQty=1 Routing=True 
+2022-09-08 15:16:01 [logger INFO] Managed Position Updated: Arrival=2022-09-08 15:16:01.408166 TradeId=trd__SPY_1662660961 PosId=f27ead3e-52b0-4553-896a-cf2ffe025697 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2022-09-08 15:16:01 [logger INFO] DBG<ER>-Symbol=SPY PosStatus=PositionStatus.Filled ExecType=ExecType.Trade LeavesQty=0 Routing=False 
+2022-09-08 15:16:01 [logger INFO] Managed Position Finished: Arrival=2022-09-08 15:16:01.623589 TradeId=trd__SPY_1662660961 PosId=f27ead3e-52b0-4553-896a-cf2ffe025697 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=399.25 Text=Fake Filled Order 
+2022-09-08 15:16:02 [logger INFO] MACD-RSI - Closing long position by Tick for symbol SPY at None 
+2022-09-08 15:16:02 [logger INFO] DBG<ER>- RunClose Symbol=SPY Routing=False 
+2022-09-08 15:16:02 [logger INFO] DBG<ER>- RunClose Symbol=SPY NetShares=1 
+2022-09-08 15:16:02 [logger INFO] DBG<ER>-Symbol=SPY PosStatus=PositionStatus.New ExecType=ExecType.New LeavesQty=1 Routing=True 
+2022-09-08 15:16:02 [logger INFO] Managed Position Updated: Arrival=2022-09-08 15:16:02.465248 TradeId=trd__SPY_1662660962 PosId=3798fc24-b032-45e5-a606-d7fe0e111e97 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2022-09-08 15:16:02 [logger INFO] MACD-RSI - Closing short position by Tick for symbol SPY at None 
+2022-09-08 15:16:02 [logger INFO] DBG<ER>- RunClose Symbol=SPY Routing=True 
+2022-09-08 15:16:02 [logger INFO] DBG<ER>- RunClose Symbol=SPY OpenSumms=[<sources.framework.business_entities.positions.execution_summary.ExecutionSummary object at 0x00000187573DE198>] 
+2022-09-08 15:16:02 [logger INFO] DBG<ER>-Symbol=SPY PosStatus=PositionStatus.Filled ExecType=ExecType.Trade LeavesQty=0 Routing=False 
+2022-09-08 15:16:02 [logger INFO] Managed Position Finished: Arrival=2022-09-08 15:16:02.678677 TradeId=trd__SPY_1662660962 PosId=3798fc24-b032-45e5-a606-d7fe0e111e97 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=399.24 Text=Fake Filled Order 
+2022-09-08 16:07:01 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2022-09-08 15:52:00+00:00
+2022-09-08 16:07:01 [logger INFO] DBG<ER>-Symbol=SPY PosStatus=PositionStatus.New ExecType=ExecType.New LeavesQty=1 Routing=True 
+2022-09-08 16:07:01 [logger INFO] Managed Position Updated: Arrival=2022-09-08 16:07:01.600524 TradeId=trd__SPY_1662664021 PosId=4a6a31b5-2ab3-4ebd-ba62-d965dfdc4c5e Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2022-09-08 16:07:01 [logger INFO] DBG<ER>-Symbol=SPY PosStatus=PositionStatus.Filled ExecType=ExecType.Trade LeavesQty=0 Routing=False 
+2022-09-08 16:07:01 [logger INFO] Managed Position Finished: Arrival=2022-09-08 16:07:01.805010 TradeId=trd__SPY_1662664021 PosId=4a6a31b5-2ab3-4ebd-ba62-d965dfdc4c5e Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=398.97 Text=Fake Filled Order 
+2022-09-08 16:07:02 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:01.015771 seconds!
+2022-09-08 16:07:02 [logger INFO] MACD-RSI - Closing long position by Tick for symbol SPY at None 
+2022-09-08 16:07:02 [logger INFO] DBG<ER>- RunClose Symbol=SPY Routing=False 
+2022-09-08 16:07:02 [logger INFO] DBG<ER>- RunClose Symbol=SPY NetShares=1 
+2022-09-08 16:07:02 [logger INFO] DBG<ER>-Symbol=SPY PosStatus=PositionStatus.New ExecType=ExecType.New LeavesQty=1 Routing=True 
+2022-09-08 16:07:02 [logger INFO] Managed Position Updated: Arrival=2022-09-08 16:07:02.723037 TradeId=trd__SPY_1662664022 PosId=52db8ed7-df78-45d2-b9b9-a84a62fcb06b Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2022-09-08 16:07:02 [logger INFO] MACD-RSI - Closing short position by Tick for symbol SPY at None 
+2022-09-08 16:07:02 [logger INFO] DBG<ER>- RunClose Symbol=SPY Routing=True 
+2022-09-08 16:07:02 [logger INFO] DBG<ER>- RunClose Symbol=SPY OpenSumms=[<sources.framework.business_entities.positions.execution_summary.ExecutionSummary object at 0x0000018757D21550>] 
+2022-09-08 16:07:02 [logger INFO] DBG<ER>-Symbol=SPY PosStatus=PositionStatus.Filled ExecType=ExecType.Trade LeavesQty=0 Routing=False 
+2022-09-08 16:07:02 [logger INFO] Managed Position Finished: Arrival=2022-09-08 16:07:02.932585 TradeId=trd__SPY_1662664022 PosId=52db8ed7-df78-45d2-b9b9-a84a62fcb06b Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=399.0 Text=Fake Filled Order 
+2022-09-08 16:08:01 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2022-09-08 15:53:00+00:00
+2022-09-08 16:08:01 [logger INFO] DBG<ER>-Symbol=SPY PosStatus=PositionStatus.New ExecType=ExecType.New LeavesQty=1 Routing=True 
+2022-09-08 16:08:01 [logger INFO] Managed Position Updated: Arrival=2022-09-08 16:08:01.746238 TradeId=trd__SPY_1662664081 PosId=207db2bb-4f65-4b74-98e2-fe38d2d5f343 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2022-09-08 16:08:01 [logger INFO] DBG<ER>-Symbol=SPY PosStatus=PositionStatus.Filled ExecType=ExecType.Trade LeavesQty=0 Routing=False 
+2022-09-08 16:08:01 [logger INFO] Managed Position Finished: Arrival=2022-09-08 16:08:01.951691 TradeId=trd__SPY_1662664081 PosId=207db2bb-4f65-4b74-98e2-fe38d2d5f343 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=398.93 Text=Fake Filled Order 
+2022-09-08 16:08:02 [logger INFO] MACD-RSI - Closing long position by Tick for symbol SPY at None 
+2022-09-08 16:08:02 [logger INFO] DBG<ER>- RunClose Symbol=SPY Routing=False 
+2022-09-08 16:08:02 [logger INFO] DBG<ER>- RunClose Symbol=SPY NetShares=1 
+2022-09-08 16:08:02 [logger INFO] DBG<ER>-Symbol=SPY PosStatus=PositionStatus.New ExecType=ExecType.New LeavesQty=1 Routing=True 
+2022-09-08 16:08:02 [logger INFO] Managed Position Updated: Arrival=2022-09-08 16:08:02.853598 TradeId=trd__SPY_1662664082 PosId=bfd2c14d-1b4f-46a3-9922-9d688bd188e4 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2022-09-08 16:08:02 [logger INFO] MACD-RSI - Closing short position by Tick for symbol SPY at None 
+2022-09-08 16:08:02 [logger INFO] DBG<ER>- RunClose Symbol=SPY Routing=True 
+2022-09-08 16:08:02 [logger INFO] DBG<ER>- RunClose Symbol=SPY OpenSumms=[<sources.framework.business_entities.positions.execution_summary.ExecutionSummary object at 0x0000018757D4D9E8>] 
+2022-09-08 16:08:03 [logger INFO] DBG<ER>-Symbol=SPY PosStatus=PositionStatus.Filled ExecType=ExecType.Trade LeavesQty=0 Routing=False 
+2022-09-08 16:08:03 [logger INFO] Managed Position Finished: Arrival=2022-09-08 16:08:03.067217 TradeId=trd__SPY_1662664082 PosId=bfd2c14d-1b4f-46a3-9922-9d688bd188e4 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=398.93 Text=Fake Filled Order 
+2022-09-08 16:09:01 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2022-09-08 15:54:00+00:00
+2022-09-08 16:09:01 [logger INFO] DBG<ER>-Symbol=SPY PosStatus=PositionStatus.New ExecType=ExecType.New LeavesQty=1 Routing=True 
+2022-09-08 16:09:01 [logger INFO] Managed Position Updated: Arrival=2022-09-08 16:09:01.566271 TradeId=trd__SPY_1662664141 PosId=fa002aac-37ea-4a9e-ab4c-1045815ab616 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2022-09-08 16:09:01 [logger INFO] DBG<ER>-Symbol=SPY PosStatus=PositionStatus.Filled ExecType=ExecType.Trade LeavesQty=0 Routing=False 
+2022-09-08 16:09:01 [logger INFO] Managed Position Finished: Arrival=2022-09-08 16:09:01.770893 TradeId=trd__SPY_1662664141 PosId=fa002aac-37ea-4a9e-ab4c-1045815ab616 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=399.05 Text=Fake Filled Order 
+2022-09-08 16:09:02 [logger INFO] MACD-RSI - Closing long position by Tick for symbol SPY at None 
+2022-09-08 16:09:02 [logger INFO] DBG<ER>- RunClose Symbol=SPY Routing=False 
+2022-09-08 16:09:02 [logger INFO] DBG<ER>- RunClose Symbol=SPY NetShares=1 
+2022-09-08 16:09:02 [logger INFO] DBG<ER>-Symbol=SPY PosStatus=PositionStatus.New ExecType=ExecType.New LeavesQty=1 Routing=True 
+2022-09-08 16:09:02 [logger INFO] MACD-RSI - Closing short position by Tick for symbol SPY at None 
+2022-09-08 16:09:02 [logger INFO] Managed Position Updated: Arrival=2022-09-08 16:09:02.675258 TradeId=trd__SPY_1662664142 PosId=f7ffc45b-4ff9-4d80-9f5d-e54a8113eb47 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2022-09-08 16:09:02 [logger INFO] DBG<ER>- RunClose Symbol=SPY Routing=True 
+2022-09-08 16:09:02 [logger INFO] DBG<ER>- RunClose Symbol=SPY OpenSumms=[<sources.framework.business_entities.positions.execution_summary.ExecutionSummary object at 0x0000018757972AC8>] 
+2022-09-08 16:09:02 [logger INFO] DBG<ER>-Symbol=SPY PosStatus=PositionStatus.Filled ExecType=ExecType.Trade LeavesQty=0 Routing=False 
+2022-09-08 16:09:02 [logger INFO] Managed Position Finished: Arrival=2022-09-08 16:09:02.892722 TradeId=trd__SPY_1662664142 PosId=f7ffc45b-4ff9-4d80-9f5d-e54a8113eb47 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=399.05 Text=Fake Filled Order 
+2022-09-08 16:10:01 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2022-09-08 15:55:00+00:00
+2022-09-08 16:10:01 [logger INFO] DBG<ER>-Symbol=SPY PosStatus=PositionStatus.New ExecType=ExecType.New LeavesQty=1 Routing=True 
+2022-09-08 16:10:01 [logger INFO] Managed Position Updated: Arrival=2022-09-08 16:10:01.856727 TradeId=trd__SPY_1662664201 PosId=cfc28a50-69fe-40d7-92f9-ff3b4278c286 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2022-09-08 16:10:02 [logger INFO] DBG<ER>-Symbol=SPY PosStatus=PositionStatus.Filled ExecType=ExecType.Trade LeavesQty=0 Routing=False 
+2022-09-08 16:10:02 [logger INFO] Managed Position Finished: Arrival=2022-09-08 16:10:02.072053 TradeId=trd__SPY_1662664201 PosId=cfc28a50-69fe-40d7-92f9-ff3b4278c286 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=399.01 Text=Fake Filled Order 
+2022-09-08 16:10:03 [logger INFO] MACD-RSI - Closing long position by Tick for symbol SPY at None 
+2022-09-08 16:10:03 [logger INFO] DBG<ER>- RunClose Symbol=SPY Routing=False 
+2022-09-08 16:10:03 [logger INFO] DBG<ER>- RunClose Symbol=SPY NetShares=1 
+2022-09-08 16:10:03 [logger INFO] DBG<ER>-Symbol=SPY PosStatus=PositionStatus.New ExecType=ExecType.New LeavesQty=1 Routing=True 
+2022-09-08 16:10:03 [logger INFO] Managed Position Updated: Arrival=2022-09-08 16:10:03.407412 TradeId=trd__SPY_1662664203 PosId=154a2767-b104-4ca2-94d0-a28e7be7e9f3 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2022-09-08 16:10:03 [logger INFO] MACD-RSI - Closing short position by Tick for symbol SPY at None 
+2022-09-08 16:10:03 [logger INFO] DBG<ER>- RunClose Symbol=SPY Routing=True 
+2022-09-08 16:10:03 [logger INFO] DBG<ER>- RunClose Symbol=SPY OpenSumms=[<sources.framework.business_entities.positions.execution_summary.ExecutionSummary object at 0x0000018757DAF6D8>] 
+2022-09-08 16:10:03 [logger INFO] DBG<ER>-Symbol=SPY PosStatus=PositionStatus.Filled ExecType=ExecType.Trade LeavesQty=0 Routing=False 
+2022-09-08 16:10:03 [logger INFO] Managed Position Finished: Arrival=2022-09-08 16:10:03.613311 TradeId=trd__SPY_1662664203 PosId=154a2767-b104-4ca2-94d0-a28e7be7e9f3 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=399.01 Text=Fake Filled Order 
+2022-09-09 10:49:44 [logger INFO] DayTrader  Initializing
+2022-09-09 10:49:44 [logger INFO] Loading 23 summaries for security SPY
+2022-09-09 10:49:45 [logger INFO] WebSocketModule  Initializing
+2022-09-09 10:49:45 [logger INFO] WebSocketModule Successfully initialized
+2022-09-09 10:49:45 [logger ERROR] Critical error opening websocket @OpenWebsocket: [WinError 10048] Solo se permite un uso de cada dirección de socket (protocolo/dirección de red/puerto)
+2022-09-09 10:49:45 [logger INFO] FileHandlerModule  Initializing
+2022-09-09 10:49:45 [logger INFO] FileHandlerModule Successfully initialized
+2022-09-09 10:49:45 [logger INFO] Initializing Bloomberg Order Router
+2022-09-09 10:49:45 [logger INFO] Connecting to localhost:8194
+2022-09-09 10:49:45 [logger INFO] Bloomberg Order Router Initialized
+2022-09-09 10:49:45 [logger INFO] SingletonModuleHandler Successfully initializer
+2022-09-09 10:49:45 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2022-09-09 10:49:45 [logger INFO] Bloomberg Session Connection is UP...
+2022-09-09 10:49:45 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2022-09-09 10:49:45 [logger INFO] Bloomberg Session started...
+2022-09-09 10:49:45 [logger INFO] Initializing Generic Market Order Router
+2022-09-09 10:49:45 [logger INFO] SingletonModuleHandler Successfully initializer
+2022-09-09 10:49:45 [logger INFO] Generic Market Order Router Initialized
+2022-09-09 10:49:46 [logger INFO] Processing SERVICE_STATUS event
+2022-09-09 10:49:46 [logger INFO] Service //blp/emapisvc opened...
+2022-09-09 10:49:46 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:SPY
+2022-09-09 10:49:46 [logger INFO] DayTrader Successfully initialized
+2022-09-09 10:49:47 [logger INFO] Processing SERVICE_STATUS event
+2022-09-09 10:49:47 [logger INFO] Service //blp/mktdata opened...
+2022-09-09 10:49:47 [logger INFO] Requesting for open orders...
+2022-09-09 10:49:47 [logger INFO] Waiting initial paints to finish to return active execution reports
+2022-09-09 10:49:47 [logger INFO] Subscribing to order and route events
+2022-09-09 10:49:47 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:SPY
+2022-09-09 10:49:47 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:SPY
+2022-09-09 10:49:48 [logger INFO] Order subscription started successfully
+2022-09-09 10:49:48 [logger INFO] Processing SERVICE_STATUS event
+2022-09-09 10:49:48 [logger INFO] Service //blp/mktbar opened...
+2022-09-09 10:49:48 [logger INFO] Route subscription started successfully
+2022-09-09 10:49:48 [logger INFO] Processing SERVICE_STATUS event
+2022-09-09 10:49:48 [logger INFO] Service //blp/refdata opened...
+2022-09-09 10:49:48 [logger INFO] Recovered 0 previously existing execution reports
+2022-09-09 10:49:48 [logger INFO] Received list of Open Positions: 0 positions
+2022-09-09 10:49:48 [logger INFO] Process ready to receive commands and trade
+2022-09-09 10:49:48 [logger INFO] Historical prices successfully loaded for symbol SPY 
+2022-09-09 12:29:59 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2022-09-09 12:15:00+00:00
+2022-09-09 12:29:59 [logger INFO] DBG<ER>-Symbol=SPY Side=Side.Buy PosStatus=PositionStatus.New ExecType=ExecType.New LeavesQty=1 Routing=True 
+2022-09-09 12:29:59 [logger INFO] Managed Position Updated: Arrival=2022-09-09 12:29:59.344771 TradeId=trd__SPY_1662737399 PosId=443e0de2-317a-4ece-83b5-a8a3c3823bdd Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2022-09-09 12:29:59 [logger INFO] DBG<ER>-Symbol=SPY Side=Side.Buy PosStatus=PositionStatus.Filled ExecType=ExecType.Trade LeavesQty=0 Routing=False 
+2022-09-09 12:29:59 [logger INFO] Managed Position Finished: Arrival=2022-09-09 12:29:59.552215 TradeId=trd__SPY_1662737399 PosId=443e0de2-317a-4ece-83b5-a8a3c3823bdd Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=405.43 Text=Fake Filled Order 
+2022-09-09 12:30:00 [logger INFO] MACD-RSI - Closing long position by Tick for symbol SPY at None 
+2022-09-09 12:30:00 [logger INFO] DBG<ER>- RunClose Symbol=SPY Routing=False 
+2022-09-09 12:30:00 [logger INFO] DBG<ER>- RunClose Symbol=SPY NetShares=1 
+2022-09-09 12:30:00 [logger INFO] DBG<ER>-Symbol=SPY Side=Side.Sell PosStatus=PositionStatus.New ExecType=ExecType.New LeavesQty=1 Routing=True 
+2022-09-09 12:30:00 [logger INFO] Managed Position Updated: Arrival=2022-09-09 12:30:00.405834 TradeId=trd__SPY_1662737400 PosId=125d980d-0eec-4d11-b6f0-c72777b7b737 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2022-09-09 12:30:00 [logger INFO] MACD-RSI - Closing short position by Tick for symbol SPY at None 
+2022-09-09 12:30:00 [logger INFO] DBG<ER>- RunClose Symbol=SPY Routing=True 
+2022-09-09 12:30:00 [logger INFO] DBG<ER>-Symbol=SPY Side=Side.Sell PosStatus=PositionStatus.Filled ExecType=ExecType.Trade LeavesQty=0 Routing=False 
+2022-09-09 12:30:00 [logger INFO] Managed Position Finished: Arrival=2022-09-09 12:30:00.616271 TradeId=trd__SPY_1662737400 PosId=125d980d-0eec-4d11-b6f0-c72777b7b737 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=405.43 Text=Fake Filled Order 
+2022-09-09 12:39:59 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2022-09-09 12:25:00+00:00
+2022-09-09 12:39:59 [logger INFO] DBG<ER>-Symbol=SPY Side=Side.Buy PosStatus=PositionStatus.New ExecType=ExecType.New LeavesQty=1 Routing=True 
+2022-09-09 12:39:59 [logger INFO] Managed Position Updated: Arrival=2022-09-09 12:39:59.283730 TradeId=trd__SPY_1662737999 PosId=3768c670-ea24-4bed-8ddf-ca151f7e89d7 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2022-09-09 12:39:59 [logger INFO] DBG<ER>-Symbol=SPY Side=Side.Buy PosStatus=PositionStatus.Filled ExecType=ExecType.Trade LeavesQty=0 Routing=False 
+2022-09-09 12:39:59 [logger INFO] Managed Position Finished: Arrival=2022-09-09 12:39:59.497159 TradeId=trd__SPY_1662737999 PosId=3768c670-ea24-4bed-8ddf-ca151f7e89d7 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=405.23 Text=Fake Filled Order 
+2022-09-09 12:40:00 [logger INFO] MACD-RSI - Closing long position by Tick for symbol SPY at None 
+2022-09-09 12:40:00 [logger INFO] DBG<ER>- RunClose Symbol=SPY Routing=False 
+2022-09-09 12:40:00 [logger INFO] DBG<ER>- RunClose Symbol=SPY NetShares=1 
+2022-09-09 12:40:00 [logger INFO] DBG<ER>-Symbol=SPY Side=Side.Sell PosStatus=PositionStatus.New ExecType=ExecType.New LeavesQty=1 Routing=True 
+2022-09-09 12:40:00 [logger INFO] Managed Position Updated: Arrival=2022-09-09 12:40:00.304999 TradeId=trd__SPY_1662738000 PosId=479962a8-5d5f-4bb3-8ab2-6e08dc5e5e1e Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2022-09-09 12:40:00 [logger INFO] MACD-RSI - Closing short position by Tick for symbol SPY at None 
+2022-09-09 12:40:00 [logger INFO] DBG<ER>- RunClose Symbol=SPY Routing=True 
+2022-09-09 12:40:00 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:01.125989 seconds!
+2022-09-09 12:40:00 [logger INFO] DBG<ER>-Symbol=SPY Side=Side.Sell PosStatus=PositionStatus.Filled ExecType=ExecType.Trade LeavesQty=0 Routing=False 
+2022-09-09 12:40:00 [logger INFO] Managed Position Finished: Arrival=2022-09-09 12:40:00.508455 TradeId=trd__SPY_1662738000 PosId=479962a8-5d5f-4bb3-8ab2-6e08dc5e5e1e Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=405.23 Text=Fake Filled Order 
+2022-09-09 13:23:59 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2022-09-09 13:09:00+00:00
+2022-09-09 13:23:59 [logger INFO] DBG<ER>-Symbol=SPY Side=Side.Buy PosStatus=PositionStatus.New ExecType=ExecType.New LeavesQty=1 Routing=True 
+2022-09-09 13:23:59 [logger INFO] Managed Position Updated: Arrival=2022-09-09 13:23:59.344777 TradeId=trd__SPY_1662740639 PosId=e91cecf5-ee24-4243-9ee2-bf5e3b4fb03b Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2022-09-09 13:23:59 [logger INFO] DBG<ER>-Symbol=SPY Side=Side.Buy PosStatus=PositionStatus.Filled ExecType=ExecType.Trade LeavesQty=0 Routing=False 
+2022-09-09 13:23:59 [logger INFO] Managed Position Finished: Arrival=2022-09-09 13:23:59.550863 TradeId=trd__SPY_1662740639 PosId=e91cecf5-ee24-4243-9ee2-bf5e3b4fb03b Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=404.92 Text=Fake Filled Order 
+2022-09-09 13:24:00 [logger INFO] MACD-RSI - Closing long position by Tick for symbol SPY at None 
+2022-09-09 13:24:00 [logger INFO] DBG<ER>- RunClose Symbol=SPY Routing=False 
+2022-09-09 13:24:00 [logger INFO] DBG<ER>- RunClose Symbol=SPY NetShares=1 
+2022-09-09 13:24:00 [logger INFO] DBG<ER>-Symbol=SPY Side=Side.Sell PosStatus=PositionStatus.New ExecType=ExecType.New LeavesQty=1 Routing=True 
+2022-09-09 13:24:00 [logger INFO] Managed Position Updated: Arrival=2022-09-09 13:24:00.372063 TradeId=trd__SPY_1662740640 PosId=81c19e5e-1bca-4a8d-a11a-86402c602bdf Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2022-09-09 13:24:00 [logger INFO] MACD-RSI - Closing short position by Tick for symbol SPY at None 
+2022-09-09 13:24:00 [logger INFO] DBG<ER>- RunClose Symbol=SPY Routing=True 
+2022-09-09 13:24:00 [logger INFO] DBG<ER>-Symbol=SPY Side=Side.Sell PosStatus=PositionStatus.Filled ExecType=ExecType.Trade LeavesQty=0 Routing=False 
+2022-09-09 13:24:00 [logger INFO] Managed Position Finished: Arrival=2022-09-09 13:24:00.580507 TradeId=trd__SPY_1662740640 PosId=81c19e5e-1bca-4a8d-a11a-86402c602bdf Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=404.92 Text=Fake Filled Order 
+2022-09-09 13:24:00 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:01.242748 seconds!
+2022-09-09 13:24:59 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2022-09-09 13:10:00+00:00
+2022-09-09 13:24:59 [logger INFO] DBG<ER>-Symbol=SPY Side=Side.Buy PosStatus=PositionStatus.New ExecType=ExecType.New LeavesQty=1 Routing=True 
+2022-09-09 13:24:59 [logger INFO] Managed Position Updated: Arrival=2022-09-09 13:24:59.132751 TradeId=trd__SPY_1662740699 PosId=4ab2dcde-42ab-46e7-bd33-672681b95bba Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2022-09-09 13:24:59 [logger INFO] DBG<ER>-Symbol=SPY Side=Side.Buy PosStatus=PositionStatus.Filled ExecType=ExecType.Trade LeavesQty=0 Routing=False 
+2022-09-09 13:24:59 [logger INFO] Managed Position Finished: Arrival=2022-09-09 13:24:59.341190 TradeId=trd__SPY_1662740699 PosId=4ab2dcde-42ab-46e7-bd33-672681b95bba Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=405.12 Text=Fake Filled Order 
+2022-09-09 13:25:00 [logger INFO] MACD-RSI - Closing long position by Tick for symbol SPY at None 
+2022-09-09 13:25:00 [logger INFO] DBG<ER>- RunClose Symbol=SPY Routing=False 
+2022-09-09 13:25:00 [logger INFO] DBG<ER>- RunClose Symbol=SPY NetShares=1 
+2022-09-09 13:25:00 [logger INFO] DBG<ER>-Symbol=SPY Side=Side.Sell PosStatus=PositionStatus.New ExecType=ExecType.New LeavesQty=1 Routing=True 
+2022-09-09 13:25:00 [logger INFO] Managed Position Updated: Arrival=2022-09-09 13:25:00.257159 TradeId=trd__SPY_1662740700 PosId=5c9d2a37-c24d-4ea3-9a05-7832a66e7cc5 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2022-09-09 13:25:00 [logger INFO] MACD-RSI - Closing short position by Tick for symbol SPY at None 
+2022-09-09 13:25:00 [logger INFO] DBG<ER>- RunClose Symbol=SPY Routing=True 
+2022-09-09 13:25:00 [logger INFO] DBG<ER>-Symbol=SPY Side=Side.Sell PosStatus=PositionStatus.Filled ExecType=ExecType.Trade LeavesQty=0 Routing=False 
+2022-09-09 13:25:00 [logger INFO] Managed Position Finished: Arrival=2022-09-09 13:25:00.461771 TradeId=trd__SPY_1662740700 PosId=5c9d2a37-c24d-4ea3-9a05-7832a66e7cc5 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=405.12 Text=Fake Filled Order 
+2022-09-09 13:26:01 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2022-09-09 13:11:00+00:00
+2022-09-09 13:26:01 [logger INFO] DBG<ER>-Symbol=SPY Side=Side.Buy PosStatus=PositionStatus.New ExecType=ExecType.New LeavesQty=1 Routing=True 
+2022-09-09 13:26:01 [logger INFO] Managed Position Updated: Arrival=2022-09-09 13:26:01.682497 TradeId=trd__SPY_1662740761 PosId=e8c7dda7-1d25-42d9-bd6d-35a858cc2267 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2022-09-09 13:26:01 [logger INFO] DBG<ER>-Symbol=SPY Side=Side.Buy PosStatus=PositionStatus.Filled ExecType=ExecType.Trade LeavesQty=0 Routing=False 
+2022-09-09 13:26:01 [logger INFO] Managed Position Finished: Arrival=2022-09-09 13:26:01.888274 TradeId=trd__SPY_1662740761 PosId=e8c7dda7-1d25-42d9-bd6d-35a858cc2267 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=405.09 Text=Fake Filled Order 
+2022-09-09 13:26:02 [logger INFO] MACD-RSI - Closing long position by Tick for symbol SPY at None 
+2022-09-09 13:26:02 [logger INFO] DBG<ER>- RunClose Symbol=SPY Routing=False 
+2022-09-09 13:26:02 [logger INFO] DBG<ER>- RunClose Symbol=SPY NetShares=1 
+2022-09-09 13:26:02 [logger INFO] DBG<ER>-Symbol=SPY Side=Side.Sell PosStatus=PositionStatus.New ExecType=ExecType.New LeavesQty=1 Routing=True 
+2022-09-09 13:26:02 [logger INFO] Managed Position Updated: Arrival=2022-09-09 13:26:02.720048 TradeId=trd__SPY_1662740762 PosId=29376ad3-8472-4321-a0f7-feaafa727e49 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2022-09-09 13:26:02 [logger INFO] MACD-RSI - Closing short position by Tick for symbol SPY at None 
+2022-09-09 13:26:02 [logger INFO] DBG<ER>- RunClose Symbol=SPY Routing=True 
+2022-09-09 13:26:02 [logger INFO] DBG<ER>-Symbol=SPY Side=Side.Sell PosStatus=PositionStatus.Filled ExecType=ExecType.Trade LeavesQty=0 Routing=False 
+2022-09-09 13:26:02 [logger INFO] Managed Position Finished: Arrival=2022-09-09 13:26:02.926671 TradeId=trd__SPY_1662740762 PosId=29376ad3-8472-4321-a0f7-feaafa727e49 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=405.09 Text=Fake Filled Order 
+2022-09-09 13:26:59 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2022-09-09 13:12:00+00:00
+2022-09-09 13:26:59 [logger INFO] DBG<ER>-Symbol=SPY Side=Side.Buy PosStatus=PositionStatus.New ExecType=ExecType.New LeavesQty=1 Routing=True 
+2022-09-09 13:26:59 [logger INFO] Managed Position Updated: Arrival=2022-09-09 13:26:59.445713 TradeId=trd__SPY_1662740819 PosId=63d04b83-fc68-4e3f-9c94-ca6b88a14569 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2022-09-09 13:26:59 [logger INFO] DBG<ER>-Symbol=SPY Side=Side.Buy PosStatus=PositionStatus.Filled ExecType=ExecType.Trade LeavesQty=0 Routing=False 
+2022-09-09 13:26:59 [logger INFO] Managed Position Finished: Arrival=2022-09-09 13:26:59.664128 TradeId=trd__SPY_1662740819 PosId=63d04b83-fc68-4e3f-9c94-ca6b88a14569 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=405.025 Text=Fake Filled Order 
+2022-09-09 13:27:00 [logger INFO] MACD-RSI - Closing long position by Tick for symbol SPY at None 
+2022-09-09 13:27:00 [logger INFO] DBG<ER>- RunClose Symbol=SPY Routing=False 
+2022-09-09 13:27:00 [logger INFO] DBG<ER>- RunClose Symbol=SPY NetShares=1 
+2022-09-09 13:27:00 [logger INFO] DBG<ER>-Symbol=SPY Side=Side.Sell PosStatus=PositionStatus.New ExecType=ExecType.New LeavesQty=1 Routing=True 
+2022-09-09 13:27:00 [logger INFO] Managed Position Updated: Arrival=2022-09-09 13:27:00.569808 TradeId=trd__SPY_1662740820 PosId=dc2c448b-6f28-4f71-b904-21cb32d9a4bd Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2022-09-09 13:27:00 [logger INFO] MACD-RSI - Closing short position by Tick for symbol SPY at None 
+2022-09-09 13:27:00 [logger INFO] DBG<ER>- RunClose Symbol=SPY Routing=True 
+2022-09-09 13:27:00 [logger INFO] DBG<ER>-Symbol=SPY Side=Side.Sell PosStatus=PositionStatus.Filled ExecType=ExecType.Trade LeavesQty=0 Routing=False 
+2022-09-09 13:27:00 [logger INFO] Managed Position Finished: Arrival=2022-09-09 13:27:00.783237 TradeId=trd__SPY_1662740820 PosId=dc2c448b-6f28-4f71-b904-21cb32d9a4bd Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=405.025 Text=Fake Filled Order 
+2022-09-09 15:03:59 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2022-09-09 14:49:00+00:00
+2022-09-09 15:03:59 [logger INFO] DBG<ER>-Symbol=SPY Side=Side.Buy PosStatus=PositionStatus.New ExecType=ExecType.New LeavesQty=1 Routing=True 
+2022-09-09 15:03:59 [logger INFO] Managed Position Updated: Arrival=2022-09-09 15:03:59.826873 TradeId=trd__SPY_1662746639 PosId=a8f56fd8-81cb-4163-9e22-18e8cc21574d Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2022-09-09 15:04:00 [logger INFO] DBG<ER>-Symbol=SPY Side=Side.Buy PosStatus=PositionStatus.Filled ExecType=ExecType.Trade LeavesQty=0 Routing=False 
+2022-09-09 15:04:00 [logger INFO] Managed Position Finished: Arrival=2022-09-09 15:04:00.044799 TradeId=trd__SPY_1662746639 PosId=a8f56fd8-81cb-4163-9e22-18e8cc21574d Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=406.43 Text=Fake Filled Order 
+2022-09-09 15:04:00 [logger INFO] MACD-RSI - Closing long position by Tick for symbol SPY at None 
+2022-09-09 15:04:00 [logger INFO] DBG<ER>- RunClose Symbol=SPY Routing=False 
+2022-09-09 15:04:00 [logger INFO] DBG<ER>- RunClose Symbol=SPY NetShares=1 
+2022-09-09 15:04:00 [logger INFO] DBG<ER>-Symbol=SPY Side=Side.Sell PosStatus=PositionStatus.New ExecType=ExecType.New LeavesQty=1 Routing=True 
+2022-09-09 15:04:00 [logger INFO] Managed Position Updated: Arrival=2022-09-09 15:04:00.829915 TradeId=trd__SPY_1662746640 PosId=d7ad5d90-abe4-4efe-a446-a19664f84efa Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2022-09-09 15:04:00 [logger INFO] MACD-RSI - Closing short position by Tick for symbol SPY at None 
+2022-09-09 15:04:00 [logger INFO] DBG<ER>- RunClose Symbol=SPY Routing=True 
+2022-09-09 15:04:01 [logger INFO] DBG<ER>-Symbol=SPY Side=Side.Sell PosStatus=PositionStatus.Filled ExecType=ExecType.Trade LeavesQty=0 Routing=False 
+2022-09-09 15:04:01 [logger INFO] Managed Position Finished: Arrival=2022-09-09 15:04:01.047130 TradeId=trd__SPY_1662746640 PosId=d7ad5d90-abe4-4efe-a446-a19664f84efa Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=406.43 Text=Fake Filled Order 
+2022-09-09 15:04:01 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:01.665610 seconds!
+2022-09-09 15:05:00 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2022-09-09 14:50:00+00:00
+2022-09-09 15:05:00 [logger INFO] DBG<ER>-Symbol=SPY Side=Side.Buy PosStatus=PositionStatus.New ExecType=ExecType.New LeavesQty=1 Routing=True 
+2022-09-09 15:05:00 [logger INFO] Managed Position Updated: Arrival=2022-09-09 15:05:00.253162 TradeId=trd__SPY_1662746700 PosId=9db75cae-7319-4f8b-a058-a78bbc50d359 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2022-09-09 15:05:00 [logger INFO] DBG<ER>-Symbol=SPY Side=Side.Buy PosStatus=PositionStatus.Filled ExecType=ExecType.Trade LeavesQty=0 Routing=False 
+2022-09-09 15:05:00 [logger INFO] Managed Position Finished: Arrival=2022-09-09 15:05:00.469732 TradeId=trd__SPY_1662746700 PosId=9db75cae-7319-4f8b-a058-a78bbc50d359 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=406.485 Text=Fake Filled Order 
+2022-09-09 15:05:01 [logger INFO] MACD-RSI - Closing long position by Tick for symbol SPY at None 
+2022-09-09 15:05:01 [logger INFO] DBG<ER>- RunClose Symbol=SPY Routing=False 
+2022-09-09 15:05:01 [logger INFO] DBG<ER>- RunClose Symbol=SPY NetShares=1 
+2022-09-09 15:05:01 [logger INFO] DBG<ER>-Symbol=SPY Side=Side.Sell PosStatus=PositionStatus.New ExecType=ExecType.New LeavesQty=1 Routing=True 
+2022-09-09 15:05:01 [logger INFO] Managed Position Updated: Arrival=2022-09-09 15:05:01.288247 TradeId=trd__SPY_1662746701 PosId=0de195fa-b89e-4ca2-8382-c55bf802405e Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2022-09-09 15:05:01 [logger INFO] MACD-RSI - Closing short position by Tick for symbol SPY at None 
+2022-09-09 15:05:01 [logger INFO] DBG<ER>- RunClose Symbol=SPY Routing=True 
+2022-09-09 15:05:01 [logger INFO] DBG<ER>-Symbol=SPY Side=Side.Sell PosStatus=PositionStatus.Filled ExecType=ExecType.Trade LeavesQty=0 Routing=False 
+2022-09-09 15:05:01 [logger INFO] Managed Position Finished: Arrival=2022-09-09 15:05:01.507665 TradeId=trd__SPY_1662746701 PosId=0de195fa-b89e-4ca2-8382-c55bf802405e Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=406.485 Text=Fake Filled Order 
+2022-09-09 15:21:58 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2022-09-09 15:07:00+00:00
+2022-09-09 15:21:58 [logger INFO] DBG<ER>-Symbol=SPY Side=Side.Buy PosStatus=PositionStatus.New ExecType=ExecType.New LeavesQty=1 Routing=True 
+2022-09-09 15:21:58 [logger INFO] Managed Position Updated: Arrival=2022-09-09 15:21:58.859264 TradeId=trd__SPY_1662747718 PosId=3a9eb2ec-1ead-48cb-9dd8-f8c63d79a80c Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2022-09-09 15:21:59 [logger INFO] DBG<ER>-Symbol=SPY Side=Side.Buy PosStatus=PositionStatus.Filled ExecType=ExecType.Trade LeavesQty=0 Routing=False 
+2022-09-09 15:21:59 [logger INFO] Managed Position Finished: Arrival=2022-09-09 15:21:59.070701 TradeId=trd__SPY_1662747718 PosId=3a9eb2ec-1ead-48cb-9dd8-f8c63d79a80c Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=406.31 Text=Fake Filled Order 
+2022-09-09 15:21:59 [logger INFO] MACD-RSI - Closing long position by Tick for symbol SPY at None 
+2022-09-09 15:21:59 [logger INFO] DBG<ER>- RunClose Symbol=SPY Routing=False 
+2022-09-09 15:21:59 [logger INFO] DBG<ER>- RunClose Symbol=SPY NetShares=1 
+2022-09-09 15:21:59 [logger INFO] DBG<ER>-Symbol=SPY Side=Side.Sell PosStatus=PositionStatus.New ExecType=ExecType.New LeavesQty=1 Routing=True 
+2022-09-09 15:21:59 [logger INFO] Managed Position Updated: Arrival=2022-09-09 15:21:59.836256 TradeId=trd__SPY_1662747719 PosId=28a72f1d-8e09-4054-a6d3-b4492a5e17c6 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2022-09-09 15:21:59 [logger INFO] MACD-RSI - Closing short position by Tick for symbol SPY at None 
+2022-09-09 15:21:59 [logger INFO] DBG<ER>- RunClose Symbol=SPY Routing=True 
+2022-09-09 15:22:00 [logger INFO] DBG<ER>-Symbol=SPY Side=Side.Sell PosStatus=PositionStatus.Filled ExecType=ExecType.Trade LeavesQty=0 Routing=False 
+2022-09-09 15:22:00 [logger INFO] Managed Position Finished: Arrival=2022-09-09 15:22:00.040568 TradeId=trd__SPY_1662747719 PosId=28a72f1d-8e09-4054-a6d3-b4492a5e17c6 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=406.31 Text=Fake Filled Order 

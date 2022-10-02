@@ -154,6 +154,7 @@ class DayTradingPosition():
 
         self.SoftTerminalCondEvaluated= None
         self.StrongTerminalCondEvaluated = None
+        self.MomMarketCondition =None
 
         #endregion
 
@@ -1423,6 +1424,9 @@ class DayTradingPosition():
 
     def EvaluateClosingMACDRSILongTradeByTick(self,slFlipModelParam,changeFixedLossAtThisGainParam,gainMinTradeParamFixedLoss,gainMinTradeParamFixedLoss2):
 
+        if not self.Open():
+            return None
+
         # rule #10
         ruleTenExitCond = self.RunRuleTenLongPos(slFlipModelParam, changeFixedLossAtThisGainParam,gainMinTradeParamFixedLoss, gainMinTradeParamFixedLoss2)
         if (ruleTenExitCond is not None):
@@ -1432,13 +1436,15 @@ class DayTradingPosition():
 
     def EvaluateClosingMACDRSIShortTradeByTick(self, slFlipModelParam, changeFixedLossAtThisGainParam,gainMinTradeParamFixedLoss, gainMinTradeParamFixedLoss2):
 
+        if not self.Open():
+            return None
+
         # rule #10
         ruleTenExitCond = self.RunRuleTenShortPos(slFlipModelParam, changeFixedLossAtThisGainParam,gainMinTradeParamFixedLoss, gainMinTradeParamFixedLoss2)
         if (ruleTenExitCond is not None):
             return ruleTenExitCond
 
         return None
-
 
 
     def EvaluateClosingGenericLongTrade(self,candlebarsArr,
@@ -1622,7 +1628,8 @@ class DayTradingPosition():
             elif self.StrongTerminalCondEvaluated is not None:
                 return self.StrongTerminalCondEvaluated
             else:
-                raise Exception("Inconsistent state where the is no a terminal close and no soft terminal and strong terminals activated")
+                return None
+                #raise Exception("Inconsistent state where the is no a terminal close and no soft terminal and strong terminals activated")
         else:
             return self.StrongTerminalCondEvaluated if self.StrongTerminalCondEvaluated is not None else self._TERMINALLY_CLOSED()
 

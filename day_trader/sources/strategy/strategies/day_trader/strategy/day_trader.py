@@ -258,8 +258,8 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
         self.ProcessExecutionPrices(dayTradingPos,execReport)
         summary.UpdateStatus(execReport, marketDataToUse=dayTradingPos.MarketData if dayTradingPos.RunningBacktest else None)
         dayTradingPos.UpdateRouting() #order is important!
-        self.DoLog("DBG<ER>-Symbol={} PosStatus={} ExecType={} LeavesQty={} Routing={} "
-                   .format(dayTradingPos.Security.Symbol,summary.Position.PosStatus,execReport.ExecType,execReport.LeavesQty,
+        self.DoLog("DBG<ER>-Symbol={} Side={} PosStatus={} ExecType={} LeavesQty={} Routing={} "
+                   .format(dayTradingPos.Security.Symbol, execReport.Order.Side,summary.Position.PosStatus,execReport.ExecType,execReport.LeavesQty,
                            dayTradingPos.Routing),MessageType.INFO)
 
         if summary.Position.IsFinishedPosition():
@@ -590,6 +590,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                     else:
                         dayTradingPos.MarketData=md
                     dayTradingPos.CalculateCurrentDayProfits(md)
+                    self.EvaluateClosingPositionsByTick(md)
 
                     LogHelper.LogPublishMarketDataOnSecurity("DayTrader Proc MarketData", self, md.Security.Symbol, md)
 
@@ -1230,8 +1231,8 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
         self.DoLog("DBG<ER>- RunClose Symbol={} Routing={} ".format(dayTradingPos.Security.Symbol,dayTradingPos.Routing), MessageType.INFO)
         if dayTradingPos.Routing:
-            self.DoLog("DBG<ER>- RunClose Symbol={} OpenSumms={} "
-                       .format(dayTradingPos.Security.Symbol, dayTradingPos.GetOpenSummaries()),MessageType.INFO)
+            # self.DoLog("DBG<ER>- RunClose Symbol={} OpenSumms={} "
+            #            .format(dayTradingPos.Security.Symbol, dayTradingPos.GetOpenSummaries()),MessageType.INFO)
 
             for summary in dayTradingPos.GetOpenSummaries():
 
@@ -1393,8 +1394,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
 
             if(closingCond is not None):
-                self.DoLog("MACD-RSI - Closing long position by Tick for symbol {} at {} ".format(dayTradingPos.Security.Symbol,
-                                                                                          md.DateTime),
+                self.DoLog("MACD-RSI - Closing long position by Tick for symbol {} at {} ".format(dayTradingPos.Security.Symbol,md.MDEntryDate),
                            MessageType.INFO)
 
                 self.RunClose(dayTradingPos, Side.Sell if dayTradingPos.GetNetOpenShares() > 0 else Side.Buy,statisticalParam=None, candlebar=None, generic=False,closingCond=closingCond)
@@ -1421,7 +1421,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
 
             if(closingCond is not None):
-                self.DoLog("MACD-RSI - Closing short position by Tick for symbol {} at {} ".format(dayTradingPos.Security.Symbol,md.DateTime),MessageType.INFO)
+                self.DoLog("MACD-RSI - Closing short position by Tick for symbol {} at {} ".format(dayTradingPos.Security.Symbol,md.MDEntryDate),MessageType.INFO)
 
                 self.RunClose(dayTradingPos, Side.Sell if dayTradingPos.GetNetOpenShares() > 0 else Side.Buy,statisticalParam=None, candlebar=None, generic=False,closingCond=closingCond)
 

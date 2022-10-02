@@ -1,0 +1,58 @@
+2022-09-09 16:10:59 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2022-09-09 15:56:00+00:00
+2022-09-09 16:10:59 [logger INFO] DBG<ER>-Symbol=SPY Side=Side.Buy PosStatus=PositionStatus.New ExecType=ExecType.New LeavesQty=1 Routing=True 
+2022-09-09 16:10:59 [logger INFO] Managed Position Updated: Arrival=2022-09-09 16:10:59.331722 TradeId=trd__SPY_1662750659 PosId=80aacfe9-2cbd-423d-9923-ef1ab7e1e85c Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2022-09-09 16:10:59 [logger INFO] DBG<ER>-Symbol=SPY Side=Side.Buy PosStatus=PositionStatus.Filled ExecType=ExecType.Trade LeavesQty=0 Routing=False 
+2022-09-09 16:10:59 [logger INFO] Managed Position Finished: Arrival=2022-09-09 16:10:59.539052 TradeId=trd__SPY_1662750659 PosId=80aacfe9-2cbd-423d-9923-ef1ab7e1e85c Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=406.53 Text=Fake Filled Order 
+2022-09-09 16:11:00 [logger INFO] MACD-RSI - Closing long position by Tick for symbol SPY at None 
+2022-09-09 16:11:00 [logger INFO] DBG<ER>- RunClose Symbol=SPY Routing=False 
+2022-09-09 16:11:00 [logger INFO] DBG<ER>- RunClose Symbol=SPY NetShares=1 
+2022-09-09 16:11:00 [logger INFO] DBG<ER>-Symbol=SPY Side=Side.Sell PosStatus=PositionStatus.New ExecType=ExecType.New LeavesQty=1 Routing=True 
+2022-09-09 16:11:00 [logger INFO] Managed Position Updated: Arrival=2022-09-09 16:11:00.304119 TradeId=trd__SPY_1662750660 PosId=0ca0347c-bdce-4bf5-ba08-89c67ff80c0a Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2022-09-09 16:11:00 [logger INFO] MACD-RSI - Closing short position by Tick for symbol SPY at None 
+2022-09-09 16:11:00 [logger INFO] DBG<ER>- RunClose Symbol=SPY Routing=True 
+2022-09-09 16:11:00 [logger INFO] DBG<ER>-Symbol=SPY Side=Side.Sell PosStatus=PositionStatus.Filled ExecType=ExecType.Trade LeavesQty=0 Routing=False 
+2022-09-09 16:11:00 [logger INFO] Managed Position Finished: Arrival=2022-09-09 16:11:00.516238 TradeId=trd__SPY_1662750660 PosId=0ca0347c-bdce-4bf5-ba08-89c67ff80c0a Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=406.53 Text=Fake Filled Order 
+2022-09-09 16:11:02 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:03.359158 seconds!
+2022-09-09 16:11:59 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2022-09-09 15:57:00+00:00
+2022-09-09 16:11:59 [logger INFO] DBG<ER>-Symbol=SPY Side=Side.Buy PosStatus=PositionStatus.New ExecType=ExecType.New LeavesQty=1 Routing=True 
+2022-09-09 16:11:59 [logger INFO] Managed Position Updated: Arrival=2022-09-09 16:11:59.212060 TradeId=trd__SPY_1662750719 PosId=4334a0ec-11f1-4e97-a4f6-d95280aa1c7b Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2022-09-09 16:11:59 [logger INFO] DBG<ER>-Symbol=SPY Side=Side.Buy PosStatus=PositionStatus.Filled ExecType=ExecType.Trade LeavesQty=0 Routing=False 
+2022-09-09 16:11:59 [logger INFO] Managed Position Finished: Arrival=2022-09-09 16:11:59.428574 TradeId=trd__SPY_1662750719 PosId=4334a0ec-11f1-4e97-a4f6-d95280aa1c7b Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=406.45 Text=Fake Filled Order 
+2022-09-09 16:12:00 [logger INFO] MACD-RSI - Closing long position by Tick for symbol SPY at None 
+2022-09-09 16:12:00 [logger INFO] DBG<ER>- RunClose Symbol=SPY Routing=False 
+2022-09-09 16:12:00 [logger INFO] DBG<ER>- RunClose Symbol=SPY NetShares=1 
+2022-09-09 16:12:00 [logger INFO] DBG<ER>-Symbol=SPY Side=Side.Sell PosStatus=PositionStatus.New ExecType=ExecType.New LeavesQty=1 Routing=True 
+2022-09-09 16:12:00 [logger INFO] Managed Position Updated: Arrival=2022-09-09 16:12:00.276795 TradeId=trd__SPY_1662750720 PosId=e409ff5a-b58b-4f1f-b570-cb710c13caa6 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2022-09-09 16:12:00 [logger INFO] MACD-RSI - Closing short position by Tick for symbol SPY at None 
+2022-09-09 16:12:00 [logger INFO] DBG<ER>- RunClose Symbol=SPY Routing=True 
+2022-09-09 16:12:00 [logger INFO] DBG<ER>-Symbol=SPY Side=Side.Sell PosStatus=PositionStatus.Filled ExecType=ExecType.Trade LeavesQty=0 Routing=False 
+2022-09-09 16:12:00 [logger INFO] Managed Position Finished: Arrival=2022-09-09 16:12:00.490226 TradeId=trd__SPY_1662750720 PosId=e409ff5a-b58b-4f1f-b570-cb710c13caa6 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=406.45 Text=Fake Filled Order 
+2022-09-09 16:12:59 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2022-09-09 15:58:00+00:00
+2022-09-09 16:12:59 [logger INFO] DBG<ER>-Symbol=SPY Side=Side.Buy PosStatus=PositionStatus.New ExecType=ExecType.New LeavesQty=1 Routing=True 
+2022-09-09 16:12:59 [logger INFO] Managed Position Updated: Arrival=2022-09-09 16:12:59.471839 TradeId=trd__SPY_1662750779 PosId=6235da30-2dbf-4c2f-b3fe-8605a73f3f8a Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2022-09-09 16:12:59 [logger INFO] DBG<ER>-Symbol=SPY Side=Side.Buy PosStatus=PositionStatus.Filled ExecType=ExecType.Trade LeavesQty=0 Routing=False 
+2022-09-09 16:12:59 [logger INFO] Managed Position Finished: Arrival=2022-09-09 16:12:59.676294 TradeId=trd__SPY_1662750779 PosId=6235da30-2dbf-4c2f-b3fe-8605a73f3f8a Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=406.595 Text=Fake Filled Order 
+2022-09-09 16:13:00 [logger INFO] MACD-RSI - Closing long position by Tick for symbol SPY at None 
+2022-09-09 16:13:00 [logger INFO] DBG<ER>- RunClose Symbol=SPY Routing=False 
+2022-09-09 16:13:00 [logger INFO] DBG<ER>- RunClose Symbol=SPY NetShares=1 
+2022-09-09 16:13:00 [logger INFO] DBG<ER>-Symbol=SPY Side=Side.Sell PosStatus=PositionStatus.New ExecType=ExecType.New LeavesQty=1 Routing=True 
+2022-09-09 16:13:00 [logger INFO] Managed Position Updated: Arrival=2022-09-09 16:13:00.626752 TradeId=trd__SPY_1662750780 PosId=7aa45e86-32ce-460e-bd93-eb7df909c14f Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2022-09-09 16:13:00 [logger INFO] MACD-RSI - Closing short position by Tick for symbol SPY at None 
+2022-09-09 16:13:00 [logger INFO] DBG<ER>- RunClose Symbol=SPY Routing=True 
+2022-09-09 16:13:00 [logger INFO] DBG<ER>-Symbol=SPY Side=Side.Sell PosStatus=PositionStatus.Filled ExecType=ExecType.Trade LeavesQty=0 Routing=False 
+2022-09-09 16:13:00 [logger INFO] Managed Position Finished: Arrival=2022-09-09 16:13:00.830210 TradeId=trd__SPY_1662750780 PosId=7aa45e86-32ce-460e-bd93-eb7df909c14f Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=406.595 Text=Fake Filled Order 
+2022-09-09 17:09:59 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2022-09-09 16:55:00+00:00
+2022-09-09 17:09:59 [logger INFO] DBG<ER>-Symbol=SPY Side=Side.Buy PosStatus=PositionStatus.New ExecType=ExecType.New LeavesQty=1 Routing=True 
+2022-09-09 17:09:59 [logger INFO] Managed Position Updated: Arrival=2022-09-09 17:09:59.655123 TradeId=trd__SPY_1662754199 PosId=98d2d596-e7a1-4591-b0c9-0a627d1b81ea Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2022-09-09 17:09:59 [logger INFO] DBG<ER>-Symbol=SPY Side=Side.Buy PosStatus=PositionStatus.Filled ExecType=ExecType.Trade LeavesQty=0 Routing=False 
+2022-09-09 17:09:59 [logger INFO] Managed Position Finished: Arrival=2022-09-09 17:09:59.858579 TradeId=trd__SPY_1662754199 PosId=98d2d596-e7a1-4591-b0c9-0a627d1b81ea Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=407.04 Text=Fake Filled Order 
+2022-09-09 17:10:00 [logger INFO] MACD-RSI - Closing long position by Tick for symbol SPY at None 
+2022-09-09 17:10:00 [logger INFO] DBG<ER>- RunClose Symbol=SPY Routing=False 
+2022-09-09 17:10:01 [logger INFO] DBG<ER>- RunClose Symbol=SPY NetShares=1 
+2022-09-09 17:10:01 [logger INFO] DBG<ER>-Symbol=SPY Side=Side.Sell PosStatus=PositionStatus.New ExecType=ExecType.New LeavesQty=1 Routing=True 
+2022-09-09 17:10:01 [logger INFO] Managed Position Updated: Arrival=2022-09-09 17:10:01.005512 TradeId=trd__SPY_1662754201 PosId=8e466539-2fc8-4840-acdf-45135628a70c Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2022-09-09 17:10:01 [logger INFO] MACD-RSI - Closing short position by Tick for symbol SPY at None 
+2022-09-09 17:10:01 [logger INFO] DBG<ER>- RunClose Symbol=SPY Routing=True 
+2022-09-09 17:10:01 [logger INFO] DBG<ER>-Symbol=SPY Side=Side.Sell PosStatus=PositionStatus.Filled ExecType=ExecType.Trade LeavesQty=0 Routing=False 
+2022-09-09 17:10:01 [logger INFO] Managed Position Finished: Arrival=2022-09-09 17:10:01.214953 TradeId=trd__SPY_1662754201 PosId=8e466539-2fc8-4840-acdf-45135628a70c Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=406.84 Text=Fake Filled Order 
+2022-09-09 17:10:03 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:03.719034 seconds!
