@@ -1164,6 +1164,20 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
         return closingLong is not None or closingShort is not None
 
+
+    def EvaluateExtendingMACDRSIAutomaticTrading(self,cbDict,candlebar):
+        extendingLong = self.EvaluateExtendingMACDRSILongPositions(candlebar, cbDict)
+        extendingShort = self.EvaluateExtendingMACDRSIShortPositions(candlebar, cbDict)
+
+        return extendingLong is not None or extendingShort is not None
+
+
+    def EvaluateReducingMACDRSIAutomaticTrading(self,cbDict,candlebar):
+        reducingLong = self.EvaluateReducingMACDRSILongPositions(candlebar, cbDict)
+        reducingShort = self.EvaluateReducingMACDRSIShortPositions(candlebar, cbDict)
+
+        return reducingLong is not None or reducingShort is not None
+
     def EvaluateClosingPositionsByTick(self,md):
         tradingMode = self.ModelParametersHandler.Get(ModelParametersHandler.TRADING_MODE(), md.Security.Symbol)
 
@@ -1189,6 +1203,62 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
             else:
                 msg = "Could not find Day Trading Position for market data symbol {} @EvaluateClosingPositionsByTick. Please Resync.".format(md.Security.Symbol)
+                self.SendToInvokingModule(ErrorWrapper(Exception(msg)))
+                self.DoLog(msg, MessageType.ERROR)
+                return False
+        else:
+            return False
+
+    def EvaluateExtendingPositons(self, candlebar, cbDict):
+        symbol = candlebar.Security.Symbol
+
+        tradingMode = self.ModelParametersHandler.Get(ModelParametersHandler.TRADING_MODE(), symbol)
+
+        dayTradingPos = next(iter(list(filter(lambda x: x.Security.Symbol == candlebar.Security.Symbol, self.DayTradingPositions))),None)
+
+        if tradingMode.StringValue == _TRADING_MODE_AUTOMATIC or dayTradingPos.RunningBacktest:
+
+            if dayTradingPos is not None:
+
+                automTradingModeModelParam = self.ModelParametersHandler.Get(ModelParametersHandler.AUTOMATIC_TRADING_MODE(),symbol)
+
+                if automTradingModeModelParam is None or automTradingModeModelParam.IntValue is None:
+                    raise Exception("Critical error for automatic trading: You must specify parameter AUTOMATIC_TRADING_MODE")
+
+                if automTradingModeModelParam.IntValue == _AUTOMATIC_TRADING_MODE_MACD_RSI:  # Second version of the auomatic trading algo
+                    return self.EvaluateExtendingMACDRSIAutomaticTrading( cbDict, candlebar)
+                #Extending Positions only availble for MACD-RSI strategy
+
+            else:
+                msg = "Could not find Day Trading Position for candlebar symbol {} @EvaluateExtendingPositons. Please Resync.".format(candlebar.Security.Symbol)
+                self.SendToInvokingModule(ErrorWrapper(Exception(msg)))
+                self.DoLog(msg, MessageType.ERROR)
+                return False
+        else:
+            return False
+
+    def EvaluateReducingPositions(self, candlebar, cbDict):
+        symbol = candlebar.Security.Symbol
+
+        tradingMode = self.ModelParametersHandler.Get(ModelParametersHandler.TRADING_MODE(), symbol)
+
+        dayTradingPos = next(iter(list(filter(lambda x: x.Security.Symbol == candlebar.Security.Symbol, self.DayTradingPositions))),None)
+
+        if tradingMode.StringValue == _TRADING_MODE_AUTOMATIC or dayTradingPos.RunningBacktest:
+
+            if dayTradingPos is not None:
+
+                automTradingModeModelParam = self.ModelParametersHandler.Get(ModelParametersHandler.AUTOMATIC_TRADING_MODE(),symbol)
+
+                if automTradingModeModelParam is None or automTradingModeModelParam.IntValue is None:
+                    raise Exception("Critical error for automatic trading: You must specify parameter AUTOMATIC_TRADING_MODE")
+
+                if automTradingModeModelParam.IntValue == _AUTOMATIC_TRADING_MODE_MACD_RSI:  # Second version of the auomatic trading algo
+                    return self.EvaluateReducingMACDRSIAutomaticTrading( cbDict, candlebar)
+                #Extending Positions only availble for MACD-RSI strategy
+
+            else:
+                msg = "Could not find Day Trading Position for candlebar symbol {} @EvaluateReducingPositions. Please Resync.".format(candlebar.Security.Symbol)
                 self.SendToInvokingModule(ErrorWrapper(Exception(msg)))
                 self.DoLog(msg, MessageType.ERROR)
                 return False
@@ -1434,6 +1504,53 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
             return None
 
 
+    def EvaluateExtendingMACDRSILongPositions(self, candlebar, cbDict):
+
+
+        if (self.ModelParametersHandler.Get(ModelParametersHandler.ENABLE_INNER_POSITIONS(),candlebar.Security.Symbol).IntValue != 1):
+            return None
+
+        symbol = candlebar.Security.Symbol
+
+        dayTradingPos = next(iter(list(filter(lambda x: x.Security.Symbol == candlebar.Security.Symbol, self.DayTradingPositions))),None)
+
+        if dayTradingPos is not None:
+
+            extendingCond = dayTradingPos.EvaluateExtendingMACDRSILongTrade(self.ModelParametersHandler.Get(ModelParametersHandler.SUB_TRADE_1_ADD_LIMIT_2(),symbol),
+                                                                            self.ModelParametersHandler.Get(ModelParametersHandler.SUB_TRADE_1_ADD_LIMIT_3(),symbol))
+
+            if extendingCond is not None :
+                self.DoLog("MACD-RSI - Extending long position for symbol {} at {} ".format(dayTradingPos.Security.Symbol,candlebar.DateTime),MessageType.INFO)
+
+                #TODO: Open Pos
+
+            return extendingCond
+
+    def EvaluateReducingMACDRSILongPositions(self, candlebar, cbDict,runClose=True):
+
+        if (self.ModelParametersHandler.Get(ModelParametersHandler.ENABLE_INNER_POSITIONS(),candlebar.Security.Symbol).IntValue != 1):
+            return None
+
+        symbol = candlebar.Security.Symbol
+
+        dayTradingPos = next(iter(list(filter(lambda x: x.Security.Symbol == candlebar.Security.Symbol, self.DayTradingPositions))),None)
+
+        if dayTradingPos is not None:
+
+            reducingCond = dayTradingPos.EvaluateReducingMACDRSILongTrade(self.ModelParametersHandler.Get(ModelParametersHandler.SUB_TRADE_1_GAIN_LIMIT_1(), symbol),
+                                                                          self.ModelParametersHandler.Get(ModelParametersHandler.SUB_TRADE_2_GAIN_LIMIT_2(), symbol),
+                                                                          self.ModelParametersHandler.Get(ModelParametersHandler.SUB_TRADE_1_GAIN_LIMIT_2(), symbol),
+                                                                          self.ModelParametersHandler.Get(ModelParametersHandler.SUB_TRADE_2_LOSS_LIMIT_2(), symbol),
+                                                                          self.ModelParametersHandler.Get(ModelParametersHandler.SUB_TRADE_3_GAIN_LIMIT_3(), symbol),
+                                                                          self.ModelParametersHandler.Get(ModelParametersHandler.SUB_TRADE_3_LOSS_LIMIT_3(), symbol))
+
+            if reducingCond is not None and runClose:
+                self.DoLog("MACD-RSI - Reducing long position for symbol {} at {} ".format(dayTradingPos.Security.Symbol,candlebar.DateTime),MessageType.INFO)
+
+                #TODO: Reduce Pos
+
+            return reducingCond
+
 
     def EvaluateClosingMACDRSILongPositions(self, candlebar, cbDict, runClose=True):
         symbol = candlebar.Security.Symbol
@@ -1503,6 +1620,61 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
         else:
             msg = "Could not find Day Trading Position for candlebar symbol {} @EvaluateClosingMACDRSILongPositions. Please Resync.".format(candlebar.Security.Symbol)
+            self.SendToInvokingModule(ErrorWrapper(Exception(msg)))
+            self.DoLog(msg, MessageType.ERROR)
+            return None
+
+
+    def EvaluateExtendingMACDRSIShortPositions(self, candlebar, cbDict):
+
+        if (self.ModelParametersHandler.Get(ModelParametersHandler.ENABLE_INNER_POSITIONS(),candlebar.Security.Symbol).IntValue != 1):
+            return None
+
+        symbol = candlebar.Security.Symbol
+
+        dayTradingPos = next(iter(list(filter(lambda x: x.Security.Symbol == candlebar.Security.Symbol, self.DayTradingPositions))),None)
+
+        if dayTradingPos is not None:
+
+            extendCond = dayTradingPos.EvaluateExtendingMACDRSIShortTrade(self.ModelParametersHandler.Get(ModelParametersHandler.SUB_TRADE_1_ADD_LIMIT_2(),symbol),
+                                                                          self.ModelParametersHandler.Get(ModelParametersHandler.SUB_TRADE_1_ADD_LIMIT_3(),symbol))
+
+            if extendCond is not None :
+                self.DoLog("MACD-RSI - Extending short position for symbol {} at {} ".format(dayTradingPos.Security.Symbol,candlebar.DateTime),MessageType.INFO)
+                #TODO Extend short position
+
+            return extendCond
+        else:
+            msg = "Could not find Day Trading Position for candlebar symbol {} @EvaluateExtendingMACDRSIShortPositions. Please Resync.".format(candlebar.Security.Symbol)
+            self.SendToInvokingModule(ErrorWrapper(Exception(msg)))
+            self.DoLog(msg, MessageType.ERROR)
+            return None
+
+    def EvaluateReducingMACDRSIShortPositions(self, candlebar, cbDict,runClose=True):
+
+        if(self.ModelParametersHandler.Get(ModelParametersHandler.ENABLE_INNER_POSITIONS(),candlebar.Security.Symbol).IntValue!=1):
+            return None
+
+        symbol = candlebar.Security.Symbol
+
+        dayTradingPos = next(iter(list(filter(lambda x: x.Security.Symbol == candlebar.Security.Symbol, self.DayTradingPositions))),None)
+
+        if dayTradingPos is not None:
+
+            reducingCond = dayTradingPos.EvaluateReducingMACDRSIShortTrade(self.ModelParametersHandler.Get(ModelParametersHandler.SUB_TRADE_1_GAIN_LIMIT_1(), symbol),
+                                                                          self.ModelParametersHandler.Get(ModelParametersHandler.SUB_TRADE_2_GAIN_LIMIT_2(), symbol),
+                                                                          self.ModelParametersHandler.Get(ModelParametersHandler.SUB_TRADE_1_GAIN_LIMIT_2(), symbol),
+                                                                          self.ModelParametersHandler.Get(ModelParametersHandler.SUB_TRADE_2_LOSS_LIMIT_2(), symbol),
+                                                                          self.ModelParametersHandler.Get(ModelParametersHandler.SUB_TRADE_3_GAIN_LIMIT_3(), symbol),
+                                                                          self.ModelParametersHandler.Get(ModelParametersHandler.SUB_TRADE_3_LOSS_LIMIT_3(), symbol))
+
+            if reducingCond is not None and runClose:
+                self.DoLog("MACD-RSI - Reducing short position for symbol {} at {} ".format(dayTradingPos.Security.Symbol,candlebar.DateTime),MessageType.INFO)
+                #TODO Reduce short position
+
+            return reducingCond
+        else:
+            msg = "Could not find Day Trading Position for candlebar symbol {} @EvaluateReducingMACDRSIShortPositions. Please Resync.".format(candlebar.Security.Symbol)
             self.SendToInvokingModule(ErrorWrapper(Exception(msg)))
             self.DoLog(msg, MessageType.ERROR)
             return None
@@ -1615,6 +1787,8 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                 self.UpdateTechnicalAnalysisParameters(candlebar,cbDict)
                 self.EvaluateOpeningPositions(candlebar,cbDict)
                 self.EvaluateClosingPositions(candlebar,cbDict)
+                self.EvaluateExtendingPositons(candlebar, cbDict)
+                self.EvaluateReducingPositions(candlebar,cbDict)
                 self.UpdateTradingSignals(candlebar,cbDict)
 
                 self.EvaluateClosingForManualConditions(candlebar, cbDict)

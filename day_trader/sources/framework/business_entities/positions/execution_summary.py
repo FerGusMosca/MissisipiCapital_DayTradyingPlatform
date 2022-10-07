@@ -4,6 +4,8 @@ import datetime
 from sources.framework.common.enums.Side import *
 
 _TRADE_ID_PREFIX="trd_"
+_INNER_SUMMARY_2="SUMM_2"
+_INNER_SUMMARY_3="SUMM_3"
 
 class ExecutionSummary:
     def __init__(self, Date, Position):
@@ -19,6 +21,7 @@ class ExecutionSummary:
         self.Timestamp = datetime.datetime.now()
         self.LastTradeTime = None
         self.CreateTime= datetime.datetime.now()
+        self.InnerSummaries={}
 
     def UpdateStatus(self, execReport,marketDataToUse=None):
 
@@ -73,3 +76,19 @@ class ExecutionSummary:
             orderId=self.Position.GetLastOrder().OrderId
 
         return "{}_{}_{}".format(_TRADE_ID_PREFIX,self.Position.Security.Symbol,orderId)
+
+
+    def DoInnerTradesExist(self):
+        return self.IsFirstInnerTradeOpen() or self.IsSecondInnerTradeOpen()
+
+    def IsFirstInnerTradeOpen(self):
+        return _INNER_SUMMARY_2 in self.InnerSummaries
+
+    def IsSecondInnerTradeOpen(self):
+        return _INNER_SUMMARY_3 in self.InnerSummaries
+
+    def GetFirstInnerSummary(self):
+        return self.InnerSummaries[_INNER_SUMMARY_2]
+
+    def GetSecondInnerSummary(self):
+        return self.InnerSummaries[_INNER_SUMMARY_3]

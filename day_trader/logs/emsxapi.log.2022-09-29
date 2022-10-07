@@ -1,0 +1,69 @@
+2022-09-29 19:09:51 [logger INFO] DayTrader  Initializing
+2022-09-29 19:09:52 [logger INFO] Loading 0 summaries for security SPY.SMART.CS
+2022-09-29 19:09:53 [logger INFO] WebSocketModule  Initializing
+2022-09-29 19:09:53 [logger INFO] WebSocketModule Successfully initialized
+2022-09-29 19:09:53 [logger ERROR] Critical error opening websocket @OpenWebsocket: [WinError 10048] Solo se permite un uso de cada dirección de socket (protocolo/dirección de red/puerto)
+2022-09-29 19:09:53 [logger INFO] FileHandlerModule  Initializing
+2022-09-29 19:09:53 [logger INFO] FileHandlerModule Successfully initialized
+2022-09-29 19:09:53 [logger ERROR] Error Loading Singleton Modules Handler module:cannot import name 'create_connection' from 'websocket' (C:\Users\Compumar\Desktop\Projects\Tradehelm\Mississipi\DayTrader\MissisipiCapital_DayTradyingPlatform\day_trader\venv\lib\site-packages\websocket\__init__.py)
+2022-09-29 19:11:23 [logger INFO] DayTrader  Initializing
+2022-09-29 19:11:23 [logger INFO] Loading 0 summaries for security SPY.SMART.CS
+2022-09-29 19:11:24 [logger INFO] WebSocketModule  Initializing
+2022-09-29 19:11:24 [logger INFO] WebSocketModule Successfully initialized
+2022-09-29 19:11:24 [logger ERROR] Critical error opening websocket @OpenWebsocket: [WinError 10048] Solo se permite un uso de cada dirección de socket (protocolo/dirección de red/puerto)
+2022-09-29 19:11:24 [logger INFO] FileHandlerModule  Initializing
+2022-09-29 19:11:24 [logger INFO] FileHandlerModule Successfully initialized
+2022-09-29 19:11:24 [logger INFO] WebSocketModule  Initializing
+2022-09-29 19:11:24 [logger INFO] Opening websocket connection with server ws://127.0.0.1:7172
+2022-09-29 19:11:24 [logger INFO] DayTrader Successfully initialized
+2022-09-29 19:11:24 [logger INFO] SingletonModuleHandler Successfully initializer
+2022-09-29 19:11:24 [logger INFO] Initializing Generic Market Order Router
+2022-09-29 19:11:24 [logger INFO] SingletonModuleHandler Successfully initializer
+2022-09-29 19:11:24 [logger INFO] Generic Market Order Router Initialized
+2022-09-29 19:11:25 [logger INFO] DayTrader Successfully initialized
+2022-09-29 19:11:26 [logger ERROR] Unknown message :{"Service":"MD","ServiceKey":"SPY.SMART.CS","Success":true,"Msg":"SubscriptionResponse"}
+2022-09-29 19:11:26 [logger INFO] Requesting for open orders...
+2022-09-29 19:11:26 [logger ERROR] Critical error @WebsocketModule.ProcessMessage: ORDER_MASS_STATUS_REQUEST
+2022-09-29 19:11:26 [logger ERROR] Critical error @WebsocketModule.ProcessMessage: ORDER_MASS_STATUS_REQUEST
+2022-09-29 19:11:26 [logger ERROR] Critical error @WebsocketModule.ProcessMessage: ORDER_MASS_STATUS_REQUEST
+2022-09-29 19:11:38 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-09-29 19:12:02 [logger INFO] DayTrader  Initializing
+2022-09-29 19:12:02 [logger INFO] Loading 0 summaries for security SPY.SMART.CS
+2022-09-29 19:12:02 [logger INFO] WebSocketModule  Initializing
+2022-09-29 19:12:02 [logger INFO] WebSocketModule Successfully initialized
+2022-09-29 19:12:02 [logger ERROR] Critical error opening websocket @OpenWebsocket: [WinError 10048] Solo se permite un uso de cada dirección de socket (protocolo/dirección de red/puerto)
+2022-09-29 19:12:02 [logger INFO] FileHandlerModule  Initializing
+2022-09-29 19:12:02 [logger INFO] FileHandlerModule Successfully initialized
+2022-09-29 19:12:02 [logger INFO] WebSocketModule  Initializing
+2022-09-29 19:12:02 [logger INFO] Opening websocket connection with server ws://127.0.0.1:7172
+2022-09-29 19:12:02 [logger INFO] DayTrader Successfully initialized
+2022-09-29 19:12:02 [logger INFO] SingletonModuleHandler Successfully initializer
+2022-09-29 19:12:02 [logger INFO] Initializing Generic Market Order Router
+2022-09-29 19:12:02 [logger INFO] SingletonModuleHandler Successfully initializer
+2022-09-29 19:12:02 [logger INFO] Generic Market Order Router Initialized
+2022-09-29 19:12:03 [logger INFO] DayTrader Successfully initialized
+2022-09-29 19:12:03 [logger ERROR] Unknown message :{"Service":"MD","ServiceKey":"SPY.SMART.CS","Success":true,"Msg":"SubscriptionResponse"}
+2022-09-29 19:12:04 [logger INFO] Requesting for open orders...
+2022-09-29 19:12:04 [logger ERROR] Critical error @WebsocketModule.ProcessMessage: ORDER_MASS_STATUS_REQUEST
+2022-09-29 19:12:04 [logger ERROR] Critical error @WebsocketModule.ProcessMessage: ORDER_MASS_STATUS_REQUEST
+2022-09-29 19:12:04 [logger ERROR] Critical error @WebsocketModule.ProcessMessage: ORDER_MASS_STATUS_REQUEST
+2022-09-29 19:12:05 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-09-29 19:12:10 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-09-29 19:12:10 [logger INFO] Market Data Processed for symbol SPY...
+2022-09-29 19:12:15 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-09-29 19:12:15 [logger INFO] Market Data Processed for symbol SPY...
+2022-09-29 19:12:21 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-09-29 19:12:21 [logger INFO] Market Data Processed for symbol SPY...
+2022-09-29 19:12:23 [logger INFO] Market Data Processed for symbol SPY...
+2022-09-29 19:12:26 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-09-29 19:12:26 [logger INFO] Market Data Processed for symbol SPY...
+2022-09-29 19:12:31 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-09-29 19:12:31 [logger INFO] Market Data Processed for symbol SPY...
+2022-09-29 19:12:36 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-09-29 19:12:36 [logger INFO] Market Data Processed for symbol SPY...
+2022-09-29 19:12:41 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-09-29 19:12:41 [logger INFO] Market Data Processed for symbol SPY...
+2022-09-29 19:12:46 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-09-29 19:12:46 [logger INFO] Market Data Processed for symbol SPY...
+2022-09-29 19:12:51 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-09-29 19:12:51 [logger INFO] Market Data Processed for symbol SPY...

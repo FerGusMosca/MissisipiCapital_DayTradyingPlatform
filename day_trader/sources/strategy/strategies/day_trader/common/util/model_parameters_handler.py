@@ -152,6 +152,10 @@ class ModelParametersHandler:
         return "END_OF_DAY_LIMIT"
 
     @staticmethod
+    def LONG_SHORT_ON_CANDLE():
+        return "LONG_SHORT_ON_CANDLE"
+
+    @staticmethod
     def NON_SMOOTHED_RSI_LONG_THRESHOLD():
         return "NON_SMOOTHED_RSI_LONG_THRESHOLD"
 
@@ -724,8 +728,61 @@ class ModelParametersHandler:
         return "SL_FLIP"
 
     @staticmethod
-    def LONG_SHORT_ON_CANDLE():
-        return "LONG_SHORT_ON_CANDLE"
+    def ENABLE_INNER_POSITIONS():
+        return "ENABLE_INNER_POSITIONS"
+
+    @staticmethod
+    def SUB_TRADE_1_GAIN_LIMIT_1():
+        return "SUB_TRADE_1_GAIN_LIMIT_1"
+
+    @staticmethod
+    def SUB_TRADE_1_GAIN_LIMIT_1():
+        return "SUB_TRADE_1_GAIN_LIMIT_1"
+
+    @staticmethod
+    def SUB_TRADE_1_ADD_LIMIT_2():
+        return "SUB_TRADE_1_ADD_LIMIT_2"
+
+    @staticmethod
+    def SUB_TRADE_2_LOSS_LIMIT_2():
+        return "SUB_TRADE_2_LOSS_LIMIT_2"
+
+    @staticmethod
+    def SUB_TRADE_2_LOSS_LIMIT_2():
+        return "SUB_TRADE_2_LOSS_LIMIT_2"
+
+    @staticmethod
+    def SUB_TRADE_1_LOSS_LIMIT_2():
+        return "SUB_TRADE_1_LOSS_LIMIT_2"
+
+    @staticmethod
+    def SUB_TRADE_2_GAIN_LIMIT_2():
+        return "SUB_TRADE_2_GAIN_LIMIT_2"
+
+    @staticmethod
+    def SUB_TRADE_1_GAIN_LIMIT_2():
+        return "SUB_TRADE_1_GAIN_LIMIT_2"
+
+    @staticmethod
+    def SUB_TRADE_1_ADD_LIMIT_3():
+        return "SUB_TRADE_1_ADD_LIMIT_3"
+
+    @staticmethod
+    def SUB_TRADE_3_GAIN_LIMIT_3():
+        return "SUB_TRADE_3_GAIN_LIMIT_3"
+
+    @staticmethod
+    def SUB_TRADE_3_LOSS_LIMIT_3():
+        return "SUB_TRADE_3_LOSS_LIMIT_3"
+
+    @staticmethod
+    def SUB_TRADE_2_SHARES():
+        return "SUB_TRADE_2_SHARES"
+
+    @staticmethod
+    def SUB_TRADE_3_SHARES():
+        return "SUB_TRADE_3_SHARES"
+
 
     #endregion
 

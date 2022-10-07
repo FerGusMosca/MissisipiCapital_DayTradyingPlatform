@@ -75,6 +75,13 @@ _LONG_MACD_RSI_RULE_4="LONG_MACD_RSI_RULE_4"
 _LONG_MACD_RSI_RULE_5="LONG_MACD_RSI_RULE_5"
 _LONG_MACD_RSI_RULE_BROOMS="LONG_MACD_RSI_RULE_BROOMS"
 
+
+_LONG_MACD_RSI_RULE_11_EXT_2="LONG_MACD_RSI_RULE_11_EXT_2"
+_LONG_MACD_RSI_RULE_11_EXT_3="LONG_MACD_RSI_RULE_11_EXT_3"
+
+_SHORT_MACD_RSI_RULE_11_EXT_2="SHORT_MACD_RSI_RULE_11_EXT_2"
+_SHORT_MACD_RSI_RULE_11_EXT_3="SHORT_MACD_RSI_RULE_11_EXT_3"
+
 _SHORT_MACD_RSI_RULE_1="SHORT_MACD_RSI_RULE_1"
 _SHORT_MACD_RSI_RULE_2="SHORT_MACD_RSI_RULE_2"
 _SHORT_MACD_RSI_RULE_3="SHORT_MACD_RSI_RULE_3"
@@ -134,6 +141,9 @@ class DayTradingPosition():
         self.CurrentProfitMonetaryLastTrade = 0
         self.IncreaseDecrease = 0
 
+        self.FirstInnerTradeProfitLastTrade=0
+        self.SecondInnerTradeProfitLastTrade = 0
+
         self.MaxProfit = 0
         self.MaxLoss=0
         self.MaxProfitCurrentTrade = 0
@@ -188,6 +198,9 @@ class DayTradingPosition():
         self.CurrentProfitMonetary = 0
         self.CurrentProfitMonetaryLastTrade= 0
         self.CurrentProfitToSecurity = 0
+
+        self.FirstInnerTradeProfitLastTrade = 0
+        self.SecondInnerTradeProfitLastTrade = 0
 
         self.MaxLoss = 0
         self.MaxProfit = 0
@@ -773,6 +786,31 @@ class DayTradingPosition():
 
 
 
+    def EvaluateExtendingMACDRSIShortTrade(self,subTrade1AddLimit2,subTrade1AddLimit3):
+        if not self.Open():  # we have to be open in order to extend the position
+            return None  # Position already opened
+
+        if self.GetNetOpenShares() >= 0:
+            return None
+
+        if self.Routing:  # But it has to be NOT routing
+            return None  # cannot open positions that are being routed
+
+        openSummary1 = self.GetLastTradedSummary(Side.Sell)
+
+        if(openSummary1 is None):
+            openSummary1= self.GetLastTradedSummary(Side.SellShort)
+
+        if(not openSummary1.DoInnerTradesExist()):
+            if self.CurrentProfitLastTrade is not None and self.CurrentProfitLastTrade<subTrade1AddLimit2.FloatValue:
+                return _SHORT_MACD_RSI_RULE_11_EXT_2
+        elif (openSummary1.IsFirstInnerTradeOpen()):
+            if self.FirstInnerTradeProfitLastTrade is not None and self.FirstInnerTradeProfitLastTrade<subTrade1AddLimit3.FloatValue:
+                return _SHORT_MACD_RSI_RULE_11_EXT_3
+
+
+        return None
+
     def EvaluateMACDRSIShortTrade(self,msNowParamA,msMinParamB,msMinParamBB,rsi30SlopeSkip5ParamC,msMaxMinParamD,msMaxMinParamDD,
                                   msNowMaxParamE,msNowParamF,msNowParamFF,rsi30SlopeSkip10ParamG,absMSMaxMinLast5ParamH,
                                   absMSMaxMinLast5ParamHH,sec5MinSlopeParamI,rsi14SlopeSkip3ExitParamV,ms3SlopeParamX,
@@ -858,6 +896,28 @@ class DayTradingPosition():
             return _SHORT_MACD_RSI_RULE_BROOMS
 
 
+
+        return None
+
+    def EvaluateExtendingMACDRSILongTrade(self,subTrade1AddLimit2,subTrade1AddLimit3):
+
+        if not self.Open():#we have to be open in order to extend the position
+            return None  # Position already opened
+
+        if self.GetNetOpenShares()<=0:
+            return None
+
+        if self.Routing:#But it has to be NOT routing
+            return None  # cannot open positions that are being routed
+
+        openSummary1 = self.GetLastTradedSummary(Side.Buy)
+
+        if (not openSummary1.DoInnerTradesExist()):
+            if self.CurrentProfitLastTrade is not None and self.CurrentProfitLastTrade < subTrade1AddLimit2.FloatValue:
+                return _LONG_MACD_RSI_RULE_11_EXT_2
+        elif (openSummary1.IsFirstInnerTradeOpen()):
+            if self.FirstInnerTradeProfitLastTrade is not None and self.FirstInnerTradeProfitLastTrade < subTrade1AddLimit3.FloatValue:
+                return _LONG_MACD_RSI_RULE_11_EXT_3
 
         return None
 
@@ -1005,6 +1065,42 @@ class DayTradingPosition():
                     return None
         else:
             return None
+
+    def EvaluateReducingMACDRSIShortTrade(self,subTrade1GainLimit1,subTrade2GainLimit2,subTrade1GainLimit2,subTrade2LossLimit2,subTrade3GainLimit3,subTrade3LossLimit3):
+        if  self.Open():  # we have to be open in order to extend the position
+            return None  # Position already opened
+
+        if self.GetNetOpenShares() < 0:
+            return None
+
+        if self.Routing:  # But it has to be NOT routing
+            return None  # cannot open positions that are being routed
+
+        if self.CurrentProfitLastTrade is None:
+            return
+
+        openSummary1 = self.GetLastTradedSummary(Side.Sell)
+
+        if (openSummary1 is None):
+            openSummary1 = self.GetLastTradedSummary(Side.SellShort)
+
+            if (not openSummary1.DoInnerTradesExist()):
+                if self.CurrentProfitLastTrade is not None and self.CurrentProfitLastTrade > subTrade1GainLimit1.FloatValue:
+                    return "xxx"  #TODO exit 1
+            elif (openSummary1.IsFirstInnerTradeOpen()):
+                if self.FirstInnerTradeProfitLastTrade is not None and self.FirstInnerTradeProfitLastTrade < subTrade2GainLimit2.FloatValue:
+                    return "yyy or yyy/xxx" #TODO exit 2
+                if self.FirstInnerTradeProfitLastTrade is not None and self.FirstInnerTradeProfitLastTrade < subTrade2LossLimit2.FloatValue:
+                    return "xxx and yyyy"
+            elif (openSummary1.IsSecondInnerTradeOpen()):
+                if self.SecondInnerTradeProfitLastTrade is not None and self.SecondInnerTradeProfitLastTrade < subTrade3GainLimit3.FloatValue:
+                    return "xxx  yyyy zzzz"
+                if self.SecondInnerTradeProfitLastTrade is not None and self.SecondInnerTradeProfitLastTrade < subTrade3LossLimit3.FloatValue:
+                    return "xxx  yyyy zzzz"
+
+                        # TODO: Now , eval reducing all the short possibilities
+
+        return None
 
     def EvaluateClosingMACDRSIShortTrade(self,candlebarsArr,msNowParamA,macdMaxGainParamJ,macdMaxGainParamJJ,gainMaxTradeParamJJJ,
                                          gainMaxTradeParamSDMult,gainMaxTradeParamFixedGain,macdGainNowMaxParamK,
@@ -1257,7 +1353,8 @@ class DayTradingPosition():
         else:
             return None
 
-
+    def EvaluateReducingMACDRSILongTrade(self,subTrade1GainLimit1,subTrade2GainLimit2,subTrade1GainLimit2,subTrade2LossLimit2,subTrade3GainLimit3,subTrade3LossLimit3):
+        return None
 
     def EvaluateClosingMACDRSILongTrade(self,candlebarsArr,msNowParamA,macdMaxGainParamJ,macdMaxGainParamJJ,gainMaxTradeParamJJJ,
                                             gainMaxTradeParamSDMult,gainMaxTradeParamFixedGain,macdGainNowMaxParamK,
