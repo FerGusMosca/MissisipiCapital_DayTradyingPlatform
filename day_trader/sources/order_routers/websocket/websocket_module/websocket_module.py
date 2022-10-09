@@ -1,7 +1,9 @@
 import time
+import uuid
 
 import websocket
 
+from sources.framework.business_entities.market_data.candle_bar import CandleBar
 from sources.framework.common.enums.fields.market_data_request_field import MarketDataRequestField
 from sources.framework.common.interfaces.icommunication_module import ICommunicationModule
 from sources.framework.common.abstract.base_communication_module import *
@@ -11,16 +13,20 @@ from sources.framework.common.dto.cm_state import *
 from sources.framework.common.enums.fields.summary_field import *
 from sources.framework.common.enums.fields.summary_list_fields import *
 from sources.framework.common.enums.fields.error_field import *
+from sources.framework.common.wrappers.error_wrapper import ErrorWrapper
 from sources.framework.util.singleton.common.util.singleton import *
+from sources.order_routers.bloomberg.common.converter.market_data_request_converter import MarketDataRequestConverter
+from sources.order_routers.websocket.common.DTO.market_data.candlebar_dto import CandlebarDTO
 from sources.order_routers.websocket.common.DTO.market_data.market_data_request_dto import MarketDataRequestDTO
 from sources.order_routers.websocket.common.DTO.order_routing.cancel_order_req import CancelOrderReq
 from sources.order_routers.websocket.common.DTO.order_routing.order_mass_status_request import \
     OrderMassStatusRequest
 from sources.order_routers.websocket.common.DTO.order_routing.update_order_req import UpdateOrderReq
 from sources.order_routers.websocket.common.configuration.configuration import *
+from sources.order_routers.websocket.common.wrappers.candlebar_wrapper import CandlebarWrapper
 from sources.order_routers.websocket.data_access_layer.websocket_client import WebsocketClient
 from sources.order_routers.websocket.data_access_layer.websocket_server import *
-
+from sources.framework.common.enums.TimeUnit import TimeUnit
 from sources.order_routers.websocket.common.converters.order_converter import *
 import tornado
 import threading
@@ -32,6 +38,7 @@ class WebSocketModule(BaseCommunicationModule, ICommunicationModule):
     def __init__(self):
         self.LockConnections = threading.Lock()
         self.TradingLock = threading.Lock()
+        self.CandleBarSubscriptionLock=threading.Lock()
         self.Configuration = None
         self.WebsocketServer = None
         self.Connections = []
@@ -40,6 +47,7 @@ class WebSocketModule(BaseCommunicationModule, ICommunicationModule):
         self.Initialized=False
         self.WsClient=None
         self.ActiveOrders = {}
+        self.CandleBarSubscriptions={}
 
 
     #region Private Methods
@@ -130,6 +138,33 @@ class WebSocketModule(BaseCommunicationModule, ICommunicationModule):
             if self.TradingLock.locked():
                 self.TradingLock.release()
 
+    def ProcessCandlebartDto(self,cbDto):
+        try:
+
+            self.DoLog("<order_router>-Incoming Candlebar for Symbol={} Date={} Open={} High={} Low={} Close={} Trade={} Volume={}".format(cbDto.Symbol,cbDto.Date,cbDto.Open,cbDto.High,cbDto.Low,cbDto.Close,cbDto.Trade,cbDto.Volume),MessageType.INFO)
+
+            self.TradingLock.acquire(blocking=True)
+
+            cbWrapper = CandlebarWrapper(self, cbDto)
+
+            if self.TradingLock.locked():
+                self.TradingLock.release()
+
+            state = self.ProcessOutgoing(cbWrapper)
+
+            if state.Success:
+                pass
+            else:
+                raise state.Exception
+
+        except Exception as e:
+            msg = "Critical ERROR for candlebar for Symbol {}. Error:{}".format(cbDto.Symbol, str(e))
+            self.DoLog(msg, MessageType.ERROR)
+        finally:
+            # self.DoLog("DB-websocket.ProcessExecutionReport.exit {}".format(self.full_now()),MessageType.INFO)
+            if self.TradingLock.locked():
+                self.TradingLock.release()
+
     def ProcessExecutionReportDto(self, execReportDto):
         try:
             #self.DoLog("DB-websocket.ProcessExecutionReport {}".format(self.full_now()),MessageType.INFO)
@@ -183,6 +218,10 @@ class WebSocketModule(BaseCommunicationModule, ICommunicationModule):
             elif "Msg" in fieldsDict and fieldsDict["Msg"] == "ExecutionReportMsg":
                 execReport = ExecutionReportDto(**json.loads(message))
                 self.ProcessExecutionReportDto(execReport)
+            elif "Msg" in fieldsDict and fieldsDict["Msg"] == "CandlebarMsg":
+                cb = CandlebarDTO(**json.loads(message))
+                self.ProcessCandlebartDto(cb)
+
             elif "Msg" in fieldsDict and fieldsDict["Msg"] == "UpdOrderAck":
                 pass
             elif "Msg" in fieldsDict and fieldsDict["Msg"] == "NewOrderAck":
@@ -328,6 +367,48 @@ class WebSocketModule(BaseCommunicationModule, ICommunicationModule):
             self.DoLog("Exception @WebsocketModule.OrderMassStatusRequestThread:{}".format(str(e)), MessageType.ERROR)
             return CMState.BuildFailure(self, Exception=e)
 
+
+    def ProcessCandleBarRequestThread(self,wrapper):
+        cbReq = MarketDataRequestConverter.ConvertCandleBarRequest(wrapper)
+        try:
+
+            if cbReq.TimeUnit != TimeUnit.Minute:
+                raise Exception("Not valid time unit for candle bar request {}".format(cbReq.TimeUnit))
+
+            self.CandleBarSubscriptionLock.acquire()
+            if cbReq.SubscriptionRequestType == SubscriptionRequestType.Unsuscribe:
+
+                raise Exception("Websocket ")
+            else:
+                self.DoLog("Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:{}".format(
+                    cbReq.Security.Symbol), MessageType.INFO)
+
+                self.CandleBarSubscriptions[cbReq.Security.Symbol] = CandleBar(cbReq.Security)
+
+                self.WaitForConnections()
+
+                reqDto = WebSocketSubscribeMessage(Msg="Subscribe",
+                                                   SubscriptionType=WebSocketSubscribeMessage._SUBSCRIPTION_TYPE_SUBSCRIBE(),
+                                                   Service="CB",
+                                                   ServiceKey=cbReq.Security.Symbol,
+                                                   ReqId=str(uuid.uuid4()))
+
+                for conn in self.Connections:
+                    conn.DoSendAsync(reqDto)
+
+                return CMState.BuildSuccess(self)
+
+
+        except Exception as e:
+            msg = "Critical error subscribing for candlebars for symbol {}:{}".format(cbReq.Security.Symbol, str(e))
+            self.DoLog(msg, MessageType.ERROR)
+            errorWrapper = ErrorWrapper(e)
+            self.OnMarketData.ProcessIncoming(errorWrapper)
+
+        finally:
+            if self.CandleBarSubscriptionLock.locked():
+                self.CandleBarSubscriptionLock.release()
+
     def ProcessMarketDataRequestThread(self,wrapper):
 
         try:
@@ -369,6 +450,16 @@ class WebSocketModule(BaseCommunicationModule, ICommunicationModule):
             return CMState.BuildSuccess(self)
         except Exception as e:
             self.DoLog("Exception @WebsocketModule.ProcessMarketDataRequest:{}".format(str(e)), MessageType.ERROR)
+            return CMState.BuildFailure(self, Exception=e)
+
+
+    def ProcessCandleBarRequest(self,wrapper):
+        try:
+            threading.Thread(target=self.ProcessCandleBarRequestThread, args=(wrapper,)).start()
+
+            return CMState.BuildSuccess(self)
+        except Exception as e:
+            self.DoLog("Exception @WebsocketModule.ProcessCandleBarRequest:{}".format(str(e)), MessageType.ERROR)
             return CMState.BuildFailure(self, Exception=e)
 
     def ProcessCancelOrder(self,wrapper):
@@ -435,6 +526,8 @@ class WebSocketModule(BaseCommunicationModule, ICommunicationModule):
                 return self.ProcessCancelOrder(wrapper)
             elif wrapper.GetAction() == Actions.MARKET_DATA_REQUEST:
                 return self.ProcessMarketDataRequest(wrapper)
+            elif wrapper.GetAction() == Actions.CANDLE_BAR_REQUEST:
+                self.ProcessCandleBarRequest(wrapper)
             elif wrapper.GetAction() == Actions.ORDER_MASS_STATUS_REQUEST:
                 return self.ProcessOrderMassStatusRequest(wrapper)
             else:
@@ -481,6 +574,7 @@ class WebSocketModule(BaseCommunicationModule, ICommunicationModule):
                     raise Exception("Invalid websocket mode:{}".format(self.Configuration.Mode))
 
                 self.DoLog("DayTrader Successfully initialized", MessageType.INFO)
+                self.CandleBarSubscriptions={}
                 self.Initialized=True
                 return CMState.BuildSuccess(self)
 
