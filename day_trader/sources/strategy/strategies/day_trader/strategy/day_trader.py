@@ -1297,14 +1297,14 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
         else:
             return False
 
-    def RunClose(self,dayTradingPos,side,statisticalParam=None,candlebar=None, text=None, generic = False, closingCond = None):
+    def RunClose(self,dayTradingPos,side,statisticalParam=None,candlebar=None, text=None, generic = False, closingCond = None, summaryOrder=ExecutionSummary._MAIN_SUMMARY()):
 
         self.DoLog("DBG<ER>- RunClose Symbol={} Routing={} ".format(dayTradingPos.Security.Symbol,dayTradingPos.Routing), MessageType.INFO)
         if dayTradingPos.Routing:
             # self.DoLog("DBG<ER>- RunClose Symbol={} OpenSumms={} "
             #            .format(dayTradingPos.Security.Symbol, dayTradingPos.GetOpenSummaries()),MessageType.INFO)
 
-            for summary in dayTradingPos.GetOpenSummaries():
+            for summary in dayTradingPos.GetOpenSummaries(summaryOrder):
 
                 # we just cancel summaries whose side is different than the closing side. We don't want to cancel the close
                 if  (
@@ -1319,24 +1319,13 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
         else:
             self.DoLog("DBG<ER>- RunClose Symbol={} NetShares={} ".format(dayTradingPos.Security.Symbol, dayTradingPos.GetNetOpenShares()), MessageType.INFO)
-            netShares = dayTradingPos.GetNetOpenShares()
+            netShares = dayTradingPos.GetNetOpenShares(summaryOrder)
             if netShares!=0: #if there is something to close
-                # print("Now we do close positions for security {} for net open shares {}".format(dayTradingPos.Security.Symbol, netShares))
 
-                self.ProcessNewPositionReqManagedPos(dayTradingPos, side,
-                                                     netShares if netShares > 0 else netShares * (-1),
-                                                     self.Configuration.DefaultAccount, text=text)
+                self.ProcessNewPositionReqManagedPos(dayTradingPos, side,netShares if netShares > 0 else netShares * (-1),self.Configuration.DefaultAccount, text=text)
 
                 if (candlebar is not None and statisticalParam is not None):
                     threading.Thread(target=self.DoPersistTradingSignalThread, args=(generic, dayTradingPos, TradingSignalHelper._ACTION_CLOSE(), self.TranslateSide(dayTradingPos, side),candlebar, statisticalParam, self, closingCond)).start()
-
-                # if generic:
-                #     self.TradingSignalHelper.PersistTradingSignal(dayTradingPos, TradingSignalHelper._ACTION_CLOSE(),
-                #                                                   self.TranslateSide(dayTradingPos,side), statisticalParam,
-                #                                                   candlebar, self,closingCond)
-                # else:
-                #     self.TradingSignalHelper.PersistMACDRSITradingSignal(dayTradingPos,TradingSignalHelper._ACTION_CLOSE(),self.TranslateSide(dayTradingPos,side),candlebar,self,closingCond)
-
 
 
 
@@ -1522,7 +1511,11 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
             if extendingCond is not None :
                 self.DoLog("MACD-RSI - Extending long position for symbol {} at {} ".format(dayTradingPos.Security.Symbol,candlebar.DateTime),MessageType.INFO)
 
-                #TODO: Open Pos
+                qty = dayTradingPos.GetShortInnerTradeQty(extendingCond,
+                                                          self.ModelParametersHandler.Get(ModelParametersHandler.SUB_TRADE_2_SHARES(),symbol),
+                                                          self.ModelParametersHandler.Get(ModelParametersHandler.SUB_TRADE_3_SHARES(),symbol))
+                self.ProcessNewPositionReqManagedPos(dayTradingPos,Side.Buy,qty,self.Configuration.DefaultAccount,IsMainSummary=False)
+                threading.Thread(target=self.DoPersistTradingSignalThread, args=(False, dayTradingPos, TradingSignalHelper._ACTION_OPEN(), Side.Buy, candlebar, None, self,extendingCond)).start()
 
             return extendingCond
 
@@ -1547,7 +1540,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
             if reducingCond is not None and runClose:
                 self.DoLog("MACD-RSI - Reducing long position for symbol {} at {} ".format(dayTradingPos.Security.Symbol,candlebar.DateTime),MessageType.INFO)
 
-                #TODO: Reduce Pos
+                #TODO: Reduce Pos long
 
             return reducingCond
 
@@ -1641,7 +1634,12 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
             if extendCond is not None :
                 self.DoLog("MACD-RSI - Extending short position for symbol {} at {} ".format(dayTradingPos.Security.Symbol,candlebar.DateTime),MessageType.INFO)
-                #TODO Extend short position
+
+                qty = dayTradingPos.GetShortInnerTradeQty(extendCond,
+                                                          self.ModelParametersHandler.Get(ModelParametersHandler.SUB_TRADE_2_SHARES(), symbol),
+                                                          self.ModelParametersHandler.Get(ModelParametersHandler.SUB_TRADE_3_SHARES(), symbol))
+                self.ProcessNewPositionReqManagedPos(dayTradingPos, Side.Buy, qty, self.Configuration.DefaultAccount,IsMainSummary=False)
+                threading.Thread(target=self.DoPersistTradingSignalThread, args=(False, dayTradingPos, TradingSignalHelper._ACTION_OPEN(), Side.Sell, candlebar, None, self,extendCond)).start()
 
             return extendCond
         else:
@@ -1661,18 +1659,23 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
         if dayTradingPos is not None:
 
-            reducingCond = dayTradingPos.EvaluateReducingMACDRSIShortTrade(self.ModelParametersHandler.Get(ModelParametersHandler.SUB_TRADE_1_GAIN_LIMIT_1(), symbol),
+            reducingConds = dayTradingPos.EvaluateReducingMACDRSIShortTrade(self.ModelParametersHandler.Get(ModelParametersHandler.SUB_TRADE_1_GAIN_LIMIT_1(), symbol),
                                                                           self.ModelParametersHandler.Get(ModelParametersHandler.SUB_TRADE_2_GAIN_LIMIT_2(), symbol),
                                                                           self.ModelParametersHandler.Get(ModelParametersHandler.SUB_TRADE_1_GAIN_LIMIT_2(), symbol),
                                                                           self.ModelParametersHandler.Get(ModelParametersHandler.SUB_TRADE_2_LOSS_LIMIT_2(), symbol),
                                                                           self.ModelParametersHandler.Get(ModelParametersHandler.SUB_TRADE_3_GAIN_LIMIT_3(), symbol),
                                                                           self.ModelParametersHandler.Get(ModelParametersHandler.SUB_TRADE_3_LOSS_LIMIT_3(), symbol))
 
-            if reducingCond is not None and runClose:
-                self.DoLog("MACD-RSI - Reducing short position for symbol {} at {} ".format(dayTradingPos.Security.Symbol,candlebar.DateTime),MessageType.INFO)
-                #TODO Reduce short position
+            if reducingConds is not None and runClose:
 
-            return reducingCond
+                for reducingCond in reducingConds:
+
+                    self.DoLog("MACD-RSI - Reducing short position for condition {} for symbol {} at {} ".format(reducingCond,dayTradingPos.Security.Symbol,candlebar.DateTime),MessageType.INFO)
+                    self.RunClose(dayTradingPos, Side.Sell if dayTradingPos.GetNetOpenShares() > 0 else Side.Buy,
+                                  dayTradingPos.GetStatisticalParameters(list(cbDict.values())), candlebar,generic=False,closingCond=reducingCond,
+                                  summaryOrder=dayTradingPos.ConvertReducingCondToSummaryOrder(reducingCond))
+
+            return reducingConds
         else:
             msg = "Could not find Day Trading Position for candlebar symbol {} @EvaluateReducingMACDRSIShortPositions. Please Resync.".format(candlebar.Security.Symbol)
             self.SendToInvokingModule(ErrorWrapper(Exception(msg)))
@@ -1910,7 +1913,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                 self.RoutingLock.release()
 
     def ProcessNewPositionReqManagedPos(self, dayTradingPos, side,qty,account, price = None,stopLoss=None,
-                                        takeProfit=None,closeEndOfDay=None, text=None):
+                                        takeProfit=None,closeEndOfDay=None, text=None,IsMainSummary=True):
         try:
             self.RoutingLock.acquire(blocking=True)
 
@@ -1925,7 +1928,8 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                               Account=account if account is not None else self.Configuration.DefaultAccount,
                               Broker=None, Strategy=None,
                               OrderType=OrdType.Market if price is None else OrdType.Limit,
-                              OrderPrice=price)
+                              OrderPrice=price
+                              )
 
             newPos.StopLoss=stopLoss
             newPos.TakeProfit=takeProfit
@@ -1933,9 +1937,15 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
             newPos.ValidateNewPosition()
 
+
             summary = ExecutionSummary(datetime.datetime.now(), newPos)
             summary.Text=text
-            dayTradingPos.ExecutionSummaries[self.NextPostId] = summary
+
+            if IsMainSummary:
+                dayTradingPos.ExecutionSummaries[self.NextPostId] = summary
+            else:
+                dayTradingPos.AppendInnerSummary(summary)
+
             dayTradingPos.Routing=True
             self.PositionSecurities[self.NextPostId] = dayTradingPos
             self.NextPostId = uuid.uuid4()
@@ -1948,6 +1958,8 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
             if state.Success:
                 threading.Thread(target=self.PublishPortfolioPositionThread, args=(dayTradingPos,)).start()
                 threading.Thread(target=self.PublishSummaryThread, args=(summary, dayTradingPos.Id)).start()
+
+
             else:
                 del dayTradingPos.ExecutionSummaries[summary.Position.PosId]
                 del self.PositionSecurities[summary.Position.PosId]

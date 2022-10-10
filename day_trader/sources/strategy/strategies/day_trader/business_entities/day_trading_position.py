@@ -1,3 +1,4 @@
+from sources.framework.business_entities.positions.execution_summary import ExecutionSummary
 from sources.framework.business_entities.securities.security import *
 from sources.framework.business_entities.market_data.candle_bar import *
 from sources.framework.common.enums.Side import *
@@ -81,6 +82,14 @@ _LONG_MACD_RSI_RULE_11_EXT_3="LONG_MACD_RSI_RULE_11_EXT_3"
 
 _SHORT_MACD_RSI_RULE_11_EXT_2="SHORT_MACD_RSI_RULE_11_EXT_2"
 _SHORT_MACD_RSI_RULE_11_EXT_3="SHORT_MACD_RSI_RULE_11_EXT_3"
+
+_LONG_MACD_RSI_RULE_11_RED_1="LONG_MACD_RSI_RULE_11_RED_1"
+_LONG_MACD_RSI_RULE_11_RED_2="LONG_MACD_RSI_RULE_11_RED_2"
+_LONG_MACD_RSI_RULE_11_RED_3="LONG_MACD_RSI_RULE_11_RED_3"
+
+_SHORT_MACD_RSI_RULE_11_RED_1="SHORT_MACD_RSI_RULE_11_RED_1"
+_SHORT_MACD_RSI_RULE_11_RED_2="SHORT_MACD_RSI_RULE_11_RED_2"
+_SHORT_MACD_RSI_RULE_11_RED_3="SHORT_MACD_RSI_RULE_11_RED_3"
 
 _SHORT_MACD_RSI_RULE_1="SHORT_MACD_RSI_RULE_1"
 _SHORT_MACD_RSI_RULE_2="SHORT_MACD_RSI_RULE_2"
@@ -379,25 +388,59 @@ class DayTradingPosition():
     def Open(self):
         return self.GetNetOpenShares()!=0
 
-    def GetNetOpenShares(self):
+    def UpdateNetShares(self,summary):
+        netShares=0
+        if summary.GetTradedSummary() > 0:
+            if summary.SharesAcquired():
+                netShares += summary.GetNetShares()
+            else:
+                netShares -= summary.GetNetShares()
+
+        return netShares
+
+
+    def GetNetOpenShares(self,summaryOrder):
         todaySummaries = sorted(list(filter(lambda x: x.CumQty >= 0
                                             and (self.RunningBacktest or x.Timestamp.date() == self.PosUpdTimestamp.date()),
                                             self.ExecutionSummaries.values())),
                                             key=lambda x: x.Timestamp, reverse=False)
 
         netShares = 0
-        for summary in todaySummaries:
-            # first we calculate the traded positions
-            if summary.GetTradedSummary() > 0:
-                if summary.SharesAcquired():
-                    netShares += summary.GetNetShares()
-                else:
-                    netShares -= summary.GetNetShares()
+        for summary in todaySummaries: # first we calculate the traded positions
+
+            if summaryOrder==ExecutionSummary._MAIN_SUMMARY():
+                netShares=self.UpdateNetShares(summary)
+            elif  (summaryOrder==ExecutionSummary._INNER_SUMMARY_2() and summary.IsFirstInnerTradeOpen()):
+                netShares=self.UpdateNetShares(summary.GetFirstInnerSummary())
+            elif  (summaryOrder==ExecutionSummary._INNER_SUMMARY_3() and summary.IsSecondInnerTradeOpen()):
+                netShares=self.UpdateNetShares(summary.GetSecondInnerSummary())
+            else:
+                raise Exception("Could not find an inner summay of order {} for symbol {}".format(summaryOrder,self.Security.Symbol))
 
         return netShares
 
-    def GetOpenSummaries(self):
-        return list(filter(lambda x: x.Position.IsOpenPosition(), self.ExecutionSummaries.values()))
+    def GetOpenSummaries(self,summaryOrder):
+        openSummaries =  list(filter(lambda x: x.Position.IsOpenPosition(), self.ExecutionSummaries.values()))
+
+        if summaryOrder==ExecutionSummary._MAIN_SUMMARY():
+            openSummaries
+        elif summaryOrder==ExecutionSummary._INNER_SUMMARY_2():
+            innerSummaries = []
+
+            for summary in openSummaries:
+                if(summary.IsFirstInnerTradeOpen()):
+                    innerSummaries.append(summary.GetFirstInnerSummary())
+            return innerSummaries
+        elif summaryOrder==ExecutionSummary._INNER_SUMMARY_3():
+            innerSummaries = []
+
+            for summary in openSummaries:
+                if (summary.IsSecondInnerTradeOpen()):
+                    innerSummaries.append(summary.GetSecondInnerSummary())
+            return innerSummaries
+        else:
+            raise Exception("Could not find an inner summay of order {} for symbol {}".format(summaryOrder,self.Security.Symbol))
+
 
     def GetLastTradedSummary(self,side):
 
@@ -407,6 +450,19 @@ class DayTradingPosition():
                                                  self.ExecutionSummaries.values())), key=lambda x: x.Timestamp, reverse=True)
 
         return lastTradedSummaries[0] if (len(lastTradedSummaries) > 0) else None
+
+    def AppendInnerSummary(self,summary):
+
+        if self.GetLastTradedSummary() is not None:
+            mainSummary = self.GetLastTradedSummary()
+            if not mainSummary.DoInnerTradesExist():
+                mainSummary.AppendFirstInnerSummary(summary)
+            elif mainSummary.IsFirstInnerTradeOpen() and not mainSummary.IsSecondInnerTradeOpen():
+                mainSummary.AppendSecondInnerSummary(summary)
+            elif  mainSummary.IsFirstInnerTradeOpen() and  mainSummary.IsSecondInnerTradeOpen():
+                raise Exception("First and Second Inner Position already opened for symbol {}".format(self.Security.Symbol))
+        else:
+            raise Exception("Could not find a Main Position to append an inner position for symbol {}".format(self.Security.Symbol))
 
     def GetAceptedSummaries(self):
 
@@ -511,8 +567,6 @@ class DayTradingPosition():
         profitsAndLosses.Profits = self.CalculatePercentageProfits(profitsAndLosses)
         profitsAndLosses.MonetaryProfits = self.CalculateMonetaryProfits(profitsAndLosses)
 
-
-
         if self.Open():
 
             self.CalculateLastTradeProfit(profitsAndLosses,marketData)
@@ -534,8 +588,6 @@ class DayTradingPosition():
 
             if (profitsAndLosses.MonetaryProfitLastTrade < self.MaxMonetaryLossCurrentTrade):
                 self.MaxMonetaryLossCurrentTrade = profitsAndLosses.MonetaryProfitLastTrade
-
-
 
             self.CurrentProfit=profitsAndLosses.Profits
             self.CurrentProfitMonetary = profitsAndLosses.MonetaryProfits
@@ -784,13 +836,20 @@ class DayTradingPosition():
         else:
             return None
 
+    def GetShortInnerTradeQty(self, extendShort, subTrades2TradesParam, subTrades3TradesParam):
 
+        if extendShort == _SHORT_MACD_RSI_RULE_11_EXT_2:
+            return subTrades2TradesParam.IntValue
+        elif extendShort == _SHORT_MACD_RSI_RULE_11_EXT_3:
+            return subTrades3TradesParam.IntValue
+        else:
+            raise Exception("Short position extension condition not recognized for {}".format(extendShort))
 
     def EvaluateExtendingMACDRSIShortTrade(self,subTrade1AddLimit2,subTrade1AddLimit3):
         if not self.Open():  # we have to be open in order to extend the position
             return None  # Position already opened
 
-        if self.GetNetOpenShares() >= 0:
+        if self.GetNetOpenShares() >= 0:#We have to be a SHORT position
             return None
 
         if self.Routing:  # But it has to be NOT routing
@@ -899,12 +958,22 @@ class DayTradingPosition():
 
         return None
 
+    def GetLongInnerTradeQty(self,extendLong,subTrades2TradesParam,subTrades3TradesParam ):
+
+        if extendLong==_LONG_MACD_RSI_RULE_11_EXT_2:
+            return subTrades2TradesParam.IntValue
+        elif extendLong==_LONG_MACD_RSI_RULE_11_EXT_3:
+            return subTrades3TradesParam.IntValue
+        else:
+            raise Exception("Long position extension condition not recognized for {}".format(extendLong))
+
+
     def EvaluateExtendingMACDRSILongTrade(self,subTrade1AddLimit2,subTrade1AddLimit3):
 
         if not self.Open():#we have to be open in order to extend the position
             return None  # Position already opened
 
-        if self.GetNetOpenShares()<=0:
+        if self.GetNetOpenShares()<=0:#We have to be LONG
             return None
 
         if self.Routing:#But it has to be NOT routing
@@ -912,7 +981,7 @@ class DayTradingPosition():
 
         openSummary1 = self.GetLastTradedSummary(Side.Buy)
 
-        if (not openSummary1.DoInnerTradesExist()):
+        if (not openSummary1.DoInnerTradesExist()):#No inner trades (trade #2 or trade #3)
             if self.CurrentProfitLastTrade is not None and self.CurrentProfitLastTrade < subTrade1AddLimit2.FloatValue:
                 return _LONG_MACD_RSI_RULE_11_EXT_2
         elif (openSummary1.IsFirstInnerTradeOpen()):
@@ -1066,6 +1135,16 @@ class DayTradingPosition():
         else:
             return None
 
+    def ConvertReducingCondToSummaryOrder(self, reducingCond):
+        if (reducingCond==_SHORT_MACD_RSI_RULE_11_RED_1 or reducingCond==_LONG_MACD_RSI_RULE_11_RED_1 ):
+            return ExecutionSummary._MAIN_SUMMARY()
+        elif (reducingCond==_SHORT_MACD_RSI_RULE_11_RED_2 or reducingCond==_LONG_MACD_RSI_RULE_11_RED_2 ):
+            return ExecutionSummary._INNER_SUMMARY_2()
+        elif (reducingCond==_SHORT_MACD_RSI_RULE_11_RED_3 or reducingCond==_LONG_MACD_RSI_RULE_11_RED_3 ):
+            return ExecutionSummary._INNER_SUMMARY_3()
+        else:
+            raise Exception("Could not find a reducing Condigtion {} to translate for Symbol {} @ConvertReducingCondToSummaryOrder",reducingCond,self.Security.Symbol)
+
     def EvaluateReducingMACDRSIShortTrade(self,subTrade1GainLimit1,subTrade2GainLimit2,subTrade1GainLimit2,subTrade2LossLimit2,subTrade3GainLimit3,subTrade3LossLimit3):
         if  self.Open():  # we have to be open in order to extend the position
             return None  # Position already opened
@@ -1079,28 +1158,35 @@ class DayTradingPosition():
         if self.CurrentProfitLastTrade is None:
             return
 
+        reducingConds=[]
+
         openSummary1 = self.GetLastTradedSummary(Side.Sell)
 
         if (openSummary1 is None):
             openSummary1 = self.GetLastTradedSummary(Side.SellShort)
 
             if (not openSummary1.DoInnerTradesExist()):
-                if self.CurrentProfitLastTrade is not None and self.CurrentProfitLastTrade > subTrade1GainLimit1.FloatValue:
-                    return "xxx"  #TODO exit 1
+                if self.CurrentProfitLastTrade is not None and self.CurrentProfitLastTrade >= subTrade1GainLimit1.FloatValue:
+                    reducingConds.append(_SHORT_MACD_RSI_RULE_11_RED_1)
             elif (openSummary1.IsFirstInnerTradeOpen()):
-                if self.FirstInnerTradeProfitLastTrade is not None and self.FirstInnerTradeProfitLastTrade < subTrade2GainLimit2.FloatValue:
-                    return "yyy or yyy/xxx" #TODO exit 2
+                if self.FirstInnerTradeProfitLastTrade is not None and self.FirstInnerTradeProfitLastTrade >= subTrade2GainLimit2.FloatValue:
+                    reducingConds.append(_SHORT_MACD_RSI_RULE_11_RED_1)
+                    if self.CurrentProfitLastTrade is not None and self.FirstInnerTradeProfitLastTrade >= subTrade1GainLimit2.FloatValue:
+                        reducingConds.append(_SHORT_MACD_RSI_RULE_11_RED_2)
                 if self.FirstInnerTradeProfitLastTrade is not None and self.FirstInnerTradeProfitLastTrade < subTrade2LossLimit2.FloatValue:
-                    return "xxx and yyyy"
+                    reducingConds.append(_SHORT_MACD_RSI_RULE_11_RED_1)
+                    reducingConds.append(_SHORT_MACD_RSI_RULE_11_RED_2)
             elif (openSummary1.IsSecondInnerTradeOpen()):
-                if self.SecondInnerTradeProfitLastTrade is not None and self.SecondInnerTradeProfitLastTrade < subTrade3GainLimit3.FloatValue:
-                    return "xxx  yyyy zzzz"
+                if self.SecondInnerTradeProfitLastTrade is not None and self.SecondInnerTradeProfitLastTrade >= subTrade3GainLimit3.FloatValue:
+                    reducingConds.append(_SHORT_MACD_RSI_RULE_11_RED_1)
+                    reducingConds.append(_SHORT_MACD_RSI_RULE_11_RED_2)
+                    reducingConds.append(_SHORT_MACD_RSI_RULE_11_RED_3)
                 if self.SecondInnerTradeProfitLastTrade is not None and self.SecondInnerTradeProfitLastTrade < subTrade3LossLimit3.FloatValue:
-                    return "xxx  yyyy zzzz"
+                    reducingConds.append(_SHORT_MACD_RSI_RULE_11_RED_1)
+                    reducingConds.append(_SHORT_MACD_RSI_RULE_11_RED_2)
+                    reducingConds.append(_SHORT_MACD_RSI_RULE_11_RED_3)
 
-                        # TODO: Now , eval reducing all the short possibilities
-
-        return None
+        return None if len(reducingConds)==0 else reducingConds
 
     def EvaluateClosingMACDRSIShortTrade(self,candlebarsArr,msNowParamA,macdMaxGainParamJ,macdMaxGainParamJJ,gainMaxTradeParamJJJ,
                                          gainMaxTradeParamSDMult,gainMaxTradeParamFixedGain,macdGainNowMaxParamK,
@@ -1354,7 +1440,45 @@ class DayTradingPosition():
             return None
 
     def EvaluateReducingMACDRSILongTrade(self,subTrade1GainLimit1,subTrade2GainLimit2,subTrade1GainLimit2,subTrade2LossLimit2,subTrade3GainLimit3,subTrade3LossLimit3):
-        return None
+        if self.Open():  # we have to be open in order to extend the position
+            return None  # Position already opened
+
+        if self.GetNetOpenShares() >0: #we must have a LONG trade
+            return None
+
+        if self.Routing:  # But it has to be NOT routing
+            return None  # cannot open positions that are being routed
+
+        if self.CurrentProfitLastTrade is None:
+            return
+
+        reducingConds = []
+
+        openSummary1 = self.GetLastTradedSummary(Side.Sell)
+
+        if (openSummary1 is None):
+            openSummary1 = self.GetLastTradedSummary(Side.SellShort)
+
+            if (not openSummary1.DoInnerTradesExist()):
+                if self.CurrentProfitLastTrade is not None and self.CurrentProfitLastTrade >= subTrade1GainLimit1.FloatValue:
+                    reducingConds.append(_LONG_MACD_RSI_RULE_11_RED_1)
+            elif (openSummary1.IsFirstInnerTradeOpen()):
+                if self.FirstInnerTradeProfitLastTrade is not None and self.FirstInnerTradeProfitLastTrade >= subTrade2GainLimit2.FloatValue:
+                    reducingConds.append(_LONG_MACD_RSI_RULE_11_RED_1)
+                    if self.CurrentProfitLastTrade is not None and self.FirstInnerTradeProfitLastTrade >= subTrade1GainLimit2.FloatValue:
+                        reducingConds.append(_LONG_MACD_RSI_RULE_11_RED_2)
+                if self.FirstInnerTradeProfitLastTrade is not None and self.FirstInnerTradeProfitLastTrade < subTrade2LossLimit2.FloatValue:
+                    reducingConds.append(_LONG_MACD_RSI_RULE_11_RED_1)
+                    reducingConds.append(_LONG_MACD_RSI_RULE_11_RED_2)
+            elif (openSummary1.IsSecondInnerTradeOpen()):
+                if self.SecondInnerTradeProfitLastTrade is not None and self.SecondInnerTradeProfitLastTrade >= subTrade3GainLimit3.FloatValue:
+                    reducingConds.append(_LONG_MACD_RSI_RULE_11_RED_1)
+                    reducingConds.append(_LONG_MACD_RSI_RULE_11_RED_2)
+                    reducingConds.append(_LONG_MACD_RSI_RULE_11_RED_3)
+                if self.SecondInnerTradeProfitLastTrade is not None and self.SecondInnerTradeProfitLastTrade < subTrade3LossLimit3.FloatValue:
+                    reducingConds.append(_LONG_MACD_RSI_RULE_11_RED_1)
+                    reducingConds.append(_LONG_MACD_RSI_RULE_11_RED_2)
+                    reducingConds.append(_LONG_MACD_RSI_RULE_11_RED_3)
 
     def EvaluateClosingMACDRSILongTrade(self,candlebarsArr,msNowParamA,macdMaxGainParamJ,macdMaxGainParamJJ,gainMaxTradeParamJJJ,
                                             gainMaxTradeParamSDMult,gainMaxTradeParamFixedGain,macdGainNowMaxParamK,

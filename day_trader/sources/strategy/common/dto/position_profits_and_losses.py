@@ -14,5 +14,10 @@ class PositionsProfitsAndLosses():
         self.PosMTM=0
         self.IncreaseDecrease = 0
 
+        # First Inner Trade
+
+
+        # Second Inner Trade
+
 
     #endregion

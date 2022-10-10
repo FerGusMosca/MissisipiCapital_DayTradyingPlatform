@@ -4,6 +4,7 @@ import datetime
 from sources.framework.common.enums.Side import *
 
 _TRADE_ID_PREFIX="trd_"
+_MAIN_SUMMARY="MAIN_SUMM"
 _INNER_SUMMARY_2="SUMM_2"
 _INNER_SUMMARY_3="SUMM_3"
 
@@ -22,6 +23,8 @@ class ExecutionSummary:
         self.LastTradeTime = None
         self.CreateTime= datetime.datetime.now()
         self.InnerSummaries={}
+
+    #region Public Methods
 
     def UpdateStatus(self, execReport,marketDataToUse=None):
 
@@ -92,3 +95,28 @@ class ExecutionSummary:
 
     def GetSecondInnerSummary(self):
         return self.InnerSummaries[_INNER_SUMMARY_3]
+
+    def AppendFirstInnerSummary(self,summary):
+        self.InnerSummaries[_INNER_SUMMARY_2]=summary
+
+    def AppendSecondInnerSummary(self,summary):
+        self.InnerSummaries[_INNER_SUMMARY_3]=summary
+
+    #endregion
+
+    #region Static Attributes
+
+    @staticmethod
+    def _MAIN_SUMMARY():
+        return _MAIN_SUMMARY
+
+    @staticmethod
+    def _INNER_SUMMARY_2():
+        return _INNER_SUMMARY_2
+
+    @staticmethod
+    def _INNER_SUMMARY_3():
+        return _INNER_SUMMARY_3
+
+
+    #endregion
