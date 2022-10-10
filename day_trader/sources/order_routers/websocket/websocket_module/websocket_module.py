@@ -150,7 +150,7 @@ class WebSocketModule(BaseCommunicationModule, ICommunicationModule):
             if self.TradingLock.locked():
                 self.TradingLock.release()
 
-            state = self.ProcessOutgoing(cbWrapper)
+            state = self.ProcessIncoming(cbWrapper)
 
             if state.Success:
                 pass
@@ -317,6 +317,14 @@ class WebSocketModule(BaseCommunicationModule, ICommunicationModule):
         finally:
             if self.LockConnections.locked():
                 self.LockConnections.release()
+
+    def ProcessCandlebar(self,wrapper):
+        try:
+            self.OnMarketData.ProcessIncoming(wrapper)
+            return CMState.BuildSuccess(self)
+        except Exception as e:
+            self.DoLog("Exception @WebsocketModule.ProcessCandlebar:{}".format(str(e)), MessageType.ERROR)
+            return CMState.BuildFailure(self, Exception=e)
 
 
     def ProcessMarketData(self,wrapper):
@@ -551,6 +559,8 @@ class WebSocketModule(BaseCommunicationModule, ICommunicationModule):
         try:
             if wrapper.GetAction() == Actions.MARKET_DATA:
                 return self.ProcessMarketData(wrapper)
+            elif wrapper.GetAction() == Actions.CANDLE_BAR_DATA:
+                return self.ProcessCandlebar(wrapper)
             else:
                 raise Exception("ProcessIncoming: Not prepared to process message {}".format(wrapper.GetAction()))
         except Exception as e:

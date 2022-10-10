@@ -1,0 +1,1339 @@
+2022-10-04 11:18:21 [logger INFO] DayTrader  Initializing
+2022-10-04 11:18:21 [logger INFO] Loading 0 summaries for security SPY
+2022-10-04 11:18:22 [logger INFO] WebSocketModule  Initializing
+2022-10-04 11:18:22 [logger INFO] WebSocketModule Successfully initialized
+2022-10-04 11:18:22 [logger ERROR] Critical error opening websocket @OpenWebsocket: [WinError 10048] Solo se permite un uso de cada dirección de socket (protocolo/dirección de red/puerto)
+2022-10-04 11:18:22 [logger INFO] FileHandlerModule  Initializing
+2022-10-04 11:18:22 [logger INFO] FileHandlerModule Successfully initialized
+2022-10-04 11:18:22 [logger INFO] WebSocketModule  Initializing
+2022-10-04 11:18:22 [logger INFO] Opening websocket connection with server ws://127.0.0.1:7172
+2022-10-04 11:18:22 [logger INFO] DayTrader Successfully initialized
+2022-10-04 11:18:22 [logger INFO] SingletonModuleHandler Successfully initializer
+2022-10-04 11:18:22 [logger INFO] Initializing Generic Market Order Router
+2022-10-04 11:18:22 [logger INFO] SingletonModuleHandler Successfully initializer
+2022-10-04 11:18:22 [logger INFO] Generic Market Order Router Initialized
+2022-10-04 11:18:23 [logger INFO] DayTrader Successfully initialized
+2022-10-04 11:18:24 [logger INFO] Requesting for open orders...
+2022-10-04 11:18:24 [logger ERROR] Critical error @WebsocketModule.ProcessMessage: ORDER_MASS_STATUS_REQUEST
+2022-10-04 11:18:24 [logger ERROR] Critical error @WebsocketModule.ProcessMessage: ORDER_MASS_STATUS_REQUEST
+2022-10-04 11:18:24 [logger ERROR] Critical error @WebsocketModule.ProcessMessage: ORDER_MASS_STATUS_REQUEST
+2022-10-04 11:50:31 [logger INFO] DayTrader  Initializing
+2022-10-04 11:50:31 [logger INFO] Loading 0 summaries for security SPY
+2022-10-04 11:50:31 [logger INFO] WebSocketModule  Initializing
+2022-10-04 11:50:31 [logger INFO] WebSocketModule Successfully initialized
+2022-10-04 11:50:31 [logger ERROR] Critical error opening websocket @OpenWebsocket: [WinError 10048] Solo se permite un uso de cada dirección de socket (protocolo/dirección de red/puerto)
+2022-10-04 11:50:31 [logger INFO] FileHandlerModule  Initializing
+2022-10-04 11:50:31 [logger INFO] FileHandlerModule Successfully initialized
+2022-10-04 11:50:31 [logger INFO] Initializing Bloomberg Order Router
+2022-10-04 11:50:31 [logger INFO] Connecting to localhost:8194
+2022-10-04 11:50:31 [logger INFO] Bloomberg Order Router Initialized
+2022-10-04 11:50:31 [logger INFO] SingletonModuleHandler Successfully initializer
+2022-10-04 11:50:31 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2022-10-04 11:50:31 [logger INFO] Bloomberg Session Connection is UP...
+2022-10-04 11:50:31 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2022-10-04 11:50:31 [logger INFO] Bloomberg Session started...
+2022-10-04 11:50:31 [logger INFO] Initializing Generic Market Order Router
+2022-10-04 11:50:31 [logger INFO] SingletonModuleHandler Successfully initializer
+2022-10-04 11:50:31 [logger INFO] Generic Market Order Router Initialized
+2022-10-04 11:50:32 [logger INFO] Processing SERVICE_STATUS event
+2022-10-04 11:50:32 [logger INFO] Service //blp/emapisvc opened...
+2022-10-04 11:50:32 [logger INFO] DayTrader Successfully initialized
+2022-10-04 11:50:32 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:SPY
+2022-10-04 11:50:33 [logger INFO] Processing SERVICE_STATUS event
+2022-10-04 11:50:33 [logger INFO] Service //blp/mktdata opened...
+2022-10-04 11:50:33 [logger INFO] Requesting for open orders...
+2022-10-04 11:50:33 [logger INFO] Waiting initial paints to finish to return active execution reports
+2022-10-04 11:50:33 [logger INFO] Subscribing to order and route events
+2022-10-04 11:50:33 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:SPY
+2022-10-04 11:50:33 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:SPY
+2022-10-04 11:50:33 [logger INFO] Order subscription started successfully
+2022-10-04 11:50:33 [logger INFO] Route subscription started successfully
+2022-10-04 11:50:34 [logger INFO] Processing SERVICE_STATUS event
+2022-10-04 11:50:34 [logger INFO] Service //blp/mktbar opened...
+2022-10-04 11:50:34 [logger ERROR] Error @@DayTrader.ProcessCandleBar for security SPY:type object 'ModelParametersHandler' has no attribute 'LONG_SHORT_ON_CANDLE' 
+2022-10-04 11:50:34 [logger INFO] Processing SERVICE_STATUS event
+2022-10-04 11:50:34 [logger INFO] Service //blp/refdata opened...
+2022-10-04 11:50:34 [logger INFO] Recovered 0 previously existing execution reports
+2022-10-04 11:50:34 [logger INFO] Received list of Open Positions: 0 positions
+2022-10-04 11:50:34 [logger INFO] Process ready to receive commands and trade
+2022-10-04 11:50:34 [logger INFO] Historical prices successfully loaded for symbol SPY 
+2022-10-04 11:51:00 [logger ERROR] Error @@DayTrader.ProcessCandleBar for security SPY:type object 'ModelParametersHandler' has no attribute 'LONG_SHORT_ON_CANDLE' 
+2022-10-04 11:52:00 [logger ERROR] Error @@DayTrader.ProcessCandleBar for security SPY:type object 'ModelParametersHandler' has no attribute 'LONG_SHORT_ON_CANDLE' 
+2022-10-04 11:52:59 [logger ERROR] Error @@DayTrader.ProcessCandleBar for security SPY:type object 'ModelParametersHandler' has no attribute 'LONG_SHORT_ON_CANDLE' 
+2022-10-04 11:53:59 [logger ERROR] Error @@DayTrader.ProcessCandleBar for security SPY:type object 'ModelParametersHandler' has no attribute 'LONG_SHORT_ON_CANDLE' 
+2022-10-04 11:55:00 [logger ERROR] Error @@DayTrader.ProcessCandleBar for security SPY:type object 'ModelParametersHandler' has no attribute 'LONG_SHORT_ON_CANDLE' 
+2022-10-04 11:55:59 [logger ERROR] Error @@DayTrader.ProcessCandleBar for security SPY:type object 'ModelParametersHandler' has no attribute 'LONG_SHORT_ON_CANDLE' 
+2022-10-04 11:57:00 [logger ERROR] Error @@DayTrader.ProcessCandleBar for security SPY:type object 'ModelParametersHandler' has no attribute 'LONG_SHORT_ON_CANDLE' 
+2022-10-04 11:57:59 [logger ERROR] Error @@DayTrader.ProcessCandleBar for security SPY:type object 'ModelParametersHandler' has no attribute 'LONG_SHORT_ON_CANDLE' 
+2022-10-04 11:59:00 [logger ERROR] Error @@DayTrader.ProcessCandleBar for security SPY:type object 'ModelParametersHandler' has no attribute 'LONG_SHORT_ON_CANDLE' 
+2022-10-04 11:59:59 [logger ERROR] Error @@DayTrader.ProcessCandleBar for security SPY:type object 'ModelParametersHandler' has no attribute 'LONG_SHORT_ON_CANDLE' 
+2022-10-04 12:00:59 [logger ERROR] Error @@DayTrader.ProcessCandleBar for security SPY:type object 'ModelParametersHandler' has no attribute 'LONG_SHORT_ON_CANDLE' 
+2022-10-04 12:02:00 [logger ERROR] Error @@DayTrader.ProcessCandleBar for security SPY:type object 'ModelParametersHandler' has no attribute 'LONG_SHORT_ON_CANDLE' 
+2022-10-04 12:02:59 [logger ERROR] Error @@DayTrader.ProcessCandleBar for security SPY:type object 'ModelParametersHandler' has no attribute 'LONG_SHORT_ON_CANDLE' 
+2022-10-04 12:03:59 [logger ERROR] Error @@DayTrader.ProcessCandleBar for security SPY:type object 'ModelParametersHandler' has no attribute 'LONG_SHORT_ON_CANDLE' 
+2022-10-04 12:05:00 [logger ERROR] Error @@DayTrader.ProcessCandleBar for security SPY:type object 'ModelParametersHandler' has no attribute 'LONG_SHORT_ON_CANDLE' 
+2022-10-04 12:05:59 [logger ERROR] Error @@DayTrader.ProcessCandleBar for security SPY:type object 'ModelParametersHandler' has no attribute 'LONG_SHORT_ON_CANDLE' 
+2022-10-04 12:06:59 [logger ERROR] Error @@DayTrader.ProcessCandleBar for security SPY:type object 'ModelParametersHandler' has no attribute 'LONG_SHORT_ON_CANDLE' 
+2022-10-04 12:07:59 [logger ERROR] Error @@DayTrader.ProcessCandleBar for security SPY:type object 'ModelParametersHandler' has no attribute 'LONG_SHORT_ON_CANDLE' 
+2022-10-04 12:08:59 [logger ERROR] Error @@DayTrader.ProcessCandleBar for security SPY:type object 'ModelParametersHandler' has no attribute 'LONG_SHORT_ON_CANDLE' 
+2022-10-04 12:10:00 [logger ERROR] Error @@DayTrader.ProcessCandleBar for security SPY:type object 'ModelParametersHandler' has no attribute 'LONG_SHORT_ON_CANDLE' 
+2022-10-04 12:10:59 [logger ERROR] Error @@DayTrader.ProcessCandleBar for security SPY:type object 'ModelParametersHandler' has no attribute 'LONG_SHORT_ON_CANDLE' 
+2022-10-04 12:12:00 [logger ERROR] Error @@DayTrader.ProcessCandleBar for security SPY:type object 'ModelParametersHandler' has no attribute 'LONG_SHORT_ON_CANDLE' 
+2022-10-04 12:12:59 [logger ERROR] Error @@DayTrader.ProcessCandleBar for security SPY:type object 'ModelParametersHandler' has no attribute 'LONG_SHORT_ON_CANDLE' 
+2022-10-04 12:14:00 [logger ERROR] Error @@DayTrader.ProcessCandleBar for security SPY:type object 'ModelParametersHandler' has no attribute 'LONG_SHORT_ON_CANDLE' 
+2022-10-04 12:14:59 [logger ERROR] Error @@DayTrader.ProcessCandleBar for security SPY:type object 'ModelParametersHandler' has no attribute 'LONG_SHORT_ON_CANDLE' 
+2022-10-04 12:15:59 [logger ERROR] Error @@DayTrader.ProcessCandleBar for security SPY:type object 'ModelParametersHandler' has no attribute 'LONG_SHORT_ON_CANDLE' 
+2022-10-04 12:17:00 [logger ERROR] Error @@DayTrader.ProcessCandleBar for security SPY:type object 'ModelParametersHandler' has no attribute 'LONG_SHORT_ON_CANDLE' 
+2022-10-04 12:17:59 [logger ERROR] Error @@DayTrader.ProcessCandleBar for security SPY:type object 'ModelParametersHandler' has no attribute 'LONG_SHORT_ON_CANDLE' 
+2022-10-04 12:19:00 [logger ERROR] Error @@DayTrader.ProcessCandleBar for security SPY:type object 'ModelParametersHandler' has no attribute 'LONG_SHORT_ON_CANDLE' 
+2022-10-04 12:19:59 [logger ERROR] Error @@DayTrader.ProcessCandleBar for security SPY:type object 'ModelParametersHandler' has no attribute 'LONG_SHORT_ON_CANDLE' 
+2022-10-04 12:21:00 [logger ERROR] Error @@DayTrader.ProcessCandleBar for security SPY:type object 'ModelParametersHandler' has no attribute 'LONG_SHORT_ON_CANDLE' 
+2022-10-04 12:22:00 [logger ERROR] Error @@DayTrader.ProcessCandleBar for security SPY:type object 'ModelParametersHandler' has no attribute 'LONG_SHORT_ON_CANDLE' 
+2022-10-04 12:22:59 [logger ERROR] Error @@DayTrader.ProcessCandleBar for security SPY:type object 'ModelParametersHandler' has no attribute 'LONG_SHORT_ON_CANDLE' 
+2022-10-04 12:23:59 [logger ERROR] Error @@DayTrader.ProcessCandleBar for security SPY:type object 'ModelParametersHandler' has no attribute 'LONG_SHORT_ON_CANDLE' 
+2022-10-04 12:24:59 [logger ERROR] Error @@DayTrader.ProcessCandleBar for security SPY:type object 'ModelParametersHandler' has no attribute 'LONG_SHORT_ON_CANDLE' 
+2022-10-04 12:25:59 [logger ERROR] Error @@DayTrader.ProcessCandleBar for security SPY:type object 'ModelParametersHandler' has no attribute 'LONG_SHORT_ON_CANDLE' 
+2022-10-04 12:26:59 [logger ERROR] Error @@DayTrader.ProcessCandleBar for security SPY:type object 'ModelParametersHandler' has no attribute 'LONG_SHORT_ON_CANDLE' 
+2022-10-04 12:27:59 [logger ERROR] Error @@DayTrader.ProcessCandleBar for security SPY:type object 'ModelParametersHandler' has no attribute 'LONG_SHORT_ON_CANDLE' 
+2022-10-04 12:29:00 [logger ERROR] Error @@DayTrader.ProcessCandleBar for security SPY:type object 'ModelParametersHandler' has no attribute 'LONG_SHORT_ON_CANDLE' 
+2022-10-04 12:30:00 [logger ERROR] Error @@DayTrader.ProcessCandleBar for security SPY:type object 'ModelParametersHandler' has no attribute 'LONG_SHORT_ON_CANDLE' 
+2022-10-04 12:30:59 [logger ERROR] Error @@DayTrader.ProcessCandleBar for security SPY:type object 'ModelParametersHandler' has no attribute 'LONG_SHORT_ON_CANDLE' 
+2022-10-04 12:32:00 [logger ERROR] Error @@DayTrader.ProcessCandleBar for security SPY:type object 'ModelParametersHandler' has no attribute 'LONG_SHORT_ON_CANDLE' 
+2022-10-04 12:32:59 [logger ERROR] Error @@DayTrader.ProcessCandleBar for security SPY:type object 'ModelParametersHandler' has no attribute 'LONG_SHORT_ON_CANDLE' 
+2022-10-04 12:33:59 [logger ERROR] Error @@DayTrader.ProcessCandleBar for security SPY:type object 'ModelParametersHandler' has no attribute 'LONG_SHORT_ON_CANDLE' 
+2022-10-04 12:34:59 [logger ERROR] Error @@DayTrader.ProcessCandleBar for security SPY:type object 'ModelParametersHandler' has no attribute 'LONG_SHORT_ON_CANDLE' 
+2022-10-04 12:36:00 [logger ERROR] Error @@DayTrader.ProcessCandleBar for security SPY:type object 'ModelParametersHandler' has no attribute 'LONG_SHORT_ON_CANDLE' 
+2022-10-04 12:37:00 [logger ERROR] Error @@DayTrader.ProcessCandleBar for security SPY:type object 'ModelParametersHandler' has no attribute 'LONG_SHORT_ON_CANDLE' 
+2022-10-04 12:38:00 [logger ERROR] Error @@DayTrader.ProcessCandleBar for security SPY:type object 'ModelParametersHandler' has no attribute 'LONG_SHORT_ON_CANDLE' 
+2022-10-04 12:39:00 [logger ERROR] Error @@DayTrader.ProcessCandleBar for security SPY:type object 'ModelParametersHandler' has no attribute 'LONG_SHORT_ON_CANDLE' 
+2022-10-04 12:39:59 [logger ERROR] Error @@DayTrader.ProcessCandleBar for security SPY:type object 'ModelParametersHandler' has no attribute 'LONG_SHORT_ON_CANDLE' 
+2022-10-04 12:40:59 [logger ERROR] Error @@DayTrader.ProcessCandleBar for security SPY:type object 'ModelParametersHandler' has no attribute 'LONG_SHORT_ON_CANDLE' 
+2022-10-04 12:41:59 [logger ERROR] Error @@DayTrader.ProcessCandleBar for security SPY:type object 'ModelParametersHandler' has no attribute 'LONG_SHORT_ON_CANDLE' 
+2022-10-04 12:43:00 [logger ERROR] Error @@DayTrader.ProcessCandleBar for security SPY:type object 'ModelParametersHandler' has no attribute 'LONG_SHORT_ON_CANDLE' 
+2022-10-04 12:43:59 [logger ERROR] Error @@DayTrader.ProcessCandleBar for security SPY:type object 'ModelParametersHandler' has no attribute 'LONG_SHORT_ON_CANDLE' 
+2022-10-04 12:45:00 [logger ERROR] Error @@DayTrader.ProcessCandleBar for security SPY:type object 'ModelParametersHandler' has no attribute 'LONG_SHORT_ON_CANDLE' 
+2022-10-04 12:46:00 [logger ERROR] Error @@DayTrader.ProcessCandleBar for security SPY:type object 'ModelParametersHandler' has no attribute 'LONG_SHORT_ON_CANDLE' 
+2022-10-04 12:46:59 [logger ERROR] Error @@DayTrader.ProcessCandleBar for security SPY:type object 'ModelParametersHandler' has no attribute 'LONG_SHORT_ON_CANDLE' 
+2022-10-04 12:48:00 [logger ERROR] Error @@DayTrader.ProcessCandleBar for security SPY:type object 'ModelParametersHandler' has no attribute 'LONG_SHORT_ON_CANDLE' 
+2022-10-04 12:49:00 [logger ERROR] Error @@DayTrader.ProcessCandleBar for security SPY:type object 'ModelParametersHandler' has no attribute 'LONG_SHORT_ON_CANDLE' 
+2022-10-04 12:50:00 [logger ERROR] Error @@DayTrader.ProcessCandleBar for security SPY:type object 'ModelParametersHandler' has no attribute 'LONG_SHORT_ON_CANDLE' 
+2022-10-04 12:50:59 [logger ERROR] Error @@DayTrader.ProcessCandleBar for security SPY:type object 'ModelParametersHandler' has no attribute 'LONG_SHORT_ON_CANDLE' 
+2022-10-04 12:51:59 [logger ERROR] Error @@DayTrader.ProcessCandleBar for security SPY:type object 'ModelParametersHandler' has no attribute 'LONG_SHORT_ON_CANDLE' 
+2022-10-04 12:52:59 [logger ERROR] Error @@DayTrader.ProcessCandleBar for security SPY:type object 'ModelParametersHandler' has no attribute 'LONG_SHORT_ON_CANDLE' 
+2022-10-04 12:53:59 [logger ERROR] Error @@DayTrader.ProcessCandleBar for security SPY:type object 'ModelParametersHandler' has no attribute 'LONG_SHORT_ON_CANDLE' 
+2022-10-04 12:55:00 [logger ERROR] Error @@DayTrader.ProcessCandleBar for security SPY:type object 'ModelParametersHandler' has no attribute 'LONG_SHORT_ON_CANDLE' 
+2022-10-04 12:56:00 [logger ERROR] Error @@DayTrader.ProcessCandleBar for security SPY:type object 'ModelParametersHandler' has no attribute 'LONG_SHORT_ON_CANDLE' 
+2022-10-04 12:56:59 [logger ERROR] Error @@DayTrader.ProcessCandleBar for security SPY:type object 'ModelParametersHandler' has no attribute 'LONG_SHORT_ON_CANDLE' 
+2022-10-04 12:57:59 [logger ERROR] Error @@DayTrader.ProcessCandleBar for security SPY:type object 'ModelParametersHandler' has no attribute 'LONG_SHORT_ON_CANDLE' 
+2022-10-04 12:59:00 [logger ERROR] Error @@DayTrader.ProcessCandleBar for security SPY:type object 'ModelParametersHandler' has no attribute 'LONG_SHORT_ON_CANDLE' 
+2022-10-04 13:00:01 [logger ERROR] Error @@DayTrader.ProcessCandleBar for security SPY:type object 'ModelParametersHandler' has no attribute 'LONG_SHORT_ON_CANDLE' 
+2022-10-04 13:00:59 [logger ERROR] Error @@DayTrader.ProcessCandleBar for security SPY:type object 'ModelParametersHandler' has no attribute 'LONG_SHORT_ON_CANDLE' 
+2022-10-04 13:02:00 [logger ERROR] Error @@DayTrader.ProcessCandleBar for security SPY:type object 'ModelParametersHandler' has no attribute 'LONG_SHORT_ON_CANDLE' 
+2022-10-04 13:03:00 [logger ERROR] Error @@DayTrader.ProcessCandleBar for security SPY:type object 'ModelParametersHandler' has no attribute 'LONG_SHORT_ON_CANDLE' 
+2022-10-04 13:03:59 [logger ERROR] Error @@DayTrader.ProcessCandleBar for security SPY:type object 'ModelParametersHandler' has no attribute 'LONG_SHORT_ON_CANDLE' 
+2022-10-04 13:05:00 [logger ERROR] Error @@DayTrader.ProcessCandleBar for security SPY:type object 'ModelParametersHandler' has no attribute 'LONG_SHORT_ON_CANDLE' 
+2022-10-04 13:05:59 [logger ERROR] Error @@DayTrader.ProcessCandleBar for security SPY:type object 'ModelParametersHandler' has no attribute 'LONG_SHORT_ON_CANDLE' 
+2022-10-04 13:07:00 [logger ERROR] Error @@DayTrader.ProcessCandleBar for security SPY:type object 'ModelParametersHandler' has no attribute 'LONG_SHORT_ON_CANDLE' 
+2022-10-04 13:08:00 [logger ERROR] Error @@DayTrader.ProcessCandleBar for security SPY:type object 'ModelParametersHandler' has no attribute 'LONG_SHORT_ON_CANDLE' 
+2022-10-04 13:08:59 [logger ERROR] Error @@DayTrader.ProcessCandleBar for security SPY:type object 'ModelParametersHandler' has no attribute 'LONG_SHORT_ON_CANDLE' 
+2022-10-04 13:09:59 [logger ERROR] Error @@DayTrader.ProcessCandleBar for security SPY:type object 'ModelParametersHandler' has no attribute 'LONG_SHORT_ON_CANDLE' 
+2022-10-04 13:11:00 [logger ERROR] Error @@DayTrader.ProcessCandleBar for security SPY:type object 'ModelParametersHandler' has no attribute 'LONG_SHORT_ON_CANDLE' 
+2022-10-04 13:12:00 [logger ERROR] Error @@DayTrader.ProcessCandleBar for security SPY:type object 'ModelParametersHandler' has no attribute 'LONG_SHORT_ON_CANDLE' 
+2022-10-04 13:12:59 [logger ERROR] Error @@DayTrader.ProcessCandleBar for security SPY:type object 'ModelParametersHandler' has no attribute 'LONG_SHORT_ON_CANDLE' 
+2022-10-04 13:13:59 [logger ERROR] Error @@DayTrader.ProcessCandleBar for security SPY:type object 'ModelParametersHandler' has no attribute 'LONG_SHORT_ON_CANDLE' 
+2022-10-04 13:15:00 [logger ERROR] Error @@DayTrader.ProcessCandleBar for security SPY:type object 'ModelParametersHandler' has no attribute 'LONG_SHORT_ON_CANDLE' 
+2022-10-04 13:15:59 [logger ERROR] Error @@DayTrader.ProcessCandleBar for security SPY:type object 'ModelParametersHandler' has no attribute 'LONG_SHORT_ON_CANDLE' 
+2022-10-04 13:17:00 [logger ERROR] Error @@DayTrader.ProcessCandleBar for security SPY:type object 'ModelParametersHandler' has no attribute 'LONG_SHORT_ON_CANDLE' 
+2022-10-04 13:17:59 [logger ERROR] Error @@DayTrader.ProcessCandleBar for security SPY:type object 'ModelParametersHandler' has no attribute 'LONG_SHORT_ON_CANDLE' 
+2022-10-04 13:19:00 [logger ERROR] Error @@DayTrader.ProcessCandleBar for security SPY:type object 'ModelParametersHandler' has no attribute 'LONG_SHORT_ON_CANDLE' 
+2022-10-04 13:19:59 [logger ERROR] Error @@DayTrader.ProcessCandleBar for security SPY:type object 'ModelParametersHandler' has no attribute 'LONG_SHORT_ON_CANDLE' 
+2022-10-04 13:21:00 [logger ERROR] Error @@DayTrader.ProcessCandleBar for security SPY:type object 'ModelParametersHandler' has no attribute 'LONG_SHORT_ON_CANDLE' 
+2022-10-04 13:21:58 [logger INFO] DayTrader  Initializing
+2022-10-04 13:21:59 [logger INFO] Loading 0 summaries for security SPY
+2022-10-04 13:22:00 [logger INFO] WebSocketModule  Initializing
+2022-10-04 13:22:00 [logger INFO] WebSocketModule Successfully initialized
+2022-10-04 13:22:00 [logger ERROR] Critical error opening websocket @OpenWebsocket: [WinError 10048] Solo se permite un uso de cada dirección de socket (protocolo/dirección de red/puerto)
+2022-10-04 13:22:00 [logger INFO] FileHandlerModule  Initializing
+2022-10-04 13:22:00 [logger INFO] FileHandlerModule Successfully initialized
+2022-10-04 13:22:00 [logger INFO] Initializing Bloomberg Order Router
+2022-10-04 13:22:00 [logger INFO] Connecting to localhost:8194
+2022-10-04 13:22:00 [logger INFO] Bloomberg Order Router Initialized
+2022-10-04 13:22:00 [logger INFO] SingletonModuleHandler Successfully initializer
+2022-10-04 13:22:00 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2022-10-04 13:22:00 [logger INFO] Bloomberg Session Connection is UP...
+2022-10-04 13:22:00 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2022-10-04 13:22:00 [logger INFO] Bloomberg Session started...
+2022-10-04 13:22:00 [logger INFO] Initializing Generic Market Order Router
+2022-10-04 13:22:00 [logger INFO] SingletonModuleHandler Successfully initializer
+2022-10-04 13:22:00 [logger INFO] Generic Market Order Router Initialized
+2022-10-04 13:22:00 [logger INFO] Processing SERVICE_STATUS event
+2022-10-04 13:22:00 [logger INFO] Service //blp/emapisvc opened...
+2022-10-04 13:22:01 [logger INFO] DayTrader Successfully initialized
+2022-10-04 13:22:01 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:SPY
+2022-10-04 13:22:01 [logger INFO] Processing SERVICE_STATUS event
+2022-10-04 13:22:01 [logger INFO] Service //blp/mktdata opened...
+2022-10-04 13:22:02 [logger INFO] Requesting for open orders...
+2022-10-04 13:22:02 [logger INFO] Waiting initial paints to finish to return active execution reports
+2022-10-04 13:22:02 [logger INFO] Subscribing to order and route events
+2022-10-04 13:22:02 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:SPY
+2022-10-04 13:22:02 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:SPY
+2022-10-04 13:22:02 [logger INFO] Order subscription started successfully
+2022-10-04 13:22:02 [logger INFO] Route subscription started successfully
+2022-10-04 13:22:02 [logger INFO] Processing SERVICE_STATUS event
+2022-10-04 13:22:02 [logger INFO] Service //blp/mktbar opened...
+2022-10-04 13:22:02 [logger INFO] Processing SERVICE_STATUS event
+2022-10-04 13:22:02 [logger INFO] Service //blp/refdata opened...
+2022-10-04 13:22:03 [logger INFO] Waiting initial paints to finish to return active execution reports
+2022-10-04 13:22:03 [logger INFO] Historical prices successfully loaded for symbol SPY 
+2022-10-04 13:22:04 [logger INFO] Recovered 0 previously existing execution reports
+2022-10-04 13:22:04 [logger INFO] Received list of Open Positions: 0 positions
+2022-10-04 13:22:04 [logger INFO] Process ready to receive commands and trade
+2022-10-04 14:12:59 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2022-10-04 13:58:00+00:00
+2022-10-04 14:12:59 [logger INFO] DBG<ER>-Symbol=SPY Side=Side.Buy PosStatus=PositionStatus.New ExecType=ExecType.New LeavesQty=1 Routing=True 
+2022-10-04 14:12:59 [logger INFO] Managed Position Updated: Arrival=2022-10-04 14:12:59.581200 TradeId=trd__SPY_1664903579 PosId=5f9c136a-78f9-4d0b-bc3a-3a7e32c18868 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2022-10-04 14:12:59 [logger INFO] DBG<ER>-Symbol=SPY Side=Side.Buy PosStatus=PositionStatus.Filled ExecType=ExecType.Trade LeavesQty=0 Routing=False 
+2022-10-04 14:12:59 [logger INFO] Managed Position Finished: Arrival=2022-10-04 14:12:59.799027 TradeId=trd__SPY_1664903579 PosId=5f9c136a-78f9-4d0b-bc3a-3a7e32c18868 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=376.18 Text=Fake Filled Order 
+2022-10-04 14:34:27 [logger INFO] MACD-RSI - Closing long position by Tick for symbol SPY at None 
+2022-10-04 14:34:27 [logger INFO] DBG<ER>- RunClose Symbol=SPY Routing=False 
+2022-10-04 14:34:27 [logger INFO] DBG<ER>- RunClose Symbol=SPY NetShares=1 
+2022-10-04 14:34:27 [logger INFO] DBG<ER>-Symbol=SPY Side=Side.Sell PosStatus=PositionStatus.New ExecType=ExecType.New LeavesQty=1 Routing=True 
+2022-10-04 14:34:27 [logger INFO] Managed Position Updated: Arrival=2022-10-04 14:34:27.544206 TradeId=trd__SPY_1664904867 PosId=ea3ac93a-c59b-4b9a-a92e-f547d35c8fa6 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2022-10-04 14:34:27 [logger INFO] MACD-RSI - Closing short position by Tick for symbol SPY at None 
+2022-10-04 14:34:27 [logger INFO] DBG<ER>- RunClose Symbol=SPY Routing=True 
+2022-10-04 14:34:27 [logger INFO] DBG<ER>-Symbol=SPY Side=Side.Sell PosStatus=PositionStatus.Filled ExecType=ExecType.Trade LeavesQty=0 Routing=False 
+2022-10-04 14:34:27 [logger INFO] Managed Position Finished: Arrival=2022-10-04 14:34:27.753634 TradeId=trd__SPY_1664904867 PosId=ea3ac93a-c59b-4b9a-a92e-f547d35c8fa6 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=374.295 Text=Fake Filled Order 
+2022-10-04 14:37:59 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2022-10-04 14:23:00+00:00
+2022-10-04 14:37:59 [logger INFO] DBG<ER>-Symbol=SPY Side=Side.Buy PosStatus=PositionStatus.New ExecType=ExecType.New LeavesQty=1 Routing=True 
+2022-10-04 14:37:59 [logger INFO] Managed Position Updated: Arrival=2022-10-04 14:37:59.901522 TradeId=trd__SPY_1664905079 PosId=768ff35f-64eb-4b9c-88df-85c6d68e5162 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2022-10-04 14:38:00 [logger INFO] DBG<ER>-Symbol=SPY Side=Side.Buy PosStatus=PositionStatus.Filled ExecType=ExecType.Trade LeavesQty=0 Routing=False 
+2022-10-04 14:38:00 [logger INFO] Managed Position Finished: Arrival=2022-10-04 14:38:00.118304 TradeId=trd__SPY_1664905079 PosId=768ff35f-64eb-4b9c-88df-85c6d68e5162 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=374.672 Text=Fake Filled Order 
+2022-10-04 15:11:50 [logger INFO] MACD-RSI - Closing long position by Tick for symbol SPY at None 
+2022-10-04 15:11:50 [logger INFO] DBG<ER>- RunClose Symbol=SPY Routing=False 
+2022-10-04 15:11:50 [logger INFO] DBG<ER>- RunClose Symbol=SPY NetShares=1 
+2022-10-04 15:11:50 [logger INFO] DBG<ER>-Symbol=SPY Side=Side.Sell PosStatus=PositionStatus.New ExecType=ExecType.New LeavesQty=1 Routing=True 
+2022-10-04 15:11:50 [logger INFO] Managed Position Updated: Arrival=2022-10-04 15:11:50.304736 TradeId=trd__SPY_1664907110 PosId=263d51c6-aaeb-4286-8e52-592f80dbe14e Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2022-10-04 15:11:50 [logger INFO] MACD-RSI - Closing short position by Tick for symbol SPY at None 
+2022-10-04 15:11:50 [logger INFO] DBG<ER>- RunClose Symbol=SPY Routing=True 
+2022-10-04 15:11:50 [logger INFO] DBG<ER>-Symbol=SPY Side=Side.Sell PosStatus=PositionStatus.Filled ExecType=ExecType.Trade LeavesQty=0 Routing=False 
+2022-10-04 15:11:50 [logger INFO] Managed Position Finished: Arrival=2022-10-04 15:11:50.516249 TradeId=trd__SPY_1664907110 PosId=263d51c6-aaeb-4286-8e52-592f80dbe14e Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=376.712 Text=Fake Filled Order 
+2022-10-04 16:30:59 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2022-10-04 16:16:00+00:00
+2022-10-04 16:30:59 [logger INFO] DBG<ER>-Symbol=SPY Side=Side.Buy PosStatus=PositionStatus.New ExecType=ExecType.New LeavesQty=1 Routing=True 
+2022-10-04 16:30:59 [logger INFO] Managed Position Updated: Arrival=2022-10-04 16:30:59.610698 TradeId=trd__SPY_1664911859 PosId=bc927e9f-ddd0-40c3-9c19-494186b0cb0d Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2022-10-04 16:30:59 [logger INFO] DBG<ER>-Symbol=SPY Side=Side.Buy PosStatus=PositionStatus.Filled ExecType=ExecType.Trade LeavesQty=0 Routing=False 
+2022-10-04 16:30:59 [logger INFO] Managed Position Finished: Arrival=2022-10-04 16:30:59.829037 TradeId=trd__SPY_1664911859 PosId=bc927e9f-ddd0-40c3-9c19-494186b0cb0d Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=376.145 Text=Fake Filled Order 
+2022-10-04 17:10:59 [logger INFO] MACD-RSI - Closing long position for symbol SPY at 2022-10-04 16:56:00+00:00 
+2022-10-04 17:10:59 [logger INFO] DBG<ER>- RunClose Symbol=SPY Routing=False 
+2022-10-04 17:10:59 [logger INFO] DBG<ER>- RunClose Symbol=SPY NetShares=1 
+2022-10-04 17:10:59 [logger INFO] DBG<ER>-Symbol=SPY Side=Side.Sell PosStatus=PositionStatus.New ExecType=ExecType.New LeavesQty=1 Routing=True 
+2022-10-04 17:10:59 [logger INFO] Managed Position Updated: Arrival=2022-10-04 17:10:59.526693 TradeId=trd__SPY_1664914259 PosId=eb5b7f53-fd19-4514-a06f-2b70ab5c9d03 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2022-10-04 17:10:59 [logger INFO] DBG<ER>-Symbol=SPY Side=Side.Sell PosStatus=PositionStatus.Filled ExecType=ExecType.Trade LeavesQty=0 Routing=False 
+2022-10-04 17:10:59 [logger INFO] Managed Position Finished: Arrival=2022-10-04 17:10:59.736946 TradeId=trd__SPY_1664914259 PosId=eb5b7f53-fd19-4514-a06f-2b70ab5c9d03 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=377.63 Text=Fake Filled Order 
+2022-10-05 01:55:00 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2022-10-05 01:55:00 [logger ERROR] Bloomberg Session Connection is DOWN...
+2022-10-05 01:55:00 [logger INFO] Processing SERVICE_STATUS event
+2022-10-05 01:55:00 [logger INFO] Processing SERVICE_STATUS event
+2022-10-05 01:55:00 [logger INFO] Processing SERVICE_STATUS event
+2022-10-05 01:55:00 [logger INFO] Processing SERVICE_STATUS event
+2022-10-05 01:55:57 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2022-10-05 01:55:57 [logger ERROR] Bloomberg Session Terminated...
+2022-10-05 08:00:00 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:SPY
+2022-10-05 08:00:00 [logger ERROR] Critical error subscribing for Market Data for symbol SPY:Session Not Started (0x00010009)
+2022-10-05 08:00:01 [logger INFO] Requesting for open orders...
+2022-10-05 08:00:01 [logger INFO] Recovered 0 previously existing execution reports
+2022-10-05 08:00:01 [logger INFO] Subscribing to order and route events
+2022-10-05 08:00:01 [logger ERROR] Error running ProcessMessage @OrderRouter.Bloomberg module:Session Not Started (0x00010009)
+2022-10-05 08:00:01 [logger INFO] Received list of Open Positions: 0 positions
+2022-10-05 08:00:01 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:SPY
+2022-10-05 08:00:01 [logger INFO] Process ready to receive commands and trade
+2022-10-05 08:00:01 [logger ERROR] Critical error subscribing for candlebars for symbol SPY:Session Not Started (0x00010009)
+2022-10-05 08:00:01 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:SPY
+2022-10-05 08:00:01 [logger ERROR] Critical error subscribing for historical prices for symbol SPY:Session Not Started (0x00010009)
+2022-10-05 10:42:21 [logger INFO] DayTrader  Initializing
+2022-10-05 10:42:22 [logger INFO] Loading 6 summaries for security SPY
+2022-10-05 10:42:22 [logger INFO] WebSocketModule  Initializing
+2022-10-05 10:42:22 [logger INFO] WebSocketModule Successfully initialized
+2022-10-05 10:42:22 [logger ERROR] Critical error opening websocket @OpenWebsocket: [WinError 10048] Solo se permite un uso de cada dirección de socket (protocolo/dirección de red/puerto)
+2022-10-05 10:42:22 [logger INFO] FileHandlerModule  Initializing
+2022-10-05 10:42:22 [logger INFO] FileHandlerModule Successfully initialized
+2022-10-05 10:42:22 [logger INFO] Initializing Bloomberg Order Router
+2022-10-05 10:42:22 [logger INFO] Connecting to localhost:8194
+2022-10-05 10:42:22 [logger INFO] Bloomberg Order Router Initialized
+2022-10-05 10:42:22 [logger INFO] SingletonModuleHandler Successfully initializer
+2022-10-05 10:42:22 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2022-10-05 10:42:22 [logger INFO] Bloomberg Session Connection is UP...
+2022-10-05 10:42:22 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2022-10-05 10:42:22 [logger INFO] Bloomberg Session started...
+2022-10-05 10:42:22 [logger INFO] Initializing Generic Market Order Router
+2022-10-05 10:42:22 [logger INFO] SingletonModuleHandler Successfully initializer
+2022-10-05 10:42:22 [logger INFO] Generic Market Order Router Initialized
+2022-10-05 10:42:23 [logger INFO] Processing SERVICE_STATUS event
+2022-10-05 10:42:23 [logger INFO] Service //blp/emapisvc opened...
+2022-10-05 10:42:23 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:SPY
+2022-10-05 10:42:23 [logger INFO] DayTrader Successfully initialized
+2022-10-05 10:42:24 [logger INFO] Processing SERVICE_STATUS event
+2022-10-05 10:42:24 [logger INFO] Service //blp/mktdata opened...
+2022-10-05 10:42:24 [logger INFO] Requesting for open orders...
+2022-10-05 10:42:24 [logger INFO] Waiting initial paints to finish to return active execution reports
+2022-10-05 10:42:24 [logger INFO] Subscribing to order and route events
+2022-10-05 10:42:24 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:SPY
+2022-10-05 10:42:24 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:SPY
+2022-10-05 10:42:25 [logger INFO] Route subscription started successfully
+2022-10-05 10:42:25 [logger INFO] Order subscription started successfully
+2022-10-05 10:42:25 [logger INFO] Processing SERVICE_STATUS event
+2022-10-05 10:42:25 [logger INFO] Service //blp/mktbar opened...
+2022-10-05 10:42:25 [logger INFO] Processing SERVICE_STATUS event
+2022-10-05 10:42:25 [logger INFO] Service //blp/refdata opened...
+2022-10-05 10:42:25 [logger INFO] Recovered 0 previously existing execution reports
+2022-10-05 10:42:25 [logger INFO] Received list of Open Positions: 0 positions
+2022-10-05 10:42:25 [logger INFO] Process ready to receive commands and trade
+2022-10-05 10:42:26 [logger INFO] Historical prices successfully loaded for symbol SPY 
+2022-10-05 11:28:00 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2022-10-05 11:13:00+00:00
+2022-10-05 11:28:00 [logger INFO] DBG<ER>-Symbol=SPY Side=Side.Buy PosStatus=PositionStatus.New ExecType=ExecType.New LeavesQty=1 Routing=True 
+2022-10-05 11:28:00 [logger INFO] Managed Position Updated: Arrival=2022-10-05 11:28:00.558051 TradeId=trd__SPY_1664980080 PosId=37f9e428-bcfe-4d3f-a928-f8cb82354ddc Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2022-10-05 11:28:00 [logger INFO] DBG<ER>-Symbol=SPY Side=Side.Buy PosStatus=PositionStatus.Filled ExecType=ExecType.Trade LeavesQty=0 Routing=False 
+2022-10-05 11:28:00 [logger INFO] Managed Position Finished: Arrival=2022-10-05 11:28:00.768488 TradeId=trd__SPY_1664980080 PosId=37f9e428-bcfe-4d3f-a928-f8cb82354ddc Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=372.595 Text=Fake Filled Order 
+2022-10-05 11:28:06 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:05.778529 seconds!
+2022-10-05 14:49:59 [logger INFO] MACD-RSI - Closing long position for symbol SPY at 2022-10-05 14:35:00+00:00 
+2022-10-05 14:49:59 [logger INFO] DBG<ER>- RunClose Symbol=SPY Routing=False 
+2022-10-05 14:49:59 [logger INFO] DBG<ER>- RunClose Symbol=SPY NetShares=1 
+2022-10-05 14:49:59 [logger INFO] DBG<ER>-Symbol=SPY Side=Side.Sell PosStatus=PositionStatus.New ExecType=ExecType.New LeavesQty=1 Routing=True 
+2022-10-05 14:49:59 [logger INFO] Managed Position Updated: Arrival=2022-10-05 14:49:59.749698 TradeId=trd__SPY_1664992199 PosId=e94028e7-231c-46f1-9e82-30fa3faecb13 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2022-10-05 14:49:59 [logger INFO] DBG<ER>-Symbol=SPY Side=Side.Sell PosStatus=PositionStatus.Filled ExecType=ExecType.Trade LeavesQty=0 Routing=False 
+2022-10-05 14:49:59 [logger INFO] Managed Position Finished: Arrival=2022-10-05 14:49:59.954851 TradeId=trd__SPY_1664992199 PosId=e94028e7-231c-46f1-9e82-30fa3faecb13 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=376.26 Text=Fake Filled Order 
+2022-10-05 14:50:03 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:04.106148 seconds!
+2022-10-05 15:17:59 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2022-10-05 15:03:00+00:00
+2022-10-05 15:17:59 [logger INFO] DBG<ER>-Symbol=SPY Side=Side.Buy PosStatus=PositionStatus.New ExecType=ExecType.New LeavesQty=1 Routing=True 
+2022-10-05 15:17:59 [logger INFO] Managed Position Updated: Arrival=2022-10-05 15:17:59.414336 TradeId=trd__SPY_1664993879 PosId=7f4fbdc7-c398-4f2b-ad7c-02a31f8b333e Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2022-10-05 15:17:59 [logger INFO] DBG<ER>-Symbol=SPY Side=Side.Buy PosStatus=PositionStatus.Filled ExecType=ExecType.Trade LeavesQty=0 Routing=False 
+2022-10-05 15:17:59 [logger INFO] Managed Position Finished: Arrival=2022-10-05 15:17:59.629082 TradeId=trd__SPY_1664993879 PosId=7f4fbdc7-c398-4f2b-ad7c-02a31f8b333e Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=376.345 Text=Fake Filled Order 
+2022-10-05 15:18:01 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:02.225796 seconds!
+2022-10-05 15:27:48 [logger ERROR] DBG Warning -Persisting Position for security SPY took  1.731467 seconds
+2022-10-05 16:08:59 [logger INFO] MACD-RSI - Closing long position for symbol SPY at 2022-10-05 15:54:00+00:00 
+2022-10-05 16:08:59 [logger INFO] DBG<ER>- RunClose Symbol=SPY Routing=False 
+2022-10-05 16:08:59 [logger INFO] DBG<ER>- RunClose Symbol=SPY NetShares=1 
+2022-10-05 16:08:59 [logger INFO] DBG<ER>-Symbol=SPY Side=Side.Sell PosStatus=PositionStatus.New ExecType=ExecType.New LeavesQty=1 Routing=True 
+2022-10-05 16:08:59 [logger INFO] Managed Position Updated: Arrival=2022-10-05 16:08:59.715792 TradeId=trd__SPY_1664996939 PosId=3080b866-b464-4305-b0a8-fdcd0b13086f Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2022-10-05 16:08:59 [logger INFO] DBG<ER>-Symbol=SPY Side=Side.Sell PosStatus=PositionStatus.Filled ExecType=ExecType.Trade LeavesQty=0 Routing=False 
+2022-10-05 16:08:59 [logger INFO] Managed Position Finished: Arrival=2022-10-05 16:08:59.929592 TradeId=trd__SPY_1664996939 PosId=3080b866-b464-4305-b0a8-fdcd0b13086f Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=377.21 Text=Fake Filled Order 
+2022-10-05 16:09:01 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:01.946707 seconds!
+2022-10-05 17:00:59 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2022-10-05 16:46:00+00:00
+2022-10-05 17:00:59 [logger INFO] DBG<ER>-Symbol=SPY Side=Side.Buy PosStatus=PositionStatus.New ExecType=ExecType.New LeavesQty=1 Routing=True 
+2022-10-05 17:00:59 [logger INFO] Managed Position Updated: Arrival=2022-10-05 17:00:59.665663 TradeId=trd__SPY_1665000059 PosId=24599fc1-eefb-491d-8ea3-0d8b10ab6522 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2022-10-05 17:00:59 [logger INFO] DBG<ER>-Symbol=SPY Side=Side.Buy PosStatus=PositionStatus.Filled ExecType=ExecType.Trade LeavesQty=0 Routing=False 
+2022-10-05 17:00:59 [logger INFO] Managed Position Finished: Arrival=2022-10-05 17:00:59.876938 TradeId=trd__SPY_1665000059 PosId=24599fc1-eefb-491d-8ea3-0d8b10ab6522 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=378.29 Text=Fake Filled Order 
+2022-10-05 17:01:05 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:05.709047 seconds!
+2022-10-05 17:10:59 [logger INFO] MACD-RSI - Closing long position for symbol SPY at 2022-10-05 16:56:00+00:00 
+2022-10-05 17:10:59 [logger INFO] DBG<ER>- RunClose Symbol=SPY Routing=False 
+2022-10-05 17:10:59 [logger INFO] DBG<ER>- RunClose Symbol=SPY NetShares=1 
+2022-10-05 17:10:59 [logger INFO] DBG<ER>-Symbol=SPY Side=Side.Sell PosStatus=PositionStatus.New ExecType=ExecType.New LeavesQty=1 Routing=True 
+2022-10-05 17:10:59 [logger INFO] Managed Position Updated: Arrival=2022-10-05 17:10:59.411508 TradeId=trd__SPY_1665000659 PosId=88a100ac-aaf4-40a7-921b-18d09090375e Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2022-10-05 17:10:59 [logger INFO] DBG<ER>-Symbol=SPY Side=Side.Sell PosStatus=PositionStatus.Filled ExecType=ExecType.Trade LeavesQty=0 Routing=False 
+2022-10-05 17:10:59 [logger INFO] Managed Position Finished: Arrival=2022-10-05 17:10:59.622425 TradeId=trd__SPY_1665000659 PosId=88a100ac-aaf4-40a7-921b-18d09090375e Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=376.97 Text=Fake Filled Order 
+2022-10-05 17:11:10 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:11.267419 seconds!
+2022-10-06 10:35:50 [logger INFO] DayTrader  Initializing
+2022-10-06 10:35:50 [logger INFO] Loading 12 summaries for security SPY
+2022-10-06 10:35:51 [logger INFO] WebSocketModule  Initializing
+2022-10-06 10:35:51 [logger INFO] WebSocketModule Successfully initialized
+2022-10-06 10:35:51 [logger ERROR] Critical error opening websocket @OpenWebsocket: [WinError 10048] Solo se permite un uso de cada dirección de socket (protocolo/dirección de red/puerto)
+2022-10-06 10:35:51 [logger INFO] FileHandlerModule  Initializing
+2022-10-06 10:35:51 [logger INFO] FileHandlerModule Successfully initialized
+2022-10-06 10:35:51 [logger INFO] Initializing Bloomberg Order Router
+2022-10-06 10:35:51 [logger INFO] Connecting to localhost:8194
+2022-10-06 10:35:51 [logger INFO] Bloomberg Order Router Initialized
+2022-10-06 10:35:51 [logger INFO] SingletonModuleHandler Successfully initializer
+2022-10-06 10:35:51 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2022-10-06 10:35:51 [logger INFO] Bloomberg Session Connection is UP...
+2022-10-06 10:35:51 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2022-10-06 10:35:51 [logger INFO] Bloomberg Session started...
+2022-10-06 10:35:51 [logger INFO] Initializing Generic Market Order Router
+2022-10-06 10:35:51 [logger INFO] SingletonModuleHandler Successfully initializer
+2022-10-06 10:35:51 [logger INFO] Generic Market Order Router Initialized
+2022-10-06 10:35:52 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:SPY
+2022-10-06 10:35:52 [logger INFO] DayTrader Successfully initialized
+2022-10-06 10:35:53 [logger INFO] Requesting for open orders...
+2022-10-06 10:35:53 [logger INFO] Waiting initial paints to finish to return active execution reports
+2022-10-06 10:35:53 [logger INFO] Subscribing to order and route events
+2022-10-06 10:35:53 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:SPY
+2022-10-06 10:35:53 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:SPY
+2022-10-06 10:35:54 [logger INFO] Waiting initial paints to finish to return active execution reports
+2022-10-06 10:35:55 [logger INFO] Waiting initial paints to finish to return active execution reports
+2022-10-06 10:35:56 [logger INFO] Waiting initial paints to finish to return active execution reports
+2022-10-06 10:35:57 [logger INFO] Waiting initial paints to finish to return active execution reports
+2022-10-06 10:35:58 [logger INFO] Waiting initial paints to finish to return active execution reports
+2022-10-06 10:35:59 [logger INFO] Waiting initial paints to finish to return active execution reports
+2022-10-06 10:36:00 [logger INFO] Waiting initial paints to finish to return active execution reports
+2022-10-06 10:36:01 [logger INFO] Waiting initial paints to finish to return active execution reports
+2022-10-06 10:36:02 [logger INFO] Waiting initial paints to finish to return active execution reports
+2022-10-06 10:36:03 [logger INFO] Waiting initial paints to finish to return active execution reports
+2022-10-06 10:36:04 [logger INFO] Waiting initial paints to finish to return active execution reports
+2022-10-06 10:36:05 [logger INFO] Waiting initial paints to finish to return active execution reports
+2022-10-06 10:36:06 [logger INFO] Waiting initial paints to finish to return active execution reports
+2022-10-06 10:36:07 [logger INFO] Waiting initial paints to finish to return active execution reports
+2022-10-06 10:36:07 [logger INFO] Processing SERVICE_STATUS event
+2022-10-06 10:36:07 [logger INFO] Service //blp/emapisvc opened...
+2022-10-06 10:36:07 [logger INFO] Processing SERVICE_STATUS event
+2022-10-06 10:36:07 [logger INFO] Service //blp/mktbar opened...
+2022-10-06 10:36:08 [logger INFO] Waiting initial paints to finish to return active execution reports
+2022-10-06 10:36:08 [logger INFO] Processing SERVICE_STATUS event
+2022-10-06 10:36:08 [logger INFO] Service //blp/mktdata opened...
+2022-10-06 10:36:08 [logger INFO] Processing SERVICE_STATUS event
+2022-10-06 10:36:08 [logger INFO] Service //blp/refdata opened...
+2022-10-06 10:36:08 [logger INFO] Processing SERVICE_STATUS event
+2022-10-06 10:36:08 [logger INFO] Service //blp/emapisvc opened...
+2022-10-06 10:36:09 [logger INFO] Processing SERVICE_STATUS event
+2022-10-06 10:36:09 [logger INFO] Service //blp/emapisvc opened...
+2022-10-06 10:36:09 [logger INFO] Historical prices successfully loaded for symbol SPY 
+2022-10-06 10:36:09 [logger INFO] Order subscription started successfully
+2022-10-06 10:36:09 [logger INFO] Route subscription started successfully
+2022-10-06 10:36:09 [logger INFO] Waiting initial paints to finish to return active execution reports
+2022-10-06 10:36:10 [logger INFO] Waiting initial paints to finish to return active execution reports
+2022-10-06 10:36:11 [logger INFO] Waiting initial paints to finish to return active execution reports
+2022-10-06 10:36:12 [logger INFO] Waiting initial paints to finish to return active execution reports
+2022-10-06 10:40:55 [logger INFO] DayTrader  Initializing
+2022-10-06 10:40:56 [logger INFO] Loading 12 summaries for security SPY
+2022-10-06 10:40:56 [logger INFO] WebSocketModule  Initializing
+2022-10-06 10:40:56 [logger INFO] WebSocketModule Successfully initialized
+2022-10-06 10:40:56 [logger ERROR] Critical error opening websocket @OpenWebsocket: [WinError 10048] Solo se permite un uso de cada dirección de socket (protocolo/dirección de red/puerto)
+2022-10-06 10:40:56 [logger INFO] FileHandlerModule  Initializing
+2022-10-06 10:40:56 [logger INFO] FileHandlerModule Successfully initialized
+2022-10-06 10:40:56 [logger INFO] Initializing Bloomberg Order Router
+2022-10-06 10:40:56 [logger INFO] Connecting to localhost:8194
+2022-10-06 10:40:56 [logger INFO] Bloomberg Order Router Initialized
+2022-10-06 10:40:56 [logger INFO] SingletonModuleHandler Successfully initializer
+2022-10-06 10:40:56 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2022-10-06 10:40:56 [logger INFO] Bloomberg Session Connection is UP...
+2022-10-06 10:40:56 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2022-10-06 10:40:56 [logger INFO] Bloomberg Session started...
+2022-10-06 10:40:56 [logger INFO] Initializing Generic Market Order Router
+2022-10-06 10:40:56 [logger INFO] SingletonModuleHandler Successfully initializer
+2022-10-06 10:40:56 [logger INFO] Generic Market Order Router Initialized
+2022-10-06 10:40:56 [logger INFO] Processing SERVICE_STATUS event
+2022-10-06 10:40:56 [logger INFO] Service //blp/emapisvc opened...
+2022-10-06 10:40:57 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:SPY
+2022-10-06 10:40:57 [logger INFO] DayTrader Successfully initialized
+2022-10-06 10:40:58 [logger INFO] Processing SERVICE_STATUS event
+2022-10-06 10:40:58 [logger INFO] Service //blp/mktdata opened...
+2022-10-06 10:40:58 [logger INFO] Requesting for open orders...
+2022-10-06 10:40:58 [logger INFO] Waiting initial paints to finish to return active execution reports
+2022-10-06 10:40:58 [logger INFO] Subscribing to order and route events
+2022-10-06 10:40:58 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:SPY
+2022-10-06 10:40:58 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:SPY
+2022-10-06 10:40:58 [logger INFO] Route subscription started successfully
+2022-10-06 10:40:58 [logger INFO] Order subscription started successfully
+2022-10-06 10:40:58 [logger INFO] Processing SERVICE_STATUS event
+2022-10-06 10:40:58 [logger INFO] Service //blp/mktbar opened...
+2022-10-06 10:40:58 [logger INFO] Processing SERVICE_STATUS event
+2022-10-06 10:40:58 [logger INFO] Service //blp/refdata opened...
+2022-10-06 10:40:59 [logger INFO] Recovered 0 previously existing execution reports
+2022-10-06 10:40:59 [logger INFO] Received list of Open Positions: 0 positions
+2022-10-06 10:40:59 [logger INFO] Process ready to receive commands and trade
+2022-10-06 10:40:59 [logger INFO] Historical prices successfully loaded for symbol SPY 
+2022-10-06 11:48:00 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2022-10-06 11:33:00+00:00
+2022-10-06 11:48:00 [logger INFO] DBG<ER>-Symbol=SPY Side=Side.Buy PosStatus=PositionStatus.New ExecType=ExecType.New LeavesQty=1 Routing=True 
+2022-10-06 11:48:00 [logger INFO] Managed Position Updated: Arrival=2022-10-06 11:48:00.209725 TradeId=trd__SPY_1665067680 PosId=3b9525a0-6909-43a7-a004-12098cc14305 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2022-10-06 11:48:00 [logger INFO] DBG<ER>-Symbol=SPY Side=Side.Buy PosStatus=PositionStatus.Filled ExecType=ExecType.Trade LeavesQty=0 Routing=False 
+2022-10-06 11:48:00 [logger INFO] Managed Position Finished: Arrival=2022-10-06 11:48:00.414553 TradeId=trd__SPY_1665067680 PosId=3b9525a0-6909-43a7-a004-12098cc14305 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=374.18 Text=Fake Filled Order 
+2022-10-06 12:17:26 [logger INFO] MACD-RSI - Closing long position by Tick for symbol SPY at None 
+2022-10-06 12:17:26 [logger INFO] DBG<ER>- RunClose Symbol=SPY Routing=False 
+2022-10-06 12:17:26 [logger INFO] DBG<ER>- RunClose Symbol=SPY NetShares=1 
+2022-10-06 12:17:26 [logger INFO] DBG<ER>-Symbol=SPY Side=Side.Sell PosStatus=PositionStatus.New ExecType=ExecType.New LeavesQty=1 Routing=True 
+2022-10-06 12:17:26 [logger INFO] Managed Position Updated: Arrival=2022-10-06 12:17:26.423670 TradeId=trd__SPY_1665069446 PosId=af5aa5ee-2ded-48f3-968e-2bb64ac8d22a Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2022-10-06 12:17:26 [logger INFO] MACD-RSI - Closing short position by Tick for symbol SPY at None 
+2022-10-06 12:17:26 [logger INFO] DBG<ER>- RunClose Symbol=SPY Routing=True 
+2022-10-06 12:17:26 [logger INFO] DBG<ER>-Symbol=SPY Side=Side.Sell PosStatus=PositionStatus.Filled ExecType=ExecType.Trade LeavesQty=0 Routing=False 
+2022-10-06 12:17:26 [logger INFO] Managed Position Finished: Arrival=2022-10-06 12:17:26.631511 TradeId=trd__SPY_1665069446 PosId=af5aa5ee-2ded-48f3-968e-2bb64ac8d22a Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=375.64 Text=Fake Filled Order 
+2022-10-06 13:23:59 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2022-10-06 13:09:00+00:00
+2022-10-06 13:23:59 [logger INFO] DBG<ER>-Symbol=SPY Side=Side.Buy PosStatus=PositionStatus.New ExecType=ExecType.New LeavesQty=1 Routing=True 
+2022-10-06 13:23:59 [logger INFO] Managed Position Updated: Arrival=2022-10-06 13:23:59.765130 TradeId=trd__SPY_1665073439 PosId=740a5b5d-c47c-4e93-bf93-98815358821d Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2022-10-06 13:23:59 [logger INFO] DBG<ER>-Symbol=SPY Side=Side.Buy PosStatus=PositionStatus.Filled ExecType=ExecType.Trade LeavesQty=0 Routing=False 
+2022-10-06 13:23:59 [logger INFO] Managed Position Finished: Arrival=2022-10-06 13:23:59.982652 TradeId=trd__SPY_1665073439 PosId=740a5b5d-c47c-4e93-bf93-98815358821d Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=374.49 Text=Fake Filled Order 
+2022-10-06 16:27:53 [logger ERROR] DBG Warning -Persisting Position for security SPY took  1.344279 seconds
+2022-10-06 17:11:01 [logger INFO] MACD-RSI - Closing long position for symbol SPY at 2022-10-06 16:56:00+00:00 
+2022-10-06 17:11:01 [logger INFO] DBG<ER>- RunClose Symbol=SPY Routing=False 
+2022-10-06 17:11:01 [logger INFO] DBG<ER>- RunClose Symbol=SPY NetShares=1 
+2022-10-06 17:11:01 [logger INFO] DBG<ER>-Symbol=SPY Side=Side.Sell PosStatus=PositionStatus.New ExecType=ExecType.New LeavesQty=1 Routing=True 
+2022-10-06 17:11:01 [logger INFO] Managed Position Updated: Arrival=2022-10-06 17:11:01.423076 TradeId=trd__SPY_1665087061 PosId=26b91c6e-a293-48e1-bd75-97226f73fa8a Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2022-10-06 17:11:01 [logger INFO] DBG<ER>-Symbol=SPY Side=Side.Sell PosStatus=PositionStatus.Filled ExecType=ExecType.Trade LeavesQty=0 Routing=False 
+2022-10-06 17:11:01 [logger INFO] Managed Position Finished: Arrival=2022-10-06 17:11:01.636445 TradeId=trd__SPY_1665087061 PosId=26b91c6e-a293-48e1-bd75-97226f73fa8a Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=374.086 Text=Fake Filled Order 
+2022-10-07 01:25:00 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2022-10-07 01:25:00 [logger ERROR] Bloomberg Session Connection is DOWN...
+2022-10-07 01:25:00 [logger INFO] Processing SERVICE_STATUS event
+2022-10-07 01:25:00 [logger INFO] Processing SERVICE_STATUS event
+2022-10-07 01:25:00 [logger INFO] Processing SERVICE_STATUS event
+2022-10-07 01:25:00 [logger INFO] Processing SERVICE_STATUS event
+2022-10-07 01:25:58 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2022-10-07 01:25:58 [logger ERROR] Bloomberg Session Terminated...
+2022-10-07 08:00:00 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:SPY
+2022-10-07 08:00:00 [logger ERROR] Critical error subscribing for Market Data for symbol SPY:Session Not Started (0x00010009)
+2022-10-07 08:00:01 [logger INFO] Requesting for open orders...
+2022-10-07 08:00:01 [logger INFO] Recovered 0 previously existing execution reports
+2022-10-07 08:00:01 [logger INFO] Subscribing to order and route events
+2022-10-07 08:00:01 [logger INFO] Received list of Open Positions: 0 positions
+2022-10-07 08:00:01 [logger ERROR] Error running ProcessMessage @OrderRouter.Bloomberg module:Session Not Started (0x00010009)
+2022-10-07 08:00:01 [logger INFO] Process ready to receive commands and trade
+2022-10-07 08:00:01 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:SPY
+2022-10-07 08:00:01 [logger ERROR] Critical error subscribing for candlebars for symbol SPY:Session Not Started (0x00010009)
+2022-10-07 08:00:01 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:SPY
+2022-10-07 08:00:01 [logger ERROR] Critical error subscribing for historical prices for symbol SPY:Session Not Started (0x00010009)
+2022-10-07 19:20:14 [logger INFO] DayTrader  Initializing
+2022-10-07 19:20:15 [logger INFO] Loading 0 summaries for security SPY
+2022-10-07 19:20:15 [logger INFO] WebSocketModule  Initializing
+2022-10-07 19:20:15 [logger INFO] WebSocketModule Successfully initialized
+2022-10-07 19:20:15 [logger ERROR] Critical error opening websocket @OpenWebsocket: [WinError 10048] Solo se permite un uso de cada dirección de socket (protocolo/dirección de red/puerto)
+2022-10-07 19:20:15 [logger INFO] FileHandlerModule  Initializing
+2022-10-07 19:20:15 [logger INFO] FileHandlerModule Successfully initialized
+2022-10-07 19:20:15 [logger INFO] WebSocketModule  Initializing
+2022-10-07 19:20:15 [logger INFO] Opening websocket connection with server ws://127.0.0.1:7172
+2022-10-07 19:20:15 [logger INFO] DayTrader Successfully initialized
+2022-10-07 19:20:15 [logger INFO] SingletonModuleHandler Successfully initializer
+2022-10-07 19:20:15 [logger INFO] Initializing Generic Market Order Router
+2022-10-07 19:20:15 [logger INFO] SingletonModuleHandler Successfully initializer
+2022-10-07 19:20:15 [logger INFO] Generic Market Order Router Initialized
+2022-10-07 19:20:16 [logger INFO] DayTrader Successfully initialized
+2022-10-07 19:20:17 [logger ERROR] Unknown message :{"Service":"MD","ServiceKey":"SPY","Success":true,"Msg":"SubscriptionResponse"}
+2022-10-07 19:20:17 [logger INFO] Requesting for open orders...
+2022-10-07 19:20:17 [logger ERROR] Critical error @WebsocketModule.ProcessMessage: ORDER_MASS_STATUS_REQUEST
+2022-10-07 19:20:21 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:20:21 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:20:26 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:20:26 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:20:30 [logger ERROR] Critical error @WebsocketModule.ProcessMessage: ORDER_MASS_STATUS_REQUEST
+2022-10-07 19:20:31 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:20:31 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:20:36 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:20:36 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:22:10 [logger INFO] DayTrader  Initializing
+2022-10-07 19:22:10 [logger INFO] Loading 0 summaries for security SPY
+2022-10-07 19:22:11 [logger INFO] WebSocketModule  Initializing
+2022-10-07 19:22:11 [logger INFO] WebSocketModule Successfully initialized
+2022-10-07 19:22:11 [logger ERROR] Critical error opening websocket @OpenWebsocket: [WinError 10048] Solo se permite un uso de cada dirección de socket (protocolo/dirección de red/puerto)
+2022-10-07 19:22:11 [logger INFO] FileHandlerModule  Initializing
+2022-10-07 19:22:11 [logger INFO] FileHandlerModule Successfully initialized
+2022-10-07 19:22:11 [logger INFO] WebSocketModule  Initializing
+2022-10-07 19:22:11 [logger INFO] Opening websocket connection with server ws://127.0.0.1:7172
+2022-10-07 19:22:11 [logger INFO] DayTrader Successfully initialized
+2022-10-07 19:22:11 [logger INFO] SingletonModuleHandler Successfully initializer
+2022-10-07 19:22:11 [logger INFO] Initializing Generic Market Order Router
+2022-10-07 19:22:11 [logger INFO] SingletonModuleHandler Successfully initializer
+2022-10-07 19:22:11 [logger INFO] Generic Market Order Router Initialized
+2022-10-07 19:22:11 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:22:11 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:22:11 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'NoneType' object has no attribute 'replace' 
+2022-10-07 19:22:12 [logger INFO] DayTrader Successfully initialized
+2022-10-07 19:22:12 [logger ERROR] Unknown message :{"Service":"MD","ServiceKey":"SPY","Success":true,"Msg":"SubscriptionResponse"}
+2022-10-07 19:22:13 [logger INFO] Requesting for open orders...
+2022-10-07 19:22:13 [logger ERROR] Critical error @WebsocketModule.ProcessMessage: ORDER_MASS_STATUS_REQUEST
+2022-10-07 19:22:13 [logger ERROR] Critical error @WebsocketModule.ProcessMessage: ORDER_MASS_STATUS_REQUEST
+2022-10-07 19:22:16 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:22:16 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:22:21 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:22:21 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:22:26 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:22:26 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:22:31 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:SPY
+2022-10-07 19:22:31 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:22:31 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:22:36 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:22:36 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:22:41 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:22:41 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:22:46 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:22:46 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:23:37 [logger INFO] DayTrader  Initializing
+2022-10-07 19:23:38 [logger INFO] Loading 0 summaries for security SPY
+2022-10-07 19:23:38 [logger INFO] WebSocketModule  Initializing
+2022-10-07 19:23:38 [logger INFO] WebSocketModule Successfully initialized
+2022-10-07 19:23:38 [logger ERROR] Critical error opening websocket @OpenWebsocket: [WinError 10048] Solo se permite un uso de cada dirección de socket (protocolo/dirección de red/puerto)
+2022-10-07 19:23:38 [logger INFO] FileHandlerModule  Initializing
+2022-10-07 19:23:38 [logger INFO] FileHandlerModule Successfully initialized
+2022-10-07 19:23:38 [logger INFO] WebSocketModule  Initializing
+2022-10-07 19:23:38 [logger INFO] Opening websocket connection with server ws://127.0.0.1:7172
+2022-10-07 19:23:38 [logger INFO] DayTrader Successfully initialized
+2022-10-07 19:23:38 [logger INFO] SingletonModuleHandler Successfully initializer
+2022-10-07 19:23:38 [logger INFO] Initializing Generic Market Order Router
+2022-10-07 19:23:38 [logger INFO] SingletonModuleHandler Successfully initializer
+2022-10-07 19:23:38 [logger INFO] Generic Market Order Router Initialized
+2022-10-07 19:23:39 [logger INFO] DayTrader Successfully initialized
+2022-10-07 19:23:39 [logger ERROR] Unknown message :{"Service":"MD","ServiceKey":"SPY","Success":true,"Msg":"SubscriptionResponse"}
+2022-10-07 19:23:40 [logger INFO] Requesting for open orders...
+2022-10-07 19:23:40 [logger ERROR] Critical error @WebsocketModule.ProcessMessage: ORDER_MASS_STATUS_REQUEST
+2022-10-07 19:23:40 [logger ERROR] Critical error @WebsocketModule.ProcessMessage: ORDER_MASS_STATUS_REQUEST
+2022-10-07 19:23:42 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:23:42 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:23:45 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:SPY
+2022-10-07 19:23:47 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:23:47 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:23:50 [logger ERROR] Unknown message :{"Service":"CB","Success":false,"Message":"Referencia a objeto no establecida como instancia de un objeto.","Msg":"SubscriptionResponse"}
+2022-10-07 19:23:52 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:23:52 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:23:56 [logger ERROR] Critical error opening websocket @OpenWebsocketClient for ws://127.0.0.1:7172: [WinError 10054] Se ha forzado la interrupción de una conexión existente por el host remoto
+2022-10-07 19:25:48 [logger INFO] DayTrader  Initializing
+2022-10-07 19:25:48 [logger INFO] Loading 0 summaries for security SPY
+2022-10-07 19:25:49 [logger INFO] WebSocketModule  Initializing
+2022-10-07 19:25:49 [logger INFO] WebSocketModule Successfully initialized
+2022-10-07 19:25:49 [logger ERROR] Critical error opening websocket @OpenWebsocket: [WinError 10048] Solo se permite un uso de cada dirección de socket (protocolo/dirección de red/puerto)
+2022-10-07 19:25:49 [logger INFO] FileHandlerModule  Initializing
+2022-10-07 19:25:49 [logger INFO] FileHandlerModule Successfully initialized
+2022-10-07 19:25:49 [logger INFO] WebSocketModule  Initializing
+2022-10-07 19:25:49 [logger INFO] Opening websocket connection with server ws://127.0.0.1:7172
+2022-10-07 19:25:49 [logger INFO] DayTrader Successfully initialized
+2022-10-07 19:25:49 [logger INFO] SingletonModuleHandler Successfully initializer
+2022-10-07 19:25:49 [logger INFO] Initializing Generic Market Order Router
+2022-10-07 19:25:49 [logger INFO] SingletonModuleHandler Successfully initializer
+2022-10-07 19:25:49 [logger INFO] Generic Market Order Router Initialized
+2022-10-07 19:25:50 [logger INFO] DayTrader Successfully initialized
+2022-10-07 19:25:50 [logger ERROR] Unknown message :{"Service":"MD","ServiceKey":"SPY","Success":true,"Msg":"SubscriptionResponse"}
+2022-10-07 19:25:51 [logger INFO] Requesting for open orders...
+2022-10-07 19:25:51 [logger ERROR] Critical error @WebsocketModule.ProcessMessage: ORDER_MASS_STATUS_REQUEST
+2022-10-07 19:25:51 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:SPY
+2022-10-07 19:25:51 [logger ERROR] Critical error @WebsocketModule.ProcessMessage: ORDER_MASS_STATUS_REQUEST
+2022-10-07 19:25:51 [logger ERROR] Unknown message :{"Service":"CB","Success":false,"Message":"Referencia a objeto no establecida como instancia de un objeto.","Msg":"SubscriptionResponse"}
+2022-10-07 19:25:52 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:25:52 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:26:07 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:26:07 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:26:07 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:26:07 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:26:07 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:26:07 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:26:12 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:26:12 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:26:17 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:26:17 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:26:22 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:26:22 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:26:27 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:26:27 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:26:32 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:26:32 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:26:37 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:26:37 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:26:42 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:26:42 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:26:47 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:26:47 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:26:52 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:26:52 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:26:57 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:26:57 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:27:02 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:27:02 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:27:07 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:27:07 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:27:12 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:27:12 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:27:17 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:27:17 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:27:22 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:27:22 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:27:27 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:27:27 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:27:32 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:27:32 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:27:37 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:27:37 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:27:42 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:27:42 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:27:47 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:27:47 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:27:52 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:27:52 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:27:57 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:27:57 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:28:02 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:28:02 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:28:07 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:28:07 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:28:12 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:28:12 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:28:17 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:28:17 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:28:22 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:28:22 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:28:27 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:28:27 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:28:32 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:28:32 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:28:37 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:28:37 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:28:42 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:28:42 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:28:47 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:28:47 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:28:52 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:28:52 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:28:57 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:28:57 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:29:02 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:29:02 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:29:07 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:29:07 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:29:12 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:29:12 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:29:17 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:29:17 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:29:22 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:29:22 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:29:27 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:29:27 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:29:32 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:29:32 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:29:37 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:29:37 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:29:42 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:29:42 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:29:47 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:29:47 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:29:52 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:29:52 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:29:57 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:29:57 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:30:02 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:30:02 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:30:07 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:30:07 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:30:13 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:30:13 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:30:18 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:30:18 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:30:23 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:30:23 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:30:28 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:30:28 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:30:33 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:30:33 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:30:38 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:30:38 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:30:43 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:30:43 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:30:48 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:30:48 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:30:53 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:30:53 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:30:58 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:30:58 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:31:03 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:31:03 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:31:08 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:31:08 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:31:13 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:31:13 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:31:18 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:31:18 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:31:23 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:31:23 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:31:28 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:31:28 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:31:33 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:31:33 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:31:38 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:31:38 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:31:43 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:31:43 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:31:48 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:31:48 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:32:51 [logger INFO] DayTrader  Initializing
+2022-10-07 19:32:51 [logger INFO] Loading 0 summaries for security SPY
+2022-10-07 19:32:51 [logger INFO] WebSocketModule  Initializing
+2022-10-07 19:32:51 [logger INFO] WebSocketModule Successfully initialized
+2022-10-07 19:32:51 [logger ERROR] Critical error opening websocket @OpenWebsocket: [WinError 10048] Solo se permite un uso de cada dirección de socket (protocolo/dirección de red/puerto)
+2022-10-07 19:32:51 [logger INFO] FileHandlerModule  Initializing
+2022-10-07 19:32:51 [logger INFO] FileHandlerModule Successfully initialized
+2022-10-07 19:32:51 [logger INFO] WebSocketModule  Initializing
+2022-10-07 19:32:51 [logger INFO] Opening websocket connection with server ws://127.0.0.1:7172
+2022-10-07 19:32:51 [logger INFO] DayTrader Successfully initialized
+2022-10-07 19:32:51 [logger INFO] SingletonModuleHandler Successfully initializer
+2022-10-07 19:32:51 [logger INFO] Initializing Generic Market Order Router
+2022-10-07 19:32:51 [logger INFO] SingletonModuleHandler Successfully initializer
+2022-10-07 19:32:51 [logger INFO] Generic Market Order Router Initialized
+2022-10-07 19:32:52 [logger INFO] DayTrader Successfully initialized
+2022-10-07 19:32:53 [logger INFO] Requesting for open orders...
+2022-10-07 19:32:53 [logger ERROR] Critical error @WebsocketModule.ProcessMessage: ORDER_MASS_STATUS_REQUEST
+2022-10-07 19:32:53 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:SPY
+2022-10-07 19:32:53 [logger ERROR] Critical error @WebsocketModule.ProcessMessage: ORDER_MASS_STATUS_REQUEST
+2022-10-07 19:32:57 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:32:57 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:33:02 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:33:02 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:33:07 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:33:07 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:33:12 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:33:12 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:33:17 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:33:17 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:33:22 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:33:22 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:33:27 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:33:27 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:33:32 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:33:32 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:33:37 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:33:37 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:33:42 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:33:42 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:33:47 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:33:47 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:33:52 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:33:52 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:34:56 [logger INFO] DayTrader  Initializing
+2022-10-07 19:34:56 [logger INFO] Loading 0 summaries for security SPY
+2022-10-07 19:34:56 [logger INFO] WebSocketModule  Initializing
+2022-10-07 19:34:56 [logger INFO] WebSocketModule Successfully initialized
+2022-10-07 19:34:56 [logger ERROR] Critical error opening websocket @OpenWebsocket: [WinError 10048] Solo se permite un uso de cada dirección de socket (protocolo/dirección de red/puerto)
+2022-10-07 19:34:56 [logger INFO] FileHandlerModule  Initializing
+2022-10-07 19:34:56 [logger INFO] FileHandlerModule Successfully initialized
+2022-10-07 19:34:56 [logger INFO] WebSocketModule  Initializing
+2022-10-07 19:34:56 [logger INFO] Opening websocket connection with server ws://127.0.0.1:7172
+2022-10-07 19:34:56 [logger INFO] DayTrader Successfully initialized
+2022-10-07 19:34:56 [logger INFO] SingletonModuleHandler Successfully initializer
+2022-10-07 19:34:56 [logger INFO] Initializing Generic Market Order Router
+2022-10-07 19:34:56 [logger INFO] SingletonModuleHandler Successfully initializer
+2022-10-07 19:34:56 [logger INFO] Generic Market Order Router Initialized
+2022-10-07 19:34:57 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:34:57 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:34:57 [logger ERROR] Error @@DayTrader.ProcessMarketData for security False:'NoneType' object has no attribute 'replace' 
+2022-10-07 19:34:57 [logger INFO] DayTrader Successfully initialized
+2022-10-07 19:34:58 [logger INFO] Requesting for open orders...
+2022-10-07 19:34:58 [logger ERROR] Critical error @WebsocketModule.ProcessMessage: ORDER_MASS_STATUS_REQUEST
+2022-10-07 19:34:58 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:SPY
+2022-10-07 19:34:58 [logger ERROR] Critical error @WebsocketModule.ProcessMessage: ORDER_MASS_STATUS_REQUEST
+2022-10-07 19:35:02 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:35:02 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:35:07 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:35:07 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:35:12 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:35:12 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:35:17 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:35:17 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:35:22 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:35:22 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:35:27 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:35:27 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:35:32 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:35:32 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:35:37 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:35:37 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:35:42 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:35:42 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:35:47 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:35:47 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:37:05 [logger INFO] DayTrader  Initializing
+2022-10-07 19:37:05 [logger INFO] Loading 0 summaries for security SPY
+2022-10-07 19:37:05 [logger INFO] WebSocketModule  Initializing
+2022-10-07 19:37:05 [logger INFO] WebSocketModule Successfully initialized
+2022-10-07 19:37:05 [logger ERROR] Critical error opening websocket @OpenWebsocket: [WinError 10048] Solo se permite un uso de cada dirección de socket (protocolo/dirección de red/puerto)
+2022-10-07 19:37:05 [logger INFO] FileHandlerModule  Initializing
+2022-10-07 19:37:05 [logger INFO] FileHandlerModule Successfully initialized
+2022-10-07 19:37:06 [logger INFO] WebSocketModule  Initializing
+2022-10-07 19:37:06 [logger INFO] Opening websocket connection with server ws://127.0.0.1:7172
+2022-10-07 19:37:06 [logger INFO] DayTrader Successfully initialized
+2022-10-07 19:37:06 [logger INFO] SingletonModuleHandler Successfully initializer
+2022-10-07 19:37:06 [logger INFO] Initializing Generic Market Order Router
+2022-10-07 19:37:06 [logger INFO] SingletonModuleHandler Successfully initializer
+2022-10-07 19:37:06 [logger INFO] Generic Market Order Router Initialized
+2022-10-07 19:37:07 [logger INFO] DayTrader Successfully initialized
+2022-10-07 19:37:08 [logger INFO] Requesting for open orders...
+2022-10-07 19:37:08 [logger ERROR] Critical error @WebsocketModule.ProcessMessage: ORDER_MASS_STATUS_REQUEST
+2022-10-07 19:37:08 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:SPY
+2022-10-07 19:37:08 [logger ERROR] Critical error subscribing for candlebars for symbol SPY:'mappingproxy' object has no attribute '__dict__'
+2022-10-07 19:37:08 [logger ERROR] Critical error @WebsocketModule.ProcessMessage: ORDER_MASS_STATUS_REQUEST
+2022-10-07 19:37:11 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:37:11 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:37:16 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:37:16 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:37:18 [logger ERROR] Unknown message :{"Service":"MD","ServiceKey":"SPY","Success":true,"Msg":"SubscriptionResponse"}
+2022-10-07 19:37:21 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:37:21 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:37:26 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:37:26 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:37:31 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:37:31 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:37:36 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:37:36 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:37:41 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:37:41 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:37:46 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:37:46 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:37:51 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:37:51 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:37:56 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:37:56 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:38:01 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:38:01 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:38:06 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:38:06 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:38:11 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:38:11 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:38:16 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:38:16 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:38:21 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:38:21 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:38:26 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:38:26 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:38:31 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:38:31 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:38:36 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:38:36 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:38:41 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:38:41 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:38:46 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:38:46 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:38:51 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:38:51 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:38:56 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:38:56 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:39:01 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:39:01 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:39:06 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:39:06 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:39:11 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:39:11 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:39:16 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:39:16 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:39:21 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:39:21 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:39:26 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:39:26 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:39:31 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:39:31 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:39:36 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:39:36 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:39:41 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:39:41 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:39:46 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:39:46 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:39:51 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:39:51 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:39:56 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:39:56 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:40:01 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:40:01 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:40:06 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:40:06 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:40:11 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:40:11 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:40:16 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:40:16 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:40:21 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:40:21 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:40:26 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:40:26 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:40:31 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:40:31 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:40:36 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:40:36 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:40:41 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:40:41 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:40:46 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:40:46 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:40:52 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:40:52 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:40:57 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:40:57 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:41:02 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:41:02 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:41:07 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:41:07 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:41:12 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:41:12 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:41:17 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:41:17 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:41:22 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:41:22 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:41:27 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:41:27 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:41:32 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:41:32 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:41:37 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:41:37 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:41:42 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:41:42 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:41:47 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:41:47 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:41:52 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:41:52 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:41:57 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:41:57 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:42:02 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:42:02 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:42:07 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:42:07 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:42:12 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:42:12 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:42:17 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:42:17 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:42:22 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:42:22 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:42:27 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:42:27 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:42:32 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:42:32 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:42:37 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:42:37 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:42:42 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:42:42 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:42:47 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:42:47 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:42:52 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:42:52 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:42:57 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:42:57 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:43:00 [logger ERROR] Critical error opening websocket @OpenWebsocketClient for ws://127.0.0.1:7172: [WinError 10054] Se ha forzado la interrupción de una conexión existente por el host remoto
+2022-10-07 19:47:12 [logger INFO] DayTrader  Initializing
+2022-10-07 19:47:12 [logger INFO] Loading 0 summaries for security SPY
+2022-10-07 19:47:13 [logger INFO] WebSocketModule  Initializing
+2022-10-07 19:47:13 [logger INFO] WebSocketModule Successfully initialized
+2022-10-07 19:47:13 [logger ERROR] Critical error opening websocket @OpenWebsocket: [WinError 10048] Solo se permite un uso de cada dirección de socket (protocolo/dirección de red/puerto)
+2022-10-07 19:47:13 [logger INFO] FileHandlerModule  Initializing
+2022-10-07 19:47:13 [logger INFO] FileHandlerModule Successfully initialized
+2022-10-07 19:47:13 [logger INFO] WebSocketModule  Initializing
+2022-10-07 19:47:13 [logger INFO] Opening websocket connection with server ws://127.0.0.1:7172
+2022-10-07 19:47:13 [logger INFO] DayTrader Successfully initialized
+2022-10-07 19:47:13 [logger INFO] SingletonModuleHandler Successfully initializer
+2022-10-07 19:47:13 [logger INFO] Initializing Generic Market Order Router
+2022-10-07 19:47:13 [logger INFO] SingletonModuleHandler Successfully initializer
+2022-10-07 19:47:13 [logger INFO] Generic Market Order Router Initialized
+2022-10-07 19:47:14 [logger INFO] DayTrader Successfully initialized
+2022-10-07 19:47:14 [logger ERROR] Unknown message :{"Service":"MD","ServiceKey":"SPY","Success":true,"Msg":"SubscriptionResponse"}
+2022-10-07 19:47:15 [logger INFO] Requesting for open orders...
+2022-10-07 19:47:15 [logger ERROR] Critical error @WebsocketModule.ProcessMessage: ORDER_MASS_STATUS_REQUEST
+2022-10-07 19:47:15 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:SPY
+2022-10-07 19:47:15 [logger ERROR] Critical error subscribing for candlebars for symbol SPY:'mappingproxy' object has no attribute '__dict__'
+2022-10-07 19:47:15 [logger ERROR] Critical error @WebsocketModule.ProcessMessage: ORDER_MASS_STATUS_REQUEST
+2022-10-07 19:47:18 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:47:18 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:47:23 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:47:23 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:47:28 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:47:28 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:47:28 [logger ERROR] Critical error opening websocket @OpenWebsocketClient for ws://127.0.0.1:7172: [WinError 10054] Se ha forzado la interrupción de una conexión existente por el host remoto
+2022-10-07 19:48:00 [logger INFO] DayTrader  Initializing
+2022-10-07 19:48:00 [logger INFO] Loading 0 summaries for security SPY
+2022-10-07 19:48:00 [logger INFO] WebSocketModule  Initializing
+2022-10-07 19:48:00 [logger INFO] WebSocketModule Successfully initialized
+2022-10-07 19:48:00 [logger ERROR] Critical error opening websocket @OpenWebsocket: [WinError 10048] Solo se permite un uso de cada dirección de socket (protocolo/dirección de red/puerto)
+2022-10-07 19:48:00 [logger INFO] FileHandlerModule  Initializing
+2022-10-07 19:48:00 [logger INFO] FileHandlerModule Successfully initialized
+2022-10-07 19:48:00 [logger INFO] WebSocketModule  Initializing
+2022-10-07 19:48:00 [logger INFO] Opening websocket connection with server ws://127.0.0.1:7172
+2022-10-07 19:48:00 [logger INFO] DayTrader Successfully initialized
+2022-10-07 19:48:00 [logger INFO] SingletonModuleHandler Successfully initializer
+2022-10-07 19:48:00 [logger INFO] Initializing Generic Market Order Router
+2022-10-07 19:48:00 [logger INFO] SingletonModuleHandler Successfully initializer
+2022-10-07 19:48:00 [logger INFO] Generic Market Order Router Initialized
+2022-10-07 19:48:01 [logger INFO] DayTrader Successfully initialized
+2022-10-07 19:48:02 [logger ERROR] Unknown message :{"Service":"MD","ServiceKey":"SPY","Success":true,"Msg":"SubscriptionResponse"}
+2022-10-07 19:48:02 [logger INFO] Requesting for open orders...
+2022-10-07 19:48:02 [logger ERROR] Critical error @WebsocketModule.ProcessMessage: ORDER_MASS_STATUS_REQUEST
+2022-10-07 19:48:02 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:SPY
+2022-10-07 19:48:02 [logger ERROR] Critical error @WebsocketModule.ProcessMessage: ORDER_MASS_STATUS_REQUEST
+2022-10-07 19:48:06 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:48:06 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:48:14 [logger INFO] DayTrader  Initializing
+2022-10-07 19:48:14 [logger INFO] Loading 0 summaries for security SPY
+2022-10-07 19:48:14 [logger INFO] WebSocketModule  Initializing
+2022-10-07 19:48:14 [logger INFO] WebSocketModule Successfully initialized
+2022-10-07 19:48:14 [logger ERROR] Critical error opening websocket @OpenWebsocket: [WinError 10048] Solo se permite un uso de cada dirección de socket (protocolo/dirección de red/puerto)
+2022-10-07 19:48:14 [logger INFO] FileHandlerModule  Initializing
+2022-10-07 19:48:14 [logger INFO] FileHandlerModule Successfully initialized
+2022-10-07 19:48:14 [logger INFO] WebSocketModule  Initializing
+2022-10-07 19:48:14 [logger INFO] Opening websocket connection with server ws://127.0.0.1:7172
+2022-10-07 19:48:14 [logger INFO] DayTrader Successfully initialized
+2022-10-07 19:48:14 [logger INFO] SingletonModuleHandler Successfully initializer
+2022-10-07 19:48:14 [logger INFO] Initializing Generic Market Order Router
+2022-10-07 19:48:14 [logger INFO] SingletonModuleHandler Successfully initializer
+2022-10-07 19:48:14 [logger INFO] Generic Market Order Router Initialized
+2022-10-07 19:48:15 [logger INFO] DayTrader Successfully initialized
+2022-10-07 19:48:15 [logger ERROR] Unknown message :{"Service":"MD","ServiceKey":"SPY","Success":true,"Msg":"SubscriptionResponse"}
+2022-10-07 19:48:16 [logger INFO] Requesting for open orders...
+2022-10-07 19:48:16 [logger ERROR] Critical error @WebsocketModule.ProcessMessage: ORDER_MASS_STATUS_REQUEST
+2022-10-07 19:48:16 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:SPY
+2022-10-07 19:48:16 [logger ERROR] Critical error @WebsocketModule.ProcessMessage: ORDER_MASS_STATUS_REQUEST
+2022-10-07 19:48:17 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:48:17 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:48:22 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:48:22 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:48:27 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:48:27 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:49:13 [logger INFO] DayTrader  Initializing
+2022-10-07 19:49:13 [logger INFO] Loading 0 summaries for security SPY
+2022-10-07 19:49:13 [logger INFO] WebSocketModule  Initializing
+2022-10-07 19:49:13 [logger INFO] WebSocketModule Successfully initialized
+2022-10-07 19:49:13 [logger ERROR] Critical error opening websocket @OpenWebsocket: [WinError 10048] Solo se permite un uso de cada dirección de socket (protocolo/dirección de red/puerto)
+2022-10-07 19:49:13 [logger INFO] FileHandlerModule  Initializing
+2022-10-07 19:49:13 [logger INFO] FileHandlerModule Successfully initialized
+2022-10-07 19:49:13 [logger INFO] WebSocketModule  Initializing
+2022-10-07 19:49:13 [logger INFO] Opening websocket connection with server ws://127.0.0.1:7172
+2022-10-07 19:49:13 [logger INFO] DayTrader Successfully initialized
+2022-10-07 19:49:13 [logger INFO] SingletonModuleHandler Successfully initializer
+2022-10-07 19:49:13 [logger INFO] Initializing Generic Market Order Router
+2022-10-07 19:49:13 [logger INFO] SingletonModuleHandler Successfully initializer
+2022-10-07 19:49:13 [logger INFO] Generic Market Order Router Initialized
+2022-10-07 19:49:14 [logger INFO] DayTrader Successfully initialized
+2022-10-07 19:49:15 [logger INFO] Requesting for open orders...
+2022-10-07 19:49:15 [logger ERROR] Critical error @WebsocketModule.ProcessMessage: ORDER_MASS_STATUS_REQUEST
+2022-10-07 19:49:15 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:SPY
+2022-10-07 19:49:15 [logger ERROR] Critical error @WebsocketModule.ProcessMessage: ORDER_MASS_STATUS_REQUEST
+2022-10-07 19:49:15 [logger ERROR] Critical error subscribing for candlebars for symbol SPY:'mappingproxy' object has no attribute '__dict__'
+2022-10-07 19:49:17 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:49:17 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:49:22 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:49:22 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:49:24 [logger ERROR] Unknown message :{"Service":"MD","ServiceKey":"SPY","Success":true,"Msg":"SubscriptionResponse"}
+2022-10-07 19:49:27 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:49:27 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:49:46 [logger INFO] DayTrader  Initializing
+2022-10-07 19:49:47 [logger INFO] Loading 0 summaries for security SPY
+2022-10-07 19:49:47 [logger INFO] WebSocketModule  Initializing
+2022-10-07 19:49:47 [logger INFO] WebSocketModule Successfully initialized
+2022-10-07 19:49:47 [logger ERROR] Critical error opening websocket @OpenWebsocket: [WinError 10048] Solo se permite un uso de cada dirección de socket (protocolo/dirección de red/puerto)
+2022-10-07 19:49:47 [logger INFO] FileHandlerModule  Initializing
+2022-10-07 19:49:47 [logger INFO] FileHandlerModule Successfully initialized
+2022-10-07 19:49:47 [logger INFO] WebSocketModule  Initializing
+2022-10-07 19:49:47 [logger INFO] Opening websocket connection with server ws://127.0.0.1:7172
+2022-10-07 19:49:47 [logger INFO] DayTrader Successfully initialized
+2022-10-07 19:49:47 [logger INFO] SingletonModuleHandler Successfully initializer
+2022-10-07 19:49:47 [logger INFO] Initializing Generic Market Order Router
+2022-10-07 19:49:47 [logger INFO] SingletonModuleHandler Successfully initializer
+2022-10-07 19:49:47 [logger INFO] Generic Market Order Router Initialized
+2022-10-07 19:49:48 [logger INFO] DayTrader Successfully initialized
+2022-10-07 19:49:48 [logger ERROR] Unknown message :{"Service":"MD","ServiceKey":"SPY","Success":true,"Msg":"SubscriptionResponse"}
+2022-10-07 19:49:49 [logger INFO] Requesting for open orders...
+2022-10-07 19:49:49 [logger ERROR] Critical error @WebsocketModule.ProcessMessage: ORDER_MASS_STATUS_REQUEST
+2022-10-07 19:49:49 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:SPY
+2022-10-07 19:49:49 [logger ERROR] Critical error @WebsocketModule.ProcessMessage: ORDER_MASS_STATUS_REQUEST
+2022-10-07 19:49:52 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:49:52 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:49:53 [logger ERROR] Unknown message :{"Service":"CB","ServiceKey":"SPY","Success":true,"Msg":"SubscriptionResponse"}
+2022-10-07 19:49:57 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:49:57 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:50:19 [logger INFO] DayTrader  Initializing
+2022-10-07 19:50:20 [logger INFO] Loading 0 summaries for security SPY
+2022-10-07 19:50:20 [logger INFO] WebSocketModule  Initializing
+2022-10-07 19:50:20 [logger INFO] WebSocketModule Successfully initialized
+2022-10-07 19:50:20 [logger ERROR] Critical error opening websocket @OpenWebsocket: [WinError 10048] Solo se permite un uso de cada dirección de socket (protocolo/dirección de red/puerto)
+2022-10-07 19:50:20 [logger INFO] FileHandlerModule  Initializing
+2022-10-07 19:50:20 [logger INFO] FileHandlerModule Successfully initialized
+2022-10-07 19:50:20 [logger INFO] WebSocketModule  Initializing
+2022-10-07 19:50:20 [logger INFO] Opening websocket connection with server ws://127.0.0.1:7172
+2022-10-07 19:50:20 [logger INFO] DayTrader Successfully initialized
+2022-10-07 19:50:20 [logger INFO] SingletonModuleHandler Successfully initializer
+2022-10-07 19:50:20 [logger INFO] Initializing Generic Market Order Router
+2022-10-07 19:50:20 [logger INFO] SingletonModuleHandler Successfully initializer
+2022-10-07 19:50:20 [logger INFO] Generic Market Order Router Initialized
+2022-10-07 19:50:21 [logger INFO] DayTrader Successfully initialized
+2022-10-07 19:50:21 [logger ERROR] Unknown message :{"Service":"MD","ServiceKey":"SPY","Success":true,"Msg":"SubscriptionResponse"}
+2022-10-07 19:50:22 [logger INFO] Requesting for open orders...
+2022-10-07 19:50:22 [logger ERROR] Critical error @WebsocketModule.ProcessMessage: ORDER_MASS_STATUS_REQUEST
+2022-10-07 19:50:22 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:SPY
+2022-10-07 19:50:22 [logger ERROR] Critical error @WebsocketModule.ProcessMessage: ORDER_MASS_STATUS_REQUEST
+2022-10-07 19:50:22 [logger ERROR] Unknown message :{"Service":"CB","ServiceKey":"SPY","Success":true,"Msg":"SubscriptionResponse"}
+2022-10-07 19:50:23 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:50:23 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:50:28 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:50:28 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:50:33 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:50:33 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:50:38 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:50:38 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:50:43 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:50:43 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:50:58 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:50:58 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:51:03 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:51:03 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:51:08 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:51:08 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:51:13 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:51:13 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:51:18 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:51:18 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:51:23 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:51:23 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:51:28 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:51:28 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:51:33 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:51:33 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:51:38 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:51:38 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:51:43 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:51:43 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:51:48 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:51:48 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:51:53 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-07 19:51:53 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-07 19:51:54 [logger ERROR] Critical error opening websocket @OpenWebsocketClient for ws://127.0.0.1:7172: [WinError 10054] Se ha forzado la interrupción de una conexión existente por el host remoto
+2022-10-08 12:22:42 [logger INFO] DayTrader  Initializing
+2022-10-08 12:22:43 [logger INFO] Loading 0 summaries for security SPY
+2022-10-08 12:22:43 [logger INFO] WebSocketModule  Initializing
+2022-10-08 12:22:43 [logger INFO] WebSocketModule Successfully initialized
+2022-10-08 12:22:43 [logger ERROR] Critical error opening websocket @OpenWebsocket: [WinError 10048] Solo se permite un uso de cada dirección de socket (protocolo/dirección de red/puerto)
+2022-10-08 12:22:43 [logger INFO] FileHandlerModule  Initializing
+2022-10-08 12:22:43 [logger INFO] FileHandlerModule Successfully initialized
+2022-10-08 12:22:44 [logger INFO] WebSocketModule  Initializing
+2022-10-08 12:22:44 [logger INFO] Opening websocket connection with server ws://127.0.0.1:7172
+2022-10-08 12:22:44 [logger INFO] DayTrader Successfully initialized
+2022-10-08 12:22:44 [logger INFO] SingletonModuleHandler Successfully initializer
+2022-10-08 12:22:44 [logger INFO] Initializing Generic Market Order Router
+2022-10-08 12:22:44 [logger INFO] SingletonModuleHandler Successfully initializer
+2022-10-08 12:22:44 [logger INFO] Generic Market Order Router Initialized
+2022-10-08 12:22:45 [logger INFO] DayTrader Successfully initialized
+2022-10-08 12:22:46 [logger ERROR] Unknown message :{"Service":"MD","ServiceKey":"SPY","Success":true,"Msg":"SubscriptionResponse"}
+2022-10-08 12:22:46 [logger INFO] Requesting for open orders...
+2022-10-08 12:22:46 [logger ERROR] Critical error @WebsocketModule.ProcessMessage: ORDER_MASS_STATUS_REQUEST
+2022-10-08 12:22:46 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:SPY
+2022-10-08 12:22:46 [logger ERROR] Critical error @WebsocketModule.ProcessMessage: ORDER_MASS_STATUS_REQUEST
+2022-10-08 12:22:46 [logger ERROR] Unknown message :{"Service":"CB","ServiceKey":"SPY","Success":true,"Msg":"SubscriptionResponse"}
+2022-10-08 12:22:50 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-08 12:22:50 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-08 12:22:55 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-08 12:22:55 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-08 12:23:00 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-08 12:23:00 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-08 12:23:05 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-08 12:23:05 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-08 12:23:10 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-08 12:23:10 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-08 12:23:15 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-08 12:23:15 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-08 12:23:20 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-08 12:23:20 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-08 12:23:25 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-08 12:23:25 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-08 12:23:30 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-08 12:23:30 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-08 12:23:35 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-08 12:23:35 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-08 12:23:40 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-08 12:23:40 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-08 12:23:45 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-08 12:23:45 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-08 12:23:52 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-08 12:23:52 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-08 12:23:57 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-08 12:23:57 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-08 12:24:02 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-08 12:24:02 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-08 12:24:08 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-08 12:24:08 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-08 12:24:13 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-08 12:24:13 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-08 12:35:38 [logger ERROR] Critical error opening websocket @OpenWebsocketClient for ws://127.0.0.1:7172: [WinError 10054] Se ha forzado la interrupción de una conexión existente por el host remoto
+2022-10-08 12:36:21 [logger INFO] DayTrader  Initializing
+2022-10-08 12:36:21 [logger INFO] Loading 0 summaries for security SPY
+2022-10-08 12:36:21 [logger INFO] WebSocketModule  Initializing
+2022-10-08 12:36:21 [logger INFO] WebSocketModule Successfully initialized
+2022-10-08 12:36:21 [logger ERROR] Critical error opening websocket @OpenWebsocket: [WinError 10048] Solo se permite un uso de cada dirección de socket (protocolo/dirección de red/puerto)
+2022-10-08 12:36:21 [logger INFO] FileHandlerModule  Initializing
+2022-10-08 12:36:21 [logger INFO] FileHandlerModule Successfully initialized
+2022-10-08 12:36:21 [logger INFO] WebSocketModule  Initializing
+2022-10-08 12:36:21 [logger INFO] Opening websocket connection with server ws://127.0.0.1:7172
+2022-10-08 12:36:21 [logger INFO] DayTrader Successfully initialized
+2022-10-08 12:36:21 [logger INFO] SingletonModuleHandler Successfully initializer
+2022-10-08 12:36:21 [logger INFO] Initializing Generic Market Order Router
+2022-10-08 12:36:21 [logger INFO] SingletonModuleHandler Successfully initializer
+2022-10-08 12:36:21 [logger INFO] Generic Market Order Router Initialized
+2022-10-08 12:36:22 [logger INFO] DayTrader Successfully initialized
+2022-10-08 12:36:23 [logger ERROR] Unknown message :{"Service":"MD","ServiceKey":"SPY","Success":true,"Msg":"SubscriptionResponse"}
+2022-10-08 12:36:23 [logger INFO] Requesting for open orders...
+2022-10-08 12:36:23 [logger ERROR] Critical error @WebsocketModule.ProcessMessage: ORDER_MASS_STATUS_REQUEST
+2022-10-08 12:36:23 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:SPY
+2022-10-08 12:36:23 [logger ERROR] Critical error @WebsocketModule.ProcessMessage: ORDER_MASS_STATUS_REQUEST
+2022-10-08 12:36:23 [logger ERROR] Unknown message :{"Service":"CB","ServiceKey":"SPY","Success":true,"Msg":"SubscriptionResponse"}
+2022-10-08 12:36:24 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-08 12:36:24 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-08 12:36:29 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-08 12:36:29 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-08 12:36:34 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-08 12:36:34 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-08 12:36:39 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-08 12:36:39 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-08 12:36:44 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-08 12:36:44 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-08 12:36:49 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-08 12:36:49 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-08 12:36:54 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-08 12:36:54 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-08 12:36:59 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-08 12:36:59 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-08 12:37:04 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-08 12:37:04 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-08 12:37:09 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-08 12:37:09 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-08 12:37:14 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-08 12:37:14 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-08 12:37:19 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-08 12:37:19 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-08 12:37:24 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-08 12:37:24 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-08 12:37:29 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-08 12:37:29 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-08 12:37:34 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-08 12:37:34 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-08 12:37:39 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-08 12:37:39 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-08 12:37:44 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-08 12:37:44 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-08 12:37:49 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-08 12:37:49 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-08 12:37:54 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-08 12:37:54 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-08 12:37:59 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-08 12:37:59 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-08 12:38:08 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-08 12:38:08 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-08 12:38:16 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-08 12:38:16 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-08 12:38:21 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-08 12:38:21 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-08 12:38:26 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-08 12:38:26 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-08 12:38:31 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-08 12:38:31 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-08 12:38:36 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-08 12:38:36 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-08 12:38:41 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-08 12:38:41 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-08 12:38:46 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-08 12:38:46 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-08 12:38:51 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-08 12:38:51 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-08 12:38:56 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-08 12:38:56 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-08 12:39:01 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-08 12:39:01 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-08 12:39:06 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-08 12:39:06 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-08 12:39:11 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-08 12:39:11 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-08 12:39:16 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-08 12:39:16 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-08 12:39:21 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-08 12:39:21 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-08 12:39:26 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-08 12:39:26 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-08 12:39:31 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-08 12:39:31 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-08 12:39:36 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-08 12:39:36 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-08 12:39:41 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-08 12:39:41 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-08 12:39:46 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-08 12:39:46 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-08 12:39:51 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-08 12:39:51 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-08 12:39:56 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-08 12:39:56 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-08 12:40:01 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-08 12:40:01 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-08 12:40:06 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-08 12:40:06 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-08 12:40:11 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-08 12:40:11 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-08 12:40:16 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-08 12:40:16 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-08 12:40:21 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-08 12:40:21 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-08 12:40:26 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2022-10-08 12:40:26 [logger INFO] Market Data Processed for symbol SPY...
+2022-10-08 12:40:29 [logger ERROR] Critical error opening websocket @OpenWebsocketClient for ws://127.0.0.1:7172: [WinError 10054] Se ha forzado la interrupción de una conexión existente por el host remoto

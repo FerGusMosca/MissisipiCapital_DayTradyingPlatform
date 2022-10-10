@@ -2,7 +2,7 @@ from datetime import datetime
 
 from sources.framework.business_entities.securities.security import Security
 
-_DATETIME_FORMAT="%d/%m/%Y %H:%M:%S"
+_DATETIME_FORMAT="%d-%m-%Y %H:%M:%S"
 class CandlebarDTO:
     def __init__(self, Msg=None, Symbol=None,Key=None,Date=None,High=None,Open=None,Low=None,Close=None,Trade=None,
                         Volume=None,** kwargs):
