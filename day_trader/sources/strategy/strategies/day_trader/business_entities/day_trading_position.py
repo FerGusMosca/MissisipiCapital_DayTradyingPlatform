@@ -135,6 +135,7 @@ class DayTradingPosition():
         self.OpenMarketData=None
 
         self.ExecutionSummaries={}
+        self.InnerSummaries={}
         self.Routing =routing
         #self.Open=open
         self.LongSignal = longSignal
@@ -200,6 +201,7 @@ class DayTradingPosition():
 
     def ResetExecutionSummaries(self):
         self.ExecutionSummaries = {}
+        self.InnerSummaries={}
 
     def ResetProfitCounters(self,now):
         self.CurrentProfit = 0
@@ -289,6 +291,134 @@ class DayTradingPosition():
 
     #region Private Methods
 
+    #region Summary Management
+
+    def AppendInnerSummary(self,summary,posId):
+
+        if self.GetLastTradedSummary() is not None:
+            mainSummary = self.GetLastTradedSummary()
+            if not mainSummary.DoInnerTradesExist():
+                mainSummary.AppendFirstInnerSummary(summary)
+            elif mainSummary.IsFirstInnerTradeOpen() and not mainSummary.IsSecondInnerTradeOpen():
+                mainSummary.AppendSecondInnerSummary(summary)
+            elif  mainSummary.IsFirstInnerTradeOpen() and  mainSummary.IsSecondInnerTradeOpen():
+                raise Exception("First and Second Inner Position already opened for symbol {}".format(self.Security.Symbol))
+        else:
+            raise Exception("Could not find a Main Position to append an inner position for symbol {}".format(self.Security.Symbol))
+
+        self.InnerSummaries[posId]=summary
+
+    def GetNetOpenShares(self,summaryOrder):
+        todaySummaries = sorted(list(filter(lambda x: x.CumQty >= 0
+                                            and (self.RunningBacktest or x.Timestamp.date() == self.PosUpdTimestamp.date()),
+                                            self.ExecutionSummaries.values())),
+                                            key=lambda x: x.Timestamp, reverse=False)
+
+        netShares = 0
+        for summary in todaySummaries: # first we calculate the traded positions
+
+            if summaryOrder==ExecutionSummary._MAIN_SUMMARY():
+                netShares= self.UpdateSummaryNetShares(summary)
+            elif  (summaryOrder==ExecutionSummary._INNER_SUMMARY_2() and summary.IsFirstInnerTradeOpen()):
+                netShares= self.UpdateSummaryNetShares(summary.GetFirstInnerSummary())
+            elif  (summaryOrder==ExecutionSummary._INNER_SUMMARY_3() and summary.IsSecondInnerTradeOpen()):
+                netShares= self.UpdateSummaryNetShares(summary.GetSecondInnerSummary())
+            else:
+                raise Exception("Could not find an inner summay of order {} for symbol {}".format(summaryOrder,self.Security.Symbol))
+
+        return netShares
+
+    def GetOpenSummaries(self,summaryOrder):
+        openSummaries =  list(filter(lambda x: x.Position.IsOpenPosition(), self.ExecutionSummaries.values()))
+
+        if summaryOrder==ExecutionSummary._MAIN_SUMMARY():
+            openSummaries
+        elif summaryOrder==ExecutionSummary._INNER_SUMMARY_2():
+            innerSummaries = []
+
+            for summary in openSummaries:
+                if(summary.IsFirstInnerTradeOpen()):
+                    innerSummaries.append(summary.GetFirstInnerSummary())
+            return innerSummaries
+        elif summaryOrder==ExecutionSummary._INNER_SUMMARY_3():
+            innerSummaries = []
+
+            for summary in openSummaries:
+                if (summary.IsSecondInnerTradeOpen()):
+                    innerSummaries.append(summary.GetSecondInnerSummary())
+            return innerSummaries
+        else:
+            raise Exception("Could not find an inner summay of order {} for symbol {}".format(summaryOrder,self.Security.Symbol))
+
+    def GetAceptedSummaries(self):
+
+        return  sorted(list(filter(lambda x: x.Position.GetLastOrder() is not None or x.Position.IsRejectedPosition(),
+                                   self.ExecutionSummaries.values())),
+                                   key=lambda x: x.CreateTime,reverse=True)
+
+    def GetLastTradedSummary(self):
+        lastTradedSummaries = sorted(list(filter(lambda x: x.GetNetShares() != 0
+                                                           and (self.RunningBacktest or x.Timestamp.date() == self.PosUpdTimestamp.date())
+                                                           and (x.Position.LongPositionOpened() if self.GetNetOpenShares() > 0 else x.Position.ShortPositionOpened()),
+                                                 self.ExecutionSummaries.values())), key=lambda x: x.Timestamp, reverse=True)
+
+        return lastTradedSummaries[0] if (len(lastTradedSummaries) > 0) else None
+
+    def GetLastTradedSummary(self,side):
+
+        #All the traded summaries for a side, order in a descending fashion
+        lastTradedSummaries = sorted(list(filter(lambda x: x.GetNetShares() != 0
+                                                 and x.Position.LongPositionOpened() if side==Side.Buy else x.Position.ShortPositionOpened(),
+                                                 self.ExecutionSummaries.values())), key=lambda x: x.Timestamp, reverse=True)
+
+        return lastTradedSummaries[0] if (len(lastTradedSummaries) > 0) else None
+
+    def GetTradedSummaries(self):
+        todaySummaries = sorted(list(filter(lambda x:      x.CumQty >= 0
+                                                      and (self.RunningBacktest or x.Timestamp.date() == self.PosUpdTimestamp.date()),
+                                            self.ExecutionSummaries.values())),
+                                key=lambda x: x.Timestamp, reverse=False)
+        return todaySummaries
+
+    def DepurateSummaries(self):
+        openSummaries = self.GetOpenSummaries(ExecutionSummary._MAIN_SUMMARY())
+
+        for openSummary in openSummaries:
+            openSummary.PosStatus = PositionStatus.Unknown
+            openSummary.Position.PosStatus = PositionStatus.Unknown
+
+        self.UpdateRouting()
+
+        return openSummaries
+
+    def UpdateRouting(self):
+        firstOrderPos = self.GetOpenSummaries(ExecutionSummary._MAIN_SUMMARY())
+        secondOrderPos = self.GetOpenSummaries(ExecutionSummary._INNER_SUMMARY_2())
+        thirdOrderPos = self.GetOpenSummaries(ExecutionSummary._INNER_SUMMARY_3())
+
+        self.Routing= (firstOrderPos is not None) or(secondOrderPos is not None) or (thirdOrderPos is not None)
+
+    def UpdateSummaryNetShares(self, summary):
+        netShares=0
+        if summary.GetTradedSummary() > 0:
+            if summary.SharesAcquired():
+                netShares += summary.GetNetShares()
+            else:
+                netShares -= summary.GetNetShares()
+
+        return netShares
+
+    def FindSummary(self,posId):
+
+        if posId in self.ExecutionSummaries:
+            return self.ExecutionSummaries[posId]
+        elif posId in self.InnerSummaries:
+            return self.InnerSummaries[posId]
+        else:
+            return None
+
+    #endregion
+
     #region Private Util/Aux
 
     def ProcessCandlebarPrices(self,msCandlePriceMethod,cbDict,candlebar):
@@ -319,8 +449,6 @@ class DayTradingPosition():
 
         else:
             raise Exception("Invalid candle price method {}".format(msCandlePriceMethod.IntValue))
-
-
 
     # Formats like a.m. or p.m. times are converted to AM or PM
     def FormatTime(self, time):
@@ -387,88 +515,6 @@ class DayTradingPosition():
 
     def Open(self):
         return self.GetNetOpenShares()!=0
-
-    def UpdateNetShares(self,summary):
-        netShares=0
-        if summary.GetTradedSummary() > 0:
-            if summary.SharesAcquired():
-                netShares += summary.GetNetShares()
-            else:
-                netShares -= summary.GetNetShares()
-
-        return netShares
-
-
-    def GetNetOpenShares(self,summaryOrder):
-        todaySummaries = sorted(list(filter(lambda x: x.CumQty >= 0
-                                            and (self.RunningBacktest or x.Timestamp.date() == self.PosUpdTimestamp.date()),
-                                            self.ExecutionSummaries.values())),
-                                            key=lambda x: x.Timestamp, reverse=False)
-
-        netShares = 0
-        for summary in todaySummaries: # first we calculate the traded positions
-
-            if summaryOrder==ExecutionSummary._MAIN_SUMMARY():
-                netShares=self.UpdateNetShares(summary)
-            elif  (summaryOrder==ExecutionSummary._INNER_SUMMARY_2() and summary.IsFirstInnerTradeOpen()):
-                netShares=self.UpdateNetShares(summary.GetFirstInnerSummary())
-            elif  (summaryOrder==ExecutionSummary._INNER_SUMMARY_3() and summary.IsSecondInnerTradeOpen()):
-                netShares=self.UpdateNetShares(summary.GetSecondInnerSummary())
-            else:
-                raise Exception("Could not find an inner summay of order {} for symbol {}".format(summaryOrder,self.Security.Symbol))
-
-        return netShares
-
-    def GetOpenSummaries(self,summaryOrder):
-        openSummaries =  list(filter(lambda x: x.Position.IsOpenPosition(), self.ExecutionSummaries.values()))
-
-        if summaryOrder==ExecutionSummary._MAIN_SUMMARY():
-            openSummaries
-        elif summaryOrder==ExecutionSummary._INNER_SUMMARY_2():
-            innerSummaries = []
-
-            for summary in openSummaries:
-                if(summary.IsFirstInnerTradeOpen()):
-                    innerSummaries.append(summary.GetFirstInnerSummary())
-            return innerSummaries
-        elif summaryOrder==ExecutionSummary._INNER_SUMMARY_3():
-            innerSummaries = []
-
-            for summary in openSummaries:
-                if (summary.IsSecondInnerTradeOpen()):
-                    innerSummaries.append(summary.GetSecondInnerSummary())
-            return innerSummaries
-        else:
-            raise Exception("Could not find an inner summay of order {} for symbol {}".format(summaryOrder,self.Security.Symbol))
-
-
-    def GetLastTradedSummary(self,side):
-
-        #All the traded summaries for a side, order in a descending fashion
-        lastTradedSummaries = sorted(list(filter(lambda x: x.GetNetShares() != 0
-                                                 and x.Position.LongPositionOpened() if side==Side.Buy else x.Position.ShortPositionOpened(),
-                                                 self.ExecutionSummaries.values())), key=lambda x: x.Timestamp, reverse=True)
-
-        return lastTradedSummaries[0] if (len(lastTradedSummaries) > 0) else None
-
-    def AppendInnerSummary(self,summary):
-
-        if self.GetLastTradedSummary() is not None:
-            mainSummary = self.GetLastTradedSummary()
-            if not mainSummary.DoInnerTradesExist():
-                mainSummary.AppendFirstInnerSummary(summary)
-            elif mainSummary.IsFirstInnerTradeOpen() and not mainSummary.IsSecondInnerTradeOpen():
-                mainSummary.AppendSecondInnerSummary(summary)
-            elif  mainSummary.IsFirstInnerTradeOpen() and  mainSummary.IsSecondInnerTradeOpen():
-                raise Exception("First and Second Inner Position already opened for symbol {}".format(self.Security.Symbol))
-        else:
-            raise Exception("Could not find a Main Position to append an inner position for symbol {}".format(self.Security.Symbol))
-
-    def GetAceptedSummaries(self):
-
-        return  sorted(list(filter(lambda x: x.Position.GetLastOrder() is not None or x.Position.IsRejectedPosition(),
-                                   self.ExecutionSummaries.values())),
-                                   key=lambda x: x.CreateTime,reverse=True)
 
     def GetSpecificBar(self,candleBarArr, index):
         sortedBars = sorted(list(filter(lambda x: x is not None, candleBarArr)),key=lambda x: x.DateTime, reverse=True)
@@ -554,46 +600,83 @@ class DayTradingPosition():
 
     #region Profits/Losses Statistics
 
-    def CalculateCurrentDayProfits(self,marketData):
-
-        self.UpdateMarketData(marketData)
-
+    def CalculatePAndLForSummaries(self,summaries,marketData):
         profitsAndLosses = PositionsProfitsAndLosses()
 
-        foundOpenPositions = self.CalculatePositionsProfit(profitsAndLosses)
+        foundOpenPositions = self.CalculatePositionsProfit(profitsAndLosses, summaries)
 
         profitsAndLosses.PosMTM = self.CalculateMarkToMarket(marketData, profitsAndLosses, foundOpenPositions)
 
         profitsAndLosses.Profits = self.CalculatePercentageProfits(profitsAndLosses)
         profitsAndLosses.MonetaryProfits = self.CalculateMonetaryProfits(profitsAndLosses)
 
+        return profitsAndLosses
+
+    def GetNOrderTradedSummary(self,mainTradedSummaries,order):
+
+        innerSummaries=[]
+
+        for summary in mainTradedSummaries:
+
+            if order==ExecutionSummary._INNER_SUMMARY_2() and summary.IsFirstInnerTradeOpen():
+                innerSummaries.append(summary)
+            elif order==ExecutionSummary._INNER_SUMMARY_3() and summary.IsSecondInnerTradeOpen():
+                innerSummaries.append(summary)
+
+        return innerSummaries
+
+    def CalculateCurrentDayProfits(self,marketData):
+
+        self.UpdateMarketData(marketData)
+
+        mainTradedSummaries = self.GetTradedSummaries()
+        mainTradesProfitsAndLosses = self.CalculatePAndLForSummaries(mainTradedSummaries,marketData)
+
+        firstOrderSummaries= self.GetNOrderTradedSummary(mainTradedSummaries,ExecutionSummary._INNER_SUMMARY_2())
+        firstOrderProfitsAndLosses = self.CalculatePAndLForSummaries(firstOrderSummaries, marketData)
+
+        secondOrderSummaries = self.GetNOrderTradedSummary(mainTradedSummaries, ExecutionSummary._INNER_SUMMARY_3())
+        secondOrderProfitsAndLosses = self.CalculatePAndLForSummaries(secondOrderSummaries, marketData)
+
+
         if self.Open():
 
-            self.CalculateLastTradeProfit(profitsAndLosses,marketData)
+            lastTradedSummary = self.GetLastTradedSummary()
 
-            if(profitsAndLosses.Profits>self.MaxProfit):
-                self.MaxProfit=profitsAndLosses.Profits
+            self.CalculateLastTradeProfit(lastTradedSummary,mainTradesProfitsAndLosses,marketData)
 
-            if(profitsAndLosses.Profits<self.MaxLoss):
-                self.MaxLoss=profitsAndLosses.Profits
+            if(lastTradedSummary.IsFirstInnerTradeOpen()):
+                self.CalculateLastTradeProfit(lastTradedSummary.GetFirstInnerSummary(), firstOrderProfitsAndLosses, marketData)
 
-            if (profitsAndLosses.ProfitLastTrade > self.MaxProfitCurrentTrade):
-                self.MaxProfitCurrentTrade = profitsAndLosses.ProfitLastTrade
+            if (lastTradedSummary.IsSecondInnerTradeOpen()):
+                self.CalculateLastTradeProfit(lastTradedSummary.GetSecondInnerSummary(), secondOrderProfitsAndLosses,marketData)
 
-            if (profitsAndLosses.ProfitLastTrade < self.MaxLossCurrentTrade):
-                self.MaxLossCurrentTrade = profitsAndLosses.ProfitLastTrade
+            if(mainTradesProfitsAndLosses.Profits>self.MaxProfit):
+                self.MaxProfit=mainTradesProfitsAndLosses.Profits
 
-            if (profitsAndLosses.MonetaryProfitLastTrade > self.MaxMonetaryProfitCurrentTrade):
-                self.MaxMonetaryProfitCurrentTrade = profitsAndLosses.MonetaryProfitLastTrade
+            if(mainTradesProfitsAndLosses.Profits<self.MaxLoss):
+                self.MaxLoss=mainTradesProfitsAndLosses.Profits
 
-            if (profitsAndLosses.MonetaryProfitLastTrade < self.MaxMonetaryLossCurrentTrade):
-                self.MaxMonetaryLossCurrentTrade = profitsAndLosses.MonetaryProfitLastTrade
+            if (mainTradesProfitsAndLosses.ProfitLastTrade > self.MaxProfitCurrentTrade):
+                self.MaxProfitCurrentTrade = mainTradesProfitsAndLosses.ProfitLastTrade
 
-            self.CurrentProfit=profitsAndLosses.Profits
-            self.CurrentProfitMonetary = profitsAndLosses.MonetaryProfits
-            self.CurrentProfitLastTrade = profitsAndLosses.ProfitLastTrade
-            self.CurrentProfitMonetaryLastTrade = profitsAndLosses.MonetaryProfitLastTrade
-            self.IncreaseDecrease=profitsAndLosses.IncreaseDecrease
+            if (mainTradesProfitsAndLosses.ProfitLastTrade < self.MaxLossCurrentTrade):
+                self.MaxLossCurrentTrade = mainTradesProfitsAndLosses.ProfitLastTrade
+
+            if (mainTradesProfitsAndLosses.MonetaryProfitLastTrade > self.MaxMonetaryProfitCurrentTrade):
+                self.MaxMonetaryProfitCurrentTrade = mainTradesProfitsAndLosses.MonetaryProfitLastTrade
+
+            if (mainTradesProfitsAndLosses.MonetaryProfitLastTrade < self.MaxMonetaryLossCurrentTrade):
+                self.MaxMonetaryLossCurrentTrade = mainTradesProfitsAndLosses.MonetaryProfitLastTrade
+
+            self.CurrentProfit=mainTradesProfitsAndLosses.Profits
+            self.CurrentProfitMonetary = mainTradesProfitsAndLosses.MonetaryProfits
+            self.CurrentProfitLastTrade = mainTradesProfitsAndLosses.ProfitLastTrade
+            self.CurrentProfitMonetaryLastTrade = mainTradesProfitsAndLosses.MonetaryProfitLastTrade
+            self.IncreaseDecrease=mainTradesProfitsAndLosses.IncreaseDecrease
+
+            self.FirstInnerTradeProfitLastTrade=firstOrderProfitsAndLosses.ProfitLastTrade
+            self.SecondInnerTradeProfitLastTrade = secondOrderProfitsAndLosses.ProfitLastTrade
 
             if (self.SharesQuantity>0 and self.SharesQuantity!=0 and self.OpenMarketData is not None
                 and self.OpenMarketData.OpeningPrice is not None and self.OpenMarketData.OpeningPrice!=0):
@@ -601,8 +684,8 @@ class DayTradingPosition():
         else:
 
             #Last Trade remains as the last estimation while was opened
-            self.CurrentProfit = profitsAndLosses.Profits
-            self.CurrentProfitMonetary = profitsAndLosses.MonetaryProfits
+            self.CurrentProfit = mainTradesProfitsAndLosses.Profits
+            self.CurrentProfitMonetary = mainTradesProfitsAndLosses.MonetaryProfits
             self.IncreaseDecrease = 0
             self.MaxLossCurrentTrade=0
             self.MaxProfitCurrentTrade=0
@@ -706,16 +789,7 @@ class DayTradingPosition():
 
         return posMTM
 
-    def CalculateLastTradeProfit(self, profitsAndLosses, marketData):
-
-        lastTradedSummaries = sorted(list(filter(lambda x:  x.GetNetShares() != 0
-                            and (self.RunningBacktest or x.Timestamp.date() == self.PosUpdTimestamp.date())
-                            and (x.Position.LongPositionOpened() if self.GetNetOpenShares()>0 else x.Position.ShortPositionOpened()),
-                           self.ExecutionSummaries.values())),key=lambda x: x.Timestamp, reverse=True)
-
-        lastTradedSummary=None
-        if(len(lastTradedSummaries)>0):
-            lastTradedSummary=lastTradedSummaries[0]
+    def CalculateLastTradeProfit(self, lastTradedSummary,profitsAndLosses, marketData):
 
 
         if lastTradedSummary is not None and marketData.Trade is not None and lastTradedSummary.AvgPx is not None:
@@ -731,11 +805,8 @@ class DayTradingPosition():
             profitsAndLosses.ProfitLastTrade = 0
             profitsAndLosses.IncreaseDecrease = 0
 
-    def CalculatePositionsProfit(self,profitsAndLosses):
-        todaySummaries = sorted(list(filter(lambda x:  x.CumQty >= 0
-                                                     and (self.RunningBacktest or x.Timestamp.date() == self.PosUpdTimestamp.date()) ,
-                                            self.ExecutionSummaries.values())),
-                                            key=lambda x: x.Timestamp, reverse=False)
+    def CalculatePositionsProfit(self,profitsAndLosses,todaySummaries):
+
         foundOpenPositions = False
 
         for summary in todaySummaries:
@@ -761,7 +832,6 @@ class DayTradingPosition():
 
     #region Public Util/Aux
 
-
     def CalculateStdDevForLastNDays(self,marketDataArr, numDaysModelParam):
         
         if numDaysModelParam.IntValue is None:
@@ -776,21 +846,6 @@ class DayTradingPosition():
 
     def toJSON(self):
         return json.dumps(self, default=lambda o: o.__dict__,sort_keys=True, indent=4)
-
-    def DepurateSummaries(self):
-        openSummaries = list(filter(lambda x: x.Position.IsOpenPosition(), self.ExecutionSummaries.values()))
-
-        for openSummary in openSummaries:
-            openSummary.PosStatus = PositionStatus.Unknown
-            openSummary.Position.PosStatus = PositionStatus.Unknown
-
-        self.UpdateRouting()
-
-        return openSummaries
-
-    def UpdateRouting(self):
-        nextOpenPos = next(iter(list(filter(lambda x: x.Position.IsOpenPosition(), self.ExecutionSummaries.values()))), None)
-        self.Routing= nextOpenPos is not None
 
     #endregion
 
@@ -1840,7 +1895,6 @@ class DayTradingPosition():
         return (not self.TerminalClose  and  self.SoftTerminalCondEvaluated is  None and self.StrongTerminalCondEvaluated is None
                 and momentumCond is not None)
 
-
     def TerminalConditionActivated(self):
 
         if not self.TerminalClose:
@@ -1854,8 +1908,6 @@ class DayTradingPosition():
         else:
             return self.StrongTerminalCondEvaluated if self.StrongTerminalCondEvaluated is not None else self._TERMINALLY_CLOSED()
 
-
-    
     def IsTerminalCondition(self,condition):
         return (condition==_EXIT_TERM_COND_EOF or condition==_EXIT_TERM_COND_1 or condition==_EXIT_TERM_COND_2
                 or condition == _TERMINALLY_CLOSED or condition==_EXIT_TERM_COND_FLEX_STOP_LOSS)
@@ -1880,8 +1932,6 @@ class DayTradingPosition():
                     return None
         else:
             return _LONG_SHORT_ON_CANDLE_OFF
-
-
 
     def EvaluateStrongTerminal(self, candlebarsArr, endOfdayLimitModelParam):
 

@@ -371,10 +371,10 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
                 if pos_id in self.PositionSecurities:
                     dayTradingPos = self.PositionSecurities[pos_id]
+                    summary= dayTradingPos.FindSummary(pos_id)
 
-                    if pos_id in dayTradingPos.ExecutionSummaries:
+                    if summary is not None:
 
-                        summary = dayTradingPos.ExecutionSummaries[pos_id]
                         self.UpdateManagedPosExecutionSummary(dayTradingPos,summary,exec_report)
                         self.ProcessOrder(summary, False)
                         threading.Thread(target=self.PublishPortfolioPositionThread, args=(dayTradingPos,)).start()
@@ -1944,7 +1944,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
             if IsMainSummary:
                 dayTradingPos.ExecutionSummaries[self.NextPostId] = summary
             else:
-                dayTradingPos.AppendInnerSummary(summary)
+                dayTradingPos.AppendInnerSummary(summary,self.NextPostId)
 
             dayTradingPos.Routing=True
             self.PositionSecurities[self.NextPostId] = dayTradingPos
