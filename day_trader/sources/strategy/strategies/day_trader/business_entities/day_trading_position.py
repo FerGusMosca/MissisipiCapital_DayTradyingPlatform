@@ -308,7 +308,7 @@ class DayTradingPosition():
 
         self.InnerSummaries[posId]=summary
 
-    def GetNetOpenShares(self,summaryOrder):
+    def GetNetOpenShares(self,summaryOrder=ExecutionSummary._MAIN_SUMMARY()):
         todaySummaries = sorted(list(filter(lambda x: x.CumQty >= 0
                                             and (self.RunningBacktest or x.Timestamp.date() == self.PosUpdTimestamp.date()),
                                             self.ExecutionSummaries.values())),
@@ -356,19 +356,12 @@ class DayTradingPosition():
                                    self.ExecutionSummaries.values())),
                                    key=lambda x: x.CreateTime,reverse=True)
 
-    def GetLastTradedSummary(self):
-        lastTradedSummaries = sorted(list(filter(lambda x: x.GetNetShares() != 0
-                                                           and (self.RunningBacktest or x.Timestamp.date() == self.PosUpdTimestamp.date())
-                                                           and (x.Position.LongPositionOpened() if self.GetNetOpenShares() > 0 else x.Position.ShortPositionOpened()),
-                                                 self.ExecutionSummaries.values())), key=lambda x: x.Timestamp, reverse=True)
-
-        return lastTradedSummaries[0] if (len(lastTradedSummaries) > 0) else None
-
-    def GetLastTradedSummary(self,side):
+    def GetLastTradedSummary(self,side=None):
 
         #All the traded summaries for a side, order in a descending fashion
         lastTradedSummaries = sorted(list(filter(lambda x: x.GetNetShares() != 0
-                                                 and x.Position.LongPositionOpened() if side==Side.Buy else x.Position.ShortPositionOpened(),
+                                                 and (self.RunningBacktest or x.Timestamp.date() == self.PosUpdTimestamp.date())
+                                                 and ( side is None or ( x.Position.LongPositionOpened() if side==Side.Buy else x.Position.ShortPositionOpened())),
                                                  self.ExecutionSummaries.values())), key=lambda x: x.Timestamp, reverse=True)
 
         return lastTradedSummaries[0] if (len(lastTradedSummaries) > 0) else None
@@ -396,7 +389,7 @@ class DayTradingPosition():
         secondOrderPos = self.GetOpenSummaries(ExecutionSummary._INNER_SUMMARY_2())
         thirdOrderPos = self.GetOpenSummaries(ExecutionSummary._INNER_SUMMARY_3())
 
-        self.Routing= (firstOrderPos is not None) or(secondOrderPos is not None) or (thirdOrderPos is not None)
+        self.Routing= (len(firstOrderPos)>0) or(len(secondOrderPos)>0) or (len(thirdOrderPos)>0)
 
     def UpdateSummaryNetShares(self, summary):
         netShares=0
@@ -1201,7 +1194,7 @@ class DayTradingPosition():
             raise Exception("Could not find a reducing Condigtion {} to translate for Symbol {} @ConvertReducingCondToSummaryOrder",reducingCond,self.Security.Symbol)
 
     def EvaluateReducingMACDRSIShortTrade(self,subTrade1GainLimit1,subTrade2GainLimit2,subTrade1GainLimit2,subTrade2LossLimit2,subTrade3GainLimit3,subTrade3LossLimit3):
-        if  self.Open():  # we have to be open in order to extend the position
+        if not  self.Open():  # we have to be open in order to extend the position
             return None  # Position already opened
 
         if self.GetNetOpenShares() < 0:
@@ -1495,7 +1488,7 @@ class DayTradingPosition():
             return None
 
     def EvaluateReducingMACDRSILongTrade(self,subTrade1GainLimit1,subTrade2GainLimit2,subTrade1GainLimit2,subTrade2LossLimit2,subTrade3GainLimit3,subTrade3LossLimit3):
-        if self.Open():  # we have to be open in order to extend the position
+        if not self.Open():  # we have to be open in order to extend the position
             return None  # Position already opened
 
         if self.GetNetOpenShares() >0: #we must have a LONG trade
