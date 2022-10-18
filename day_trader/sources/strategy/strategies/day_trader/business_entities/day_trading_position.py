@@ -332,7 +332,7 @@ class DayTradingPosition():
         openSummaries =  list(filter(lambda x: x.Position.IsOpenPosition(), self.ExecutionSummaries.values()))
 
         if summaryOrder==ExecutionSummary._MAIN_SUMMARY():
-            openSummaries
+            return openSummaries
         elif summaryOrder==ExecutionSummary._INNER_SUMMARY_2():
             innerSummaries = []
 
@@ -1029,12 +1029,14 @@ class DayTradingPosition():
 
         openSummary1 = self.GetLastTradedSummary(Side.Buy)
 
-        if (not openSummary1.DoInnerTradesExist()):#No inner trades (trade #2 or trade #3)
-            if self.CurrentProfitLastTrade is not None and self.CurrentProfitLastTrade < subTrade1AddLimit2.FloatValue:
-                return _LONG_MACD_RSI_RULE_11_EXT_2
-        elif (openSummary1.IsFirstInnerTradeOpen()):
-            if self.FirstInnerTradeProfitLastTrade is not None and self.FirstInnerTradeProfitLastTrade < subTrade1AddLimit3.FloatValue:
-                return _LONG_MACD_RSI_RULE_11_EXT_3
+        if openSummary1 is not None:
+
+            if (not openSummary1.DoInnerTradesExist()):#No inner trades (trade #2 or trade #3)
+                if self.CurrentProfitLastTrade is not None and self.CurrentProfitLastTrade < subTrade1AddLimit2.FloatValue:
+                    return _LONG_MACD_RSI_RULE_11_EXT_2
+            elif (openSummary1.IsFirstInnerTradeOpen()):
+                if self.FirstInnerTradeProfitLastTrade is not None and self.FirstInnerTradeProfitLastTrade < subTrade1AddLimit3.FloatValue:
+                    return _LONG_MACD_RSI_RULE_11_EXT_3
 
         return None
 

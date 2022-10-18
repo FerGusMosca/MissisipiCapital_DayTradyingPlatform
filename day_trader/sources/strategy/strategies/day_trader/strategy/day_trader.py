@@ -258,9 +258,9 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
         self.ProcessExecutionPrices(dayTradingPos,execReport)
         summary.UpdateStatus(execReport, marketDataToUse=dayTradingPos.MarketData if dayTradingPos.RunningBacktest else None)
         dayTradingPos.UpdateRouting() #order is important!
-        self.DoLog("DBG<ER>-Symbol={} Side={} PosStatus={} ExecType={} LeavesQty={} Routing={} "
-                   .format(dayTradingPos.Security.Symbol, execReport.Order.Side,summary.Position.PosStatus,execReport.ExecType,execReport.LeavesQty,
-                           dayTradingPos.Routing),MessageType.INFO)
+        # self.DoLog("DBG<ER>-Symbol={} Side={} PosStatus={} ExecType={} LeavesQty={} Routing={} "
+        #            .format(dayTradingPos.Security.Symbol, execReport.Order.Side,summary.Position.PosStatus,execReport.ExecType,execReport.LeavesQty,
+        #                    dayTradingPos.Routing),MessageType.INFO)
 
         if summary.Position.IsFinishedPosition():
             self.WaitForFilledToArrive = False
@@ -1299,26 +1299,33 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
     def RunClose(self,dayTradingPos,side,statisticalParam=None,candlebar=None, text=None, generic = False, closingCond = None, summaryOrder=ExecutionSummary._MAIN_SUMMARY()):
 
-        self.DoLog("DBG<ER>- RunClose Symbol={} Routing={} ".format(dayTradingPos.Security.Symbol,dayTradingPos.Routing), MessageType.INFO)
+        #self.DoLog("DBG<ER>- RunClose Symbol={} Routing={} ".format(dayTradingPos.Security.Symbol,dayTradingPos.Routing), MessageType.INFO)
         if dayTradingPos.Routing:
             # self.DoLog("DBG<ER>- RunClose Symbol={} OpenSumms={} "
             #            .format(dayTradingPos.Security.Symbol, dayTradingPos.GetOpenSummaries()),MessageType.INFO)
 
-            for summary in dayTradingPos.GetOpenSummaries(summaryOrder):
 
-                # we just cancel summaries whose side is different than the closing side. We don't want to cancel the close
-                if  (
-                    summary.Position.PosId not in self.PendingCancels  and
-                    (dayTradingPos.GetNetOpenShares() ==0 or summary.Position.Side !=side)):
-                    self.DoLog("Cancelling order previously to closing position for symbol {}".format(dayTradingPos.Security.Symbol),MessageType.INFO)
-                    self.PendingCancels[summary.Position.PosId] = summary
-                    cxlWrapper = CancelPositionWrapper(summary.Position.PosId)
-                    state= self.OrderRoutingModule.ProcessMessage(cxlWrapper)
-                    if not state.Success:
-                        self.ProcessError(state.Exception)
+            openSummaries=dayTradingPos.GetOpenSummaries(summaryOrder)
+
+
+            if( len(openSummaries) >0):
+                for summary in dayTradingPos.GetOpenSummaries(summaryOrder):
+
+                    # we just cancel summaries whose side is different than the closing side. We don't want to cancel the close
+                    if  (
+                        summary.Position.PosId not in self.PendingCancels  and
+                        (dayTradingPos.GetNetOpenShares() ==0 or summary.Position.Side !=side)):
+                        self.DoLog("Cancelling order previously to closing position for symbol {}".format(dayTradingPos.Security.Symbol),MessageType.INFO)
+                        self.PendingCancels[summary.Position.PosId] = summary
+                        cxlWrapper = CancelPositionWrapper(summary.Position.PosId)
+                        state= self.OrderRoutingModule.ProcessMessage(cxlWrapper)
+                        if not state.Success:
+                            self.ProcessError(state.Exception)
+            else:
+                raise Exception("Running a close for a summary order {} with no open summaries for symbol {}?",summaryOrder,dayTradingPos.Security.Symbol)
 
         else:
-            self.DoLog("DBG<ER>- RunClose Symbol={} NetShares={} ".format(dayTradingPos.Security.Symbol, dayTradingPos.GetNetOpenShares()), MessageType.INFO)
+            #self.DoLog("DBG<ER>- RunClose Symbol={} NetShares={} ".format(dayTradingPos.Security.Symbol, dayTradingPos.GetNetOpenShares()), MessageType.INFO)
             netShares = dayTradingPos.GetNetOpenShares(summaryOrder)
             if netShares!=0: #if there is something to close
 
