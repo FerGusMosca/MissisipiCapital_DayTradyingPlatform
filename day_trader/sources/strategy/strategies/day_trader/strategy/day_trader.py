@@ -1645,8 +1645,8 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                 qty = dayTradingPos.GetShortInnerTradeQty(extendCond,
                                                           self.ModelParametersHandler.Get(ModelParametersHandler.SUB_TRADE_2_SHARES(), symbol),
                                                           self.ModelParametersHandler.Get(ModelParametersHandler.SUB_TRADE_3_SHARES(), symbol))
-                self.ProcessNewPositionReqManagedPos(dayTradingPos, Side.Buy, qty, self.Configuration.DefaultAccount,IsMainSummary=False)
-                threading.Thread(target=self.DoPersistTradingSignalThread, args=(False, dayTradingPos, TradingSignalHelper._ACTION_OPEN(), Side.Sell, candlebar, None, self,extendCond)).start()
+                self.ProcessNewPositionReqManagedPos(dayTradingPos, Side.Sell, qty, self.Configuration.DefaultAccount,IsMainSummary=False)
+                threading.Thread(target=self.DoPersistTradingSignalThread, args=(False, dayTradingPos, TradingSignalHelper._ACTION_OPEN(), Side.SellShort, candlebar, None, self,extendCond)).start()
 
             return extendCond
         else:
