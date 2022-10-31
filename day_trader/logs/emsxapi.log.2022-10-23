@@ -1,0 +1,24 @@
+2022-10-22 19:34:10 [logger INFO] Processing SERVICE_STATUS event
+2022-10-22 19:34:11 [logger INFO] Processing SERVICE_STATUS event
+2022-10-22 19:34:11 [logger INFO] Processing SERVICE_STATUS event
+2022-10-22 19:34:13 [logger INFO] Processing SERVICE_STATUS event
+2022-10-23 03:15:14 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2022-10-23 03:15:14 [logger ERROR] Bloomberg Session Connection is DOWN...
+2022-10-23 03:15:14 [logger INFO] Processing SERVICE_STATUS event
+2022-10-23 03:15:14 [logger INFO] Processing SERVICE_STATUS event
+2022-10-23 03:15:14 [logger INFO] Processing SERVICE_STATUS event
+2022-10-23 03:15:14 [logger INFO] Processing SERVICE_STATUS event
+2022-10-23 03:16:11 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2022-10-23 03:16:11 [logger ERROR] Bloomberg Session Terminated...
+2022-10-23 08:00:00 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:SPY
+2022-10-23 08:00:00 [logger ERROR] Critical error subscribing for Market Data for symbol SPY:Session Not Started (0x00010009)
+2022-10-23 08:00:01 [logger INFO] Requesting for open orders...
+2022-10-23 08:00:01 [logger INFO] Recovered 0 previously existing execution reports
+2022-10-23 08:00:01 [logger INFO] Subscribing to order and route events
+2022-10-23 08:00:01 [logger INFO] Received list of Open Positions: 0 positions
+2022-10-23 08:00:01 [logger INFO] Process ready to receive commands and trade
+2022-10-23 08:00:01 [logger ERROR] Error running ProcessMessage @OrderRouter.Bloomberg module:Session Not Started (0x00010009)
+2022-10-23 08:00:01 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:SPY
+2022-10-23 08:00:01 [logger ERROR] Critical error subscribing for candlebars for symbol SPY:Session Not Started (0x00010009)
+2022-10-23 08:00:01 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:SPY
+2022-10-23 08:00:01 [logger ERROR] Critical error subscribing for historical prices for symbol SPY:Session Not Started (0x00010009)

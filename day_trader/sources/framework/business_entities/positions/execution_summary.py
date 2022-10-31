@@ -23,6 +23,7 @@ class ExecutionSummary:
         self.LastTradeTime = None
         self.CreateTime= datetime.datetime.now()
         self.InnerSummaries={}
+        self.SummaryHierarchy=None
 
     #region Public Methods
 
@@ -97,9 +98,11 @@ class ExecutionSummary:
         return self.InnerSummaries[_INNER_SUMMARY_3]
 
     def AppendFirstInnerSummary(self,summary):
+        summary.SummaryHierarchy=_INNER_SUMMARY_2
         self.InnerSummaries[_INNER_SUMMARY_2]=summary
 
     def AppendSecondInnerSummary(self,summary):
+        summary.SummaryHierarchy = _INNER_SUMMARY_3
         self.InnerSummaries[_INNER_SUMMARY_3]=summary
 
     #endregion

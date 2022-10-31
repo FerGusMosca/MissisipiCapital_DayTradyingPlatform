@@ -1,0 +1,176 @@
+2022-10-21 13:25:08 [logger INFO] DayTrader  Initializing
+2022-10-21 13:25:09 [logger INFO] Loading 677 summaries for security SPY
+2022-10-21 13:25:10 [logger INFO] WebSocketModule  Initializing
+2022-10-21 13:25:10 [logger INFO] WebSocketModule Successfully initialized
+2022-10-21 13:25:10 [logger ERROR] Critical error opening websocket @OpenWebsocket: [WinError 10048] Solo se permite un uso de cada dirección de socket (protocolo/dirección de red/puerto)
+2022-10-21 13:25:10 [logger INFO] FileHandlerModule  Initializing
+2022-10-21 13:25:10 [logger INFO] FileHandlerModule Successfully initialized
+2022-10-21 13:25:10 [logger INFO] Initializing Bloomberg Order Router
+2022-10-21 13:25:10 [logger INFO] Connecting to localhost:8194
+2022-10-21 13:25:10 [logger INFO] Bloomberg Order Router Initialized
+2022-10-21 13:25:10 [logger INFO] SingletonModuleHandler Successfully initializer
+2022-10-21 13:25:10 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2022-10-21 13:25:10 [logger INFO] Bloomberg Session Connection is UP...
+2022-10-21 13:25:10 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2022-10-21 13:25:10 [logger INFO] Bloomberg Session started...
+2022-10-21 13:25:10 [logger INFO] Initializing Generic Market Order Router
+2022-10-21 13:25:10 [logger INFO] SingletonModuleHandler Successfully initializer
+2022-10-21 13:25:10 [logger INFO] Generic Market Order Router Initialized
+2022-10-21 13:25:10 [logger INFO] Processing SERVICE_STATUS event
+2022-10-21 13:25:10 [logger INFO] Service //blp/emapisvc opened...
+2022-10-21 13:25:11 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:SPY
+2022-10-21 13:25:11 [logger INFO] DayTrader Successfully initialized
+2022-10-21 13:25:11 [logger INFO] Processing SERVICE_STATUS event
+2022-10-21 13:25:11 [logger INFO] Service //blp/mktdata opened...
+2022-10-21 13:25:12 [logger INFO] Requesting for open orders...
+2022-10-21 13:25:12 [logger INFO] Waiting initial paints to finish to return active execution reports
+2022-10-21 13:25:12 [logger INFO] Subscribing to order and route events
+2022-10-21 13:25:12 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:SPY
+2022-10-21 13:25:12 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:SPY
+2022-10-21 13:25:12 [logger INFO] Order subscription started successfully
+2022-10-21 13:25:12 [logger INFO] Route subscription started successfully
+2022-10-21 13:25:12 [logger INFO] Processing SERVICE_STATUS event
+2022-10-21 13:25:12 [logger INFO] Service //blp/mktbar opened...
+2022-10-21 13:25:12 [logger INFO] Processing SERVICE_STATUS event
+2022-10-21 13:25:12 [logger INFO] Service //blp/refdata opened...
+2022-10-21 13:25:13 [logger INFO] Waiting initial paints to finish to return active execution reports
+2022-10-21 13:25:13 [logger INFO] Historical prices successfully loaded for symbol SPY 
+2022-10-21 13:25:14 [logger INFO] Recovered 0 previously existing execution reports
+2022-10-21 13:25:14 [logger INFO] Received list of Open Positions: 0 positions
+2022-10-21 13:25:14 [logger INFO] Process ready to receive commands and trade
+2022-10-21 13:31:33 [logger INFO] DayTrader  Initializing
+2022-10-21 13:31:33 [logger INFO] Loading 677 summaries for security SPY
+2022-10-21 13:31:33 [logger INFO] WebSocketModule  Initializing
+2022-10-21 13:31:33 [logger INFO] WebSocketModule Successfully initialized
+2022-10-21 13:31:33 [logger ERROR] Critical error opening websocket @OpenWebsocket: [WinError 10048] Solo se permite un uso de cada dirección de socket (protocolo/dirección de red/puerto)
+2022-10-21 13:31:33 [logger INFO] FileHandlerModule  Initializing
+2022-10-21 13:31:33 [logger INFO] FileHandlerModule Successfully initialized
+2022-10-21 13:31:33 [logger INFO] Initializing Bloomberg Order Router
+2022-10-21 13:31:33 [logger INFO] Connecting to localhost:8194
+2022-10-21 13:31:33 [logger INFO] Bloomberg Order Router Initialized
+2022-10-21 13:31:33 [logger INFO] SingletonModuleHandler Successfully initializer
+2022-10-21 13:31:33 [logger INFO] Initializing Generic Market Order Router
+2022-10-21 13:31:33 [logger INFO] SingletonModuleHandler Successfully initializer
+2022-10-21 13:31:33 [logger INFO] Generic Market Order Router Initialized
+2022-10-21 13:31:33 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2022-10-21 13:31:33 [logger INFO] Bloomberg Session Connection is UP...
+2022-10-21 13:31:33 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2022-10-21 13:31:33 [logger INFO] Bloomberg Session started...
+2022-10-21 13:31:33 [logger INFO] Processing SERVICE_STATUS event
+2022-10-21 13:31:33 [logger INFO] Service //blp/emapisvc opened...
+2022-10-21 13:31:34 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:SPY
+2022-10-21 13:31:34 [logger INFO] DayTrader Successfully initialized
+2022-10-21 13:31:35 [logger INFO] Processing SERVICE_STATUS event
+2022-10-21 13:31:35 [logger INFO] Service //blp/mktdata opened...
+2022-10-21 13:31:35 [logger INFO] Requesting for open orders...
+2022-10-21 13:31:35 [logger INFO] Waiting initial paints to finish to return active execution reports
+2022-10-21 13:31:35 [logger INFO] Subscribing to order and route events
+2022-10-21 13:31:35 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:SPY
+2022-10-21 13:31:35 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:SPY
+2022-10-21 13:31:35 [logger INFO] Order subscription started successfully
+2022-10-21 13:31:35 [logger INFO] Route subscription started successfully
+2022-10-21 13:31:36 [logger INFO] Processing SERVICE_STATUS event
+2022-10-21 13:31:36 [logger INFO] Service //blp/mktbar opened...
+2022-10-21 13:31:36 [logger INFO] Processing SERVICE_STATUS event
+2022-10-21 13:31:36 [logger INFO] Service //blp/refdata opened...
+2022-10-21 13:31:36 [logger INFO] Waiting initial paints to finish to return active execution reports
+2022-10-21 13:31:36 [logger INFO] Historical prices successfully loaded for symbol SPY 
+2022-10-21 13:31:37 [logger INFO] Recovered 0 previously existing execution reports
+2022-10-21 13:31:37 [logger INFO] Received list of Open Positions: 0 positions
+2022-10-21 13:31:37 [logger INFO] Process ready to receive commands and trade
+2022-10-21 14:10:58 [logger INFO] MACD/RSI = Running short trade for symbol SPY at 2022-10-21 13:56:00+00:00
+2022-10-21 14:10:58 [logger INFO] DBX1-Found position for pos_id 41e2e8a6-a002-446e-a10b-45a70b71b5a7
+2022-10-21 14:10:58 [logger INFO] DBX2-Updating pos status Open= False NetOpenShares=0 Routing=True NetShares=0
+2022-10-21 14:10:58 [logger INFO] DBX3-Updating pos status Open= False NetOpenShares=0 Routing=True NetShares=0
+2022-10-21 14:10:58 [logger INFO] DBX4<ER>-Symbol=SPY Side=Side.SellShort PosStatus=PositionStatus.New ExecType=ExecType.New LeavesQty=1 Routing=True 
+2022-10-21 14:10:58 [logger INFO] Managed Position Updated: Arrival=2022-10-21 14:10:58.651239 TradeId=trd__SPY_1666372258 PosId=41e2e8a6-a002-446e-a10b-45a70b71b5a7 Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2022-10-21 14:10:58 [logger INFO] DBX1-Found position for pos_id 41e2e8a6-a002-446e-a10b-45a70b71b5a7
+2022-10-21 14:10:58 [logger INFO] DBX2-Updating pos status Open= False NetOpenShares=0 Routing=True NetShares=0
+2022-10-21 14:10:58 [logger INFO] DBX3-Updating pos status Open= True NetOpenShares=-1 Routing=False NetShares=1
+2022-10-21 14:10:58 [logger INFO] DBX4<ER>-Symbol=SPY Side=Side.SellShort PosStatus=PositionStatus.Filled ExecType=ExecType.Trade LeavesQty=0 Routing=False 
+2022-10-21 14:10:58 [logger INFO] Managed Position Finished: Arrival=2022-10-21 14:10:58.847909 TradeId=trd__SPY_1666372258 PosId=41e2e8a6-a002-446e-a10b-45a70b71b5a7 Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=371.455 Text=Fake Filled Order 
+2022-10-21 14:11:01 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:03.129830 seconds!
+2022-10-21 15:27:58 [logger INFO] MACD-RSI - Closing short position for symbol SPY at 2022-10-21 15:13:00+00:00 
+2022-10-21 15:27:58 [logger INFO] DBX1-Found position for pos_id 59e7dbcd-33b0-46ff-9b1f-0e8ea61c7890
+2022-10-21 15:27:58 [logger INFO] DBX2-Updating pos status Open= False NetOpenShares=0 Routing=True NetShares=0
+2022-10-21 15:27:58 [logger INFO] DBX3-Updating pos status Open= False NetOpenShares=0 Routing=True NetShares=0
+2022-10-21 15:27:58 [logger INFO] DBX4<ER>-Symbol=SPY Side=Side.BuyToClose PosStatus=PositionStatus.New ExecType=ExecType.New LeavesQty=1 Routing=True 
+2022-10-21 15:27:58 [logger INFO] Managed Position Updated: Arrival=2022-10-21 15:27:58.963490 TradeId=trd__SPY_1666376878 PosId=59e7dbcd-33b0-46ff-9b1f-0e8ea61c7890 Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2022-10-21 15:27:59 [logger INFO] DBX1-Found position for pos_id 59e7dbcd-33b0-46ff-9b1f-0e8ea61c7890
+2022-10-21 15:27:59 [logger INFO] DBX2-Updating pos status Open= False NetOpenShares=0 Routing=True NetShares=0
+2022-10-21 15:27:59 [logger INFO] DBX3-Updating pos status Open= True NetOpenShares=1 Routing=False NetShares=1
+2022-10-21 15:27:59 [logger INFO] DBX4<ER>-Symbol=SPY Side=Side.BuyToClose PosStatus=PositionStatus.Filled ExecType=ExecType.Trade LeavesQty=0 Routing=False 
+2022-10-21 15:27:59 [logger INFO] Managed Position Finished: Arrival=2022-10-21 15:27:59.172440 TradeId=trd__SPY_1666376878 PosId=59e7dbcd-33b0-46ff-9b1f-0e8ea61c7890 Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=373.275 Text=Fake Filled Order 
+2022-10-21 15:28:58 [logger INFO] MACD-RSI - Closing long position for symbol SPY at 2022-10-21 15:14:00+00:00 
+2022-10-21 15:28:58 [logger INFO] DBX1-Found position for pos_id 6eb2c707-76d6-4e29-b6df-2175b991a6f3
+2022-10-21 15:28:58 [logger INFO] DBX2-Updating pos status Open= False NetOpenShares=0 Routing=True NetShares=0
+2022-10-21 15:28:58 [logger INFO] DBX3-Updating pos status Open= False NetOpenShares=0 Routing=True NetShares=0
+2022-10-21 15:28:58 [logger INFO] DBX4<ER>-Symbol=SPY Side=Side.Sell PosStatus=PositionStatus.New ExecType=ExecType.New LeavesQty=1 Routing=True 
+2022-10-21 15:28:58 [logger INFO] Managed Position Updated: Arrival=2022-10-21 15:28:58.400246 TradeId=trd__SPY_1666376938 PosId=6eb2c707-76d6-4e29-b6df-2175b991a6f3 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2022-10-21 15:28:58 [logger INFO] DBX1-Found position for pos_id 6eb2c707-76d6-4e29-b6df-2175b991a6f3
+2022-10-21 15:28:58 [logger INFO] DBX2-Updating pos status Open= False NetOpenShares=0 Routing=True NetShares=0
+2022-10-21 15:28:58 [logger INFO] DBX3-Updating pos status Open= True NetOpenShares=-1 Routing=False NetShares=1
+2022-10-21 15:28:58 [logger INFO] DBX4<ER>-Symbol=SPY Side=Side.Sell PosStatus=PositionStatus.Filled ExecType=ExecType.Trade LeavesQty=0 Routing=False 
+2022-10-21 15:28:58 [logger INFO] Managed Position Finished: Arrival=2022-10-21 15:28:58.591318 TradeId=trd__SPY_1666376938 PosId=6eb2c707-76d6-4e29-b6df-2175b991a6f3 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=372.949 Text=Fake Filled Order 
+2022-10-21 17:10:58 [logger INFO] MACD-RSI - Closing short position for symbol SPY at 2022-10-21 16:56:00+00:00 
+2022-10-21 17:10:58 [logger INFO] DBX1-Found position for pos_id 7f20e01e-36e2-4f03-bc23-21e56299ebe8
+2022-10-21 17:10:58 [logger INFO] DBX2-Updating pos status Open= False NetOpenShares=0 Routing=True NetShares=0
+2022-10-21 17:10:58 [logger INFO] DBX3-Updating pos status Open= False NetOpenShares=0 Routing=True NetShares=0
+2022-10-21 17:10:58 [logger INFO] DBX4<ER>-Symbol=SPY Side=Side.BuyToClose PosStatus=PositionStatus.New ExecType=ExecType.New LeavesQty=1 Routing=True 
+2022-10-21 17:10:58 [logger INFO] Managed Position Updated: Arrival=2022-10-21 17:10:58.815431 TradeId=trd__SPY_1666383058 PosId=7f20e01e-36e2-4f03-bc23-21e56299ebe8 Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2022-10-21 17:10:59 [logger INFO] DBX1-Found position for pos_id 7f20e01e-36e2-4f03-bc23-21e56299ebe8
+2022-10-21 17:10:59 [logger INFO] DBX2-Updating pos status Open= False NetOpenShares=0 Routing=True NetShares=0
+2022-10-21 17:10:59 [logger INFO] DBX3-Updating pos status Open= True NetOpenShares=1 Routing=False NetShares=1
+2022-10-21 17:10:59 [logger INFO] DBX4<ER>-Symbol=SPY Side=Side.BuyToClose PosStatus=PositionStatus.Filled ExecType=ExecType.Trade LeavesQty=0 Routing=False 
+2022-10-21 17:10:59 [logger INFO] Managed Position Finished: Arrival=2022-10-21 17:10:59.024201 TradeId=trd__SPY_1666383058 PosId=7f20e01e-36e2-4f03-bc23-21e56299ebe8 Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=374.245 Text=Fake Filled Order 
+2022-10-21 17:11:58 [logger INFO] MACD-RSI - Closing long position for symbol SPY at 2022-10-21 16:57:00+00:00 
+2022-10-21 17:11:58 [logger INFO] DBX1-Found position for pos_id 69821376-849b-435d-84ff-90250ada604d
+2022-10-21 17:11:58 [logger INFO] DBX2-Updating pos status Open= False NetOpenShares=0 Routing=True NetShares=0
+2022-10-21 17:11:58 [logger INFO] DBX3-Updating pos status Open= False NetOpenShares=0 Routing=True NetShares=0
+2022-10-21 17:11:58 [logger INFO] DBX4<ER>-Symbol=SPY Side=Side.Sell PosStatus=PositionStatus.New ExecType=ExecType.New LeavesQty=1 Routing=True 
+2022-10-21 17:11:58 [logger INFO] Managed Position Updated: Arrival=2022-10-21 17:11:58.699413 TradeId=trd__SPY_1666383118 PosId=69821376-849b-435d-84ff-90250ada604d Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2022-10-21 17:11:58 [logger INFO] DBX1-Found position for pos_id 69821376-849b-435d-84ff-90250ada604d
+2022-10-21 17:11:58 [logger INFO] DBX2-Updating pos status Open= False NetOpenShares=0 Routing=True NetShares=0
+2022-10-21 17:11:58 [logger INFO] DBX3-Updating pos status Open= True NetOpenShares=-1 Routing=False NetShares=1
+2022-10-21 17:11:58 [logger INFO] DBX4<ER>-Symbol=SPY Side=Side.Sell PosStatus=PositionStatus.Filled ExecType=ExecType.Trade LeavesQty=0 Routing=False 
+2022-10-21 17:11:58 [logger INFO] Managed Position Finished: Arrival=2022-10-21 17:11:58.911548 TradeId=trd__SPY_1666383118 PosId=69821376-849b-435d-84ff-90250ada604d Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=374.24 Text=Fake Filled Order 
+2022-10-21 17:12:58 [logger INFO] MACD-RSI - Closing short position for symbol SPY at 2022-10-21 16:58:00+00:00 
+2022-10-21 17:12:58 [logger INFO] DBX1-Found position for pos_id 349e2e40-d75e-4a98-89e6-d0f58099b92e
+2022-10-21 17:12:58 [logger INFO] DBX2-Updating pos status Open= False NetOpenShares=0 Routing=True NetShares=0
+2022-10-21 17:12:58 [logger INFO] DBX3-Updating pos status Open= False NetOpenShares=0 Routing=True NetShares=0
+2022-10-21 17:12:58 [logger INFO] DBX4<ER>-Symbol=SPY Side=Side.BuyToClose PosStatus=PositionStatus.New ExecType=ExecType.New LeavesQty=1 Routing=True 
+2022-10-21 17:12:58 [logger INFO] Managed Position Updated: Arrival=2022-10-21 17:12:58.428085 TradeId=trd__SPY_1666383178 PosId=349e2e40-d75e-4a98-89e6-d0f58099b92e Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2022-10-21 17:12:58 [logger INFO] DBX1-Found position for pos_id 349e2e40-d75e-4a98-89e6-d0f58099b92e
+2022-10-21 17:12:58 [logger INFO] DBX2-Updating pos status Open= False NetOpenShares=0 Routing=True NetShares=0
+2022-10-21 17:12:58 [logger INFO] DBX3-Updating pos status Open= True NetOpenShares=1 Routing=False NetShares=1
+2022-10-21 17:12:58 [logger INFO] DBX4<ER>-Symbol=SPY Side=Side.BuyToClose PosStatus=PositionStatus.Filled ExecType=ExecType.Trade LeavesQty=0 Routing=False 
+2022-10-21 17:12:58 [logger INFO] Managed Position Finished: Arrival=2022-10-21 17:12:58.635531 TradeId=trd__SPY_1666383178 PosId=349e2e40-d75e-4a98-89e6-d0f58099b92e Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=374.155 Text=Fake Filled Order 
+2022-10-21 17:13:58 [logger INFO] MACD-RSI - Closing long position for symbol SPY at 2022-10-21 16:59:00+00:00 
+2022-10-21 17:13:58 [logger INFO] DBX1-Found position for pos_id 09a942cb-d3bb-43e4-b12d-3a7d4657f0b5
+2022-10-21 17:13:58 [logger INFO] DBX2-Updating pos status Open= False NetOpenShares=0 Routing=True NetShares=0
+2022-10-21 17:13:58 [logger INFO] DBX3-Updating pos status Open= False NetOpenShares=0 Routing=True NetShares=0
+2022-10-21 17:13:58 [logger INFO] DBX4<ER>-Symbol=SPY Side=Side.Sell PosStatus=PositionStatus.New ExecType=ExecType.New LeavesQty=1 Routing=True 
+2022-10-21 17:13:58 [logger INFO] Managed Position Updated: Arrival=2022-10-21 17:13:58.612843 TradeId=trd__SPY_1666383238 PosId=09a942cb-d3bb-43e4-b12d-3a7d4657f0b5 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=None Text=Fake New Order 
+2022-10-21 17:13:58 [logger INFO] DBX1-Found position for pos_id 09a942cb-d3bb-43e4-b12d-3a7d4657f0b5
+2022-10-21 17:13:58 [logger INFO] DBX2-Updating pos status Open= False NetOpenShares=0 Routing=True NetShares=0
+2022-10-21 17:13:58 [logger INFO] DBX3-Updating pos status Open= True NetOpenShares=-1 Routing=False NetShares=1
+2022-10-21 17:13:58 [logger INFO] DBX4<ER>-Symbol=SPY Side=Side.Sell PosStatus=PositionStatus.Filled ExecType=ExecType.Trade LeavesQty=0 Routing=False 
+2022-10-21 17:13:58 [logger INFO] Managed Position Finished: Arrival=2022-10-21 17:13:58.827437 TradeId=trd__SPY_1666383238 PosId=09a942cb-d3bb-43e4-b12d-3a7d4657f0b5 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=374.1 Text=Fake Filled Order 
+2022-10-21 18:20:36 [logger INFO] Processing SERVICE_STATUS event
+2022-10-21 18:20:36 [logger INFO] Processing SERVICE_STATUS event
+2022-10-22 08:00:00 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:SPY
+2022-10-22 08:00:01 [logger INFO] Requesting for open orders...
+2022-10-22 08:00:01 [logger INFO] Recovered 0 previously existing execution reports
+2022-10-22 08:00:01 [logger INFO] Subscribing to order and route events
+2022-10-22 08:00:01 [logger INFO] Received list of Open Positions: 0 positions
+2022-10-22 08:00:01 [logger INFO] Process ready to receive commands and trade
+2022-10-22 08:00:01 [logger ERROR] Error running ProcessMessage @OrderRouter.Bloomberg module:Duplicate CorrelationId: [ valueType=INT classId=0 value=98 ] (0x00020005)
+2022-10-22 08:00:01 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:SPY
+2022-10-22 08:00:01 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:SPY
+2022-10-22 08:02:01 [logger INFO] Processing SERVICE_STATUS event
+2022-10-22 08:02:01 [logger ERROR] Error: Service //blp/refdata failed to open
+2022-10-22 08:02:01 [logger INFO] Processing SERVICE_STATUS event
+2022-10-22 10:34:09 [logger INFO] Processing SERVICE_STATUS event
+2022-10-22 10:34:09 [logger INFO] Processing SERVICE_STATUS event
+2022-10-22 10:34:09 [logger INFO] Processing SERVICE_STATUS event
+2022-10-22 10:34:10 [logger INFO] Historical prices successfully loaded for symbol SPY 

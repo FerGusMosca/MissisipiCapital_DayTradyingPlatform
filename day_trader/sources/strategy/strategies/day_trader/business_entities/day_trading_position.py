@@ -293,6 +293,20 @@ class DayTradingPosition():
 
     #region Summary Management
 
+    def GetInnerSummaries(self):
+
+        openSummary1 = self.GetLastTradedSummary(Side.Sell)
+
+        innerTrades=[]
+        if openSummary1 is not None and openSummary1.DoInnerTradesExist():
+            if  openSummary1.IsFirstInnerTradeOpen():
+                innerTrades.append(openSummary1.GetFirstInnerSummary())
+            if  openSummary1.AppendSecondInnerSummary():
+                innerTrades.append(openSummary1.GetSecondInnerSummary())
+
+
+        return innerTrades
+
     def AppendInnerSummary(self,summary,posId):
 
         if self.GetLastTradedSummary() is not None:
@@ -301,7 +315,7 @@ class DayTradingPosition():
                 mainSummary.AppendFirstInnerSummary(summary)
             elif mainSummary.IsFirstInnerTradeOpen() and not mainSummary.IsSecondInnerTradeOpen():
                 mainSummary.AppendSecondInnerSummary(summary)
-            elif  mainSummary.IsFirstInnerTradeOpen() and  mainSummary.IsSecondInnerTradeOpen():
+            elif  mainSummary.IsFirstInnerTradeOpen() and  mainSummary.AppendSecondInnerSummary():
                 raise Exception("First and Second Inner Position already opened for symbol {}".format(self.Security.Symbol))
         else:
             raise Exception("Could not find a Main Position to append an inner position for symbol {}".format(self.Security.Symbol))
@@ -316,16 +330,14 @@ class DayTradingPosition():
 
         netShares = 0
         for summary in todaySummaries: # first we calculate the traded positions
-
             if summaryOrder==ExecutionSummary._MAIN_SUMMARY():
-                netShares= self.UpdateSummaryNetShares(summary)
+                netShares+= self.UpdateSummaryNetShares(summary)
             elif  (summaryOrder==ExecutionSummary._INNER_SUMMARY_2() and summary.IsFirstInnerTradeOpen()):
-                netShares= self.UpdateSummaryNetShares(summary.GetFirstInnerSummary())
+                netShares+= self.UpdateSummaryNetShares(summary.GetFirstInnerSummary())
             elif  (summaryOrder==ExecutionSummary._INNER_SUMMARY_3() and summary.IsSecondInnerTradeOpen()):
-                netShares= self.UpdateSummaryNetShares(summary.GetSecondInnerSummary())
+                netShares+= self.UpdateSummaryNetShares(summary.GetSecondInnerSummary())
             else:
                 raise Exception("Could not find an inner summay of order {} for symbol {}".format(summaryOrder,self.Security.Symbol))
-
         return netShares
 
     def GetOpenSummaries(self,summaryOrder):
@@ -1215,6 +1227,10 @@ class DayTradingPosition():
         if (openSummary1 is None):
             openSummary1 = self.GetLastTradedSummary(Side.SellShort)
 
+            if openSummary1 is None:
+                print("DBX-short: Open={} NetOpenShares={} Routing={}".format(self.Open(), self.GetNetOpenShares(),self.Routing))
+                return None
+
             if (not openSummary1.DoInnerTradesExist()):
                 if self.CurrentProfitLastTrade is not None and self.CurrentProfitLastTrade >= subTrade1GainLimit1.FloatValue:
                     reducingConds.append(_SHORT_MACD_RSI_RULE_11_RED_1)
@@ -1264,6 +1280,7 @@ class DayTradingPosition():
             return None  # We are in a LONG position
         else:
             openQty= abs(self.GetNetOpenShares()) if self.GetNetOpenShares()!=0 else 1
+
 
         '''
         #Rule TERMINAL --> Positions are not closed. They won't just be opened again
@@ -1508,6 +1525,10 @@ class DayTradingPosition():
 
         if (openSummary1 is None):
             openSummary1 = self.GetLastTradedSummary(Side.SellShort)
+
+            if openSummary1 is None:
+                print("DBX-long: Open={} NetOpenShares={} Routing={}".format(self.Open(), self.GetNetOpenShares(),self.Routing))
+                return None
 
             if (not openSummary1.DoInnerTradesExist()):
                 if self.CurrentProfitLastTrade is not None and self.CurrentProfitLastTrade >= subTrade1GainLimit1.FloatValue:
