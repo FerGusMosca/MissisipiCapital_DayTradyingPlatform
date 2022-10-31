@@ -1628,14 +1628,13 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                 self.DoLog("MACD-RSI - Closing long position for symbol {} at {} ".format(dayTradingPos.Security.Symbol,candlebar.DateTime),MessageType.INFO)
                 self.DoLog("DBX0-A- GetNetShares={} len(Executionummaries)={}".format(dayTradingPos.GetNetOpenShares(),len(dayTradingPos.ExecutionSummaries)),MessageType.INFO)
 
-
                 innerTrades = dayTradingPos.GetInnerSummaries()
 
                 for innerTrade in innerTrades:
-                    self.DoLog("DBX0-A.b- Closing Inner Trade  Hierarchy={} CumQty={}".format(innerTrade.SummaryHierarchy,innerTrade.CumQty),MessageType.INFO)
+                    self.DoLog("DBX0-A.b- Closing LONG Inner Trade  Hierarchy={} CumQty={}".format(innerTrade.SummaryHierarchy,innerTrade.CumQty),MessageType.INFO)
                     self.RunClose(dayTradingPos, Side.Sell if dayTradingPos.GetNetOpenShares() > 0 else Side.Buy,dayTradingPos.GetStatisticalParameters(list(cbDict.values())), candlebar,generic=False,
                                   closingCond=closingCond,summaryOrder=innerTrade.SummaryHierarchy,ordQty=innerTrade.CumQty)
-                    self.DoLog("DBX0-A.c- Closed Inner Trade  Hierarchy={} CumQty={}".format(innerTrade.SummaryHierarchy,innerTrade.CumQty),MessageType.INFO)
+                    self.DoLog("DBX0-A.c- Closed LONG Inner Trade  Hierarchy={} CumQty={}".format(innerTrade.SummaryHierarchy,innerTrade.CumQty),MessageType.INFO)
 
                 self.RunClose(dayTradingPos, Side.Sell if dayTradingPos.GetNetOpenShares() > 0 else Side.Buy,
                               dayTradingPos.GetStatisticalParameters(list(cbDict.values())), candlebar,generic=False,
@@ -1776,6 +1775,17 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
             if closingCond is not None and runClose:
                 self.DoLog("MACD-RSI - Closing short position for symbol {} at {} ".format(dayTradingPos.Security.Symbol,candlebar.DateTime),MessageType.INFO)
                 self.DoLog("DBX0-A- GetNetShares={} len(Executionummaries)={}".format(dayTradingPos.GetNetOpenShares(),len(dayTradingPos.ExecutionSummaries)),MessageType.INFO)
+
+                innerTrades = dayTradingPos.GetInnerSummaries()
+
+                for innerTrade in innerTrades:
+                    self.DoLog("DBX0-A.b- Closing SHORT Inner Trade  Hierarchy={} CumQty={}".format(innerTrade.SummaryHierarchy,innerTrade.CumQty),MessageType.INFO)
+                    self.RunClose(dayTradingPos, Side.Sell if dayTradingPos.GetNetOpenShares() > 0 else Side.Buy,
+                                  dayTradingPos.GetStatisticalParameters(list(cbDict.values())), candlebar,
+                                  generic=False,
+                                  closingCond=closingCond, summaryOrder=innerTrade.SummaryHierarchy,
+                                  ordQty=innerTrade.CumQty)
+                    self.DoLog("DBX0-A.c- Closed SHORT Inner Trade  Hierarchy={} CumQty={}".format(innerTrade.SummaryHierarchy,innerTrade.CumQty),MessageType.INFO)
 
                 self.RunClose(dayTradingPos, Side.Sell if dayTradingPos.GetNetOpenShares() > 0 else Side.Buy,
                               dayTradingPos.GetStatisticalParameters(list(cbDict.values())), candlebar,generic=False,
