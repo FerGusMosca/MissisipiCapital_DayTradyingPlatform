@@ -79,6 +79,9 @@ class ExecutionSummary:
         else:
             orderId=self.Position.GetLastOrder().OrderId
 
+        if(self.SummaryHierarchy is not None):
+            orderId+="_"+self.SummaryHierarchy
+
         return "{}_{}_{}".format(_TRADE_ID_PREFIX,self.Position.Security.Symbol,orderId)
 
 

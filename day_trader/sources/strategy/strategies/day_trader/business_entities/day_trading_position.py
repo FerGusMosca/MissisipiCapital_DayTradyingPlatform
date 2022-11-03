@@ -301,7 +301,7 @@ class DayTradingPosition():
         if openSummary1 is not None and openSummary1.DoInnerTradesExist():
             if  openSummary1.IsFirstInnerTradeOpen():
                 innerTrades.append(openSummary1.GetFirstInnerSummary())
-            if  openSummary1.AppendSecondInnerSummary():
+            if  openSummary1.IsSecondInnerTradeOpen():
                 innerTrades.append(openSummary1.GetSecondInnerSummary())
 
 

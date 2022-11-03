@@ -181,13 +181,16 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                     start = datetime.datetime.now()
 
                     if summary.Position.PosId in self.PositionSecurities:
+                        self.DoLog("DBX6- Persisting summary for PosId={} TradeId={}".format(summary.Position.PosId,summary.GetTradeId()), MessageType.INFO)
                         dayTradingPos = self.PositionSecurities[summary.Position.PosId]
                         self.ExecutionSummaryManager.PersistExecutionSummary(summary,dayTradingPos.Id if dayTradingPos is not None else None)
+                        self.DoLog("DBX7- Persisted summary for PosId={} TradeId={}".format(summary.Position.PosId,summary.GetTradeId()),MessageType.INFO)
                     else:
+                        self.DoLog("DBX8- Persisted summary for PosId={} TradeId={}".format(summary.Position.PosId,summary.GetTradeId()),MessageType.INFO)
                         self.ExecutionSummaryManager.PersistExecutionSummary(summary,None)
 
                     finish = datetime.datetime.now()
-                    tdelta = finish - start
+                    tdelta = finish - start 
 
                     if tdelta.total_seconds() > 1:
                         self.DoLog("DBG Warning -Persisting summary for PosId {} took {} seconds"
@@ -287,6 +290,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
         else:
             LogHelper.LogPositionUpdate(self, "Managed Position Updated", summary, execReport)
 
+        self.DoLog("DBX5-Persisting Summary PosId={} CumQty={} Side={}".format(summary.Position.PosId,summary.CumQty,summary.Position.Side),MessageType.INFO)
         self.SummariesQueue.put(summary)
 
 
@@ -384,7 +388,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                 if pos_id in self.PositionSecurities:
                     dayTradingPos = self.PositionSecurities[pos_id]
                     summary= dayTradingPos.FindSummary(pos_id)
-                    self.DoLog("DBX1-Found position for pos_id {}".format(pos_id), MessageType.INFO)
+                    self.DoLog("DBX1-Found position for pos_id {}--> SummaryHierarchy={}".format(pos_id,summary.SummaryHierarchy), MessageType.INFO)
 
                     if summary is not None:
 
@@ -1338,8 +1342,8 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                 raise Exception("Running a close for a summary order {} with no open summaries for symbol {}?",summaryOrder,dayTradingPos.Security.Symbol)
 
         else:
-            self.DoLog("DBX0-C- GetNetShares={} len(Executionummaries)={}".format(dayTradingPos.GetNetOpenShares(), len(dayTradingPos.ExecutionSummaries)), MessageType.INFO)
             netShares = dayTradingPos.GetNetOpenShares(summaryOrder) if  summaryOrder==ExecutionSummary._MAIN_SUMMARY() else ordQty
+            self.DoLog("DBX0-b2- GetNetShares={} summaryOrder{}".format(netShares,summaryOrder),MessageType.INFO)
             if netShares!=0: #if there is something to close
 
                 self.ProcessNewPositionReqManagedPos(dayTradingPos, side,netShares if netShares > 0 else netShares * (-1),self.Configuration.DefaultAccount,
@@ -1986,13 +1990,13 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
             summary = ExecutionSummary(datetime.datetime.now(), newPos)
             summary.Text=text
 
-            self.DoLog("DBX0-C- GetNetShares={} len(Executionummaries)={} CumQty={} IsMainSummary={}".format(dayTradingPos.GetNetOpenShares(), len(dayTradingPos.ExecutionSummaries),summary.CumQty,IsMainSummary), MessageType.INFO)
+            self.DoLog("DBX0-C- GetNetShares={} len(Executionummaries)={} OrQty={} IsMainSummary={} PosId={}".format(dayTradingPos.GetNetOpenShares(), len(dayTradingPos.ExecutionSummaries),qty,IsMainSummary,newPos.PosId), MessageType.INFO)
             if IsMainSummary:
                 dayTradingPos.ExecutionSummaries[self.NextPostId] = summary
             else:
                 dayTradingPos.AppendInnerSummary(summary,self.NextPostId)
 
-            self.DoLog("DBX0-D- GetNetShares={} len(Executionummaries)={} CumQty={} IsMainSummary={}".format(dayTradingPos.GetNetOpenShares(),len(dayTradingPos.ExecutionSummaries),summary.CumQty,IsMainSummary), MessageType.INFO)
+            self.DoLog("DBX0-D- GetNetShares={} len(Executionummaries)={} OrQty={} IsMainSummary={} PosId={}".format(dayTradingPos.GetNetOpenShares(),len(dayTradingPos.ExecutionSummaries),qty,IsMainSummary,newPos.PosId), MessageType.INFO)
 
             dayTradingPos.Routing=True
             self.PositionSecurities[self.NextPostId] = dayTradingPos
