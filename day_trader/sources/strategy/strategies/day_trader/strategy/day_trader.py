@@ -190,7 +190,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                         self.ExecutionSummaryManager.PersistExecutionSummary(summary,None)
 
                     finish = datetime.datetime.now()
-                    tdelta = finish - start 
+                    tdelta = finish - start
 
                     if tdelta.total_seconds() > 1:
                         self.DoLog("DBG Warning -Persisting summary for PosId {} took {} seconds"
@@ -1555,19 +1555,24 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
         if dayTradingPos is not None:
 
-            reducingCond = dayTradingPos.EvaluateReducingMACDRSILongTrade(self.ModelParametersHandler.Get(ModelParametersHandler.SUB_TRADE_1_GAIN_LIMIT_1(), symbol),
+            reducingConds = dayTradingPos.EvaluateReducingMACDRSILongTrade(self.ModelParametersHandler.Get(ModelParametersHandler.SUB_TRADE_1_GAIN_LIMIT_1(), symbol),
                                                                           self.ModelParametersHandler.Get(ModelParametersHandler.SUB_TRADE_2_GAIN_LIMIT_2(), symbol),
                                                                           self.ModelParametersHandler.Get(ModelParametersHandler.SUB_TRADE_1_GAIN_LIMIT_2(), symbol),
                                                                           self.ModelParametersHandler.Get(ModelParametersHandler.SUB_TRADE_2_LOSS_LIMIT_2(), symbol),
                                                                           self.ModelParametersHandler.Get(ModelParametersHandler.SUB_TRADE_3_GAIN_LIMIT_3(), symbol),
                                                                           self.ModelParametersHandler.Get(ModelParametersHandler.SUB_TRADE_3_LOSS_LIMIT_3(), symbol))
 
-            if reducingCond is not None and runClose:
+            if reducingConds is not None and runClose:
                 self.DoLog("MACD-RSI - Reducing long position for symbol {} at {} ".format(dayTradingPos.Security.Symbol,candlebar.DateTime),MessageType.INFO)
 
-                #TODO: Reduce Pos long
+                for reducingCond in reducingConds:
+                    tradeToClose = dayTradingPos.GetInnerTrade(reducingCond,Side.Buy)
+                    self.DoLog("DBX0-C.b- Reducing LONG Inner Trade  Hierarchy={} CumQty={}".format(tradeToClose.SummaryHierarchy,tradeToClose.CumQty),MessageType.INFO)
+                    self.RunClose(dayTradingPos, Side.Buy,dayTradingPos.GetStatisticalParameters(list(cbDict.values())), candlebar,
+                                  generic=False,closingCond=reducingCond, summaryOrder=dayTradingPos.ConvertReducingCondToSummaryOrder(reducingCond),ordQty=tradeToClose.CumQty)
+                    self.DoLog("DBX0-C.c- Closed LONG Inner Trade  Hierarchy={} CumQty={}".format(tradeToClose.SummaryHierarchy,tradeToClose.CumQty),MessageType.INFO)
 
-            return reducingCond
+            return reducingConds
 
 
     def EvaluateClosingMACDRSILongPositions(self, candlebar, cbDict, runClose=True):
@@ -1705,11 +1710,17 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
             if reducingConds is not None and runClose:
 
                 for reducingCond in reducingConds:
-
+                    tradeToClose = dayTradingPos.GetInnerTrade(reducingCond, Side.Sell)
                     self.DoLog("MACD-RSI - Reducing short position for condition {} for symbol {} at {} ".format(reducingCond,dayTradingPos.Security.Symbol,candlebar.DateTime),MessageType.INFO)
-                    self.RunClose(dayTradingPos, Side.Sell if dayTradingPos.GetNetOpenShares() > 0 else Side.Buy,
+
+                    self.DoLog("DBX0-C.b- Reducing SHORT Inner Trade  Hierarchy={} CumQty={}".format(tradeToClose.SummaryHierarchy, tradeToClose.CumQty), MessageType.INFO)
+
+                    self.RunClose(dayTradingPos, Side.Sell ,
                                   dayTradingPos.GetStatisticalParameters(list(cbDict.values())), candlebar,generic=False,closingCond=reducingCond,
-                                  summaryOrder=dayTradingPos.ConvertReducingCondToSummaryOrder(reducingCond))
+                                  summaryOrder=dayTradingPos.ConvertReducingCondToSummaryOrder(reducingCond),ordQty=tradeToClose.CumQty)
+
+                    self.DoLog("DBX0-C.c- Closed SHORT Inner Trade  Hierarchy={} CumQty={}".format(tradeToClose.SummaryHierarchy, tradeToClose.CumQty), MessageType.INFO)
+
 
             return reducingConds
         else:
@@ -1962,7 +1973,8 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                 self.RoutingLock.release()
 
     def ProcessNewPositionReqManagedPos(self, dayTradingPos, side,qty,account, price = None,stopLoss=None,
-                                        takeProfit=None,closeEndOfDay=None, text=None,IsMainSummary=True):
+                                        takeProfit=None,closeEndOfDay=None, text=None,IsMainSummary=True,
+                                        summaryHierarchy=ExecutionSummary._MAIN_SUMMARY()):
         try:
             self.RoutingLock.acquire(blocking=True)
 
@@ -1988,6 +2000,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
 
             summary = ExecutionSummary(datetime.datetime.now(), newPos)
+            summary.SummaryHierarchy=summaryHierarchy
             summary.Text=text
 
             self.DoLog("DBX0-C- GetNetShares={} len(Executionummaries)={} OrQty={} IsMainSummary={} PosId={}".format(dayTradingPos.GetNetOpenShares(), len(dayTradingPos.ExecutionSummaries),qty,IsMainSummary,newPos.PosId), MessageType.INFO)
