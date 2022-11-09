@@ -292,6 +292,23 @@ class DayTradingPosition():
 
     # region Summary Management
 
+    def GetNextOpeningSummaryHierarchy(self,side):
+
+        if not self.Open():
+            return ExecutionSummary._MAIN_SUMMARY()
+
+        openSummary1 = self.GetLastTradedSummary(side)
+
+        if openSummary1 is not None and not openSummary1.DoInnerTradesExist():
+            return ExecutionSummary._MAIN_SUMMARY()
+        elif not openSummary1.IsFirstInnerTradeOpen() and not openSummary1.IsSecondInnerTradeOpen():
+            return ExecutionSummary._INNER_SUMMARY_2()
+        elif openSummary1.IsFirstInnerTradeOpen() and openSummary1.IsSecondInnerTradeOpen():
+            return ExecutionSummary._INNER_SUMMARY_3()
+        else:
+            raise Exception("Inconsistent status for symbol {} @GetNextOpeningSummaryHierarchy: InnerTradeOpen={} SecondInnerTrade={}",
+                            self.Security.Symbol,openSummary1.GetFirstInnerTradeOpen(),openSummary1.GetSecondInnerTradeOpen())
+
     def GetInnerSummaries(self):
 
         openSummary1 = self.GetLastTradedSummary(Side.Sell)

@@ -1539,7 +1539,8 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                 qty = dayTradingPos.GetLongInnerTradeQty(extendingCond,
                                                           self.ModelParametersHandler.Get(ModelParametersHandler.SUB_TRADE_2_SHARES(),symbol),
                                                           self.ModelParametersHandler.Get(ModelParametersHandler.SUB_TRADE_3_SHARES(),symbol))
-                self.ProcessNewPositionReqManagedPos(dayTradingPos,Side.Buy,qty,self.Configuration.DefaultAccount,IsMainSummary=False)
+                self.ProcessNewPositionReqManagedPos(dayTradingPos,Side.Buy,qty,self.Configuration.DefaultAccount,IsMainSummary=False,
+                                                     summaryHierarchy=dayTradingPos.GetNextOpeningSummaryHierarchy(Side.Buy))
                 threading.Thread(target=self.DoPersistTradingSignalThread, args=(False, dayTradingPos, TradingSignalHelper._ACTION_OPEN(), Side.Buy, candlebar, None, self,extendingCond)).start()
 
             return extendingCond
@@ -1679,7 +1680,8 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                 qty = dayTradingPos.GetShortInnerTradeQty(extendCond,
                                                           self.ModelParametersHandler.Get(ModelParametersHandler.SUB_TRADE_2_SHARES(), symbol),
                                                           self.ModelParametersHandler.Get(ModelParametersHandler.SUB_TRADE_3_SHARES(), symbol))
-                self.ProcessNewPositionReqManagedPos(dayTradingPos, Side.Sell, qty, self.Configuration.DefaultAccount,IsMainSummary=False)
+                self.ProcessNewPositionReqManagedPos(dayTradingPos, Side.Sell, qty, self.Configuration.DefaultAccount,IsMainSummary=False,
+                                                     summaryHierarchy=dayTradingPos.GetNextOpeningSummaryHierarchy(Side.Sell))
                 threading.Thread(target=self.DoPersistTradingSignalThread, args=(False, dayTradingPos, TradingSignalHelper._ACTION_OPEN(), Side.SellShort, candlebar, None, self,extendCond)).start()
 
             return extendCond
