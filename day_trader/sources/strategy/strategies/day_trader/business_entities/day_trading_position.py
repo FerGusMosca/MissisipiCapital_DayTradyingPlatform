@@ -300,18 +300,20 @@ class DayTradingPosition():
         openSummary1 = self.GetLastTradedSummary(side)
 
         if openSummary1 is not None and not openSummary1.DoInnerTradesExist():
-            return ExecutionSummary._MAIN_SUMMARY()
-        elif not openSummary1.IsFirstInnerTradeOpen() and not openSummary1.IsSecondInnerTradeOpen():
             return ExecutionSummary._INNER_SUMMARY_2()
-        elif openSummary1.IsFirstInnerTradeOpen() and openSummary1.IsSecondInnerTradeOpen():
+        elif  openSummary1.IsFirstInnerTradeOpen() and not openSummary1.IsSecondInnerTradeOpen():
             return ExecutionSummary._INNER_SUMMARY_3()
+        elif openSummary1.IsFirstInnerTradeOpen() and openSummary1.IsSecondInnerTradeOpen():
+            raise Exception("Inconsistent status for symbol {} @GetNextOpeningSummaryHierarchy: InnerTradeOpen={} SecondInnerTrade={}--> No more trades to open!",
+                            self.Security.Symbol,openSummary1.IsFirstInnerTradeOpen(),openSummary1.IsSecondInnerTradeOpen())
         else:
-            raise Exception("Inconsistent status for symbol {} @GetNextOpeningSummaryHierarchy: InnerTradeOpen={} SecondInnerTrade={}",
-                            self.Security.Symbol,openSummary1.GetFirstInnerTradeOpen(),openSummary1.GetSecondInnerTradeOpen())
+            raise Exception(
+                "Inconsistent status II for symbol {} @GetNextOpeningSummaryHierarchy: InnerTradeOpen={} SecondInnerTrade={}--> No more trades to open!",
+                self.Security.Symbol, openSummary1.IsFirstInnerTradeOpen(), openSummary1.IsSecondInnerTradeOpen())
 
-    def GetInnerSummaries(self):
+    def GetInnerSummaries(self,side):
 
-        openSummary1 = self.GetLastTradedSummary(Side.Sell)
+        openSummary1 = self.GetLastTradedSummary(side)
 
         innerTrades = []
         if openSummary1 is not None and openSummary1.DoInnerTradesExist():
@@ -966,7 +968,7 @@ class DayTradingPosition():
         if (not openSummary1.DoInnerTradesExist()):
             if self.CurrentProfitLastTrade is not None and self.CurrentProfitLastTrade < subTrade1AddLimit2.FloatValue:
                 return _SHORT_MACD_RSI_RULE_11_EXT_2
-        elif (openSummary1.IsFirstInnerTradeOpen()):
+        elif (openSummary1.IsFirstInnerTradeOpen() and not openSummary1.IsSecondInnerTradeOpen() ):
             if self.FirstInnerTradeProfitLastTrade is not None and self.FirstInnerTradeProfitLastTrade < subTrade1AddLimit3.FloatValue:
                 return _SHORT_MACD_RSI_RULE_11_EXT_3
 
@@ -1101,7 +1103,7 @@ class DayTradingPosition():
             if (not openSummary1.DoInnerTradesExist()):  # No inner trades (trade #2 or trade #3)
                 if self.CurrentProfitLastTrade is not None and self.CurrentProfitLastTrade < subTrade1AddLimit2.FloatValue:
                     return _LONG_MACD_RSI_RULE_11_EXT_2
-            elif (openSummary1.IsFirstInnerTradeOpen()):
+            elif (openSummary1.IsFirstInnerTradeOpen() and not openSummary1.IsSecondInnerTradeOpen()):
                 if self.FirstInnerTradeProfitLastTrade is not None and self.FirstInnerTradeProfitLastTrade < subTrade1AddLimit3.FloatValue:
                     return _LONG_MACD_RSI_RULE_11_EXT_3
 
