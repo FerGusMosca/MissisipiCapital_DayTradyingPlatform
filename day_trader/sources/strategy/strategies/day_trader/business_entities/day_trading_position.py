@@ -1289,7 +1289,7 @@ class DayTradingPosition():
 
     def EvaluateReducingMACDRSIShortTrade(self, subTrade1GainLimit1, subTrade2GainLimit2, subTrade1GainLimit2,
                                           subTrade2LossLimit2, subTrade3GainLimit3, subTrade3LossLimit3):
-        if not self.Open():  # we have to be open in order to extend the position
+        if not self.Open():  # we have to be open in order to reduce the position
             return None  # Position already opened
 
         if self.GetNetOpenShares() < 0:
@@ -1316,7 +1316,7 @@ class DayTradingPosition():
             if (not openSummary1.DoInnerTradesExist()):
                 if self.CurrentProfitLastTrade is not None and self.CurrentProfitLastTrade >= subTrade1GainLimit1.FloatValue:
                     reducingConds.append(_SHORT_MACD_RSI_RULE_11_RED_1)
-            elif (openSummary1.IsFirstInnerTradeOpen()):
+            elif (openSummary1.IsFirstInnerTradeOpen() and not openSummary1.IsSecondInnerTradeOpen()):
                 if self.FirstInnerTradeProfitLastTrade is not None and self.FirstInnerTradeProfitLastTrade >= subTrade2GainLimit2.FloatValue:
                     reducingConds.append(_SHORT_MACD_RSI_RULE_11_RED_1)
                     if self.CurrentProfitLastTrade is not None and self.FirstInnerTradeProfitLastTrade >= subTrade1GainLimit2.FloatValue:
@@ -1638,7 +1638,7 @@ class DayTradingPosition():
 
     def EvaluateReducingMACDRSILongTrade(self, subTrade1GainLimit1, subTrade2GainLimit2, subTrade1GainLimit2,
                                          subTrade2LossLimit2, subTrade3GainLimit3, subTrade3LossLimit3):
-        if not self.Open():  # we have to be open in order to extend the position
+        if not self.Open():  # we have to be open in order to reduce the position
             return None  # Position already opened
 
         if self.GetNetOpenShares() > 0:  # we must have a LONG trade
@@ -1652,36 +1652,33 @@ class DayTradingPosition():
 
         reducingConds = []
 
-        openSummary1 = self.GetLastTradedSummary(Side.Sell)
+        openSummary1 = self.GetLastTradedSummary(Side.Buy)
 
         if (openSummary1 is None):
-            openSummary1 = self.GetLastTradedSummary(Side.SellShort)
-
-            if openSummary1 is None:
-                print("DBX-long: Open={} NetOpenShares={} Routing={}".format(self.Open(), self.GetNetOpenShares(),
-                                                                             self.Routing))
-                return None
-
-            if (not openSummary1.DoInnerTradesExist()):
-                if self.CurrentProfitLastTrade is not None and self.CurrentProfitLastTrade >= subTrade1GainLimit1.FloatValue:
-                    reducingConds.append(_LONG_MACD_RSI_RULE_11_RED_1)
-            elif (openSummary1.IsFirstInnerTradeOpen()):
-                if self.FirstInnerTradeProfitLastTrade is not None and self.FirstInnerTradeProfitLastTrade >= subTrade2GainLimit2.FloatValue:
-                    reducingConds.append(_LONG_MACD_RSI_RULE_11_RED_1)
-                    if self.CurrentProfitLastTrade is not None and self.FirstInnerTradeProfitLastTrade >= subTrade1GainLimit2.FloatValue:
-                        reducingConds.append(_LONG_MACD_RSI_RULE_11_RED_2)
-                if self.FirstInnerTradeProfitLastTrade is not None and self.FirstInnerTradeProfitLastTrade < subTrade2LossLimit2.FloatValue:
-                    reducingConds.append(_LONG_MACD_RSI_RULE_11_RED_1)
+            print("DBX-long: Open={} NetOpenShares={} Routing={}".format(self.Open(), self.GetNetOpenShares(),
+                                                                         self.Routing))
+            return None
+        elif (not openSummary1.DoInnerTradesExist()):
+            if self.CurrentProfitLastTrade is not None and self.CurrentProfitLastTrade >= subTrade1GainLimit1.FloatValue:
+                reducingConds.append(_LONG_MACD_RSI_RULE_11_RED_1)
+                print("DB-")
+        elif (openSummary1.IsFirstInnerTradeOpen() and not openSummary1.IsSecondInnerTradeOpen()):
+            if self.FirstInnerTradeProfitLastTrade is not None and self.FirstInnerTradeProfitLastTrade >= subTrade2GainLimit2.FloatValue:
+                reducingConds.append(_LONG_MACD_RSI_RULE_11_RED_1)
+                if self.CurrentProfitLastTrade is not None and self.FirstInnerTradeProfitLastTrade >= subTrade1GainLimit2.FloatValue:
                     reducingConds.append(_LONG_MACD_RSI_RULE_11_RED_2)
-            elif (openSummary1.IsSecondInnerTradeOpen()):
-                if self.SecondInnerTradeProfitLastTrade is not None and self.SecondInnerTradeProfitLastTrade >= subTrade3GainLimit3.FloatValue:
-                    reducingConds.append(_LONG_MACD_RSI_RULE_11_RED_1)
-                    reducingConds.append(_LONG_MACD_RSI_RULE_11_RED_2)
-                    reducingConds.append(_LONG_MACD_RSI_RULE_11_RED_3)
-                if self.SecondInnerTradeProfitLastTrade is not None and self.SecondInnerTradeProfitLastTrade < subTrade3LossLimit3.FloatValue:
-                    reducingConds.append(_LONG_MACD_RSI_RULE_11_RED_1)
-                    reducingConds.append(_LONG_MACD_RSI_RULE_11_RED_2)
-                    reducingConds.append(_LONG_MACD_RSI_RULE_11_RED_3)
+            if self.FirstInnerTradeProfitLastTrade is not None and self.FirstInnerTradeProfitLastTrade < subTrade2LossLimit2.FloatValue:
+                reducingConds.append(_LONG_MACD_RSI_RULE_11_RED_1)
+                reducingConds.append(_LONG_MACD_RSI_RULE_11_RED_2)
+        elif (openSummary1.IsSecondInnerTradeOpen()):
+            if self.SecondInnerTradeProfitLastTrade is not None and self.SecondInnerTradeProfitLastTrade >= subTrade3GainLimit3.FloatValue:
+                reducingConds.append(_LONG_MACD_RSI_RULE_11_RED_1)
+                reducingConds.append(_LONG_MACD_RSI_RULE_11_RED_2)
+                reducingConds.append(_LONG_MACD_RSI_RULE_11_RED_3)
+            if self.SecondInnerTradeProfitLastTrade is not None and self.SecondInnerTradeProfitLastTrade < subTrade3LossLimit3.FloatValue:
+                reducingConds.append(_LONG_MACD_RSI_RULE_11_RED_1)
+                reducingConds.append(_LONG_MACD_RSI_RULE_11_RED_2)
+                reducingConds.append(_LONG_MACD_RSI_RULE_11_RED_3)
 
         return None if len(reducingConds) == 0 else reducingConds
 

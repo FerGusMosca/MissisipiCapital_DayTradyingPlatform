@@ -1,0 +1,12 @@
+2022-11-19 08:00:00 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:SPY
+2022-11-19 08:00:01 [logger INFO] Requesting for open orders...
+2022-11-19 08:00:01 [logger INFO] Recovered 0 previously existing execution reports
+2022-11-19 08:00:01 [logger INFO] Subscribing to order and route events
+2022-11-19 08:00:01 [logger INFO] Received list of Open Positions: 0 positions
+2022-11-19 08:00:01 [logger INFO] Process ready to receive commands and trade
+2022-11-19 08:00:01 [logger ERROR] Error running ProcessMessage @OrderRouter.Bloomberg module:Duplicate CorrelationId: [ valueType=INT classId=0 value=98 ] (0x00020005)
+2022-11-19 08:00:01 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:SPY
+2022-11-19 08:00:01 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:SPY
+2022-11-19 08:00:01 [logger INFO] Processing SERVICE_STATUS event
+2022-11-19 08:00:01 [logger INFO] Service //blp/refdata opened...
+2022-11-19 08:00:02 [logger INFO] Historical prices successfully loaded for symbol SPY 
