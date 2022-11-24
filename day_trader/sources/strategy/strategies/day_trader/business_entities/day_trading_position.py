@@ -1661,7 +1661,7 @@ class DayTradingPosition():
         elif (not openSummary1.DoInnerTradesExist()):
             if self.CurrentProfitLastTrade is not None and self.CurrentProfitLastTrade >= subTrade1GainLimit1.FloatValue:
                 reducingConds.append(_LONG_MACD_RSI_RULE_11_RED_1)
-                print("DB-")
+                print("DBx-")
         elif (openSummary1.IsFirstInnerTradeOpen() and not openSummary1.IsSecondInnerTradeOpen()):
             if self.FirstInnerTradeProfitLastTrade is not None and self.FirstInnerTradeProfitLastTrade >= subTrade2GainLimit2.FloatValue:
                 reducingConds.append(_LONG_MACD_RSI_RULE_11_RED_1)

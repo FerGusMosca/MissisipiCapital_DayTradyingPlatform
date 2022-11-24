@@ -1579,7 +1579,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                 for reducingCond in reducingConds:
                     tradeToClose = dayTradingPos.GetInnerTrade(reducingCond,Side.Buy)
                     self.DoLog("DBX0-C.b- Reducing LONG Inner Trade  Hierarchy={} CumQty={}".format(tradeToClose.SummaryHierarchy,tradeToClose.CumQty),MessageType.INFO)
-                    self.RunClose(dayTradingPos, Side.Buy,dayTradingPos.GetStatisticalParameters(list(cbDict.values())), candlebar,
+                    self.RunClose(dayTradingPos, Side.Sell,dayTradingPos.GetStatisticalParameters(list(cbDict.values())), candlebar,
                                   generic=False,closingCond=reducingCond, summaryHierarchy=dayTradingPos.ConvertReducingCondToSummaryOrder(reducingCond),ordQty=tradeToClose.CumQty)
                     self.DoLog("DBX0-C.c- Closed LONG Inner Trade  Hierarchy={} CumQty={}".format(tradeToClose.SummaryHierarchy,tradeToClose.CumQty),MessageType.INFO)
 
@@ -1727,7 +1727,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
                     self.DoLog("DBX0-C.b- Reducing SHORT Inner Trade  Hierarchy={} CumQty={}".format(tradeToClose.SummaryHierarchy, tradeToClose.CumQty), MessageType.INFO)
 
-                    self.RunClose(dayTradingPos, Side.Sell ,
+                    self.RunClose(dayTradingPos, Side.Buy ,
                                   dayTradingPos.GetStatisticalParameters(list(cbDict.values())), candlebar,generic=False,closingCond=reducingCond,
                                   summaryHierarchy=dayTradingPos.ConvertReducingCondToSummaryOrder(reducingCond),ordQty=tradeToClose.CumQty)
 
