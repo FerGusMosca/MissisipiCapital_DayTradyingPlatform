@@ -1479,12 +1479,15 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
 
             if(closingCond is not None):
-                self.DoLog("MACD-RSI - Closing long position by Tick for symbol {} at {} ".format(dayTradingPos.Security.Symbol,md.MDEntryDate),
-                           MessageType.INFO)
+                innerTrades = dayTradingPos.GetInnerSummaries(Side.Buy)
 
+                for innerTrade in innerTrades:
+                    self.DoLog("DBX0-A.b- Closing LONG Inner Trade By Tick  Hierarchy={} CumQty={}".format(innerTrade.SummaryHierarchy, innerTrade.CumQty), MessageType.INFO)
+                    self.RunClose(dayTradingPos, Side.Sell,statisticalParam=None, candlebar=None,generic=False, closingCond=closingCond, summaryHierarchy=innerTrade.SummaryHierarchy,ordQty=innerTrade.CumQty)
+                    self.DoLog("DBX0-A.c- Closed LONG Inner Trade By Tick Hierarchy={} CumQty={}".format(innerTrade.SummaryHierarchy,innerTrade.CumQty),MessageType.INFO)
+
+                self.DoLog("MACD-RSI - Closing long position by Tick for symbol {} at {} ".format(dayTradingPos.Security.Symbol,md.MDEntryDate),MessageType.INFO)
                 self.RunClose(dayTradingPos, Side.Sell if dayTradingPos.GetNetOpenShares() > 0 else Side.Buy,statisticalParam=None, candlebar=None, generic=False,closingCond=closingCond)
-
-
 
         else:
             msg = "Could not find Day Trading Position for market data symbol {} @EvaluateClosingMACDRSILongPositionsByTick. Please Resync.".format(md.Security.Symbol)
@@ -1506,11 +1509,17 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
 
             if(closingCond is not None):
+
+                innerTrades = dayTradingPos.GetInnerSummaries(Side.Sell)
+
+                for innerTrade in innerTrades:
+                    self.DoLog("DBX0-A.b- Closing SHORT Inner Trade By Tick  Hierarchy={} CumQty={}".format(innerTrade.SummaryHierarchy, innerTrade.CumQty), MessageType.INFO)
+                    self.RunClose(dayTradingPos, Side.Buy,statisticalParam=None, candlebar=None, generic=False, closingCond=closingCond,summaryHierarchy=innerTrade.SummaryHierarchy,ordQty=innerTrade.CumQty)
+                    self.DoLog("DBX0-A.c- Closed SHORT Inner Trade By Tick Hierarchy={} CumQty={}".format(innerTrade.SummaryHierarchy, innerTrade.CumQty), MessageType.INFO)
+
                 self.DoLog("MACD-RSI - Closing short position by Tick for symbol {} at {} ".format(dayTradingPos.Security.Symbol,md.MDEntryDate),MessageType.INFO)
 
                 self.RunClose(dayTradingPos, Side.Sell if dayTradingPos.GetNetOpenShares() > 0 else Side.Buy,statisticalParam=None, candlebar=None, generic=False,closingCond=closingCond)
-
-
 
         else:
             msg = "Could not find Day Trading Position for market data symbol {} @EvaluateClosingMACDRSIShortPositionsByTick. Please Resync.".format(md.Security.Symbol)
