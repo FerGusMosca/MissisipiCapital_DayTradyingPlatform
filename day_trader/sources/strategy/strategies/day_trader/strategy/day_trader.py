@@ -181,12 +181,9 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                     start = datetime.datetime.now()
 
                     if summary.Position.PosId in self.PositionSecurities:
-                        self.DoLog("DBX6- Persisting summary for PosId={} TradeId={}".format(summary.Position.PosId,summary.GetTradeId()), MessageType.INFO)
                         dayTradingPos = self.PositionSecurities[summary.Position.PosId]
                         self.ExecutionSummaryManager.PersistExecutionSummary(summary,dayTradingPos.Id if dayTradingPos is not None else None)
-                        self.DoLog("DBX7- Persisted summary for PosId={} TradeId={}".format(summary.Position.PosId,summary.GetTradeId()),MessageType.INFO)
                     else:
-                        self.DoLog("DBX8- Persisted summary for PosId={} TradeId={}".format(summary.Position.PosId,summary.GetTradeId()),MessageType.INFO)
                         self.ExecutionSummaryManager.PersistExecutionSummary(summary,None)
 
                     finish = datetime.datetime.now()
@@ -259,23 +256,9 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
             return
 
         self.ProcessExecutionPrices(dayTradingPos,execReport)
-        self.DoLog("DBX2-Updating pos status Open= {} NetOpenShares={} Routing={} CumQty={} Len.ExecSummaries={}".format(dayTradingPos.Open(),
-                                                                                                      dayTradingPos.GetNetOpenShares(),
-                                                                                                      dayTradingPos.Routing,
-                                                                                                       summary.GetNetShares(),
-                                                                                                       len(dayTradingPos.ExecutionSummaries)), MessageType.INFO)
+
         summary.UpdateStatus(execReport, marketDataToUse=dayTradingPos.MarketData if dayTradingPos.RunningBacktest else None)
         dayTradingPos.UpdateRouting() #order is important!
-
-        self.DoLog("DBX3-Updating pos status Open= {} NetOpenShares={} Routing={} CumQty={} Len.ExecSummaries={}".format(dayTradingPos.Open(),
-                                                                                                      dayTradingPos.GetNetOpenShares(),
-                                                                                                      dayTradingPos.Routing,
-                                                                                                      summary.GetNetShares(),
-                                                                                                      len(dayTradingPos.ExecutionSummaries)), MessageType.INFO)
-
-        self.DoLog("DBX4<ER>-Symbol={} Side={} PosStatus={} ExecType={} LeavesQty={} Routing={} "
-                   .format(dayTradingPos.Security.Symbol, execReport.Order.Side,summary.Position.PosStatus,execReport.ExecType,execReport.LeavesQty,
-                           dayTradingPos.Routing),MessageType.INFO)
 
         if summary.Position.IsFinishedPosition():
             self.WaitForFilledToArrive = False
@@ -290,7 +273,6 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
         else:
             LogHelper.LogPositionUpdate(self, "Managed Position Updated", summary, execReport)
 
-        self.DoLog("DBX5-Persisting Summary PosId={} CumQty={} Side={}".format(summary.Position.PosId,summary.CumQty,summary.Position.Side),MessageType.INFO)
         self.SummariesQueue.put(summary)
 
 
@@ -388,7 +370,6 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                 if pos_id in self.PositionSecurities:
                     dayTradingPos = self.PositionSecurities[pos_id]
                     summary= dayTradingPos.FindSummary(pos_id)
-                    self.DoLog("DBX1-Found position for pos_id {}--> SummaryHierarchy={}".format(pos_id,summary.SummaryHierarchy), MessageType.INFO)
 
                     if summary is not None:
 
@@ -1343,7 +1324,6 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
         else:
             netShares = dayTradingPos.GetNetOpenShares(summaryHierarchy) if  summaryHierarchy==ExecutionSummary._MAIN_SUMMARY() else ordQty
-            self.DoLog("DBX0-b2- GetNetShares={} summaryOrder{} ".format(netShares,summaryHierarchy),MessageType.INFO)
             if netShares!=0: #if there is something to close
 
                 self.ProcessNewPositionReqManagedPos(dayTradingPos, side,netShares if netShares > 0 else netShares * (-1),self.Configuration.DefaultAccount,
@@ -1482,9 +1462,9 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                 innerTrades = dayTradingPos.GetInnerSummaries(Side.Buy)
 
                 for innerTrade in innerTrades:
-                    self.DoLog("DBX0-A.b- Closing LONG Inner Trade By Tick  Hierarchy={} CumQty={}".format(innerTrade.SummaryHierarchy, innerTrade.CumQty), MessageType.INFO)
+                    self.DoLog("Closing LONG Inner Trade By Tick for Symbol={}  Hierarchy={} CumQty={}".format(dayTradingPos.Security.Symbol,innerTrade.SummaryHierarchy, innerTrade.CumQty), MessageType.INFO)
                     self.RunClose(dayTradingPos, Side.Sell,statisticalParam=None, candlebar=None,generic=False, closingCond=closingCond, summaryHierarchy=innerTrade.SummaryHierarchy,ordQty=innerTrade.CumQty)
-                    self.DoLog("DBX0-A.c- Closed LONG Inner Trade By Tick Hierarchy={} CumQty={}".format(innerTrade.SummaryHierarchy,innerTrade.CumQty),MessageType.INFO)
+
 
                 self.DoLog("MACD-RSI - Closing long position by Tick for symbol {} at {} ".format(dayTradingPos.Security.Symbol,md.MDEntryDate),MessageType.INFO)
                 self.RunClose(dayTradingPos, Side.Sell if dayTradingPos.GetNetOpenShares() > 0 else Side.Buy,statisticalParam=None, candlebar=None, generic=False,closingCond=closingCond)
@@ -1513,9 +1493,8 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                 innerTrades = dayTradingPos.GetInnerSummaries(Side.Sell)
 
                 for innerTrade in innerTrades:
-                    self.DoLog("DBX0-A.b- Closing SHORT Inner Trade By Tick  Hierarchy={} CumQty={}".format(innerTrade.SummaryHierarchy, innerTrade.CumQty), MessageType.INFO)
+                    self.DoLog("Closing SHORT Inner Trade By Tick for symbol {}  Hierarchy={} CumQty={}".format(dayTradingPos.Security.Symbol,innerTrade.SummaryHierarchy, innerTrade.CumQty), MessageType.INFO)
                     self.RunClose(dayTradingPos, Side.Buy,statisticalParam=None, candlebar=None, generic=False, closingCond=closingCond,summaryHierarchy=innerTrade.SummaryHierarchy,ordQty=innerTrade.CumQty)
-                    self.DoLog("DBX0-A.c- Closed SHORT Inner Trade By Tick Hierarchy={} CumQty={}".format(innerTrade.SummaryHierarchy, innerTrade.CumQty), MessageType.INFO)
 
                 self.DoLog("MACD-RSI - Closing short position by Tick for symbol {} at {} ".format(dayTradingPos.Security.Symbol,md.MDEntryDate),MessageType.INFO)
 
@@ -1578,10 +1557,9 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
                 for reducingCond in reducingConds:
                     tradeToClose = dayTradingPos.GetInnerTrade(reducingCond,Side.Buy)
-                    self.DoLog("DBX0-C.b- Reducing LONG Inner Trade  Hierarchy={} CumQty={}".format(tradeToClose.SummaryHierarchy,tradeToClose.CumQty),MessageType.INFO)
+                    self.DoLog("Reducing LONG Inner Trade for Symbol={}  Hierarchy={} CumQty={}".format(dayTradingPos.Security.Symbol,tradeToClose.SummaryHierarchy,tradeToClose.CumQty),MessageType.INFO)
                     self.RunClose(dayTradingPos, Side.Sell,dayTradingPos.GetStatisticalParameters(list(cbDict.values())), candlebar,
                                   generic=False,closingCond=reducingCond, summaryHierarchy=dayTradingPos.ConvertReducingCondToSummaryOrder(reducingCond),ordQty=tradeToClose.CumQty)
-                    self.DoLog("DBX0-C.c- Closed LONG Inner Trade  Hierarchy={} CumQty={}".format(tradeToClose.SummaryHierarchy,tradeToClose.CumQty),MessageType.INFO)
 
             return reducingConds
 
@@ -1646,20 +1624,17 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
             if closingCond is not None and runClose:
 
                 self.DoLog("MACD-RSI - Closing long position for symbol {} at {} ".format(dayTradingPos.Security.Symbol,candlebar.DateTime),MessageType.INFO)
-                self.DoLog("DBX0-A- GetNetShares={} len(Executionummaries)={}".format(dayTradingPos.GetNetOpenShares(),len(dayTradingPos.ExecutionSummaries)),MessageType.INFO)
 
                 innerTrades = dayTradingPos.GetInnerSummaries(Side.Buy)
 
                 for innerTrade in innerTrades:
-                    self.DoLog("DBX0-A.b- Closing LONG Inner Trade  Hierarchy={} CumQty={}".format(innerTrade.SummaryHierarchy,innerTrade.CumQty),MessageType.INFO)
+                    self.DoLog("Closing LONG Inner Trade for Symbol {}  Hierarchy={} CumQty={}".format(dayTradingPos.Security.Symbol,innerTrade.SummaryHierarchy,innerTrade.CumQty),MessageType.INFO)
                     self.RunClose(dayTradingPos, Side.Sell ,dayTradingPos.GetStatisticalParameters(list(cbDict.values())), candlebar,generic=False,
                                   closingCond=closingCond,summaryHierarchy=innerTrade.SummaryHierarchy,ordQty=innerTrade.CumQty)
-                    self.DoLog("DBX0-A.c- Closed LONG Inner Trade  Hierarchy={} CumQty={}".format(innerTrade.SummaryHierarchy,innerTrade.CumQty),MessageType.INFO)
 
                 self.RunClose(dayTradingPos, Side.Sell if dayTradingPos.GetNetOpenShares() > 0 else Side.Buy,
                               dayTradingPos.GetStatisticalParameters(list(cbDict.values())), candlebar,generic=False,
                               closingCond=closingCond)
-                self.DoLog("DBX0-B- GetNetShares={} len(Executionummaries)={}".format(dayTradingPos.GetNetOpenShares(),len(dayTradingPos.ExecutionSummaries)),MessageType.INFO)
 
             return closingCond
 
@@ -1725,13 +1700,13 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                     tradeToClose = dayTradingPos.GetInnerTrade(reducingCond, Side.Sell)
                     self.DoLog("MACD-RSI - Reducing short position for condition {} for symbol {} at {} ".format(reducingCond,dayTradingPos.Security.Symbol,candlebar.DateTime),MessageType.INFO)
 
-                    self.DoLog("DBX0-C.b- Reducing SHORT Inner Trade  Hierarchy={} CumQty={}".format(tradeToClose.SummaryHierarchy, tradeToClose.CumQty), MessageType.INFO)
+                    self.DoLog("Reducing SHORT Inner Trade for symbol {}  Hierarchy={} CumQty={}".format(dayTradingPos.Security.Symbol,tradeToClose.SummaryHierarchy, tradeToClose.CumQty), MessageType.INFO)
 
                     self.RunClose(dayTradingPos, Side.Buy ,
                                   dayTradingPos.GetStatisticalParameters(list(cbDict.values())), candlebar,generic=False,closingCond=reducingCond,
                                   summaryHierarchy=dayTradingPos.ConvertReducingCondToSummaryOrder(reducingCond),ordQty=tradeToClose.CumQty)
 
-                    self.DoLog("DBX0-C.c- Closed SHORT Inner Trade  Hierarchy={} CumQty={}".format(tradeToClose.SummaryHierarchy, tradeToClose.CumQty), MessageType.INFO)
+
 
 
             return reducingConds
@@ -1801,20 +1776,17 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
             if closingCond is not None and runClose:
                 self.DoLog("MACD-RSI - Closing short position for symbol {} at {} ".format(dayTradingPos.Security.Symbol,candlebar.DateTime),MessageType.INFO)
-                self.DoLog("DBX0-A- GetNetShares={} len(Executionummaries)={}".format(dayTradingPos.GetNetOpenShares(),len(dayTradingPos.ExecutionSummaries)),MessageType.INFO)
 
                 innerTrades = dayTradingPos.GetInnerSummaries(Side.Sell)
 
                 for innerTrade in innerTrades:
-                    self.DoLog("DBX0-A.b- Closing SHORT Inner Trade  Hierarchy={} CumQty={}".format(innerTrade.SummaryHierarchy,innerTrade.CumQty),MessageType.INFO)
+                    self.DoLog("Closing SHORT Inner Trade for symbol {}  Hierarchy={} CumQty={}".format(dayTradingPos.Security.Symbol,innerTrade.SummaryHierarchy,innerTrade.CumQty),MessageType.INFO)
                     self.RunClose(dayTradingPos,  Side.Buy,dayTradingPos.GetStatisticalParameters(list(cbDict.values())), candlebar,
                                   generic=False,closingCond=closingCond, summaryHierarchy=innerTrade.SummaryHierarchy,ordQty=innerTrade.CumQty)
-                    self.DoLog("DBX0-A.c- Closed SHORT Inner Trade  Hierarchy={} CumQty={}".format(innerTrade.SummaryHierarchy,innerTrade.CumQty),MessageType.INFO)
 
                 self.RunClose(dayTradingPos, Side.Sell if dayTradingPos.GetNetOpenShares() > 0 else Side.Buy,
                               dayTradingPos.GetStatisticalParameters(list(cbDict.values())), candlebar,generic=False,
                               closingCond=closingCond)
-                self.DoLog("DBX0-B- GetNetShares={} len(Executionummaries)={}".format(dayTradingPos.GetNetOpenShares(),len(dayTradingPos.ExecutionSummaries)),MessageType.INFO)
 
             return closingCond
         else:
@@ -2012,13 +1984,10 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
             summary.SummaryHierarchy=summaryHierarchy
             summary.Text=text
 
-            self.DoLog("DBX0-C- GetNetShares={} Side={} len(Executionummaries)={} OrQty={} IsMainSummary={} PosId={} SummaryHierarchy={}".format(dayTradingPos.GetNetOpenShares(),side, len(dayTradingPos.ExecutionSummaries),qty,IsMainSummary,newPos.PosId,summaryHierarchy), MessageType.INFO)
             if IsMainSummary:
                 dayTradingPos.ExecutionSummaries[self.NextPostId] = summary
             else:
                 dayTradingPos.AppendInnerSummary(summary,self.NextPostId)
-
-            self.DoLog("DBX0-D- GetNetShares={} Side={} len(Executionummaries)={} OrQty={} IsMainSummary={} PosId={}".format(dayTradingPos.GetNetOpenShares(),side,len(dayTradingPos.ExecutionSummaries),qty,IsMainSummary,newPos.PosId), MessageType.INFO)
 
             dayTradingPos.Routing=True
             self.PositionSecurities[self.NextPostId] = dayTradingPos

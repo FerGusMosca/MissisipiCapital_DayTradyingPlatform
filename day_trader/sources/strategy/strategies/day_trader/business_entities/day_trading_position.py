@@ -1309,14 +1309,12 @@ class DayTradingPosition():
             openSummary1 = self.GetLastTradedSummary(Side.SellShort)
 
             if openSummary1 is None:
-                print("DBX-short: Open={} NetOpenShares={} Routing={}".format(self.Open(), self.GetNetOpenShares(),
-                                                                              self.Routing))
                 return None
 
         elif (not openSummary1.DoInnerTradesExist()):
             if self.CurrentProfitLastTrade is not None and self.CurrentProfitLastTrade >= subTrade1GainLimit1.FloatValue:
                 reducingConds.append(_SHORT_MACD_RSI_RULE_11_RED_1)
-                print("DBx-ReduceShort")
+
         elif (openSummary1.IsFirstInnerTradeOpen() and not openSummary1.IsSecondInnerTradeOpen()):
             if self.FirstInnerTradeProfitLastTrade is not None and self.FirstInnerTradeProfitLastTrade >= subTrade2GainLimit2.FloatValue:
                 reducingConds.append(_SHORT_MACD_RSI_RULE_11_RED_2)
@@ -1659,13 +1657,11 @@ class DayTradingPosition():
         openSummary1 = self.GetLastTradedSummary(Side.Buy)
 
         if (openSummary1 is None):
-            print("DBX-long: Open={} NetOpenShares={} Routing={}".format(self.Open(), self.GetNetOpenShares(),
-                                                                         self.Routing))
             return None
         elif (not openSummary1.DoInnerTradesExist()):
             if self.CurrentProfitLastTrade is not None and self.CurrentProfitLastTrade >= subTrade1GainLimit1.FloatValue:
                 reducingConds.append(_LONG_MACD_RSI_RULE_11_RED_1)
-                print("DBx-ReduceLong")
+
         elif (openSummary1.IsFirstInnerTradeOpen() and not openSummary1.IsSecondInnerTradeOpen()):
             if self.FirstInnerTradeProfitLastTrade is not None and self.FirstInnerTradeProfitLastTrade >= subTrade2GainLimit2.FloatValue:
                 reducingConds.append(_LONG_MACD_RSI_RULE_11_RED_2)
