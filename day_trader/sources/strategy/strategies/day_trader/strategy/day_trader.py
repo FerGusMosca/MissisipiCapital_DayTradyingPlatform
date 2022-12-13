@@ -1018,6 +1018,8 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                                   self.ModelParametersHandler.Get(ModelParametersHandler.MACD_RSI_OPEN_LONG_RULE_BROOMS(),symbol),
                                   self.ModelParametersHandler.Get(ModelParametersHandler.MACD_RSI_START_TRADING(),symbol),
                                   self.ModelParametersHandler.Get(ModelParametersHandler.DAILY_BIAS_MACD_RSI(),symbol),
+                                  self.ModelParametersHandler.Get(ModelParametersHandler.ENTRY_RULE_6_START_TIME(),symbol),
+                                  self.ModelParametersHandler.Get(ModelParametersHandler.START_LONG_AT_THIS_GAIN(),symbol),
                                   list(cbDict.values()))
                if longCondition is not None:
 
@@ -1082,6 +1084,8 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                                                                     self.ModelParametersHandler.Get(ModelParametersHandler.MACD_RSI_OPEN_SHORT_RULE_BROOMS(), symbol),
                                                                     self.ModelParametersHandler.Get(ModelParametersHandler.MACD_RSI_START_TRADING(), symbol),
                                                                     self.ModelParametersHandler.Get(ModelParametersHandler.DAILY_BIAS_MACD_RSI(), symbol),
+                                                                    self.ModelParametersHandler.Get(ModelParametersHandler.ENTRY_RULE_6_START_TIME(), symbol),
+                                                                    self.ModelParametersHandler.Get(ModelParametersHandler.START_SHORT_AT_THIS_GAIN(), symbol),
                                                                     list(cbDict.values()))
 
             if shortCondition is not None:

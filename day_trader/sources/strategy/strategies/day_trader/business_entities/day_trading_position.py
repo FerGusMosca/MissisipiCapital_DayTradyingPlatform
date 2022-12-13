@@ -74,6 +74,7 @@ _LONG_MACD_RSI_RULE_2 = "LONG_MACD_RSI_RULE_2"
 _LONG_MACD_RSI_RULE_3 = "LONG_MACD_RSI_RULE_3"
 _LONG_MACD_RSI_RULE_4 = "LONG_MACD_RSI_RULE_4"
 _LONG_MACD_RSI_RULE_5 = "LONG_MACD_RSI_RULE_5"
+_LONG_MACD_RSI_RULE_6 = "LONG_MACD_RSI_RULE_6"
 _LONG_MACD_RSI_RULE_BROOMS = "LONG_MACD_RSI_RULE_BROOMS"
 
 _LONG_MACD_RSI_RULE_11_EXT_2 = "LONG_MACD_RSI_RULE_11_EXT_2"
@@ -95,6 +96,7 @@ _SHORT_MACD_RSI_RULE_2 = "SHORT_MACD_RSI_RULE_2"
 _SHORT_MACD_RSI_RULE_3 = "SHORT_MACD_RSI_RULE_3"
 _SHORT_MACD_RSI_RULE_4 = "SHORT_MACD_RSI_RULE_4"
 _SHORT_MACD_RSI_RULE_5 = "SHORT_MACD_RSI_RULE_5"
+_SHORT_MACD_RSI_RULE_6 = "SHORT_MACD_RSI_RULE_6"
 _SHORT_MACD_RSI_RULE_BROOMS = "SHORT_MACD_RSI_RULE_BROOMS"
 
 _TERMINALLY_CLOSED = "TERMINALLY_CLOSED"
@@ -177,8 +179,12 @@ class DayTradingPosition():
 
         # endregion
 
+        #region Statistical Samples
         self.PricesReggrSlope = None
         self.PricesReggrSlopePeriod = None
+        self.PointInTimePriceRuleSix=None
+        self.ProfitRuleSix=None
+        #endrgion
 
         self.MinuteNonSmoothedRSIIndicator = RSIIndicator(False)
         self.MinuteSmoothedRSIIndicator = RSIIndicatorSmoothed()
@@ -242,6 +248,8 @@ class DayTradingPosition():
 
         self.PricesReggrSlope = None
         self.PricesReggrSlopePeriod = None
+        self.PointInTimePriceRuleSix=None
+        self.ProfitRuleSix=None
 
         self.OpenMarketData = None
         self.MarketData = None
@@ -591,6 +599,13 @@ class DayTradingPosition():
                                second=0, microsecond=0)
         return todayStart < now and now < todayEnd
 
+    def EvaluateRecordingRuleSixPrices(self,entryRuleSixStartTimeParam,candlebar):
+
+        if (entryRuleSixStartTimeParam.StringValue is not None and self.PointInTimePriceRuleSix is None):
+
+            if self.EvaluateBiggerDate(candlebar, entryRuleSixStartTimeParam):
+                self.PointInTimePriceRuleSix=candlebar.Close
+
     def EvaluateBiggerDate(self, candlebar, timeFromModelParam):
         now = candlebar.DateTime
         fromTime = time.strptime(self.FormatTime(timeFromModelParam.StringValue), "%I:%M %p")
@@ -641,6 +656,9 @@ class DayTradingPosition():
 
         profitsAndLosses.Profits = self.CalculatePercentageProfits(profitsAndLosses)
         profitsAndLosses.MonetaryProfits = self.CalculateMonetaryProfits(profitsAndLosses)
+
+        if(self.PointInTimePriceRuleSix is not None and marketData.Trade is not None and self.PointInTimePriceRuleSix>0):
+            profitsAndLosses.ProfitRuleSix = ((marketData.Trade/self.PointInTimePriceRuleSix)-1)*100
 
         return profitsAndLosses
 
@@ -725,6 +743,8 @@ class DayTradingPosition():
             self.MaxProfitCurrentTrade = 0
             self.MaxMonetaryLossCurrentTrade = 0
             self.MaxMonetaryProfitCurrentTrade = 0
+
+            self.ProfitRuleSix=mainTradesProfitsAndLosses.ProfitRuleSix
 
     def GetStatisticalParameters(self, candlebarsArr):
         fiftyMinNoSkipMovAvg = self.GetMovOnData(candlebarsArr, 0, 50)
@@ -986,7 +1006,7 @@ class DayTradingPosition():
                                   macdRsiOpenShortRule3ModelParam,
                                   macdRsiOpenShortRule4ModelParam, macdRsiOpenShortRuleBroomsModelParam,
                                   macdRsiStartTradingModelParam,
-                                  dailyBiasMACDRSI, candlebarsArr):
+                                  dailyBiasMACDRSI, entryRuleSixStartTimeParam,startShortAtGainParam, candlebarsArr):
 
         if self.Open():
             return None  # Position already opened
@@ -1003,6 +1023,8 @@ class DayTradingPosition():
                 or self.BollingerIndicator.DeltaDN() is None
         ):
             return None
+
+        self.EvaluateRecordingRuleSixPrices(entryRuleSixStartTimeParam,candlebarsArr[-1])
 
         # NO TRADE ON --> SHORT ON
         # line 1
@@ -1074,6 +1096,11 @@ class DayTradingPosition():
             self.BollingerIndicator.OnTradeSignal()
             return _SHORT_MACD_RSI_RULE_BROOMS
 
+        # line rule #6
+        if( self.PointInTimePriceRuleSix is not None):
+            if(self.ProfitRuleSix is not None and self.ProfitRuleSix<=startShortAtGainParam.FloatValue):
+                return _SHORT_MACD_RSI_RULE_6
+
         return None
 
     def GetLongInnerTradeQty(self, extendLong, subTrades2TradesParam, subTrades3TradesParam):
@@ -1121,7 +1148,8 @@ class DayTradingPosition():
                                  macdRsiOpenLongRule3ModelParam,
                                  macdRsiOpenLongRule4ModelParam, macdRsiOpenLongRuleBroomsModelParam,
                                  macdRsiStartTradingModelParam,
-                                 dailyBiasMACDRSI, candlebarsArr):
+                                 dailyBiasMACDRSI, entryRuleSixStartTimeParam,startLongAtGainParam,
+                                 candlebarsArr):
 
         if self.Open():
             return None  # Position already opened
@@ -1138,6 +1166,8 @@ class DayTradingPosition():
                 or self.BollingerIndicator.DeltaUP() is None
         ):
             return None
+
+        self.EvaluateRecordingRuleSixPrices(entryRuleSixStartTimeParam,candlebarsArr[-1])
 
         # NO TRADE ON --> LONG ON
         # line 1
@@ -1211,6 +1241,11 @@ class DayTradingPosition():
         ):
             self.BollingerIndicator.OnTradeSignal()
             return _LONG_MACD_RSI_RULE_BROOMS
+
+        #Rule #6
+        if (self.PointInTimePriceRuleSix is not None):
+            if (self.ProfitRuleSix is not None and self.ProfitRuleSix >= startLongAtGainParam.FloatValue):
+                return _LONG_MACD_RSI_RULE_6
 
         return None
 

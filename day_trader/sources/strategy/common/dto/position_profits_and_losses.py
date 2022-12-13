@@ -14,10 +14,10 @@ class PositionsProfitsAndLosses():
         self.PosMTM=0
         self.IncreaseDecrease = 0
 
-        # First Inner Trade
+        #Rules Inner Statistics
+        self.ProfitRuleSix=None
 
-
-        # Second Inner Trade
+        #endregion
 
 
     #endregion

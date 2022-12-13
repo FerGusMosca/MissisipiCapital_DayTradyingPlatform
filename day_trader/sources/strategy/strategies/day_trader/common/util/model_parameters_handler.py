@@ -304,6 +304,10 @@ class ModelParametersHandler:
         return "M_S_NOW_F_F"
 
     @staticmethod
+    def ABS_M_S_MAX_MIN_LEAST_5_H():
+        return "ABS_M_S_MAX_MIN_LEAST_5_H"
+
+    @staticmethod
     def ABS_M_S_MAX_MIN_LAST_5_H_H():
         return "ABS_M_S_MAX_MIN_LAST_5_H_H"
 
@@ -782,6 +786,18 @@ class ModelParametersHandler:
     @staticmethod
     def SUB_TRADE_3_SHARES():
         return "SUB_TRADE_3_SHARES"
+
+    @staticmethod
+    def ENTRY_RULE_6_START_TIME():
+        return "ENTRY_RULE_6_START_TIME"
+
+    @staticmethod
+    def START_LONG_AT_THIS_GAIN():
+        return "START_LONG_AT_THIS_GAIN"
+
+    @staticmethod
+    def START_SHORT_AT_THIS_GAIN():
+        return "START_SHORT_AT_THIS_GAIN"
 
 
     #endregion
