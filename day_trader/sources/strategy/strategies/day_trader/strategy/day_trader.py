@@ -1023,7 +1023,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
                                   list(cbDict.values()))
                if longCondition is not None:
 
-                   self.DoLog("MACD/RSI = Running long trade for symbol {} at {}".format(dayTradingPos.Security.Symbol,candlebar.DateTime),MessageType.INFO)
+                   self.DoLog("MACD/RSI = Running long trade for symbol {} at {} for condition {}".format(dayTradingPos.Security.Symbol,candlebar.DateTime,longCondition),MessageType.INFO)
                    self.ProcessNewPositionReqManagedPos(dayTradingPos, Side.Buy, dayTradingPos.SharesQuantity,self.Configuration.DefaultAccount)
                    threading.Thread(target=self.DoPersistTradingSignalThread, args=(False,dayTradingPos,TradingSignalHelper._ACTION_OPEN(),Side.Buy,candlebar,None, self,longCondition)).start()
                    #self.TradingSignalHelper.PersistMACDRSITradingSignal(dayTradingPos,TradingSignalHelper._ACTION_OPEN(), Side.Buy,candlebar, self, condition=longCondition)
@@ -1090,7 +1090,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
             if shortCondition is not None:
 
-                self.DoLog("MACD/RSI = Running short trade for symbol {} at {}".format(dayTradingPos.Security.Symbol, candlebar.DateTime),MessageType.INFO)
+                self.DoLog("MACD/RSI = Running short trade for symbol {} at {} for condition {}".format(dayTradingPos.Security.Symbol, candlebar.DateTime,shortCondition),MessageType.INFO)
 
                 self.ProcessNewPositionReqManagedPos(dayTradingPos, Side.Sell, dayTradingPos.SharesQuantity,
                                                      self.Configuration.DefaultAccount)
