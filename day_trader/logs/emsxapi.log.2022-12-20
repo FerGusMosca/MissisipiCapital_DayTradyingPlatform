@@ -1,0 +1,792 @@
+2022-12-19 19:09:33 [logger INFO] DayTrader  Initializing
+2022-12-19 19:13:17 [logger INFO] DayTrader  Initializing
+2022-12-19 19:13:18 [logger INFO] Loading 6 summaries for security SPY
+2022-12-19 19:13:18 [logger INFO] WebSocketModule  Initializing
+2022-12-19 19:13:18 [logger INFO] WebSocketModule Successfully initialized
+2022-12-19 19:13:18 [logger INFO] Websocket commands successfully opened on port 7172: 
+2022-12-19 19:13:18 [logger INFO] FileHandlerModule  Initializing
+2022-12-19 19:13:18 [logger INFO] FileHandlerModule Successfully initialized
+2022-12-19 19:13:18 [logger INFO] Initializing Bloomberg Order Router
+2022-12-19 19:13:18 [logger INFO] Connecting to localhost:8194
+2022-12-19 19:13:18 [logger INFO] Bloomberg Order Router Initialized
+2022-12-19 19:13:18 [logger INFO] SingletonModuleHandler Successfully initializer
+2022-12-19 19:13:18 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2022-12-19 19:13:18 [logger INFO] Bloomberg Session Connection is UP...
+2022-12-19 19:13:18 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2022-12-19 19:13:18 [logger INFO] Bloomberg Session started...
+2022-12-19 19:13:18 [logger INFO] Initializing Generic Market Order Router
+2022-12-19 19:13:18 [logger INFO] SingletonModuleHandler Successfully initializer
+2022-12-19 19:13:18 [logger INFO] Generic Market Order Router Initialized
+2022-12-19 19:13:19 [logger INFO] Processing SERVICE_STATUS event
+2022-12-19 19:13:19 [logger INFO] Service //blp/emapisvc opened...
+2022-12-19 19:13:19 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:SPY
+2022-12-19 19:13:19 [logger INFO] DayTrader Successfully initialized
+2022-12-19 19:13:20 [logger INFO] Processing SERVICE_STATUS event
+2022-12-19 19:13:20 [logger INFO] Service //blp/mktdata opened...
+2022-12-19 19:13:20 [logger INFO] Requesting for open orders...
+2022-12-19 19:13:20 [logger INFO] Waiting initial paints to finish to return active execution reports
+2022-12-19 19:13:20 [logger INFO] Subscribing to order and route events
+2022-12-19 19:13:20 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:SPY
+2022-12-19 19:13:20 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:SPY
+2022-12-19 19:13:21 [logger INFO] Order subscription started successfully
+2022-12-19 19:13:21 [logger INFO] Route subscription started successfully
+2022-12-19 19:13:21 [logger INFO] Processing SERVICE_STATUS event
+2022-12-19 19:13:21 [logger INFO] Service //blp/mktbar opened...
+2022-12-19 19:13:21 [logger INFO] Processing SERVICE_STATUS event
+2022-12-19 19:13:21 [logger INFO] Service //blp/refdata opened...
+2022-12-19 19:13:21 [logger INFO] Waiting initial paints to finish to return active execution reports
+2022-12-19 19:13:21 [logger INFO] Historical prices successfully loaded for symbol SPY 
+2022-12-19 19:13:22 [logger INFO] Recovered 0 previously existing execution reports
+2022-12-19 19:13:22 [logger INFO] Received list of Open Positions: 0 positions
+2022-12-19 19:13:22 [logger INFO] Process ready to receive commands and trade
+2022-12-19 19:14:51 [logger INFO] Found CSV file A_2303_INPUT_FILE_GENERIC_03232020.csv. Extracting simulated market data
+2022-12-19 19:14:51 [logger INFO] File Handler Module : Moving file ./files/input/A_2303_INPUT_FILE_GENERIC_03232020.csv to ./files/processed/A_2303_INPUT_FILE_GENERIC_03232020.csv
+2022-12-19 19:14:51 [logger ERROR] Critical Error processing strategy backtest (@thread): Security SPY is in automatic mode. It's unsafe to run a backtest while the security it's in this state. Please turn it to manual mode!
+2022-12-19 19:16:57 [logger INFO] DayTrader  Initializing
+2022-12-19 19:16:57 [logger INFO] Loading 6 summaries for security SPY
+2022-12-19 19:16:58 [logger INFO] WebSocketModule  Initializing
+2022-12-19 19:16:58 [logger INFO] WebSocketModule Successfully initialized
+2022-12-19 19:16:58 [logger INFO] Websocket commands successfully opened on port 7172: 
+2022-12-19 19:16:58 [logger INFO] FileHandlerModule  Initializing
+2022-12-19 19:16:58 [logger INFO] FileHandlerModule Successfully initialized
+2022-12-19 19:16:58 [logger INFO] Initializing Bloomberg Order Router
+2022-12-19 19:16:58 [logger INFO] Connecting to localhost:8194
+2022-12-19 19:16:58 [logger INFO] Bloomberg Order Router Initialized
+2022-12-19 19:16:58 [logger INFO] SingletonModuleHandler Successfully initializer
+2022-12-19 19:16:58 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2022-12-19 19:16:58 [logger INFO] Bloomberg Session Connection is UP...
+2022-12-19 19:16:58 [logger INFO] Processing Bloomberg SESSION_STATUS event
+2022-12-19 19:16:58 [logger INFO] Bloomberg Session started...
+2022-12-19 19:16:58 [logger INFO] Initializing Generic Market Order Router
+2022-12-19 19:16:58 [logger INFO] SingletonModuleHandler Successfully initializer
+2022-12-19 19:16:58 [logger INFO] Generic Market Order Router Initialized
+2022-12-19 19:16:58 [logger INFO] Processing SERVICE_STATUS event
+2022-12-19 19:16:58 [logger INFO] Service //blp/emapisvc opened...
+2022-12-19 19:16:59 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:SPY
+2022-12-19 19:16:59 [logger INFO] DayTrader Successfully initialized
+2022-12-19 19:17:00 [logger INFO] Processing SERVICE_STATUS event
+2022-12-19 19:17:00 [logger INFO] Service //blp/mktdata opened...
+2022-12-19 19:17:00 [logger INFO] Requesting for open orders...
+2022-12-19 19:17:00 [logger INFO] Waiting initial paints to finish to return active execution reports
+2022-12-19 19:17:00 [logger INFO] Subscribing to order and route events
+2022-12-19 19:17:00 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:SPY
+2022-12-19 19:17:00 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:SPY
+2022-12-19 19:17:00 [logger INFO] Order subscription started successfully
+2022-12-19 19:17:00 [logger INFO] Route subscription started successfully
+2022-12-19 19:17:00 [logger INFO] Processing SERVICE_STATUS event
+2022-12-19 19:17:00 [logger INFO] Service //blp/mktbar opened...
+2022-12-19 19:17:00 [logger INFO] Processing SERVICE_STATUS event
+2022-12-19 19:17:00 [logger INFO] Service //blp/refdata opened...
+2022-12-19 19:17:01 [logger INFO] Waiting initial paints to finish to return active execution reports
+2022-12-19 19:17:01 [logger INFO] Historical prices successfully loaded for symbol SPY 
+2022-12-19 19:17:02 [logger INFO] Recovered 0 previously existing execution reports
+2022-12-19 19:17:02 [logger INFO] Received list of Open Positions: 0 positions
+2022-12-19 19:17:02 [logger INFO] Process ready to receive commands and trade
+2022-12-19 19:17:49 [logger INFO] Found CSV file SPY_profits_07-Nov-2020_13_27_00_832696.csv. Extracting simulated market data
+2022-12-19 19:17:49 [logger ERROR] Critical error fetching for input files @FileHandlerModule.FetchInputFileThread: time data '08:30' does not match format '%H:%M:%S'
+2022-12-19 19:19:16 [logger INFO] Found CSV file INPUT_SAMPLE_FILE_MODEL_23NEW_NOFLEXTG10_NOFLEXSL0pt25_JJJ4_FLh.csv. Extracting simulated market data
+2022-12-19 19:19:16 [logger INFO] File Handler Module : Moving file ./files/input/INPUT_SAMPLE_FILE_MODEL_23NEW_NOFLEXTG10_NOFLEXSL0pt25_JJJ4_FLh.csv to ./files/processed/INPUT_SAMPLE_FILE_MODEL_23NEW_NOFLEXTG10_NOFLEXSL0pt25_JJJ4_FLh.csv
+2022-12-19 19:19:17 [logger INFO] Starting to process for date:2008-01-02
+2022-12-19 19:19:17 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2008-01-02 09:10:00 for condition LONG_MACD_RSI_RULE_BROOMS
+2022-12-19 19:19:17 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:19:17.973156 TradeId=trd__SPY_1671488357_MAIN_SUMM PosId=6b0a308c-b9d2-4b2d-afd3-750951d5d5d0 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=146.01 Text=Fake New Order 
+2022-12-19 19:19:18 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:19:18.177377 TradeId=trd__SPY_1671488357_MAIN_SUMM PosId=6b0a308c-b9d2-4b2d-afd3-750951d5d5d0 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=146.01 Text=Fake Filled Order 
+2022-12-19 19:19:18 [logger INFO] MACD-RSI - Closing long position for symbol SPY at 2008-01-02 10:17:00 
+2022-12-19 19:19:18 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:19:18.519723 TradeId=trd__SPY_1671488358_MAIN_SUMM PosId=f16d13b6-552e-4e99-85c2-b45722a4fd5c Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=145.27 Text=Fake New Order 
+2022-12-19 19:19:18 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:19:18.732799 TradeId=trd__SPY_1671488358_MAIN_SUMM PosId=f16d13b6-552e-4e99-85c2-b45722a4fd5c Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=145.27 Text=Fake Filled Order 
+2022-12-19 19:19:19 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:01.270423 seconds!
+2022-12-19 19:19:20 [logger INFO] Starting to process for date:2008-01-02
+2022-12-19 19:19:20 [logger INFO] MACD/RSI = Running short trade for symbol SPY at 2008-01-03 09:12:00 for condition SHORT_MACD_RSI_RULE_BROOMS
+2022-12-19 19:19:20 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:19:20.928810 TradeId=trd__SPY_1671488360_MAIN_SUMM PosId=3b90fa42-a874-4757-a858-a688f4818bdb Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=145.23 Text=Fake New Order 
+2022-12-19 19:19:21 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:19:21.141250 TradeId=trd__SPY_1671488360_MAIN_SUMM PosId=3b90fa42-a874-4757-a858-a688f4818bdb Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=145.23 Text=Fake Filled Order 
+2022-12-19 19:19:22 [logger INFO] MACD-RSI - Closing short position for symbol SPY at 2008-01-03 14:41:00 
+2022-12-19 19:19:22 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:19:22.256364 TradeId=trd__SPY_1671488362_MAIN_SUMM PosId=3c6f6db0-2e65-40d0-a7b3-d50c2fda5cda Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=144.51 Text=Fake New Order 
+2022-12-19 19:19:22 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:19:22.469426 TradeId=trd__SPY_1671488362_MAIN_SUMM PosId=3c6f6db0-2e65-40d0-a7b3-d50c2fda5cda Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=144.51 Text=Fake Filled Order 
+2022-12-19 19:19:22 [logger INFO] MACD/RSI = Running short trade for symbol SPY at 2008-01-03 14:51:00 for condition SHORT_MACD_RSI_RULE_BROOMS
+2022-12-19 19:19:22 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:19:22.577232 TradeId=trd__SPY_1671488362_MAIN_SUMM PosId=b5389a38-e329-46b6-bd2d-3c66169c4893 Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=144.44 Text=Fake New Order 
+2022-12-19 19:19:22 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:19:22.781868 TradeId=trd__SPY_1671488362_MAIN_SUMM PosId=b5389a38-e329-46b6-bd2d-3c66169c4893 Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=144.44 Text=Fake Filled Order 
+2022-12-19 19:19:23 [logger INFO] Starting to process for date:2008-01-03
+2022-12-19 19:19:24 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2008-01-04 09:23:00 for condition LONG_MACD_RSI_RULE_BROOMS
+2022-12-19 19:19:24 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:19:24.053841 TradeId=trd__SPY_1671488364_MAIN_SUMM PosId=4c089e3f-3ee3-4a5a-a384-3d47da722b50 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=142.65 Text=Fake New Order 
+2022-12-19 19:19:24 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:19:24.260963 TradeId=trd__SPY_1671488364_MAIN_SUMM PosId=4c089e3f-3ee3-4a5a-a384-3d47da722b50 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=142.65 Text=Fake Filled Order 
+2022-12-19 19:19:24 [logger INFO] MACD-RSI - Closing long position for symbol SPY at 2008-01-04 09:57:00 
+2022-12-19 19:19:24 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:19:24.402015 TradeId=trd__SPY_1671488364_MAIN_SUMM PosId=2dc634f8-c2bb-493e-9b40-3ff808d2441a Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=141.92 Text=Fake New Order 
+2022-12-19 19:19:24 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:19:24.605747 TradeId=trd__SPY_1671488364_MAIN_SUMM PosId=2dc634f8-c2bb-493e-9b40-3ff808d2441a Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=141.92 Text=Fake Filled Order 
+2022-12-19 19:19:25 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:01.022405 seconds!
+2022-12-19 19:19:26 [logger INFO] Starting to process for date:2008-01-04
+2022-12-19 19:19:26 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2008-01-07 09:25:00 for condition LONG_MACD_RSI_RULE_BROOMS
+2022-12-19 19:19:26 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:19:26.560695 TradeId=trd__SPY_1671488366_MAIN_SUMM PosId=69bb9fd5-9894-4115-85e9-21aaa0ee3d94 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=140.9 Text=Fake New Order 
+2022-12-19 19:19:26 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:19:26.777078 TradeId=trd__SPY_1671488366_MAIN_SUMM PosId=69bb9fd5-9894-4115-85e9-21aaa0ee3d94 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=140.9 Text=Fake Filled Order 
+2022-12-19 19:19:26 [logger INFO] MACD-RSI - Closing long position for symbol SPY at 2008-01-07 09:34:00 
+2022-12-19 19:19:26 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:19:26.832946 TradeId=trd__SPY_1671488366_MAIN_SUMM PosId=ab45fae0-6be5-4b71-afa9-ddacc2382cb6 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=140.14 Text=Fake New Order 
+2022-12-19 19:19:27 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:19:27.041267 TradeId=trd__SPY_1671488366_MAIN_SUMM PosId=ab45fae0-6be5-4b71-afa9-ddacc2382cb6 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=140.14 Text=Fake Filled Order 
+2022-12-19 19:19:28 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:01.196184 seconds!
+2022-12-19 19:19:28 [logger INFO] Starting to process for date:2008-01-07
+2022-12-19 19:19:29 [logger INFO] MACD/RSI = Running short trade for symbol SPY at 2008-01-08 09:14:00 for condition SHORT_MACD_RSI_RULE_BROOMS
+2022-12-19 19:19:29 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:19:29.040407 TradeId=trd__SPY_1671488369_MAIN_SUMM PosId=5d80a22b-d60d-4b34-b86a-e9be11f5a559 Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=142.78 Text=Fake New Order 
+2022-12-19 19:19:29 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:19:29.246747 TradeId=trd__SPY_1671488369_MAIN_SUMM PosId=5d80a22b-d60d-4b34-b86a-e9be11f5a559 Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=142.78 Text=Fake Filled Order 
+2022-12-19 19:19:29 [logger INFO] MACD-RSI - Closing short position for symbol SPY at 2008-01-08 11:16:00 
+2022-12-19 19:19:29 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:19:29.656465 TradeId=trd__SPY_1671488369_MAIN_SUMM PosId=fdad99d1-25f8-46b6-9f8b-e85445c70791 Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=141.43 Text=Fake New Order 
+2022-12-19 19:19:29 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:19:29.865250 TradeId=trd__SPY_1671488369_MAIN_SUMM PosId=fdad99d1-25f8-46b6-9f8b-e85445c70791 Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=141.43 Text=Fake Filled Order 
+2022-12-19 19:19:29 [logger INFO] MACD/RSI = Running short trade for symbol SPY at 2008-01-08 11:18:00 for condition SHORT_MACD_RSI_RULE_6
+2022-12-19 19:19:29 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:19:29.917111 TradeId=trd__SPY_1671488369_MAIN_SUMM PosId=b594d38f-e296-45a0-a060-4333a4802640 Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=141.35 Text=Fake New Order 
+2022-12-19 19:19:30 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:19:30.127049 TradeId=trd__SPY_1671488369_MAIN_SUMM PosId=b594d38f-e296-45a0-a060-4333a4802640 Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=141.35 Text=Fake Filled Order 
+2022-12-19 19:19:30 [logger INFO] MACD-RSI - Closing short position for symbol SPY at 2008-01-08 13:11:00 
+2022-12-19 19:19:30 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:19:30.597110 TradeId=trd__SPY_1671488370_MAIN_SUMM PosId=6acb29f3-1729-4dc7-bc74-862ca2d864ad Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=142.07 Text=Fake New Order 
+2022-12-19 19:19:30 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:19:30.800000 TradeId=trd__SPY_1671488370_MAIN_SUMM PosId=6acb29f3-1729-4dc7-bc74-862ca2d864ad Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=142.07 Text=Fake Filled Order 
+2022-12-19 19:19:31 [logger INFO] MACD/RSI = Running short trade for symbol SPY at 2008-01-08 13:33:00 for condition SHORT_MACD_RSI_RULE_BROOMS
+2022-12-19 19:19:31 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:19:31.035369 TradeId=trd__SPY_1671488371_MAIN_SUMM PosId=315ca3d7-59f1-48ee-bb11-989171d14133 Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=142.18 Text=Fake New Order 
+2022-12-19 19:19:31 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:01.258059 seconds!
+2022-12-19 19:19:31 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:19:31.250617 TradeId=trd__SPY_1671488371_MAIN_SUMM PosId=315ca3d7-59f1-48ee-bb11-989171d14133 Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=142.18 Text=Fake Filled Order 
+2022-12-19 19:19:31 [logger INFO] MACD-RSI - Closing short position for symbol SPY at 2008-01-08 14:33:00 
+2022-12-19 19:19:31 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:19:31.561500 TradeId=trd__SPY_1671488371_MAIN_SUMM PosId=da624070-c3a1-4b41-8f23-e26a38f36f02 Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=140.3 Text=Fake New Order 
+2022-12-19 19:19:31 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:19:31.774010 TradeId=trd__SPY_1671488371_MAIN_SUMM PosId=da624070-c3a1-4b41-8f23-e26a38f36f02 Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=140.3 Text=Fake Filled Order 
+2022-12-19 19:19:31 [logger INFO] MACD/RSI = Running short trade for symbol SPY at 2008-01-08 14:34:00 for condition SHORT_MACD_RSI_RULE_6
+2022-12-19 19:19:31 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:19:31.809641 TradeId=trd__SPY_1671488371_MAIN_SUMM PosId=2cad4df6-9620-452f-a108-84bba7393eb5 Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=140.22 Text=Fake New Order 
+2022-12-19 19:19:31 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:01.247454 seconds!
+2022-12-19 19:19:32 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:19:32.021409 TradeId=trd__SPY_1671488371_MAIN_SUMM PosId=2cad4df6-9620-452f-a108-84bba7393eb5 Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=140.22 Text=Fake Filled Order 
+2022-12-19 19:19:32 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:01.374373 seconds!
+2022-12-19 19:19:32 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:01.331477 seconds!
+2022-12-19 19:19:33 [logger INFO] Starting to process for date:2008-01-08
+2022-12-19 19:19:33 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2008-01-09 09:28:00 for condition LONG_MACD_RSI_RULE_BROOMS
+2022-12-19 19:19:33 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:19:33.341164 TradeId=trd__SPY_1671488373_MAIN_SUMM PosId=338a5c73-d5af-40eb-a37f-a67a0865064a Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=139.23 Text=Fake New Order 
+2022-12-19 19:19:33 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:01.658483 seconds!
+2022-12-19 19:19:33 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:19:33.552184 TradeId=trd__SPY_1671488373_MAIN_SUMM PosId=338a5c73-d5af-40eb-a37f-a67a0865064a Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=139.23 Text=Fake Filled Order 
+2022-12-19 19:19:33 [logger INFO] MACD-RSI - Closing long position for symbol SPY at 2008-01-09 10:48:00 
+2022-12-19 19:19:33 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:19:33.845050 TradeId=trd__SPY_1671488373_MAIN_SUMM PosId=de4a7dd9-4017-49b2-8a07-db3875b04340 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=138.49 Text=Fake New Order 
+2022-12-19 19:19:34 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:19:34.051263 TradeId=trd__SPY_1671488373_MAIN_SUMM PosId=de4a7dd9-4017-49b2-8a07-db3875b04340 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=138.49 Text=Fake Filled Order 
+2022-12-19 19:19:34 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:01.107454 seconds!
+2022-12-19 19:19:35 [logger INFO] Starting to process for date:2008-01-09
+2022-12-19 19:19:35 [logger INFO] MACD/RSI = Running short trade for symbol SPY at 2008-01-10 09:11:00 for condition SHORT_MACD_RSI_RULE_BROOMS
+2022-12-19 19:19:35 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:19:35.999474 TradeId=trd__SPY_1671488375_MAIN_SUMM PosId=ad8f2b46-e266-4260-a026-4f9f6ad45db9 Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=140.36 Text=Fake New Order 
+2022-12-19 19:19:36 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:19:36.200866 TradeId=trd__SPY_1671488375_MAIN_SUMM PosId=ad8f2b46-e266-4260-a026-4f9f6ad45db9 Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=140.36 Text=Fake Filled Order 
+2022-12-19 19:19:36 [logger INFO] MACD-RSI - Closing short position for symbol SPY at 2008-01-10 11:18:00 
+2022-12-19 19:19:36 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:19:36.703121 TradeId=trd__SPY_1671488376_MAIN_SUMM PosId=12cd016f-940d-413a-8472-9e77d83db1f8 Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=141.3 Text=Fake New Order 
+2022-12-19 19:19:36 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:19:36.914942 TradeId=trd__SPY_1671488376_MAIN_SUMM PosId=12cd016f-940d-413a-8472-9e77d83db1f8 Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=141.3 Text=Fake Filled Order 
+2022-12-19 19:19:38 [logger INFO] Starting to process for date:2008-01-10
+2022-12-19 19:19:38 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2008-01-11 09:13:00 for condition LONG_MACD_RSI_RULE_BROOMS
+2022-12-19 19:19:38 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:19:38.765167 TradeId=trd__SPY_1671488378_MAIN_SUMM PosId=650b8bec-350e-47c0-a8b0-bce537fdac7e Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=140.5515 Text=Fake New Order 
+2022-12-19 19:19:38 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:19:38.985215 TradeId=trd__SPY_1671488378_MAIN_SUMM PosId=650b8bec-350e-47c0-a8b0-bce537fdac7e Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=140.5515 Text=Fake Filled Order 
+2022-12-19 19:19:39 [logger INFO] MACD-RSI - Closing long position for symbol SPY at 2008-01-11 10:40:00 
+2022-12-19 19:19:39 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:19:39.284405 TradeId=trd__SPY_1671488379_MAIN_SUMM PosId=49a2c9c4-a840-4d0e-a6ab-d6e42311ad73 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=141.26 Text=Fake New Order 
+2022-12-19 19:19:39 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:19:39.495960 TradeId=trd__SPY_1671488379_MAIN_SUMM PosId=49a2c9c4-a840-4d0e-a6ab-d6e42311ad73 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=141.26 Text=Fake Filled Order 
+2022-12-19 19:19:39 [logger INFO] MACD/RSI = Running short trade for symbol SPY at 2008-01-11 10:41:00 for condition SHORT_MACD_RSI_RULE_BROOMS
+2022-12-19 19:19:39 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:19:39.539930 TradeId=trd__SPY_1671488379_MAIN_SUMM PosId=91bfe930-93fe-452d-93b0-a63bbd69d144 Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=141.22 Text=Fake New Order 
+2022-12-19 19:19:39 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:19:39.748142 TradeId=trd__SPY_1671488379_MAIN_SUMM PosId=91bfe930-93fe-452d-93b0-a63bbd69d144 Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=141.22 Text=Fake Filled Order 
+2022-12-19 19:19:40 [logger INFO] MACD-RSI - Closing short position for symbol SPY at 2008-01-11 12:26:00 
+2022-12-19 19:19:40 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:19:40.168910 TradeId=trd__SPY_1671488380_MAIN_SUMM PosId=01d72234-d384-4b18-b882-cddab42919a4 Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=140.51 Text=Fake New Order 
+2022-12-19 19:19:40 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:19:40.384943 TradeId=trd__SPY_1671488380_MAIN_SUMM PosId=01d72234-d384-4b18-b882-cddab42919a4 Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=140.51 Text=Fake Filled Order 
+2022-12-19 19:19:40 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2008-01-11 12:51:00 for condition LONG_MACD_RSI_RULE_BROOMS
+2022-12-19 19:19:40 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:19:40.556249 TradeId=trd__SPY_1671488380_MAIN_SUMM PosId=0fa8ec3d-9bc3-42e4-bcc6-789e56d56c4e Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=140.16 Text=Fake New Order 
+2022-12-19 19:19:40 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:01.221457 seconds!
+2022-12-19 19:19:40 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:19:40.767372 TradeId=trd__SPY_1671488380_MAIN_SUMM PosId=0fa8ec3d-9bc3-42e4-bcc6-789e56d56c4e Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=140.16 Text=Fake Filled Order 
+2022-12-19 19:19:41 [logger INFO] MACD-RSI - Closing long position for symbol SPY at 2008-01-11 14:13:00 
+2022-12-19 19:19:41 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:19:41.198876 TradeId=trd__SPY_1671488381_MAIN_SUMM PosId=a4a283e9-44b8-4db4-b2c6-184cfe9a2382 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=139.45 Text=Fake New Order 
+2022-12-19 19:19:41 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:19:41.400660 TradeId=trd__SPY_1671488381_MAIN_SUMM PosId=a4a283e9-44b8-4db4-b2c6-184cfe9a2382 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=139.45 Text=Fake Filled Order 
+2022-12-19 19:19:41 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2008-01-11 14:16:00 for condition LONG_MACD_RSI_RULE_BROOMS
+2022-12-19 19:19:41 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:19:41.473185 TradeId=trd__SPY_1671488381_MAIN_SUMM PosId=b8c2d43e-6cb2-4ae8-a748-1b2bba332158 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=139.64 Text=Fake New Order 
+2022-12-19 19:19:41 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:01.344861 seconds!
+2022-12-19 19:19:41 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:19:41.676629 TradeId=trd__SPY_1671488381_MAIN_SUMM PosId=b8c2d43e-6cb2-4ae8-a748-1b2bba332158 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=139.64 Text=Fake Filled Order 
+2022-12-19 19:19:42 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:01.621834 seconds!
+2022-12-19 19:19:42 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:01.451523 seconds!
+2022-12-19 19:19:42 [logger INFO] Starting to process for date:2008-01-11
+2022-12-19 19:19:43 [logger INFO] MACD/RSI = Running short trade for symbol SPY at 2008-01-14 09:39:00 for condition SHORT_MACD_RSI_RULE_BROOMS
+2022-12-19 19:19:43 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:19:43.162050 TradeId=trd__SPY_1671488383_MAIN_SUMM PosId=c8564ec1-ddbe-4035-a8e0-f448f902f0b2 Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=141.0 Text=Fake New Order 
+2022-12-19 19:19:43 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:01.785009 seconds!
+2022-12-19 19:19:43 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:19:43.378868 TradeId=trd__SPY_1671488383_MAIN_SUMM PosId=c8564ec1-ddbe-4035-a8e0-f448f902f0b2 Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=141.0 Text=Fake Filled Order 
+2022-12-19 19:19:43 [logger INFO] MACD-RSI - Closing short position for symbol SPY at 2008-01-14 11:25:00 
+2022-12-19 19:19:43 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:19:43.746229 TradeId=trd__SPY_1671488383_MAIN_SUMM PosId=c08618b2-c78e-4f3e-8292-5be20cf58a22 Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=140.67 Text=Fake New Order 
+2022-12-19 19:19:43 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:19:43.958798 TradeId=trd__SPY_1671488383_MAIN_SUMM PosId=c08618b2-c78e-4f3e-8292-5be20cf58a22 Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=140.67 Text=Fake Filled Order 
+2022-12-19 19:19:44 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2008-01-14 11:47:00 for condition LONG_MACD_RSI_RULE_BROOMS
+2022-12-19 19:19:44 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:19:44.123987 TradeId=trd__SPY_1671488384_MAIN_SUMM PosId=97cc2bba-5737-41bb-85b5-388a6c9951b5 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=140.59 Text=Fake New Order 
+2022-12-19 19:19:44 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:19:44.333271 TradeId=trd__SPY_1671488384_MAIN_SUMM PosId=97cc2bba-5737-41bb-85b5-388a6c9951b5 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=140.59 Text=Fake Filled Order 
+2022-12-19 19:19:44 [logger INFO] MACD-RSI - Closing long position for symbol SPY at 2008-01-14 12:00:00 
+2022-12-19 19:19:44 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:19:44.405479 TradeId=trd__SPY_1671488384_MAIN_SUMM PosId=ee8bb9ac-af46-41d2-9cfc-1588a09ba0e2 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=140.75 Text=Fake New Order 
+2022-12-19 19:19:44 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:19:44.612559 TradeId=trd__SPY_1671488384_MAIN_SUMM PosId=ee8bb9ac-af46-41d2-9cfc-1588a09ba0e2 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=140.75 Text=Fake Filled Order 
+2022-12-19 19:19:44 [logger INFO] MACD/RSI = Running short trade for symbol SPY at 2008-01-14 12:02:00 for condition SHORT_MACD_RSI_RULE_BROOMS
+2022-12-19 19:19:44 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:19:44.668393 TradeId=trd__SPY_1671488384_MAIN_SUMM PosId=c9c533aa-e9ba-437b-89e3-9350dd605af7 Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=140.745 Text=Fake New Order 
+2022-12-19 19:19:44 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:19:44.876918 TradeId=trd__SPY_1671488384_MAIN_SUMM PosId=c9c533aa-e9ba-437b-89e3-9350dd605af7 Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=140.745 Text=Fake Filled Order 
+2022-12-19 19:19:45 [logger INFO] MACD-RSI - Closing short position for symbol SPY at 2008-01-14 13:41:00 
+2022-12-19 19:19:45 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:19:45.261916 TradeId=trd__SPY_1671488385_MAIN_SUMM PosId=6fee767c-2513-482a-b163-168376c1d684 Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=141.48 Text=Fake New Order 
+2022-12-19 19:19:45 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:01.182428 seconds!
+2022-12-19 19:19:45 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:19:45.465754 TradeId=trd__SPY_1671488385_MAIN_SUMM PosId=6fee767c-2513-482a-b163-168376c1d684 Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=141.48 Text=Fake Filled Order 
+2022-12-19 19:19:45 [logger INFO] MACD/RSI = Running short trade for symbol SPY at 2008-01-14 13:44:00 for condition SHORT_MACD_RSI_RULE_BROOMS
+2022-12-19 19:19:45 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:19:45.532260 TradeId=trd__SPY_1671488385_MAIN_SUMM PosId=b9179b5b-3670-4553-873b-48e3404ebb52 Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=141.26 Text=Fake New Order 
+2022-12-19 19:19:45 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:19:45.744564 TradeId=trd__SPY_1671488385_MAIN_SUMM PosId=b9179b5b-3670-4553-873b-48e3404ebb52 Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=141.26 Text=Fake Filled Order 
+2022-12-19 19:19:45 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:01.497610 seconds!
+2022-12-19 19:19:46 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:01.902621 seconds!
+2022-12-19 19:19:47 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:01.831529 seconds!
+2022-12-19 19:19:47 [logger INFO] Starting to process for date:2008-01-14
+2022-12-19 19:19:47 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2008-01-16 09:19:00 for condition LONG_MACD_RSI_RULE_BROOMS
+2022-12-19 19:19:47 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:19:47.270942 TradeId=trd__SPY_1671488387_MAIN_SUMM PosId=a8682edb-9847-47c2-a659-b75c833fc0c2 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=137.33 Text=Fake New Order 
+2022-12-19 19:19:47 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:19:47.475396 TradeId=trd__SPY_1671488387_MAIN_SUMM PosId=a8682edb-9847-47c2-a659-b75c833fc0c2 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=137.33 Text=Fake Filled Order 
+2022-12-19 19:19:47 [logger INFO] MACD-RSI - Closing long position for symbol SPY at 2008-01-16 09:49:00 
+2022-12-19 19:19:47 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:19:47.624409 TradeId=trd__SPY_1671488387_MAIN_SUMM PosId=e9286115-d127-44ec-a9e0-d34c55fba2dc Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=136.62 Text=Fake New Order 
+2022-12-19 19:19:47 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:19:47.843118 TradeId=trd__SPY_1671488387_MAIN_SUMM PosId=e9286115-d127-44ec-a9e0-d34c55fba2dc Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=136.62 Text=Fake Filled Order 
+2022-12-19 19:19:47 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:02.424554 seconds!
+2022-12-19 19:19:49 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:02.069176 seconds!
+2022-12-19 19:19:50 [logger INFO] Starting to process for date:2008-01-16
+2022-12-19 19:19:50 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2008-01-17 09:09:00 for condition LONG_MACD_RSI_RULE_BROOMS
+2022-12-19 19:19:50 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:19:50.299745 TradeId=trd__SPY_1671488390_MAIN_SUMM PosId=0e8b8f63-47e2-41b9-873a-d7f043a435b4 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=136.96 Text=Fake New Order 
+2022-12-19 19:19:50 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:19:50.505265 TradeId=trd__SPY_1671488390_MAIN_SUMM PosId=0e8b8f63-47e2-41b9-873a-d7f043a435b4 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=136.96 Text=Fake Filled Order 
+2022-12-19 19:19:50 [logger INFO] MACD-RSI - Closing long position for symbol SPY at 2008-01-17 09:19:00 
+2022-12-19 19:19:50 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:19:50.577480 TradeId=trd__SPY_1671488390_MAIN_SUMM PosId=50215dcb-9a1f-41bd-9207-c4401691d342 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=136.25 Text=Fake New Order 
+2022-12-19 19:19:50 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:19:50.782313 TradeId=trd__SPY_1671488390_MAIN_SUMM PosId=50215dcb-9a1f-41bd-9207-c4401691d342 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=136.25 Text=Fake Filled Order 
+2022-12-19 19:19:51 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:04.168066 seconds!
+2022-12-19 19:19:52 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:01.974698 seconds!
+2022-12-19 19:19:52 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:02.136179 seconds!
+2022-12-19 19:19:52 [logger INFO] Starting to process for date:2008-01-17
+2022-12-19 19:19:52 [logger INFO] MACD/RSI = Running short trade for symbol SPY at 2008-01-18 09:17:00 for condition SHORT_MACD_RSI_RULE_BROOMS
+2022-12-19 19:19:52 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:19:52.966397 TradeId=trd__SPY_1671488392_MAIN_SUMM PosId=dd7c0f58-0c17-4a8c-93fb-36c183ede94d Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=134.62 Text=Fake New Order 
+2022-12-19 19:19:53 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:19:53.178649 TradeId=trd__SPY_1671488392_MAIN_SUMM PosId=dd7c0f58-0c17-4a8c-93fb-36c183ede94d Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=134.62 Text=Fake Filled Order 
+2022-12-19 19:19:53 [logger INFO] MACD-RSI - Closing short position for symbol SPY at 2008-01-18 10:31:00 
+2022-12-19 19:19:53 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:19:53.405477 TradeId=trd__SPY_1671488393_MAIN_SUMM PosId=3f51cb9e-d33c-4228-9789-4b45cbd26484 Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=132.87 Text=Fake New Order 
+2022-12-19 19:19:53 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:19:53.616348 TradeId=trd__SPY_1671488393_MAIN_SUMM PosId=3f51cb9e-d33c-4228-9789-4b45cbd26484 Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=132.87 Text=Fake Filled Order 
+2022-12-19 19:19:53 [logger INFO] MACD/RSI = Running short trade for symbol SPY at 2008-01-18 10:32:00 for condition SHORT_MACD_RSI_RULE_6
+2022-12-19 19:19:53 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:19:53.651132 TradeId=trd__SPY_1671488393_MAIN_SUMM PosId=24cdeed5-741d-413c-9aab-91123a87b061 Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=132.75 Text=Fake New Order 
+2022-12-19 19:19:53 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:19:53.867049 TradeId=trd__SPY_1671488393_MAIN_SUMM PosId=24cdeed5-741d-413c-9aab-91123a87b061 Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=132.75 Text=Fake Filled Order 
+2022-12-19 19:19:53 [logger INFO] MACD-RSI - Closing short position for symbol SPY at 2008-01-18 11:01:00 
+2022-12-19 19:19:53 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:19:53.987894 TradeId=trd__SPY_1671488393_MAIN_SUMM PosId=06da227e-9d51-4f53-8170-7c405c278e29 Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=131.53 Text=Fake New Order 
+2022-12-19 19:19:54 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:19:54.194366 TradeId=trd__SPY_1671488393_MAIN_SUMM PosId=06da227e-9d51-4f53-8170-7c405c278e29 Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=131.53 Text=Fake Filled Order 
+2022-12-19 19:19:54 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2008-01-18 11:02:00 for condition LONG_MACD_RSI_RULE_BROOMS
+2022-12-19 19:19:54 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:19:54.246026 TradeId=trd__SPY_1671488394_MAIN_SUMM PosId=9ca139fa-1955-45b1-8b9a-99b240afd58b Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=131.64 Text=Fake New Order 
+2022-12-19 19:19:54 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:19:54.463093 TradeId=trd__SPY_1671488394_MAIN_SUMM PosId=9ca139fa-1955-45b1-8b9a-99b240afd58b Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=131.64 Text=Fake Filled Order 
+2022-12-19 19:19:55 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:01.670562 seconds!
+2022-12-19 19:19:56 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:01.856499 seconds!
+2022-12-19 19:19:56 [logger INFO] Starting to process for date:2008-01-18
+2022-12-19 19:19:56 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2008-01-22 09:26:00 for condition LONG_MACD_RSI_RULE_6
+2022-12-19 19:19:56 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:19:56.506883 TradeId=trd__SPY_1671488396_MAIN_SUMM PosId=7a1b98a3-e336-4e59-b688-b9ce8e35cc17 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=130.64 Text=Fake New Order 
+2022-12-19 19:19:56 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:19:56.721745 TradeId=trd__SPY_1671488396_MAIN_SUMM PosId=7a1b98a3-e336-4e59-b688-b9ce8e35cc17 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=130.64 Text=Fake Filled Order 
+2022-12-19 19:19:56 [logger INFO] MACD-RSI - Closing long position for symbol SPY at 2008-01-22 09:34:00 
+2022-12-19 19:19:56 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:19:56.777413 TradeId=trd__SPY_1671488396_MAIN_SUMM PosId=3c055e40-002e-405d-b9dc-2fadf871128d Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=129.2099 Text=Fake New Order 
+2022-12-19 19:19:56 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:19:56.986545 TradeId=trd__SPY_1671488396_MAIN_SUMM PosId=3c055e40-002e-405d-b9dc-2fadf871128d Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=129.2099 Text=Fake Filled Order 
+2022-12-19 19:19:57 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:01.162122 seconds!
+2022-12-19 19:19:58 [logger INFO] Starting to process for date:2008-01-22
+2022-12-19 19:19:59 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2008-01-23 09:20:00 for condition LONG_MACD_RSI_RULE_6
+2022-12-19 19:19:59 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:19:59.021302 TradeId=trd__SPY_1671488399_MAIN_SUMM PosId=982e14cc-e1c2-4f39-ae7d-ca84d071bcdd Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=130.62 Text=Fake New Order 
+2022-12-19 19:19:59 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:19:59.232719 TradeId=trd__SPY_1671488399_MAIN_SUMM PosId=982e14cc-e1c2-4f39-ae7d-ca84d071bcdd Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=130.62 Text=Fake Filled Order 
+2022-12-19 19:19:59 [logger INFO] MACD-RSI - Closing long position for symbol SPY at 2008-01-23 09:33:00 
+2022-12-19 19:19:59 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:19:59.309701 TradeId=trd__SPY_1671488399_MAIN_SUMM PosId=219f8d4b-81dc-460e-a233-a01d7271dee3 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=129.91 Text=Fake New Order 
+2022-12-19 19:19:59 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:19:59.524350 TradeId=trd__SPY_1671488399_MAIN_SUMM PosId=219f8d4b-81dc-460e-a233-a01d7271dee3 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=129.91 Text=Fake Filled Order 
+2022-12-19 19:20:00 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:01.343641 seconds!
+2022-12-19 19:20:01 [logger INFO] Starting to process for date:2008-01-23
+2022-12-19 19:20:01 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2008-01-25 09:28:00 for condition LONG_MACD_RSI_RULE_BROOMS
+2022-12-19 19:20:01 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:20:01.702932 TradeId=trd__SPY_1671488401_MAIN_SUMM PosId=0c1b0c64-c440-4361-84df-7e7934f0dc49 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=135.93 Text=Fake New Order 
+2022-12-19 19:20:01 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:20:01.915196 TradeId=trd__SPY_1671488401_MAIN_SUMM PosId=0c1b0c64-c440-4361-84df-7e7934f0dc49 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=135.93 Text=Fake Filled Order 
+2022-12-19 19:20:01 [logger INFO] MACD-RSI - Closing long position for symbol SPY at 2008-01-25 09:34:00 
+2022-12-19 19:20:01 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:20:01.964508 TradeId=trd__SPY_1671488401_MAIN_SUMM PosId=75b3e793-610c-4267-977b-9e993ae47f5e Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=135.16 Text=Fake New Order 
+2022-12-19 19:20:02 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:20:02.180334 TradeId=trd__SPY_1671488401_MAIN_SUMM PosId=75b3e793-610c-4267-977b-9e993ae47f5e Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=135.16 Text=Fake Filled Order 
+2022-12-19 19:20:03 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:01.087569 seconds!
+2022-12-19 19:20:03 [logger INFO] Starting to process for date:2008-01-25
+2022-12-19 19:20:04 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2008-01-28 09:12:00 for condition LONG_MACD_RSI_RULE_BROOMS
+2022-12-19 19:20:04 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:20:04.094309 TradeId=trd__SPY_1671488404_MAIN_SUMM PosId=8313e634-8fde-4084-8c22-28c0580731ca Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=132.32 Text=Fake New Order 
+2022-12-19 19:20:04 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:20:04.309750 TradeId=trd__SPY_1671488404_MAIN_SUMM PosId=8313e634-8fde-4084-8c22-28c0580731ca Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=132.32 Text=Fake Filled Order 
+2022-12-19 19:20:04 [logger INFO] MACD-RSI - Closing long position for symbol SPY at 2008-01-28 09:34:00 
+2022-12-19 19:20:04 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:20:04.414471 TradeId=trd__SPY_1671488404_MAIN_SUMM PosId=1ab70ed9-43a3-48e0-837c-62c17f84b451 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=133.13 Text=Fake New Order 
+2022-12-19 19:20:04 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:20:04.621793 TradeId=trd__SPY_1671488404_MAIN_SUMM PosId=1ab70ed9-43a3-48e0-837c-62c17f84b451 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=133.13 Text=Fake Filled Order 
+2022-12-19 19:20:04 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2008-01-28 09:46:00 for condition LONG_MACD_RSI_RULE_6
+2022-12-19 19:20:04 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:20:04.714821 TradeId=trd__SPY_1671488404_MAIN_SUMM PosId=c5ffaa68-2d5d-4575-81af-21db216f3635 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=133.6 Text=Fake New Order 
+2022-12-19 19:20:04 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:20:04.932905 TradeId=trd__SPY_1671488404_MAIN_SUMM PosId=c5ffaa68-2d5d-4575-81af-21db216f3635 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=133.6 Text=Fake Filled Order 
+2022-12-19 19:20:05 [logger INFO] MACD-RSI - Closing long position for symbol SPY at 2008-01-28 13:49:00 
+2022-12-19 19:20:05 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:20:05.839189 TradeId=trd__SPY_1671488405_MAIN_SUMM PosId=349e93ec-7027-47bb-be06-e40e3f57a1ce Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=134.5 Text=Fake New Order 
+2022-12-19 19:20:06 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:20:06.045957 TradeId=trd__SPY_1671488405_MAIN_SUMM PosId=349e93ec-7027-47bb-be06-e40e3f57a1ce Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=134.5 Text=Fake Filled Order 
+2022-12-19 19:20:06 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2008-01-28 13:50:00 for condition LONG_MACD_RSI_RULE_6
+2022-12-19 19:20:06 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:20:06.098187 TradeId=trd__SPY_1671488406_MAIN_SUMM PosId=bfb0eff1-9b30-4920-9536-6ab2bbbf408e Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=134.49 Text=Fake New Order 
+2022-12-19 19:20:06 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:01.432031 seconds!
+2022-12-19 19:20:06 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:20:06.312972 TradeId=trd__SPY_1671488406_MAIN_SUMM PosId=bfb0eff1-9b30-4920-9536-6ab2bbbf408e Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=134.49 Text=Fake Filled Order 
+2022-12-19 19:20:07 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:01.129404 seconds!
+2022-12-19 19:20:07 [logger INFO] Starting to process for date:2008-01-28
+2022-12-19 19:20:07 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2008-01-29 09:59:00 for condition LONG_MACD_RSI_RULE_BROOMS
+2022-12-19 19:20:07 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:20:07.935992 TradeId=trd__SPY_1671488407_MAIN_SUMM PosId=c2a299f4-4ec4-4c3b-8c15-f504f97f9910 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=135.8 Text=Fake New Order 
+2022-12-19 19:20:08 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:20:08.152555 TradeId=trd__SPY_1671488407_MAIN_SUMM PosId=c2a299f4-4ec4-4c3b-8c15-f504f97f9910 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=135.8 Text=Fake Filled Order 
+2022-12-19 19:20:08 [logger INFO] MACD-RSI - Closing long position for symbol SPY at 2008-01-29 10:42:00 
+2022-12-19 19:20:08 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:20:08.334072 TradeId=trd__SPY_1671488408_MAIN_SUMM PosId=d83ff808-eb6e-49cf-937b-412b27131f8d Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=136.08 Text=Fake New Order 
+2022-12-19 19:20:08 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:20:08.548217 TradeId=trd__SPY_1671488408_MAIN_SUMM PosId=d83ff808-eb6e-49cf-937b-412b27131f8d Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=136.08 Text=Fake Filled Order 
+2022-12-19 19:20:08 [logger INFO] MACD/RSI = Running short trade for symbol SPY at 2008-01-29 10:43:00 for condition SHORT_MACD_RSI_RULE_BROOMS
+2022-12-19 19:20:08 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:20:08.585374 TradeId=trd__SPY_1671488408_MAIN_SUMM PosId=b19b86d0-06a7-40b3-b58e-b6164c0857d6 Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=136.1 Text=Fake New Order 
+2022-12-19 19:20:08 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:20:08.797539 TradeId=trd__SPY_1671488408_MAIN_SUMM PosId=b19b86d0-06a7-40b3-b58e-b6164c0857d6 Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=136.1 Text=Fake Filled Order 
+2022-12-19 19:20:08 [logger INFO] MACD-RSI - Closing short position for symbol SPY at 2008-01-29 11:22:00 
+2022-12-19 19:20:08 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:20:08.967147 TradeId=trd__SPY_1671488408_MAIN_SUMM PosId=6e9942ef-f18d-490a-b0ab-d7f752ed33db Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=135.8 Text=Fake New Order 
+2022-12-19 19:20:09 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:20:09.170399 TradeId=trd__SPY_1671488408_MAIN_SUMM PosId=6e9942ef-f18d-490a-b0ab-d7f752ed33db Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=135.8 Text=Fake Filled Order 
+2022-12-19 19:20:09 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2008-01-29 11:23:00 for condition LONG_MACD_RSI_RULE_BROOMS
+2022-12-19 19:20:09 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:20:09.220983 TradeId=trd__SPY_1671488409_MAIN_SUMM PosId=99af8a17-1a5c-4a4c-b28f-9019e04267c2 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=135.75 Text=Fake New Order 
+2022-12-19 19:20:09 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:20:09.437785 TradeId=trd__SPY_1671488409_MAIN_SUMM PosId=99af8a17-1a5c-4a4c-b28f-9019e04267c2 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=135.75 Text=Fake Filled Order 
+2022-12-19 19:20:10 [logger INFO] MACD-RSI - Closing long position for symbol SPY at 2008-01-29 14:12:00 
+2022-12-19 19:20:10 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:20:10.144319 TradeId=trd__SPY_1671488410_MAIN_SUMM PosId=130c4fe6-3a12-4c0f-937d-784bce719ac0 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=136.12 Text=Fake New Order 
+2022-12-19 19:20:10 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:20:10.350147 TradeId=trd__SPY_1671488410_MAIN_SUMM PosId=130c4fe6-3a12-4c0f-937d-784bce719ac0 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=136.12 Text=Fake Filled Order 
+2022-12-19 19:20:10 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:01.386987 seconds!
+2022-12-19 19:20:10 [logger INFO] MACD/RSI = Running short trade for symbol SPY at 2008-01-29 14:13:00 for condition SHORT_MACD_RSI_RULE_BROOMS
+2022-12-19 19:20:10 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:20:10.402351 TradeId=trd__SPY_1671488410_MAIN_SUMM PosId=364ca77f-8df2-416e-803b-d6feb9349afd Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=136.21 Text=Fake New Order 
+2022-12-19 19:20:10 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:20:10.617217 TradeId=trd__SPY_1671488410_MAIN_SUMM PosId=364ca77f-8df2-416e-803b-d6feb9349afd Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=136.21 Text=Fake Filled Order 
+2022-12-19 19:20:10 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:01.706572 seconds!
+2022-12-19 19:20:11 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:01.197058 seconds!
+2022-12-19 19:20:11 [logger INFO] Starting to process for date:2008-01-29
+2022-12-19 19:20:11 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:01.431251 seconds!
+2022-12-19 19:20:11 [logger INFO] MACD/RSI = Running short trade for symbol SPY at 2008-01-30 09:15:00 for condition SHORT_MACD_RSI_RULE_BROOMS
+2022-12-19 19:20:11 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:20:11.930510 TradeId=trd__SPY_1671488411_MAIN_SUMM PosId=f27c34ba-47a4-432b-bb90-abb51782aedd Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=135.91 Text=Fake New Order 
+2022-12-19 19:20:12 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:20:12.141168 TradeId=trd__SPY_1671488411_MAIN_SUMM PosId=f27c34ba-47a4-432b-bb90-abb51782aedd Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=135.91 Text=Fake Filled Order 
+2022-12-19 19:20:12 [logger INFO] MACD-RSI - Closing short position for symbol SPY at 2008-01-30 13:16:00 
+2022-12-19 19:20:12 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:20:12.983870 TradeId=trd__SPY_1671488412_MAIN_SUMM PosId=4591e367-903e-4a78-beda-c2300292b2f1 Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=136.84 Text=Fake New Order 
+2022-12-19 19:20:13 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:20:13.187752 TradeId=trd__SPY_1671488412_MAIN_SUMM PosId=4591e367-903e-4a78-beda-c2300292b2f1 Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=136.84 Text=Fake Filled Order 
+2022-12-19 19:20:14 [logger INFO] Starting to process for date:2008-01-30
+2022-12-19 19:20:14 [logger INFO] MACD/RSI = Running short trade for symbol SPY at 2008-01-31 10:06:00 for condition SHORT_MACD_RSI_RULE_BROOMS
+2022-12-19 19:20:14 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:20:14.853880 TradeId=trd__SPY_1671488414_MAIN_SUMM PosId=a27aad7a-9a1a-4f0c-bf55-5407c90ff62d Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=135.07 Text=Fake New Order 
+2022-12-19 19:20:15 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:20:15.064760 TradeId=trd__SPY_1671488414_MAIN_SUMM PosId=a27aad7a-9a1a-4f0c-bf55-5407c90ff62d Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=135.07 Text=Fake Filled Order 
+2022-12-19 19:20:15 [logger INFO] MACD-RSI - Closing short position for symbol SPY at 2008-01-31 10:28:00 
+2022-12-19 19:20:15 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:20:15.185292 TradeId=trd__SPY_1671488415_MAIN_SUMM PosId=6bf4b615-2a97-48ac-816a-a66c8b95825c Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=135.82 Text=Fake New Order 
+2022-12-19 19:20:15 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:20:15.390655 TradeId=trd__SPY_1671488415_MAIN_SUMM PosId=6bf4b615-2a97-48ac-816a-a66c8b95825c Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=135.82 Text=Fake Filled Order 
+2022-12-19 19:20:16 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:01.083569 seconds!
+2022-12-19 19:20:17 [logger INFO] Starting to process for date:2008-01-31
+2022-12-19 19:20:17 [logger INFO] MACD/RSI = Running short trade for symbol SPY at 2008-02-01 09:10:00 for condition SHORT_MACD_RSI_RULE_BROOMS
+2022-12-19 19:20:17 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:20:17.285972 TradeId=trd__SPY_1671488417_MAIN_SUMM PosId=7f57e725-1ddd-45e9-84b5-8313479d53a3 Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=139.2 Text=Fake New Order 
+2022-12-19 19:20:17 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:20:17.500181 TradeId=trd__SPY_1671488417_MAIN_SUMM PosId=7f57e725-1ddd-45e9-84b5-8313479d53a3 Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=139.2 Text=Fake Filled Order 
+2022-12-19 19:20:19 [logger INFO] Starting to process for date:2008-02-01
+2022-12-19 19:20:19 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2008-02-04 09:11:00 for condition LONG_MACD_RSI_RULE_BROOMS
+2022-12-19 19:20:19 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:20:19.950136 TradeId=trd__SPY_1671488419_MAIN_SUMM PosId=d35fe8a6-b51b-45c9-890b-b55a9f7e3f3f Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=138.44 Text=Fake New Order 
+2022-12-19 19:20:20 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:20:20.154067 TradeId=trd__SPY_1671488419_MAIN_SUMM PosId=d35fe8a6-b51b-45c9-890b-b55a9f7e3f3f Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=138.44 Text=Fake Filled Order 
+2022-12-19 19:20:22 [logger INFO] Starting to process for date:2008-02-04
+2022-12-19 19:20:22 [logger INFO] MACD/RSI = Running short trade for symbol SPY at 2008-02-05 09:34:00 for condition SHORT_MACD_RSI_RULE_BROOMS
+2022-12-19 19:20:22 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:20:22.506462 TradeId=trd__SPY_1671488422_MAIN_SUMM PosId=1e44d4ba-652f-49bc-a990-bebfb99fc5e4 Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=136.02 Text=Fake New Order 
+2022-12-19 19:20:22 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:20:22.723714 TradeId=trd__SPY_1671488422_MAIN_SUMM PosId=1e44d4ba-652f-49bc-a990-bebfb99fc5e4 Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=136.02 Text=Fake Filled Order 
+2022-12-19 19:20:22 [logger INFO] MACD-RSI - Closing short position for symbol SPY at 2008-02-05 09:56:00 
+2022-12-19 19:20:22 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:20:22.820455 TradeId=trd__SPY_1671488422_MAIN_SUMM PosId=699cf813-0a1b-4359-92ba-5c1205f6153c Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=135.4 Text=Fake New Order 
+2022-12-19 19:20:23 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:20:23.036356 TradeId=trd__SPY_1671488422_MAIN_SUMM PosId=699cf813-0a1b-4359-92ba-5c1205f6153c Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=135.4 Text=Fake Filled Order 
+2022-12-19 19:20:23 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2008-02-05 10:10:00 for condition LONG_MACD_RSI_RULE_BROOMS
+2022-12-19 19:20:23 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:20:23.149076 TradeId=trd__SPY_1671488423_MAIN_SUMM PosId=1be7c2e3-5a9f-49fb-b541-b402d210b602 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=135.15 Text=Fake New Order 
+2022-12-19 19:20:23 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:20:23.364365 TradeId=trd__SPY_1671488423_MAIN_SUMM PosId=1be7c2e3-5a9f-49fb-b541-b402d210b602 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=135.15 Text=Fake Filled Order 
+2022-12-19 19:20:23 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:01.056903 seconds!
+2022-12-19 19:20:24 [logger INFO] MACD-RSI - Closing long position for symbol SPY at 2008-02-05 12:37:00 
+2022-12-19 19:20:24 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:20:24.023966 TradeId=trd__SPY_1671488424_MAIN_SUMM PosId=28fb35fd-47a3-4ef1-852f-2dcce276eba2 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=134.44 Text=Fake New Order 
+2022-12-19 19:20:24 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:20:24.240301 TradeId=trd__SPY_1671488424_MAIN_SUMM PosId=28fb35fd-47a3-4ef1-852f-2dcce276eba2 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=134.44 Text=Fake Filled Order 
+2022-12-19 19:20:24 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2008-02-05 12:40:00 for condition LONG_MACD_RSI_RULE_BROOMS
+2022-12-19 19:20:24 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:20:24.291173 TradeId=trd__SPY_1671488424_MAIN_SUMM PosId=811c47ea-1c68-4afc-852e-7d763be4ec6c Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=134.601 Text=Fake New Order 
+2022-12-19 19:20:24 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:01.342465 seconds!
+2022-12-19 19:20:24 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:20:24.506361 TradeId=trd__SPY_1671488424_MAIN_SUMM PosId=811c47ea-1c68-4afc-852e-7d763be4ec6c Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=134.601 Text=Fake Filled Order 
+2022-12-19 19:20:25 [logger INFO] MACD-RSI - Closing long position for symbol SPY at 2008-02-05 14:44:00 
+2022-12-19 19:20:25 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:20:25.046406 TradeId=trd__SPY_1671488425_MAIN_SUMM PosId=989e7468-bb0e-4009-9976-8a3338c8a810 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=133.92 Text=Fake New Order 
+2022-12-19 19:20:25 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:20:25.254734 TradeId=trd__SPY_1671488425_MAIN_SUMM PosId=989e7468-bb0e-4009-9976-8a3338c8a810 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=133.92 Text=Fake Filled Order 
+2022-12-19 19:20:25 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:01.255359 seconds!
+2022-12-19 19:20:25 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:01.492167 seconds!
+2022-12-19 19:20:26 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:01.174966 seconds!
+2022-12-19 19:20:26 [logger INFO] Starting to process for date:2008-02-05
+2022-12-19 19:20:26 [logger INFO] MACD/RSI = Running short trade for symbol SPY at 2008-02-07 09:12:00 for condition SHORT_MACD_RSI_RULE_BROOMS
+2022-12-19 19:20:26 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:20:26.442287 TradeId=trd__SPY_1671488426_MAIN_SUMM PosId=fabfae9a-2497-43a3-a6a4-9a772a64c7e2 Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=132.81 Text=Fake New Order 
+2022-12-19 19:20:26 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:20:26.657149 TradeId=trd__SPY_1671488426_MAIN_SUMM PosId=fabfae9a-2497-43a3-a6a4-9a772a64c7e2 Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=132.81 Text=Fake Filled Order 
+2022-12-19 19:20:26 [logger INFO] MACD-RSI - Closing short position for symbol SPY at 2008-02-07 09:16:00 
+2022-12-19 19:20:26 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:20:26.700033 TradeId=trd__SPY_1671488426_MAIN_SUMM PosId=dbaf0f2d-0b84-4fbf-a62b-206e715d877b Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=133.49 Text=Fake New Order 
+2022-12-19 19:20:26 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:20:26.908654 TradeId=trd__SPY_1671488426_MAIN_SUMM PosId=dbaf0f2d-0b84-4fbf-a62b-206e715d877b Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=133.49 Text=Fake Filled Order 
+2022-12-19 19:20:27 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:01.151672 seconds!
+2022-12-19 19:20:28 [logger INFO] Starting to process for date:2008-02-07
+2022-12-19 19:20:28 [logger INFO] MACD/RSI = Running short trade for symbol SPY at 2008-02-08 09:09:00 for condition SHORT_MACD_RSI_RULE_BROOMS
+2022-12-19 19:20:28 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:20:28.995737 TradeId=trd__SPY_1671488428_MAIN_SUMM PosId=046a2704-4b59-495d-bd59-3a1ab1b5cd88 Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=133.88 Text=Fake New Order 
+2022-12-19 19:20:29 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:20:29.205308 TradeId=trd__SPY_1671488428_MAIN_SUMM PosId=046a2704-4b59-495d-bd59-3a1ab1b5cd88 Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=133.88 Text=Fake Filled Order 
+2022-12-19 19:20:29 [logger INFO] MACD-RSI - Closing short position for symbol SPY at 2008-02-08 12:48:00 
+2022-12-19 19:20:29 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:20:29.842150 TradeId=trd__SPY_1671488429_MAIN_SUMM PosId=e8ae836a-a04a-48a5-b617-3843d9d0e260 Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=132.66 Text=Fake New Order 
+2022-12-19 19:20:30 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:20:30.046106 TradeId=trd__SPY_1671488429_MAIN_SUMM PosId=e8ae836a-a04a-48a5-b617-3843d9d0e260 Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=132.66 Text=Fake Filled Order 
+2022-12-19 19:20:30 [logger INFO] MACD/RSI = Running short trade for symbol SPY at 2008-02-08 13:04:00 for condition SHORT_MACD_RSI_RULE_6
+2022-12-19 19:20:30 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:20:30.187296 TradeId=trd__SPY_1671488430_MAIN_SUMM PosId=a0a79236-c4bb-4e8b-9d38-bef4f72863ef Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=132.53 Text=Fake New Order 
+2022-12-19 19:20:30 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:20:30.401862 TradeId=trd__SPY_1671488430_MAIN_SUMM PosId=a0a79236-c4bb-4e8b-9d38-bef4f72863ef Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=132.53 Text=Fake Filled Order 
+2022-12-19 19:20:30 [logger INFO] MACD-RSI - Closing short position for symbol SPY at 2008-02-08 14:32:00 
+2022-12-19 19:20:30 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:20:30.717512 TradeId=trd__SPY_1671488430_MAIN_SUMM PosId=746ecb77-01c0-4929-b877-4d877d427708 Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=133.31 Text=Fake New Order 
+2022-12-19 19:20:30 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:20:30.929169 TradeId=trd__SPY_1671488430_MAIN_SUMM PosId=746ecb77-01c0-4929-b877-4d877d427708 Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=133.31 Text=Fake Filled Order 
+2022-12-19 19:20:30 [logger INFO] MACD/RSI = Running short trade for symbol SPY at 2008-02-08 14:38:00 for condition SHORT_MACD_RSI_RULE_BROOMS
+2022-12-19 19:20:30 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:20:30.994357 TradeId=trd__SPY_1671488430_MAIN_SUMM PosId=daae01c9-c919-48a7-98b0-0fc95d84e754 Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=133.22 Text=Fake New Order 
+2022-12-19 19:20:31 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:20:31.211772 TradeId=trd__SPY_1671488430_MAIN_SUMM PosId=daae01c9-c919-48a7-98b0-0fc95d84e754 Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=133.22 Text=Fake Filled Order 
+2022-12-19 19:20:31 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:01.004527 seconds!
+2022-12-19 19:20:32 [logger INFO] Starting to process for date:2008-02-08
+2022-12-19 19:20:32 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2008-02-11 09:14:00 for condition LONG_MACD_RSI_RULE_BROOMS
+2022-12-19 19:20:32 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:20:32.596898 TradeId=trd__SPY_1671488432_MAIN_SUMM PosId=b3da05dd-814a-4a86-bf09-af0caf6744bf Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=132.26 Text=Fake New Order 
+2022-12-19 19:20:32 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:20:32.799463 TradeId=trd__SPY_1671488432_MAIN_SUMM PosId=b3da05dd-814a-4a86-bf09-af0caf6744bf Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=132.26 Text=Fake Filled Order 
+2022-12-19 19:20:33 [logger INFO] MACD-RSI - Closing long position for symbol SPY at 2008-02-11 10:27:00 
+2022-12-19 19:20:33 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:20:33.056895 TradeId=trd__SPY_1671488433_MAIN_SUMM PosId=1ce82b53-e3c9-42c4-ac1c-3f56cc8e43ab Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=132.96 Text=Fake New Order 
+2022-12-19 19:20:33 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:20:33.264542 TradeId=trd__SPY_1671488433_MAIN_SUMM PosId=1ce82b53-e3c9-42c4-ac1c-3f56cc8e43ab Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=132.96 Text=Fake Filled Order 
+2022-12-19 19:20:33 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2008-02-11 11:02:00 for condition LONG_MACD_RSI_RULE_BROOMS
+2022-12-19 19:20:33 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:20:33.475929 TradeId=trd__SPY_1671488433_MAIN_SUMM PosId=a0f88a51-56b7-46d5-9866-3b9d6b783593 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=132.95 Text=Fake New Order 
+2022-12-19 19:20:33 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:20:33.683418 TradeId=trd__SPY_1671488433_MAIN_SUMM PosId=a0f88a51-56b7-46d5-9866-3b9d6b783593 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=132.95 Text=Fake Filled Order 
+2022-12-19 19:20:33 [logger INFO] MACD-RSI - Closing long position for symbol SPY at 2008-02-11 11:12:00 
+2022-12-19 19:20:33 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:20:33.793837 TradeId=trd__SPY_1671488433_MAIN_SUMM PosId=2c1f4430-0618-4211-a873-b724ecb03d1c Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=133.28 Text=Fake New Order 
+2022-12-19 19:20:34 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:20:34.004474 TradeId=trd__SPY_1671488433_MAIN_SUMM PosId=2c1f4430-0618-4211-a873-b724ecb03d1c Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=133.28 Text=Fake Filled Order 
+2022-12-19 19:20:34 [logger INFO] MACD/RSI = Running short trade for symbol SPY at 2008-02-11 11:13:00 for condition SHORT_MACD_RSI_RULE_BROOMS
+2022-12-19 19:20:34 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:20:34.041104 TradeId=trd__SPY_1671488434_MAIN_SUMM PosId=3ec4d86f-05f4-430b-a11d-d1361802b566 Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=133.31 Text=Fake New Order 
+2022-12-19 19:20:34 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:20:34.252896 TradeId=trd__SPY_1671488434_MAIN_SUMM PosId=3ec4d86f-05f4-430b-a11d-d1361802b566 Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=133.31 Text=Fake Filled Order 
+2022-12-19 19:20:34 [logger INFO] MACD-RSI - Closing short position for symbol SPY at 2008-02-11 12:01:00 
+2022-12-19 19:20:34 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:20:34.432417 TradeId=trd__SPY_1671488434_MAIN_SUMM PosId=cd2b4770-085e-4e8d-b052-c8a8e162022b Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=134.05 Text=Fake New Order 
+2022-12-19 19:20:34 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:20:34.636402 TradeId=trd__SPY_1671488434_MAIN_SUMM PosId=cd2b4770-085e-4e8d-b052-c8a8e162022b Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=134.05 Text=Fake Filled Order 
+2022-12-19 19:20:34 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2008-02-11 12:02:00 for condition LONG_MACD_RSI_RULE_6
+2022-12-19 19:20:34 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:20:34.687775 TradeId=trd__SPY_1671488434_MAIN_SUMM PosId=cd37763e-e38d-480b-a710-19951f4fdb1e Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=134.05 Text=Fake New Order 
+2022-12-19 19:20:34 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:01.063441 seconds!
+2022-12-19 19:20:34 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:20:34.907158 TradeId=trd__SPY_1671488434_MAIN_SUMM PosId=cd37763e-e38d-480b-a710-19951f4fdb1e Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=134.05 Text=Fake Filled Order 
+2022-12-19 19:20:35 [logger INFO] Backtest successfully completed...
+2022-12-19 19:20:35 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:01.749475 seconds!
+2022-12-19 19:20:36 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:01.842199 seconds!
+2022-12-19 19:20:36 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:02.058548 seconds!
+2022-12-19 19:24:38 [logger INFO] Found CSV file INPUT_SAMPLE_FILE_MODEL_23NEW_NOFLEXTG10_NOFLEXSL0pt25_JJJ4_FLh.csv. Extracting simulated market data
+2022-12-19 19:24:38 [logger INFO] File Handler Module : Moving file ./files/input/INPUT_SAMPLE_FILE_MODEL_23NEW_NOFLEXTG10_NOFLEXSL0pt25_JJJ4_FLh.csv to ./files/processed/INPUT_SAMPLE_FILE_MODEL_23NEW_NOFLEXTG10_NOFLEXSL0pt25_JJJ4_FLh.csv
+2022-12-19 19:24:39 [logger INFO] Starting to process for date:2008-01-02
+2022-12-19 19:24:40 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2008-01-02 09:10:00 for condition LONG_MACD_RSI_RULE_BROOMS
+2022-12-19 19:24:40 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:24:40.116714 TradeId=trd__SPY_1671488680_MAIN_SUMM PosId=7a94d61b-03bf-488c-bb63-e8e3de543ab5 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=146.01 Text=Fake New Order 
+2022-12-19 19:24:40 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:24:40.325314 TradeId=trd__SPY_1671488680_MAIN_SUMM PosId=7a94d61b-03bf-488c-bb63-e8e3de543ab5 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=146.01 Text=Fake Filled Order 
+2022-12-19 19:24:40 [logger INFO] MACD-RSI - Closing long position for symbol SPY at 2008-01-02 10:17:00 
+2022-12-19 19:24:40 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:24:40.657426 TradeId=trd__SPY_1671488680_MAIN_SUMM PosId=fd97b875-99e2-48ac-91ae-892aa2fdde79 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=145.27 Text=Fake New Order 
+2022-12-19 19:24:40 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:24:40.862549 TradeId=trd__SPY_1671488680_MAIN_SUMM PosId=fd97b875-99e2-48ac-91ae-892aa2fdde79 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=145.27 Text=Fake Filled Order 
+2022-12-19 19:24:41 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:01.315887 seconds!
+2022-12-19 19:24:42 [logger INFO] Starting to process for date:2008-01-02
+2022-12-19 19:24:42 [logger INFO] MACD/RSI = Running short trade for symbol SPY at 2008-01-03 09:12:00 for condition SHORT_MACD_RSI_RULE_BROOMS
+2022-12-19 19:24:42 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:24:42.866676 TradeId=trd__SPY_1671488682_MAIN_SUMM PosId=b2efc5e4-32e8-42b0-9d46-01e56b802f21 Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=145.23 Text=Fake New Order 
+2022-12-19 19:24:43 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:24:43.082375 TradeId=trd__SPY_1671488682_MAIN_SUMM PosId=b2efc5e4-32e8-42b0-9d46-01e56b802f21 Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=145.23 Text=Fake Filled Order 
+2022-12-19 19:24:44 [logger INFO] MACD-RSI - Closing short position for symbol SPY at 2008-01-03 14:41:00 
+2022-12-19 19:24:44 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:24:44.264076 TradeId=trd__SPY_1671488684_MAIN_SUMM PosId=c7966318-7ddf-454b-85bd-48f7418b03dc Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=144.51 Text=Fake New Order 
+2022-12-19 19:24:44 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:24:44.471518 TradeId=trd__SPY_1671488684_MAIN_SUMM PosId=c7966318-7ddf-454b-85bd-48f7418b03dc Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=144.51 Text=Fake Filled Order 
+2022-12-19 19:24:44 [logger INFO] MACD/RSI = Running short trade for symbol SPY at 2008-01-03 14:51:00 for condition SHORT_MACD_RSI_RULE_BROOMS
+2022-12-19 19:24:44 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:24:44.587187 TradeId=trd__SPY_1671488684_MAIN_SUMM PosId=ec4b3785-6be2-4578-9d20-09a0c6d1ad5c Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=144.44 Text=Fake New Order 
+2022-12-19 19:24:44 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:24:44.798860 TradeId=trd__SPY_1671488684_MAIN_SUMM PosId=ec4b3785-6be2-4578-9d20-09a0c6d1ad5c Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=144.44 Text=Fake Filled Order 
+2022-12-19 19:24:45 [logger INFO] Starting to process for date:2008-01-03
+2022-12-19 19:24:46 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2008-01-04 09:23:00 for condition LONG_MACD_RSI_RULE_BROOMS
+2022-12-19 19:24:46 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:24:46.082906 TradeId=trd__SPY_1671488686_MAIN_SUMM PosId=56ca81d8-5a12-421b-8039-3400e2598ea6 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=142.65 Text=Fake New Order 
+2022-12-19 19:24:46 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:24:46.292380 TradeId=trd__SPY_1671488686_MAIN_SUMM PosId=56ca81d8-5a12-421b-8039-3400e2598ea6 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=142.65 Text=Fake Filled Order 
+2022-12-19 19:24:46 [logger INFO] MACD-RSI - Closing long position for symbol SPY at 2008-01-04 09:57:00 
+2022-12-19 19:24:46 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:24:46.423391 TradeId=trd__SPY_1671488686_MAIN_SUMM PosId=b11f8215-0b3a-461d-b188-57f283e8b072 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=141.92 Text=Fake New Order 
+2022-12-19 19:24:46 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:24:46.635133 TradeId=trd__SPY_1671488686_MAIN_SUMM PosId=b11f8215-0b3a-461d-b188-57f283e8b072 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=141.92 Text=Fake Filled Order 
+2022-12-19 19:24:47 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:01.318131 seconds!
+2022-12-19 19:24:48 [logger INFO] Starting to process for date:2008-01-04
+2022-12-19 19:24:48 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2008-01-07 09:25:00 for condition LONG_MACD_RSI_RULE_BROOMS
+2022-12-19 19:24:48 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:24:48.845549 TradeId=trd__SPY_1671488688_MAIN_SUMM PosId=c6da23bb-c20a-4291-85c2-32ef1ff5ce11 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=140.9 Text=Fake New Order 
+2022-12-19 19:24:49 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:24:49.066020 TradeId=trd__SPY_1671488688_MAIN_SUMM PosId=c6da23bb-c20a-4291-85c2-32ef1ff5ce11 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=140.9 Text=Fake Filled Order 
+2022-12-19 19:24:49 [logger INFO] MACD-RSI - Closing long position for symbol SPY at 2008-01-07 09:34:00 
+2022-12-19 19:24:49 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:24:49.127855 TradeId=trd__SPY_1671488689_MAIN_SUMM PosId=9da55687-333b-4ab6-b8fa-71c0e53c9c96 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=140.14 Text=Fake New Order 
+2022-12-19 19:24:49 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:24:49.343166 TradeId=trd__SPY_1671488689_MAIN_SUMM PosId=9da55687-333b-4ab6-b8fa-71c0e53c9c96 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=140.14 Text=Fake Filled Order 
+2022-12-19 19:24:50 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:01.271208 seconds!
+2022-12-19 19:24:51 [logger INFO] Starting to process for date:2008-01-07
+2022-12-19 19:24:51 [logger INFO] MACD/RSI = Running short trade for symbol SPY at 2008-01-08 09:14:00 for condition SHORT_MACD_RSI_RULE_BROOMS
+2022-12-19 19:24:51 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:24:51.396562 TradeId=trd__SPY_1671488691_MAIN_SUMM PosId=64b696d8-49e0-4846-9657-eabb0b0cd422 Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=142.78 Text=Fake New Order 
+2022-12-19 19:24:51 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:24:51.614760 TradeId=trd__SPY_1671488691_MAIN_SUMM PosId=64b696d8-49e0-4846-9657-eabb0b0cd422 Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=142.78 Text=Fake Filled Order 
+2022-12-19 19:24:51 [logger INFO] MACD-RSI - Closing short position for symbol SPY at 2008-01-08 11:16:00 
+2022-12-19 19:24:51 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:24:51.998295 TradeId=trd__SPY_1671488691_MAIN_SUMM PosId=477e9afe-51a7-410e-94a3-e82917103d8e Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=141.43 Text=Fake New Order 
+2022-12-19 19:24:52 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:24:52.212984 TradeId=trd__SPY_1671488691_MAIN_SUMM PosId=477e9afe-51a7-410e-94a3-e82917103d8e Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=141.43 Text=Fake Filled Order 
+2022-12-19 19:24:52 [logger INFO] MACD/RSI = Running short trade for symbol SPY at 2008-01-08 11:18:00 for condition SHORT_MACD_RSI_RULE_6
+2022-12-19 19:24:52 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:24:52.263876 TradeId=trd__SPY_1671488692_MAIN_SUMM PosId=274e25e9-4091-403a-b6c1-bfd36ac16e96 Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=141.35 Text=Fake New Order 
+2022-12-19 19:24:52 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:24:52.477254 TradeId=trd__SPY_1671488692_MAIN_SUMM PosId=274e25e9-4091-403a-b6c1-bfd36ac16e96 Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=141.35 Text=Fake Filled Order 
+2022-12-19 19:24:52 [logger INFO] MACD-RSI - Closing short position for symbol SPY at 2008-01-08 13:11:00 
+2022-12-19 19:24:52 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:24:52.933696 TradeId=trd__SPY_1671488692_MAIN_SUMM PosId=6148fa9b-6896-4ce0-9dc9-2285efa9c582 Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=142.07 Text=Fake New Order 
+2022-12-19 19:24:53 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:24:53.136927 TradeId=trd__SPY_1671488692_MAIN_SUMM PosId=6148fa9b-6896-4ce0-9dc9-2285efa9c582 Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=142.07 Text=Fake Filled Order 
+2022-12-19 19:24:53 [logger INFO] MACD/RSI = Running short trade for symbol SPY at 2008-01-08 13:33:00 for condition SHORT_MACD_RSI_RULE_BROOMS
+2022-12-19 19:24:53 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:24:53.316398 TradeId=trd__SPY_1671488693_MAIN_SUMM PosId=19666252-b7e2-49a5-a54e-dacd3feee95a Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=142.18 Text=Fake New Order 
+2022-12-19 19:24:53 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:24:53.520382 TradeId=trd__SPY_1671488693_MAIN_SUMM PosId=19666252-b7e2-49a5-a54e-dacd3feee95a Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=142.18 Text=Fake Filled Order 
+2022-12-19 19:24:53 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:01.265474 seconds!
+2022-12-19 19:24:53 [logger INFO] MACD-RSI - Closing short position for symbol SPY at 2008-01-08 14:33:00 
+2022-12-19 19:24:53 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:24:53.756535 TradeId=trd__SPY_1671488693_MAIN_SUMM PosId=cbd526e8-ad25-4d3d-9e96-ad60eff98d3c Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=140.3 Text=Fake New Order 
+2022-12-19 19:24:53 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:24:53.971790 TradeId=trd__SPY_1671488693_MAIN_SUMM PosId=cbd526e8-ad25-4d3d-9e96-ad60eff98d3c Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=140.3 Text=Fake Filled Order 
+2022-12-19 19:24:54 [logger INFO] MACD/RSI = Running short trade for symbol SPY at 2008-01-08 14:34:00 for condition SHORT_MACD_RSI_RULE_6
+2022-12-19 19:24:54 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:24:54.006599 TradeId=trd__SPY_1671488694_MAIN_SUMM PosId=909d13e7-02bc-4316-a3f0-30634ffd26e7 Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=140.22 Text=Fake New Order 
+2022-12-19 19:24:54 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:01.202457 seconds!
+2022-12-19 19:24:54 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:24:54.221407 TradeId=trd__SPY_1671488694_MAIN_SUMM PosId=909d13e7-02bc-4316-a3f0-30634ffd26e7 Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=140.22 Text=Fake Filled Order 
+2022-12-19 19:24:54 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:01.409177 seconds!
+2022-12-19 19:24:55 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:01.422675 seconds!
+2022-12-19 19:24:55 [logger INFO] Starting to process for date:2008-01-08
+2022-12-19 19:24:55 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2008-01-09 09:28:00 for condition LONG_MACD_RSI_RULE_BROOMS
+2022-12-19 19:24:55 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:24:55.558353 TradeId=trd__SPY_1671488695_MAIN_SUMM PosId=b2c4cc88-5181-4c65-9664-55fa59e27c9f Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=139.23 Text=Fake New Order 
+2022-12-19 19:24:55 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:24:55.772874 TradeId=trd__SPY_1671488695_MAIN_SUMM PosId=b2c4cc88-5181-4c65-9664-55fa59e27c9f Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=139.23 Text=Fake Filled Order 
+2022-12-19 19:24:55 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:01.771722 seconds!
+2022-12-19 19:24:56 [logger INFO] MACD-RSI - Closing long position for symbol SPY at 2008-01-09 10:48:00 
+2022-12-19 19:24:56 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:24:56.086393 TradeId=trd__SPY_1671488696_MAIN_SUMM PosId=55171220-85cf-490b-a52d-be74670e00c5 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=138.49 Text=Fake New Order 
+2022-12-19 19:24:56 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:24:56.303449 TradeId=trd__SPY_1671488696_MAIN_SUMM PosId=55171220-85cf-490b-a52d-be74670e00c5 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=138.49 Text=Fake Filled Order 
+2022-12-19 19:24:56 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:01.082031 seconds!
+2022-12-19 19:24:57 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:01.251372 seconds!
+2022-12-19 19:24:58 [logger INFO] Starting to process for date:2008-01-09
+2022-12-19 19:24:58 [logger INFO] MACD/RSI = Running short trade for symbol SPY at 2008-01-10 09:11:00 for condition SHORT_MACD_RSI_RULE_BROOMS
+2022-12-19 19:24:58 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:24:58.157050 TradeId=trd__SPY_1671488698_MAIN_SUMM PosId=d01d4ade-f4bd-431d-b41b-23eaa2487f74 Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=140.36 Text=Fake New Order 
+2022-12-19 19:24:58 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:24:58.369091 TradeId=trd__SPY_1671488698_MAIN_SUMM PosId=d01d4ade-f4bd-431d-b41b-23eaa2487f74 Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=140.36 Text=Fake Filled Order 
+2022-12-19 19:24:58 [logger INFO] MACD-RSI - Closing short position for symbol SPY at 2008-01-10 11:18:00 
+2022-12-19 19:24:58 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:24:58.791532 TradeId=trd__SPY_1671488698_MAIN_SUMM PosId=05cdacc5-fac0-43b6-92d1-5f4b49b9120d Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=141.3 Text=Fake New Order 
+2022-12-19 19:24:58 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:24:58.997571 TradeId=trd__SPY_1671488698_MAIN_SUMM PosId=05cdacc5-fac0-43b6-92d1-5f4b49b9120d Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=141.3 Text=Fake Filled Order 
+2022-12-19 19:24:59 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:01.018135 seconds!
+2022-12-19 19:25:00 [logger INFO] Starting to process for date:2008-01-10
+2022-12-19 19:25:00 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2008-01-11 09:13:00 for condition LONG_MACD_RSI_RULE_BROOMS
+2022-12-19 19:25:00 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:25:00.819820 TradeId=trd__SPY_1671488700_MAIN_SUMM PosId=88375bc8-d563-4cbd-8e60-81d3393a3e59 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=140.5515 Text=Fake New Order 
+2022-12-19 19:25:01 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:25:01.038084 TradeId=trd__SPY_1671488700_MAIN_SUMM PosId=88375bc8-d563-4cbd-8e60-81d3393a3e59 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=140.5515 Text=Fake Filled Order 
+2022-12-19 19:25:01 [logger INFO] MACD-RSI - Closing long position for symbol SPY at 2008-01-11 10:40:00 
+2022-12-19 19:25:01 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:25:01.343051 TradeId=trd__SPY_1671488701_MAIN_SUMM PosId=945a256a-fcfa-42eb-b794-0f3b1389c7ed Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=141.26 Text=Fake New Order 
+2022-12-19 19:25:01 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:25:01.547812 TradeId=trd__SPY_1671488701_MAIN_SUMM PosId=945a256a-fcfa-42eb-b794-0f3b1389c7ed Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=141.26 Text=Fake Filled Order 
+2022-12-19 19:25:01 [logger INFO] MACD/RSI = Running short trade for symbol SPY at 2008-01-11 10:41:00 for condition SHORT_MACD_RSI_RULE_BROOMS
+2022-12-19 19:25:01 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:25:01.603239 TradeId=trd__SPY_1671488701_MAIN_SUMM PosId=5f1e96d3-c43c-4f73-bb07-86482888803f Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=141.22 Text=Fake New Order 
+2022-12-19 19:25:01 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:25:01.820499 TradeId=trd__SPY_1671488701_MAIN_SUMM PosId=5f1e96d3-c43c-4f73-bb07-86482888803f Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=141.22 Text=Fake Filled Order 
+2022-12-19 19:25:02 [logger INFO] MACD-RSI - Closing short position for symbol SPY at 2008-01-11 12:26:00 
+2022-12-19 19:25:02 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:25:02.261019 TradeId=trd__SPY_1671488702_MAIN_SUMM PosId=5ade0a79-f41c-45b0-a92a-7042ff4fd253 Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=140.51 Text=Fake New Order 
+2022-12-19 19:25:02 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:25:02.465276 TradeId=trd__SPY_1671488702_MAIN_SUMM PosId=5ade0a79-f41c-45b0-a92a-7042ff4fd253 Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=140.51 Text=Fake Filled Order 
+2022-12-19 19:25:02 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2008-01-11 12:51:00 for condition LONG_MACD_RSI_RULE_BROOMS
+2022-12-19 19:25:02 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:25:02.676316 TradeId=trd__SPY_1671488702_MAIN_SUMM PosId=f6360f28-bb28-4772-828d-9a287eb4d45c Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=140.16 Text=Fake New Order 
+2022-12-19 19:25:02 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:25:02.883372 TradeId=trd__SPY_1671488702_MAIN_SUMM PosId=f6360f28-bb28-4772-828d-9a287eb4d45c Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=140.16 Text=Fake Filled Order 
+2022-12-19 19:25:03 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:01.601708 seconds!
+2022-12-19 19:25:03 [logger INFO] MACD-RSI - Closing long position for symbol SPY at 2008-01-11 14:13:00 
+2022-12-19 19:25:03 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:25:03.326608 TradeId=trd__SPY_1671488703_MAIN_SUMM PosId=1516078b-bd75-43a3-b4d9-6009eb2f2cd0 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=139.45 Text=Fake New Order 
+2022-12-19 19:25:03 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:25:03.532909 TradeId=trd__SPY_1671488703_MAIN_SUMM PosId=1516078b-bd75-43a3-b4d9-6009eb2f2cd0 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=139.45 Text=Fake Filled Order 
+2022-12-19 19:25:03 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2008-01-11 14:16:00 for condition LONG_MACD_RSI_RULE_BROOMS
+2022-12-19 19:25:03 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:25:03.593486 TradeId=trd__SPY_1671488703_MAIN_SUMM PosId=6451d61f-4937-4fea-8f24-96544cda562b Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=139.64 Text=Fake New Order 
+2022-12-19 19:25:03 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:25:03.796535 TradeId=trd__SPY_1671488703_MAIN_SUMM PosId=6451d61f-4937-4fea-8f24-96544cda562b Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=139.64 Text=Fake Filled Order 
+2022-12-19 19:25:03 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:01.544932 seconds!
+2022-12-19 19:25:04 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:01.799740 seconds!
+2022-12-19 19:25:04 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:01.639585 seconds!
+2022-12-19 19:25:05 [logger INFO] Starting to process for date:2008-01-11
+2022-12-19 19:25:05 [logger INFO] MACD/RSI = Running short trade for symbol SPY at 2008-01-14 09:39:00 for condition SHORT_MACD_RSI_RULE_BROOMS
+2022-12-19 19:25:05 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:25:05.314719 TradeId=trd__SPY_1671488705_MAIN_SUMM PosId=b89ea6e6-5df9-464b-80fc-16a102ad6ae6 Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=141.0 Text=Fake New Order 
+2022-12-19 19:25:05 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:25:05.524639 TradeId=trd__SPY_1671488705_MAIN_SUMM PosId=b89ea6e6-5df9-464b-80fc-16a102ad6ae6 Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=141.0 Text=Fake Filled Order 
+2022-12-19 19:25:05 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:02.084492 seconds!
+2022-12-19 19:25:05 [logger INFO] MACD-RSI - Closing short position for symbol SPY at 2008-01-14 11:25:00 
+2022-12-19 19:25:05 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:25:05.927865 TradeId=trd__SPY_1671488705_MAIN_SUMM PosId=b78c7e34-3d44-4d9c-ad69-8602fd7049b8 Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=140.67 Text=Fake New Order 
+2022-12-19 19:25:06 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:25:06.143216 TradeId=trd__SPY_1671488705_MAIN_SUMM PosId=b78c7e34-3d44-4d9c-ad69-8602fd7049b8 Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=140.67 Text=Fake Filled Order 
+2022-12-19 19:25:06 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2008-01-14 11:47:00 for condition LONG_MACD_RSI_RULE_BROOMS
+2022-12-19 19:25:06 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:25:06.321646 TradeId=trd__SPY_1671488706_MAIN_SUMM PosId=bf79df7d-b6d0-4deb-a68a-8c44fda1679f Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=140.59 Text=Fake New Order 
+2022-12-19 19:25:06 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:01.149384 seconds!
+2022-12-19 19:25:06 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:25:06.532828 TradeId=trd__SPY_1671488706_MAIN_SUMM PosId=bf79df7d-b6d0-4deb-a68a-8c44fda1679f Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=140.59 Text=Fake Filled Order 
+2022-12-19 19:25:06 [logger INFO] MACD-RSI - Closing long position for symbol SPY at 2008-01-14 12:00:00 
+2022-12-19 19:25:06 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:25:06.606187 TradeId=trd__SPY_1671488706_MAIN_SUMM PosId=9c29f82f-c875-4b12-963b-2c100ee9e01b Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=140.75 Text=Fake New Order 
+2022-12-19 19:25:06 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:25:06.815938 TradeId=trd__SPY_1671488706_MAIN_SUMM PosId=9c29f82f-c875-4b12-963b-2c100ee9e01b Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=140.75 Text=Fake Filled Order 
+2022-12-19 19:25:06 [logger INFO] MACD/RSI = Running short trade for symbol SPY at 2008-01-14 12:02:00 for condition SHORT_MACD_RSI_RULE_BROOMS
+2022-12-19 19:25:06 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:25:06.855999 TradeId=trd__SPY_1671488706_MAIN_SUMM PosId=611afca6-bb10-4db1-a360-58d973ee87b7 Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=140.745 Text=Fake New Order 
+2022-12-19 19:25:07 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:01.098750 seconds!
+2022-12-19 19:25:07 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:25:07.065476 TradeId=trd__SPY_1671488706_MAIN_SUMM PosId=611afca6-bb10-4db1-a360-58d973ee87b7 Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=140.745 Text=Fake Filled Order 
+2022-12-19 19:25:07 [logger INFO] MACD-RSI - Closing short position for symbol SPY at 2008-01-14 13:41:00 
+2022-12-19 19:25:07 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:25:07.476276 TradeId=trd__SPY_1671488707_MAIN_SUMM PosId=9dd57650-1544-459e-9ee5-4f0cf67385e7 Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=141.48 Text=Fake New Order 
+2022-12-19 19:25:07 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:25:07.689668 TradeId=trd__SPY_1671488707_MAIN_SUMM PosId=9dd57650-1544-459e-9ee5-4f0cf67385e7 Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=141.48 Text=Fake Filled Order 
+2022-12-19 19:25:07 [logger INFO] MACD/RSI = Running short trade for symbol SPY at 2008-01-14 13:44:00 for condition SHORT_MACD_RSI_RULE_BROOMS
+2022-12-19 19:25:07 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:25:07.756488 TradeId=trd__SPY_1671488707_MAIN_SUMM PosId=f83f3e4f-3997-49f6-af68-589159e70876 Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=141.26 Text=Fake New Order 
+2022-12-19 19:25:07 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:01.509671 seconds!
+2022-12-19 19:25:07 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:25:07.968707 TradeId=trd__SPY_1671488707_MAIN_SUMM PosId=f83f3e4f-3997-49f6-af68-589159e70876 Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=141.26 Text=Fake Filled Order 
+2022-12-19 19:25:08 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:01.966437 seconds!
+2022-12-19 19:25:09 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:02.233256 seconds!
+2022-12-19 19:25:09 [logger INFO] Starting to process for date:2008-01-14
+2022-12-19 19:25:09 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2008-01-16 09:19:00 for condition LONG_MACD_RSI_RULE_BROOMS
+2022-12-19 19:25:09 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:25:09.447048 TradeId=trd__SPY_1671488709_MAIN_SUMM PosId=6491701e-4cd1-479a-925a-28bfc0afaf5c Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=137.33 Text=Fake New Order 
+2022-12-19 19:25:09 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:25:09.656538 TradeId=trd__SPY_1671488709_MAIN_SUMM PosId=6491701e-4cd1-479a-925a-28bfc0afaf5c Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=137.33 Text=Fake Filled Order 
+2022-12-19 19:25:09 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:02.212177 seconds!
+2022-12-19 19:25:09 [logger INFO] MACD-RSI - Closing long position for symbol SPY at 2008-01-16 09:49:00 
+2022-12-19 19:25:09 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:25:09.786193 TradeId=trd__SPY_1671488709_MAIN_SUMM PosId=092ea00b-cdc6-48ff-90d5-39bcd5504ce8 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=136.62 Text=Fake New Order 
+2022-12-19 19:25:09 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:25:09.993376 TradeId=trd__SPY_1671488709_MAIN_SUMM PosId=092ea00b-cdc6-48ff-90d5-39bcd5504ce8 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=136.62 Text=Fake Filled Order 
+2022-12-19 19:25:10 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:02.780346 seconds!
+2022-12-19 19:25:11 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:01.797255 seconds!
+2022-12-19 19:25:11 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:01.924568 seconds!
+2022-12-19 19:25:11 [logger INFO] Starting to process for date:2008-01-16
+2022-12-19 19:25:12 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2008-01-17 09:09:00 for condition LONG_MACD_RSI_RULE_BROOMS
+2022-12-19 19:25:12 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:25:12.024173 TradeId=trd__SPY_1671488712_MAIN_SUMM PosId=1c2de596-b473-48e8-b649-9d0a5ec0f707 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=136.96 Text=Fake New Order 
+2022-12-19 19:25:12 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:25:12.234935 TradeId=trd__SPY_1671488712_MAIN_SUMM PosId=1c2de596-b473-48e8-b649-9d0a5ec0f707 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=136.96 Text=Fake Filled Order 
+2022-12-19 19:25:12 [logger INFO] MACD-RSI - Closing long position for symbol SPY at 2008-01-17 09:19:00 
+2022-12-19 19:25:12 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:25:12.301792 TradeId=trd__SPY_1671488712_MAIN_SUMM PosId=3d31acea-2d21-4bd4-859d-632b32125aac Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=136.25 Text=Fake New Order 
+2022-12-19 19:25:12 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:25:12.518710 TradeId=trd__SPY_1671488712_MAIN_SUMM PosId=3d31acea-2d21-4bd4-859d-632b32125aac Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=136.25 Text=Fake Filled Order 
+2022-12-19 19:25:13 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:01.307609 seconds!
+2022-12-19 19:25:14 [logger INFO] Starting to process for date:2008-01-17
+2022-12-19 19:25:14 [logger INFO] MACD/RSI = Running short trade for symbol SPY at 2008-01-18 09:17:00 for condition SHORT_MACD_RSI_RULE_BROOMS
+2022-12-19 19:25:14 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:25:14.607944 TradeId=trd__SPY_1671488714_MAIN_SUMM PosId=82ca607b-11c0-45d6-b286-018e63f608b0 Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=134.62 Text=Fake New Order 
+2022-12-19 19:25:14 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:25:14.823016 TradeId=trd__SPY_1671488714_MAIN_SUMM PosId=82ca607b-11c0-45d6-b286-018e63f608b0 Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=134.62 Text=Fake Filled Order 
+2022-12-19 19:25:15 [logger INFO] MACD-RSI - Closing short position for symbol SPY at 2008-01-18 10:31:00 
+2022-12-19 19:25:15 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:25:15.113006 TradeId=trd__SPY_1671488715_MAIN_SUMM PosId=e20f9431-bfcb-4587-87f4-1224662867e7 Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=132.87 Text=Fake New Order 
+2022-12-19 19:25:15 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:25:15.317142 TradeId=trd__SPY_1671488715_MAIN_SUMM PosId=e20f9431-bfcb-4587-87f4-1224662867e7 Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=132.87 Text=Fake Filled Order 
+2022-12-19 19:25:15 [logger INFO] MACD/RSI = Running short trade for symbol SPY at 2008-01-18 10:32:00 for condition SHORT_MACD_RSI_RULE_6
+2022-12-19 19:25:15 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:25:15.369886 TradeId=trd__SPY_1671488715_MAIN_SUMM PosId=d30d1595-e468-4fa2-b596-fbd0074cd120 Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=132.75 Text=Fake New Order 
+2022-12-19 19:25:15 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:25:15.589355 TradeId=trd__SPY_1671488715_MAIN_SUMM PosId=d30d1595-e468-4fa2-b596-fbd0074cd120 Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=132.75 Text=Fake Filled Order 
+2022-12-19 19:25:15 [logger INFO] MACD-RSI - Closing short position for symbol SPY at 2008-01-18 11:01:00 
+2022-12-19 19:25:15 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:25:15.749916 TradeId=trd__SPY_1671488715_MAIN_SUMM PosId=1f411900-a334-4712-a537-7ddf04d4eb21 Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=131.53 Text=Fake New Order 
+2022-12-19 19:25:15 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:25:15.957190 TradeId=trd__SPY_1671488715_MAIN_SUMM PosId=1f411900-a334-4712-a537-7ddf04d4eb21 Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=131.53 Text=Fake Filled Order 
+2022-12-19 19:25:16 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2008-01-18 11:02:00 for condition LONG_MACD_RSI_RULE_BROOMS
+2022-12-19 19:25:16 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:25:16.007056 TradeId=trd__SPY_1671488716_MAIN_SUMM PosId=5dd22a46-3bba-4145-87cd-f646e8bd143d Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=131.64 Text=Fake New Order 
+2022-12-19 19:25:16 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:25:16.223360 TradeId=trd__SPY_1671488716_MAIN_SUMM PosId=5dd22a46-3bba-4145-87cd-f646e8bd143d Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=131.64 Text=Fake Filled Order 
+2022-12-19 19:25:17 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:01.937294 seconds!
+2022-12-19 19:25:18 [logger INFO] Starting to process for date:2008-01-18
+2022-12-19 19:25:18 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2008-01-22 09:26:00 for condition LONG_MACD_RSI_RULE_6
+2022-12-19 19:25:18 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:25:18.479087 TradeId=trd__SPY_1671488718_MAIN_SUMM PosId=6d61e8d0-195a-4787-a02c-7daafbce4c91 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=130.64 Text=Fake New Order 
+2022-12-19 19:25:18 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:25:18.693270 TradeId=trd__SPY_1671488718_MAIN_SUMM PosId=6d61e8d0-195a-4787-a02c-7daafbce4c91 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=130.64 Text=Fake Filled Order 
+2022-12-19 19:25:18 [logger INFO] MACD-RSI - Closing long position for symbol SPY at 2008-01-22 09:34:00 
+2022-12-19 19:25:18 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:25:18.745157 TradeId=trd__SPY_1671488718_MAIN_SUMM PosId=e2dae7ad-6f28-4cad-ad36-3d07c2750158 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=129.2099 Text=Fake New Order 
+2022-12-19 19:25:18 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:25:18.959557 TradeId=trd__SPY_1671488718_MAIN_SUMM PosId=e2dae7ad-6f28-4cad-ad36-3d07c2750158 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=129.2099 Text=Fake Filled Order 
+2022-12-19 19:25:20 [logger INFO] Starting to process for date:2008-01-22
+2022-12-19 19:25:21 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2008-01-23 09:20:00 for condition LONG_MACD_RSI_RULE_6
+2022-12-19 19:25:21 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:25:21.074179 TradeId=trd__SPY_1671488721_MAIN_SUMM PosId=81daaec2-ee09-41e9-a945-ac315dad2328 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=130.62 Text=Fake New Order 
+2022-12-19 19:25:21 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:25:21.281989 TradeId=trd__SPY_1671488721_MAIN_SUMM PosId=81daaec2-ee09-41e9-a945-ac315dad2328 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=130.62 Text=Fake Filled Order 
+2022-12-19 19:25:21 [logger INFO] MACD-RSI - Closing long position for symbol SPY at 2008-01-23 09:33:00 
+2022-12-19 19:25:21 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:25:21.369756 TradeId=trd__SPY_1671488721_MAIN_SUMM PosId=7ce3a42d-7243-4a65-98e1-377a65045177 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=129.91 Text=Fake New Order 
+2022-12-19 19:25:21 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:25:21.576711 TradeId=trd__SPY_1671488721_MAIN_SUMM PosId=7ce3a42d-7243-4a65-98e1-377a65045177 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=129.91 Text=Fake Filled Order 
+2022-12-19 19:25:21 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:06.391334 seconds!
+2022-12-19 19:25:22 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:06.910939 seconds!
+2022-12-19 19:25:23 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:07.156697 seconds!
+2022-12-19 19:25:23 [logger INFO] Starting to process for date:2008-01-23
+2022-12-19 19:25:23 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2008-01-25 09:28:00 for condition LONG_MACD_RSI_RULE_BROOMS
+2022-12-19 19:25:23 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:25:23.764877 TradeId=trd__SPY_1671488723_MAIN_SUMM PosId=b7963d2d-38e5-4b87-835e-45b527e63073 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=135.93 Text=Fake New Order 
+2022-12-19 19:25:23 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:05.375557 seconds!
+2022-12-19 19:25:23 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:25:23.974471 TradeId=trd__SPY_1671488723_MAIN_SUMM PosId=b7963d2d-38e5-4b87-835e-45b527e63073 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=135.93 Text=Fake Filled Order 
+2022-12-19 19:25:24 [logger INFO] MACD-RSI - Closing long position for symbol SPY at 2008-01-25 09:34:00 
+2022-12-19 19:25:24 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:25:24.025886 TradeId=trd__SPY_1671488724_MAIN_SUMM PosId=227315d7-a83c-4b18-9b38-f1966c91214c Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=135.16 Text=Fake New Order 
+2022-12-19 19:25:24 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:25:24.242091 TradeId=trd__SPY_1671488724_MAIN_SUMM PosId=227315d7-a83c-4b18-9b38-f1966c91214c Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=135.16 Text=Fake Filled Order 
+2022-12-19 19:25:24 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:05.723253 seconds!
+2022-12-19 19:25:25 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:04.238504 seconds!
+2022-12-19 19:25:25 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:04.420780 seconds!
+2022-12-19 19:25:26 [logger INFO] Starting to process for date:2008-01-25
+2022-12-19 19:25:26 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2008-01-28 09:12:00 for condition LONG_MACD_RSI_RULE_BROOMS
+2022-12-19 19:25:26 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:25:26.196150 TradeId=trd__SPY_1671488726_MAIN_SUMM PosId=f2d8c077-a310-4908-8cd8-e70704b7c6cc Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=132.32 Text=Fake New Order 
+2022-12-19 19:25:26 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:25:26.401523 TradeId=trd__SPY_1671488726_MAIN_SUMM PosId=f2d8c077-a310-4908-8cd8-e70704b7c6cc Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=132.32 Text=Fake Filled Order 
+2022-12-19 19:25:26 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:02.688433 seconds!
+2022-12-19 19:25:26 [logger INFO] MACD-RSI - Closing long position for symbol SPY at 2008-01-28 09:34:00 
+2022-12-19 19:25:26 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:25:26.510170 TradeId=trd__SPY_1671488726_MAIN_SUMM PosId=83461ba3-6957-4187-a5ef-3da82c9d295c Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=133.13 Text=Fake New Order 
+2022-12-19 19:25:26 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:25:26.716533 TradeId=trd__SPY_1671488726_MAIN_SUMM PosId=83461ba3-6957-4187-a5ef-3da82c9d295c Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=133.13 Text=Fake Filled Order 
+2022-12-19 19:25:26 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2008-01-28 09:46:00 for condition LONG_MACD_RSI_RULE_6
+2022-12-19 19:25:26 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:25:26.815268 TradeId=trd__SPY_1671488726_MAIN_SUMM PosId=a9c35651-84fb-435a-829d-4107d864c18f Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=133.6 Text=Fake New Order 
+2022-12-19 19:25:27 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:25:27.028195 TradeId=trd__SPY_1671488726_MAIN_SUMM PosId=a9c35651-84fb-435a-829d-4107d864c18f Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=133.6 Text=Fake Filled Order 
+2022-12-19 19:25:27 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:03.161052 seconds!
+2022-12-19 19:25:27 [logger INFO] MACD-RSI - Closing long position for symbol SPY at 2008-01-28 13:49:00 
+2022-12-19 19:25:27 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:25:27.989689 TradeId=trd__SPY_1671488727_MAIN_SUMM PosId=c9aeaf66-a970-4263-b7f4-9cd72576336d Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=134.5 Text=Fake New Order 
+2022-12-19 19:25:28 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:25:28.198869 TradeId=trd__SPY_1671488727_MAIN_SUMM PosId=c9aeaf66-a970-4263-b7f4-9cd72576336d Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=134.5 Text=Fake Filled Order 
+2022-12-19 19:25:28 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:02.007722 seconds!
+2022-12-19 19:25:28 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2008-01-28 13:50:00 for condition LONG_MACD_RSI_RULE_6
+2022-12-19 19:25:28 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:25:28.255714 TradeId=trd__SPY_1671488728_MAIN_SUMM PosId=a44c0dd1-b8cb-422e-b2a7-5bfa5aef4ca5 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=134.49 Text=Fake New Order 
+2022-12-19 19:25:28 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:25:28.461164 TradeId=trd__SPY_1671488728_MAIN_SUMM PosId=a44c0dd1-b8cb-422e-b2a7-5bfa5aef4ca5 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=134.49 Text=Fake Filled Order 
+2022-12-19 19:25:28 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:02.452189 seconds!
+2022-12-19 19:25:29 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:02.665348 seconds!
+2022-12-19 19:25:29 [logger INFO] Starting to process for date:2008-01-28
+2022-12-19 19:25:30 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2008-01-29 09:59:00 for condition LONG_MACD_RSI_RULE_BROOMS
+2022-12-19 19:25:30 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:25:30.157131 TradeId=trd__SPY_1671488730_MAIN_SUMM PosId=e2e57dd2-87e1-44c1-904c-e6a553128c48 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=135.8 Text=Fake New Order 
+2022-12-19 19:25:30 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:02.192281 seconds!
+2022-12-19 19:25:30 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:25:30.363906 TradeId=trd__SPY_1671488730_MAIN_SUMM PosId=e2e57dd2-87e1-44c1-904c-e6a553128c48 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=135.8 Text=Fake Filled Order 
+2022-12-19 19:25:30 [logger INFO] MACD-RSI - Closing long position for symbol SPY at 2008-01-29 10:42:00 
+2022-12-19 19:25:30 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:25:30.582310 TradeId=trd__SPY_1671488730_MAIN_SUMM PosId=837e794f-9748-4f4f-92cf-bf36179eb5f7 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=136.08 Text=Fake New Order 
+2022-12-19 19:25:30 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:25:30.793421 TradeId=trd__SPY_1671488730_MAIN_SUMM PosId=837e794f-9748-4f4f-92cf-bf36179eb5f7 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=136.08 Text=Fake Filled Order 
+2022-12-19 19:25:30 [logger INFO] MACD/RSI = Running short trade for symbol SPY at 2008-01-29 10:43:00 for condition SHORT_MACD_RSI_RULE_BROOMS
+2022-12-19 19:25:30 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:25:30.830316 TradeId=trd__SPY_1671488730_MAIN_SUMM PosId=887a5a19-e827-40aa-8d20-3a75bc43ac4a Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=136.1 Text=Fake New Order 
+2022-12-19 19:25:30 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:02.613009 seconds!
+2022-12-19 19:25:31 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:25:31.041956 TradeId=trd__SPY_1671488730_MAIN_SUMM PosId=887a5a19-e827-40aa-8d20-3a75bc43ac4a Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=136.1 Text=Fake Filled Order 
+2022-12-19 19:25:31 [logger INFO] MACD-RSI - Closing short position for symbol SPY at 2008-01-29 11:22:00 
+2022-12-19 19:25:31 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:25:31.244466 TradeId=trd__SPY_1671488731_MAIN_SUMM PosId=ae6ec0b2-daf5-458a-9c1c-642347dc4f3d Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=135.8 Text=Fake New Order 
+2022-12-19 19:25:31 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:25:31.447054 TradeId=trd__SPY_1671488731_MAIN_SUMM PosId=ae6ec0b2-daf5-458a-9c1c-642347dc4f3d Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=135.8 Text=Fake Filled Order 
+2022-12-19 19:25:31 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2008-01-29 11:23:00 for condition LONG_MACD_RSI_RULE_BROOMS
+2022-12-19 19:25:31 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:25:31.498518 TradeId=trd__SPY_1671488731_MAIN_SUMM PosId=2b2c4c1d-e1bc-48f3-a611-dbfe2fee891e Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=135.75 Text=Fake New Order 
+2022-12-19 19:25:31 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:01.408265 seconds!
+2022-12-19 19:25:31 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:25:31.713164 TradeId=trd__SPY_1671488731_MAIN_SUMM PosId=2b2c4c1d-e1bc-48f3-a611-dbfe2fee891e Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=135.75 Text=Fake Filled Order 
+2022-12-19 19:25:32 [logger INFO] MACD-RSI - Closing long position for symbol SPY at 2008-01-29 14:12:00 
+2022-12-19 19:25:32 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:25:32.386506 TradeId=trd__SPY_1671488732_MAIN_SUMM PosId=c2bc7791-02ef-4094-a244-12d494b44b02 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=136.12 Text=Fake New Order 
+2022-12-19 19:25:32 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:01.874494 seconds!
+2022-12-19 19:25:32 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:25:32.597933 TradeId=trd__SPY_1671488732_MAIN_SUMM PosId=c2bc7791-02ef-4094-a244-12d494b44b02 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=136.12 Text=Fake Filled Order 
+2022-12-19 19:25:32 [logger INFO] MACD/RSI = Running short trade for symbol SPY at 2008-01-29 14:13:00 for condition SHORT_MACD_RSI_RULE_BROOMS
+2022-12-19 19:25:32 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:25:32.649898 TradeId=trd__SPY_1671488732_MAIN_SUMM PosId=65593f2b-a6d1-4b47-b84d-388966899537 Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=136.21 Text=Fake New Order 
+2022-12-19 19:25:32 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:25:32.866517 TradeId=trd__SPY_1671488732_MAIN_SUMM PosId=65593f2b-a6d1-4b47-b84d-388966899537 Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=136.21 Text=Fake Filled Order 
+2022-12-19 19:25:33 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:02.366862 seconds!
+2022-12-19 19:25:33 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:02.456035 seconds!
+2022-12-19 19:25:34 [logger INFO] Starting to process for date:2008-01-29
+2022-12-19 19:25:34 [logger INFO] MACD/RSI = Running short trade for symbol SPY at 2008-01-30 09:15:00 for condition SHORT_MACD_RSI_RULE_BROOMS
+2022-12-19 19:25:34 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:25:34.256342 TradeId=trd__SPY_1671488734_MAIN_SUMM PosId=8b248e7a-0e62-4ce5-8962-ad3faa13e790 Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=135.91 Text=Fake New Order 
+2022-12-19 19:25:34 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:02.783258 seconds!
+2022-12-19 19:25:34 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:25:34.473985 TradeId=trd__SPY_1671488734_MAIN_SUMM PosId=8b248e7a-0e62-4ce5-8962-ad3faa13e790 Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=135.91 Text=Fake Filled Order 
+2022-12-19 19:25:35 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:02.888989 seconds!
+2022-12-19 19:25:35 [logger INFO] MACD-RSI - Closing short position for symbol SPY at 2008-01-30 13:16:00 
+2022-12-19 19:25:35 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:25:35.325311 TradeId=trd__SPY_1671488735_MAIN_SUMM PosId=e97f2117-2972-4965-9d18-51cb816732cf Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=136.84 Text=Fake New Order 
+2022-12-19 19:25:35 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:25:35.535554 TradeId=trd__SPY_1671488735_MAIN_SUMM PosId=e97f2117-2972-4965-9d18-51cb816732cf Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=136.84 Text=Fake Filled Order 
+2022-12-19 19:25:36 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:03.418045 seconds!
+2022-12-19 19:25:36 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:02.351197 seconds!
+2022-12-19 19:25:36 [logger INFO] Starting to process for date:2008-01-30
+2022-12-19 19:25:37 [logger INFO] MACD/RSI = Running short trade for symbol SPY at 2008-01-31 10:06:00 for condition SHORT_MACD_RSI_RULE_BROOMS
+2022-12-19 19:25:37 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:25:37.305484 TradeId=trd__SPY_1671488737_MAIN_SUMM PosId=e03f4a1b-c76c-447d-b6ff-43c7394d4cb1 Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=135.07 Text=Fake New Order 
+2022-12-19 19:25:37 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:02.056672 seconds!
+2022-12-19 19:25:37 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:25:37.517764 TradeId=trd__SPY_1671488737_MAIN_SUMM PosId=e03f4a1b-c76c-447d-b6ff-43c7394d4cb1 Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=135.07 Text=Fake Filled Order 
+2022-12-19 19:25:37 [logger INFO] MACD-RSI - Closing short position for symbol SPY at 2008-01-31 10:28:00 
+2022-12-19 19:25:37 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:25:37.689459 TradeId=trd__SPY_1671488737_MAIN_SUMM PosId=51c06243-74c9-43f3-bdb7-3e96219b7aaf Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=135.82 Text=Fake New Order 
+2022-12-19 19:25:37 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:25:37.908272 TradeId=trd__SPY_1671488737_MAIN_SUMM PosId=51c06243-74c9-43f3-bdb7-3e96219b7aaf Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=135.82 Text=Fake Filled Order 
+2022-12-19 19:25:38 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:01.268842 seconds!
+2022-12-19 19:25:39 [logger INFO] Starting to process for date:2008-01-31
+2022-12-19 19:25:39 [logger INFO] MACD/RSI = Running short trade for symbol SPY at 2008-02-01 09:10:00 for condition SHORT_MACD_RSI_RULE_BROOMS
+2022-12-19 19:25:39 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:25:39.769978 TradeId=trd__SPY_1671488739_MAIN_SUMM PosId=46a4ebda-b5e8-41bb-aa91-cd19cf1d9af6 Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=139.2 Text=Fake New Order 
+2022-12-19 19:25:39 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:25:39.980446 TradeId=trd__SPY_1671488739_MAIN_SUMM PosId=46a4ebda-b5e8-41bb-aa91-cd19cf1d9af6 Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=139.2 Text=Fake Filled Order 
+2022-12-19 19:25:42 [logger INFO] Starting to process for date:2008-02-01
+2022-12-19 19:25:42 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2008-02-04 09:11:00 for condition LONG_MACD_RSI_RULE_BROOMS
+2022-12-19 19:25:42 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:25:42.385061 TradeId=trd__SPY_1671488742_MAIN_SUMM PosId=ef75915a-418c-4a03-9ec4-391b590f73c4 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=138.44 Text=Fake New Order 
+2022-12-19 19:25:42 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:25:42.594408 TradeId=trd__SPY_1671488742_MAIN_SUMM PosId=ef75915a-418c-4a03-9ec4-391b590f73c4 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=138.44 Text=Fake Filled Order 
+2022-12-19 19:25:43 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:01.003248 seconds!
+2022-12-19 19:25:44 [logger INFO] Starting to process for date:2008-02-04
+2022-12-19 19:25:45 [logger INFO] MACD/RSI = Running short trade for symbol SPY at 2008-02-05 09:34:00 for condition SHORT_MACD_RSI_RULE_BROOMS
+2022-12-19 19:25:45 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:25:45.076765 TradeId=trd__SPY_1671488745_MAIN_SUMM PosId=202bc4bb-dd90-4a36-8c7b-bd044d8668c2 Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=136.02 Text=Fake New Order 
+2022-12-19 19:25:45 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:25:45.287414 TradeId=trd__SPY_1671488745_MAIN_SUMM PosId=202bc4bb-dd90-4a36-8c7b-bd044d8668c2 Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=136.02 Text=Fake Filled Order 
+2022-12-19 19:25:45 [logger INFO] MACD-RSI - Closing short position for symbol SPY at 2008-02-05 09:56:00 
+2022-12-19 19:25:45 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:25:45.406201 TradeId=trd__SPY_1671488745_MAIN_SUMM PosId=365e4aea-a261-4b87-84e3-0938644924c6 Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=135.4 Text=Fake New Order 
+2022-12-19 19:25:45 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:25:45.615486 TradeId=trd__SPY_1671488745_MAIN_SUMM PosId=365e4aea-a261-4b87-84e3-0938644924c6 Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=135.4 Text=Fake Filled Order 
+2022-12-19 19:25:45 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2008-02-05 10:10:00 for condition LONG_MACD_RSI_RULE_BROOMS
+2022-12-19 19:25:45 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:25:45.750990 TradeId=trd__SPY_1671488745_MAIN_SUMM PosId=833c192b-65f9-4c04-8c38-44d34e5ca9d8 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=135.15 Text=Fake New Order 
+2022-12-19 19:25:45 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:25:45.967360 TradeId=trd__SPY_1671488745_MAIN_SUMM PosId=833c192b-65f9-4c04-8c38-44d34e5ca9d8 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=135.15 Text=Fake Filled Order 
+2022-12-19 19:25:46 [logger INFO] MACD-RSI - Closing long position for symbol SPY at 2008-02-05 12:37:00 
+2022-12-19 19:25:46 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:25:46.497951 TradeId=trd__SPY_1671488746_MAIN_SUMM PosId=0bcc07be-1809-44b8-ac0b-bfb9da85671d Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=134.44 Text=Fake New Order 
+2022-12-19 19:25:46 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:01.221440 seconds!
+2022-12-19 19:25:46 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:25:46.711419 TradeId=trd__SPY_1671488746_MAIN_SUMM PosId=0bcc07be-1809-44b8-ac0b-bfb9da85671d Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=134.44 Text=Fake Filled Order 
+2022-12-19 19:25:46 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2008-02-05 12:40:00 for condition LONG_MACD_RSI_RULE_BROOMS
+2022-12-19 19:25:46 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:25:46.779238 TradeId=trd__SPY_1671488746_MAIN_SUMM PosId=a317ee92-39a4-4c64-be92-76482df09486 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=134.601 Text=Fake New Order 
+2022-12-19 19:25:46 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:25:46.998838 TradeId=trd__SPY_1671488746_MAIN_SUMM PosId=a317ee92-39a4-4c64-be92-76482df09486 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=134.601 Text=Fake Filled Order 
+2022-12-19 19:25:47 [logger INFO] MACD-RSI - Closing long position for symbol SPY at 2008-02-05 14:44:00 
+2022-12-19 19:25:47 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:25:47.544657 TradeId=trd__SPY_1671488747_MAIN_SUMM PosId=a643cbf8-34c4-4045-a400-09ae37d2eda9 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=133.92 Text=Fake New Order 
+2022-12-19 19:25:47 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:01.838929 seconds!
+2022-12-19 19:25:47 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:25:47.754080 TradeId=trd__SPY_1671488747_MAIN_SUMM PosId=a643cbf8-34c4-4045-a400-09ae37d2eda9 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=133.92 Text=Fake Filled Order 
+2022-12-19 19:25:48 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:01.668289 seconds!
+2022-12-19 19:25:48 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:01.910343 seconds!
+2022-12-19 19:25:48 [logger INFO] Starting to process for date:2008-02-05
+2022-12-19 19:25:49 [logger INFO] MACD/RSI = Running short trade for symbol SPY at 2008-02-07 09:12:00 for condition SHORT_MACD_RSI_RULE_BROOMS
+2022-12-19 19:25:49 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:25:49.050108 TradeId=trd__SPY_1671488749_MAIN_SUMM PosId=cb7b58f1-edae-489c-8a83-082ac1f64b12 Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=132.81 Text=Fake New Order 
+2022-12-19 19:25:49 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:25:49.257965 TradeId=trd__SPY_1671488749_MAIN_SUMM PosId=cb7b58f1-edae-489c-8a83-082ac1f64b12 Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=132.81 Text=Fake Filled Order 
+2022-12-19 19:25:49 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:01.727261 seconds!
+2022-12-19 19:25:49 [logger INFO] MACD-RSI - Closing short position for symbol SPY at 2008-02-07 09:16:00 
+2022-12-19 19:25:49 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:25:49.310422 TradeId=trd__SPY_1671488749_MAIN_SUMM PosId=a176b5c9-2952-4847-a67a-57b6e46189b0 Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=133.49 Text=Fake New Order 
+2022-12-19 19:25:49 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:25:49.524361 TradeId=trd__SPY_1671488749_MAIN_SUMM PosId=a176b5c9-2952-4847-a67a-57b6e46189b0 Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=133.49 Text=Fake Filled Order 
+2022-12-19 19:25:50 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:01.090061 seconds!
+2022-12-19 19:25:50 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:01.493562 seconds!
+2022-12-19 19:25:51 [logger INFO] Starting to process for date:2008-02-07
+2022-12-19 19:25:51 [logger INFO] MACD/RSI = Running short trade for symbol SPY at 2008-02-08 09:09:00 for condition SHORT_MACD_RSI_RULE_BROOMS
+2022-12-19 19:25:51 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:25:51.565536 TradeId=trd__SPY_1671488751_MAIN_SUMM PosId=9320a62b-b586-42cf-bcce-660cb6e5c669 Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=133.88 Text=Fake New Order 
+2022-12-19 19:25:51 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:25:51.777413 TradeId=trd__SPY_1671488751_MAIN_SUMM PosId=9320a62b-b586-42cf-bcce-660cb6e5c669 Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=133.88 Text=Fake Filled Order 
+2022-12-19 19:25:52 [logger INFO] MACD-RSI - Closing short position for symbol SPY at 2008-02-08 12:48:00 
+2022-12-19 19:25:52 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:25:52.525257 TradeId=trd__SPY_1671488752_MAIN_SUMM PosId=319af2b7-4787-4f4c-9c47-73f389dafb34 Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=132.66 Text=Fake New Order 
+2022-12-19 19:25:52 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:01.139784 seconds!
+2022-12-19 19:25:52 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:25:52.739525 TradeId=trd__SPY_1671488752_MAIN_SUMM PosId=319af2b7-4787-4f4c-9c47-73f389dafb34 Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=132.66 Text=Fake Filled Order 
+2022-12-19 19:25:52 [logger INFO] MACD/RSI = Running short trade for symbol SPY at 2008-02-08 13:04:00 for condition SHORT_MACD_RSI_RULE_6
+2022-12-19 19:25:52 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:25:52.896283 TradeId=trd__SPY_1671488752_MAIN_SUMM PosId=4521aea6-a723-4148-a99c-f232c6c21561 Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=132.53 Text=Fake New Order 
+2022-12-19 19:25:53 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:25:53.113113 TradeId=trd__SPY_1671488752_MAIN_SUMM PosId=4521aea6-a723-4148-a99c-f232c6c21561 Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=132.53 Text=Fake Filled Order 
+2022-12-19 19:25:53 [logger INFO] MACD-RSI - Closing short position for symbol SPY at 2008-02-08 14:32:00 
+2022-12-19 19:25:53 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:25:53.465731 TradeId=trd__SPY_1671488753_MAIN_SUMM PosId=014e0702-35b0-4250-a7aa-e9889a9cdcd8 Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=133.31 Text=Fake New Order 
+2022-12-19 19:25:53 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:01.010081 seconds!
+2022-12-19 19:25:53 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:25:53.674911 TradeId=trd__SPY_1671488753_MAIN_SUMM PosId=014e0702-35b0-4250-a7aa-e9889a9cdcd8 Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=133.31 Text=Fake Filled Order 
+2022-12-19 19:25:53 [logger INFO] MACD/RSI = Running short trade for symbol SPY at 2008-02-08 14:38:00 for condition SHORT_MACD_RSI_RULE_BROOMS
+2022-12-19 19:25:53 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:25:53.773657 TradeId=trd__SPY_1671488753_MAIN_SUMM PosId=2b5c96cd-9626-44b4-b936-c02c17396b2e Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=133.22 Text=Fake New Order 
+2022-12-19 19:25:53 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:25:53.988071 TradeId=trd__SPY_1671488753_MAIN_SUMM PosId=2b5c96cd-9626-44b4-b936-c02c17396b2e Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=133.22 Text=Fake Filled Order 
+2022-12-19 19:25:54 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:01.327485 seconds!
+2022-12-19 19:25:54 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:01.264881 seconds!
+2022-12-19 19:25:55 [logger INFO] Starting to process for date:2008-02-08
+2022-12-19 19:25:55 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2008-02-11 09:14:00 for condition LONG_MACD_RSI_RULE_BROOMS
+2022-12-19 19:25:55 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:25:55.223769 TradeId=trd__SPY_1671488755_MAIN_SUMM PosId=69c76378-37bf-43c4-9fde-1c3bbee40976 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=132.26 Text=Fake New Order 
+2022-12-19 19:25:55 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:01.571064 seconds!
+2022-12-19 19:25:55 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:25:55.437122 TradeId=trd__SPY_1671488755_MAIN_SUMM PosId=69c76378-37bf-43c4-9fde-1c3bbee40976 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=132.26 Text=Fake Filled Order 
+2022-12-19 19:25:55 [logger INFO] MACD-RSI - Closing long position for symbol SPY at 2008-02-11 10:27:00 
+2022-12-19 19:25:55 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:25:55.686608 TradeId=trd__SPY_1671488755_MAIN_SUMM PosId=ad63a3a3-8b43-4a21-990c-d81343529738 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=132.96 Text=Fake New Order 
+2022-12-19 19:25:55 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:25:55.900691 TradeId=trd__SPY_1671488755_MAIN_SUMM PosId=ad63a3a3-8b43-4a21-990c-d81343529738 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=132.96 Text=Fake Filled Order 
+2022-12-19 19:25:56 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2008-02-11 11:02:00 for condition LONG_MACD_RSI_RULE_BROOMS
+2022-12-19 19:25:56 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:25:56.144712 TradeId=trd__SPY_1671488756_MAIN_SUMM PosId=3450e2e6-e940-4d48-8cfe-e1a6ad929b61 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=132.95 Text=Fake New Order 
+2022-12-19 19:25:56 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:25:56.360376 TradeId=trd__SPY_1671488756_MAIN_SUMM PosId=3450e2e6-e940-4d48-8cfe-e1a6ad929b61 Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=132.95 Text=Fake Filled Order 
+2022-12-19 19:25:56 [logger INFO] MACD-RSI - Closing long position for symbol SPY at 2008-02-11 11:12:00 
+2022-12-19 19:25:56 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:25:56.436078 TradeId=trd__SPY_1671488756_MAIN_SUMM PosId=63e88ef3-31d3-4913-a2c8-296a0371a474 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=133.28 Text=Fake New Order 
+2022-12-19 19:25:56 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:25:56.654687 TradeId=trd__SPY_1671488756_MAIN_SUMM PosId=63e88ef3-31d3-4913-a2c8-296a0371a474 Symbol=SPY Side=Side.Sell Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=133.28 Text=Fake Filled Order 
+2022-12-19 19:25:56 [logger INFO] MACD/RSI = Running short trade for symbol SPY at 2008-02-11 11:13:00 for condition SHORT_MACD_RSI_RULE_BROOMS
+2022-12-19 19:25:56 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:25:56.694516 TradeId=trd__SPY_1671488756_MAIN_SUMM PosId=8cf5c5f3-bc00-4b2d-b4d6-73eeda7449aa Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=133.31 Text=Fake New Order 
+2022-12-19 19:25:56 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:01.078501 seconds!
+2022-12-19 19:25:56 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:25:56.901740 TradeId=trd__SPY_1671488756_MAIN_SUMM PosId=8cf5c5f3-bc00-4b2d-b4d6-73eeda7449aa Symbol=SPY Side=Side.SellShort Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=133.31 Text=Fake Filled Order 
+2022-12-19 19:25:57 [logger INFO] MACD-RSI - Closing short position for symbol SPY at 2008-02-11 12:01:00 
+2022-12-19 19:25:57 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:25:57.116166 TradeId=trd__SPY_1671488757_MAIN_SUMM PosId=db3f97d4-1b29-48ca-b8e2-5fccc710ea54 Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=134.05 Text=Fake New Order 
+2022-12-19 19:25:57 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:25:57.330668 TradeId=trd__SPY_1671488757_MAIN_SUMM PosId=db3f97d4-1b29-48ca-b8e2-5fccc710ea54 Symbol=SPY Side=Side.BuyToClose Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=134.05 Text=Fake Filled Order 
+2022-12-19 19:25:57 [logger INFO] MACD/RSI = Running long trade for symbol SPY at 2008-02-11 12:02:00 for condition LONG_MACD_RSI_RULE_6
+2022-12-19 19:25:57 [logger INFO] Managed Position Updated: Arrival=2022-12-19 19:25:57.366569 TradeId=trd__SPY_1671488757_MAIN_SUMM PosId=50c228e7-d8b1-4017-a52b-917093b0090c Symbol=SPY Side=Side.Buy Final Status=PositionStatus.New OrdQty=1 CumQty=0 LvsQty=1 AvgPx=134.05 Text=Fake New Order 
+2022-12-19 19:25:57 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:01.307618 seconds!
+2022-12-19 19:25:57 [logger INFO] Managed Position Finished: Arrival=2022-12-19 19:25:57.580507 TradeId=trd__SPY_1671488757_MAIN_SUMM PosId=50c228e7-d8b1-4017-a52b-917093b0090c Symbol=SPY Side=Side.Buy Final Status=PositionStatus.Filled OrdQty=1 CumQty=1 LvsQty=0 AvgPx=134.05 Text=Fake Filled Order 
+2022-12-19 19:25:58 [logger INFO] Backtest successfully completed...
+2022-12-19 19:25:58 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:01.944754 seconds!
+2022-12-19 19:25:58 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:02.217300 seconds!
+2022-12-19 19:25:59 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:02.323829 seconds!
+2022-12-19 19:25:59 [logger ERROR] Error persisting trading signal for symbol SPY:WARNING - Persisting trading signal took 0:00:02.586023 seconds!
+2022-12-20 08:00:01 [logger INFO] Bloomberg Order Router: Received Market Data Subscription Request for symbol:SPY
+2022-12-20 08:00:02 [logger INFO] Requesting for open orders...
+2022-12-20 08:00:02 [logger INFO] Recovered 0 previously existing execution reports
+2022-12-20 08:00:02 [logger INFO] Subscribing to order and route events
+2022-12-20 08:00:02 [logger INFO] Received list of Open Positions: 0 positions
+2022-12-20 08:00:02 [logger INFO] Process ready to receive commands and trade
+2022-12-20 08:00:02 [logger ERROR] Error running ProcessMessage @OrderRouter.Bloomberg module:Duplicate CorrelationId: [ valueType=INT classId=0 value=98 ] (0x00020005)
+2022-12-20 08:00:02 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:SPY
+2022-12-20 08:00:02 [logger INFO] Bloomberg Order Router: Received Historical Prices Snapshot Subscription Request for symbol:SPY
+2022-12-20 08:00:02 [logger INFO] Processing SERVICE_STATUS event
+2022-12-20 08:00:02 [logger INFO] Service //blp/refdata opened...
+2022-12-20 08:00:03 [logger INFO] Historical prices successfully loaded for symbol SPY 

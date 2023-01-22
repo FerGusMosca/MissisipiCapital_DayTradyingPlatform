@@ -1099,6 +1099,7 @@ class DayTradingPosition():
         # line rule #6
         if( self.PointInTimePriceRuleSix is not None):
             if(self.ProfitRuleSix is not None and self.ProfitRuleSix<=startShortAtGainParam.FloatValue):
+                self.BollingerIndicator.OnTradeSignal()
                 return _SHORT_MACD_RSI_RULE_6
 
         return None
@@ -1245,6 +1246,7 @@ class DayTradingPosition():
         #Rule #6
         if (self.PointInTimePriceRuleSix is not None):
             if (self.ProfitRuleSix is not None and self.ProfitRuleSix >= startLongAtGainParam.FloatValue):
+                self.BollingerIndicator.OnTradeSignal()
                 return _LONG_MACD_RSI_RULE_6
 
         return None
@@ -1779,6 +1781,7 @@ class DayTradingPosition():
                 # or self.MACDIndicato.GetMaxABSMaxMinMS(5) is None
         ):
             return None
+
 
         # =================== NOW WE START WITH THE ALGO NON TERMINAL RULES =============================
 
