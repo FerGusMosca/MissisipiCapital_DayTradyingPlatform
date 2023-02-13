@@ -58,7 +58,7 @@ class AggrOrderRouter(MarketOrderRouter):
             new_pos = PositionConverter.ConvertPosition(self, wrapper)
             # In this Generic Order Router ClOrdID=PosId
             self.Positions[new_pos.PosId] = new_pos
-            orderPrice=self.GetOrderPrice(new_pos.Security.symbol,new_pos.Side, new_pos.OrderPrice)
+            orderPrice=self.GetOrderPrice(new_pos.Security.Symbol,new_pos.Side, new_pos.OrderPrice)
             new_pos.OrderPrice=orderPrice
             order_wrapper = NewOrderWrapper(new_pos.Security.Symbol, new_pos.OrderQty, new_pos.PosId,
                                             new_pos.Security.Currency,new_pos.Security.SecurityType,new_pos.Security.Exchange,
