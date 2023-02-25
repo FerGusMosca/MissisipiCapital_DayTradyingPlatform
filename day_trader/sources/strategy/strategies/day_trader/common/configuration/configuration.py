@@ -16,6 +16,7 @@ class Configuration:
         self.DefaultAccount = config['DEFAULT']['DEFAULT_ACCOUNT']
         self.ImplementDetailedSides = config['DEFAULT']['IMPLEMENT_DETAILED_SIDES']=="True"
         self.TestMode =config['DEFAULT']['TEST_MODE']=="True"
+        self.MarketDataToRouter = config['DEFAULT']['MARKET_DATA_TO_ROUTER'] == "True"
 
         self.DBConectionString = config['DB']['CONNECTION_STRING']
 

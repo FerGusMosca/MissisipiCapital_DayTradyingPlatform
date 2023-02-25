@@ -566,11 +566,26 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
             if self.RoutingLock.locked():
                 self.RoutingLock.release()
 
+    def PublishMarketDataToRouter(self,wrapper,symbol):
+
+        try:
+            state = self.OrderRoutingModule.ProcessMessage(wrapper)
+            if not state.Success:
+                self.ProcessError(state.Exception)
+
+        except Exception as e:
+            traceback.print_exc()
+            self.ProcessErrorInMethod("@DayTrader.ProcessMarketData", e,symbol)
+
     def ProcessMarketData(self,wrapper):
 
         md = MarketDataConverter.ConvertMarketData(wrapper)
 
         try:
+
+            if self.Configuration.MarketDataToRouter:
+                threading.Thread(target=self.PublishMarketDataToRouter, args=(wrapper,md.Security.Symbol,)).start()
+
             self.LockCandlebar.acquire()
             md = MarketDataConverter.ConvertMarketData(wrapper)
 
