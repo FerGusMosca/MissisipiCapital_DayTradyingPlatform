@@ -45,6 +45,9 @@ class AggrOrderRouter(MarketOrderRouter):
         dto.BestBidPx=wrapper.GetField(MarketDataField.BestBidPrice)
         dto.Symbol=wrapper.GetField(MarketDataField.Symbol)
 
+        self.DoLog("DBX-Aggr Order Router= Recv Market Data? symbol {} : Best Bid={} Best Ask={}"
+                   .format(dto.Symbol, dto.BestBidPx, dto.BestAskPx), MessageType.INFO)
+
         if(dto.Symbol is not None):
             self.DoLog("DBX-Aggr Order Router= Persisting Market Data for symbol {} : Best Bid={} Best Ask={}"
                        .format(dto.Symbol,dto.BestBidPx,dto.BestAskPx),MessageType.INFO)
@@ -88,6 +91,8 @@ class AggrOrderRouter(MarketOrderRouter):
            if wrapper.GetAction() == Actions.MARKET_DATA:
                 self.ProcessMarketData(wrapper)
                 return CMState.BuildSuccess(self)
+           elif wrapper.GetAction() == Actions.CANDLE_BAR_DATA:
+                return CMState.BuildSuccess(self)
            else:
                return super().ProcessIncoming(wrapper)
 
@@ -109,6 +114,9 @@ class AggrOrderRouter(MarketOrderRouter):
                 return self.OutgoingModule.ProcessMessage(wrapper)
             elif wrapper.GetAction() == Actions.CANDLE_BAR_REQUEST:
                 return self.OutgoingModule.ProcessMessage(wrapper)
+            elif wrapper.GetAction() == Actions.MARKET_DATA:
+                self.ProcessMarketData(wrapper)
+                return CMState.BuildSuccess(self)
             else:
                 raise Exception("Generic Aggr Order Router not prepared for routing message {}".format(wrapper.GetAction()))
 
