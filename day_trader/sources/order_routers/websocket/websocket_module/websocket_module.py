@@ -420,45 +420,6 @@ class WebSocketModule(BaseCommunicationModule, ICommunicationModule):
             self.DoLog("Exception @WebsocketModule.ProcessUpdateOrder:{}".format(str(e)), MessageType.ERROR)
             return CMState.BuildFailure(self, Exception=e)
 
-    def DoSendExecutionReportThread(self,execReport):
-
-        try:
-            self.OnExecutionReport.ProcessOutgoing(execReport)
-        except Exception as e:
-            self.DoLog("Error sending execution report:{}".format(str(e)), MessageType.ERROR)
-
-    def SendMockFilledExecutionReportsThread(self,newOrder):
-        try:
-
-            newOrder.OrderId = int(time.time())
-            newOrder.MarketArrivalTime = datetime.now()
-            self.ActiveOrders[newOrder.OrderId] = newOrder
-
-            newWrapper = NewExecutionReportWrapper(newOrder)
-            self.DoSendExecutionReportThread(newWrapper)
-            time.sleep(self.Configuration.SecondsToSleepOnTradeForMock)
-
-
-            mdDto=None
-            if newOrder.Security.Symbol in  self.MarketDataSubscriptions:
-               mdDto = self.MarketDataSubscriptions[newOrder.Security.Symbol]
-
-            executionPrice = newOrder.Price if newOrder.Price is not None else \
-                            (mdDto.BestAskPx if newOrder.Side==Side.Buy or Side.BuyToClose else mdDto.BestBidPx)
-
-            filledWrapper = FilledExecutionReportWrapper(newOrder,executionPrice)
-            self.DoSendExecutionReportThread(filledWrapper)
-        except Exception as e:
-            msg = "Critical error @SendMockFilledExecutionReportsThread:{}".format(str(e))
-            self.DoLog(msg, MessageType.ERROR)
-            errorWrapper = ErrorWrapper(e)
-            self.OnMarketData.ProcessIncoming(errorWrapper)
-
-    def ProcessNewOrderMock(self,wrapper):
-
-        newOrder = OrderConverter.ConvertNewOrder(self, wrapper)
-
-        threading.Thread(target=self.SendMockFilledExecutionReportsThread, args=(newOrder,)).start()
 
     def ProcessNewOrder(self,wrapper):
         try:
@@ -485,10 +446,7 @@ class WebSocketModule(BaseCommunicationModule, ICommunicationModule):
     def ProcessMessage(self, wrapper):
         try:
             if wrapper.GetAction() == Actions.NEW_ORDER:
-                if (self.Configuration.ImplementMock):
-                    self.ProcessNewOrderMock(wrapper)
-                else:
-                    return self.ProcessNewOrder(wrapper)
+                return self.ProcessNewOrder(wrapper)
             elif wrapper.GetAction() == Actions.UPDATE_ORDER:
                 return self.ProcessUpdateOrder(wrapper)
             elif wrapper.GetAction() == Actions.CANCEL_ORDER:
