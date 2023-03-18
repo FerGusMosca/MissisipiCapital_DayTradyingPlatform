@@ -45,7 +45,12 @@ class AggrOrderRouter(MarketOrderRouter):
         dto.BestBidPx=wrapper.GetField(MarketDataField.BestBidPrice)
         dto.Symbol=wrapper.GetField(MarketDataField.Symbol)
 
+        self.DoLog("DBX-Aggr Order Router= Recv Market Data? symbol {} : Best Bid={} Best Ask={}"
+                   .format(dto.Symbol, dto.BestBidPx, dto.BestAskPx), MessageType.INFO)
+
         if(dto.Symbol is not None):
+            self.DoLog("DBX-Aggr Order Router= Persisting Market Data for symbol {} : Best Bid={} Best Ask={}"
+                       .format(dto.Symbol,dto.BestBidPx,dto.BestAskPx),MessageType.INFO)
             self.LastMarketData[dto.Symbol]=dto
 
 
@@ -69,6 +74,8 @@ class AggrOrderRouter(MarketOrderRouter):
                                         TimeInForce=TimeInForce.Day,Account=new_pos.Account,
                                         OrdStatus=OrdStatus.PendingNew,Broker=new_pos.Broker,Strategy=new_pos.Strategy))
 
+            self.DoLog("DBX-{}= Sending order to market for symbol {} : Side={} Qty={} Price={}"
+                       .format(self.Name,new_pos.Security.Symbol,new_pos.Side,new_pos.Qty,new_pos.OrderPrice), MessageType.INFO)
             if self.PositionsLock.locked():
                 self.PositionsLock.release()
             return self.OutgoingModule.ProcessMessage(order_wrapper)
