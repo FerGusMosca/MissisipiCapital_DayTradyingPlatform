@@ -417,6 +417,22 @@ class DayTradingPosition():
         else:
             return 0
 
+    def GetOpeningPrice(self):
+        if self.OpenMarketData is not None:
+            if self.OpenMarketData.OpeningPrice is not None:
+                return self.OpenMarketData.OpeningPrice
+            elif self.OpenMarketData.Trade is not None:
+                return self.OpenMarketData.Trade
+            return None
+        else:
+            return None
+
+    def HasSomeValidPrice(self,md):
+        if md is not None:
+            return md.OpeningPrice is not None or md.Trade is not None
+        else:
+            return None
+
     def UpdateMarketData(self,marketData):
         if(marketData.MDEntryDate is not None):
             self.PosUpdTimestamp=self.PosUpdTimestamp.replace(hour=marketData.MDEntryDate.hour,
@@ -1644,16 +1660,15 @@ class DayTradingPosition():
     def EvaluateMomentumConditions(self,candlebarsArr,longShortOnCandleParam,longTrade):
         lastCandlebar = candlebarsArr[-1]
 
-        if(longShortOnCandleParam.IntValue is not None and longShortOnCandleParam.IntValue>0 and self.OpenMarketData is not None
-            and self.OpenMarketData.OpeningPrice is not None):
+        if(longShortOnCandleParam.IntValue is not None and longShortOnCandleParam.IntValue>0 and self.GetOpeningPrice() is not None):
 
             if longTrade:
-                if lastCandlebar.Close> self.OpenMarketData.OpeningPrice:
+                if lastCandlebar.Close> self.GetOpeningPrice():
                     return _LONG_SHORT_ON_CANDLE_LONG_MARKET
                 else:
                     return None
             else:
-                if lastCandlebar.Close< self.OpenMarketData.OpeningPrice:
+                if lastCandlebar.Close< self.GetOpeningPrice():
                     return _LONG_SHORT_ON_CANDLE_SHORT_MARKET
                 else:
                     return None
