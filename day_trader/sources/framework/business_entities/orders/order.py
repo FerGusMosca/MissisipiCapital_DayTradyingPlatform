@@ -42,3 +42,10 @@ class Order:
         return ( self.OrdStatus==OrdStatus.New or self.OrdStatus==OrdStatus.PartiallyFilled
                or self.OrdStatus==OrdStatus.PendingNew or self.OrdStatus==OrdStatus.Replaced
                or self.OrdStatus==OrdStatus.PendingReplace or self.OrdStatus==OrdStatus.AcceptedForBidding)
+
+    def Clone(self):
+
+        newOrder=Order(self.ClOrdId,self.Security,self.SettlType,self.Side,self.Exchange,self.OrdType,self.QuantityType,
+                       self.OrderQty,self.PriceType,self.Price,self.StopPx,self.Currency,self.TimeInForce,self.Account,
+                       self.OrdStatus,self.Broker,self.Strategy,self.MarketArrivalTime)
+        return newOrder

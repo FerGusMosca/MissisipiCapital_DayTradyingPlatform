@@ -1,0 +1,9 @@
+2022-09-06 10:47:01 [logger INFO] DayTrader  Initializing
+2022-09-06 10:47:02 [logger INFO] Loading 0 summaries for security SPY
+2022-09-06 10:47:03 [logger INFO] WebSocketModule  Initializing
+2022-09-06 10:47:03 [logger INFO] WebSocketModule Successfully initialized
+2022-09-06 10:47:03 [logger INFO] Websocket commands successfully opened on port 7172: 
+2022-09-06 10:47:03 [logger INFO] FileHandlerModule  Initializing
+2022-09-06 10:47:03 [logger INFO] FileHandlerModule Successfully initialized
+2022-09-06 10:47:03 [logger INFO] Initializing Bloomberg Order Router
+2022-09-06 10:47:03 [logger INFO] Connecting to localhost:8194

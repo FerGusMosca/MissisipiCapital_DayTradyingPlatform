@@ -489,11 +489,18 @@ class WebSocketModule(BaseCommunicationModule, ICommunicationModule):
     def ProcessUpdateOrder(self,wrapper):
         try:
 
+            symbol = wrapper.GetField(OrderField.Symbol)
             origClOrdId =  wrapper.GetField(OrderField.OrigClOrdID)
             clOrdId =  wrapper.GetField(OrderField.ClOrdID)
             price = wrapper.GetField(OrderField.Price)
+            ordType = wrapper.GetField(OrderField.OrdType)
+            side = wrapper.GetField(OrderField.Side)
+            tif = wrapper.GetField(OrderField.TimeInForce)
+            ordQty = wrapper.GetField(OrderField.OrderQty)
 
-            updOrderReq = UpdateOrderReq(Msg="UpdOrderReq",OrigClOrdId= origClOrdId,ClOrdId= clOrdId,Price=price)
+
+            updOrderReq = UpdateOrderReq(Msg="UpdOrderReq",OrigClOrdId= origClOrdId,ClOrdId= clOrdId,pPrice=price,
+                                         pSymbol=symbol,pOrdType=ordType,pSide=side,pTimeInforce=tif,pOrdQty=ordQty)
 
             self.DoUpdateOrder(updOrderReq)
 
