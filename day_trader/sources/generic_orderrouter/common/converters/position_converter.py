@@ -42,7 +42,8 @@ class PositionConverter:
         pos.Security.Currency = wrapper.GetField(PositionField.Currency)
         pos.Security.Exchange = wrapper.GetField(PositionField.Exchange)
 
-        pos.OrderQty = wrapper.GetField(PositionField.Qty)
+        pos.OrderQty = wrapper.GetField(PositionField.Qty)#potential bug
+        pos.Qty = wrapper.GetField(PositionField.Qty)
         pos.PosId = wrapper.GetField(PositionField.PosId)
 
         pos.Exchange = wrapper.GetField(PositionField.Exchange)

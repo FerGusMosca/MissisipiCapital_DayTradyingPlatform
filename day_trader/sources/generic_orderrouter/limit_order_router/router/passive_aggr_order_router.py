@@ -1,5 +1,6 @@
 import threading
 from sources.framework.common.abstract.base_communication_module import BaseCommunicationModule
+from sources.framework.common.enums.QuantityType import QuantityType
 from sources.framework.common.enums.fields.market_data_field import MarketDataField
 from sources.framework.common.interfaces.icommunication_module import ICommunicationModule
 from sources.framework.common.logger.message_type import MessageType
@@ -19,6 +20,8 @@ class MarketDataDTO:
 
 class PassiveAggrOrderRouter(MarketOrderRouter):
 
+    _UPDATE_ORD_PACING_SEC=1
+
     def __init__(self):
         super().__init__()
 
@@ -27,6 +30,16 @@ class PassiveAggrOrderRouter(MarketOrderRouter):
 
 
     #region Private Methods
+
+    def GetOrderQty(self,pos,price):
+
+        if pos.QuantityType==QuantityType.CURRENCY:
+            return pos.CashQty//price #FLOOR!
+        elif pos.QuantityType==QuantityType.SHARES or pos.QuantityType==QuantityType.BONDS\
+             or pos.QuantityType==QuantityType.CONTRACTS or pos.QuantityType==QuantityType.CRYPTOCURRENCY:
+            return pos.Qty
+        else:
+            raise Exception("New position for symbol {} : Invalid Quantity Type!:{}".format(pos.Security.Symbol,pos.QuantityType))
 
 
     def GetOrderPrice(self,symbol, side, orderPrice):
@@ -37,9 +50,9 @@ class PassiveAggrOrderRouter(MarketOrderRouter):
                 return orderPrice
 
             if side==Side.Buy or side==Side.BuyToClose:
-                return self.LastMarketData[symbol].BestAskPx
+                return self.LastMarketData[symbol].BestBidPx-30#DBG-Price Manip
             elif side==Side.Sell or side==Side.SellShort:
-                return self.LastMarketData[symbol].BestBidPx
+                return self.LastMarketData[symbol].BestAskPx+30#DBG-Price Manip
             else:
                 raise Exception("{} - Unrecognized side {}".format(self.Name,side))
         else:
@@ -91,43 +104,45 @@ class PassiveAggrOrderRouter(MarketOrderRouter):
             if self.PositionsLock.locked():
                 self.PositionsLock.release()
 
-
-
     def UpdatePositionThread(self):
-        try:
-            time.sleep(int(1))
-            self.PositionsLock.acquire(blocking=True)
 
-            for pos in self.Positions.values():
-                if pos.IsOpenPosition():
-                    lastPrice = self.GetOrderPrice(pos.Security.Symbol,pos.Side,pos.OrderPrice)
-                    if pos.OrderPrice!= lastPrice:
-                        self.DoLog("Updating Price for PosId {} (Symbol={}) {}-->{}".format(pos.PosId,pos.Security.Symbol,pos.OrderPrice,lastPrice),MessageType.INFO)
+        while True:
+            try:
+                time.sleep(PassiveAggrOrderRouter._UPDATE_ORD_PACING_SEC)
+                self.PositionsLock.acquire(blocking=True)
 
-                        lastOrder =pos.GetLastOrder()
-                        newOrder = lastOrder.Clone()
-                        newOrder.OrigClOrdId=lastOrder.ClOrdId
-                        newOrder.OrderId=lastOrder.OrderId
-                        newOrder.ClOrdId=pos.LoadUpdateOrdNewClOrdId()
+                for pos in self.Positions.values():
+                    if pos.IsOpenPosition():
+                        lastPrice = self.GetOrderPrice(pos.Security.Symbol,pos.Side,pos.OrderPrice)
+                        if pos.OrderPrice!= lastPrice :
+                            self.DoLog("Updating Price for PosId {} (Symbol={}) {}-->{}".format(pos.PosId,pos.Security.Symbol,pos.OrderPrice,lastPrice),MessageType.INFO)
 
-                        updWrapper = UpdateOrderWrapper(pos.Security.Symbol,newOrder.OrigClOrdId,newOrder.ClOrdId,newOrder.OrderId,
-                                                                           newOrder.Side,newOrder.OrdType,newOrder,newOrder.OrderQty)
+                            lastOrder =pos.GetLastOrder()
+                            if lastOrder is not None:
+                                newOrder = lastOrder.Clone()
+                                newOrder.OrigClOrdId=lastOrder.ClOrdId
+                                newOrder.OrderId=lastOrder.OrderId
+                                newOrder.ClOrdId=pos.LoadUpdateOrdNewClOrdId()
+                                newOrder.Price=lastPrice
 
-                        pos.AppendOrder(newOrder)
-                        pos.OrderPrice=lastPrice
-                        if self.PositionsLock.locked():
-                            self.PositionsLock.release()
-                        self.OutgoingModule.ProcessMessage(updWrapper)
+                                updWrapper = UpdateOrderWrapper(pos.Security.Symbol,newOrder.OrigClOrdId,newOrder.ClOrdId,newOrder.OrderId,
+                                                                newOrder.Side,newOrder.OrdType,newOrder.Price,newOrder.OrderQty)
 
-
-        except Exception as e:
-            self.DoLog("CRITICAL ERROR at UpdatePositionThread @{}} module:{}".format(self.Name, str(e)),
-                       MessageType.ERROR)
-        finally:
-            if self.PositionsLock.locked():
-                self.PositionsLock.release()
+                                pos.AppendOrder(newOrder)
+                                pos.OrderPrice=lastPrice
+                                if self.PositionsLock.locked():
+                                    self.PositionsLock.release()
+                                self.OutgoingModule.ProcessMessage(updWrapper)
+                            else:
+                                self.DoLog("No last Order for Pos {} with Pos Status {}. Potential conflict".format(pos.PosId,pos.PosStatus),MessageType.INFO)
 
 
+            except Exception as e:
+                self.DoLog("CRITICAL ERROR at UpdatePositionThread @{}} module:{}".format(self.Name, str(e)),
+                           MessageType.ERROR)
+            finally:
+                if self.PositionsLock.locked():
+                    self.PositionsLock.release()
 
     def ProcessNewPosition(self, wrapper):
         try:
@@ -137,14 +152,19 @@ class PassiveAggrOrderRouter(MarketOrderRouter):
             # In this Generic Order Router ClOrdID=PosId
             self.Positions[new_pos.PosId] = new_pos
             orderPrice=self.GetOrderPrice(new_pos.Security.Symbol,new_pos.Side, new_pos.OrderPrice)
+            orderQty = self.GetOrderQty(new_pos,orderPrice)
+
             new_pos.OrderPrice=orderPrice
-            order_wrapper = NewOrderWrapper(new_pos.Security.Symbol, new_pos.OrderQty, new_pos.PosId,
+            new_pos.Qty=orderQty
+
+            clOrdId=new_pos.LoadNextClOrdId()
+            order_wrapper = NewOrderWrapper(new_pos.Security.Symbol, orderQty, clOrdId,
                                             new_pos.Security.Currency,new_pos.Security.SecurityType,new_pos.Security.Exchange,
                                             new_pos.Side, new_pos.Account, new_pos.Broker,
                                             new_pos.Strategy, new_pos.OrderType, new_pos.OrderPrice)
-            new_pos.Orders.append(Order(ClOrdId=new_pos.LoadNextClOrdId(),Security=new_pos.Security,SettlType=SettlType.Regular,
-                                        Side=new_pos.Side,Exchange=new_pos.Exchange,OrdType=OrdType.Market,
-                                        QuantityType=new_pos.QuantityType,OrderQty=new_pos.Qty,PriceType=new_pos.PriceType,
+            new_pos.Orders.append(Order(ClOrdId=clOrdId,Security=new_pos.Security,SettlType=SettlType.Regular,
+                                        Side=new_pos.Side,Exchange=new_pos.Exchange,OrdType=OrdType.Limit,
+                                        QuantityType=QuantityType.SHARES,OrderQty=orderQty,PriceType=new_pos.PriceType,
                                         Price=None,StopPx=None,Currency=new_pos.Security.Currency,
                                         TimeInForce=TimeInForce.Day,Account=new_pos.Account,
                                         OrdStatus=OrdStatus.PendingNew,Broker=new_pos.Broker,Strategy=new_pos.Strategy))
@@ -155,7 +175,8 @@ class PassiveAggrOrderRouter(MarketOrderRouter):
                 self.PositionsLock.release()
             return self.OutgoingModule.ProcessMessage(order_wrapper)
         except Exception as e:
-            self.DoLog("CRITICAL ERROR sending order to  market @{}} module:{}".format(self.Name,str(e)), MessageType.ERROR)
+            self.DoLog("CRITICAL ERROR sending order to  market @{} module:{}".format(self.Name,str(e)), MessageType.ERROR)
+            return CMState.BuildFailure(self,Exception=e)
         finally:
             if self.PositionsLock.locked():
                 self.PositionsLock.release()
@@ -217,7 +238,7 @@ class PassiveAggrOrderRouter(MarketOrderRouter):
             if self.LoadConfig():
                 self.OutgoingModule = self.InitializeModule(self.Configuration.OutgoingModule,self.Configuration.OutgoingConfigFile)
 
-                threading.Thread(target=self.UpdatePositionThread(), args=()).start()
+                threading.Thread(target=self.UpdatePositionThread, args=()).start()
                 self.DoLog("{} Initialized".format(self.Name), MessageType.INFO)
                 return CMState.BuildSuccess(self)
             else:
