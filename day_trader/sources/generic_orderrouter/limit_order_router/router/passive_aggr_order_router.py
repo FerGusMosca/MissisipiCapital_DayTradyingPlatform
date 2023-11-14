@@ -50,9 +50,9 @@ class PassiveAggrOrderRouter(MarketOrderRouter):
                 return orderPrice
 
             if side==Side.Buy or side==Side.BuyToClose:
-                return self.LastMarketData[symbol].BestBidPx-30#DBG-Price Manip
+                return self.LastMarketData[symbol].BestBidPx
             elif side==Side.Sell or side==Side.SellShort:
-                return self.LastMarketData[symbol].BestAskPx+30#DBG-Price Manip
+                return self.LastMarketData[symbol].BestAskPx
             else:
                 raise Exception("{} - Unrecognized side {}".format(self.Name,side))
         else:
