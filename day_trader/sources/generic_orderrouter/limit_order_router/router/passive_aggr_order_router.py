@@ -204,6 +204,18 @@ class PassiveAggrOrderRouter(MarketOrderRouter):
             self.DoLog("CRITICAL ERROR @ProcessIncoming @{} :{}".format(self.Name, str(e)),MessageType.ERROR)
             return CMState.BuildFailure(self, Exception=e)
 
+    def ProcessOutgoing(self, wrapper):
+        try:
+
+            if wrapper.GetAction() == Actions.MARKET_DATA:
+                return self.ProcessMarketData(wrapper)
+            else:
+                return super().ProcessOutgoing(wrapper)
+
+        except Exception as e:
+            self.DoLog("Error running ProcessOutgoing @{} module:{}".format(self.Name,str(e)), MessageType.ERROR)
+            return CMState.BuildFailure(self, Exception=e)
+
 
     def ProcessMessage(self, wrapper):
         try:

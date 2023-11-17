@@ -330,6 +330,7 @@ class WebSocketModule(BaseCommunicationModule, ICommunicationModule):
     def ProcessMarketData(self,wrapper):
         try:
             self.OnMarketData.ProcessIncoming(wrapper)
+            self.OnExecutionReport.ProcessOutgoing(wrapper)#we need to send MD to the order router too
             #self.InvokingModule.ProcessIncoming(wrapper)
 
             return CMState.BuildSuccess(self)

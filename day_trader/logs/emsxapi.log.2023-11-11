@@ -1,0 +1,78 @@
+2023-11-11 13:30:57 [logger INFO] DayTrader  Initializing
+2023-11-11 13:34:41 [logger INFO] DayTrader  Initializing
+2023-11-11 13:35:59 [logger INFO] DayTrader  Initializing
+2023-11-11 13:36:02 [logger INFO] Loading 0 summaries for security SPY
+2023-11-11 13:36:04 [logger INFO] WebSocketModule  Initializing
+2023-11-11 13:36:04 [logger INFO] WebSocketModule Successfully initialized
+2023-11-11 13:36:04 [logger INFO] Websocket commands successfully opened on port 7172: 
+2023-11-11 13:36:05 [logger INFO] FileHandlerModule  Initializing
+2023-11-11 13:36:05 [logger INFO] FileHandlerModule Successfully initialized
+2023-11-11 13:36:05 [logger ERROR] Error Loading Singleton Modules Handler module:No module named 'websocket'
+2023-11-11 13:38:06 [logger INFO] DayTrader  Initializing
+2023-11-11 13:38:06 [logger INFO] Loading 0 summaries for security SPY
+2023-11-11 13:38:06 [logger INFO] WebSocketModule  Initializing
+2023-11-11 13:38:06 [logger INFO] WebSocketModule Successfully initialized
+2023-11-11 13:38:06 [logger INFO] Websocket commands successfully opened on port 7172: 
+2023-11-11 13:38:06 [logger INFO] FileHandlerModule  Initializing
+2023-11-11 13:38:06 [logger INFO] FileHandlerModule Successfully initialized
+2023-11-11 13:38:06 [logger ERROR] Error Loading Singleton Modules Handler module:No module named 'sources.order_routers.bloomberg'
+2023-11-11 14:23:54 [logger INFO] DayTrader  Initializing
+2023-11-11 14:23:54 [logger INFO] Loading 0 summaries for security SPY
+2023-11-11 14:23:54 [logger INFO] WebSocketModule  Initializing
+2023-11-11 14:23:54 [logger INFO] WebSocketModule Successfully initialized
+2023-11-11 14:23:54 [logger INFO] Websocket commands successfully opened on port 7172: 
+2023-11-11 14:23:54 [logger INFO] FileHandlerModule  Initializing
+2023-11-11 14:23:54 [logger INFO] FileHandlerModule Successfully initialized
+2023-11-11 14:23:54 [logger ERROR] Error Loading Singleton Modules Handler module:cannot import name 'create_connection' from 'websocket' (C:\Users\zimzum\Desktop\Projects\Tradehelm\Mississipi\MissisipiCapital_DayTradyingPlatform\day_trader\venv\lib\site-packages\websocket\__init__.py)
+2023-11-11 14:27:46 [logger INFO] DayTrader  Initializing
+2023-11-11 14:27:46 [logger INFO] Loading 0 summaries for security SPY
+2023-11-11 14:27:46 [logger INFO] WebSocketModule  Initializing
+2023-11-11 14:27:46 [logger INFO] WebSocketModule Successfully initialized
+2023-11-11 14:27:46 [logger INFO] Websocket commands successfully opened on port 7172: 
+2023-11-11 14:27:46 [logger INFO] FileHandlerModule  Initializing
+2023-11-11 14:27:46 [logger INFO] FileHandlerModule Successfully initialized
+2023-11-11 14:27:46 [logger ERROR] Error Loading Singleton Modules Handler module:cannot import name 'create_connection' from 'websocket' (C:\Users\zimzum\Desktop\Projects\Tradehelm\Mississipi\MissisipiCapital_DayTradyingPlatform\day_trader\venv\lib\site-packages\websocket\__init__.py)
+2023-11-11 14:29:22 [logger INFO] DayTrader  Initializing
+2023-11-11 14:29:22 [logger INFO] Loading 0 summaries for security SPY
+2023-11-11 14:29:22 [logger INFO] WebSocketModule  Initializing
+2023-11-11 14:29:22 [logger INFO] WebSocketModule Successfully initialized
+2023-11-11 14:29:22 [logger INFO] Websocket commands successfully opened on port 7172: 
+2023-11-11 14:29:22 [logger INFO] FileHandlerModule  Initializing
+2023-11-11 14:29:22 [logger INFO] FileHandlerModule Successfully initialized
+2023-11-11 14:29:22 [logger ERROR] Error Loading Singleton Modules Handler module:cannot import name 'create_connection' from 'websocket' (C:\Users\zimzum\Desktop\Projects\Tradehelm\Mississipi\MissisipiCapital_DayTradyingPlatform\day_trader\venv\lib\site-packages\websocket\__init__.py)
+2023-11-11 14:30:54 [logger INFO] DayTrader  Initializing
+2023-11-11 14:30:54 [logger INFO] Loading 0 summaries for security SPY
+2023-11-11 14:30:54 [logger INFO] WebSocketModule  Initializing
+2023-11-11 14:30:54 [logger INFO] WebSocketModule Successfully initialized
+2023-11-11 14:30:54 [logger INFO] Websocket commands successfully opened on port 7172: 
+2023-11-11 14:30:54 [logger INFO] FileHandlerModule  Initializing
+2023-11-11 14:30:54 [logger INFO] FileHandlerModule Successfully initialized
+2023-11-11 14:30:54 [logger ERROR] Error Loading Singleton Modules Handler module:cannot import name 'create_connection' from 'websocket' (C:\Users\zimzum\Desktop\Projects\Tradehelm\Mississipi\MissisipiCapital_DayTradyingPlatform\day_trader\venv\lib\site-packages\websocket\__init__.py)
+2023-11-11 14:33:46 [logger INFO] DayTrader  Initializing
+2023-11-11 14:33:46 [logger INFO] Loading 0 summaries for security SPY
+2023-11-11 14:33:46 [logger INFO] WebSocketModule  Initializing
+2023-11-11 14:33:46 [logger INFO] WebSocketModule Successfully initialized
+2023-11-11 14:33:46 [logger INFO] Websocket commands successfully opened on port 7172: 
+2023-11-11 14:33:46 [logger INFO] FileHandlerModule  Initializing
+2023-11-11 14:33:46 [logger INFO] FileHandlerModule Successfully initialized
+2023-11-11 14:33:46 [logger INFO] WebSocketModule  Initializing
+2023-11-11 14:33:46 [logger INFO] Opening websocket connection with server ws://66.94.106.206:9192
+2023-11-11 14:33:46 [logger INFO] DayTrader Successfully initialized
+2023-11-11 14:33:46 [logger INFO] SingletonModuleHandler Successfully initializer
+2023-11-11 14:33:46 [logger INFO] Initializing Generic Market Order Router
+2023-11-11 14:33:46 [logger INFO] SingletonModuleHandler Successfully initializer
+2023-11-11 14:33:46 [logger INFO] Generic Market Order Router Initialized
+2023-11-11 14:33:47 [logger INFO] DayTrader Successfully initialized
+2023-11-11 14:33:48 [logger ERROR] Unknown message :{"Service":"MD","ServiceKey":"SPY","Success":true,"Msg":"SubscriptionResponse"}
+2023-11-11 14:33:48 [logger INFO] Requesting for open orders...
+2023-11-11 14:33:48 [logger ERROR] Critical error @WebsocketModule.ProcessMessage: ORDER_MASS_STATUS_REQUEST
+2023-11-11 14:33:48 [logger INFO] Bloomberg Order Router: Received Candle Bars Subscription Request for symbol:SPY
+2023-11-11 14:33:48 [logger ERROR] Critical error @WebsocketModule.ProcessMessage: ORDER_MASS_STATUS_REQUEST
+2023-11-11 14:33:48 [logger ERROR] Unknown message :{"Service":"CB","ServiceKey":"SPY","Success":true,"Msg":"SubscriptionResponse"}
+2023-11-11 14:33:48 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2023-11-11 14:33:48 [logger INFO] Market Data Processed for symbol SPY...
+2023-11-11 14:33:53 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2023-11-11 14:33:53 [logger INFO] Market Data Processed for symbol SPY...
+2023-11-11 14:33:58 [logger INFO] <order_router> Incoming Market Data for Symbol SPY
+2023-11-11 14:33:58 [logger INFO] Market Data Processed for symbol SPY...
+2023-11-11 14:34:01 [logger ERROR] Critical error opening websocket @OpenWebsocketClient for ws://66.94.106.206:9192: [WinError 10054] An existing connection was forcibly closed by the remote host
