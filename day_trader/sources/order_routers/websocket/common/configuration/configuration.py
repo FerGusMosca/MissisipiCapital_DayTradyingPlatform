@@ -9,5 +9,7 @@ class Configuration:
         self.ClientUrl = config['DEFAULT']['CLIENT_URL']
         self.Mode = config['DEFAULT']['MODE']
 
+        self.ImplementMock=config['DEFAULT']['IMPLEMENT_MOCK']=="True"
+
         self.WaitForConnectionsPacingSec = int(config['DEFAULT']['WAIT_FOR_CONNECTIONS_PACING_SEC'])
 
