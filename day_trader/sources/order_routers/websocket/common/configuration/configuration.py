@@ -10,6 +10,6 @@ class Configuration:
         self.Mode = config['DEFAULT']['MODE']
 
         self.ImplementMock=config['DEFAULT']['IMPLEMENT_MOCK']=="True"
-
+        self.SecondsToSleepOnTradeForMock = float(config['DEFAULT']['SECONDS_TO_SLEEP_ON_TRADE_FOR_MOCK'])
         self.WaitForConnectionsPacingSec = int(config['DEFAULT']['WAIT_FOR_CONNECTIONS_PACING_SEC'])
 
