@@ -196,7 +196,7 @@ class WebSocketModule(BaseCommunicationModule, ICommunicationModule):
                     raise state.Exception
             else:
                 tempOrder = Order(ClOrdId=execReportDto.ClOrdId,
-                                  OrigClOrdId=execReportDto.OrigClOrdId,
+                                  #OrigClOrdId=execReportDto.OrigClOrdId,
                                   Security=Security(Symbol=""))
                 wrapper = ExecutionReportWrapper(execReportDto, tempOrder)
                 self.ProcessOutgoing(wrapper)
