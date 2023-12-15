@@ -565,6 +565,8 @@ class WebSocketModule(BaseCommunicationModule, ICommunicationModule):
 
         threading.Thread(target=self.SendMockFilledExecutionReportsThread, args=(newOrder,)).start()
 
+        return CMState.BuildSuccess(self)
+
     #endregion
 
     #region ICommunicationModule methods
@@ -579,7 +581,7 @@ class WebSocketModule(BaseCommunicationModule, ICommunicationModule):
         try:
             if wrapper.GetAction() == Actions.NEW_ORDER:
                 if (self.Configuration.ImplementMock):
-                    self.ProcessNewOrderMock(wrapper)
+                    return self.ProcessNewOrderMock(wrapper)
                 else:
                     return self.ProcessNewOrder(wrapper)
             elif wrapper.GetAction() == Actions.UPDATE_ORDER:
