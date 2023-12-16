@@ -1819,6 +1819,10 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
             dayTradingPos = next(iter(list(filter(lambda x: x.Security.Symbol == candlebar.Security.Symbol, self.DayTradingPositions))),
                             None)
 
+            if dayTradingPos is None:
+                self.DoLog("ignoring candle for non tracked symbol {}".format(candlebar.Security.Symbol),MessageType.INFO)
+                return
+
             if  not dayTradingPos.RunningBacktest:
 
                 cbDict = self.Candlebars[candlebar.Security.Symbol]
