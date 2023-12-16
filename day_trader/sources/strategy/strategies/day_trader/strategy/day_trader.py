@@ -596,6 +596,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
 
         except Exception as e:
             traceback.print_exc()
+            self.DoLog(traceback.print_exc(), MessageType.ERROR)  # FIX3
             self.ProcessErrorInMethod("@DayTrader.ProcessMarketData", e,md.Security.Symbol is md if not None else None)
         finally:
             if self.LockCandlebar.locked():
@@ -1599,6 +1600,10 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
             dayTradingPos = next(iter(list(filter(lambda x: x.Security.Symbol == candlebar.Security.Symbol, self.DayTradingPositions))),
                             None)
 
+            if dayTradingPos is None:
+                self.DoLog("ignoring candle for non tracked symbol {}".format(candlebar.Security.Symbol),MessageType.INFO)
+                return
+
             if  not dayTradingPos.RunningBacktest:
 
                 cbDict = self.Candlebars[candlebar.Security.Symbol]
@@ -1626,7 +1631,7 @@ class DayTrader(BaseCommunicationModule, ICommunicationModule):
             LogHelper.LogPublishCandleBarOnSecurity("DayTrader Processed Candlebar", self, candlebar.Security.Symbol,candlebar)
 
         except Exception as e:
-            traceback.print_exc()
+            self.DoLog(traceback.print_exc(),MessageType.ERROR)
             self.ProcessErrorInMethod("@DayTrader.ProcessCandleBar", e,candlebar.Security.Symbol if candlebar is not None else None)
         finally:
             if self.LockCandlebar.locked():

@@ -77,7 +77,7 @@
       <recent name="C:\Users\zimzum\Desktop\Projects\Tradehelm\Missisipi\python\day_trader\sources\strategy\common\dto" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.day_trader">
+  <component name="RunManager" selected="Python.main">
     <configuration name="candle_bar_data_wrapper" type="PythonConfigurationType" factoryName="Python">
       <module name="emsxapi" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -130,7 +130,7 @@
         <env name="PYTHONUNBUFFERED" value="1" />
         <env name="PYDEVD_USE_FRAME_EVAL" value="NO" />
       </envs>
-      <option name="SDK_HOME" value="C:\Users\Compumar\Desktop\Projects\Tradehelm\Mississipi\DayTrader\MissisipiCapital_DayTradyingPlatform\day_trader\venv\Scripts\python.exe" />
+      <option name="SDK_HOME" value="C:\Users\zimzum\Desktop\Projects\Tradehelm\Mississipi\MissisipiCapital_DayTradyingPlatform\day_trader\venv\Scripts\python.exe" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/" />
       <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
