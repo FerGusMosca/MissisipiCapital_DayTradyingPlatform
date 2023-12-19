@@ -1,3 +1,5 @@
+import uuid
+
 from sources.framework.common.enums.PositionsStatus import PositionStatus
 from sources.framework.common.enums.ExecType import *
 from sources.framework.common.enums.Side import *
@@ -29,6 +31,9 @@ _Side_Buy_To_Close="BuyToClose"
 _Side_Uknown="Unknown"
 
 class Position:
+
+    _ORDER_ID_SEPARATOR="__"
+
     def __init__(self, PosId=None, Security=None,Side=None,PriceType=None,Qty=None,QuantityType=None,Account=None,
                 Broker=None,Strategy=None,OrderType=None, OrderPrice = None, CumQty=None, LeavesQty = None,
                  AvgPx=None, LastQty=None,LastPx=None,LastMkt=None):
@@ -150,9 +155,6 @@ class Position:
             return  False
 
     def ValidateNewPosition(self):
-        """
-
-        """
         if(self.OrderType is not None):
 
             if  self.OrderType==OrdType.Market and self.OrderPrice is not None:
@@ -161,16 +163,18 @@ class Position:
     def GetLastExecutionReport(self):
 
         if len(self.ExecutionReports)>0:
-            execList = sorted(self.ExecutionReports, key=lambda execRep: execRep.TransactTime, reverse=True)
-            return execList[0]
+            #execList = sorted(self.ExecutionReports, key=lambda execRep: execRep.TransactTime, reverse=True)
+            #return execList[0]
+            return  self.ExecutionReports[-1]
         else:
             return None
 
     def GetLastOrder(self):
 
         if len(self.Orders)>0:
-            ordList = sorted(self.Orders, key=lambda order: order.ClOrdId, reverse=True)
-            return ordList[0]
+            #ordList = sorted(self.Orders, key=lambda order: order.ClOrdId, reverse=True)
+            #return ordList[0]
+            return  self.Orders[-1]#last one
         else:
             return None
 
@@ -186,7 +190,7 @@ class Position:
             return None
 
     def AppendOrder(self,order):
-        ordersInMem = list(filter(lambda x: x.OrderId == order.OrderId, self.Orders))
+        ordersInMem = list(filter(lambda x: x.ClOrdId == order.ClOrdId, self.Orders))
 
         if len(ordersInMem)>0:
             ordersInMem[0]=order
@@ -319,3 +323,19 @@ class Position:
                 return "1900-01-01"
         except Exception as e:
             return "1900-01-01"
+
+
+    def LoadNextClOrdId(self):
+        ordCount = len(self.Orders)
+        return  "{}{}{}".format(uuid.uuid4(),Position._ORDER_ID_SEPARATOR,str(ordCount))#first one is 0
+
+    def LoadUpdateOrdNewClOrdId(self):
+
+        lastOrder = self.GetLastOrder()
+        posIdArr=  lastOrder.ClOrdId.split(Position._ORDER_ID_SEPARATOR)
+
+        if len(posIdArr)==2:
+            ordCount = len(self.Orders)
+            return "{}{}{}".format(posIdArr[0], Position._ORDER_ID_SEPARATOR, str(ordCount))#Next index just adds one
+        else:
+            raise Exception("CRITICAL ERROR Generating New Order Id : Could not recognize the following ClOrdId as a valid ClOrdId:{}".format(lastOrder.ClOrdId))
